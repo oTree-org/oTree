@@ -25,7 +25,7 @@ class Treatment(ptree.models.BaseTreatment):
                                                 decimal_places=1,
                                                 max_digits=2,
                                                 doc="""
-                                                Returns multiplication factor in group contribution
+                                                The multiplication factor in group contribution
                                                 """)
 
 

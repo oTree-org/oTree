@@ -22,11 +22,11 @@ class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
     amount_allocated = models.PositiveIntegerField(
-        doc='Initial amount allocated to each participant'
+        doc="""Initial amount allocated to each participant"""
     )
 
     increment_amount = models.PositiveIntegerField(
-        doc='The increment between send choices and send back choices, in cents'
+        doc="""The increment between send choices and send back choices, in cents"""
     )
 
 
@@ -38,9 +38,9 @@ class Match(ptree.models.BaseMatch):
 
     # custom fields
     sent_amount = models.PositiveIntegerField(null=True,
-                                              doc='Amount sent by participant one')
+                                              doc="""Amount sent by participant one""")
     sent_back_amount = models.PositiveIntegerField(null=True,
-                                                   doc='Amount sent back by participant two')
+                                                   doc="""Amount sent back by participant two""")
 
     def send_choices(self):
         """Range of allowed values during send"""

@@ -19,7 +19,7 @@ class Introduction(ParticipantMixin, ptree.views.Page):
 class Send(ParticipantMixin, ptree.views.Page):
     """This page is only for participant one
       P1 sends some(all, some or none) amount to P2
-      This amount is trippled by experimenter i.e if sent amount by P1=10, amount received by P2=30"""
+      This amount is tripled by experimenter i.e if sent amount by P1=10, amount received by P2=30"""
     template_name = 'trust/Send.html'
 
     def get_form_class(self):

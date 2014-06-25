@@ -18,17 +18,17 @@ class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
     betray_amount = models.PositiveIntegerField(
-        doc="amount a participant makes if he chooses 'Compete' and the other chooses 'Cooperate'"
+        doc="""amount a participant makes if he chooses 'Compete' and the other chooses 'Cooperate'"""
     )
     friends_amount = models.PositiveIntegerField(
-        doc="amount both participants make if both participants choose 'Cooperate'"
+        doc="""amount both participants make if both participants choose 'Cooperate'"""
     )
     betrayed_amount = models.PositiveIntegerField(
-        doc="amount a participant makes if he chooses 'Cooperate' and the other chooses 'Compete'"
+        doc="""amount a participant makes if he chooses 'Cooperate' and the other chooses 'Compete'"""
     )
 
     enemies_amount = models.PositiveIntegerField(
-        doc="amount both participants make if both participants choose 'Compete'"
+        doc="""amount both participants make if both participants choose 'Compete'"""
     )
 
 
@@ -49,7 +49,7 @@ class Participant(ptree.models.BaseParticipant):
     decision = models.CharField(
         max_length=10, null=True, verbose_name='What is your decision?',
         choices=(('Cooperate', 'I will cooperate'), ('Compete', 'I will compete')),
-        doc="This participant's decision"
+        doc="""This participant's decision"""
     )
 
     def other_participant(self):
