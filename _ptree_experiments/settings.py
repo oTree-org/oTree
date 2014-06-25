@@ -37,6 +37,7 @@ settings = {
     'INSTALLED_PTREE_APPS': [
         'prisoner_minimal',
         'trust',
+        'public_goods',
         'dictator',
     ],
     # don't share this with anybody.

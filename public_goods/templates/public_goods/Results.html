@@ -1,0 +1,42 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        The payoffs for the group members are listed below. Your payoff is highlighted.
+    </p>
+
+    <table class="table table-condensed" style="width:500px; margin-top:20px;">
+        <thead>
+        <tr>
+            <th>Initial Amount</th>
+            <th>Contribution</th>
+            <th>Total Payoff</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for p in participants %}
+            <tr>
+                <td id="{{ p.index_among_participants_in_match }}">{{ amount_allocated }}</td>
+                <td id="{{ p.index_among_participants_in_match }}">{{ p.contributed_amount_currency }}</td>
+                <td id="{{ p.index_among_participants_in_match }}">{{ p.payoff_currency }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function(){
+            $('[id="{{ id }}"]').toggleClass("success");
+        });
+    </script>
+
+{% endblock %}
+
+{% block form %}{% endblock %}

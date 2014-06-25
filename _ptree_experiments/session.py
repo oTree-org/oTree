@@ -29,6 +29,19 @@ def session_types():
             """
         ),
         SessionType(
+            name='Public Goods',
+            base_pay=10,
+            num_participants=4,
+            subsession_apps=[
+                'public_goods',
+            ],
+            doc="""
+            Public goods game. Single treatment. Four players can contribute to a joint project.
+            The total contribution is multiplied by some factor, the resulting amount is then divided equally
+            between the players.
+            """
+        ),
+        SessionType(
             name='Dictator',
             base_pay=100,
             num_participants=2,
