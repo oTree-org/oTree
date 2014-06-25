@@ -5,12 +5,20 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+# local database settings
+# add: export LOCALDEV=1 to .bashrc
+if os.environ.get("LOCALDEV"):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+# heroku database settings
+else:
+    import dj_database_url
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config()
 
 settings = {
     'CREATE_DEFAULT_SUPERUSER': True,
