@@ -36,6 +36,7 @@ settings = {
     ],
     'INSTALLED_PTREE_APPS': [
         'dictator',
+        'prisoner_minimal',
 
     ],
     # don't share this with anybody.
