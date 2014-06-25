@@ -8,8 +8,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.validators import MaxLengthValidator
 from ptree.common import currency
 
-doc = """
-Description of this app.
+doc="""
+Trust game. Single treatment. Both players are given an initial sum.
+One player may give part of the sum to the other player, who actually receives triple the amount.
+The second player may then give part of the now-tripled amount back to the first player.
 """
 
 class Subsession(ptree.models.BaseSubsession):
@@ -36,9 +38,9 @@ class Match(ptree.models.BaseMatch):
 
     # custom fields
     sent_amount = models.PositiveIntegerField(null=True,
-                                              doc="""Amount sent by participant one""")
+                                              doc='Amount sent by participant one')
     sent_back_amount = models.PositiveIntegerField(null=True,
-                                                   doc="""Amount sent back by participant two""")
+                                                   doc='Amount sent back by participant two')
 
     def send_choices(self):
         """Range of allowed values during send"""

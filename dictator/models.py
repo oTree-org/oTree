@@ -7,6 +7,13 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from ptree.common import currency
 
+doc="""
+The Dictator Game. Single Treatment. Two players: Dictator and other participant. Dictator is given some
+amount of money, while the other participant is given nothing.
+The Dictator is told that he must offer some amount of that money to the other participant, even
+if that amount is zero. Whatever amount the dictator offers to the other participant must be accepted.
+"""
+
 
 class Subsession(ptree.models.BaseSubsession):
 

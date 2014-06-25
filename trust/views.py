@@ -19,7 +19,7 @@ class Introduction(ParticipantMixin, ptree.views.Page):
 class Send(ParticipantMixin, ptree.views.Page):
     """This page is only for participant one
       P1 sends some(all, some or none) amount to P2
-      This amount is tripled by experimenter i.e if sent amount by P1=10, amount received by P2=30"""
+      This amount is trippled by experimenter i.e if sent amount by P1=10, amount received by P2=30"""
     template_name = 'trust/Send.html'
 
     def get_form_class(self):
@@ -111,13 +111,14 @@ class ExperimenterIntroduction(ExperimenterMixin, ptree.views.ExperimenterPage):
         return _('Trust Game: Experimenter Page')
 
     def wait_page_body_text(self):
-        match_string = "There is only 1 match."
-        if len(self.subsession.matches()) > 1:
-            match_string = "There are {} matches.".format(len(self.subsession.matches()))
-
-        return """All {} participants have started playing the game. {}
+        participant_count = len(self.subsession.participants())
+        participant_string = "participants" if participant_count > 1 else "participant"
+        matches_count = len(self.subsession.matches())
+        matches_string = "matches" if matches_count > 1 else "match"
+        return """All {} {} in {} {} have started playing the game.
                   As the experimenter in this game, you have no particular role to play.
-                  This page will change once all participants have been given a payoff.""".format(len(self.subsession.participants()), match_string)
+                  This page will change once all participants have been given a
+                  payoff.""".format(participant_count, participant_string, matches_count, matches_string)
 
     def variables_for_template(self):
         return {'participant_count': len(self.subsession.participants())}

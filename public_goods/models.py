@@ -5,6 +5,10 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from ptree.common import currency
 
+doc="""
+Public goods game. Single treatment. Four players can contribute to a joint project.
+The total contribution is multiplied by some factor, the resulting amount is then divided equally between the players.
+"""
 
 class Subsession(ptree.models.BaseSubsession):
 
@@ -21,7 +25,7 @@ class Treatment(ptree.models.BaseTreatment):
                                                 decimal_places=1,
                                                 max_digits=2,
                                                 doc="""
-                                                The multiplication factor in group contribution
+                                                Returns multiplication factor in group contribution
                                                 """)
 
 
