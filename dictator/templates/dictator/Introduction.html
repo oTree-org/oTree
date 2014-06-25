@@ -1,0 +1,25 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Dictator Game: Introduction
+{% endblock %}
+
+{% block content %}
+    <p>
+        The Dictator Game consists of two participants: The Dictator and Other Participant.
+        The Dictator is given an amount of money.The Other Participant is given nothing.
+        The Dictator is told that he must offer some amount of that money to the Other Participant,
+        even if that amount is zero. Whatever amount the Dictator offers to the Other Participant must be accepted.
+    </p>
+    {% if participant_id == 1 %}
+        <p>You are the Dictator, you have been given {{ allocated_amount }}. Please do
+           offer some of this amount to the Other Participant.</p>
+        <p>Please click "Next" to proceed.</p>
+    {% else %}
+        <p>You are the Other Participant, please click "Next"  and wait for the Dictator to offer you some of the
+            {{ allocated_amount }} given.</p>
+    {% endif %}
+
+{% endblock %}

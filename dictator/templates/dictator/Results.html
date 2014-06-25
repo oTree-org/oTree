@@ -1,0 +1,20 @@
+{% extends "global/Base.html" %}
+% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Dictator Game: Results
+{% endblock %}
+
+{% block content %}
+
+    {% if participant_id == 1 %}
+        <p>As the Dictator, you offered {{ offer_amount }} to the Other Participant.</p>
+    {% else %}
+        <p>As the Other Participant, you were offered {{ offer_amount }} by the Dictator.</p>
+    {% endif %}
+    <p>Your payoff is therefore: {{ payoff }}.</p>
+
+{% endblock %}
+
+{% block form %}{% endblock %}

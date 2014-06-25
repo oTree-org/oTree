@@ -1,0 +1,7 @@
+venv
+*.pyc
+staticfiles
+./ptree_subsessions/db.sqlite3
+.idea
+*~
+*.sqlite3
