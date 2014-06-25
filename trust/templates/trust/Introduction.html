@@ -1,0 +1,30 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Introduction
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You have been randomly and anonymously paired with another participant.
+    </p>
+
+    <p>
+        Each will be given the same initial sum of {{ amount_allocated }}.
+        Then, one of you will be selected at random and given the opportunity to give part of the sum to the other participant.
+        Before the chosen amount reaches the second participant, it will automatically be tripled by the experimenter.
+        In other words, the second participant will receive three times the amount originally given by the first participant.
+    </p>
+
+    <p>
+        The second participant will then be given a similar opportunity, namely to give part of the now-tripled sum back to the first participant.
+    </p>
+
+    <p>
+        Please click "Next" to proceed.
+    </p>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Your choice
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You have been given {{ amount_allocated }}. Please select the amount you wish to give to the other participant.
+    </p>
+
+    <p>
+        The selected amount will be automatically tripled by the experimenter;
+        this is the amount that will reach the other participant, who will then be given the opportunity to give part of it back to you.
+    </p>
+
+{% endblock %}

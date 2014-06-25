@@ -16,6 +16,19 @@ def session_types():
             """
         ),
         SessionType(
+            name='Trust Game',
+            base_pay=10,
+            num_participants=2,
+            subsession_apps=[
+                'trust',
+            ],
+            doc="""
+            Trust game. Single treatment. Both players are given an initial sum.
+            One player may give part of the sum to the other player, who actually receives triple the amount.
+            The second player may then give part of the now-tripled amount back to the first player.
+            """
+        ),
+        SessionType(
             name='Dictator',
             base_pay=100,
             num_participants=2,
