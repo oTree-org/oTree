@@ -11,7 +11,7 @@ import commit_and_push
 
 # replace the below app names with your heroku app names
 heroku_apps = {
-    'dev': 'heroku-app-name-dev',
+    'demo': 'ancient-coast-2653',
     'staging': 'heroku-app-name-staging',
     'production': 'heroku-app-name-production'
 }

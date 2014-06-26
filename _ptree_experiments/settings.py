@@ -5,6 +5,15 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True
 
+if os.environ.get('IS_PTREE_DOT_ORG'):
+    ADMIN_PASSWORD = os.environ['PTREE_ADMIN_PASSWORD']
+    SECRET_KEY = os.environ['PTREE_SECRET_KEY']
+else:
+    ADMIN_PASSWORD = 'ptree'
+    # don't share this with anybody.
+    # Change this to something unique (e.g. mash your keyboard), and then delete this comment.
+    SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
+
 # local database settings
 # add: export LOCALDEV=1 to .bashrc
 if os.environ.get("LOCALDEV"):
@@ -23,7 +32,7 @@ else:
 settings = {
     'CREATE_DEFAULT_SUPERUSER': True,
     'ADMIN_USERNAME': 'ptree',
-    'ADMIN_PASSWORD': 'ptree',
+    'ADMIN_PASSWORD': ADMIN_PASSWORD,
     'AWS_ACCESS_KEY_ID': os.environ.get('AWS_ACCESS_KEY_ID'),
     'AWS_SECRET_ACCESS_KEY': os.environ.get('AWS_SECRET_ACCESS_KEY'),
     'CURRENCY_CODE': 'USD',
@@ -41,9 +50,7 @@ settings = {
         'dictator',
         'matching_pennies',
     ],
-    # don't share this with anybody.
-    # Change this to something unique (e.g. mash your keyboard), and then delete this comment.
-    'SECRET_KEY': 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz',
+    'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
     'WSGI_APPLICATION': '_ptree_experiments.wsgi.application',
     'ROOT_URLCONF': '_ptree_experiments.urls',
