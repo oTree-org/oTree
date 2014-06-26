@@ -8,35 +8,35 @@ def session_types():
             base_pay=400,
             num_participants=2,
             subsession_apps=['prisoner_minimal',],
-            doc="""Demo"""
+            doc=""""""
         ),
         SessionType(
             name='Trust Game',
             base_pay=10,
             num_participants=2,
             subsession_apps=['trust',],
-            doc="""Demo"""
+            doc=""""""
         ),
         SessionType(
             name='Public Goods',
             base_pay=10,
             num_participants=4,
             subsession_apps=['public_goods',],
-            doc="""Demo"""
+            doc=""""""
         ),
         SessionType(
             name='Dictator',
             base_pay=100,
             num_participants=2,
             subsession_apps=['dictator',],
-            doc="""Demo"""
+            doc=""""""
         ),
         SessionType(
             name='Matching Pennies',
             base_pay=100,
             num_participants=2,
             subsession_apps=['matching_pennies',],
-            doc="""Demo"""
+            doc=""""""
         ),
     ]
 
