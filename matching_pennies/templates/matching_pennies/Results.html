@@ -1,0 +1,16 @@
+{% extends "global/Base.html" %}
+% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Matching Pennies: Results
+{% endblock %}
+
+{% block content %}
+    <p>As the {% if participant_id == 1 %}MATCHER{% else %}MISMATCHER{% endif%},</p>
+    <p>You chose {{ my_choice }} and the other participant chose {{ other_choice }}.</p>
+    <p>Your payoff is therefore: {{ payoff }}.</p>
+
+{% endblock %}
+
+{% block form %}{% endblock %}

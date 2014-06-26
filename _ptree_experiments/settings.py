@@ -39,6 +39,7 @@ settings = {
         'trust',
         'public_goods',
         'dictator',
+        'matching_pennies',
     ],
     # don't share this with anybody.
     # Change this to something unique (e.g. mash your keyboard), and then delete this comment.

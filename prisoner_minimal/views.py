@@ -10,7 +10,7 @@ from ptree.common import currency
 
 class Decision(ParticipantMixin, ptree.views.Page):
 
-    template_name = 'prisoner_minimal/Decision.html'
+    template_name = 'prisoner_minimal/Choice.html'
 
     def variables_for_template(self):
         return {'friends_amount': currency(self.treatment.friends_amount),
