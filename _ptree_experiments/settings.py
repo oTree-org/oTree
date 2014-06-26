@@ -16,7 +16,7 @@ else:
 
 # local database settings
 # add: export LOCALDEV=1 to .bashrc
-if os.environ.get("LOCALDEV"):
+if os.environ.get("PTREE_LOCALDEV"):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
