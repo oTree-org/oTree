@@ -4,13 +4,17 @@ import ptree.settings
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = False
-"""
+
 if os.environ.get('PTREE_PRODUCTION'):
     DEBUG = False
 else:
     DEBUG = True
-"""
 
+
+ADMIN_PASSWORD = os.environ['PTREE_ADMIN_PASSWORD']
+SECRET_KEY = os.environ['PTREE_SECRET_KEY']
+
+"""
 if os.environ.get('IS_PTREE_DOT_ORG'):
     ADMIN_PASSWORD = os.environ['PTREE_ADMIN_PASSWORD']
     SECRET_KEY = os.environ['PTREE_SECRET_KEY']
@@ -19,6 +23,7 @@ else:
     # don't share this with anybody.
     # Change this to something unique (e.g. mash your keyboard), and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
+"""
 
 # local database settings
 # add: export LOCALDEV=1 to .bashrc
