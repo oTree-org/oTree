@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 doc = """
 Matching pennies is a two-player prediction game.
-One player is known as the MARCHER, the other player is the MISMATCHER.
+One player is known as the MATCHER, the other player is the MISMATCHER.
 The MARCHER aims to see matching pennies.
 The MISMATCHER wants the pennies not to match.
 Both players simultaneously select either heads or tails.
