@@ -3,7 +3,10 @@ import ptree.settings
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-DEBUG = True
+if os.environ.get('PTREE_PRODUCTION'):
+    DEBUG = False
+else:
+    DEBUG = True
 
 if os.environ.get('IS_PTREE_DOT_ORG'):
     ADMIN_PASSWORD = os.environ['PTREE_ADMIN_PASSWORD']
