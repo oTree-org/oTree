@@ -15,7 +15,7 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         else:
             self.submit(views.Choice, {"penny_side": "tail"})
 
-        # results after decisions
+        # results after choices
         self.submit(views.Results)
 
 
