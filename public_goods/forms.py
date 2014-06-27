@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 import public_goods.models as models
-from django import forms
-from django.forms import ValidationError
-from public_goods.utilities import ParticipantMixin, ExperimenterMixin
-from django.utils.translation import ugettext_lazy as _
+from public_goods.utilities import ParticipantMixin
 import ptree.forms
-from crispy_forms.layout import HTML
 
 
 class ContributeForm(ParticipantMixin, ptree.forms.Form):
