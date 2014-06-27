@@ -6,7 +6,7 @@ import os
 import commit_and_push
 
 heroku_apps = {
-    'demo': 'ancient-coast-2653',
+    'demo': 'ptree-demo',
 }
 
 def main():

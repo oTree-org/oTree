@@ -29,7 +29,8 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         self.submit(views.Send, {"sent_amount": 100})
 
     def play_p2(self):
-        self.submit(views.SendBack, {'sent_back_amount': 200})
+        self.submit(views.SendBack, {'sent_back_amount': 150})
+        assert self.participant.payoff == 250
 
 
 class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
