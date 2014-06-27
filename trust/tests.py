@@ -27,6 +27,11 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         # finally, show results
         self.submit(views.Results)
 
+        #
+        #  work in progress
+        #   print payoffs of all participant pairs, for each match
+        #
+        #
         #for match in self.subsession.matches():
         #    for player in match.participants():
         #        print "Payoff P{} = {}".format(player.index_among_participants_in_match, player.payoff)
