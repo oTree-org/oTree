@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import trust.models as models
-from django import forms
-from trust.utilities import ParticipantMixin, ExperimenterMixin
-from django.utils.translation import ugettext_lazy as _
+from trust.utilities import ParticipantMixin
 import ptree.forms
 
 

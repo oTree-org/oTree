@@ -4,7 +4,6 @@ import ptree.views.concrete
 import trust.forms as forms
 from trust.utilities import ParticipantMixin, ExperimenterMixin
 from django.utils.translation import ugettext as _
-from django.conf import settings
 from ptree.common import currency
 
 
@@ -17,9 +16,11 @@ class Introduction(ParticipantMixin, ptree.views.Page):
 
 
 class Send(ParticipantMixin, ptree.views.Page):
+
     """This page is only for participant one
-      P1 sends some(all, some or none) amount to P2
-      This amount is tripled by experimenter i.e if sent amount by P1=10, amount received by P2=30"""
+    P1 sends some (all, some, or none) amount to P2
+    This amount is tripled by experimenter, i.e if sent amount by P1 is 10, amount received by P2 is 30"""
+
     template_name = 'trust/Send.html'
 
     def get_form_class(self):
@@ -36,8 +37,10 @@ class Send(ParticipantMixin, ptree.views.Page):
 
 
 class SendBack(ParticipantMixin, ptree.views.Page):
+
     """This page is only for participant two
-      P2 sends back some amount(of the tripled amount received) to P1 ranging from zero to max they got"""
+    P2 sends back some amount (of the tripled amount received) to P1 ranging from 0 to MAX they got"""
+
     template_name = 'trust/SendBack.html'
 
     def get_form_class(self):
@@ -66,7 +69,9 @@ class SendBack(ParticipantMixin, ptree.views.Page):
 
 
 class Results(ParticipantMixin, ptree.views.Page):
-    # How much each Participant has got..
+
+    """This page displays the earnings of each participant"""
+
     template_name = 'trust/Results.html'
 
     def show_skip_wait(self):
@@ -82,7 +87,6 @@ class Results(ParticipantMixin, ptree.views.Page):
         if self.participant.payoff is None:
             self.participant.set_payoff()
 
-        # get payoffs
         participant1_payoff = self.match.get_payoff_participant_1()
         participant2_payoff = self.match.get_payoff_participant_2()
 
@@ -99,6 +103,10 @@ class Results(ParticipantMixin, ptree.views.Page):
 
 class ExperimenterIntroduction(ExperimenterMixin, ptree.views.ExperimenterPage):
 
+    """This page is only for the experimenter,
+    and because the experimenter doesn't have to do anything in this game,
+    this page is a waiting screen and is updated once all participants are finished"""
+
     template_name = 'trust/ExperimenterPage.html'
 
     def show_skip_wait(self):
@@ -113,12 +121,10 @@ class ExperimenterIntroduction(ExperimenterMixin, ptree.views.ExperimenterPage):
     def wait_page_body_text(self):
         participant_count = len(self.subsession.participants())
         participant_string = "participants" if participant_count > 1 else "participant"
-        matches_count = len(self.subsession.matches())
-        matches_string = "matches" if matches_count > 1 else "match"
-        return """All {} {} in {} {} have started playing the game.
+        return """All {} {} have started playing the game.
                   As the experimenter in this game, you have no particular role to play.
                   This page will change once all participants have been given a
-                  payoff.""".format(participant_count, participant_string, matches_count, matches_string)
+                  payoff.""".format(participant_count, participant_string)
 
     def variables_for_template(self):
         return {'participant_count': len(self.subsession.participants())}
