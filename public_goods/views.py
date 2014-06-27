@@ -97,8 +97,7 @@ def experimenter_pages():
 
 
 def pages():
-    return [
-        Introduction,
-        Contribute,
-        Results
-    ]
+
+    return [Introduction,
+            Contribute,
+            Results]

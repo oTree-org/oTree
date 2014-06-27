@@ -82,7 +82,7 @@ class Participant(ptree.models.BaseParticipant):
 
     def contribute_choices(self):
         """Returns a list of allowed values for contribution"""
-        return range(0, self.treatment.amount_allocated+1, 10)
+        return range(0, self.treatment.amount_allocated + 1, 10)
 
     def get_contribute_choices(self):
         """Returns a list of tuples with the allowed contributions choices"""

@@ -1,6 +1,7 @@
 import ptree.test
 import public_goods.views as views
 from public_goods.utilities import ParticipantMixin, ExperimenterMixin
+import random
 
 
 class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
@@ -10,18 +11,18 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         # all players
         self.submit(views.Introduction)
 
-        # each contribute some amount
-        if self.participant.index_among_participants_in_match == 1:
-            self.submit(views.Contribute, {"contributed_amount": 50})
-        elif self.participant.index_among_participants_in_match == 2:
-            self.submit(views.Contribute, {"contributed_amount": 150})
-        elif self.participant.index_among_participants_in_match == 3:
-            self.submit(views.Contribute, {"contributed_amount": 200})
-        elif self.participant.index_among_participants_in_match == 4:
-            self.submit(views.Contribute, {"contributed_amount": 250})
+        # each player contributes random amount
+        print "Contribution P{}:".format(self.participant.index_among_participants_in_match,)
+        self.submit(views.Contribute, {"contributed_amount": random.choice(self.participant.contribute_choices())})
 
-        # show results for all
+        # submit results page
         self.submit(views.Results)
+
+        # print payoffs
+        if self.participant.index_among_participants_in_match == 1:
+            for match in self.subsession.matches():
+                for player in match.participants():
+                    print "Payoff P{} = {}".format(player.index_among_participants_in_match, player.payoff)
 
 
 class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from ptree.db import models
 import ptree.models
-from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+
 
 doc="""
-Minimal prisoner's dilemma game. Single treatment. The players are asked separately whether they want to cooperate or compete.
+Minimal prisoner's dilemma game. Single treatment. Two players are asked separately whether they want to cooperate or compete.
 Their choices directly determine the payoffs.
 """
+
 
 class Subsession(ptree.models.BaseSubsession):
 
@@ -36,7 +36,6 @@ class Match(ptree.models.BaseMatch):
 
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
-
     participants_per_match = 2
 
 
@@ -46,16 +45,21 @@ class Participant(ptree.models.BaseParticipant):
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
 
+    DECISION_CHOICES = (('Cooperate', 'I will cooperate'),
+                        ('Compete', 'I will compete'))
+
     decision = models.CharField(
         max_length=10, null=True, verbose_name='What is your decision?',
-        choices=(('Cooperate', 'I will cooperate'), ('Compete', 'I will compete')),
+        choices=DECISION_CHOICES,
         doc="""This participant's decision"""
     )
 
     def other_participant(self):
+        """Returns other participant in match"""
         return self.other_participants_in_match()[0]
 
     def set_payoff(self):
+        """Calculate participant payoff"""
         payoff_matrix = {'Cooperate': {'Cooperate': self.treatment.friends_amount,
                                        'Compete': self.treatment.betrayed_amount},
                          'Compete':   {'Cooperate': self.treatment.betray_amount,
@@ -66,6 +70,7 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
+
     return [Treatment.create(betray_amount=30,
                              friends_amount=20,
                              enemies_amount=10,
