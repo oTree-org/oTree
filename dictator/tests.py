@@ -1,6 +1,7 @@
 import ptree.test
 import dictator.views as views
 from dictator.utilities import ParticipantMixin, ExperimenterMixin
+import random
 
 
 class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
@@ -14,21 +15,19 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         # start game
         self.submit(views.Introduction)
 
-        # if p1, play offer
+        # dictator
         if self.participant.index_among_participants_in_match == 1:
             self.play_p1()
 
-        # Show the results
         self.submit(views.Results)
-        print self.participant.payoff
 
     def play_p1(self):
-        self.submit(views.Offer, {"offer_amount": 25})
-        print self.treatment.allocated_amount
+
+        self.submit(views.Offer, {"offer_amount": random.choice(self.match.offer_choices())})
 
 
 class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
 
     def play(self):
-        pass
 
+        self.submit(views.ExperimenterIntroduction)
