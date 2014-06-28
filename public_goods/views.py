@@ -4,12 +4,12 @@ import ptree.views.concrete
 import public_goods.forms as forms
 from public_goods.utilities import ParticipantMixin, ExperimenterMixin
 from django.utils.translation import ugettext as _
-from django.conf import settings
 from ptree.common import currency
 
 
 class Introduction(ParticipantMixin, ptree.views.Page):
-    """Description of the game: how to play and returns expected"""
+
+    """Description of the game: How to play and returns expected"""
 
     template_name = 'public_goods/Introduction.html'
 
@@ -23,7 +23,8 @@ class Introduction(ParticipantMixin, ptree.views.Page):
 
 
 class Contribute(ParticipantMixin, ptree.views.Page):
-    """Participant: choose how much to contribute"""
+
+    """Participant: Choose how much to contribute"""
 
     template_name = 'public_goods/Contribute.html'
 
@@ -32,7 +33,9 @@ class Contribute(ParticipantMixin, ptree.views.Page):
 
 
 class Results(ParticipantMixin, ptree.views.Page):
-    """Participants payoff: how much each has earned"""
+
+    """Participants payoff: How much each has earned"""
+
     template_name = 'public_goods/Results.html'
 
     def show_skip_wait(self):
@@ -55,6 +58,10 @@ class Results(ParticipantMixin, ptree.views.Page):
 
 class ExperimenterPage(ExperimenterMixin, ptree.views.ExperimenterPage):
 
+    """This page is only for the experimenter,
+    and because the experimenter doesn't have to do anything in this game,
+    this page is a waiting screen and is updated once all participants are finished"""
+
     template_name = 'public_goods/ExperimenterPage.html'
 
     def show_skip_wait(self):
@@ -75,12 +82,10 @@ class ExperimenterPage(ExperimenterMixin, ptree.views.ExperimenterPage):
     def wait_page_body_text(self):
         participant_count = len(self.subsession.participants())
         participant_string = "participants" if participant_count > 1 else "participant"
-        matches_count = len(self.subsession.matches())
-        matches_string = "matches" if matches_count > 1 else "match"
-        return """All {} {} in {} {} have started playing the game.
+        return """All {} {} have started playing the game.
                   As the experimenter in this game, you have no particular role to play.
                   This page will change once all participants have been given a
-                  payoff.""".format(participant_count, participant_string, matches_count, matches_string)
+                  payoff.""".format(participant_count, participant_string)
 
     def variables_for_template(self):
         return {'participant_count': len(self.subsession.participants())}
@@ -92,8 +97,7 @@ def experimenter_pages():
 
 
 def pages():
-    return [
-        Introduction,
-        Contribute,
-        Results
-    ]
+
+    return [Introduction,
+            Contribute,
+            Results]

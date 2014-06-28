@@ -4,11 +4,13 @@ import ptree.views.concrete
 import prisoner_minimal.forms as forms
 from prisoner_minimal.utilities import ParticipantMixin, ExperimenterMixin
 from django.utils.translation import ugettext as _
-from django.conf import settings
 from ptree.common import currency
 
 
 class Decision(ParticipantMixin, ptree.views.Page):
+
+    """This page has the instructions and this is where the decision is made.
+    Presented to both participants in a match at the same time"""
 
     template_name = 'prisoner_minimal/Decision.html'
 
@@ -23,6 +25,8 @@ class Decision(ParticipantMixin, ptree.views.Page):
 
 
 class Results(ParticipantMixin, ptree.views.Page):
+
+    """Results page to show participants the decisions that were made and print the payoffs"""
 
     template_name = 'prisoner_minimal/Results.html'
 
@@ -47,6 +51,10 @@ class Results(ParticipantMixin, ptree.views.Page):
 
 class ExperimenterIntroduction(ExperimenterMixin, ptree.views.ExperimenterPage):
 
+    """This page is only for the experimenter,
+    and because the experimenter doesn't have to do anything in this game,
+    this page is a waiting screen and is updated once all participants are finished"""
+
     template_name = 'prisoner_minimal/ExperimenterPage.html'
 
     def show_skip_wait(self):
@@ -61,12 +69,10 @@ class ExperimenterIntroduction(ExperimenterMixin, ptree.views.ExperimenterPage):
     def wait_page_body_text(self):
         participant_count = len(self.subsession.participants())
         participant_string = "participants" if participant_count > 1 else "participant"
-        matches_count = len(self.subsession.matches())
-        matches_string = "matches" if matches_count > 1 else "match"
-        return """All {} {} in {} {} have started playing the game.
+        return """All {} {} have started playing the game.
                   As the experimenter in this game, you have no particular role to play.
                   This page will change once all participants have been given a
-                  payoff.""".format(participant_count, participant_string, matches_count, matches_string)
+                  payoff.""".format(participant_count, participant_string)
 
     def variables_for_template(self):
         return {'participant_count': len(self.subsession.participants())}

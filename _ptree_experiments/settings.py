@@ -17,7 +17,6 @@ else:
     # Change this to something unique (e.g. mash your keyboard), and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
 
-
 # local database settings
 # add: export LOCALDEV=1 to .bashrc
 if os.environ.get("PTREE_LOCALDEV"):

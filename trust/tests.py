@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import ptree.test
 import trust.views as views
 from trust.utilities import ParticipantMixin, ExperimenterMixin
+import random
 
 
 class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
@@ -18,22 +20,23 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         if self.participant.index_among_participants_in_match == 1:
             self.play_p1()
 
-        # else p2, send back page
+        # else p2, play send back page
         else:
             self.play_p2()
 
-        # finally, show the results
+        # finally, show results
         self.submit(views.Results)
 
     def play_p1(self):
-        self.submit(views.Send, {"sent_amount": 100})
+        self.submit(views.Send,
+                    {"sent_amount": random.choice(self.match.send_choices())})
 
     def play_p2(self):
-        self.submit(views.SendBack, {'sent_back_amount': 150})
-        assert self.participant.payoff == 250
+        self.submit(views.SendBack, {'sent_back_amount': 200})
 
 
 class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
 
     def play(self):
-        pass
+
+        self.submit(views.ExperimenterIntroduction)
