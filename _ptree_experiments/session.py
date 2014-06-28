@@ -38,6 +38,13 @@ def session_types():
             subsession_apps=['matching_pennies',],
             doc=""""""
         ),
+        SessionType(
+            name='Travelers Dilemma',
+            base_pay=100,
+            num_participants=2,
+            subsession_apps=['travelers_dilemma',],
+            doc=""""""
+        ),
     ]
 
 

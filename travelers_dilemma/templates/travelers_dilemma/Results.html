@@ -1,0 +1,14 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Traveler's Dilemma: Results
+{% endblock %}
+
+{% block content %}
+    <p>Your estimated Item value was {{ estimated_value }}.</p>
+    <p>The other participant's estimated Item value is {{ other_estimated_value }}.</p>
+    <p>Your payoff is therefore {{ payoff }}.</p>
+
+{% endblock %}
