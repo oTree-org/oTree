@@ -25,9 +25,9 @@ class Treatment(ptree.models.BaseTreatment):
                        doc="""Player's gain or loss as a result of the value given""")
 
     max_value = models.PositiveIntegerField(null=True,
-                        doc="""Maximum value to be estimated""")
+                        doc="""The maximum value to be compensated""")
     min_value = models.PositiveIntegerField(null=True,
-                        doc="""Minimum value to be estimated""")
+                        doc="""The minimum value to be compensated""")
 
 
 class Match(ptree.models.BaseMatch):
@@ -38,7 +38,7 @@ class Match(ptree.models.BaseMatch):
     participants_per_match = 2
 
     def value_choices(self):
-        """Range of allowed offers"""
+        """Range of allowed estimate values"""
         return range(self.treatment.min_value, self.treatment.max_value + 1, 5)
 
     def get_value_field_choices(self):
