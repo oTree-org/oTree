@@ -4,15 +4,15 @@ from travelers_dilemma.utilities import ParticipantMixin
 import ptree.forms
 
 
-class EstimateValueForm(ParticipantMixin, ptree.forms.Form):
+class ClaimForm(ParticipantMixin, ptree.forms.Form):
 
     class Meta:
         model = models.Participant
-        fields = ['estimate_value']
+        fields = ['claim']
 
     def labels(self):
-        return {'estimate_value': "What's the estimated value of your items?"}
+        return {'claim': "What's your Claim Amount?"}
 
     def choices(self):
-        return {'estimate_value': self.match.get_value_field_choices()}
+        return {'claim': self.match.get_claim_field_choices()}
 

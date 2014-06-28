@@ -40,7 +40,7 @@ def session_types():
         ),
         SessionType(
             name='Travelers Dilemma',
-            base_pay=100,
+            base_pay=0,
             num_participants=2,
             subsession_apps=['travelers_dilemma',],
             doc=""""""

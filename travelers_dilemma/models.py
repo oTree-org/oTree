@@ -6,10 +6,8 @@ import ptree.models
 from ptree.common import currency
 
 doc = """
-Traveler's Dilemma Game involves two participants:
-Assuming, both participants have lost two identical items.
-Both participants are going to be compensated for their lost items but they have to estimate the value of
-their items without conferring with each another.
+Traveller's Dilemma game has two participants who are anonymously paired.
+Each participant is told to make a claim and payoffs calculated according to the claims made.
 """
 
 
@@ -21,13 +19,16 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    honesty_gain = models.PositiveIntegerField(null=True,
-                       doc="""Player's gain or loss as a result of the value given""")
+    reward = models.PositiveIntegerField(null=True,
+                       doc="""Player's reward for the lowest claim""")
 
-    max_value = models.PositiveIntegerField(null=True,
-                        doc="""The maximum value to be compensated""")
-    min_value = models.PositiveIntegerField(null=True,
-                        doc="""The minimum value to be compensated""")
+    penalty = models.PositiveIntegerField(null=True,
+                       doc="""Player's deduction for the higher claim""")
+
+    max_amount = models.PositiveIntegerField(null=True,
+                        doc="""The maximum claim to be requested""")
+    min_amount = models.PositiveIntegerField(null=True,
+                        doc="""The minimum claim to be requested""")
 
 
 class Match(ptree.models.BaseMatch):
@@ -37,13 +38,13 @@ class Match(ptree.models.BaseMatch):
 
     participants_per_match = 2
 
-    def value_choices(self):
-        """Range of allowed estimate values"""
-        return range(self.treatment.min_value, self.treatment.max_value + 1, 5)
+    def claim_choices(self):
+        """Range of allowed claim values"""
+        return range(self.treatment.min_amount, self.treatment.max_amount + 1, 5)
 
-    def get_value_field_choices(self):
-        """A tuple of allowed value estimates"""
-        return tuple([(i, currency(i)) for i in self.value_choices()])
+    def get_claim_field_choices(self):
+        """A tuple of allowed claim estimates"""
+        return tuple([(i, currency(i)) for i in self.claim_choices()])
 
 
 class Participant(ptree.models.BaseParticipant):
@@ -52,11 +53,11 @@ class Participant(ptree.models.BaseParticipant):
     treatment = models.ForeignKey(Treatment, null = True)
     subsession = models.ForeignKey(Subsession)
 
-    # estimated value by participant
-    estimate_value = models.PositiveIntegerField(
+    # claim by participant
+    claim = models.PositiveIntegerField(
         null=True,
         doc="""
-        Each player's estimated value of their items
+        Each participant's claim
         """
     )
 
@@ -64,14 +65,12 @@ class Participant(ptree.models.BaseParticipant):
         return self.other_participants_in_match()[0]
 
     def set_payoff(self):
-        if self.estimate_value < self.other_participant().estimate_value:
-            self.payoff = self.estimate_value + self.treatment.honesty_gain
-            self.other_participant().payoff = self.other_participant().estimate_value - self.treatment.honesty_gain
-        elif self.estimate_value > self.other_participant().estimate_value:
-            self.payoff = self.estimate_value - self.treatment.honesty_gain
-            self.other_participant().payoff = self.other_participant().estimate_value + self.treatment.honesty_gain
+        if self.claim < self.other_participant().claim:
+            self.payoff = self.claim + self.treatment.reward
+        elif self.claim > self.other_participant().claim:
+            self.payoff = self.claim - self.treatment.penalty
         else:
-            self.payoff = self.other_participant().payoff = self.estimate_value
+            self.payoff = self.claim
 
 
 def treatments():
@@ -79,9 +78,10 @@ def treatments():
     treatment_list = []
 
     treatment = Treatment(
-        honesty_gain=10,
-        max_value=100,
-        min_value=20,
+        reward=10,
+        penalty=10,
+        max_amount=100,
+        min_amount=20,
     )
 
     treatment_list.append(treatment)
