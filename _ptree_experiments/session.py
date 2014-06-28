@@ -45,6 +45,13 @@ def session_types():
             subsession_apps=['travelers_dilemma',],
             doc=""""""
         ),
+        SessionType(
+            name='Simple Questionnaire',
+            base_pay=0,
+            num_participants=2,
+            subsession_apps=['questionnaire_zurich',],
+            doc=""""""
+        ),
     ]
 
 

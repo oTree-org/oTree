@@ -53,6 +53,7 @@ settings = {
         'dictator',
         'matching_pennies',
         'travelers_dilemma',
+        'questionnaire_zurich',
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
