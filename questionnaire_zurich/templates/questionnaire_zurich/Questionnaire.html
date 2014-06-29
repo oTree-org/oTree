@@ -1,0 +1,26 @@
+{% extends "global/Base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}
+        Questionnaire
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please answer the following questions.
+    </p>
+
+{% endblock %}
+
+{% block content_at_bottom_of_body %}
+
+    <script type="text/javascript">
+        function sort(a, b) {
+            return (a.innerHTML > b.innerHTML) ? 1 : -1;
+        };
+        $('#id_q_country option').sort(sort).appendTo('#id_q_country');
+    </script>
+
+{% endblock %}

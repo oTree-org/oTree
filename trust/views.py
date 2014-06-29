@@ -3,7 +3,6 @@ import ptree.views
 import ptree.views.concrete
 import trust.forms as forms
 from trust.utilities import ParticipantMixin, ExperimenterMixin
-from django.utils.translation import ugettext as _
 from ptree.common import currency
 
 
@@ -116,7 +115,7 @@ class ExperimenterIntroduction(ExperimenterMixin, ptree.views.ExperimenterPage):
             return self.PageActions.wait
 
     def wait_page_title_text(self):
-        return _('Trust Game: Experimenter Page')
+        return "Trust Game: Experimenter Page"
 
     def wait_page_body_text(self):
         participant_count = len(self.subsession.participants())

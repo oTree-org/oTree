@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
 """Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
-
 from ptree.db import models
 import ptree.models
-from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
 from ptree.common import currency
 
-doc="""
-The Dictator Game. Single Treatment. Two players: Dictator and other participant. Dictator is given some
-amount of money, while the other participant is given nothing.
-The Dictator is told that he must offer some amount of that money to the other participant, even
-if that amount is zero. Whatever amount the dictator offers to the other participant must be accepted.
+
+doc = """
+Dictator Game. Single Treatment. Two players, one of whom is the dictator.
+The dictator is given some amount of money, while the other participant is given nothing.
+The dictator must offer part of the money to the other participant.
+The offered amount cannot be rejected.
 """
 
 
@@ -23,10 +21,10 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    allocated_amount = models.PositiveIntegerField(null=True,
-                           doc="""
-                           Initial amount allocated to Dictator player
-                           """)
+    allocated_amount = models.PositiveIntegerField(
+        null=True,
+        doc="""Initial amount allocated to the dictator"""
+    )
 
 
 class Match(ptree.models.BaseMatch):
@@ -35,17 +33,17 @@ class Match(ptree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     participants_per_match = 2
 
-    offer_amount = models.PositiveIntegerField(null=True,
-                         doc="""
-                         Amount to be offered by Dictator player to the Other player
-                         """)
+    offer_amount = models.PositiveIntegerField(
+        null=True,
+        doc="""Amount offered by the dictator"""
+    )
 
     def offer_choices(self):
-        """range of allowed incremented offer values"""
-        return range(0, self.treatment.allocated_amount+1, 5)
+        """Range of allowed offers"""
+        return range(0, self.treatment.allocated_amount + 1, 5)
 
     def get_offer_field_choices(self):
-        """a tuple with the range of allowed offer values"""
+        """Tuple of tuples with allowed offers"""
         return tuple([(i, currency(i)) for i in self.offer_choices()])
 
 
@@ -56,6 +54,7 @@ class Participant(ptree.models.BaseParticipant):
     subsession = models.ForeignKey(Subsession)
 
     def set_payoff(self):
+        """Calculates player payoff"""
         if self.index_among_participants_in_match == 1:
             self.payoff = self.treatment.allocated_amount - self.match.offer_amount
         else:

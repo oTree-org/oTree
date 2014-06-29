@@ -3,17 +3,18 @@
 {% load i18n %}
 
 {% block title %}
-    Dictator Game: Results
+    Results
 {% endblock %}
 
 {% block content %}
 
-    {% if participant_id == 1 %}
-        <p>As the Dictator, you offered {{ offer_amount }} to the Other Participant.</p>
-    {% else %}
-        <p>As the Other Participant, you were offered {{ offer_amount }} by the Dictator.</p>
-    {% endif %}
-    <p>Your payoff is therefore: {{ payoff }}.</p>
+    <p>
+        {% if participant_id == 1 %}
+            As the dictator, you offered the other participant {{ offer_amount }}. Your payoff is therefore {{ payoff }}.
+        {% else %}
+            The dictator offered you {{ offer_amount }}. Your payoff is therefore {{ payoff }}.
+        {% endif %}
+    </p>
 
 {% endblock %}
 

@@ -15,7 +15,7 @@ class OfferForm(ParticipantMixin, ptree.forms.Form):
         fields = ['offer_amount']
 
     def labels(self):
-        return {'offer_amount': 'Amount to offer to the other participant?'}
+        return {'offer_amount': 'How much will you offer?'}
 
     def choices(self):
         return {'offer_amount': self.match.get_offer_field_choices()}

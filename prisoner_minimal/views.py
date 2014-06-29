@@ -3,7 +3,6 @@ import ptree.views
 import ptree.views.concrete
 import prisoner_minimal.forms as forms
 from prisoner_minimal.utilities import ParticipantMixin, ExperimenterMixin
-from django.utils.translation import ugettext as _
 from ptree.common import currency
 
 
@@ -64,7 +63,7 @@ class ExperimenterIntroduction(ExperimenterMixin, ptree.views.ExperimenterPage):
             return self.PageActions.wait
 
     def wait_page_title_text(self):
-        return _("Prisoner's Dilemma: Experimenter Page")
+        return "Prisoner's Dilemma: Experimenter Page"
 
     def wait_page_body_text(self):
         participant_count = len(self.subsession.participants())

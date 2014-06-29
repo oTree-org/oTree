@@ -3,6 +3,7 @@ dj-static==0.0.5
 django-ptree==0.2.129
 django-toolbelt==0.0.1
 django-vanilla-views==1.0.2
+django-countries==1.5
 gunicorn==18.0
 static==1.0.2
 wsgiref==0.1.2

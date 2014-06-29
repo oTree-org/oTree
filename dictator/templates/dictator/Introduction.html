@@ -3,23 +3,31 @@
 {% load i18n %}
 
 {% block title %}
-    Dictator Game: Introduction
+    Introduction
 {% endblock %}
 
 {% block content %}
+
     <p>
-        The Dictator Game consists of two participants: The Dictator and Other Participant.
-        The Dictator is given an amount of money.The Other Participant is given nothing.
-        The Dictator is told that he must offer some amount of that money to the Other Participant,
-        even if that amount is zero. Whatever amount the Dictator offers to the Other Participant must be accepted.
+        You have been randomly paired with another participant.
+        {% if participant_id == 1 %}
+            You are the <strong>dictator</strong>, and have been given {{ allocated_amount }}. The other participant has not been given anything.
+        {% else %}
+            This other participant is the <strong>dictator</strong>, and has been given {{ allocated_amount }}. You have not been given anything.
+        {% endif %}
     </p>
-    {% if participant_id == 1 %}
-        <p>You are the Dictator, you have been given {{ allocated_amount }}. Please do
-           offer some of this amount to the Other Participant.</p>
-        <p>Please click "Next" to proceed.</p>
-    {% else %}
-        <p>You are the Other Participant, please click "Next"  and wait for the Dictator to offer you some of the
-            {{ allocated_amount }} given.</p>
-    {% endif %}
+
+    <p>
+        {% if participant_id == 1 %}
+            You will be given the opportunity to offer part of this amount to the other participant.
+            The offered amount cannot be rejected.
+        {% else %}
+            The dictator will be given the opportunity to offer part of this amount to you. The offered amount cannot be rejected.
+        {% endif %}
+    </p>
+
+    <p>
+        Please click "Next" to proceed.
+    </p>
 
 {% endblock %}
