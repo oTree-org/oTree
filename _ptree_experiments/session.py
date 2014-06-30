@@ -2,6 +2,7 @@ from ptree.session import SessionType
 
 
 def session_types():
+
     return [
         SessionType(
             name="Prisoner Dilemma",
