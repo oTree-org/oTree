@@ -57,17 +57,10 @@ class Participant(ptree.models.BaseParticipant):
 
     def set_payoff(self):
         """Calculates payoffs"""
-        payoff_matrix = {'heads': {'heads': 'match',
-                                   'tails': 'mismatch'},
-                         'tails':   {'heads': 'mismatch',
-                                     'tails': 'match'}}
 
-        outcome = (payoff_matrix[self.penny_side]
-                                [self.other_participant().penny_side])
+        match = self.penny_side == self.other_participant().penny_side
 
-        if outcome == 'match' and self.index_among_participants_in_match == 1:
-            self.payoff = self.treatment.initial_amount * 2
-        elif outcome == 'mismatch' and self.index_among_participants_in_match == 2:
+        if (self.index_among_participants_in_match == 1 and match) or (self.index_among_participants_in_match == 2 and not match):
             self.payoff = self.treatment.initial_amount * 2
         else:
             self.payoff = 0
