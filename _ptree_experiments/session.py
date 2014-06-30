@@ -2,6 +2,7 @@ from ptree.session import SessionType
 
 
 def session_types():
+
     return [
         SessionType(
             name="Prisoner Dilemma",
@@ -39,23 +40,24 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Travelers Dilemma',
+            name='Traveler Dilemma',
             base_pay=0,
             num_participants=2,
-            subsession_apps=['travelers_dilemma',],
+            subsession_apps=['traveler_dilemma',],
             doc=""""""
         ),
         SessionType(
-            name='Simple Questionnaire',
+            name='Survey',
             base_pay=0,
-            num_participants=2,
-            subsession_apps=['questionnaire_zurich',],
+            num_participants=1,
+            subsession_apps=['survey',],
             doc=""""""
         ),
     ]
 
 
 def show_on_demo_page(session_type_name):
+
     return True
 
 demo_page_intro_text = """

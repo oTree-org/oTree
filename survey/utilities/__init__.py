@@ -1,5 +1,5 @@
 # Don't change anything in this file.
-import questionnaire_zurich.models as models
+import survey.models as models
 import ptree.views
 
 class ParticipantMixin(object):

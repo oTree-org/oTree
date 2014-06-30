@@ -6,7 +6,7 @@ from ptree.common import currency
 
 
 doc = """
-Dictator Game. Single Treatment. Two players, one of whom is the dictator.
+Dictator game. Single Treatment. Two players, one of whom is the dictator.
 The dictator is given some amount of money, while the other participant is given nothing.
 The dictator must offer part of the money to the other participant.
 The offered amount cannot be rejected.

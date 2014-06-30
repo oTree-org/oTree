@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block title %}
-        Questionnaire
+    Survey
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@
     <script type="text/javascript">
         function sort(a, b) {
             return (a.innerHTML > b.innerHTML) ? 1 : -1;
-        };
+        }
         $('#id_q_country option').sort(sort).appendTo('#id_q_country');
     </script>
 

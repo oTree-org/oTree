@@ -3,7 +3,7 @@ from ptree.db import models
 import ptree.models
 
 
-doc="""
+doc = """
 Prisoner's dilemma game. Single treatment. Two players are asked separately whether they want to cooperate or compete.
 Their choices directly determine the payoffs.
 """
