@@ -1,5 +1,5 @@
 from django.contrib import admin
-import questionnaire_zurich.models as models
+import survey.models as models
 import ptree.adminlib as adminlib
 
 

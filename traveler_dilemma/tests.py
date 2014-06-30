@@ -1,6 +1,6 @@
 import ptree.test
-import travelers_dilemma.views as views
-from travelers_dilemma.utilities import ParticipantMixin, ExperimenterMixin
+import traveler_dilemma.views as views
+from traveler_dilemma.utilities import ParticipantMixin, ExperimenterMixin
 import random
 
 

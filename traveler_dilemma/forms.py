@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import travelers_dilemma.models as models
-from travelers_dilemma.utilities import ParticipantMixin
+import traveler_dilemma.models as models
+from traveler_dilemma.utilities import ParticipantMixin
 import ptree.forms
 
 

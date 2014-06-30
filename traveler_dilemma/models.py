@@ -6,14 +6,14 @@ import ptree.models
 from ptree.common import currency
 
 doc = """
-Traveller's Dilemma game has two participants who are anonymously paired.
-Each participant is told to make a claim and payoffs calculated according to the claims made.
+Traveler's dilemma game has two participants.
+Each participant is told to make a claim. Payoffs calculated according to the claims made.
 """
 
 
 class Subsession(ptree.models.BaseSubsession):
 
-    name_in_url = 'travelers_dilemma'
+    name_in_url = 'traveler_dilemma'
 
 
 class Treatment(ptree.models.BaseTreatment):

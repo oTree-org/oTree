@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import ptree.views
 import ptree.views.concrete
-import prisoner_minimal.forms as forms
-from prisoner_minimal.utilities import ParticipantMixin, ExperimenterMixin
+import prisoner_dilemma.forms as forms
+from prisoner_dilemma.utilities import ParticipantMixin, ExperimenterMixin
 from ptree.common import currency
 
 
@@ -11,7 +11,7 @@ class Decision(ParticipantMixin, ptree.views.Page):
     """This page has the instructions and this is where the decision is made.
     Presented to both participants in a match at the same time"""
 
-    template_name = 'prisoner_minimal/Decision.html'
+    template_name = 'prisoner_dilemma/Decision.html'
 
     def variables_for_template(self):
         return {'friends_amount': currency(self.treatment.friends_amount),
@@ -27,7 +27,7 @@ class Results(ParticipantMixin, ptree.views.Page):
 
     """Results page to show participants the decisions that were made and print the payoffs"""
 
-    template_name = 'prisoner_minimal/Results.html'
+    template_name = 'prisoner_dilemma/Results.html'
 
     def variables_for_template(self):
         if self.participant.payoff is None:
@@ -54,7 +54,7 @@ class ExperimenterIntroduction(ExperimenterMixin, ptree.views.ExperimenterPage):
     and because the experimenter doesn't have to do anything in this game,
     this page is a waiting screen and is updated once all participants are finished"""
 
-    template_name = 'prisoner_minimal/ExperimenterPage.html'
+    template_name = 'prisoner_dilemma/ExperimenterPage.html'
 
     def show_skip_wait(self):
         if all(p.payoff is not None for p in self.subsession.participants()):

@@ -1,6 +1,7 @@
 # Don't change anything in this file.
-import questionnaire_zurich.models as models
+import prisoner_dilemma.models as models
 import ptree.views
+import ptree.forms
 
 class ParticipantMixin(object):
     z_models = models
@@ -18,12 +19,8 @@ class ExperimenterMixin(object):
     def z_autocomplete(self):
         self.subsession = models.Subsession()
 
-
 class InitializeParticipant(ParticipantMixin, ptree.views.InitializeParticipant):
-
     pass
 
-
 class InitializeExperimenter(ExperimenterMixin, ptree.views.InitializeExperimenter):
-
     pass

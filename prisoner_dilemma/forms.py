@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-import prisoner_minimal.models as models
+import prisoner_dilemma.models as models
 from django import forms
-from prisoner_minimal.utilities import ParticipantMixin
+from prisoner_dilemma.utilities import ParticipantMixin
 import ptree.forms
 
 
