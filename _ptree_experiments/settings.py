@@ -47,7 +47,7 @@ settings = {
         '_ptree_experiments',
     ],
     'INSTALLED_PTREE_APPS': [
-        'prisoner_minimal',
+        'prisoner',
         'trust',
         'public_goods',
         'dictator',

@@ -7,7 +7,7 @@ def session_types():
             name="Prisoner Dilemma",
             base_pay=400,
             num_participants=2,
-            subsession_apps=['prisoner_minimal',],
+            subsession_apps=['prisoner',],
             doc=""""""
         ),
         SessionType(

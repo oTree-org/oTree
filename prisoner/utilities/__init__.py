@@ -1,5 +1,5 @@
 # Don't change anything in this file.
-import prisoner_minimal.models as models
+import prisoner.models as models
 import ptree.views
 import ptree.forms
 
