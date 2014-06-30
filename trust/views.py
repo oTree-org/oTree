@@ -99,44 +99,9 @@ class Results(ParticipantMixin, ptree.views.Page):
                 'participant1_payoff': currency(participant1_payoff),
                 'participant2_payoff': currency(participant2_payoff)}
 
-
-class ExperimenterIntroduction(ExperimenterMixin, ptree.views.ExperimenterPage):
-
-    """This page is only for the experimenter,
-    and because the experimenter doesn't have to do anything in this game,
-    this page is a waiting screen and is updated once all participants are finished"""
-
-    template_name = 'trust/ExperimenterPage.html'
-
-    def show_skip_wait(self):
-        if all(p.payoff is not None for p in self.subsession.participants()):
-            return self.PageActions.show
-        else:
-            return self.PageActions.wait
-
-    def wait_page_title_text(self):
-        return "Trust Game: Experimenter Page"
-
-    def wait_page_body_text(self):
-        participant_count = len(self.subsession.participants())
-        participant_string = "participants" if participant_count > 1 else "participant"
-        return """All {} {} have started playing the game.
-                  As the experimenter in this game, you have no particular role to play.
-                  This page will change once all participants have been given a
-                  payoff.""".format(participant_count, participant_string)
-
-    def variables_for_template(self):
-        return {'participant_count': len(self.subsession.participants())}
-
-
 def pages():
 
     return [Introduction,
             Send,
             SendBack,
             Results]
-
-
-def experimenter_pages():
-
-    return [ExperimenterIntroduction]

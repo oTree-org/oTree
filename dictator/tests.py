@@ -29,5 +29,4 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
 class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
 
     def play(self):
-
-        self.submit(views.ExperimenterIntroduction)
+        pass
