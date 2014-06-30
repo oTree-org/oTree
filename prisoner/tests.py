@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import ptree.test
-import prisoner_dilemma.views as views
-from prisoner_dilemma.utilities import ParticipantMixin, ExperimenterMixin
+import prisoner.views as views
+from prisoner.utilities import ParticipantMixin, ExperimenterMixin
 import random
 
 

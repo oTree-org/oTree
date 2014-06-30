@@ -28,10 +28,11 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         self.submit(views.Results)
 
     def play_p1(self):
-        self.submit(views.Send, {"sent_amount": random.choice(self.match.send_choices())})
+        self.submit(views.Send,
+                    {"sent_amount": random.choice(self.match.send_choices())})
 
     def play_p2(self):
-        self.submit(views.SendBack, {'sent_back_amount': random.choice(self.match.send_back_choices())})
+        self.submit(views.SendBack, {'sent_back_amount': 200})
 
 
 class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):

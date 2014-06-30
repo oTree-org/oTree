@@ -7,7 +7,7 @@ def session_types():
             name="Prisoner Dilemma",
             base_pay=400,
             num_participants=2,
-            subsession_apps=['prisoner_dilemma',],
+            subsession_apps=['prisoner',],
             doc=""""""
         ),
         SessionType(
@@ -59,4 +59,7 @@ def show_on_demo_page(session_type_name):
 
     return True
 
-demo_page_intro_text = 'Click on one of the below sessions to play.'
+demo_page_intro_text = """
+Click on one of the below links to learn more and play.
+You can read the source code of these games <a href="https://github.com/wickens/ptree_library">here</a>.
+"""
