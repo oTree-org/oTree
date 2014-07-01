@@ -13,6 +13,7 @@ If the outcomes match, the former player gets both pennies; if the outcomes do n
 """
 
 
+
 class Subsession(ptree.models.BaseSubsession):
 
     name_in_url = 'matching_pennies'
@@ -26,7 +27,6 @@ class Treatment(ptree.models.BaseTreatment):
         null=True,
         doc="""The value of the pennies given to each player"""
     )
-
 
 class Match(ptree.models.BaseMatch):
 
