@@ -53,6 +53,13 @@ def session_types():
             subsession_apps=['survey',],
             doc=""""""
         ),
+        SessionType(
+            name='Bargaining',
+            base_pay=0,
+            num_participants=2,
+            subsession_apps=['bargaining',],
+            doc=""""""
+        ),
     ]
 
 

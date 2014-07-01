@@ -54,6 +54,7 @@ settings = {
         'matching_pennies',
         'traveler_dilemma',
         'survey',
+        'bargaining',
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
