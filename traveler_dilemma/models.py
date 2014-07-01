@@ -6,8 +6,8 @@ import ptree.models
 from ptree.common import currency
 
 doc = """
-Traveler's dilemma game has two participants.
-Each participant is told to make a claim. Payoffs calculated according to the claims made.
+Traveler's dilemma game. Single treatment.
+Both players make a claim at the same time.
 """
 
 
