@@ -60,6 +60,20 @@ def session_types():
             subsession_apps=['bargaining',],
             doc=""""""
         ),
+        SessionType(
+            name='Guessing Game***',
+            base_pay=0,
+            num_participants=2,
+            subsession_apps=['guessing',],
+            doc=""""""
+        ),
+        SessionType(
+            name='Lying Game',
+            base_pay=0,
+            num_participants=1,
+            subsession_apps=['lying',],
+            doc=""""""
+        ),
     ]
 
 

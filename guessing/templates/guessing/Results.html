@@ -1,0 +1,16 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>Your guess value was {{ guess_value }}.</p>
+    <p>Your payoff is {{ payoff }}.</p>
+
+{% endblock %}
+
+{% block form %}{% endblock %}

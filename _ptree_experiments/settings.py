@@ -55,6 +55,8 @@ settings = {
         'traveler_dilemma',
         'survey',
         'bargaining',
+        'guessing',
+        'lying',
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
