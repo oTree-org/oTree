@@ -8,6 +8,7 @@ def session_types():
             name="Prisoner Dilemma",
             base_pay=400,
             num_participants=2,
+            num_bot_participants=10,
             subsession_apps=['prisoner',],
             doc=""""""
         ),
@@ -15,6 +16,7 @@ def session_types():
             name='Trust Game',
             base_pay=10,
             num_participants=2,
+            num_bot_participants=10,
             subsession_apps=['trust',],
             doc=""""""
         ),
@@ -22,6 +24,7 @@ def session_types():
             name='Public Goods',
             base_pay=10,
             num_participants=4,
+            num_bot_participants=16,
             subsession_apps=['public_goods',],
             doc=""""""
         ),
@@ -29,6 +32,7 @@ def session_types():
             name='Dictator',
             base_pay=100,
             num_participants=2,
+            num_bot_participants=10,
             subsession_apps=['dictator',],
             doc=""""""
         ),
@@ -36,6 +40,7 @@ def session_types():
             name='Matching Pennies',
             base_pay=100,
             num_participants=2,
+            num_bot_participants=10,
             subsession_apps=['matching_pennies',],
             doc=""""""
         ),
@@ -43,13 +48,15 @@ def session_types():
             name='Traveler Dilemma',
             base_pay=0,
             num_participants=2,
-            subsession_apps=['traveler_dilemma',],
+            num_bot_participants=16,
+            subsession_apps=['traveler_dilemma', 'public_goods'],
             doc=""""""
         ),
         SessionType(
             name='Survey',
             base_pay=0,
             num_participants=1,
+            num_bot_participants=10,
             subsession_apps=['survey',],
             doc=""""""
         ),
@@ -57,6 +64,7 @@ def session_types():
             name='Bargaining',
             base_pay=0,
             num_participants=2,
+            num_bot_participants=10,
             subsession_apps=['bargaining',],
             doc=""""""
         ),
