@@ -1,0 +1,14 @@
+{% extends "global/Base.html" %}
+% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+    <p>You requested {{ request_amount }}.</p>
+    <p>Your opponent requested {{ other_request }}.</p>
+    <p>Your payoff is therefore {{ payoff }}</p>
+
+{% endblock %}

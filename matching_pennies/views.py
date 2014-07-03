@@ -12,7 +12,7 @@ class Choice(ParticipantMixin, ptree.views.Page):
     form_class = forms.PennySideForm
 
     def variables_for_template(self):
-        return {'participant_id': self.participant.index_among_participants_in_match,
+        return {'role': self.participant.role(),
                 'initial_amount': currency(self.treatment.initial_amount),
                 'winner_amount': currency(self.treatment.initial_amount * 2),
                 'loser_amount': currency(0)}
@@ -38,7 +38,7 @@ class Results(ParticipantMixin, ptree.views.Page):
         return {'my_choice': self.participant.penny_side,
                 'other_choice': self.participant.other_participant().penny_side,
                 'payoff': currency(self.participant.payoff),
-                'participant_id': self.participant.index_among_participants_in_match}
+                'role': self.participant.role()}
 
 
 class ExperimenterPage(ExperimenterMixin, ptree.views.ExperimenterPage):

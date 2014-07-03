@@ -54,6 +54,12 @@ settings = {
         'matching_pennies',
         'traveler_dilemma',
         'survey',
+        'bargaining',
+        'guessing',
+        'lying',
+        # app to display all lab results in a given session
+        # can be used together with any of the above games
+        'lab_results',
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,

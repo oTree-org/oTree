@@ -3,13 +3,12 @@
 {% load i18n %}
 
 {% block title %}
-    Thank you
+    Results
 {% endblock %}
 
 {% block content %}
 
-    <p>
-        You have finished the survey.
-    </p>
+    <p>Your guess value was {{ guess_value }}.</p>
+    <p>Your payoff is {{ payoff }}.</p>
 
 {% endblock %}

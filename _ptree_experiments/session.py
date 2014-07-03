@@ -7,50 +7,73 @@ def session_types():
         SessionType(
             name="Prisoner Dilemma",
             base_pay=400,
-            num_participants=2,
-            subsession_apps=['prisoner',],
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['prisoner', 'lab_results'],
             doc=""""""
         ),
         SessionType(
             name='Trust Game',
             base_pay=10,
-            num_participants=2,
-            subsession_apps=['trust',],
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['trust', 'lab_results'],
             doc=""""""
         ),
         SessionType(
             name='Public Goods',
             base_pay=10,
-            num_participants=4,
-            subsession_apps=['public_goods',],
+            num_demo_participants=4,
+            num_participants=12,
+            subsession_apps=['public_goods', 'lab_results'],
             doc=""""""
         ),
         SessionType(
             name='Dictator',
             base_pay=100,
-            num_participants=2,
-            subsession_apps=['dictator',],
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['dictator', 'lab_results'],
             doc=""""""
         ),
         SessionType(
             name='Matching Pennies',
             base_pay=100,
-            num_participants=2,
-            subsession_apps=['matching_pennies',],
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['matching_pennies']*3 + ['lab_results'],
             doc=""""""
         ),
         SessionType(
             name='Traveler Dilemma',
             base_pay=0,
-            num_participants=2,
-            subsession_apps=['traveler_dilemma',],
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['traveler_dilemma', 'lab_results'],
             doc=""""""
         ),
         SessionType(
             name='Survey',
             base_pay=0,
-            num_participants=1,
-            subsession_apps=['survey',],
+            num_demo_participants=1,
+            num_participants=12,
+            subsession_apps=['survey', 'lab_results'],
+            doc=""""""
+        ),
+        SessionType(
+            name='Bargaining',
+            base_pay=0,
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['bargaining', 'lab_results'],
+            doc=""""""
+        ),
+        SessionType(
+            name='Lying Game',
+            base_pay=0,
+            num_demo_participants=1,
+            num_participants=12,
+            subsession_apps=['lying', 'lab_results'],
             doc=""""""
         ),
     ]
