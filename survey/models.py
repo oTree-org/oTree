@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django_countries import CountryField
+from django_countries.fields import CountryField
 from ptree.db import models
 import ptree.models
 

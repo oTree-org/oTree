@@ -5,3 +5,4 @@ staticfiles
 .idea
 *~
 *.sqlite3
+_coverage_results/
