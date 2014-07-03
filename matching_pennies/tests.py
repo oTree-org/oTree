@@ -19,8 +19,9 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         self.submit(views.Results)
 
 
+
 class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
 
     def play(self):
-
-        pass
+        print '**************************'
+        print 'Round number: {}'.format(self.subsession.round_number)

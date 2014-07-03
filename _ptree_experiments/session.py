@@ -41,7 +41,7 @@ def session_types():
             base_pay=100,
             num_participants=2,
             num_bot_participants=12,
-            subsession_apps=['matching_pennies', 'lab_results'],
+            subsession_apps=['matching_pennies']*3 + ['lab_results'],
             doc=""""""
         ),
         SessionType(
