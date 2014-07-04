@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 from . import models
 from django import forms
-from .utilities import ParticipantMixin
+from .utilities import ParticipantMixIn
 from ptree.common import currency
 import ptree.forms
 
 
-class StartForm(ParticipantMixin, ptree.forms.Form):
+class StartForm(ParticipantMixIn, ptree.forms.Form):
 
     class Meta:
         model = models.Participant
         fields = []
 
 
-class DemographicsForm(ParticipantMixin, ptree.forms.Form):
+class DemographicsForm(ParticipantMixIn, ptree.forms.Form):
 
     class Meta:
         model = models.Participant
@@ -27,7 +27,7 @@ class DemographicsForm(ParticipantMixin, ptree.forms.Form):
             return "Please enter a valid age"
 
 
-class CognitiveReflectionTestForm(ParticipantMixin, ptree.forms.Form):
+class CognitiveReflectionTestForm(ParticipantMixIn, ptree.forms.Form):
 
     class Meta:
         model = models.Participant

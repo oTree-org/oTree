@@ -2,13 +2,13 @@
 import dictator.models as models
 from django import forms
 from django.forms import ValidationError
-from dictator.utilities import ParticipantMixin, ExperimenterMixin
+from dictator.utilities import ParticipantMixIn, ExperimenterMixIn
 from django.utils.translation import ugettext_lazy as _
 import ptree.forms
 from crispy_forms.layout import HTML
 
 
-class OfferForm(ParticipantMixin, ptree.forms.Form):
+class OfferForm(ParticipantMixIn, ptree.forms.Form):
 
     class Meta:
         model = models.Match

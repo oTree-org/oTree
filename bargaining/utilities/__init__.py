@@ -3,7 +3,7 @@ import bargaining.models as models
 import ptree.views
 import ptree.forms
 
-class ParticipantMixin(object):
+class ParticipantMixIn(object):
     z_models = models
 
     def z_autocomplete(self):
@@ -12,15 +12,15 @@ class ParticipantMixin(object):
         self.match = models.Match()
         self.participant = models.Participant()
 
-class ExperimenterMixin(object):
+class ExperimenterMixIn(object):
 
     z_models = models
 
     def z_autocomplete(self):
         self.subsession = models.Subsession()
 
-class InitializeParticipant(ParticipantMixin, ptree.views.InitializeParticipant):
+class InitializeParticipant(ParticipantMixIn, ptree.views.InitializeParticipant):
     pass
 
-class InitializeExperimenter(ExperimenterMixin, ptree.views.InitializeExperimenter):
+class InitializeExperimenter(ExperimenterMixIn, ptree.views.InitializeExperimenter):
     pass

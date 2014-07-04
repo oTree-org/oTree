@@ -2,11 +2,11 @@
 import ptree.views
 import ptree.views.concrete
 import public_goods.forms as forms
-from public_goods.utilities import ParticipantMixin, ExperimenterMixin
+from public_goods.utilities import ParticipantMixIn, ExperimenterMixIn
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixin, ptree.views.Page):
+class Introduction(ParticipantMixIn, ptree.views.Page):
 
     """Description of the game: How to play and returns expected"""
 
@@ -21,7 +21,7 @@ class Introduction(ParticipantMixin, ptree.views.Page):
                 'multiplication_factor': self.treatment.multiplication_factor}
 
 
-class Contribute(ParticipantMixin, ptree.views.Page):
+class Contribute(ParticipantMixIn, ptree.views.Page):
 
     """Participant: Choose how much to contribute"""
 
@@ -31,7 +31,7 @@ class Contribute(ParticipantMixin, ptree.views.Page):
         return forms.ContributeForm
 
 
-class Results(ParticipantMixin, ptree.views.Page):
+class Results(ParticipantMixIn, ptree.views.Page):
 
     """Participants payoff: How much each has earned"""
 
@@ -55,7 +55,7 @@ class Results(ParticipantMixin, ptree.views.Page):
                 'id': self.participant.index_among_participants_in_match}
 
 
-class ExperimenterPage(ExperimenterMixin, ptree.views.ExperimenterPage):
+class ExperimenterPage(ExperimenterMixIn, ptree.views.ExperimenterPage):
 
     """This page is only for the experimenter,
     and because the experimenter doesn't have to do anything in this game,

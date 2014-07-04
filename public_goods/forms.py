@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import public_goods.models as models
-from public_goods.utilities import ParticipantMixin
+from public_goods.utilities import ParticipantMixIn
 import ptree.forms
 
 
-class ContributeForm(ParticipantMixin, ptree.forms.Form):
+class ContributeForm(ParticipantMixIn, ptree.forms.Form):
 
     class Meta:
         model = models.Participant

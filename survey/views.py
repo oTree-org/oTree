@@ -2,10 +2,10 @@
 import ptree.views
 import ptree.views.concrete
 import survey.forms as forms
-from survey.utilities import ParticipantMixin, ExperimenterMixin
+from survey.utilities import ParticipantMixIn, ExperimenterMixIn
 
 
-class Start(ParticipantMixin, ptree.views.Page):
+class Start(ParticipantMixIn, ptree.views.Page):
 
     template_name = 'survey/Start.html'
 
@@ -23,13 +23,13 @@ class Start(ParticipantMixin, ptree.views.Page):
         return "Waiting for the other participants."
 
 
-class Demographics(ParticipantMixin, ptree.views.Page):
+class Demographics(ParticipantMixIn, ptree.views.Page):
 
     form_class = forms.DemographicsForm
     template_name = 'survey/Survey.html'
 
 
-class CognitiveReflectionTest(ParticipantMixin, ptree.views.Page):
+class CognitiveReflectionTest(ParticipantMixIn, ptree.views.Page):
 
     form_class = forms.CognitiveReflectionTestForm
     template_name = 'survey/Survey.html'
@@ -38,7 +38,7 @@ class CognitiveReflectionTest(ParticipantMixin, ptree.views.Page):
         self.participant.crt_bat = self.participant.crt_bat_float * 100
 
 
-class End(ParticipantMixin, ptree.views.Page):
+class End(ParticipantMixIn, ptree.views.Page):
 
     template_name = 'survey/End.html'
 

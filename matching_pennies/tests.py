@@ -1,10 +1,10 @@
 import ptree.test
 import matching_pennies.views as views
-from matching_pennies.utilities import ParticipantMixin, ExperimenterMixin
+from matching_pennies.utilities import ParticipantMixIn, ExperimenterMixIn
 import random
 
 
-class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
+class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
 
     def play(self):
 
@@ -20,7 +20,7 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
 
 
 
-class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
+class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
         print '**************************'

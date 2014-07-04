@@ -2,11 +2,11 @@
 import ptree.views
 import ptree.views.concrete
 import trust.forms as forms
-from trust.utilities import ParticipantMixin, ExperimenterMixin
+from trust.utilities import ParticipantMixIn, ExperimenterMixIn
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixin, ptree.views.Page):
+class Introduction(ParticipantMixIn, ptree.views.Page):
 
     template_name = 'trust/Introduction.html'
 
@@ -14,7 +14,7 @@ class Introduction(ParticipantMixin, ptree.views.Page):
         return {'amount_allocated': currency(self.treatment.amount_allocated)}
 
 
-class Send(ParticipantMixin, ptree.views.Page):
+class Send(ParticipantMixIn, ptree.views.Page):
 
     """This page is only for participant one
     P1 sends some (all, some, or none) amount to P2
@@ -35,7 +35,7 @@ class Send(ParticipantMixin, ptree.views.Page):
         return {'amount_allocated': currency(self.treatment.amount_allocated)}
 
 
-class SendBack(ParticipantMixin, ptree.views.Page):
+class SendBack(ParticipantMixIn, ptree.views.Page):
 
     """This page is only for participant two
     P2 sends back some amount (of the tripled amount received) to P1 ranging from 0 to MAX they got"""
@@ -67,7 +67,7 @@ class SendBack(ParticipantMixin, ptree.views.Page):
                 'total_amount': currency(total_amount)}
 
 
-class Results(ParticipantMixin, ptree.views.Page):
+class Results(ParticipantMixIn, ptree.views.Page):
 
     """This page displays the earnings of each participant"""
 

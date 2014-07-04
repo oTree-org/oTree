@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import bargaining.models as models
-from bargaining.utilities import ParticipantMixin
+from bargaining.utilities import ParticipantMixIn
 import ptree.forms
 
 
-class RequestForm(ParticipantMixin, ptree.forms.Form):
+class RequestForm(ParticipantMixIn, ptree.forms.Form):
 
     class Meta:
         model = models.Participant

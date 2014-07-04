@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import traveler_dilemma.models as models
-from traveler_dilemma.utilities import ParticipantMixin
+from traveler_dilemma.utilities import ParticipantMixIn
 import ptree.forms
 
 
-class ClaimForm(ParticipantMixin, ptree.forms.Form):
+class ClaimForm(ParticipantMixIn, ptree.forms.Form):
 
     class Meta:
         model = models.Participant
