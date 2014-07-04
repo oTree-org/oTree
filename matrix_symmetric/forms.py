@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-import matrix.models as models
+import matrix_symmetric.models as models
 from django import forms
 from django.forms import ValidationError
-from matrix.utilities import ParticipantMixin, ExperimenterMixin
+from matrix_symmetric.utilities import ParticipantMixin, ExperimenterMixin
 from django.utils.translation import ugettext_lazy as _
 import ptree.forms
 from crispy_forms.layout import HTML

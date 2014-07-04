@@ -1,5 +1,5 @@
 # Don't change anything in this file.
-import matrix.models as models
+import matrix_symmetric.models as models
 import ptree.views
 import ptree.forms
 

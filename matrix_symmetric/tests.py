@@ -1,6 +1,6 @@
 import ptree.test
-import matrix.views as views
-from matrix.utilities import ParticipantMixin, ExperimenterMixin
+import matrix_symmetric.views as views
+from matrix_symmetric.utilities import ParticipantMixin, ExperimenterMixin
 
 class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
 

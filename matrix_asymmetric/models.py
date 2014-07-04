@@ -10,7 +10,7 @@ Description of this app.
 
 class Subsession(ptree.models.BaseSubsession):
 
-    name_in_url = 'matrix'
+    name_in_url = 'matrix_asymmetric'
 
 
 class Treatment(ptree.models.BaseTreatment):

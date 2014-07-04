@@ -1,5 +1,5 @@
 from django.contrib import admin
-import matrix.models as models
+import matrix_symmetric.models as models
 import ptree.adminlib as adminlib
 
 class ParticipantAdmin(adminlib.ParticipantAdmin):

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import ptree.views
 import ptree.views.concrete
-import matrix.forms as forms
-from matrix.utilities import ParticipantMixin, ExperimenterMixin
+import matrix_symmetric.forms as forms
+from matrix_symmetric.utilities import ParticipantMixin, ExperimenterMixin
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from ptree.common import currency
@@ -12,7 +12,7 @@ class MyPage(ParticipantMixin, ptree.views.Page):
     def show_skip_wait(self):
         return self.PageActions.show
 
-    template_name = 'matrix/MyView.html'
+    template_name = 'matrix_symmetric/MyView.html'
 
     def get_form_class(self):
         return forms.MyForm
