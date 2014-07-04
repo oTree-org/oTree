@@ -66,12 +66,12 @@ class Participant(ptree.models.BaseParticipant):
         if self.role() == 'row':
             payoff_matrix = {
                 1: {
-                    1: self.treatment.r1c1_column,
-                    2: self.treatment.r1c2_column,
+                    1: self.treatment.r1c1_row,
+                    2: self.treatment.r1c2_row,
                 },
                 2: {
-                    1: self.treatment.r2c1_column,
-                    2: self.treatment.r2c2_column,
+                    1: self.treatment.r2c1_row,
+                    2: self.treatment.r2c2_row,
                 }
             }
 
