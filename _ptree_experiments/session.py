@@ -13,7 +13,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Trust Game',
+            name='Trust',
             base_pay=10,
             num_demo_participants=2,
             num_participants=12,
@@ -69,10 +69,10 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Lying Game',
+            name='Lying',
             base_pay=0,
             num_demo_participants=1,
-            num_participants=2,
+            num_participants=12,
             subsession_apps=['lying', 'lab_results'],
             doc=""""""
         ),
