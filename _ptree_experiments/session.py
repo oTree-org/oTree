@@ -72,7 +72,7 @@ def session_types():
             name='Lying Game',
             base_pay=0,
             num_demo_participants=1,
-            num_participants=12,
+            num_participants=2,
             subsession_apps=['lying', 'lab_results'],
             doc=""""""
         ),

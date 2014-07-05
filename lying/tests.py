@@ -1,10 +1,10 @@
 import ptree.test
 import lying.views as views
-from lying.utilities import ParticipantMixin, ExperimenterMixin
+from lying.utilities import ParticipantMixIn, ExperimenterMixIn
 import random
 
 
-class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
+class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
 
     def play(self):
 
@@ -16,13 +16,13 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         self.submit(views.Start)
 
         # coin flip
-        self.submit(views.FlipCoins, {"number_of_heads": 12})
+        self.submit(views.FlipCoins, {"number_of_heads": random.choice(range(1, 10, 1))})
 
         # results
         self.submit(views.Results)
 
 
-class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
+class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
         pass
