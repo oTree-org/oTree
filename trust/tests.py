@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import ptree.test
 import trust.views as views
-from trust.utilities import ParticipantMixin, ExperimenterMixin
+from trust.utilities import ParticipantMixIn, ExperimenterMixIn
 import random
 
 
-class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
+class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
 
     def play(self):
 
@@ -35,7 +35,7 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         self.submit(views.SendBack, {'sent_back_amount': 200})
 
 
-class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
+class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
         pass

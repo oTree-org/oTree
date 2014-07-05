@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import ptree.test
 import prisoner.views as views
-from prisoner.utilities import ParticipantMixin, ExperimenterMixin
+from prisoner.utilities import ParticipantMixIn, ExperimenterMixIn
 import random
 
 
-class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
+class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
 
     def play(self):
 
@@ -16,7 +16,7 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         self.submit(views.Results)
 
 
-class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
+class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
         pass

@@ -1,10 +1,10 @@
 import ptree.test
 import dictator.views as views
-from dictator.utilities import ParticipantMixin, ExperimenterMixin
+from dictator.utilities import ParticipantMixIn, ExperimenterMixIn
 import random
 
 
-class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
+class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
 
     def play(self):
 
@@ -26,7 +26,7 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         self.submit(views.Offer, {"offer_amount": random.choice(self.match.offer_choices())})
 
 
-class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
+class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
         pass

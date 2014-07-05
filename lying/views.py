@@ -1,15 +1,15 @@
 import ptree.views
 import ptree.views.concrete
 import lying.forms as forms
-from lying.utilities import ParticipantMixin
+from lying.utilities import ParticipantMixIn
 from ptree.common import currency
 
 
-class Start(ParticipantMixin, ptree.views.Page):
+class Start(ParticipantMixIn, ptree.views.Page):
     template_name = 'lying/Start.html'
 
 
-class FlipCoins(ParticipantMixin, ptree.views.Page):
+class FlipCoins(ParticipantMixIn, ptree.views.Page):
 
     template_name = 'lying/CoinFlip.html'
 
@@ -27,7 +27,7 @@ class FlipCoins(ParticipantMixin, ptree.views.Page):
         self.participant.set_payoff()
 
 
-class Results(ParticipantMixin, ptree.views.Page):
+class Results(ParticipantMixIn, ptree.views.Page):
 
     def show_skip_wait(self):
         return self.PageActions.show

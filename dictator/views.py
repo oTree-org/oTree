@@ -2,11 +2,11 @@
 import ptree.views
 import ptree.views.concrete
 import dictator.forms as forms
-from dictator.utilities import ParticipantMixin, ExperimenterMixin
+from dictator.utilities import ParticipantMixIn, ExperimenterMixIn
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixin, ptree.views.Page):
+class Introduction(ParticipantMixIn, ptree.views.Page):
 
     template_name = 'dictator/Introduction.html'
 
@@ -18,7 +18,7 @@ class Introduction(ParticipantMixin, ptree.views.Page):
                 'participant_id': self.participant.index_among_participants_in_match}
 
 
-class Offer(ParticipantMixin, ptree.views.Page):
+class Offer(ParticipantMixIn, ptree.views.Page):
 
     template_name = 'dictator/Offer.html'
 
@@ -32,7 +32,7 @@ class Offer(ParticipantMixin, ptree.views.Page):
             return self.PageActions.skip
 
 
-class Results(ParticipantMixin, ptree.views.Page):
+class Results(ParticipantMixIn, ptree.views.Page):
 
     template_name = 'dictator/Results.html'
 
