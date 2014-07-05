@@ -1,16 +1,16 @@
 import ptree.test
 import survey.views as views
-from survey.utilities import ParticipantMixin, ExperimenterMixin
+from survey.utilities import ParticipantMixIn, ExperimenterMixIn
 
 
-class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
+class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
 
     def play(self):
 
         pass
 
 
-class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
+class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
 

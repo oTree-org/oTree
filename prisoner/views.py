@@ -2,11 +2,11 @@
 import ptree.views
 import ptree.views.concrete
 import prisoner.forms as forms
-from prisoner.utilities import ParticipantMixin, ExperimenterMixin
+from prisoner.utilities import ParticipantMixIn, ExperimenterMixIn
 from ptree.common import currency
 
 
-class Decision(ParticipantMixin, ptree.views.Page):
+class Decision(ParticipantMixIn, ptree.views.Page):
 
     """This page has the instructions and this is where the decision is made.
     Presented to both participants in a match at the same time"""
@@ -23,7 +23,7 @@ class Decision(ParticipantMixin, ptree.views.Page):
         return forms.DecisionForm
 
 
-class Results(ParticipantMixin, ptree.views.Page):
+class Results(ParticipantMixIn, ptree.views.Page):
 
     """Results page to show participants the decisions that were made and print the payoffs"""
 

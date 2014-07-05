@@ -2,11 +2,11 @@
 import ptree.views
 import ptree.views.concrete
 import guessing.forms as forms
-from guessing.utilities import ParticipantMixin, ExperimenterMixin
+from guessing.utilities import ParticipantMixIn, ExperimenterMixIn
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixin, ptree.views.Page):
+class Introduction(ParticipantMixIn, ptree.views.Page):
 
     def show_skip_wait(self):
         return self.PageActions.show
@@ -14,7 +14,7 @@ class Introduction(ParticipantMixin, ptree.views.Page):
     template_name = 'guessing/Introduction.html'
 
 
-class Guess(ParticipantMixin, ptree.views.Page):
+class Guess(ParticipantMixIn, ptree.views.Page):
 
     def show_skip_wait(self):
         return self.PageActions.show
@@ -25,7 +25,7 @@ class Guess(ParticipantMixin, ptree.views.Page):
         return forms.GuessForm
 
 
-class Results(ParticipantMixin, ptree.views.Page):
+class Results(ParticipantMixIn, ptree.views.Page):
 
     def show_skip_wait(self):
         if self.participant.payoff is None:
@@ -43,7 +43,7 @@ class Results(ParticipantMixin, ptree.views.Page):
         }
 
 
-class Experimenter(ExperimenterMixin, ptree.views.ExperimenterPage):
+class Experimenter(ExperimenterMixIn, ptree.views.ExperimenterPage):
 
     template_name = 'guessing/Experimenter.html'
 

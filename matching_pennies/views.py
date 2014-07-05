@@ -2,11 +2,11 @@
 import ptree.views
 import ptree.views.concrete
 import matching_pennies.forms as forms
-from matching_pennies.utilities import ParticipantMixin, ExperimenterMixin
+from matching_pennies.utilities import ParticipantMixIn, ExperimenterMixIn
 from ptree.common import currency
 
 
-class Choice(ParticipantMixin, ptree.views.Page):
+class Choice(ParticipantMixIn, ptree.views.Page):
 
     template_name = 'matching_pennies/Choice.html'
     form_class = forms.PennySideForm
@@ -18,7 +18,7 @@ class Choice(ParticipantMixin, ptree.views.Page):
                 'loser_amount': currency(0)}
 
 
-class Results(ParticipantMixin, ptree.views.Page):
+class Results(ParticipantMixIn, ptree.views.Page):
 
     template_name = 'matching_pennies/Results.html'
 
@@ -41,7 +41,7 @@ class Results(ParticipantMixin, ptree.views.Page):
                 'role': self.participant.role()}
 
 
-class ExperimenterPage(ExperimenterMixin, ptree.views.ExperimenterPage):
+class ExperimenterPage(ExperimenterMixIn, ptree.views.ExperimenterPage):
 
     pass
 

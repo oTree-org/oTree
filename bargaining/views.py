@@ -2,11 +2,11 @@
 import ptree.views
 import ptree.views.concrete
 import bargaining.forms as forms
-from bargaining.utilities import ParticipantMixin
+from bargaining.utilities import ParticipantMixIn
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixin, ptree.views.Page):
+class Introduction(ParticipantMixIn, ptree.views.Page):
 
     def show_skip_wait(self):
         return self.PageActions.show
@@ -19,7 +19,7 @@ class Introduction(ParticipantMixin, ptree.views.Page):
         }
 
 
-class Request(ParticipantMixin, ptree.views.Page):
+class Request(ParticipantMixIn, ptree.views.Page):
 
     def show_skip_wait(self):
         return self.PageActions.show
@@ -35,7 +35,7 @@ class Request(ParticipantMixin, ptree.views.Page):
         }
 
 
-class Results(ParticipantMixin, ptree.views.Page):
+class Results(ParticipantMixIn, ptree.views.Page):
 
     def show_skip_wait(self):
         if self.participant.other_participant().request_amount:

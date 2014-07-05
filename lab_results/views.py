@@ -1,10 +1,10 @@
 import ptree.views
 import ptree.views.concrete
-from lab_results.utilities import ParticipantMixin
+from lab_results.utilities import ParticipantMixIn
 from ptree.common import currency
 import lab_results.forms as forms
 
-class RedemptionCode(ParticipantMixin, ptree.views.Page):
+class RedemptionCode(ParticipantMixIn, ptree.views.Page):
     template_name = 'lab_results/RedemptionCode.html'
 
     def variables_for_template(self):

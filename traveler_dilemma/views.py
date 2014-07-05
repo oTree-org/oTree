@@ -2,13 +2,13 @@
 import ptree.views
 import ptree.views.concrete
 import traveler_dilemma.forms as forms
-from traveler_dilemma.utilities import ParticipantMixin, ExperimenterMixin
+from traveler_dilemma.utilities import ParticipantMixIn, ExperimenterMixIn
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixin, ptree.views.Page):
+class Introduction(ParticipantMixIn, ptree.views.Page):
 
     def show_skip_wait(self):
         return self.PageActions.show
@@ -24,7 +24,7 @@ class Introduction(ParticipantMixin, ptree.views.Page):
         }
 
 
-class Claim(ParticipantMixin, ptree.views.Page):
+class Claim(ParticipantMixIn, ptree.views.Page):
 
     def show_skip_wait(self):
         return self.PageActions.show
@@ -35,7 +35,7 @@ class Claim(ParticipantMixin, ptree.views.Page):
         return forms.ClaimForm
 
 
-class Results(ParticipantMixin, ptree.views.Page):
+class Results(ParticipantMixIn, ptree.views.Page):
 
     def show_skip_wait(self):
         if self.participant.other_participant().claim:
