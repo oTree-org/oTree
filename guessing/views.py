@@ -38,6 +38,8 @@ class Results(ParticipantMixin, ptree.views.Page):
         return {
             'payoff': self.participant.payoff,
             'guess_value': self.participant.guess_value,
+            'two_third_average': self.subsession.two_third_guesses,
+            'is_winner': self.participant.is_winner,
         }
 
 
@@ -48,9 +50,10 @@ class Experimenter(ExperimenterMixin, ptree.views.ExperimenterPage):
     def show_skip_wait(self):
         if any(p.guess_value is None for p in self.subsession.participants()):
             return self.PageActions.wait
-        for m in self.subsession.matches():
-            m.calculate_average()
-            m.save()
+
+        self.subsession.calculate_average()
+        self.subsession.choose_winner()
+
         for p in self.subsession.participants():
             p.set_payoff()
             p.save()

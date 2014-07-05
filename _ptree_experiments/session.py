@@ -76,6 +76,14 @@ def session_types():
             subsession_apps=['lying', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Guessing',
+            base_pay=0,
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['guessing', 'lab_results'],
+            doc=""""""
+        ),
     ]
 
 

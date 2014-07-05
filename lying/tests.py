@@ -16,7 +16,7 @@ class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
         self.submit(views.Start)
 
         # coin flip
-        self.submit(views.FlipCoins, {"number_of_heads": random.choice(range(1,10,1))})
+        self.submit(views.FlipCoins, {"number_of_heads": 12})
 
         # results
         self.submit(views.Results)
