@@ -10,6 +10,7 @@ doc = """
 Description of this app.
 """
 
+
 class Subsession(ptree.models.BaseSubsession):
 
     name_in_url = 'matrix_symmetric'
@@ -31,6 +32,7 @@ class Match(ptree.models.BaseMatch):
 
     participants_per_match = 2
 
+
 class Participant(ptree.models.BaseParticipant):
 
     match = models.ForeignKey(Match, null = True)
@@ -40,7 +42,6 @@ class Participant(ptree.models.BaseParticipant):
     def other_participant(self):
         """Returns other participant in match"""
         return self.other_participants_in_match()[0]
-
 
     decision = models.PositiveIntegerField(
         null=True,
@@ -62,13 +63,17 @@ class Participant(ptree.models.BaseParticipant):
 
         self.payoff = payoff_matrix[self.decision][self.other_participant().decision]
 
+
 def treatments():
 
     treatment_list = []
 
     treatment = Treatment(
-        label = '',
-        # other attributes here...
+        # TODO: modify this values
+        self_1_other_1=40,
+        self_1_other_2=50,
+        self_2_other_1=60,
+        self_2_other_2=70
     )
 
     treatment_list.append(treatment)

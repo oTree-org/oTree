@@ -1,13 +1,15 @@
 import ptree.test
 import matrix_asymmetric.views as views
-from matrix_asymmetric.utilities import ParticipantMixin, ExperimenterMixin
+from matrix_asymmetric.utilities import ParticipantMixIn, ExperimenterMixIn
 
-class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
+
+class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
 
     def play(self):
         pass
 
-class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
+
+class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
         pass
