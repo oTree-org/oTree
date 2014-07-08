@@ -21,8 +21,8 @@ class Decision(ParticipantMixIn, ptree.views.Page):
             'r1c1_row': currency(self.treatment.r1c1_row),
             'r1c1_column': currency(self.treatment.r1c1_column),
 
-            'r1c2_row': currency(self.treatment.r1c1_row),
-            'r1c2_column': currency(self.treatment.r1c1_column),
+            'r1c2_row': currency(self.treatment.r1c2_row),
+            'r1c2_column': currency(self.treatment.r1c2_column),
 
             'r2c1_row': currency(self.treatment.r2c1_row),
             'r2c1_column': currency(self.treatment.r2c1_column),
