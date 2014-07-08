@@ -5,7 +5,8 @@ from ptree.db import models
 import ptree.models
 
 doc = """
-Description of this app.
+Matrix Asymmetric is a game where there is no identical strategy sets for both players.
+Each player earns the different payoff when making the same choice against similar choices of his competitors.
 """
 
 
@@ -102,18 +103,17 @@ def treatments():
 
     treatment = Treatment(
 
-        # TODO: modify this values
         r1c1_row=20,
         r1c1_column=30,
 
         r1c2_row=40,
-        r1c2_column=50,
+        r1c2_column=10,
 
-        r2c1_row=60,
-        r2c1_column=70,
+        r2c1_row=5,
+        r2c1_column=45,
 
-        r2c2_row=80,
-        r2c2_column=90,
+        r2c2_row=15,
+        r2c2_column=25,
     )
 
     treatment_list.append(treatment)

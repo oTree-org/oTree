@@ -18,17 +18,17 @@ class Decision(ParticipantMixIn, ptree.views.Page):
 
     def variables_for_template(self):
         return {
-            'r1c1_row': self.treatment.r1c1_row,
-            'r1c1_column': self.treatment.r1c1_column,
+            'r1c1_row': currency(self.treatment.r1c1_row),
+            'r1c1_column': currency(self.treatment.r1c1_column),
 
-            'r1c2_row': self.treatment.r1c1_row,
-            'r1c2_column': self.treatment.r1c1_column,
+            'r1c2_row': currency(self.treatment.r1c1_row),
+            'r1c2_column': currency(self.treatment.r1c1_column),
 
-            'r2c1_row': self.treatment.r2c1_row,
-            'r2c1_column': self.treatment.r2c1_column,
+            'r2c1_row': currency(self.treatment.r2c1_row),
+            'r2c1_column': currency(self.treatment.r2c1_column),
 
-            'r2c2_row': self.treatment.r2c2_row,
-            'r2c2_column': self.treatment.r2c2_column,
+            'r2c2_row': currency(self.treatment.r2c2_row),
+            'r2c2_column': currency(self.treatment.r2c2_column),
         }
 
 

@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 doc = """
 Matrix Symmetry is a game in which the identity of the player does not change the resulting game facing that player.
-Each player earns the same payoff when making the same choice against similar choices of his competitors
+Each player earns the same payoff when making the same choice against similar choices of his competitors.
 """
 
 
