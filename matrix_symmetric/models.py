@@ -7,7 +7,8 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 doc = """
-Description of this app.
+Matrix Symmetry is a game in which the identity of the player does not change the resulting game facing that player.
+Each player earns the same payoff when making the same choice against similar choices of his competitors
 """
 
 
@@ -69,11 +70,10 @@ def treatments():
     treatment_list = []
 
     treatment = Treatment(
-        # TODO: modify this values
-        self_1_other_1=40,
-        self_1_other_2=50,
-        self_2_other_1=60,
-        self_2_other_2=70
+        self_1_other_1=10,
+        self_1_other_2=0,
+        self_2_other_1=30,
+        self_2_other_2=40
     )
 
     treatment_list.append(treatment)

@@ -84,6 +84,14 @@ def session_types():
             subsession_apps=['guessing', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Matrix Symetric',
+            base_pay=10,
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['matrix_symmetric', 'lab_results'],
+            doc=""""""
+        ),
     ]
 
 
