@@ -85,7 +85,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Matrix Symetric',
+            name='Matrix Symmetric',
             base_pay=10,
             num_demo_participants=2,
             num_participants=12,

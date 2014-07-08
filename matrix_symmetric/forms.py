@@ -2,7 +2,6 @@
 import matrix_symmetric.models as models
 from matrix_symmetric.utilities import ParticipantMixIn
 import ptree.forms
-from django import forms
 
 
 class DecisionForm(ParticipantMixIn, ptree.forms.Form):
@@ -16,4 +15,4 @@ class DecisionForm(ParticipantMixIn, ptree.forms.Form):
 
     def decision_error_message(self, value):
         if (value < 1) or (value > 2):
-            return 'Decision value should be either {} and {}'.format(1, 2)
+            return 'Choice should be either {} and {}'.format(1, 2)
