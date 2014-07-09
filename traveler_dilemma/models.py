@@ -8,6 +8,8 @@ from ptree.common import currency
 doc = """
 Traveler's dilemma game has two participants.
 Each participant is told to make a claim. Payoffs calculated according to the claims made.
+
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/traveler_dilemma">here</a></p>
 """
 
 

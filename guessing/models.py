@@ -7,8 +7,11 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 doc = """
-In Guessing Game, Participants are asked to pick a number between 0 and 100, with the winner of the contest
+<p>In Guessing Game, Participants are asked to pick a number between 0 and 100, with the winner of the contest
 being the participant that is closest to 2/3 times the average number picked of all participants.
+</p>
+
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/guessing">here</a></p>
 """
 
 

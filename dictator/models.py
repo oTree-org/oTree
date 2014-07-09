@@ -6,10 +6,14 @@ from ptree.common import currency
 
 
 doc = """
+<p>
 Dictator game. Single Treatment. Two players, one of whom is the dictator.
 The dictator is given some amount of money, while the other participant is given nothing.
 The dictator must offer part of the money to the other participant.
 The offered amount cannot be rejected.
+</p>
+
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/dictator">here</a></p>
 """
 
 

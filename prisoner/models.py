@@ -6,6 +6,8 @@ import ptree.models
 doc = """
 Prisoner's dilemma game. Single treatment. Two players are asked separately whether they want to cooperate or compete.
 Their choices directly determine the payoffs.
+
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/prisoner">here</a></p>
 """
 
 
