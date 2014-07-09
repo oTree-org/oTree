@@ -59,6 +59,7 @@ settings = {
         'lying',
         'matrix_symmetric',
         'matrix_asymmetric',
+        'cournot_competition',
         # lab results: displays lab results in a given session
         'lab_results',
     ],
