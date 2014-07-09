@@ -102,7 +102,7 @@ def session_types():
         ),
         SessionType(
             name='Cournot Competition',
-            base_pay=10,
+            base_pay=100,
             num_demo_participants=2,
             num_participants=12,
             subsession_apps=['cournot_competition', 'lab_results'],
