@@ -1,27 +1,19 @@
 # -*- coding: utf-8 -*-
 import matrix_asymmetric.models as models
-from django import forms
-from django.forms import ValidationError
-from matrix_asymmetric.utilities import ParticipantMixin, ExperimenterMixin
-from django.utils.translation import ugettext_lazy as _
+from matrix_asymmetric.utilities import ParticipantMixIn
 import ptree.forms
-from crispy_forms.layout import HTML
 
-class MyForm(ParticipantMixin, ptree.forms.Form):
+
+class DecisionForm(ParticipantMixIn, ptree.forms.Form):
 
     class Meta:
         model = models.Participant
-        fields = ['my_field']
-
-    def my_field_error_message(self, value):
-        if not self.treatment.your_method_here(value):
-            return 'Error message goes here'
+        fields = ['decision']
 
     def labels(self):
-        return {}
+        return {'decision': 'Make a choice: Either 1 or 2'}
 
-    def initial_values(self):
-        return {}
+    def decision_error_message(self, value):
+        if (value < 1) or (value > 2):
+            return 'Choice should be either {} and {}'.format(1, 2)
 
-    def order(self):
-        pass

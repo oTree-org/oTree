@@ -33,8 +33,6 @@ class Results(ParticipantMixIn, ptree.views.Page):
         if self.participant.payoff is None:
             self.participant.set_payoff()
 
-
-
         return {'my_payoff': currency(self.participant.payoff),
                 'my_decision': self.participant.decision.lower(),
                 'other_participant_decision': self.participant.other_participant().decision.lower(),
@@ -48,6 +46,7 @@ class Results(ParticipantMixIn, ptree.views.Page):
 
     def wait_page_body_text(self):
         return 'Waiting for the other participant to make a decision.'
+
 
 def pages():
 
