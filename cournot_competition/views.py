@@ -48,7 +48,7 @@ class Results(ParticipantMixIn, ptree.views.Page):
             'payoff': currency(self.participant.payoff),
             'quantity': self.participant.quantity,
             'other_quantity': self.participant.other_participant().quantity,
-            'price': self.match.price
+            'price': currency(self.match.price)
         }
 
 
