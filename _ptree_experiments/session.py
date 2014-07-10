@@ -108,6 +108,14 @@ def session_types():
             subsession_apps=['cournot_competition', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Stackelberg Competition',
+            base_pay=100,
+            num_demo_participants=2,
+            num_participants=2,
+            subsession_apps=['stackelberg_competition', 'lab_results'],
+            doc=""""""
+        ),
     ]
 
 

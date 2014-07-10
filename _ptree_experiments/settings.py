@@ -60,6 +60,7 @@ settings = {
         'matrix_symmetric',
         'matrix_asymmetric',
         'cournot_competition',
+        'stackelberg_competition',
         # lab results: displays lab results in a given session
         'lab_results',
     ],
