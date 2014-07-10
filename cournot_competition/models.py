@@ -6,9 +6,14 @@ import ptree.models
 
 
 doc = """
+<p>
 In Cournot Competition, participants play as firm owners(in duopoly market), each deciding simultaneously on
 how much quantity to produce in order to make a profit. Participants decide on choosing to maximise their profits or
 cooperating with others to improve profits.
+</p>
+<p>
+Source code <a href="https://github.com/wickens/ptree_library/tree/master/cournot_competition">here</a>
+</p>
 """
 
 
