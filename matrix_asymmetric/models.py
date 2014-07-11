@@ -20,17 +20,17 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    r1c1_row = models.PositiveIntegerField()
-    r1c1_column = models.PositiveIntegerField()
+    rowAcolumnA_row = models.PositiveIntegerField()
+    rowAcolumnA_column = models.PositiveIntegerField()
 
-    r1c2_row = models.PositiveIntegerField()
-    r1c2_column = models.PositiveIntegerField()
+    rowAcolumnB_row = models.PositiveIntegerField()
+    rowAcolumnB_column = models.PositiveIntegerField()
 
-    r2c1_row = models.PositiveIntegerField()
-    r2c1_column = models.PositiveIntegerField()
+    rowBcolumnA_row = models.PositiveIntegerField()
+    rowBcolumnA_column = models.PositiveIntegerField()
 
-    r2c2_row = models.PositiveIntegerField()
-    r2c2_column = models.PositiveIntegerField()
+    rowBcolumnB_row = models.PositiveIntegerField()
+    rowBcolumnB_column = models.PositiveIntegerField()
 
 
 class Match(ptree.models.BaseMatch):
@@ -61,33 +61,35 @@ class Participant(ptree.models.BaseParticipant):
         """Returns other participant in match"""
         return self.other_participants_in_match()[0]
 
-    decision = models.PositiveIntegerField(
+    decision = models.CharField(
         null=True,
-        doc='either 1 or 2',
+        max_length=2,
+        choices=(('A', 'A'), ('B', 'B')),
+        doc='either A or B',
     )
 
     def set_payoff(self):
         if self.role() == 'row':
             payoff_matrix = {
-                1: {
-                    1: self.treatment.r1c1_row,
-                    2: self.treatment.r1c2_row,
+                'A': {
+                    'A': self.treatment.rowAcolumnA_row,
+                    'B': self.treatment.rowAcolumnB_row,
                 },
-                2: {
-                    1: self.treatment.r2c1_row,
-                    2: self.treatment.r2c2_row,
+                'B': {
+                    'A': self.treatment.rowBcolumnA_row,
+                    'B': self.treatment.rowBcolumnB_row,
                 }
             }
 
         else: #column
             payoff_matrix = {
-                1: {
-                    1: self.treatment.r1c1_column,
-                    2: self.treatment.r1c2_column,
+                'A': {
+                    'A': self.treatment.rowAcolumnA_column,
+                    'B': self.treatment.rowAcolumnB_column,
                 },
-                2: {
-                    1: self.treatment.r2c1_column,
-                    2: self.treatment.r2c2_column,
+                'B': {
+                    'A': self.treatment.rowBcolumnA_column,
+                    'B': self.treatment.rowBcolumnB_column,
                 }
             }
         self.payoff = payoff_matrix[self.match.row_participant().decision][self.match.column_participant().decision]
@@ -105,17 +107,17 @@ def treatments():
 
     treatment = Treatment(
 
-        r1c1_row=20,
-        r1c1_column=30,
+        rowAcolumnA_row=20,
+        rowAcolumnA_column=30,
 
-        r1c2_row=40,
-        r1c2_column=10,
+        rowAcolumnB_row=40,
+        rowAcolumnB_column=10,
 
-        r2c1_row=5,
-        r2c1_column=45,
+        rowBcolumnA_row=5,
+        rowBcolumnA_column=45,
 
-        r2c2_row=15,
-        r2c2_column=25,
+        rowBcolumnB_row=15,
+        rowBcolumnB_column=25,
     )
 
     treatment_list.append(treatment)
