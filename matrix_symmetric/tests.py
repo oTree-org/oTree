@@ -9,7 +9,8 @@ class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
     def play(self):
 
         # random decision
-        self.submit(views.Decision, {"decision": random.choice(range(1, 3))})
+        choice = random.choice((('A', 'A'), ('B', 'B')))[0]
+        self.submit(views.Decision, {"decision": choice})
 
         #  results
         self.submit(views.Results)

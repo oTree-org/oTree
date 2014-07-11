@@ -22,10 +22,10 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    self_1_other_1 = models.PositiveIntegerField()
-    self_1_other_2 = models.PositiveIntegerField()
-    self_2_other_1 = models.PositiveIntegerField()
-    self_2_other_2 = models.PositiveIntegerField()
+    self_A_other_A = models.PositiveIntegerField()
+    self_A_other_B = models.PositiveIntegerField()
+    self_B_other_A = models.PositiveIntegerField()
+    self_B_other_B = models.PositiveIntegerField()
 
 
 class Match(ptree.models.BaseMatch):
@@ -46,21 +46,23 @@ class Participant(ptree.models.BaseParticipant):
         """Returns other participant in match"""
         return self.other_participants_in_match()[0]
 
-    decision = models.PositiveIntegerField(
+    decision = models.CharField(
         null=True,
-        doc='either 1 or 2',
+        max_length=2,
+        choices=(('A', 'A'), ('B', 'B')),
+        doc='either A or B',
     )
 
     def set_payoff(self):
 
         payoff_matrix = {
-            1: {
-                1: self.treatment.self_1_other_1,
-                2: self.treatment.self_1_other_2,
+            'A': {
+                'A': self.treatment.self_A_other_A,
+                'B': self.treatment.self_A_other_B,
             },
-            2: {
-                1: self.treatment.self_2_other_1,
-                2: self.treatment.self_2_other_2,
+            'B': {
+                'A': self.treatment.self_B_other_A,
+                'B': self.treatment.self_B_other_B,
             }
         }
 
@@ -72,10 +74,10 @@ def treatments():
     treatment_list = []
 
     treatment = Treatment(
-        self_1_other_1=10,
-        self_1_other_2=0,
-        self_2_other_1=30,
-        self_2_other_2=40
+        self_A_other_A=10,
+        self_A_other_B=0,
+        self_B_other_A=30,
+        self_B_other_B=40
     )
 
     treatment_list.append(treatment)

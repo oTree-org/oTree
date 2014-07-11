@@ -18,10 +18,10 @@ class Decision(ParticipantMixIn, ptree.views.Page):
 
     def variables_for_template(self):
         return {
-            'self_1_other_1': currency(self.treatment.self_1_other_1),
-            'self_1_other_2': currency(self.treatment.self_1_other_2),
-            'self_2_other_1': currency(self.treatment.self_2_other_1),
-            'self_2_other_2': currency(self.treatment.self_2_other_2),
+            'self_A_other_A': currency(self.treatment.self_A_other_A),
+            'self_A_other_B': currency(self.treatment.self_A_other_B),
+            'self_B_other_A': currency(self.treatment.self_B_other_A),
+            'self_B_other_B': currency(self.treatment.self_B_other_B),
         }
 
 
