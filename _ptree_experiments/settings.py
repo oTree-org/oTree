@@ -61,6 +61,7 @@ settings = {
         'matrix_asymmetric',
         'cournot_competition',
         'stackelberg_competition',
+        'private_value_auction',
         # lab results: displays lab results in a given session
         'lab_results',
     ],
