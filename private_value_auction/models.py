@@ -75,8 +75,12 @@ class Participant(ptree.models.BaseParticipant):
             self.other_participant().is_winner = True
             self.payoff = 0
         else:
-            # TODO: Fix the issue of tie in bids
-            self.payoff = 0
+            if self.payoff is None:
+                import random
+                random_winner = random.choice(range(1, self.match.participants_per_match+1))
+                if random_winner == self.index_among_participants_in_match:
+                    self.payoff = self.bid_amount
+                    self.other_participants_in_match().payoff = 0
 
 
 def treatments():
