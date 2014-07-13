@@ -124,6 +124,14 @@ def session_types():
             subsession_apps=['private_value_auction', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Volunteer Dilemma',
+            base_pay=100,
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['volunteer_dilemma', 'lab_results'],
+            doc=""""""
+        ),
     ]
 
 

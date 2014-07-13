@@ -4,12 +4,13 @@
 from ptree.db import models
 import ptree.models
 from ptree.common import currency
-import random
 
 
 doc = """
 In Private Value Auction Game. There are two participants anonymously paired. Each of the participants will submit a
 bid for a prize being sold in an auction. The winner is the participant with the highest bid value.
+
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/private_value_auction">here</a></p>
 """
 
 
