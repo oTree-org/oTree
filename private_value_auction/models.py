@@ -4,6 +4,7 @@
 from ptree.db import models
 import ptree.models
 from ptree.common import currency
+import random
 
 
 doc = """
@@ -76,7 +77,6 @@ class Participant(ptree.models.BaseParticipant):
             self.payoff = 0
         else:
             if self.payoff is None:
-                import random
                 random_winner = random.choice(range(1, self.match.participants_per_match+1))
                 if random_winner == self.index_among_participants_in_match:
                     self.payoff = self.bid_amount
