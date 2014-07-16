@@ -132,6 +132,14 @@ def session_types():
             subsession_apps=['volunteer_dilemma', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Bertand Competition',
+            base_pay=100,
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['bertand_competition', 'lab_results'],
+            doc=""""""
+        ),
     ]
 
 
