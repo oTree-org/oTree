@@ -1,6 +1,6 @@
 import ptree.test
-import bertand_competition.views as views
-from bertand_competition.utilities import ParticipantMixIn, ExperimenterMixIn
+import bertrand_competition.views as views
+from bertrand_competition.utilities import ParticipantMixIn, ExperimenterMixIn
 import random
 
 

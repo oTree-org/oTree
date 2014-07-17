@@ -9,13 +9,13 @@ doc = """
 In Bertand Competition, participants play as firm owners(in duopoly market), each deciding simultaneously on how
 much price to set for their products. The participant with the lowest price carries the day and becomes the winner.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/bertand_competition">here</a></p>
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/bertrand_competition">here</a></p>
 """
 
 
 class Subsession(ptree.models.BaseSubsession):
 
-    name_in_url = 'bertand_competition'
+    name_in_url = 'bertrand_competition'
 
 
 class Treatment(ptree.models.BaseTreatment):

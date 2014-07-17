@@ -1,5 +1,5 @@
 # Don't change anything in this file.
-import bertand_competition.models as models
+import bertrand_competition.models as models
 import ptree.views
 import ptree.forms
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import bertand_competition.models as models
-from bertand_competition.utilities import ParticipantMixIn
+import bertrand_competition.models as models
+from bertrand_competition.utilities import ParticipantMixIn
 import ptree.forms
 
 

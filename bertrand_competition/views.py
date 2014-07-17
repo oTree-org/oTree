@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import ptree.views
 import ptree.views.concrete
-import bertand_competition.forms as forms
-from bertand_competition.utilities import ParticipantMixIn, ExperimenterMixIn
+import bertrand_competition.forms as forms
+from bertrand_competition.utilities import ParticipantMixIn, ExperimenterMixIn
 from ptree.common import currency
 
 
@@ -11,7 +11,7 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
     def show_skip_wait(self):
         return self.PageActions.show
 
-    template_name = 'bertand_competition/Introduction.html'
+    template_name = 'bertrand_competition/Introduction.html'
 
     def variables_for_template(self):
         return {
@@ -25,7 +25,7 @@ class Compete(ParticipantMixIn, ptree.views.Page):
     def show_skip_wait(self):
         return self.PageActions.show
 
-    template_name = 'bertand_competition/Compete.html'
+    template_name = 'bertrand_competition/Compete.html'
 
     def get_form_class(self):
         return forms.PriceForm
@@ -39,7 +39,7 @@ class Results(ParticipantMixIn, ptree.views.Page):
         else:
             return self.PageActions.wait
 
-    template_name = 'bertand_competition/Results.html'
+    template_name = 'bertrand_competition/Results.html'
 
     def variables_for_template(self):
         if self.participant.payoff is None:

@@ -1,5 +1,5 @@
 from django.contrib import admin
-import bertand_competition.models as models
+import bertrand_competition.models as models
 import ptree.adminlib as adminlib
 
 class ParticipantAdmin(adminlib.ParticipantAdmin):

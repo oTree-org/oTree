@@ -63,7 +63,7 @@ settings = {
         'stackelberg_competition',
         'private_value_auction',
         'volunteer_dilemma',
-        'bertand_competition',
+        'bertrand_competition',
         # lab results: displays lab results in a given session
         'lab_results',
     ],
