@@ -1,0 +1,24 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>Your Price was {{ price }}.</p>
+    <p>Opponent Price was {{ other_price }}. </p>
+    <p>
+        {% if is_winner %}
+            You won the price competition, you had the lowest price.
+        {% elif equal_price %}
+            You both had the same price, hence equal share.
+        {% else %}
+            You lost the price competition, you had the highest price.
+        {% endif %}
+    </p>
+    <p>Your payoff is therefore {{ payoff }}</p>
+
+{% endblock %}
