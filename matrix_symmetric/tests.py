@@ -1,13 +1,22 @@
 import ptree.test
 import matrix_symmetric.views as views
-from matrix_symmetric.utilities import ParticipantMixin, ExperimenterMixin
+from matrix_symmetric.utilities import ParticipantMixIn, ExperimenterMixIn
+import random
 
-class ParticipantBot(ParticipantMixin, ptree.test.ParticipantBot):
+
+class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
 
     def play(self):
-        pass
 
-class ExperimenterBot(ExperimenterMixin, ptree.test.ExperimenterBot):
+        # random decision
+        choice = random.choice((('A', 'A'), ('B', 'B')))[0]
+        self.submit(views.Decision, {"decision": choice})
+
+        #  results
+        self.submit(views.Results)
+
+
+class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
         pass

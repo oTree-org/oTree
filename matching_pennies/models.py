@@ -10,6 +10,8 @@ doc = """
 Matching pennies. Single treatment. Two players are given a penny each, and will at the same time choose either heads or tails.
 One player wants the outcome to match; the other wants the outcome not to match.
 If the outcomes match, the former player gets both pennies; if the outcomes do not match, the latter player gets both pennies.
+
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/matching_pennies">here</a></p>
 """
 
 

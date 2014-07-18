@@ -7,10 +7,14 @@ from ptree.common import currency
 
 
 doc = """
-Bargaining Game is a two-player game used to model bargaining interactions. In this game,
+<p>
+The Bargaining Game is a two-player game used to model bargaining interactions. In this game,
 two players demand a portion of some amount of money. If the total amount
 requested by the players is less than that available, both players get their request.
 If their total request is greater than that available, neither player gets their request.
+</p>
+
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/bargaining">here</a></p>
 """
 
 

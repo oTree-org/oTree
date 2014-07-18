@@ -57,8 +57,13 @@ settings = {
         'bargaining',
         'guessing',
         'lying',
-        # app to display all lab results in a given session
-        # can be used together with any of the above games
+        'matrix_symmetric',
+        'matrix_asymmetric',
+        'cournot_competition',
+        'stackelberg_competition',
+        'private_value_auction',
+        'volunteer_dilemma',
+        # lab results: displays lab results in a given session
         'lab_results',
     ],
     'SECRET_KEY': SECRET_KEY,

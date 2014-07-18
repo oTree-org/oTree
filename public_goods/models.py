@@ -7,6 +7,8 @@ from ptree.common import currency
 doc = """
 Public goods game. Single treatment. Four players can contribute to a joint project.
 The total contribution is multiplied by some factor, the resulting amount is then divided equally between the players.
+
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/public_goods">here</a></p>
 """
 
 

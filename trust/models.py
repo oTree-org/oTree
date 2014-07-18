@@ -9,6 +9,8 @@ doc = """
 Trust game. Single treatment. Both players are given an initial sum.
 One player may give part of the sum to the other player, who actually receives triple the amount.
 The second player may then give part of the now-tripled amount back to the first player.
+
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/trust">here</a></p>
 """
 
 

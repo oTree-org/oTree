@@ -1,0 +1,16 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>Price was: {{ price }}</p>
+    <p>Your quantity was: {{ quantity }} </p>
+    <p>Opponent quantity was: {{ other_quantity }} </p>
+    <p>Your payoff is therefore: {{ payoff }}</p>
+
+{% endblock %}

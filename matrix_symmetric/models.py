@@ -7,8 +7,12 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 doc = """
-Description of this app.
+Matrix Symmetric is a game in which the identity of the player does not change the resulting game facing that player.
+Each player earns the same payoff when making the same choice against similar choices of his competitors.
+
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/matrix_symmetric">here</a></p>
 """
+
 
 class Subsession(ptree.models.BaseSubsession):
 
@@ -18,10 +22,10 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    self_1_other_1 = models.PositiveIntegerField()
-    self_1_other_2 = models.PositiveIntegerField()
-    self_2_other_1 = models.PositiveIntegerField()
-    self_2_other_2 = models.PositiveIntegerField()
+    self_A_other_A = models.PositiveIntegerField()
+    self_A_other_B = models.PositiveIntegerField()
+    self_B_other_A = models.PositiveIntegerField()
+    self_B_other_B = models.PositiveIntegerField()
 
 
 class Match(ptree.models.BaseMatch):
@@ -30,6 +34,7 @@ class Match(ptree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
 
     participants_per_match = 2
+
 
 class Participant(ptree.models.BaseParticipant):
 
@@ -41,34 +46,38 @@ class Participant(ptree.models.BaseParticipant):
         """Returns other participant in match"""
         return self.other_participants_in_match()[0]
 
-
-    decision = models.PositiveIntegerField(
+    decision = models.CharField(
         null=True,
-        doc='either 1 or 2',
+        max_length=2,
+        choices=(('A', 'A'), ('B', 'B')),
+        doc='either A or B',
     )
 
     def set_payoff(self):
 
         payoff_matrix = {
-            1: {
-                1: self.treatment.self_1_other_1,
-                2: self.treatment.self_1_other_2,
+            'A': {
+                'A': self.treatment.self_A_other_A,
+                'B': self.treatment.self_A_other_B,
             },
-            2: {
-                1: self.treatment.self_2_other_1,
-                2: self.treatment.self_2_other_2,
+            'B': {
+                'A': self.treatment.self_B_other_A,
+                'B': self.treatment.self_B_other_B,
             }
         }
 
         self.payoff = payoff_matrix[self.decision][self.other_participant().decision]
+
 
 def treatments():
 
     treatment_list = []
 
     treatment = Treatment(
-        label = '',
-        # other attributes here...
+        self_A_other_A=10,
+        self_A_other_B=0,
+        self_B_other_A=30,
+        self_B_other_B=40
     )
 
     treatment_list.append(treatment)

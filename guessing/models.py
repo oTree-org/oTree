@@ -7,14 +7,33 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 doc = """
-In Guessing Game, Participants are asked to pick a number between 0 and 100, with the winner of the contest
-being the participant that is closest to 2/3 times the average number picked of all participants.
+Guessing Game. In this game, Participants are asked to pick a number between 0 and 100, with the winner of the contest
+being the participant who is closest to 2/3 times the average number picked of all participants. In case of a tie between
+the participants, the winner is picked randomly.
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/guessing">here</a></p>
 """
 
 
 class Subsession(ptree.models.BaseSubsession):
 
     name_in_url = 'guessing'
+
+    two_third_guesses = models.FloatField(null=True)
+
+    def calculate_average(self):
+        self.two_third_guesses = (2.0/3) * sum(p.guess_value for p in self.participants()) / len(self.participants())
+
+    def choose_winner(self):
+        winner_so_far = None
+        smallest_difference_so_far = 1000
+
+        for p in self.participants():
+            difference = abs(p.guess_value - self.two_third_guesses)
+            if difference < smallest_difference_so_far:
+                winner_so_far = p
+                smallest_difference_so_far = difference
+        winner_so_far.is_winner = True
+        winner_so_far.save()
 
 
 class Treatment(ptree.models.BaseTreatment):
@@ -26,13 +45,7 @@ class Match(ptree.models.BaseMatch):
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
 
-    average_guesses = models.FloatField(null=True)
-
-    participants_per_match = 1
-
-    def calculate_average(self):
-        self.average_guesses = sum(p.guess_value for p in self.subsession.participants()) / len(self.subsession.participants())
-        print self.average_guesses
+    participants_per_match = 2
 
 
 class Participant(ptree.models.BaseParticipant):
@@ -40,6 +53,12 @@ class Participant(ptree.models.BaseParticipant):
     match = models.ForeignKey(Match, null = True)
     treatment = models.ForeignKey(Treatment, null = True)
     subsession = models.ForeignKey(Subsession)
+
+    is_winner = models.BooleanField(default=False,
+        doc="""
+        True if participant had the winning guess
+        """
+    )
 
     guess_value = models.PositiveIntegerField(
         null=True,
@@ -49,8 +68,7 @@ class Participant(ptree.models.BaseParticipant):
     )
 
     def set_payoff(self):
-        #TODO: FIX THIS- No payoff for now
-        self.payoff = 0
+        self.payoff = self.guess_value if self.is_winner else 0
 
 
 def treatments():
