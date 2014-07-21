@@ -40,7 +40,7 @@ class Match(ptree.models.BaseMatch):
     total_return = models.PositiveIntegerField(
         null=True,
         doc="""
-        Total return from expert’s effort = 70×(Agent Work effort)
+        Total return from agent's effort = 70×(Agent Work effort)
         """
     )
     agent_fixed_pay = models.IntegerField(
