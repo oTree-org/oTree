@@ -1,0 +1,22 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Accept
+{% endblock %}
+
+{% block content %}
+
+    <h3>Agent</h3>
+    <p>
+        The Principal has offered a contract with the following details:
+        <ul>
+            <li>Your Fixed Pay: {{ fixed_pay }}</li>
+            <li>Your Returns on Share: {{ return_share }}%</li>
+        </ul>
+        Please do accept or reject the contract.
+
+    </p>
+
+{% endblock %}
