@@ -140,6 +140,14 @@ def session_types():
             subsession_apps=['bertrand_competition', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Principal Agent',
+            base_pay=100,
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['principal_agent', 'lab_results'],
+            doc=""""""
+        ),
     ]
 
 

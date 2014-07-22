@@ -6,7 +6,7 @@ import ptree.models
 
 
 doc = """
-In Bertand Competition, participants play as firm owners(in duopoly market), each deciding simultaneously on how
+In Bertrand Competition, participants play as firm owners(in duopoly market), each deciding simultaneously on how
 much price to set for their products. The participant with the lowest price carries the day and becomes the winner.
 
 <p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/bertrand_competition">here</a></p>

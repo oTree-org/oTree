@@ -64,6 +64,7 @@ settings = {
         'private_value_auction',
         'volunteer_dilemma',
         'bertrand_competition',
+        'principal_agent',
         # lab results: displays lab results in a given session
         'lab_results',
     ],
