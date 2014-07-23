@@ -27,6 +27,7 @@ class Contribute(ParticipantMixIn, ptree.views.Page):
     def get_form_class(self):
         return forms.ContributeForm
 
+
 class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
 
     def action(self):
@@ -53,6 +54,7 @@ class Results(ParticipantMixIn, ptree.views.Page):
                 'contributed_amount': currency(self.participant.contributed_amount),
                 'participants': participants,
                 'id': self.participant.index_among_participants_in_match}
+
 
 def pages():
 

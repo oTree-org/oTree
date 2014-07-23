@@ -65,6 +65,7 @@ settings = {
         'volunteer_dilemma',
         'bertrand_competition',
         'principal_agent',
+        'coordination',
         # lab results: displays lab results in a given session
         'lab_results',
     ],

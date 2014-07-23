@@ -60,6 +60,7 @@ class SendBack(ParticipantMixIn, ptree.views.Page):
                 'tripled_amount': currency(tripled_amount),
                 'total_amount': currency(total_amount)}
 
+
 class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
 
     def wait_page_body_text(self):
@@ -90,6 +91,7 @@ class Results(ParticipantMixIn, ptree.views.Page):
                 'participant_index': self.participant.index_among_participants_in_match,
                 'participant1_payoff': currency(participant1_payoff),
                 'participant2_payoff': currency(participant2_payoff)}
+
 
 def pages():
 
