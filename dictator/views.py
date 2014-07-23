@@ -10,8 +10,6 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
 
     template_name = 'dictator/Introduction.html'
 
-
-
     def variables_for_template(self):
         return {'allocated_amount': currency(self.treatment.allocated_amount),
                 'participant_id': self.participant.index_among_participants_in_match}
@@ -53,6 +51,7 @@ def pages():
 
     return [Introduction,
             Offer,
+            ResultsCheckpoint,
             Results]
 
 

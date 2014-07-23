@@ -1,6 +1,6 @@
 import ptree.test
 import dictator.views as views
-from dictator.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from dictator.utilities import ParticipantMixIn, SubsessionMixIn
 import random
 
 
