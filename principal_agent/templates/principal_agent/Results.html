@@ -1,0 +1,27 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    {% if rejected %}
+        {% if agent %}
+            <p>You rejected the Contract.</p>
+        {% else %}
+            <p>The Contract was rejected. </p>
+        {% endif %}
+    {% else %}
+        {% if agent %}
+            <p>You Accepted the Contract.</p>
+        {% else %}
+            <p>The Contract was Accepted. </p>
+        {% endif %}
+    {% endif %}
+
+    <p>Your payoff is therefore: {{ payoff }}.</p>
+
+{% endblock %}

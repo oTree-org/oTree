@@ -1,0 +1,60 @@
+{% load i18n %}
+
+<style type="text/css">
+    h4.panel-sub-heading {
+        margin-top:20px;
+    }
+    ul {
+        list-style-type:circle;
+        padding-left:20px;
+    }
+</style>
+
+<div class="well well-lg" style="padding-top:3px; padding-bottom:5px; margin-top:20px;">
+
+    <div class="panel-body">
+
+        <h4 class="panel-sub-heading">Principal's role</h4>
+
+        <p>Creates a contract by deciding on the fixed payment and the Agent's returns share.</p>
+
+        <h4 class="panel-sub-heading">Agent's role</h4>
+
+        <p>Decides on whether to accept or reject the Contract.</p>
+
+        <h4 class="panel-sub-heading">Rules</h4>
+
+        <p>For contract offers the following rules hold: <br>
+            −{{ fixed_payment }} ≤ fixed payment ≤ {{ fixed_payment }} (only integers!) <br>
+            The Agent's return share: between 0% and 100% (0%, 10%, 20%,…,100%).
+        </p>
+
+        <h4 class="panel-sub-heading">Payoffs</h4>
+        <p>
+            The Agent gets:<br>
+            [Agent's return share in %]×(total return) + fixed payment – cost of the Agent's work effort
+        </p>
+        <p>
+            The Principle gets: <br>
+            [100% – Agent's return share in %]×(total return) – fixed payment
+        </p>
+
+        <p>Table showing the relationship between the Agent's effort and the generated total return from their costs</p>
+        <table class="table">
+            <tr><th>Agent's work effort</th><th>Total return from Agent's effort: <br>
+            70×(Work effort) </th><th>Cost of work effort by Agent</th></tr>
+            <tr><td>1</td><td>70</td><td>0</td></tr>
+            <tr><td>2</td><td>140</td><td>20</td></tr>
+            <tr><td>3</td><td>210</td><td>40</td></tr>
+            <tr><td>4</td><td>280</td><td>60</td></tr>
+            <tr><td>5</td><td>350</td><td>90</td></tr>
+            <tr><td>6</td><td>420</td><td>120</td></tr>
+            <tr><td>7</td><td>490</td><td>160</td></tr>
+            <tr><td>8</td><td>560</td><td>200</td></tr>
+            <tr><td>9</td><td>630</td><td>250</td></tr>
+            <tr><td>10</td><td>700</td><td>300</td></tr>
+        </table>
+
+    </div>
+
+</div>
