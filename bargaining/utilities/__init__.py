@@ -28,15 +28,6 @@ class MatchMixIn(object):
         self.subsession = models.Subsession()
         self.treatment = models.Treatment()
         self.match = models.Match()
-class MatchMixIn(object):
-
-    z_models = models
-
-    def z_autocomplete(self):
-        self.subsession = models.Subsession()
-        self.treatment = models.Treatment()
-        self.match = models.Match()
-
 
 class InitializeParticipant(ParticipantMixIn, ptree.views.InitializeParticipant):
     pass
