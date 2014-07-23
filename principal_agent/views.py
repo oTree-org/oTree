@@ -2,7 +2,7 @@
 import ptree.views
 import ptree.views.concrete
 import principal_agent.forms as forms
-from principal_agent.utilities import ParticipantMixIn, ExperimenterMixIn
+from principal_agent.utilities import ParticipantMixIn, MatchMixIn
 from ptree.common import currency
 
 
@@ -23,11 +23,8 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
 
 class Offer(ParticipantMixIn, ptree.views.Page):
 
-    def show_skip_wait(self):
-        if self.participant.index_among_participants_in_match == 1:
-            return self.PageActions.show
-        else:
-            return self.PageActions.skip
+    def participate_condition(self):
+        return self.participant.index_among_participants_in_match == 1
 
     template_name = 'principal_agent/Offer.html'
 
@@ -40,18 +37,18 @@ class Offer(ParticipantMixIn, ptree.views.Page):
         }
 
 
+class SimpleCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+
+    def wait_page_body_text(self):
+        return 'Please wait for the other participant.'
+
+
 class Accept(ParticipantMixIn, ptree.views.Page):
 
-    def show_skip_wait(self):
-        if self.participant.index_among_participants_in_match == 2:
-            if self.match.agent_fixed_pay is None:
-                return self.PageActions.wait
-            else:
-                return self.PageActions.show
-        else:
-            return self.PageActions.skip
-
     template_name = 'principal_agent/Accept.html'
+
+    def participate_condition(self):
+        return self.participant.index_among_participants_in_match == 2
 
     def get_form_class(self):
         return forms.DecisionForm
@@ -65,34 +62,27 @@ class Accept(ParticipantMixIn, ptree.views.Page):
 
 class WorkEffort(ParticipantMixIn, ptree.views.Page):
 
-    def show_skip_wait(self):
-        if self.participant.index_among_participants_in_match == 2:
-            if self.match.decision == 'Accept':
-                return self.PageActions.show
-            else:
-                return self.PageActions.skip
-        else:
-            return self.PageActions.skip
-
     template_name = 'principal_agent/WorkEffort.html'
 
     def get_form_class(self):
         return forms.WorkEffortForm
 
+    def participate_condition(self):
+        if self.match.decision == 'Accept':
+            return self.participant.index_among_participants_in_match == 2
+
+
+class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+
+    def action(self):
+        for p in self.match.participants():
+            p.set_payoff()
+
+    def wait_page_body_text(self):
+        return "Waiting for the other participant."
+
 
 class Results(ParticipantMixIn, ptree.views.Page):
-
-    def show_skip_wait(self):
-        if self.match.decision is not None:
-            if self.match.decision == 'Accept':
-                if self.match.agent_work_effort is not None:
-                    return self.PageActions.show
-                else:
-                    return self.PageActions.wait
-            else:
-                return self.PageActions.show
-        else:
-            return self.PageActions.wait
 
     template_name = 'principal_agent/Results.html'
 
@@ -106,15 +96,13 @@ class Results(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class ExperimenterPage(ExperimenterMixIn, ptree.views.ExperimenterPage):
-    pass
-
-
 def pages():
     return [
         Introduction,
         Offer,
+        SimpleCheckpoint,
         Accept,
         WorkEffort,
+        ResultsCheckpoint,
         Results
     ]
