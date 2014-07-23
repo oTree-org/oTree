@@ -1,4 +1,6 @@
 import lab_results.models as models
+import ptree.views
+
 
 class ParticipantMixIn(object):
     z_models = models
@@ -17,6 +19,7 @@ class SubsessionMixIn(object):
     def z_autocomplete(self):
         self.subsession = models.Subsession()
 
+
 class MatchMixIn(object):
 
     z_models = models
@@ -25,8 +28,11 @@ class MatchMixIn(object):
         self.subsession = models.Subsession()
         self.treatment = models.Treatment()
         self.match = models.Match()
-import ptree.views
+
+
 class InitializeParticipant(ParticipantMixIn, ptree.views.InitializeParticipant):
     pass
+
+
 class InitializeExperimenter(SubsessionMixIn, ptree.views.InitializeExperimenter):
     pass

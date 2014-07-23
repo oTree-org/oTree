@@ -2,6 +2,7 @@
 import survey.models as models
 import ptree.views
 
+
 class ParticipantMixIn(object):
     z_models = models
 
@@ -19,6 +20,7 @@ class SubsessionMixIn(object):
     def z_autocomplete(self):
         self.subsession = models.Subsession()
 
+
 class MatchMixIn(object):
 
     z_models = models
@@ -27,6 +29,7 @@ class MatchMixIn(object):
         self.subsession = models.Subsession()
         self.treatment = models.Treatment()
         self.match = models.Match()
+
 
 class InitializeParticipant(ParticipantMixIn, ptree.views.InitializeParticipant):
 
