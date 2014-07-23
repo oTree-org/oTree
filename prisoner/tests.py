@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import ptree.test
 import prisoner.views as views
-from prisoner.utilities import ParticipantMixIn, ExperimenterMixIn
+from prisoner.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 import random
 
 
@@ -16,7 +16,7 @@ class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
         self.submit(views.Results)
 
 
-class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
+class ExperimenterBot(SubsessionMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
         pass

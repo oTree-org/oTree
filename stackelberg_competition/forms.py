@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import stackelberg_competition.models as models
-from stackelberg_competition.utilities import ParticipantMixIn
+from stackelberg_competition.utilities import ParticipantMixIn, MatchMixIn
 import ptree.forms
 
 

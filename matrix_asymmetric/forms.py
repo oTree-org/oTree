@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import matrix_asymmetric.models as models
-from matrix_asymmetric.utilities import ParticipantMixIn
+from matrix_asymmetric.utilities import ParticipantMixIn, MatchMixIn
 import ptree.forms
 from django import forms
 

@@ -2,7 +2,7 @@
 import dictator.models as models
 from django import forms
 from django.forms import ValidationError
-from dictator.utilities import ParticipantMixIn, ExperimenterMixIn
+from dictator.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 from django.utils.translation import ugettext_lazy as _
 import ptree.forms
 from crispy_forms.layout import HTML

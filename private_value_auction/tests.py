@@ -1,6 +1,6 @@
 import ptree.test
 import private_value_auction.views as views
-from private_value_auction.utilities import ParticipantMixIn, ExperimenterMixIn
+from private_value_auction.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 import random
 
 
@@ -28,7 +28,7 @@ class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
         self.submit(views.Bid, {"bid_amount": random.choice(self.match.bid_choices())})
 
 
-class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
+class ExperimenterBot(SubsessionMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
         pass

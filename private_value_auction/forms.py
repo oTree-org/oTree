@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import private_value_auction.models as models
-from private_value_auction.utilities import ParticipantMixIn
+from private_value_auction.utilities import ParticipantMixIn, MatchMixIn
 import ptree.forms
 
 

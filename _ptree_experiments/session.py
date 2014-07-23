@@ -55,7 +55,7 @@ def session_types():
         SessionType(
             name='Survey',
             base_pay=0,
-            num_demo_participants=1,
+            num_demo_participants=4,
             num_participants=12,
             subsession_apps=['survey', 'lab_results'],
             doc=""""""

@@ -2,14 +2,11 @@
 import ptree.views
 import ptree.views.concrete
 import matrix_asymmetric.forms as forms
-from matrix_asymmetric.utilities import ParticipantMixIn, ExperimenterMixIn
+from matrix_asymmetric.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 from ptree.common import currency
 
 
 class Decision(ParticipantMixIn, ptree.views.Page):
-
-    def show_skip_wait(self):
-        return self.PageActions.show
 
     template_name = 'matrix_asymmetric/Decision.html'
 
@@ -31,22 +28,18 @@ class Decision(ParticipantMixIn, ptree.views.Page):
             'rowBcolumnB_column': currency(self.treatment.rowBcolumnB_column),
         }
 
+class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+
+    def action(self):
+        for p in self.match.participants():
+            p.set_payoff()
+
 
 class Results(ParticipantMixIn, ptree.views.Page):
-
-    def show_skip_wait(self):
-        if self.participant.other_participant().decision:
-            return self.PageActions.show
-        else:
-            return self.PageActions.wait
 
     template_name = 'matrix_asymmetric/Results.html'
 
     def variables_for_template(self):
-
-        if self.participant.payoff is None:
-            self.participant.set_payoff()
-
         return {
             'payoff': currency(self.participant.payoff),
             'my_decision': self.participant.decision,
@@ -55,12 +48,9 @@ class Results(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class ExperimenterPage(ExperimenterMixIn, ptree.views.ExperimenterPage):
-    pass
-
-
 def pages():
     return [
         Decision,
+        ResultsCheckpoint,
         Results
     ]

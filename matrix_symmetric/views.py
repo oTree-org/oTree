@@ -2,14 +2,13 @@
 import ptree.views
 import ptree.views.concrete
 import matrix_symmetric.forms as forms
-from matrix_symmetric.utilities import ParticipantMixIn, ExperimenterMixIn
+from matrix_symmetric.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 from ptree.common import currency
 
 
 class Decision(ParticipantMixIn, ptree.views.Page):
 
-    def show_skip_wait(self):
-        return self.PageActions.show
+
 
     template_name = 'matrix_symmetric/Decision.html'
 
@@ -48,7 +47,7 @@ class Results(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class ExperimenterPage(ExperimenterMixIn, ptree.views.ExperimenterPage):
+class ExperimenterPage(SubsessionMixIn, ptree.views.ExperimenterPage):
     pass
 
 

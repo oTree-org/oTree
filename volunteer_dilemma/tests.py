@@ -1,6 +1,6 @@
 import ptree.test
 import volunteer_dilemma.views as views
-from volunteer_dilemma.utilities import ParticipantMixIn, ExperimenterMixIn
+from volunteer_dilemma.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 import random
 
 
@@ -15,7 +15,7 @@ class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
         self.submit(views.Results)
 
 
-class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
+class ExperimenterBot(SubsessionMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
         pass

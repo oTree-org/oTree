@@ -2,18 +2,14 @@
 import ptree.views
 import ptree.views.concrete
 import survey.forms as forms
-from survey.utilities import ParticipantMixIn, ExperimenterMixIn
+from survey.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 
+class SubsessionCheckpoint(SubsessionMixIn, ptree.views.SubsessionCheckpoint):
+    pass
 
 class Start(ParticipantMixIn, ptree.views.Page):
 
     template_name = 'survey/Start.html'
-
-    def show_skip_wait(self):
-        if all(p.visited for p in self.subsession.participants()):
-            return self.PageActions.show
-        else:
-            return self.PageActions.wait
 
     def variables_for_template(self):
         if self.participant.payoff is None:
@@ -45,7 +41,8 @@ class End(ParticipantMixIn, ptree.views.Page):
 
 def pages():
 
-    return [Start,
+    return [SubsessionCheckpoint,
+            Start,
             Demographics,
             CognitiveReflectionTest,
             End]

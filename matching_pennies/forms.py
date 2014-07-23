@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import matching_pennies.models as models
 from django import forms
-from matching_pennies.utilities import ParticipantMixIn
+from matching_pennies.utilities import ParticipantMixIn, MatchMixIn
 import ptree.forms
 
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import trust.models as models
-from trust.utilities import ParticipantMixIn
+from trust.utilities import ParticipantMixIn, MatchMixIn
 import ptree.forms
 
 

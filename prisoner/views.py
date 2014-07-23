@@ -2,7 +2,7 @@
 import ptree.views
 import ptree.views.concrete
 import prisoner.forms as forms
-from prisoner.utilities import ParticipantMixIn, ExperimenterMixIn
+from prisoner.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 from ptree.common import currency
 
 
@@ -23,6 +23,16 @@ class Decision(ParticipantMixIn, ptree.views.Page):
         return forms.DecisionForm
 
 
+class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+
+    def wait_page_body_text(self):
+        return 'Waiting for the other participant to make a decision.'
+
+    def action(self):
+        for p in self.match.participants():
+            p.set_payoff()
+
+
 class Results(ParticipantMixIn, ptree.views.Page):
 
     """Results page to show participants the decisions that were made and print the payoffs"""
@@ -30,25 +40,15 @@ class Results(ParticipantMixIn, ptree.views.Page):
     template_name = 'prisoner/Results.html'
 
     def variables_for_template(self):
-        if self.participant.payoff is None:
-            self.participant.set_payoff()
-
         return {'my_payoff': currency(self.participant.payoff),
                 'my_decision': self.participant.decision.lower(),
                 'other_participant_decision': self.participant.other_participant().decision.lower(),
                 'same_choice': True if self.participant.decision == self.participant.other_participant().decision else False}
 
-    def show_skip_wait(self):
-        if self.participant.other_participant().decision:
-            return self.PageActions.show
-        else:
-            return self.PageActions.wait
-
-    def wait_page_body_text(self):
-        return 'Waiting for the other participant to make a decision.'
 
 
 def pages():
 
     return [Decision,
+            ResultsCheckpoint,
             Results]

@@ -24,8 +24,9 @@ class Subsession(ptree.models.BaseSubsession):
         self.two_third_guesses = (2.0/3) * sum(p.guess_value for p in self.participants()) / len(self.participants())
 
     def choose_winner(self):
+        self.calculate_average()
         winner_so_far = None
-        smallest_difference_so_far = 1000
+        smallest_difference_so_far = 1000 #arbitrary big number
 
         for p in self.participants():
             difference = abs(p.guess_value - self.two_third_guesses)
@@ -33,7 +34,6 @@ class Subsession(ptree.models.BaseSubsession):
                 winner_so_far = p
                 smallest_difference_so_far = difference
         winner_so_far.is_winner = True
-        winner_so_far.save()
 
 
 class Treatment(ptree.models.BaseTreatment):
@@ -45,7 +45,7 @@ class Match(ptree.models.BaseMatch):
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
 
-    participants_per_match = 2
+    participants_per_match = 1
 
 
 class Participant(ptree.models.BaseParticipant):

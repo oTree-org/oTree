@@ -1,6 +1,6 @@
 import ptree.views
 import ptree.views.concrete
-from lab_results.utilities import ParticipantMixIn
+from lab_results.utilities import ParticipantMixIn, MatchMixIn
 from ptree.common import currency
 import lab_results.forms as forms
 
