@@ -8,8 +8,6 @@ from ptree.common import currency
 
 class Decision(ParticipantMixIn, ptree.views.Page):
 
-
-
     template_name = 'matrix_symmetric/Decision.html'
 
     def get_form_class(self):
@@ -24,13 +22,17 @@ class Decision(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
 
-    def show_skip_wait(self):
-        if self.participant.other_participant().decision:
-            return self.PageActions.show
-        else:
-            return self.PageActions.wait
+    def action(self):
+        for p in self.match.participants():
+            p.set_payoff()
+
+    def wait_page_body_text(self):
+        return "Waiting for the other participant."
+
+
+class Results(ParticipantMixIn, ptree.views.Page):
 
     template_name = 'matrix_symmetric/Results.html'
 
@@ -54,5 +56,6 @@ class ExperimenterPage(SubsessionMixIn, ptree.views.ExperimenterPage):
 def pages():
     return [
         Decision,
+        ResultsCheckpoint,
         Results
     ]
