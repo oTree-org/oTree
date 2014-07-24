@@ -66,6 +66,8 @@ settings = {
         'bertrand_competition',
         'principal_agent',
         'coordination',
+        'stag_hunt',
+        'battle_of_the_sexes',
         # lab results: displays lab results in a given session
         'lab_results',
     ],

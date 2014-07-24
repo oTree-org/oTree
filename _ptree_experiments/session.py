@@ -156,6 +156,22 @@ def session_types():
             subsession_apps=['coordination', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Stag Hunt',
+            base_pay=100,
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['stag_hunt', 'lab_results'],
+            doc=""""""
+        ),
+        SessionType(
+            name='Battle of the sexes',
+            base_pay=100,
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['battle_of_the_sexes', 'lab_results'],
+            doc=""""""
+        ),
     ]
 
 
