@@ -55,7 +55,7 @@ def session_types():
         SessionType(
             name='Survey',
             base_pay=0,
-            num_demo_participants=1,
+            num_demo_participants=4,
             num_participants=12,
             subsession_apps=['survey', 'lab_results'],
             doc=""""""
@@ -146,6 +146,14 @@ def session_types():
             num_demo_participants=2,
             num_participants=12,
             subsession_apps=['principal_agent', 'lab_results'],
+            doc=""""""
+        ),
+        SessionType(
+            name='Coordination',
+            base_pay=100,
+            num_demo_participants=2,
+            num_participants=12,
+            subsession_apps=['coordination', 'lab_results'],
             doc=""""""
         ),
     ]

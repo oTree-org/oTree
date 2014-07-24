@@ -1,6 +1,6 @@
 import ptree.test
 import bargaining.views as views
-from bargaining.utilities import ParticipantMixIn, ExperimenterMixIn
+from bargaining.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 
 
 class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
@@ -17,7 +17,7 @@ class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
         self.submit(views.Results)
 
 
-class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
+class ExperimenterBot(SubsessionMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
         pass

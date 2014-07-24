@@ -2,14 +2,11 @@
 import ptree.views
 import ptree.views.concrete
 import bertrand_competition.forms as forms
-from bertrand_competition.utilities import ParticipantMixIn, ExperimenterMixIn
+from bertrand_competition.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 from ptree.common import currency
 
 
 class Introduction(ParticipantMixIn, ptree.views.Page):
-
-    def show_skip_wait(self):
-        return self.PageActions.show
 
     template_name = 'bertrand_competition/Introduction.html'
 
@@ -22,28 +19,22 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
 
 class Compete(ParticipantMixIn, ptree.views.Page):
 
-    def show_skip_wait(self):
-        return self.PageActions.show
-
     template_name = 'bertrand_competition/Compete.html'
 
     def get_form_class(self):
         return forms.PriceForm
 
+class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+
+    def action(self):
+        for p in self.match.participants():
+            p.set_payoff()
 
 class Results(ParticipantMixIn, ptree.views.Page):
-
-    def show_skip_wait(self):
-        if self.participant.other_participant().price:
-            return self.PageActions.show
-        else:
-            return self.PageActions.wait
 
     template_name = 'bertrand_competition/Results.html'
 
     def variables_for_template(self):
-        if self.participant.payoff is None:
-            self.participant.set_payoff()
 
         return {
             'payoff': currency(self.participant.payoff),
@@ -53,14 +44,10 @@ class Results(ParticipantMixIn, ptree.views.Page):
             'equal_price': True if self.participant.price == self.participant.other_participant().price else False,
         }
 
-
-class ExperimenterPage(ExperimenterMixIn, ptree.views.ExperimenterPage):
-    pass
-
-
 def pages():
     return [
         Introduction,
         Compete,
+        ResultsCheckpoint,
         Results
     ]

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from . import models
 from django import forms
-from .utilities import ParticipantMixIn
+from .utilities import ParticipantMixIn, MatchMixIn
 from ptree.common import currency
 import ptree.forms
 

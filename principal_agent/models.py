@@ -123,10 +123,14 @@ class Participant(ptree.models.BaseParticipant):
 
             if self.index_among_participants_in_match == 1:  # principal
                 # [100% – Agent's return share in %]×(total return) – fixed payment
-                self.payoff = (0.01 * (100 - self.match.agent_return_share) * self.match.total_return) - self.match.agent_fixed_pay
+                # if payoff < 0 ..then make it 0 - no negative payoffs
+                calc_payoff = (0.01 * (100 - self.match.agent_return_share) * self.match.total_return) - self.match.agent_fixed_pay
+                self.payoff = calc_payoff if calc_payoff > 0 else 0
             else:  # agent
                 # [Agent's return share in %]×(total return) + fixed payment – cost of the Agent's work effort
-                self.payoff = (0.01*self.match.agent_return_share * self.match.total_return) + (self.match.agent_fixed_pay - self.match.agent_work_costs)
+                # if payoff < 0 ..then make it 0 - no negative payoffs
+                calc_payoff = (0.01*self.match.agent_return_share * self.match.total_return) + (self.match.agent_fixed_pay - self.match.agent_work_costs)
+                self.payoff = calc_payoff if calc_payoff > 0 else 0
 
 
 def treatments():

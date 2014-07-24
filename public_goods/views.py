@@ -2,7 +2,7 @@
 import ptree.views
 import ptree.views.concrete
 import public_goods.forms as forms
-from public_goods.utilities import ParticipantMixIn, ExperimenterMixIn
+from public_goods.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 from ptree.common import currency
 
 
@@ -11,9 +11,6 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
     """Description of the game: How to play and returns expected"""
 
     template_name = 'public_goods/Introduction.html'
-
-    def show_skip_wait(self):
-        return self.PageActions.show
 
     def variables_for_template(self):
         return {'no_of_participants': self.match.participants_per_match,
@@ -31,19 +28,23 @@ class Contribute(ParticipantMixIn, ptree.views.Page):
         return forms.ContributeForm
 
 
+class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+
+    def action(self):
+        self.match.set_contributions()
+        self.match.set_individual_share()
+        for p in self.match.participants():
+            p.set_payoff()
+
+    def wait_page_body_text(self):
+        return "Waiting for other group members to contribute."
+
+
 class Results(ParticipantMixIn, ptree.views.Page):
 
     """Participants payoff: How much each has earned"""
 
     template_name = 'public_goods/Results.html'
-
-    def show_skip_wait(self):
-        if self.participant.payoff is None:
-            return self.PageActions.wait
-        return self.PageActions.show
-
-    def wait_page_body_text(self):
-        return "Waiting for other group members to contribute."
 
     def variables_for_template(self):
 
@@ -55,48 +56,9 @@ class Results(ParticipantMixIn, ptree.views.Page):
                 'id': self.participant.index_among_participants_in_match}
 
 
-class ExperimenterPage(ExperimenterMixIn, ptree.views.ExperimenterPage):
-
-    """This page is only for the experimenter,
-    and because the experimenter doesn't have to do anything in this game,
-    this page is a waiting screen and is updated once all participants are finished"""
-
-    template_name = 'public_goods/ExperimenterPage.html'
-
-    def show_skip_wait(self):
-        if any(p.contributed_amount is None for p in self.subsession.participants()):
-            return self.PageActions.wait
-        for m in self.subsession.matches():
-            m.set_contributions()
-            m.set_individual_share()
-            m.save()
-        for p in self.subsession.participants():
-            p.set_payoff()
-            p.save()
-        return self.PageActions.show
-
-    def wait_page_title_text(self):
-        return "Public Goods Game: Experimenter Page"
-
-    def wait_page_body_text(self):
-        participant_count = len(self.subsession.participants())
-        participant_string = "participants" if participant_count > 1 else "participant"
-        return """All {} {} have started playing the game.
-                  As the experimenter in this game, you have no particular role to play.
-                  This page will change once all participants have been given a
-                  payoff.""".format(participant_count, participant_string)
-
-    def variables_for_template(self):
-        return {'participant_count': len(self.subsession.participants())}
-
-
-def experimenter_pages():
-
-    return [ExperimenterPage]
-
-
 def pages():
 
     return [Introduction,
             Contribute,
+            ResultsCheckpoint,
             Results]

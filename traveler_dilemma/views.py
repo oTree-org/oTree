@@ -2,16 +2,13 @@
 import ptree.views
 import ptree.views.concrete
 import traveler_dilemma.forms as forms
-from traveler_dilemma.utilities import ParticipantMixIn, ExperimenterMixIn
+from traveler_dilemma.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from ptree.common import currency
 
 
 class Introduction(ParticipantMixIn, ptree.views.Page):
-
-    def show_skip_wait(self):
-        return self.PageActions.show
 
     template_name = 'traveler_dilemma/Introduction.html'
 
@@ -26,28 +23,23 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
 
 class Claim(ParticipantMixIn, ptree.views.Page):
 
-    def show_skip_wait(self):
-        return self.PageActions.show
-
     template_name = 'traveler_dilemma/Claim.html'
 
     def get_form_class(self):
         return forms.ClaimForm
 
+class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+
+    def action(self):
+        for p in self.match.participants():
+            p.set_payoff()
+
 
 class Results(ParticipantMixIn, ptree.views.Page):
-
-    def show_skip_wait(self):
-        if self.participant.other_participant().claim:
-            return self.PageActions.show
-        else:
-            return self.PageActions.wait
 
     template_name = 'traveler_dilemma/Results.html'
 
     def variables_for_template(self):
-        if self.participant.payoff is None:
-            self.participant.set_payoff()
         return {
             'claim': currency(self.participant.claim),
             'other_claim': currency(self.participant.other_participant().claim),
@@ -59,5 +51,6 @@ def pages():
     return [
         Introduction,
         Claim,
+        ResultsCheckpoint,
         Results
     ]

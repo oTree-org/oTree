@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import guessing.models as models
-from guessing.utilities import ParticipantMixIn
+from guessing.utilities import ParticipantMixIn, MatchMixIn
 import ptree.forms
 
 

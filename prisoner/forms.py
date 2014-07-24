@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import prisoner.models as models
 from django import forms
-from prisoner.utilities import ParticipantMixIn
+from prisoner.utilities import ParticipantMixIn, MatchMixIn
 import ptree.forms
 
 

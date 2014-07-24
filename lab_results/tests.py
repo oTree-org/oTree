@@ -1,6 +1,6 @@
 import ptree.test
 import lab_results.views as views
-from lab_results.utilities import ParticipantMixIn, ExperimenterMixIn
+from lab_results.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
 
 
 class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
@@ -9,7 +9,7 @@ class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
         pass
 
 
-class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
+class ExperimenterBot(SubsessionMixIn, ptree.test.ExperimenterBot):
 
     def play(self):
         pass

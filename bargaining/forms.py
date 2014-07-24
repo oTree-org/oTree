@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import bargaining.models as models
-from bargaining.utilities import ParticipantMixIn
+from bargaining.utilities import ParticipantMixIn, MatchMixIn
 import ptree.forms
 
 
