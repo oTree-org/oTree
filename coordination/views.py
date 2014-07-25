@@ -13,8 +13,8 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {
-            'similar_amount': currency(self.treatment.similar_amount),
-            'dissimilar_amount': currency(self.treatment.dissimilar_amount),
+            'match_amount': currency(self.treatment.match_amount),
+            'mismatch_amount': currency(self.treatment.mismatch_amount),
         }
 
 

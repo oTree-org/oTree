@@ -21,14 +21,14 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    similar_amount = models.PositiveIntegerField(
+    match_amount = models.PositiveIntegerField(
         null=True,
         doc="""
-        amount each participant is rewarded for having similar choices
+        amount each participant is rewarded for having match choices
         """
     )
 
-    dissimilar_amount = models.PositiveIntegerField(
+    mismatch_amount = models.PositiveIntegerField(
         null=True,
         doc="""
         amount each participant is rewarded for having different choices
@@ -63,25 +63,16 @@ class Participant(ptree.models.BaseParticipant):
 
     def set_payoff(self):
 
-        payoff_matrix = {
-            'A': {
-                'A': self.treatment.similar_amount,
-                'B': self.treatment.dissimilar_amount,
-            },
-            'B': {
-                'A': self.treatment.dissimilar_amount,
-                'B': self.treatment.similar_amount,
-            }
-        }
-
-        self.payoff = payoff_matrix[self.choice][self.other_participant().choice]
+        if self.choice == self.other_participant().choice:
+            return self.treatment.match_amount
+        return self.treatment.mismatch_amount
 
 
 def treatments():
 
     return [
         Treatment.create(
-            similar_amount = 10,
-            dissimilar_amount = 0,
+            match_amount = 10,
+            mismatch_amount = 0,
         )
     ]
