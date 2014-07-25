@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import matrix_asymmetric.models as models
-from matrix_asymmetric.utilities import ParticipantMixIn, MatchMixIn
+from matrix_asymmetric.utilities import Form
 import ptree.forms
 from django import forms
 
 
-class DecisionForm(ParticipantMixIn, ptree.forms.Form):
+class DecisionForm(Form):
 
     class Meta:
         model = models.Participant

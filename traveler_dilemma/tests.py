@@ -1,10 +1,10 @@
 import ptree.test
 import traveler_dilemma.views as views
-from traveler_dilemma.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from traveler_dilemma.utilities import Bot
 import random
 
 
-class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
+class ParticipantBot(Bot):
 
     def play(self):
 
@@ -33,8 +33,4 @@ class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
         self.submit(views.Claim, {"claim": random.choice(self.match.claim_choices())})
 
 
-class ExperimenterBot(SubsessionMixIn, ptree.test.ExperimenterBot):
-
-    def play(self):
-        pass
 

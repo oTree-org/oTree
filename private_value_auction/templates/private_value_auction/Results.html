@@ -10,9 +10,9 @@
 
     <p>You bidded {{ bid_amount }}.</p>
     {% if is_winner %}
-        <p>You had the highest bid, your payoff therefore is {{ payoff }}.</p>
+        <p>You won the auction; your payoff therefore is {{ payoff }}.</p>
     {% else %}
-        <p>You had the lowest bid, your payoff therefore is {{ payoff }}.</p>
+        <p>You did not win the auction; your payoff therefore is {{ payoff }}.</p>
     {% endif %}
 
 {% endblock %}

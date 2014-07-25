@@ -1,8 +1,8 @@
 import ptree.test
 import stag_hunt.views as views
-from stag_hunt.utilities import ParticipantMixIn, ExperimenterMixIn
+from stag_hunt.utilities import Bot
 
-class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
+class ParticipantBot(Bot):
 
     def play(self):
         pass

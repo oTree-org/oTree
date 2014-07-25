@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import matching_pennies.models as models
 from django import forms
-from matching_pennies.utilities import ParticipantMixIn, MatchMixIn
+from matching_pennies.utilities import Form
 import ptree.forms
 
 
-class PennySideForm(ParticipantMixIn, ptree.forms.Form):
+class PennySideForm(Form):
 
     class Meta:
         model = models.Participant

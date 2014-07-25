@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import guessing.models as models
-from guessing.utilities import ParticipantMixIn, MatchMixIn
+from guessing.utilities import Form
 import ptree.forms
 
 
-class GuessForm(ParticipantMixIn, ptree.forms.Form):
+class GuessForm(Form):
 
     class Meta:
         model = models.Participant

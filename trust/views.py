@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import trust.forms as forms
-from trust.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from trust.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixIn, ptree.views.Page):
+class Introduction(Page):
 
     template_name = 'trust/Introduction.html'
 
@@ -14,7 +12,7 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
         return {'amount_allocated': currency(self.treatment.amount_allocated)}
 
 
-class Send(ParticipantMixIn, ptree.views.Page):
+class Send(Page):
 
     """This page is only for participant one
     P1 sends some (all, some, or none) amount to P2
@@ -32,13 +30,13 @@ class Send(ParticipantMixIn, ptree.views.Page):
         return {'amount_allocated': currency(self.treatment.amount_allocated)}
 
 
-class SimpleCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class SimpleWaitPage(MatchWaitPage):
 
-    def wait_page_body_text(self):
+    def body_text(self):
         return 'The other participant has been given the opportunity to give money first. Please wait.'
 
 
-class SendBack(ParticipantMixIn, ptree.views.Page):
+class SendBack(Page):
 
     """This page is only for participant two
     P2 sends back some amount (of the tripled amount received) to P1 ranging from 0 to MAX they got"""
@@ -61,7 +59,7 @@ class SendBack(ParticipantMixIn, ptree.views.Page):
                 'total_amount': currency(total_amount)}
 
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
     def wait_page_body_text(self):
         return 'Waiting for the other participant to finish.'
@@ -71,7 +69,7 @@ class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
             p.set_payoff()
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     """This page displays the earnings of each participant"""
 
@@ -97,7 +95,7 @@ def pages():
 
     return [Introduction,
             Send,
-            SimpleCheckpoint,
+            SimpleWaitPage,
             SendBack,
-            ResultsCheckpoint,
+            ResultsWaitPage,
             Results]

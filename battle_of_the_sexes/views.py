@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import battle_of_the_sexes.forms as forms
-from battle_of_the_sexes.utilities import ParticipantMixIn, MatchMixIn
+from battle_of_the_sexes.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Decide(ParticipantMixIn, ptree.views.Page):
+class Decide(Page):
 
     def participate_condition(self):
         return True
@@ -26,17 +24,17 @@ class Decide(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
         for p in self.match.participants():
             p.set_payoff()
 
-    def wait_page_body_text(self):
+    def body_text(self):
         return "Waiting for the other participant."
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     def participate_condition(self):
         return True
@@ -44,8 +42,6 @@ class Results(ParticipantMixIn, ptree.views.Page):
     template_name = 'battle_of_the_sexes/Results.html'
 
     def variables_for_template(self):
-        if self.participant.payoff is None:
-            self.participant.set_payoff()
 
         return {
             'payoff': currency(self.participant.payoff),
@@ -57,6 +53,6 @@ class Results(ParticipantMixIn, ptree.views.Page):
 def pages():
     return [
         Decide,
-        ResultsCheckpoint,
+        ResultsWaitPage,
         Results
     ]

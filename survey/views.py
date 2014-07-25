@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import survey.forms as forms
-from survey.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from survey.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from ptree.common import currency
 
-class SubsessionCheckpoint(SubsessionMixIn, ptree.views.SubsessionCheckpoint):
-    pass
-
-class Start(ParticipantMixIn, ptree.views.Page):
+class Start(Page):
 
     template_name = 'survey/Start.html'
 
@@ -15,17 +11,17 @@ class Start(ParticipantMixIn, ptree.views.Page):
         if self.participant.payoff is None:
             self.participant.set_payoff()
 
-    def wait_page_body_text(self):
+    def body_text(self):
         return "Waiting for the other participants."
 
 
-class Demographics(ParticipantMixIn, ptree.views.Page):
+class Demographics(Page):
 
     form_class = forms.DemographicsForm
     template_name = 'survey/Survey.html'
 
 
-class CognitiveReflectionTest(ParticipantMixIn, ptree.views.Page):
+class CognitiveReflectionTest(Page):
 
     form_class = forms.CognitiveReflectionTestForm
     template_name = 'survey/Survey.html'
@@ -34,14 +30,14 @@ class CognitiveReflectionTest(ParticipantMixIn, ptree.views.Page):
         self.participant.crt_bat = self.participant.crt_bat_float * 100
 
 
-class End(ParticipantMixIn, ptree.views.Page):
+class End(Page):
 
     template_name = 'survey/End.html'
 
 
 def pages():
 
-    return [SubsessionCheckpoint,
+    return [SubsessionWaitPage,
             Start,
             Demographics,
             CognitiveReflectionTest,

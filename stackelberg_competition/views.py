@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import stackelberg_competition.forms as forms
-from stackelberg_competition.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from stackelberg_competition.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixIn, ptree.views.Page):
+class Introduction(Page):
 
     template_name = 'stackelberg_competition/Introduction.html'
 
@@ -16,7 +14,7 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class ChoiceOne(ParticipantMixIn, ptree.views.Page):
+class ChoiceOne(Page):
 
     def participate_condition(self):
         return self.participant.index_among_participants_in_match == 1
@@ -26,10 +24,8 @@ class ChoiceOne(ParticipantMixIn, ptree.views.Page):
     def get_form_class(self):
         return forms.QuantityForm
 
-class SimpleCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
-    pass
 
-class ChoiceTwo(ParticipantMixIn, ptree.views.Page):
+class ChoiceTwo(Page):
 
     def participate_condition(self):
         return self.participant.index_among_participants_in_match == 2
@@ -44,13 +40,12 @@ class ChoiceTwo(ParticipantMixIn, ptree.views.Page):
             'other_quantity': self.participant.other_participant().quantity
         }
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
-
+class ResultsWaitPage(MatchWaitPage):
     def action(self):
         for p in self.match.participants():
             p.set_payoff()
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     template_name = 'stackelberg_competition/Results.html'
 
@@ -64,16 +59,12 @@ class Results(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class ExperimenterPage(SubsessionMixIn, ptree.views.ExperimenterPage):
-    pass
-
-
 def pages():
     return [
         Introduction,
         ChoiceOne,
-        SimpleCheckpoint,
+        MatchWaitPage,
         ChoiceTwo,
-        ResultsCheckpoint,
+        ResultsWaitPage,
         Results
     ]

@@ -1,9 +1,9 @@
 import ptree.test
 import coordination.views as views
-from coordination.utilities import ParticipantMixIn
+from coordination.utilities import Bot
 
 
-class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
+class ParticipantBot(Bot):
 
     def play(self):
         pass

@@ -1,10 +1,10 @@
 import ptree.test
 import bertrand_competition.views as views
-from bertrand_competition.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from bertrand_competition.utilities import Bot
 import random
 
 
-class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
+class ParticipantBot(Bot):
 
     def play(self):
         # start
@@ -17,7 +17,3 @@ class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
         self.submit(views.Results)
 
 
-class ExperimenterBot(SubsessionMixIn, ptree.test.ExperimenterBot):
-
-    def play(self):
-        pass

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import stag_hunt.models as models
 from django import forms
-from stag_hunt.utilities import ParticipantMixIn
+from stag_hunt.utilities import Form
 import ptree.forms
 
 
-class DecisionForm(ParticipantMixIn, ptree.forms.Form):
+class DecisionForm(Form):
 
     class Meta:
         model = models.Participant

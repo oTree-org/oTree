@@ -1,9 +1,9 @@
 import ptree.test
 import principal_agent.views as views
-from principal_agent.utilities import ParticipantMixIn, ExperimenterMixIn
+from principal_agent.utilities import Bot
 
 
-class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
+class ParticipantBot(Bot):
 
     def play(self):
         # intro

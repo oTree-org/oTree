@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import private_value_auction.models as models
-from private_value_auction.utilities import ParticipantMixIn, MatchMixIn
+from private_value_auction.utilities import Form
 import ptree.forms
 
 
-class BidForm(ParticipantMixIn, ptree.forms.Form):
+class BidForm(Form):
 
     class Meta:
         model = models.Participant

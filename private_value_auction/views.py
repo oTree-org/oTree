@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import private_value_auction.forms as forms
-from private_value_auction.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from private_value_auction.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixIn, ptree.views.Page):
+class Introduction(Page):
 
     template_name = 'private_value_auction/Introduction.html'
 
 
-class Bid(ParticipantMixIn, ptree.views.Page):
+class Bid(Page):
 
     template_name = 'private_value_auction/Bid.html'
 
@@ -23,14 +21,15 @@ class Bid(ParticipantMixIn, ptree.views.Page):
             'price_value': currency(self.treatment.price_value),
         }
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(SubsessionWaitPage):
 
     def action(self):
+        self.subsession.choose_winner()
         for p in self.subsession.participants():
             p.set_payoff()
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     template_name = 'private_value_auction/Results.html'
 
@@ -46,6 +45,6 @@ def pages():
     return [
         Introduction,
         Bid,
-        ResultsCheckpoint,
+        ResultsWaitPage,
         Results
     ]

@@ -1,10 +1,10 @@
 import ptree.test
 import guessing.views as views
-from guessing.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from guessing.utilities import Bot
 import random
 
 
-class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
+class ParticipantBot(Bot):
 
     def play(self):
 
@@ -18,9 +18,3 @@ class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
 
     def play_p2(self):
         self.submit(views.Guess, {"guess_value": random.choice(range(0, 100))})
-
-
-class ExperimenterBot(SubsessionMixIn, ptree.test.ExperimenterBot):
-
-    def play(self):
-        self.submit(views.Experimenter)

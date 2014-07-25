@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import public_goods.forms as forms
-from public_goods.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from public_goods.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixIn, ptree.views.Page):
+class Introduction(Page):
 
     """Description of the game: How to play and returns expected"""
 
@@ -18,7 +16,7 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
                 'multiplication_factor': self.treatment.multiplication_factor}
 
 
-class Contribute(ParticipantMixIn, ptree.views.Page):
+class Contribute(Page):
 
     """Participant: Choose how much to contribute"""
 
@@ -28,7 +26,7 @@ class Contribute(ParticipantMixIn, ptree.views.Page):
         return forms.ContributeForm
 
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
         self.match.set_contributions()
@@ -36,11 +34,11 @@ class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
         for p in self.match.participants():
             p.set_payoff()
 
-    def wait_page_body_text(self):
+    def body_text(self):
         return "Waiting for other group members to contribute."
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     """Participants payoff: How much each has earned"""
 
@@ -60,5 +58,5 @@ def pages():
 
     return [Introduction,
             Contribute,
-            ResultsCheckpoint,
+            ResultsWaitPage,
             Results]

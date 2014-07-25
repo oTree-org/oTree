@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import coordination.forms as forms
-from coordination.utilities import ParticipantMixIn, MatchMixIn
+from coordination.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixIn, ptree.views.Page):
+class Introduction(Page):
 
     def participate_condition(self):
         return True
@@ -20,7 +18,7 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class Choice(ParticipantMixIn, ptree.views.Page):
+class Choice(Page):
 
     def participate_condition(self):
         return True
@@ -31,17 +29,17 @@ class Choice(ParticipantMixIn, ptree.views.Page):
         return forms.ChoiceForm
 
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
         for p in self.match.participants():
             p.set_payoff()
 
-    def wait_page_body_text(self):
+    def body_text(self):
         return "Waiting for the other participant."
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     def participate_condition(self):
         return True
@@ -60,6 +58,6 @@ def pages():
     return [
         Introduction,
         Choice,
-        ResultsCheckpoint,
+        ResultsWaitPage,
         Results
     ]

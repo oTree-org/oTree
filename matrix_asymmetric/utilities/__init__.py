@@ -3,7 +3,9 @@ import matrix_asymmetric.models as models
 import ptree.views
 import ptree.forms
 
-class ParticipantMixIn(object):
+import ptree.test
+
+class Page(ptree.views.Page):
     z_models = models
 
     def z_autocomplete(self):
@@ -13,14 +15,15 @@ class ParticipantMixIn(object):
         self.participant = models.Participant()
 
 
-class SubsessionMixIn(object):
+class SubsessionWaitPage(ptree.views.SubsessionWaitPage):
 
     z_models = models
 
     def z_autocomplete(self):
         self.subsession = models.Subsession()
 
-class MatchMixIn(object):
+
+class MatchWaitPage(ptree.views.MatchWaitPage):
 
     z_models = models
 
@@ -28,8 +31,27 @@ class MatchMixIn(object):
         self.subsession = models.Subsession()
         self.treatment = models.Treatment()
         self.match = models.Match()
-class InitializeParticipant(ParticipantMixIn, ptree.views.InitializeParticipant):
-    pass
 
-class InitializeExperimenter(SubsessionMixIn, ptree.views.InitializeExperimenter):
-    pass
+class Form(ptree.forms.Form):
+
+    def z_autocomplete(self):
+        self.subsession = models.Subsession()
+        self.treatment = models.Treatment()
+        self.match = models.Match()
+        self.participant = models.Participant()
+
+class Bot(ptree.test.Bot):
+
+    def z_autocomplete(self):
+        self.subsession = models.Subsession()
+        self.treatment = models.Treatment()
+        self.match = models.Match()
+        self.participant = models.Participant()
+
+
+class InitializeParticipant(ptree.views.InitializeParticipant):
+    z_models = models
+
+
+class InitializeExperimenter(ptree.views.InitializeExperimenter):
+    z_models = models

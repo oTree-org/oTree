@@ -1,9 +1,9 @@
 import lying.models as models
 import ptree.forms
-from lying.utilities import ParticipantMixIn, MatchMixIn
+from lying.utilities import Form
 
 
-class CoinFlipForm(ParticipantMixIn, ptree.forms.Form):
+class CoinFlipForm(Form):
 
     class Meta:
         model = models.Participant

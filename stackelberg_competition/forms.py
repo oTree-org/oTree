@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import stackelberg_competition.models as models
-from stackelberg_competition.utilities import ParticipantMixIn, MatchMixIn
+from stackelberg_competition.utilities import Form
 import ptree.forms
 
 
-class QuantityForm(ParticipantMixIn, ptree.forms.Form):
+class QuantityForm(Form):
 
     class Meta:
         model = models.Participant

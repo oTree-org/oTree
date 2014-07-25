@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import dictator.forms as forms
-from dictator.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from dictator.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixIn, ptree.views.Page):
+class Introduction(Page):
 
     template_name = 'dictator/Introduction.html'
 
@@ -15,7 +13,7 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
                 'participant_id': self.participant.index_among_participants_in_match}
 
 
-class Offer(ParticipantMixIn, ptree.views.Page):
+class Offer(Page):
 
     template_name = 'dictator/Offer.html'
 
@@ -26,18 +24,18 @@ class Offer(ParticipantMixIn, ptree.views.Page):
         return self.participant.index_among_participants_in_match == 1
 
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
         for p in self.match.participants():
             p.set_payoff()
 
-    def wait_page_body_text(self):
+    def body_text(self):
         if self.participant.index_among_participants_in_match == 2:
             return "Waiting for the dictator to make an offer."
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     template_name = 'dictator/Results.html'
 
@@ -51,7 +49,7 @@ def pages():
 
     return [Introduction,
             Offer,
-            ResultsCheckpoint,
+            ResultsWaitPage,
             Results]
 
 
