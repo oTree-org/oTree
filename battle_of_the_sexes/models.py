@@ -18,13 +18,13 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    football_amount1 = models.PositiveIntegerField(
+    football_husband_amount = models.PositiveIntegerField(
         null=True,
         doc="""
         Amount rewarded to p1 for choosing football
         """
     )
-    football_amount2 = models.PositiveIntegerField(
+    football_wife_amount = models.PositiveIntegerField(
         null=True,
         doc="""
         Amount rewarded to p2 for choosing football
@@ -36,13 +36,13 @@ class Treatment(ptree.models.BaseTreatment):
         Amount rewarded for choosing football and opera for either participants
         """
     )
-    opera_amount1 = models.PositiveIntegerField(
+    opera_husband_amount = models.PositiveIntegerField(
         null=True,
         doc="""
         Amount rewarded to p1 for choosing both opera
         """
     )
-    opera_amount2 = models.PositiveIntegerField(
+    opera_wife_amount = models.PositiveIntegerField(
         null=True,
         doc="""
         Amount rewarded to p1 for choosing both opera
@@ -76,44 +76,46 @@ class Participant(ptree.models.BaseParticipant):
         return self.other_participants_in_match()[0]
 
     def set_payoff(self):
-        if self.role() == 'row':
+        if self.role() == 'husband':
             payoff_matrix = {
                 'football': {
-                    'football': self.treatment.football_amount1,
+                    'football': self.treatment.football_husband_amount,
                     'opera': self.treatment.football_opera_amount,
                 },
                 'opera': {
                     'football': self.treatment.football_opera_amount,
-                    'opera': self.treatment.opera_amount1,
+                    'opera': self.treatment.opera_husband_amount,
                 }
             }
         else:
             payoff_matrix = {
                 'football': {
-                    'football': self.treatment.football_amount2,
+                    'football': self.treatment.football_wife_amount,
                     'opera': self.treatment.football_opera_amount,
                 },
                 'opera': {
                     'football': self.treatment.football_opera_amount,
-                    'opera': self.treatment.opera_amount2,
+                    'opera': self.treatment.opera_wife_amount,
                 }
             }
         self.payoff = payoff_matrix[self.decision][self.other_participant().decision]
 
     def role(self):
-        return {
-            1: 'row',  # football preference
-            2: 'column'  # opera preference
-        }[self.index_among_participants_in_match]
+        roles = {
+            1: 'husband',  # football preference
+            2: 'wife'  # opera preference
+        }
+
+        return roles[self.index_among_participants_in_match]
 
 
 def treatments():
     return [
         Treatment.create(
-            football_amount1=30,
-            football_amount2=20,
+            football_husband_amount=30,
+            football_wife_amount=20,
             football_opera_amount=0,
-            opera_amount1=20,
-            opera_amount2=30
+            opera_husband_amount=20,
+            opera_wife_amount=30
         )
     ]

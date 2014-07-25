@@ -16,11 +16,12 @@ class Decide(Page):
 
     def variables_for_template(self):
         return {
-            'fbl_amt1': currency(self.treatment.football_amount1),
-            'fbl_amt2': currency(self.treatment.football_amount2),
+            'role': self.participant.role(),
+            'fbl_husband_amt': currency(self.treatment.football_husband_amount),
+            'fbl_wife_amt': currency(self.treatment.football_wife_amount),
             'fbl_opr_amt': currency(self.treatment.football_opera_amount),
-            'opr_amt1': currency(self.treatment.opera_amount1),
-            'opr_amt2': currency(self.treatment.opera_amount2)
+            'opr_husband_amt': currency(self.treatment.opera_husband_amount),
+            'opr_wife_amt': currency(self.treatment.opera_wife_amount)
         }
 
 

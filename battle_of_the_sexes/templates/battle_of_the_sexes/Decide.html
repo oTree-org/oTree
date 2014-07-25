@@ -23,14 +23,18 @@
         </tr>
         <tr>
             <th style="border:1px solid #ddd;">Football</th>
-            <td style="border:1px solid #ddd;">{{ fbl_amt1 }}, {{ fbl_amt2 }}</td>
+            <td style="border:1px solid #ddd;">{{ fbl_husband_amt }}, {{ fbl_wife_amt }}</td>
             <td style="border:1px solid #ddd;">{{ fbl_opr_amt }}, {{ fbl_opr_amt }}</td>
         </tr>
         <tr>
             <th style="border:1px solid #ddd;">Opera</th>
             <td style="border:1px solid #ddd;">{{ fbl_opr_amt }}, {{ fbl_opr_amt }}</td>
-            <td style="border:1px solid #ddd;">{{ opr_amt1 }}, {{ opr_amt2 }}</td>
+            <td style="border:1px solid #ddd;">{{ opr_husband_amt }}, {{ opr_wife_amt }}</td>
         </tr>
     </table>
+
+    <p>
+        In this game, you are assigned to make a decision as if you were the <b>{{ role }}</b>.
+    </p>
 
 {% endblock %}
