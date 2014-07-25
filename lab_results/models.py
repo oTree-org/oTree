@@ -38,6 +38,4 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    treatment = Treatment.create()
-
-    return [treatment]
+    return [Treatment.create()]

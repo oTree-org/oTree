@@ -93,13 +93,4 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    treatment_list = []
-
-    treatment = Treatment(
-        amount_allocated=300,
-        multiplication_factor=1.6,
-    )
-
-    treatment_list.append(treatment)
-
-    return treatment_list
+    return [Treatment.create(amount_allocated=300, multiplication_factor=1.6)]

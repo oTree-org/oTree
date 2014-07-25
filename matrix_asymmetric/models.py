@@ -103,10 +103,7 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    treatment_list = []
-
-    treatment = Treatment(
-
+    return [Treatment.create(
         rowAcolumnA_row=20,
         rowAcolumnA_column=30,
 
@@ -118,8 +115,4 @@ def treatments():
 
         rowBcolumnB_row=15,
         rowBcolumnB_column=25,
-    )
-
-    treatment_list.append(treatment)
-
-    return treatment_list
+    )]

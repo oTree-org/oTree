@@ -80,13 +80,4 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    treatment_list = []
-
-    treatment = Treatment(
-        minimum_price=20,
-        maximum_price=100,
-    )
-
-    treatment_list.append(treatment)
-
-    return treatment_list
+    return [Treatment.create(minimum_price=20, maximum_price=100,)]

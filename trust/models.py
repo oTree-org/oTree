@@ -94,14 +94,7 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-
-    treatment_list = []
-
-    treatment = Treatment(
+    return [Treatment.create(
         amount_allocated=100,
-        increment_amount=5,
-    )
-
-    treatment_list.append(treatment)
-
-    return treatment_list
+        increment_amount=5
+    )]
