@@ -4,20 +4,6 @@ from coordination.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Introduction(Page):
-
-    def participate_condition(self):
-        return True
-
-    template_name = 'coordination/Introduction.html'
-
-    def variables_for_template(self):
-        return {
-            'match_amount': currency(self.treatment.match_amount),
-            'mismatch_amount': currency(self.treatment.mismatch_amount),
-        }
-
-
 class Choice(Page):
 
     def participate_condition(self):
@@ -27,6 +13,12 @@ class Choice(Page):
 
     def get_form_class(self):
         return forms.ChoiceForm
+
+    def variables_for_template(self):
+        return {
+            'match_amount': currency(self.treatment.match_amount),
+            'mismatch_amount': currency(self.treatment.mismatch_amount),
+        }
 
 
 class ResultsWaitPage(MatchWaitPage):
@@ -50,13 +42,13 @@ class Results(Page):
         return {
             'payoff': currency(self.participant.payoff),
             'choice': self.participant.choice,
-            'other_choice': self.participant.other_participant().choice
+            'other_choice': self.participant.other_participant().choice,
+            'same_choice': True if self.participant.choice == self.participant.other_participant().choice else False
         }
 
 
 def pages():
     return [
-        Introduction,
         Choice,
         ResultsWaitPage,
         Results
