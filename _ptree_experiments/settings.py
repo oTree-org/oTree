@@ -68,6 +68,7 @@ settings = {
         'coordination',
         'stag_hunt',
         'battle_of_the_sexes',
+        'lemon_market',
         # lab results: displays lab results in a given session
         'lab_results',
     ],

@@ -172,6 +172,14 @@ def session_types():
             subsession_apps=['battle_of_the_sexes', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Lemon Market',
+            base_pay=100,
+            num_participants=12,
+            num_demo_participants=1,
+            subsession_apps=['lemon_market', 'lab_results'],
+            doc=""""""
+        ),
     ]
 
 
