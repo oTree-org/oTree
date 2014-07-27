@@ -1,13 +1,17 @@
 import ptree.test
 import stag_hunt.views as views
 from stag_hunt.utilities import Bot
+import random
+
 
 class ParticipantBot(Bot):
 
     def play(self):
-        pass
 
-class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
+        # random decision
+        choice = random.choice((('Stag', 'Stag'), ('Hare', 'Hare')))[0]
 
-    def play(self):
-        pass
+        self.submit(views.Decide, {"decision": choice})
+
+        # results
+        self.submit(views.Results)
