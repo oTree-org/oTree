@@ -68,20 +68,13 @@ class Participant(ptree.models.BaseParticipant):
             self.payoff = 0
 
     def role(self):
-        return {
+        roles = {
             1: 'matcher',
             2: 'mismatcher'
-        }[self.index_among_participants_in_match]
+        }
+        return roles[self.index_among_participants_in_match]
 
 
 def treatments():
 
-    treatment_list = []
-
-    treatment = Treatment(
-        initial_amount=100,
-    )
-
-    treatment_list.append(treatment)
-
-    return treatment_list
+    return [Treatment.create(initial_amount=100)]

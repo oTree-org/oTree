@@ -1,15 +1,13 @@
-import ptree.views
-import ptree.views.concrete
 import lying.forms as forms
-from lying.utilities import ParticipantMixIn, MatchMixIn
+from lying.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Start(ParticipantMixIn, ptree.views.Page):
+class Start(Page):
     template_name = 'lying/Start.html'
 
 
-class FlipCoins(ParticipantMixIn, ptree.views.Page):
+class FlipCoins(Page):
 
     template_name = 'lying/CoinFlip.html'
 
@@ -24,7 +22,7 @@ class FlipCoins(ParticipantMixIn, ptree.views.Page):
         self.participant.set_payoff()
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     template_name = 'lying/Results.html'
 

@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import bargaining.forms as forms
-from bargaining.utilities import ParticipantMixIn, MatchMixIn
+from bargaining.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
-
-class Introduction(ParticipantMixIn, ptree.views.Page):
+class Introduction(Page):
 
     template_name = 'bargaining/Introduction.html'
 
@@ -16,7 +13,7 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class Request(ParticipantMixIn, ptree.views.Page):
+class Request(Page):
 
     template_name = 'bargaining/Request.html'
 
@@ -29,13 +26,13 @@ class Request(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
         for p in self.match.participants():
             p.set_payoff()
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     template_name = 'bargaining/Results.html'
 
@@ -51,6 +48,6 @@ def pages():
     return [
         Introduction,
         Request,
-        ResultsCheckpoint,
+        ResultsWaitPage,
         Results
     ]

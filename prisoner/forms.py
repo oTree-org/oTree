@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import prisoner.models as models
 from django import forms
-from prisoner.utilities import ParticipantMixIn, MatchMixIn
+from prisoner.utilities import Form
 import ptree.forms
 
 
-class DecisionForm(ParticipantMixIn, ptree.forms.Form):
+class DecisionForm(Form):
 
     class Meta:
         model = models.Participant

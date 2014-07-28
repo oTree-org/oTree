@@ -1,10 +1,10 @@
 import ptree.test
 import public_goods.views as views
-from public_goods.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from public_goods.utilities import Bot
 import random
 
 
-class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
+class ParticipantBot(Bot):
 
     def play(self):
 

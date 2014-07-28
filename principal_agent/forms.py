@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import principal_agent.models as models
-from principal_agent.utilities import ParticipantMixIn
+from principal_agent.utilities import Form
 import ptree.forms
 
 
-class ContractForm(ParticipantMixIn, ptree.forms.Form):
+class ContractForm(Form):
 
     class Meta:
         model = models.Match
@@ -25,7 +25,7 @@ class ContractForm(ParticipantMixIn, ptree.forms.Form):
             return 'Agent return share should be in multiples of 10 .i.e 10%, 20%..,100%.'
 
 
-class DecisionForm(ParticipantMixIn, ptree.forms.Form):
+class DecisionForm(Form):
 
     class Meta:
         model = models.Match
@@ -37,7 +37,7 @@ class DecisionForm(ParticipantMixIn, ptree.forms.Form):
         }
 
 
-class WorkEffortForm(ParticipantMixIn, ptree.forms.Form):
+class WorkEffortForm(Form):
 
     class Meta:
         model = models.Match

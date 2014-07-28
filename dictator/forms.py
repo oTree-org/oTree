@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import dictator.models as models
-from dictator.utilities import ParticipantMixIn
+from dictator.utilities import Form
 import ptree.forms
 
 
-class OfferForm(ParticipantMixIn, ptree.forms.Form):
+class OfferForm(Form):
 
     class Meta:
         model = models.Match

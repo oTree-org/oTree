@@ -4,7 +4,7 @@
 from ptree.db import models
 import ptree.models
 from ptree.common import currency
-
+import random
 
 doc = """
 In Private Value Auction Game. There are two participants anonymously paired. Each of the participants will submit a
@@ -17,6 +17,13 @@ bid for a prize being sold in an auction. The winner is the participant with the
 class Subsession(ptree.models.BaseSubsession):
 
     name_in_url = 'private_value_auction'
+
+    def choose_winner(self):
+        highest_bid = max(p.bid_amount for p in self.participants())
+        # could be a tie
+        participants_with_highest_bid = [p for p in self.participants() if p.bid_amount == highest_bid]
+        random_highest_bidder = random.choice(participants_with_highest_bid)
+        random_highest_bidder.is_winner = True
 
 
 class Treatment(ptree.models.BaseTreatment):
@@ -35,7 +42,7 @@ class Match(ptree.models.BaseMatch):
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
 
-    participants_per_match = 2
+    participants_per_match = 1
 
     def bid_choices(self):
         """Range of allowed bid values"""
@@ -70,25 +77,12 @@ class Participant(ptree.models.BaseParticipant):
         return self.other_participants_in_match()[0]
 
     def set_payoff(self):
-        if self.bid_amount > self.other_participant().bid_amount:
-            self.is_winner = True
+        if self.is_winner:
             self.payoff = self.treatment.price_value - self.bid_amount
-        elif self.bid_amount < self.other_participant().bid_amount:
-            self.other_participant().is_winner = True
-            self.payoff = 0
         else:
             self.payoff = 0
-            #TODO: Fix in case of a tie: pick winner randomly
 
 
 def treatments():
 
-    treatment_list = []
-
-    treatment = Treatment(
-        price_value=200,
-    )
-
-    treatment_list.append(treatment)
-
-    return treatment_list
+    return [Treatment.create(price_value=200)]

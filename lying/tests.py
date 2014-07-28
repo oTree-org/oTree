@@ -1,10 +1,10 @@
 import ptree.test
 import lying.views as views
-from lying.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from lying.utilities import Bot
 import random
 
 
-class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
+class ParticipantBot(Bot):
 
     def play(self):
 
@@ -22,7 +22,3 @@ class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
         self.submit(views.Results)
 
 
-class ExperimenterBot(SubsessionMixIn, ptree.test.ExperimenterBot):
-
-    def play(self):
-        pass

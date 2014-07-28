@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import guessing.forms as forms
-from guessing.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from guessing.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixIn, ptree.views.Page):
+class Introduction(Page):
 
     template_name = 'guessing/Introduction.html'
 
 
-class Guess(ParticipantMixIn, ptree.views.Page):
+class Guess(Page):
 
     template_name = 'guessing/Guess.html'
 
@@ -19,7 +17,7 @@ class Guess(ParticipantMixIn, ptree.views.Page):
         return forms.GuessForm
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     template_name = 'guessing/Results.html'
 
@@ -31,7 +29,7 @@ class Results(ParticipantMixIn, ptree.views.Page):
             'is_winner': self.participant.is_winner,
         }
 
-class ResultsCheckpoint(SubsessionMixIn, ptree.views.SubsessionCheckpoint):
+class ResultsWaitPage(SubsessionWaitPage):
 
     def action(self):
         self.subsession.choose_winner()
@@ -43,6 +41,6 @@ def pages():
     return [
         Introduction,
         Guess,
-        ResultsCheckpoint,
+        ResultsWaitPage,
         Results
     ]

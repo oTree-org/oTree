@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import prisoner.forms as forms
-from prisoner.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from prisoner.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
+import time
 
-
-class Decision(ParticipantMixIn, ptree.views.Page):
+class Decision(Page):
 
     """This page has the instructions and this is where the decision is made.
     Presented to both participants in a match at the same time"""
@@ -23,9 +21,9 @@ class Decision(ParticipantMixIn, ptree.views.Page):
         return forms.DecisionForm
 
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
-    def wait_page_body_text(self):
+    def body_text(self):
         return 'Waiting for the other participant to make a decision.'
 
     def action(self):
@@ -33,7 +31,7 @@ class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
             p.set_payoff()
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     """Results page to show participants the decisions that were made and print the payoffs"""
 
@@ -43,12 +41,12 @@ class Results(ParticipantMixIn, ptree.views.Page):
         return {'my_payoff': currency(self.participant.payoff),
                 'my_decision': self.participant.decision.lower(),
                 'other_participant_decision': self.participant.other_participant().decision.lower(),
-                'same_choice': True if self.participant.decision == self.participant.other_participant().decision else False}
+                'same_choice': self.participant.decision == self.participant.other_participant().decision}
 
 
 
 def pages():
 
     return [Decision,
-            ResultsCheckpoint,
+            ResultsWaitPage,
             Results]

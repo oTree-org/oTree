@@ -1,10 +1,8 @@
-import ptree.views
-import ptree.views.concrete
-from lab_results.utilities import ParticipantMixIn, MatchMixIn
+from lab_results.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 import lab_results.forms as forms
 
-class RedemptionCode(ParticipantMixIn, ptree.views.Page):
+class RedemptionCode(Page):
     template_name = 'lab_results/RedemptionCode.html'
 
     def variables_for_template(self):

@@ -1,10 +1,10 @@
 import ptree.test
 import matrix_symmetric.views as views
-from matrix_symmetric.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from matrix_symmetric.utilities import Bot
 import random
 
 
-class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
+class ParticipantBot(Bot):
 
     def play(self):
 
@@ -16,7 +16,3 @@ class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
         self.submit(views.Results)
 
 
-class ExperimenterBot(SubsessionMixIn, ptree.test.ExperimenterBot):
-
-    def play(self):
-        pass

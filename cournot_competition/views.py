@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import cournot_competition.forms as forms
-from cournot_competition.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from cournot_competition.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixIn, ptree.views.Page):
+class Introduction(Page):
     template_name = 'cournot_competition/Introduction.html'
 
     def variables_for_template(self):
@@ -15,19 +13,19 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class Compete(ParticipantMixIn, ptree.views.Page):
+class Compete(Page):
     template_name = 'cournot_competition/Compete.html'
 
     def get_form_class(self):
         return forms.QuantityForm
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
         for p in self.match.participants():
             p.set_payoff()
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
 
     template_name = 'cournot_competition/Results.html'
@@ -46,6 +44,6 @@ def pages():
     return [
         Introduction,
         Compete,
-        ResultsCheckpoint,
+        ResultsWaitPage,
         Results
     ]

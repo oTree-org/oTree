@@ -1,0 +1,14 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>You chose {{ decision }}. The other participant chose {{ other_decision }}. </p>
+    <p>Your payoff is {{ payoff }}.</p>
+
+{% endblock %}

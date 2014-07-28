@@ -1,10 +1,10 @@
 import ptree.test
 import stackelberg_competition.views as views
-from stackelberg_competition.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from stackelberg_competition.utilities import Bot
 import random
 
 
-class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
+class ParticipantBot(Bot):
 
     def play(self):
         # Start
@@ -30,7 +30,3 @@ class ParticipantBot(ParticipantMixIn, ptree.test.ParticipantBot):
         self.submit(views.ChoiceTwo, {'quantity': random.choice(range(1, (self.treatment.total_capacity)/2))})
 
 
-class ExperimenterBot(SubsessionMixIn, ptree.test.ExperimenterBot):
-
-    def play(self):
-        pass

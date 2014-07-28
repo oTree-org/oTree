@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import matrix_symmetric.forms as forms
-from matrix_symmetric.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from matrix_symmetric.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Decision(ParticipantMixIn, ptree.views.Page):
+class Decision(Page):
 
     template_name = 'matrix_symmetric/Decision.html'
 
@@ -22,40 +20,33 @@ class Decision(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
         for p in self.match.participants():
             p.set_payoff()
 
-    def wait_page_body_text(self):
+    def body_text(self):
         return "Waiting for the other participant."
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     template_name = 'matrix_symmetric/Results.html'
 
     def variables_for_template(self):
 
-        if self.participant.payoff is None:
-            self.participant.set_payoff()
-
         return {
             'payoff': currency(self.participant.payoff),
             'my_decision': self.participant.decision,
             'other_decision': self.participant.other_participant().decision,
-            'same_decision': True if self.participant.decision == self.participant.other_participant().decision else False,
+            'same_decision': self.participant.decision == self.participant.other_participant().decision,
         }
-
-
-class ExperimenterPage(SubsessionMixIn, ptree.views.ExperimenterPage):
-    pass
 
 
 def pages():
     return [
         Decision,
-        ResultsCheckpoint,
+        ResultsWaitPage,
         Results
     ]

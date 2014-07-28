@@ -71,15 +71,9 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    treatment_list = []
-
-    treatment = Treatment(
+    return [Treatment.create(
         self_A_other_A=10,
         self_A_other_B=0,
         self_B_other_A=30,
         self_B_other_B=40
-    )
-
-    treatment_list.append(treatment)
-
-    return treatment_list
+    )]

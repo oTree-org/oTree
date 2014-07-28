@@ -1,15 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import principal_agent.forms as forms
-from principal_agent.utilities import ParticipantMixIn, MatchMixIn
+from principal_agent.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixIn, ptree.views.Page):
-
-    def show_skip_wait(self):
-        return self.PageActions.show
+class Introduction(Page):
 
     template_name = 'principal_agent/Introduction.html'
 
@@ -21,7 +16,7 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class Offer(ParticipantMixIn, ptree.views.Page):
+class Offer(Page):
 
     def participate_condition(self):
         return self.participant.index_among_participants_in_match == 1
@@ -37,13 +32,7 @@ class Offer(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class SimpleCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
-
-    def wait_page_body_text(self):
-        return 'Please wait for the other participant.'
-
-
-class Accept(ParticipantMixIn, ptree.views.Page):
+class Accept(Page):
 
     template_name = 'principal_agent/Accept.html'
 
@@ -60,7 +49,7 @@ class Accept(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class WorkEffort(ParticipantMixIn, ptree.views.Page):
+class WorkEffort(Page):
 
     template_name = 'principal_agent/WorkEffort.html'
 
@@ -72,27 +61,25 @@ class WorkEffort(ParticipantMixIn, ptree.views.Page):
             return self.participant.index_among_participants_in_match == 2
 
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
         for p in self.match.participants():
             p.set_payoff()
 
-    def wait_page_body_text(self):
+    def body_text(self):
         return "Waiting for the other participant."
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     template_name = 'principal_agent/Results.html'
 
     def variables_for_template(self):
-        if self.participant.payoff is None:
-            self.participant.set_payoff()
         return {
             'payoff': currency(self.participant.payoff),
-            'rejected': True if self.match.decision == 'Reject' else False,
-            'agent': True if self.participant.index_among_participants_in_match == 2 else False
+            'rejected': self.match.decision == 'Reject',
+            'agent': self.participant.index_among_participants_in_match == 2
         }
 
 
@@ -100,9 +87,9 @@ def pages():
     return [
         Introduction,
         Offer,
-        SimpleCheckpoint,
+        MatchWaitPage,
         Accept,
         WorkEffort,
-        ResultsCheckpoint,
+        ResultsWaitPage,
         Results
     ]

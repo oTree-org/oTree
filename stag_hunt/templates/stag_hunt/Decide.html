@@ -1,0 +1,37 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Decide
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        In Stag Hunt game, there are two participants which are required to choose whether to hunt a stag or hare.
+        Hunting stag requires the effort of both participants.
+        The payoff are calculated as follows:
+    </p>
+    <p>
+        The payoff matrix is as shown below:
+    </p>
+    <table class="table" style="table-layout:fixed; max-width:500px; margin-top:15px;">
+        <tr>
+            <th style="border:0; border-right:1px solid #ddd; width:30%;"></th>
+            <th style="text-align:center; border:1px solid #ddd;">Stag</th>
+            <th style="text-align:center; border:1px solid #ddd;">Hare</th>
+        </tr>
+        <tr>
+            <th style="border:1px solid #ddd;">Stag</th>
+            <td style="border:1px solid #ddd;">{{ stag_stag }}, {{ stag_stag }}</td>
+            <td style="border:1px solid #ddd;">{{ stag_hare }}, {{ hare_stag }}</td>
+        </tr>
+        <tr>
+            <th style="border:1px solid #ddd;">Hare</th>
+            <td style="border:1px solid #ddd;">{{ hare_stag }}, {{ stag_hare }}</td>
+            <td style="border:1px solid #ddd;">{{ hare_hare }}, {{ hare_hare }}</td>
+        </tr>
+    </table>
+
+{% endblock %}

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import bertrand_competition.models as models
-from bertrand_competition.utilities import ParticipantMixIn, MatchMixIn
+from bertrand_competition.utilities import Form
 import ptree.forms
 
 
-class PriceForm(ParticipantMixIn, ptree.forms.Form):
+class PriceForm(Form):
 
     class Meta:
         model = models.Participant

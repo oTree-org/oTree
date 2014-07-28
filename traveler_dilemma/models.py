@@ -77,15 +77,9 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    treatment_list = []
-
-    treatment = Treatment(
+    return [Treatment.create(
         reward=10,
         penalty=10,
         max_amount=100,
-        min_amount=20,
-    )
-
-    treatment_list.append(treatment)
-
-    return treatment_list
+        min_amount=20,)
+    ]

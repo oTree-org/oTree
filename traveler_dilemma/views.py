@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import traveler_dilemma.forms as forms
-from traveler_dilemma.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
-from django.utils.translation import ugettext as _
-from django.conf import settings
+from traveler_dilemma.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Introduction(ParticipantMixIn, ptree.views.Page):
+class Introduction(Page):
 
     template_name = 'traveler_dilemma/Introduction.html'
 
@@ -21,21 +17,21 @@ class Introduction(ParticipantMixIn, ptree.views.Page):
         }
 
 
-class Claim(ParticipantMixIn, ptree.views.Page):
+class Claim(Page):
 
     template_name = 'traveler_dilemma/Claim.html'
 
     def get_form_class(self):
         return forms.ClaimForm
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
         for p in self.match.participants():
             p.set_payoff()
 
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     template_name = 'traveler_dilemma/Results.html'
 
@@ -51,6 +47,6 @@ def pages():
     return [
         Introduction,
         Claim,
-        ResultsCheckpoint,
+        ResultsWaitPage,
         Results
     ]

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import trust.models as models
-from trust.utilities import ParticipantMixIn, MatchMixIn
+from trust.utilities import Form
 import ptree.forms
 
 
-class SendForm(ParticipantMixIn, ptree.forms.Form):
+class SendForm(Form):
 
     class Meta:
         model = models.Match
@@ -17,7 +17,7 @@ class SendForm(ParticipantMixIn, ptree.forms.Form):
         return {'sent_amount': "How much would you like to give?"}
 
 
-class SendBackForm(ParticipantMixIn, ptree.forms.Form):
+class SendBackForm(Form):
 
     class Meta:
         model = models.Match

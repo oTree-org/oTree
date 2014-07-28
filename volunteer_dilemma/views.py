@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import volunteer_dilemma.forms as forms
-from volunteer_dilemma.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from volunteer_dilemma.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Decision(ParticipantMixIn, ptree.views.Page):
+class Decision(Page):
 
     template_name = 'volunteer_dilemma/Decision.html'
 
@@ -26,13 +24,13 @@ class Decision(ParticipantMixIn, ptree.views.Page):
             'ign_ign': currency(ign_ign),
         }
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
         for p in self.match.participants():
             p.set_payoff()
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     template_name = 'volunteer_dilemma/Results.html'
 
@@ -45,6 +43,6 @@ class Results(ParticipantMixIn, ptree.views.Page):
 def pages():
     return [
         Decision,
-        ResultsCheckpoint,
+        ResultsWaitPage,
         Results
     ]

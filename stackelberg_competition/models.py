@@ -71,12 +71,4 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    treatment_list = []
-
-    treatment = Treatment(
-        total_capacity=60,
-    )
-
-    treatment_list.append(treatment)
-
-    return treatment_list
+    return [Treatment.create(total_capacity=60)]

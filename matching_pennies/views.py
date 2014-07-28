@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
 import matching_pennies.forms as forms
-from matching_pennies.utilities import ParticipantMixIn, MatchMixIn, SubsessionMixIn
+from matching_pennies.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
 
-class Choice(ParticipantMixIn, ptree.views.Page):
+class Choice(Page):
 
     template_name = 'matching_pennies/Choice.html'
     form_class = forms.PennySideForm
@@ -18,16 +16,16 @@ class Choice(ParticipantMixIn, ptree.views.Page):
                 'loser_amount': currency(0)}
 
 
-class ResultsCheckpoint(MatchMixIn, ptree.views.MatchCheckpoint):
+class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
         for p in self.match.participants():
             p.set_payoff()
 
-    def wait_page_body_text(self):
+    def body_text(self):
         return "Waiting for the other player to select heads or tails."
 
-class Results(ParticipantMixIn, ptree.views.Page):
+class Results(Page):
 
     template_name = 'matching_pennies/Results.html'
 
@@ -41,5 +39,5 @@ class Results(ParticipantMixIn, ptree.views.Page):
 def pages():
 
     return [Choice,
-            ResultsCheckpoint,
+            ResultsWaitPage,
             Results]
