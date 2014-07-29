@@ -28,3 +28,4 @@ class SendBackForm(Form):
 
     def labels(self):
         return {'sent_back_amount': "How much would you like to give?"}
+
