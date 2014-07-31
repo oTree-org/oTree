@@ -1,0 +1,29 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Embed Images and Video Demo
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Ptree allows for embedding of various static contents such as images, videos among others.
+    </p>
+    <p>
+        <h4>Embedding Images</h4>
+        <p>An image describing Public goods game.</p>
+        <img src="{{ STATIC_URL }}publicgoods.jpeg" />
+    </p>
+    <p>
+        <h4>Embedding Videos</h4>
+        <p>A video describing prisoner's Dilemma game.</p>
+        <iframe width="420" height="315" src="//www.youtube.com/embed/DanTKx1FLY8" frameborder="0" allowfullscreen></iframe>
+    </p>
+
+    <p>
+        Please click 'Next' to view more features.
+    </p>
+
+{% endblock %}
