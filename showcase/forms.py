@@ -10,11 +10,11 @@ class DemoForm(Form):
     '''A form to showcase various form elements'''
     class Meta:
         model = models.Participant
-        fields = ['demo_field1', 'demo_field2', 'demo_field3', 'demo_field4', 'demo_field5', 'demo_field6']
-
+        fields = ['demo_field1', 'demo_field3', 'demo_field4', 'demo_field5', 'demo_field6']
+        # , 'demo_field2' # TODO add to fields.
         widgets = {
             'demo_field1': forms.RadioSelect(),
-            'demo_field2': forms.CheckboxSelectMultiple(),
+            # 'demo_field2': forms.CheckboxSelectMultiple(),
             'demo_field3': forms.Textarea(),
             'demo_field4': forms.TextInput(),
             # 'demo_field5': forms.SelectMultiple(),
@@ -24,7 +24,7 @@ class DemoForm(Form):
     def labels(self):
         return {
             'demo_field1': 'RadioButton',
-            'demo_field2': 'CheckBoxes',
+            # 'demo_field2': 'CheckBoxes',
             'demo_field3': 'TextArea',
             'demo_field4': 'TextInput',
             'demo_field5': 'Select',
@@ -38,31 +38,9 @@ class DemoForm(Form):
 
     def order(self):
         return ['demo_field1', HTML('<p>Allows only selection of one input.</p>'),
-                'demo_field2', HTML('<p>Allows for multiple selection of inputs.</p>'),
+                # 'demo_field2', HTML('<p>Allows for multiple selection of inputs.</p>'),
                 'demo_field3', HTML('<p>Allows for entry of text input. No limit of words or characters used.</p>'),
                 'demo_field4', HTML('<p>Allows for entry of text inputs, restricted to 50 letters</p>'),
                 'demo_field5', HTML('<p>Allows for selection of only one input from the given list</p>'),
                 'demo_field6', HTML('<p>Allows for entry of only positive odd numbers</p>'),
                 ]
-
-
-'''
-class demoForm(Form):
-
-    class Meta:
-        model = models.Participant
-        fields = ['demo_field']
-
-    def my_field_error_message(self, value):
-        if not self.treatment.your_method_here(value):
-            return 'Error message goes here'
-
-    def labels(self):
-        return {}
-
-    def initial_values(self):
-        return {}
-
-    def order(self):
-        return ['demo_field', HTML('<p>demo for illustration</p>')]
-'''

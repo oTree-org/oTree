@@ -42,6 +42,7 @@ class Participant(ptree.models.BaseParticipant):
         """
     )
     demo_field2 = models.CharField(
+        null=True,
         max_length=30,
         choices=(('cooperate', 'cooperate'), ('defect', 'defect')),
         doc="""
@@ -62,6 +63,7 @@ class Participant(ptree.models.BaseParticipant):
         """
     )
     demo_field5 = models.CharField(
+        null=True,
         max_length=10,
         choices=(('accept', 'accept'), ('reject', 'reject')),
         doc="""

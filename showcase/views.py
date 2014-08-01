@@ -26,7 +26,17 @@ class EmbedDemo(Page):
 
 class BootstrapWidgetDemo(Page):
 
-    template_name = 'showcase/BootstrapWidgetDemo.html'
+    template_name = 'showcase/BootstrapWidgetsDemo.html'
+
+
+class BootstrapWidgetDemo(Page):
+
+    template_name = 'showcase/BootstrapWidgetsDemo.html'
+
+
+class AdminDemo(Page):
+
+    template_name = 'showcase/AdminDemo.html'
 
 
 def pages():
@@ -35,4 +45,5 @@ def pages():
         FormsDemo,
         EmbedDemo,
         BootstrapWidgetDemo,
+        AdminDemo,
     ]
