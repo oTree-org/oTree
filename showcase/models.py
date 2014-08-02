@@ -6,7 +6,8 @@ import ptree.models
 
 
 doc = """
-A show case of various features that ptree support.
+<p>A show case of various features that ptree support. </p>
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/showcase">here</a></p>
 """
 
 
@@ -41,28 +42,20 @@ class Participant(ptree.models.BaseParticipant):
         field With radiobutton input.
         """
     )
-    demo_field2 = models.CharField(
-        null=True,
-        max_length=30,
-        choices=(('cooperate', 'cooperate'), ('defect', 'defect')),
-        doc="""
-        field with checkboxes input
-        """
-    )
-    demo_field3 = models.TextField(
+    demo_field2 = models.TextField(
         null=True,
         doc="""
         field with textarea input
         """
     )
-    demo_field4 = models.CharField(
+    demo_field3 = models.CharField(
         null=True,
         max_length=50,
         doc="""
         field with text input
         """
     )
-    demo_field5 = models.CharField(
+    demo_field4 = models.CharField(
         null=True,
         max_length=10,
         choices=(('accept', 'accept'), ('reject', 'reject')),
@@ -70,7 +63,7 @@ class Participant(ptree.models.BaseParticipant):
         field with select choices input
         """
     )
-    demo_field6 = models.PositiveIntegerField(
+    demo_field5 = models.PositiveIntegerField(
         null=True,
         doc="""
         field with positive integers and only odd numbers - see form validation

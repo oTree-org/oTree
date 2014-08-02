@@ -3,15 +3,17 @@
 {% load i18n %}
 
 {% block title %}
-    Forms Demo
+    Forms / User Inputs
 {% endblock %}
 
 {% block content %}
 
     <p>
         Forms provides elements that allow participants in various experiments to interact with by entering data to it.
-        Ptree supports a number of them. Including but not limited to: RadioButtons, Checkboxes, TextInput, TextArea,
-        Select Choices and more. This is illustrated below.
+        pTree supports a number of them. Including but not limited to: RadioButtons, Checkboxes, TextInput, TextArea,
+        Select Choices and more. This is illustrated below.<br>
+        Note: All Inputs are required, and validated. For example, Inputting a text on a numerical field  or having a
+        blank field will raise a validation error.
     </p>
     <p>
         More on form elements can be found in <a href="https://docs.djangoproject.com/en/dev/topics/forms/">django
