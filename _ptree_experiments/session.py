@@ -5,6 +5,14 @@ def session_types():
 
     return [
         SessionType(
+            name="Show Case",
+            base_pay=0,
+            num_demo_participants=1,
+            num_participants=1,
+            subsession_apps=['showcase'],
+            doc=""""""
+        ),
+        SessionType(
             name="Prisoner Dilemma",
             base_pay=400,
             num_demo_participants=2,

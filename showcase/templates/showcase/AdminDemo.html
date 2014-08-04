@@ -1,0 +1,21 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Admin Interface Demo
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        pTree provides an admin interface that can be accessed <a href="/admin/">here.</a>
+        The Admin interface allows for monitoring of Participants progress,
+        adding new data and or settings and analysis of data trough data export functionality.
+    </p>
+    <p>
+        A screenshot of the pTree's Admin interface. <br>
+        <img src="{{ STATIC_URL }}pTree Admin.png" />
+    </p>
+
+{% endblock %}
