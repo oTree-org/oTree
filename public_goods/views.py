@@ -3,6 +3,8 @@ import public_goods.forms as forms
 from public_goods.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import currency
 
+def variables_for_all_templates(self):
+    return {'amount_allocated': currency(self.treatment.amount_allocated)}
 
 class Introduction(Page):
 
@@ -12,7 +14,6 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {'no_of_participants': self.match.participants_per_match,
-                'amount_allocated': currency(self.treatment.amount_allocated),
                 'multiplication_factor': self.treatment.multiplication_factor}
 
 
@@ -48,10 +49,11 @@ class Results(Page):
 
         participants = self.match.participants()
 
-        return {'amount_allocated': currency(self.treatment.amount_allocated),
-                'contributed_amount': currency(self.participant.contributed_amount),
-                'participants': participants,
-                'id': self.participant.index_among_participants_in_match}
+        return {
+            'contributed_amount': currency(self.participant.contributed_amount),
+            'participants': participants,
+            'id': self.participant.index_among_participants_in_match
+        }
 
 
 def pages():

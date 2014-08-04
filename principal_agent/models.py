@@ -67,12 +67,10 @@ class Match(ptree.models.BaseMatch):
         Costs of work effort for agent
         """
     )
-    DECISION_CHOICES = (('Accept', 'I Accept the Contract'),
-                        ('Reject', 'I Reject the Contract'))
 
     decision = models.CharField(
         max_length=10, null=True, verbose_name='What is your decision?',
-        choices=DECISION_CHOICES,
+        choices=['Accept', 'Reject'],
         doc="""Agent's decision"""
     )
 

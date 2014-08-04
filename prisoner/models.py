@@ -47,12 +47,9 @@ class Participant(ptree.models.BaseParticipant):
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
 
-    DECISION_CHOICES = (('Cooperate', 'I will cooperate'),
-                        ('Compete', 'I will compete'))
-
     decision = models.CharField(
         max_length=10, null=True, verbose_name='What is your decision?',
-        choices=DECISION_CHOICES,
+        choices=['Cooperate', 'Compete'],
         doc="""This participant's decision"""
     )
 

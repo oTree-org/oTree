@@ -7,7 +7,7 @@ class CoinFlipForm(Form):
 
     class Meta:
         model = models.Participant
-        fields = ['number_of_heads']
+        fields = ['number_of_heads', 'test_amount']
 
     def number_of_heads_error_message(self, value):
         if (value > self.treatment.number_of_flips):

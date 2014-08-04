@@ -28,6 +28,7 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
+            'test_amount': self.participant.test_amount,
             'payoff': currency(self.participant.payoff),
             'number_of_heads': self.participant.number_of_heads,
         }

@@ -36,6 +36,8 @@ class Participant(ptree.models.BaseParticipant):
     match = models.ForeignKey(Match, null = True)
     treatment = models.ForeignKey(Treatment, null = True)
 
+    test_amount = models.MoneyField(null=True, default=10)
+
     number_of_heads = models.PositiveIntegerField(null = True, blank=False)
 
     def set_payoff(self):

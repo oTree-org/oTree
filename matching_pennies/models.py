@@ -44,12 +44,9 @@ class Participant(ptree.models.BaseParticipant):
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
 
-    PENNY_CHOICES = (('heads', 'Heads'),
-                     ('tails', 'Tails'))
-
     penny_side = models.CharField(
         max_length=5,
-        choices=PENNY_CHOICES,
+        choices=['heads', 'tails'],
         doc="""Heads or tails"""
     )
 

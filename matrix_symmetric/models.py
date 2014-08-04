@@ -49,7 +49,7 @@ class Participant(ptree.models.BaseParticipant):
     decision = models.CharField(
         null=True,
         max_length=2,
-        choices=(('A', 'A'), ('B', 'B')),
+        choices=['A','B'],
         doc='either A or B',
     )
 

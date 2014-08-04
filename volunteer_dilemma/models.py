@@ -49,15 +49,10 @@ class Participant(ptree.models.BaseParticipant):
     treatment = models.ForeignKey(Treatment, null = True)
     subsession = models.ForeignKey(Subsession)
 
-    DECISION_CHOICES = (
-        ('Volunteer', 'Volunteer'),
-        ('Ignore', 'Ignore'),
-    )
-
     decision = models.CharField(
         null=True,
         max_length=10,
-        choices=DECISION_CHOICES,
+        choices=['Volunteer', 'Ignore'],
         doc="""
         Participant's decision to volunteer
         """

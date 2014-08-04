@@ -67,7 +67,7 @@ class Participant(ptree.models.BaseParticipant):
     decision = models.CharField(
         null=True,
         max_length=10,
-        choices=(('football', 'Football'), ('opera', 'Opera')),
+        choices=['football', 'opera'],
         doc='either football or opera',
     )
 
