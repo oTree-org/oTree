@@ -4,6 +4,7 @@
 from ptree.db import models
 import ptree.models
 import random
+from ptree.common import Money, money_range
 
 
 doc = """
@@ -19,7 +20,7 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    max_bid_amount = models.PositiveIntegerField(
+    max_bid_amount = models.MoneyField(
         null=True,
         doc="""
         Maximum allowed bid amount.
@@ -32,13 +33,13 @@ class Match(ptree.models.BaseMatch):
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
 
-    bid_amount = models.PositiveIntegerField(
+    bid_amount = models.MoneyField(
         null=True,
         doc="""
         Amount bidded by the bidder
         """
     )
-    random_value = models.PositiveIntegerField(
+    random_value = models.MoneyField(
         null=True,
         doc="""
         Random value for the value of commodity to be auctioned.
@@ -48,7 +49,7 @@ class Match(ptree.models.BaseMatch):
     participants_per_match = 1
 
     def calculate_value(self):
-        self.random_value = random.choice(range(0, 100))
+        self.random_value = random.choice(money_range(0.00, 1.00))
 
 
 class Participant(ptree.models.BaseParticipant):
@@ -67,5 +68,5 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
     return [Treatment.create(
-        max_bid_amount = 100,
+        max_bid_amount = 1.00,
     )]

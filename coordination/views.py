@@ -43,7 +43,7 @@ class Results(Page):
             'payoff': self.participant.payoff,
             'choice': self.participant.choice,
             'other_choice': self.participant.other_participant().choice,
-            'same_choice': True if self.participant.choice == self.participant.other_participant().choice else False
+            'same_choice': self.participant.choice == self.participant.other_participant().choice
         }
 
 
