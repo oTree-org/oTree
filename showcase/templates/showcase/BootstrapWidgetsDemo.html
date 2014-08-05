@@ -1,0 +1,143 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Bootstrap Widgets Demo
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Ptree uses bootstrap as its front-end Interface. The following are some of the interesting components that can be
+        added on ptree apps using bootstrap.
+    </p>
+    <!--Panels-->
+    <h4>Panels</h4>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Game Instructions</h3>
+      </div>
+      <div class="panel-body">
+        Games/Experiments have several participants each with a different role to play. For example, In Principle Agent
+        Game, we have two participants: Principle and Agent. The Principle offers the Agent a contract which can be
+        accepted or rejected depending on the terms.
+      </div>
+    </div>
+    <!--Tables-->
+    <h4>Tables</h4>
+    <table class="table">
+        <thead>
+          <tr>
+            <th>Participant</th>
+            <th>Payoff</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>$4.0</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>$2.4</td>
+          </tr>
+        </tbody>
+      </table>
+    <!--Tooltips-->
+    <p>
+        <h4>Tooltips</h4>
+        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="A simple tooltip for assisting users">
+            Hover over me for a tip.
+        </button>
+    </p>
+    <!--alerts-->
+    <p>
+        <h4>Alerts</h4>
+        <div class="alert alert-warning fade in" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+          <strong>Warning!</strong> Your time is running out, please make a decision.
+        </div>
+    </p>
+    <!--collapsibles-->
+    <h4>Collapsibles</h4>
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+              Dictator Game
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+          <div class="panel-body">
+            Dictator game. Consists of Two players, one of whom is the dictator.
+            The dictator is given some amount of money, while the other participant is given nothing.
+            The dictator must offer part of the money to the other participant.
+            The offered amount cannot be rejected.
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+              Guessing Game
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+          <div class="panel-body">
+            Guessing Game. In this game, Participants are asked to pick a number between 0 and 100, with the winner of the contest
+            being the participant who is closest to 2/3 times the average number picked of all participants. In case of a tie between
+            the participants, the winner is picked randomly.
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+              Coordination Game
+            </a>
+          </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse">
+          <div class="panel-body">
+            In Coordination game. There are two participants which are required to choose either A or B.
+            If both Participants chooses the same choice then they both wins, otherwise they loose.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--modal-->
+        <!-- Button trigger modal -->
+    <h4>Modals</h4>
+    <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">
+      Launch demo modal
+    </button>
+        <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Title</h4>
+          </div>
+          <div class="modal-body">
+            contents here ..
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p></p>
+    <p>
+        For more on bootstrap widgets and components please <a href="http://getbootstrap.com/components/"> click here</a>
+    </p>
+
+{% endblock %}

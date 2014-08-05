@@ -64,8 +64,9 @@ class Participant(ptree.models.BaseParticipant):
     def set_payoff(self):
 
         if self.choice == self.other_participant().choice:
-            return self.treatment.match_amount
-        return self.treatment.mismatch_amount
+            self.payoff = self.treatment.match_amount
+        else:
+            self.payoff = self.treatment.mismatch_amount
 
 
 def treatments():

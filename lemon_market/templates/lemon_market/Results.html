@@ -1,0 +1,16 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>You bidded {{ bid_amount }}.</p>
+    <p>Commodity value was {{ random_value }}.</p>
+    <p>Your payoff is {{ payoff }}.</p>
+
+
+{% endblock %}
