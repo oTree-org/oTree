@@ -18,25 +18,25 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    stag_stag_amount = models.PositiveIntegerField(
+    stag_stag_amount = models.MoneyField(
         null=True,
         doc="""
         Amount rewarded for choosing both stag
         """
     )
-    stag_hare_amount = models.PositiveIntegerField(
+    stag_hare_amount = models.MoneyField(
         null=True,
         doc="""
         Amount rewarded for choosing stag and hare
         """
     )
-    hare_stag_amount = models.PositiveIntegerField(
+    hare_stag_amount = models.MoneyField(
         null=True,
         doc="""
         Amount rewarded for choosing hare and stag
         """
     )
-    hare_hare_amount = models.PositiveIntegerField(
+    hare_hare_amount = models.MoneyField(
         null=True,
         doc="""
         Amount rewarded for choosing both hare

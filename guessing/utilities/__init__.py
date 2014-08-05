@@ -3,6 +3,7 @@ import guessing.models as models
 import ptree.views
 import ptree.forms
 import ptree.test
+from ptree.common import Money, money_range
 
 class Page(ptree.views.Page):
     z_models = models

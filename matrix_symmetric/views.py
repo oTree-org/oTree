@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import matrix_symmetric.forms as forms
 from matrix_symmetric.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 class Decision(Page):
@@ -13,10 +13,10 @@ class Decision(Page):
 
     def variables_for_template(self):
         return {
-            'self_A_other_A': currency(self.treatment.self_A_other_A),
-            'self_A_other_B': currency(self.treatment.self_A_other_B),
-            'self_B_other_A': currency(self.treatment.self_B_other_A),
-            'self_B_other_B': currency(self.treatment.self_B_other_B),
+            'self_A_other_A': self.treatment.self_A_other_A,
+            'self_A_other_B': self.treatment.self_A_other_B,
+            'self_B_other_A': self.treatment.self_B_other_A,
+            'self_B_other_B': self.treatment.self_B_other_B,
         }
 
 
@@ -37,7 +37,7 @@ class Results(Page):
     def variables_for_template(self):
 
         return {
-            'payoff': currency(self.participant.payoff),
+            'payoff': self.participant.payoff,
             'my_decision': self.participant.decision,
             'other_decision': self.participant.other_participant().decision,
             'same_decision': self.participant.decision == self.participant.other_participant().decision,

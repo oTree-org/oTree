@@ -19,7 +19,7 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
     number_of_flips = models.PositiveIntegerField()
-    payoff_per_head = models.PositiveIntegerField()
+    payoff_per_head = models.MoneyField()
 
 
 class Match(ptree.models.BaseMatch):
@@ -36,8 +36,6 @@ class Participant(ptree.models.BaseParticipant):
     match = models.ForeignKey(Match, null = True)
     treatment = models.ForeignKey(Treatment, null = True)
 
-    test_amount = models.MoneyField(null=True, default=10)
-
     number_of_heads = models.PositiveIntegerField(null = True, blank=False)
 
     def set_payoff(self):
@@ -47,8 +45,8 @@ class Participant(ptree.models.BaseParticipant):
 def treatments():
 
     treatment = Treatment.create(
-        number_of_flips = 10,
-        payoff_per_head = 10,
+        number_of_flips = 0.1,
+        payoff_per_head = 0.1,
     )
 
     return [treatment]

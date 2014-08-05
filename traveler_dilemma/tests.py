@@ -1,4 +1,5 @@
 import ptree.test
+from ptree.common import Money, money_range
 import traveler_dilemma.views as views
 from traveler_dilemma.utilities import Bot
 import random

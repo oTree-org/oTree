@@ -3,7 +3,7 @@
 
 from ptree.db import models
 import ptree.models
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 doc = """
 Traveler's dilemma game has two participants.
@@ -21,15 +21,15 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    reward = models.PositiveIntegerField(null=True,
+    reward = models.MoneyField(null=True,
                        doc="""Player's reward for the lowest claim""")
 
-    penalty = models.PositiveIntegerField(null=True,
+    penalty = models.MoneyField(null=True,
                        doc="""Player's deduction for the higher claim""")
 
-    max_amount = models.PositiveIntegerField(null=True,
+    max_amount = models.MoneyField(null=True,
                         doc="""The maximum claim to be requested""")
-    min_amount = models.PositiveIntegerField(null=True,
+    min_amount = models.MoneyField(null=True,
                         doc="""The minimum claim to be requested""")
 
 
@@ -42,11 +42,7 @@ class Match(ptree.models.BaseMatch):
 
     def claim_choices(self):
         """Range of allowed claim values"""
-        return range(self.treatment.min_amount, self.treatment.max_amount + 1, 5)
-
-    def get_claim_field_choices(self):
-        """A tuple of allowed claim estimates"""
-        return tuple([(i, currency(i)) for i in self.claim_choices()])
+        return money_range(self.treatment.min_amount, self.treatment.max_amount, 0.05)
 
 
 class Participant(ptree.models.BaseParticipant):
@@ -56,7 +52,7 @@ class Participant(ptree.models.BaseParticipant):
     subsession = models.ForeignKey(Subsession)
 
     # claim by participant
-    claim = models.PositiveIntegerField(
+    claim = models.MoneyField(
         null=True,
         doc="""
         Each participant's claim

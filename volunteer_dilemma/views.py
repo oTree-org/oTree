@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import volunteer_dilemma.forms as forms
 from volunteer_dilemma.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 class Decision(Page):
@@ -18,10 +18,10 @@ class Decision(Page):
         ign_ign = 0
 
         return {
-            'vol_ign': currency(vol_ign),
-            'ign_vol': currency(ign_vol),
-            'vol_vol': currency(vol_vol),
-            'ign_ign': currency(ign_ign),
+            'vol_ign': vol_ign,
+            'ign_vol': ign_vol,
+            'vol_vol': vol_vol,
+            'ign_ign': ign_ign,
         }
 
 class ResultsWaitPage(MatchWaitPage):
@@ -37,8 +37,10 @@ class Results(Page):
     def variables_for_template(self):
         return {
             'decision': self.participant.decision,
-            'payoff': currency(self.participant.payoff),
+            'payoff': self.participant.payoff,
         }
+
+
 
 def pages():
     return [

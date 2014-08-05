@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import bargaining.forms as forms
 from bargaining.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 class Introduction(Page):
 
@@ -9,7 +9,7 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {
-            'amount_shared': currency(self.treatment.amount_shared),
+            'amount_shared': self.treatment.amount_shared,
         }
 
 
@@ -22,7 +22,7 @@ class Request(Page):
 
     def variables_for_template(self):
         return {
-            'amount_shared': currency(self.treatment.amount_shared),
+            'amount_shared': self.treatment.amount_shared,
         }
 
 
@@ -38,9 +38,9 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': currency(self.participant.payoff),
-            'request_amount': currency(self.participant.request_amount),
-            'other_request': currency(self.participant.other_participant().request_amount)
+            'payoff': self.participant.payoff,
+            'request_amount': self.participant.request_amount,
+            'other_request': self.participant.other_participant().request_amount
         }
 
 

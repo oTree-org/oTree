@@ -18,34 +18,34 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    football_husband_amount = models.PositiveIntegerField(
+    football_husband_amount = models.MoneyField(
         null=True,
         doc="""
-        Amount rewarded to p1 for choosing football
+        Amount rewarded to husband if football is chosen
         """
     )
-    football_wife_amount = models.PositiveIntegerField(
+    football_wife_amount = models.MoneyField(
         null=True,
         doc="""
-        Amount rewarded to p2 for choosing football
+        Amount rewarded to wife if football is chosen
         """
     )
-    football_opera_amount = models.PositiveIntegerField(
+    mismatch_amount = models.MoneyField(
         null=True,
         doc="""
         Amount rewarded for choosing football and opera for either participants
         """
     )
-    opera_husband_amount = models.PositiveIntegerField(
+    opera_husband_amount = models.MoneyField(
         null=True,
         doc="""
-        Amount rewarded to p1 for choosing both opera
+        Amount rewarded to husband if opera is chosen
         """
     )
-    opera_wife_amount = models.PositiveIntegerField(
+    opera_wife_amount = models.MoneyField(
         null=True,
         doc="""
-        Amount rewarded to p1 for choosing both opera
+        Amount rewarded to wife if opera is chosen
         """
     )
 
@@ -57,6 +57,22 @@ class Match(ptree.models.BaseMatch):
 
     participants_per_match = 2
 
+
+    def set_payoffs(self):
+        husband = self.get_participant('husband')
+        wife = self.get_participant('wife')
+
+        if husband.decision != wife.decision:
+            husband.payoff = self.treatment.mismatch_amount
+            wife.payoff = self.treatment.mismatch_amount
+
+        else:
+            if husband.decision == 'football':
+                husband.payoff = self.treatment.football_husband_amount
+                wife.payoff = self.treatment.football_wife_amount
+            else:
+                husband.payoff = self.treatment.opera_husband_amount
+                wife.payoff = self.treatment.opera_wife_amount
 
 class Participant(ptree.models.BaseParticipant):
 
@@ -75,31 +91,6 @@ class Participant(ptree.models.BaseParticipant):
         """Returns other participant in match"""
         return self.other_participants_in_match()[0]
 
-    def set_payoff(self):
-        if self.role() == 'husband':
-            payoff_matrix = {
-                'football': {
-                    'football': self.treatment.football_husband_amount,
-                    'opera': self.treatment.football_opera_amount,
-                },
-                'opera': {
-                    'football': self.treatment.football_opera_amount,
-                    'opera': self.treatment.opera_husband_amount,
-                }
-            }
-        else:
-            payoff_matrix = {
-                'football': {
-                    'football': self.treatment.football_wife_amount,
-                    'opera': self.treatment.football_opera_amount,
-                },
-                'opera': {
-                    'football': self.treatment.football_opera_amount,
-                    'opera': self.treatment.opera_wife_amount,
-                }
-            }
-        self.payoff = payoff_matrix[self.decision][self.other_participant().decision]
-
     def role(self):
         roles = {
             1: 'husband',  # football preference
@@ -112,10 +103,10 @@ class Participant(ptree.models.BaseParticipant):
 def treatments():
     return [
         Treatment.create(
-            football_husband_amount=30,
-            football_wife_amount=20,
-            football_opera_amount=0,
-            opera_husband_amount=20,
-            opera_wife_amount=30
+            football_husband_amount=0.3,
+            football_wife_amount=0.2,
+            mismatch_amount=0,
+            opera_husband_amount=0.2,
+            opera_wife_amount=0.3
         )
     ]

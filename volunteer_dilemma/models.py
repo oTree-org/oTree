@@ -22,12 +22,12 @@ class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
 
-    volunteer_cost = models.PositiveIntegerField(
+    volunteer_cost = models.MoneyField(
         null=True,
         doc="""
         Cost incurred by volunteering
         """)
-    general_benefit = models.PositiveIntegerField(
+    general_benefit = models.MoneyField(
         null=True,
         doc="""
         General benefit for all the participants, If at least one volunteers
@@ -65,13 +65,12 @@ class Participant(ptree.models.BaseParticipant):
     def set_payoff(self):
         """Calculate participant payoff"""
 
-        payoff_matrix = {'Volunteer': {'Volunteer': (self.treatment.general_benefit - self.treatment.volunteer_cost),
-                                       'Ignore': (self.treatment.general_benefit - self.treatment.volunteer_cost)},
-                         'Ignore':   {'Volunteer': self.treatment.general_benefit,
-                                       'Ignore': 0}}
+        self.payoff = 0
+        if self.decision == 'Volunteer' or self.other_participant().decision == 'Volunteer':
+            self.payoff += self.treatment.general_benefit
+        if self.decision == 'Volunteer':
+            self.payoff -= self.treatment.volunteer_cost
 
-        self.payoff = (payoff_matrix[self.decision]
-                                    [self.other_participant().decision])
 
 
 def treatments():

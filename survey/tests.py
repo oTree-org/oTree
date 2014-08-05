@@ -1,4 +1,5 @@
 import ptree.test
+from ptree.common import Money, money_range
 import survey.views as views
 from survey.utilities import Bot
 

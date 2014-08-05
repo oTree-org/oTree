@@ -3,7 +3,7 @@
 
 from ptree.db import models
 import ptree.models
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 doc = """
@@ -26,7 +26,7 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    amount_shared = models.PositiveIntegerField(null=True,
+    amount_shared = models.MoneyField(null=True,
         doc="""
         Amount to be shared by both players
         """
@@ -42,11 +42,7 @@ class Match(ptree.models.BaseMatch):
 
     def request_choices(self):
         """Range of allowed request amount"""
-        return range(0, self.treatment.amount_shared + 1, 5)
-
-    def get_request_field_choices(self):
-        """Tuple of tuples with allowed request amount"""
-        return tuple([(i, currency(i)) for i in self.request_choices()])
+        return money_range(0, self.treatment.amount_shared, 0.05)
 
 
 class Participant(ptree.models.BaseParticipant):
@@ -55,7 +51,7 @@ class Participant(ptree.models.BaseParticipant):
     treatment = models.ForeignKey(Treatment, null = True)
     subsession = models.ForeignKey(Subsession)
 
-    request_amount = models.PositiveIntegerField(
+    request_amount = models.MoneyField(
         null=True,
         doc="""
         Amount requested by each participant..
@@ -75,4 +71,4 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    return [Treatment.create(amount_shared=100)]
+    return [Treatment.create(amount_shared=1)]

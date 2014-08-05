@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from ptree.db import models
 import ptree.models
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 doc = """
@@ -21,7 +21,7 @@ class Treatment(ptree.models.BaseTreatment):
 
     subsession = models.ForeignKey(Subsession)
 
-    amount_allocated = models.PositiveIntegerField(
+    amount_allocated = models.MoneyField(
         null=True,
         doc="""Amount allocated to each participant"""
     )
@@ -40,12 +40,12 @@ class Match(ptree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     participants_per_match = 4
 
-    contributions = models.PositiveIntegerField(
+    contributions = models.MoneyField(
         null=True,
         doc="""Total amount contributed by the group players"""
     )
 
-    individual_share = models.PositiveIntegerField(
+    individual_share = models.MoneyField(
         null=True,
         doc="""The amount each player in the group receives out of the the total contributed (after multiplication by some factor)"""
     )
@@ -65,18 +65,10 @@ class Participant(ptree.models.BaseParticipant):
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
 
-    contributed_amount = models.PositiveIntegerField(
+    contributed_amount = models.MoneyField(
         null=True,
         doc="""The amount contributed by the player"""
     )
-
-    def payoff_currency(self):
-        """Returns participant payoff in the appropriate currency."""
-        return currency(self.payoff)
-
-    def contributed_amount_currency(self):
-        """Returns contributed amount by participant in the appropriate currency."""
-        return currency(self.contributed_amount)
 
     def set_payoff(self):
         """Calculate participant payoff"""
@@ -84,13 +76,9 @@ class Participant(ptree.models.BaseParticipant):
 
     def contribute_choices(self):
         """Returns a list of allowed values for contribution"""
-        return range(0, self.treatment.amount_allocated + 1, 10)
-
-    def get_contribute_choices(self):
-        """Returns a list of tuples with the allowed contributions choices"""
-        return [(i, currency(i)) for i in self.contribute_choices()]
+        return money_range(0, self.treatment.amount_allocated, 0.10)
 
 
 def treatments():
 
-    return [Treatment.create(amount_allocated=300, multiplication_factor=1.6)]
+    return [Treatment.create(amount_allocated=3.00, multiplication_factor=1.6)]
