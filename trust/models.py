@@ -2,7 +2,7 @@
 """Documentation at http://django-ptree.readthedocs.org/en/latest/app.html"""
 from ptree.db import models
 import ptree.models
-from ptree.common import currency
+from ptree.common import money_range, Money
 
 
 doc = """
@@ -23,11 +23,11 @@ class Treatment(ptree.models.BaseTreatment):
 
     subsession = models.ForeignKey(Subsession)
 
-    amount_allocated = models.PositiveIntegerField(
+    amount_allocated = models.MoneyField(
         doc="""Initial amount allocated to each participant"""
     )
 
-    increment_amount = models.PositiveIntegerField(
+    increment_amount = models.MoneyField(
         doc="""The increment between amount choices (in cents)"""
     )
 
@@ -38,45 +38,33 @@ class Match(ptree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     participants_per_match = 2
 
-    sent_amount = models.PositiveIntegerField(
+
+
+    sent_amount = models.MoneyField(
         null=True,
-        doc="""Amount sent by P1"""
+        doc="""Amount sent by P1""",
     )
 
-    sent_back_amount = models.PositiveIntegerField(
+    sent_back_amount = models.MoneyField(
         null=True,
-        doc="""Amount sent back by P2"""
+        doc="""Amount sent back by P2""",
     )
 
     def send_choices(self):
         """Range of allowed values during send"""
-        return range(0, self.treatment.amount_allocated + 1, self.treatment.increment_amount)
+        return money_range(0, self.treatment.amount_allocated, self.treatment.increment_amount)
 
     def send_back_choices(self):
         """Range of allowed values during send back"""
-        return range(0, (self.sent_amount * 3 + 1), self.treatment.increment_amount)
-
-    def get_send_field_choices(self):
-        """Returns a tuple of tuples with the range of allowed values for P1"""
-        return tuple([(i, currency(i)) for i in self.send_choices()])
-
-    def get_send_back_field_choices(self):
-        """Returns a tuple of tuples with the range of allowed values for P2"""
-        return tuple([(i, currency(i)) for i in self.send_back_choices()])
+        return money_range(0, self.sent_amount * 3, self.treatment.increment_amount)
 
     def get_payoff_participant_1(self):
         """Calculate P1 one payoff"""
-        if self.sent_amount is None:
-            return None
-        else:
-            return self.treatment.amount_allocated - self.sent_amount + self.sent_back_amount
+        return self.treatment.amount_allocated - self.sent_amount + self.sent_back_amount
 
     def get_payoff_participant_2(self):
         """Calculate P2 payoff"""
-        if self.sent_back_amount is None:
-            return None
-        else:
-            return self.treatment.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
+        return self.treatment.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
 
 
 class Participant(ptree.models.BaseParticipant):
@@ -95,6 +83,6 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
     return [Treatment.create(
-        amount_allocated=100,
-        increment_amount=5
+        amount_allocated=1.00,
+        increment_amount=0.05
     )]

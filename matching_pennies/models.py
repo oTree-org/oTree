@@ -25,7 +25,7 @@ class Treatment(ptree.models.BaseTreatment):
 
     subsession = models.ForeignKey(Subsession)
 
-    initial_amount = models.PositiveIntegerField(
+    initial_amount = models.MoneyField(
         null=True,
         doc="""The value of the pennies given to each player"""
     )
@@ -44,12 +44,9 @@ class Participant(ptree.models.BaseParticipant):
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
 
-    PENNY_CHOICES = (('heads', 'Heads'),
-                     ('tails', 'Tails'))
-
     penny_side = models.CharField(
         max_length=5,
-        choices=PENNY_CHOICES,
+        choices=['heads', 'tails'],
         doc="""Heads or tails"""
     )
 
@@ -77,4 +74,4 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    return [Treatment.create(initial_amount=100)]
+    return [Treatment.create(initial_amount=1.00)]

@@ -39,6 +39,8 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
+    winner_payoff = models.MoneyField(default=1)
+
 
 class Match(ptree.models.BaseMatch):
 
@@ -68,7 +70,7 @@ class Participant(ptree.models.BaseParticipant):
     )
 
     def set_payoff(self):
-        self.payoff = self.guess_value if self.is_winner else 0
+        self.payoff = self.treatment.winner_payoff if self.is_winner else 0
 
 
 def treatments():

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import private_value_auction.forms as forms
 from private_value_auction.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 class Introduction(Page):
@@ -18,7 +18,7 @@ class Bid(Page):
 
     def variables_for_template(self):
         return {
-            'price_value': currency(self.treatment.price_value),
+            'price_value': self.treatment.price_value,
         }
 
 class ResultsWaitPage(SubsessionWaitPage):
@@ -35,8 +35,8 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': currency(self.participant.payoff),
-            'bid_amount': currency(self.participant.bid_amount),
+            'payoff': self.participant.payoff,
+            'bid_amount': self.participant.bid_amount,
             'is_winner': self.participant.is_winner
         }
 

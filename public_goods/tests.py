@@ -1,4 +1,5 @@
 import ptree.test
+from ptree.common import Money, money_range
 import public_goods.views as views
 from public_goods.utilities import Bot
 import random
@@ -16,10 +17,3 @@ class ParticipantBot(Bot):
 
         # submit results page
         self.submit(views.Results)
-
-
-class ExperimenterBot(SubsessionMixIn, ptree.test.ExperimenterBot):
-
-    def play(self):
-
-        self.submit(views.ExperimenterPage)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import coordination.forms as forms
 from coordination.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 class Choice(Page):
@@ -16,8 +16,8 @@ class Choice(Page):
 
     def variables_for_template(self):
         return {
-            'match_amount': currency(self.treatment.match_amount),
-            'mismatch_amount': currency(self.treatment.mismatch_amount),
+            'match_amount': self.treatment.match_amount,
+            'mismatch_amount': self.treatment.mismatch_amount,
         }
 
 
@@ -40,10 +40,10 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': currency(self.participant.payoff),
+            'payoff': self.participant.payoff,
             'choice': self.participant.choice,
             'other_choice': self.participant.other_participant().choice,
-            'same_choice': True if self.participant.choice == self.participant.other_participant().choice else False
+            'same_choice': self.participant.choice == self.participant.other_participant().choice
         }
 
 

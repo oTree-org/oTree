@@ -1,6 +1,7 @@
 import lab_results.models as models
 import ptree.views
 import ptree.test
+from ptree.common import Money, money_range
 import ptree.forms
 
 class Page(ptree.views.Page):

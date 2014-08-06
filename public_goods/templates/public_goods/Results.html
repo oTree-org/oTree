@@ -24,8 +24,8 @@
         {% for p in participants %}
             <tr>
                 <td id="{{ p.index_among_participants_in_match }}">{{ amount_allocated }}</td>
-                <td id="{{ p.index_among_participants_in_match }}">{{ p.contributed_amount_currency }}</td>
-                <td id="{{ p.index_among_participants_in_match }}">{{ p.payoff_currency }}</td>
+                <td id="{{ p.index_among_participants_in_match }}">{{ p.contributed_amount }}</td>
+                <td id="{{ p.index_among_participants_in_match }}">{{ p.payoff }}</td>
             </tr>
         {% endfor %}
         </tbody>

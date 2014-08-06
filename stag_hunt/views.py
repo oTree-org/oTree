@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import stag_hunt.forms as forms
 from stag_hunt.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 class Decide(Page):
@@ -16,10 +16,10 @@ class Decide(Page):
 
     def variables_for_template(self):
         return {
-            'stag_stag': currency(self.treatment.stag_stag_amount),
-            'stag_hare': currency(self.treatment.stag_hare_amount),
-            'hare_stag': currency(self.treatment.hare_stag_amount),
-            'hare_hare': currency(self.treatment.hare_hare_amount),
+            'stag_stag': self.treatment.stag_stag_amount,
+            'stag_hare': self.treatment.stag_hare_amount,
+            'hare_stag': self.treatment.hare_stag_amount,
+            'hare_hare': self.treatment.hare_hare_amount,
         }
 
 
@@ -43,7 +43,7 @@ class Results(Page):
     def variables_for_template(self):
 
         return {
-            'payoff': currency(self.participant.payoff),
+            'payoff': self.participant.payoff,
             'decision': self.participant.decision,
             'other_decision': self.participant.other_participant().decision,
         }

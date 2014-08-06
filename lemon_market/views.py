@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 import ptree.views
-import ptree.views.concrete
 import lemon_market.forms as forms
 from lemon_market.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+
 
 
 class Introduction(Page):
@@ -12,7 +11,7 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': currency(self.participant.payoff),
+            'payoff': self.participant.payoff,
         }
 
 
@@ -40,9 +39,9 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': currency(self.participant.payoff),
-            'bid_amount': currency(self.match.bid_amount),
-            'random_value': currency(self.match.random_value)
+            'payoff': self.participant.payoff,
+            'bid_amount': self.match.bid_amount,
+            'random_value': self.match.random_value
         }
 
 

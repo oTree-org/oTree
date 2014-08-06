@@ -14,4 +14,4 @@ class RequestForm(Form):
         return {'request_amount': 'Make your request?'}
 
     def choices(self):
-        return {'request_amount': self.match.get_request_field_choices()}
+        return {'request_amount': self.match.request_choices()}

@@ -1,4 +1,5 @@
 import ptree.test
+from ptree.common import Money, money_range
 import guessing.views as views
 from guessing.utilities import Bot
 import random

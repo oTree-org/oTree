@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 import trust.forms as forms
 from trust.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
-
 
 class Introduction(Page):
 
     template_name = 'trust/Introduction.html'
 
     def variables_for_template(self):
-        return {'amount_allocated': currency(self.treatment.amount_allocated)}
+        return {'amount_allocated': self.treatment.amount_allocated}
 
 
 class Send(Page):
@@ -27,7 +25,7 @@ class Send(Page):
         return self.participant.index_among_participants_in_match == 1
 
     def variables_for_template(self):
-        return {'amount_allocated': currency(self.treatment.amount_allocated)}
+        return {'amount_allocated': self.treatment.amount_allocated}
 
 
 class SimpleWaitPage(MatchWaitPage):
@@ -53,10 +51,10 @@ class SendBack(Page):
         tripled_amount = self.match.sent_amount * 3
         total_amount = self.treatment.amount_allocated + tripled_amount
 
-        return {'amount_allocated': currency(self.treatment.amount_allocated),
-                'sent_amount': currency(self.match.sent_amount),
-                'tripled_amount': currency(tripled_amount),
-                'total_amount': currency(total_amount)}
+        return {'amount_allocated': self.treatment.amount_allocated,
+                'sent_amount': self.match.sent_amount,
+                'tripled_amount': tripled_amount,
+                'total_amount': total_amount}
 
 
 class ResultsWaitPage(MatchWaitPage):
@@ -82,13 +80,13 @@ class Results(Page):
 
         tripled_amount = self.match.sent_amount * 3
 
-        return {'amount_allocated': currency(self.treatment.amount_allocated),
-                'sent_amount': currency(self.match.sent_amount),
-                'tripled_amount': currency(tripled_amount),
-                'sent_back_amount': currency(self.match.sent_back_amount),
+        return {'amount_allocated': self.treatment.amount_allocated,
+                'sent_amount': self.match.sent_amount,
+                'tripled_amount': tripled_amount,
+                'sent_back_amount': self.match.sent_back_amount,
                 'participant_index': self.participant.index_among_participants_in_match,
-                'participant1_payoff': currency(participant1_payoff),
-                'participant2_payoff': currency(participant2_payoff)}
+                'participant1_payoff': participant1_payoff,
+                'participant2_payoff': participant2_payoff}
 
 
 def pages():

@@ -3,7 +3,7 @@
 
 from ptree.db import models
 import ptree.models
-from ptree.common import currency
+from ptree.common import Money, money_range
 import random
 
 doc = """
@@ -29,7 +29,7 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    price_value = models.PositiveIntegerField(
+    price_value = models.MoneyField(
         null=True,
         doc="""
         Price value of the prize being sold in the auction
@@ -46,11 +46,7 @@ class Match(ptree.models.BaseMatch):
 
     def bid_choices(self):
         """Range of allowed bid values"""
-        return range(0, self.treatment.price_value + 1, 5)
-
-    def get_bid_field_choices(self):
-        """A tuple of allowed bid values"""
-        return tuple([(i, currency(i)) for i in self.bid_choices()])
+        return money_range(0, self.treatment.price_value, 0.05)
 
 
 class Participant(ptree.models.BaseParticipant):
@@ -59,12 +55,13 @@ class Participant(ptree.models.BaseParticipant):
     treatment = models.ForeignKey(Treatment, null = True)
     subsession = models.ForeignKey(Subsession)
 
-    bid_amount = models.PositiveIntegerField(
+    bid_amount = models.MoneyField(
         null=True,
         doc="""
         Amount bidded by each participant
         """
     )
+
     is_winner = models.BooleanField(
         default=False,
         doc="""
@@ -85,4 +82,4 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    return [Treatment.create(price_value=200)]
+    return [Treatment.create(price_value=2.00)]

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import dictator.forms as forms
 from dictator.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 class Introduction(Page):
@@ -9,7 +9,7 @@ class Introduction(Page):
     template_name = 'dictator/Introduction.html'
 
     def variables_for_template(self):
-        return {'allocated_amount': currency(self.treatment.allocated_amount),
+        return {'allocated_amount': self.treatment.allocated_amount,
                 'participant_id': self.participant.index_among_participants_in_match}
 
 
@@ -40,8 +40,8 @@ class Results(Page):
     template_name = 'dictator/Results.html'
 
     def variables_for_template(self):
-        return {'payoff': currency(self.participant.payoff),
-                'offer_amount': currency(self.match.offer_amount),
+        return {'payoff': self.participant.payoff,
+                'offer_amount': self.match.offer_amount,
                 'participant_id': self.participant.index_among_participants_in_match}
 
 

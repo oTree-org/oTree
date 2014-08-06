@@ -37,7 +37,7 @@ class Match(ptree.models.BaseMatch):
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
 
-    price = models.PositiveIntegerField(
+    price = models.MoneyField(
         null=True,
         doc="""
         Price of goods: P=600-q1-q2

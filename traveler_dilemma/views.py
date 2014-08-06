@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import traveler_dilemma.forms as forms
 from traveler_dilemma.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 class Introduction(Page):
@@ -10,10 +10,10 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {
-            'max_amount': currency(self.treatment.max_amount),
-            'min_amount': currency(self.treatment.min_amount),
-            'reward': currency(self.treatment.reward),
-            'penalty': currency(self.treatment.penalty),
+            'max_amount': self.treatment.max_amount,
+            'min_amount': self.treatment.min_amount,
+            'reward': self.treatment.reward,
+            'penalty': self.treatment.penalty,
         }
 
 
@@ -37,9 +37,9 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'claim': currency(self.participant.claim),
-            'other_claim': currency(self.participant.other_participant().claim),
-            'payoff': currency(self.participant.payoff)
+            'claim': self.participant.claim,
+            'other_claim': self.participant.other_participant().claim,
+            'payoff': self.participant.payoff
         }
 
 

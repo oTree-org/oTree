@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import ptree.test
+from ptree.common import Money, money_range
 import trust.views as views
 from trust.utilities import Bot
 import random
@@ -10,7 +11,7 @@ class ParticipantBot(Bot):
     def play(self):
 
         # basic assertions
-        assert (self.treatment.amount_allocated == 100)
+        assert (self.treatment.amount_allocated == 1.00)
         assert (self.match.participants_per_match == 2)
 
         # start game
@@ -32,7 +33,7 @@ class ParticipantBot(Bot):
                     {"sent_amount": random.choice(self.match.send_choices())})
 
     def play_p2(self):
-        self.submit(views.SendBack, {'sent_back_amount': 200})
+        self.submit(views.SendBack, {'sent_back_amount': 2.00})
 
 
 
