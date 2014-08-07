@@ -40,17 +40,6 @@ class Match(ptree.models.BaseMatch):
 
     participants_per_match = 2
 
-    def row_participant(self):
-        for p in self.participants():
-            if p.role() == 'row':
-                return p
-
-    def column_participant(self):
-        for p in self.participants():
-            if p.role() == 'column':
-                return p
-
-
 class Participant(ptree.models.BaseParticipant):
 
     match = models.ForeignKey(Match, null = True)
@@ -92,7 +81,10 @@ class Participant(ptree.models.BaseParticipant):
                     'B': self.treatment.rowBcolumnB_column,
                 }
             }
-        self.payoff = payoff_matrix[self.match.row_participant().decision][self.match.column_participant().decision]
+
+        row_participant = self.match.get_participant_by_role('row')
+        column_participant = self.match.get_participant_by_role('column')
+        self.payoff = payoff_matrix[row_participant.decision][column_participant.decision]
 
     def role(self):
         if self.index_among_participants_in_match == 1:
