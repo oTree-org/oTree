@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import battle_of_the_sexes.forms as forms
 from battle_of_the_sexes.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 class Decide(Page):
@@ -17,19 +17,18 @@ class Decide(Page):
     def variables_for_template(self):
         return {
             'role': self.participant.role(),
-            'fbl_husband_amt': currency(self.treatment.football_husband_amount),
-            'fbl_wife_amt': currency(self.treatment.football_wife_amount),
-            'fbl_opr_amt': currency(self.treatment.football_opera_amount),
-            'opr_husband_amt': currency(self.treatment.opera_husband_amount),
-            'opr_wife_amt': currency(self.treatment.opera_wife_amount)
+            'fbl_husband_amt': self.treatment.football_husband_amount,
+            'fbl_wife_amt': self.treatment.football_wife_amount,
+            'fbl_opr_amt': self.treatment.mismatch_amount,
+            'opr_husband_amt': self.treatment.opera_husband_amount,
+            'opr_wife_amt': self.treatment.opera_wife_amount
         }
 
 
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
-            p.set_payoff()
+        self.match.set_payoffs()
 
     def body_text(self):
         return "Waiting for the other participant."
@@ -45,7 +44,7 @@ class Results(Page):
     def variables_for_template(self):
 
         return {
-            'payoff': currency(self.participant.payoff),
+            'payoff': self.participant.payoff,
             'decision': self.participant.decision,
             'other_decision': self.participant.other_participant().decision,
         }

@@ -2,7 +2,7 @@
 """Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
 from ptree.db import models
 import ptree.models
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 doc = """
@@ -25,7 +25,7 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    allocated_amount = models.PositiveIntegerField(
+    allocated_amount = models.MoneyField(
         null=True,
         doc="""Initial amount allocated to the dictator"""
     )
@@ -37,18 +37,14 @@ class Match(ptree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     participants_per_match = 2
 
-    offer_amount = models.PositiveIntegerField(
+    offer_amount = models.MoneyField(
         null=True,
         doc="""Amount offered by the dictator"""
     )
 
     def offer_choices(self):
         """Range of allowed offers"""
-        return range(0, self.treatment.allocated_amount + 1, 5)
-
-    def get_offer_field_choices(self):
-        """Tuple of tuples with allowed offers"""
-        return tuple([(i, currency(i)) for i in self.offer_choices()])
+        return money_range(0, self.treatment.allocated_amount, 0.05)
 
 
 class Participant(ptree.models.BaseParticipant):

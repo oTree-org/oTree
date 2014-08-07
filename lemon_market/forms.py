@@ -10,6 +10,7 @@ class BidForm(Form):
         fields = ['bid_amount']
 
     def labels(self):
+        #FIXME: this method has the wrong name? labels also defined below
         return {
             'bid_amount': self.match.bid_amount,
         }

@@ -24,7 +24,7 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    fixed_payment = models.IntegerField(
+    fixed_payment = models.MoneyField(
         null=True,
         doc="""
         Principal's fixed pay range: given as a range e.g -300 > x < 300
@@ -37,19 +37,19 @@ class Match(ptree.models.BaseMatch):
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
 
-    total_return = models.PositiveIntegerField(
+    total_return = models.MoneyField(
         null=True,
         doc="""
         Total return from agent's effort = 70×(Agent Work effort)
         """
     )
-    agent_fixed_pay = models.IntegerField(
+    agent_fixed_pay = models.MoneyField(
         null=True,
         doc="""
         Amount offered as fixed pay to the agent.
         """
     )
-    agent_return_share = models.PositiveIntegerField(
+    agent_return_share = models.MoneyField(
         null=True,
         doc="""
         Share of the total return
@@ -61,18 +61,16 @@ class Match(ptree.models.BaseMatch):
         Agent's work effort, ranging from 1-10: 1-lowest 10-highest
         """
     )
-    agent_work_costs = models.PositiveIntegerField(
+    agent_work_costs = models.MoneyField(
         null=True,
         doc="""
         Costs of work effort for agent
         """
     )
-    DECISION_CHOICES = (('Accept', 'I Accept the Contract'),
-                        ('Reject', 'I Reject the Contract'))
 
     decision = models.CharField(
         max_length=10, null=True, verbose_name='What is your decision?',
-        choices=DECISION_CHOICES,
+        choices=['Accept', 'Reject'],
         doc="""Agent's decision"""
     )
 
@@ -80,26 +78,20 @@ class Match(ptree.models.BaseMatch):
         self.total_return = self.agent_work_effort * 70
 
     def calculate_agent_work_cost(self):
-        if self.agent_work_effort == 1:
-            self.agent_work_costs = 0
-        elif self.agent_work_effort == 2:
-            self.agent_work_costs = 20
-        elif self.agent_work_effort == 3:
-            self.agent_work_costs = 40
-        elif self.agent_work_effort == 4:
-            self.agent_work_costs = 60
-        elif self.agent_work_effort == 5:
-            self.agent_work_costs = 90
-        elif self.agent_work_effort == 6:
-            self.agent_work_costs = 120
-        elif self.agent_work_effort == 7:
-            self.agent_work_costs = 160
-        elif self.agent_work_effort == 8:
-            self.agent_work_costs = 200
-        elif self.agent_work_effort == 9:
-            self.agent_work_costs = 250
-        elif self.agent_work_effort == 10:
-            self.agent_work_costs = 300
+        efforts_to_costs = {
+            1: 0,
+            2: 20,
+            3: 40,
+            4: 60,
+            5: 90,
+            6: 120,
+            7: 160,
+            8: 200,
+            9: 250,
+            10: 300
+        }
+
+        self.agent_work_costs = efforts_to_costs[self.agent_work_effort]
 
     participants_per_match = 2
 
@@ -111,6 +103,7 @@ class Participant(ptree.models.BaseParticipant):
     subsession = models.ForeignKey(Subsession)
 
     def set_payoff(self):
+        #FIXME: move this to the match object, and use match.get_participant
         # TODO: re-structure payoff calculations to avoid negative payoffs
         if self.match.decision == 'Reject':
             if self.index_among_participants_in_match == 1:

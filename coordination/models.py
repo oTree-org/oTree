@@ -21,14 +21,14 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    match_amount = models.PositiveIntegerField(
+    match_amount = models.MoneyField(
         null=True,
         doc="""
         amount each participant is rewarded for having match choices
         """
     )
 
-    mismatch_amount = models.PositiveIntegerField(
+    mismatch_amount = models.MoneyField(
         null=True,
         doc="""
         amount each participant is rewarded for having different choices
@@ -53,7 +53,7 @@ class Participant(ptree.models.BaseParticipant):
     choice = models.CharField(
         null=True,
         max_length=2,
-        choices=(('A', 'A'), ('B', 'B')),
+        choices=['A', 'B'],
         doc='either A or B',
     )
 

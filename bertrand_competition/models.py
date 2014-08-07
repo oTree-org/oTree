@@ -21,14 +21,14 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    minimum_price = models.PositiveIntegerField(
+    minimum_price = models.MoneyField(
         null=True,
         doc="""
         The minimum price that can be set i.e equivalent to marginal cost.
         """
     )
 
-    maximum_price = models.PositiveIntegerField(
+    maximum_price = models.MoneyField(
         null=True,
         doc="""
         The maximum price that can be set .
@@ -50,7 +50,7 @@ class Participant(ptree.models.BaseParticipant):
     treatment = models.ForeignKey(Treatment, null = True)
     subsession = models.ForeignKey(Subsession)
 
-    price = models.PositiveIntegerField(
+    price = models.MoneyField(
         null=True,
         doc="""
         Target price by a given participant.
@@ -80,4 +80,4 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    return [Treatment.create(minimum_price=20, maximum_price=100,)]
+    return [Treatment.create(minimum_price=0.2, maximum_price=1,)]

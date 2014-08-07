@@ -21,7 +21,7 @@ class ContractForm(Form):
             return 'Agent fixed pay should be between -{} and {}.'.format(self.treatment.fixed_payment, self.treatment.fixed_payment)
 
     def agent_return_share_error_message(self, value):
-        if (value < 0) or (value > 100) or (value not in range(0, 101, 10)):
+        if value not in range(0, 101, 10):
             return 'Agent return share should be in multiples of 10 .i.e 10%, 20%..,100%.'
 
 

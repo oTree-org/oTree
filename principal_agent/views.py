@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import principal_agent.forms as forms
 from principal_agent.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 class Introduction(Page):
@@ -11,8 +11,8 @@ class Introduction(Page):
     def variables_for_template(self):
         return {
             'fixed_payment': self.treatment.fixed_payment,
-            'reject_prncpl_pay': currency(0),
-            'reject_agt_pay': currency(100)
+            'reject_prncpl_pay': Money(0.00),
+            'reject_agt_pay': Money(1.00)
         }
 
 
@@ -44,7 +44,7 @@ class Accept(Page):
 
     def variables_for_template(self):
         return {
-            'fixed_pay': currency(self.match.agent_fixed_pay),
+            'fixed_pay': self.match.agent_fixed_pay,
             'return_share': self.match.agent_return_share,
         }
 
@@ -77,7 +77,7 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': currency(self.participant.payoff),
+            'payoff': self.participant.payoff,
             'rejected': self.match.decision == 'Reject',
             'agent': self.participant.index_among_participants_in_match == 2
         }

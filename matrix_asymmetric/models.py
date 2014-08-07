@@ -20,17 +20,17 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    rowAcolumnA_row = models.PositiveIntegerField()
-    rowAcolumnA_column = models.PositiveIntegerField()
+    rowAcolumnA_row = models.MoneyField()
+    rowAcolumnA_column = models.MoneyField()
 
-    rowAcolumnB_row = models.PositiveIntegerField()
-    rowAcolumnB_column = models.PositiveIntegerField()
+    rowAcolumnB_row = models.MoneyField()
+    rowAcolumnB_column = models.MoneyField()
 
-    rowBcolumnA_row = models.PositiveIntegerField()
-    rowBcolumnA_column = models.PositiveIntegerField()
+    rowBcolumnA_row = models.MoneyField()
+    rowBcolumnA_column = models.MoneyField()
 
-    rowBcolumnB_row = models.PositiveIntegerField()
-    rowBcolumnB_column = models.PositiveIntegerField()
+    rowBcolumnB_row = models.MoneyField()
+    rowBcolumnB_column = models.MoneyField()
 
 
 class Match(ptree.models.BaseMatch):
@@ -64,7 +64,7 @@ class Participant(ptree.models.BaseParticipant):
     decision = models.CharField(
         null=True,
         max_length=2,
-        choices=(('A', 'A'), ('B', 'B')),
+        choices=['A', 'B'],
         doc='either A or B',
     )
 

@@ -14,4 +14,4 @@ class CoinFlipForm(Form):
             return 'Number of heads cannot be more than {}'.format(self.treatment.number_of_flips)
 
     def choices(self):
-        return {'number_of_heads': [(x, x) for x in range(0, self.treatment.number_of_flips + 1)]}
+        return {'number_of_heads': range(0, self.treatment.number_of_flips + 1)}

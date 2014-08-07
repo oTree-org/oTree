@@ -1,4 +1,5 @@
 import ptree.test
+from ptree.common import Money, money_range
 import dictator.views as views
 from dictator.utilities import Bot
 import random

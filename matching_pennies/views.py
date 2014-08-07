@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import matching_pennies.forms as forms
 from matching_pennies.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 class Choice(Page):
@@ -11,9 +11,9 @@ class Choice(Page):
 
     def variables_for_template(self):
         return {'role': self.participant.role(),
-                'initial_amount': currency(self.treatment.initial_amount),
-                'winner_amount': currency(self.treatment.initial_amount * 2),
-                'loser_amount': currency(0)}
+                'initial_amount': self.treatment.initial_amount,
+                'winner_amount': self.treatment.initial_amount * 2,
+                'loser_amount': Money(0)}
 
 
 class ResultsWaitPage(MatchWaitPage):
@@ -33,7 +33,7 @@ class Results(Page):
 
         return {'my_choice': self.participant.penny_side,
                 'other_choice': self.participant.other_participant().penny_side,
-                'payoff': currency(self.participant.payoff),
+                'payoff': self.participant.payoff,
                 'role': self.participant.role()}
 
 def pages():

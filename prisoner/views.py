@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import prisoner.forms as forms
 from prisoner.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 import time
 
 class Decision(Page):
@@ -12,10 +12,10 @@ class Decision(Page):
     template_name = 'prisoner/Decision.html'
 
     def variables_for_template(self):
-        return {'friends_amount': currency(self.treatment.friends_amount),
-                'betrayed_amount': currency(self.treatment.betrayed_amount),
-                'enemies_amount': currency(self.treatment.enemies_amount),
-                'betray_amount': currency(self.treatment.betray_amount)}
+        return {'friends_amount': self.treatment.friends_amount,
+                'betrayed_amount': self.treatment.betrayed_amount,
+                'enemies_amount': self.treatment.enemies_amount,
+                'betray_amount': self.treatment.betray_amount}
 
     def get_form_class(self):
         return forms.DecisionForm
@@ -38,7 +38,7 @@ class Results(Page):
     template_name = 'prisoner/Results.html'
 
     def variables_for_template(self):
-        return {'my_payoff': currency(self.participant.payoff),
+        return {'my_payoff': self.participant.payoff,
                 'my_decision': self.participant.decision.lower(),
                 'other_participant_decision': self.participant.other_participant().decision.lower(),
                 'same_choice': self.participant.decision == self.participant.other_participant().decision}

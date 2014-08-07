@@ -1,6 +1,6 @@
 import lying.forms as forms
 from lying.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from ptree.common import Money, money_range
 
 
 class Start(Page):
@@ -16,7 +16,7 @@ class FlipCoins(Page):
 
     def variables_for_template(self):
         return {'number_of_flips': self.treatment.number_of_flips,
-                'payoff_per_head': currency(self.treatment.payoff_per_head)}
+                'payoff_per_head': self.treatment.payoff_per_head}
 
     def after_valid_form_submission(self):
         self.participant.set_payoff()
@@ -28,7 +28,7 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': currency(self.participant.payoff),
+            'payoff': self.participant.payoff,
             'number_of_heads': self.participant.number_of_heads,
         }
 

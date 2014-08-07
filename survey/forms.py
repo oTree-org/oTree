@@ -2,7 +2,7 @@
 from . import models
 from django import forms
 from .utilities import Form
-from ptree.common import currency
+from ptree.common import Money, money_range
 import ptree.forms
 
 
@@ -37,7 +37,7 @@ class CognitiveReflectionTestForm(Form):
 
     def labels(self):
         return{'crt_bat_float': """A bat and a ball cost {} in total. The bat costs {} more than the ball.
-                                   How much does the ball cost?""".format(currency(110), currency(100)),
+                                   How much does the ball cost?""".format(Money(1.10), Money(1.00)),
                'crt_widget': """If it takes 5 machines 5 minutes to make 5 widgets,
                                 how many minutes would it take 100 machines to make 100 widgets?""",
                'crt_lake': """In a lake, there is a patch of lily pads. Every day, the patch doubles in size.

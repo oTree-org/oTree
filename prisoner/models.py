@@ -4,7 +4,7 @@ import ptree.models
 
 
 doc = """
-Prisoner's dilemma game. Single treatment. Two players are asked separately whether they want to cooperate or compete.
+Prisoner's dilemma game. Single treatment. Two players are asked separately whether they want to cooperate or Defect.
 Their choices directly determine the payoffs.
 
 <p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/prisoner">here</a></p>
@@ -19,18 +19,18 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    betray_amount = models.PositiveIntegerField(
-        doc="""amount a participant makes if he chooses 'Compete' and the other chooses 'Cooperate'"""
+    betray_amount = models.MoneyField(
+        doc="""amount a participant makes if he chooses 'Defect' and the other chooses 'Cooperate'"""
     )
-    friends_amount = models.PositiveIntegerField(
+    friends_amount = models.MoneyField(
         doc="""amount both participants make if both participants choose 'Cooperate'"""
     )
-    betrayed_amount = models.PositiveIntegerField(
-        doc="""amount a participant makes if he chooses 'Cooperate' and the other chooses 'Compete'"""
+    betrayed_amount = models.MoneyField(
+        doc="""amount a participant makes if he chooses 'Cooperate' and the other chooses 'Defect'"""
     )
 
-    enemies_amount = models.PositiveIntegerField(
-        doc="""amount both participants make if both participants choose 'Compete'"""
+    enemies_amount = models.MoneyField(
+        doc="""amount both participants make if both participants choose 'Defect'"""
     )
 
 
@@ -47,8 +47,7 @@ class Participant(ptree.models.BaseParticipant):
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
 
-    DECISION_CHOICES = (('Cooperate', 'I will cooperate'),
-                        ('Compete', 'I will compete'))
+    DECISION_CHOICES = ['Cooperate', 'Defect']
 
     decision = models.CharField(
         max_length=10, null=True, verbose_name='What is your decision?',
@@ -63,9 +62,9 @@ class Participant(ptree.models.BaseParticipant):
     def set_payoff(self):
         """Calculate participant payoff"""
         payoff_matrix = {'Cooperate': {'Cooperate': self.treatment.friends_amount,
-                                       'Compete': self.treatment.betrayed_amount},
-                         'Compete':   {'Cooperate': self.treatment.betray_amount,
-                                       'Compete': self.treatment.enemies_amount}}
+                                       'Defect': self.treatment.betrayed_amount},
+                         'Defect':   {'Cooperate': self.treatment.betray_amount,
+                                       'Defect': self.treatment.enemies_amount}}
 
         self.payoff = (payoff_matrix[self.decision]
                                     [self.other_participant().decision])
@@ -73,7 +72,7 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    return [Treatment.create(betray_amount=30,
-                             friends_amount=20,
-                             enemies_amount=10,
-                             betrayed_amount=0)]
+    return [Treatment.create(betray_amount=0.30,
+                             friends_amount=0.20,
+                             enemies_amount=0.10,
+                             betrayed_amount=0.00)]
