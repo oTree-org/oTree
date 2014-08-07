@@ -65,11 +65,10 @@ class Participant(ptree.models.BaseParticipant):
             self.payoff = 0
 
     def role(self):
-        roles = {
-            1: 'matcher',
-            2: 'mismatcher'
-        }
-        return roles[self.index_among_participants_in_match]
+        if self.index_among_participants_in_match == 1:
+            return 'matcher'
+        if self.index_among_participants_in_match == 2:
+            return 'mismatcher'
 
 
 def treatments():

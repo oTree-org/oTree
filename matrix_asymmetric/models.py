@@ -95,13 +95,10 @@ class Participant(ptree.models.BaseParticipant):
         self.payoff = payoff_matrix[self.match.row_participant().decision][self.match.column_participant().decision]
 
     def role(self):
-
-        roles = {
-            1: 'row',
-            2: 'column'
-        }
-
-        return roles[self.index_among_participants_in_match]
+        if self.index_among_participants_in_match == 1:
+            return 'row'
+        if self.index_among_participants_in_match == 2:
+            return 'column'
 
 
 def treatments():
