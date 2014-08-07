@@ -59,8 +59,8 @@ class Match(ptree.models.BaseMatch):
 
 
     def set_payoffs(self):
-        husband = self.get_participant('husband')
-        wife = self.get_participant('wife')
+        husband = self.get_participant_by_role('husband')
+        wife = self.get_participant_by_role('wife')
 
         if husband.decision != wife.decision:
             husband.payoff = self.treatment.mismatch_amount
