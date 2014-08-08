@@ -14,7 +14,7 @@ def session_types():
         ),
         SessionType(
             name="Prisoner Dilemma",
-            base_pay=400,
+            base_pay=4.00,
             num_demo_participants=2,
             num_participants=12,
             subsession_apps=['prisoner', 'lab_results'],
@@ -22,7 +22,7 @@ def session_types():
         ),
         SessionType(
             name='Trust',
-            base_pay=10,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['trust', 'lab_results'],
@@ -30,7 +30,7 @@ def session_types():
         ),
         SessionType(
             name='Public Goods',
-            base_pay=10,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=4,
             subsession_apps=['public_goods', 'lab_results'],
@@ -38,7 +38,7 @@ def session_types():
         ),
         SessionType(
             name='Dictator',
-            base_pay=100,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['dictator', 'lab_results'],
@@ -46,7 +46,7 @@ def session_types():
         ),
         SessionType(
             name='Matching Pennies',
-            base_pay=100,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=4,
             subsession_apps=['matching_pennies']*3 + ['lab_results'],
@@ -54,7 +54,7 @@ def session_types():
         ),
         SessionType(
             name='Traveler Dilemma',
-            base_pay=0,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['traveler_dilemma', 'lab_results'],
@@ -62,7 +62,7 @@ def session_types():
         ),
         SessionType(
             name='Survey',
-            base_pay=0,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['survey', 'lab_results'],
@@ -70,7 +70,7 @@ def session_types():
         ),
         SessionType(
             name='Bargaining',
-            base_pay=0,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['bargaining', 'lab_results'],
@@ -78,7 +78,7 @@ def session_types():
         ),
         SessionType(
             name='Lying',
-            base_pay=0,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=1,
             subsession_apps=['lying', 'lab_results'],
@@ -86,7 +86,7 @@ def session_types():
         ),
         SessionType(
             name='Guessing',
-            base_pay=0,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=5,
             subsession_apps=['guessing', 'lab_results'],
@@ -94,7 +94,7 @@ def session_types():
         ),
         SessionType(
             name='Matrix Symmetric',
-            base_pay=10,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['matrix_symmetric', 'lab_results'],
@@ -102,7 +102,7 @@ def session_types():
         ),
         SessionType(
             name='Matrix Asymmetric',
-            base_pay=10,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['matrix_asymmetric', 'lab_results'],
@@ -110,7 +110,7 @@ def session_types():
         ),
         SessionType(
             name='Cournot Competition',
-            base_pay=100,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['cournot_competition', 'lab_results'],
@@ -118,7 +118,7 @@ def session_types():
         ),
         SessionType(
             name='Stackelberg Competition',
-            base_pay=100,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['stackelberg_competition', 'lab_results'],
@@ -126,7 +126,7 @@ def session_types():
         ),
         SessionType(
             name='Private Value Auction',
-            base_pay=100,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=5,
             subsession_apps=['private_value_auction', 'lab_results'],
@@ -134,7 +134,7 @@ def session_types():
         ),
         SessionType(
             name='Volunteer Dilemma',
-            base_pay=100,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['volunteer_dilemma', 'lab_results'],
@@ -142,7 +142,7 @@ def session_types():
         ),
         SessionType(
             name='Bertrand Competition',
-            base_pay=100,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['bertrand_competition', 'lab_results'],
@@ -150,7 +150,7 @@ def session_types():
         ),
         SessionType(
             name='Principal Agent',
-            base_pay=100,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['principal_agent', 'lab_results'],
@@ -158,7 +158,7 @@ def session_types():
         ),
         SessionType(
             name='Coordination',
-            base_pay=100,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['coordination', 'lab_results'],
@@ -166,7 +166,7 @@ def session_types():
         ),
         SessionType(
             name='Stag Hunt',
-            base_pay=100,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['stag_hunt', 'lab_results'],
@@ -174,7 +174,7 @@ def session_types():
         ),
         SessionType(
             name='Battle of the sexes',
-            base_pay=100,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=2,
             subsession_apps=['battle_of_the_sexes', 'lab_results'],
@@ -182,7 +182,7 @@ def session_types():
         ),
         SessionType(
             name='Lemon Market',
-            base_pay=100,
+            base_pay=10.00,
             num_participants=12,
             num_demo_participants=1,
             subsession_apps=['lemon_market', 'lab_results'],

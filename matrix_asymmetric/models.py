@@ -96,15 +96,15 @@ class Participant(ptree.models.BaseParticipant):
 def treatments():
 
     return [Treatment.create(
-        rowAcolumnA_row=20,
-        rowAcolumnA_column=30,
+        rowAcolumnA_row=0.20,
+        rowAcolumnA_column=0.30,
 
-        rowAcolumnB_row=40,
-        rowAcolumnB_column=10,
+        rowAcolumnB_row=0.40,
+        rowAcolumnB_column=0.10,
 
-        rowBcolumnA_row=5,
-        rowBcolumnA_column=45,
+        rowBcolumnA_row=0.05,
+        rowBcolumnA_column=0.45,
 
-        rowBcolumnB_row=15,
-        rowBcolumnB_column=25,
+        rowBcolumnB_row=0.15,
+        rowBcolumnB_column=0.25,
     )]
