@@ -87,8 +87,8 @@ class Participant(ptree.models.BaseParticipant):
 def treatments():
     return [
         Treatment.create(
-            stag_stag_amount=20,
-            stag_hare_amount=0,
-            hare_stag_amount=10,
-            hare_hare_amount=10)
+            stag_stag_amount=0.20,
+            stag_hare_amount=0.00,
+            hare_stag_amount=0.10,
+            hare_hare_amount=0.10)
     ]

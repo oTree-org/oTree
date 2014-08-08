@@ -74,8 +74,8 @@ class Participant(ptree.models.BaseParticipant):
 def treatments():
 
     return [Treatment.create(
-        reward=10,
-        penalty=10,
-        max_amount=100,
-        min_amount=20,)
+        reward=0.10,
+        penalty=0.10,
+        max_amount=1.00,
+        min_amount=0.20,)
     ]
