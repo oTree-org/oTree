@@ -16,7 +16,7 @@ def session_types():
             name="Prisoner Dilemma",
             base_pay=4.00,
             num_demo_participants=2,
-            num_participants=12,
+            num_participants=2,
             subsession_apps=['prisoner', 'lab_results'],
             doc=""""""
         ),
@@ -39,7 +39,7 @@ def session_types():
         SessionType(
             name='Dictator',
             base_pay=10.00,
-            num_participants=12,
+            num_participants=2,
             num_demo_participants=2,
             subsession_apps=['dictator', 'lab_results'],
             doc=""""""
@@ -71,7 +71,7 @@ def session_types():
         SessionType(
             name='Bargaining',
             base_pay=10.00,
-            num_participants=12,
+            num_participants=2,
             num_demo_participants=2,
             subsession_apps=['bargaining', 'lab_results'],
             doc=""""""
@@ -127,7 +127,7 @@ def session_types():
         SessionType(
             name='Private Value Auction',
             base_pay=10.00,
-            num_participants=12,
+            num_participants=2,
             num_demo_participants=5,
             subsession_apps=['private_value_auction', 'lab_results'],
             doc=""""""
@@ -143,7 +143,7 @@ def session_types():
         SessionType(
             name='Bertrand Competition',
             base_pay=10.00,
-            num_participants=12,
+            num_participants=2,
             num_demo_participants=2,
             subsession_apps=['bertrand_competition', 'lab_results'],
             doc=""""""
@@ -167,7 +167,7 @@ def session_types():
         SessionType(
             name='Stag Hunt',
             base_pay=10.00,
-            num_participants=12,
+            num_participants=2,
             num_demo_participants=2,
             subsession_apps=['stag_hunt', 'lab_results'],
             doc=""""""
@@ -175,7 +175,7 @@ def session_types():
         SessionType(
             name='Battle of the sexes',
             base_pay=10.00,
-            num_participants=12,
+            num_participants=2,
             num_demo_participants=2,
             subsession_apps=['battle_of_the_sexes', 'lab_results'],
             doc=""""""
@@ -188,6 +188,15 @@ def session_types():
             subsession_apps=['lemon_market', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Common Value Auction',
+            base_pay=10.00,
+            num_participants=2,
+            num_demo_participants=2,
+            subsession_apps=['common_value_auction', 'lab_results'],
+            doc=""""""
+        ),
+
     ]
 
 

@@ -6,19 +6,20 @@ import ptree.models
 from ptree.common import Money, money_range
 import random
 
+author = 'Dev'
 
 doc = """
-In Private Value Auction Game. Consists of multiple participants. Each participant submits a
-bid for a prize being sold in an auction. The prize value is privately known to each participant and therefore
-uncertainty on the other participant's value. The winner is the participant with the highest bid value.
+In Common Value Auction Game, there are multiple participants with each participant submitting
+a bid for a prize being sold in an auction. The prize value is known and same to all participants.
+The winner is the participant with the highest bid value.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/private_value_auction">here</a></p>
+<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/common_value_auction">here</a></p>
 """
 
 
 class Subsession(ptree.models.BaseSubsession):
 
-    name_in_url = 'private_value_auction'
+    name_in_url = 'common_value_auction'
 
     def choose_winner(self):
         highest_bid = max(p.bid_amount for p in self.participants())
@@ -31,10 +32,10 @@ class Subsession(ptree.models.BaseSubsession):
 class Treatment(ptree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
-    price_value = models.MoneyField(
+    prize_value = models.MoneyField(
         null=True,
         doc="""
-        Price value of the prize being sold in the auction
+        Value of the item to be auctioned.
         """
     )
 
@@ -44,11 +45,11 @@ class Match(ptree.models.BaseMatch):
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
 
-    participants_per_match = 1
+    participants_per_match = 2
 
     def bid_choices(self):
         """Range of allowed bid values"""
-        return money_range(0, self.treatment.price_value-0.2, 0.05) # range less than price value **uncertain aspect
+        return money_range(0, self.treatment.prize_value, 0.05)
 
 
 class Participant(ptree.models.BaseParticipant):
@@ -77,11 +78,11 @@ class Participant(ptree.models.BaseParticipant):
 
     def set_payoff(self):
         if self.is_winner:
-            self.payoff = self.treatment.price_value - self.bid_amount
+            self.payoff = self.treatment.prize_value - self.bid_amount
         else:
             self.payoff = 0
 
 
 def treatments():
 
-    return [Treatment.create(price_value=2.00)]
+    return [Treatment.create(prize_value=2.00)]

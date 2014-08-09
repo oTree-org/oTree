@@ -1,20 +1,27 @@
 # -*- coding: utf-8 -*-
-import private_value_auction.forms as forms
-from private_value_auction.utilities import Page, MatchWaitPage, SubsessionWaitPage
+import ptree.views
+import ptree.views.concrete
+import common_value_auction.forms as forms
+from common_value_auction.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import Money, money_range
 
 
 class Introduction(Page):
 
-    template_name = 'private_value_auction/Introduction.html'
+    template_name = 'common_value_auction/Introduction.html'
 
 
 class Bid(Page):
 
-    template_name = 'private_value_auction/Bid.html'
+    template_name = 'common_value_auction/Bid.html'
 
     def get_form_class(self):
         return forms.BidForm
+
+    def variables_for_template(self):
+        return {
+            'prize_value': self.treatment.prize_value,
+        }
 
 
 class ResultsWaitPage(SubsessionWaitPage):
@@ -27,7 +34,7 @@ class ResultsWaitPage(SubsessionWaitPage):
 
 class Results(Page):
 
-    template_name = 'private_value_auction/Results.html'
+    template_name = 'common_value_auction/Results.html'
 
     def variables_for_template(self):
         return {

@@ -1,7 +1,7 @@
 import ptree.test
+import common_value_auction.views as views
+from common_value_auction.utilities import Bot
 from ptree.common import Money, money_range
-import private_value_auction.views as views
-from private_value_auction.utilities import Bot
 import random
 
 
@@ -12,7 +12,7 @@ class ParticipantBot(Bot):
         # Introduction
         self.submit(views.Introduction)
 
-        # bid
+        # player: bid
         self.submit(views.Bid, {"bid_amount": random.choice(self.match.bid_choices())})
 
         # results

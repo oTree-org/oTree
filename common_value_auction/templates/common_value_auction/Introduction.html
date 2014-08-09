@@ -1,0 +1,27 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Introduction
+{% endblock %}
+
+{% block content %}
+
+    <p>In Common Value Auction Game, there are multiple participants with each participant submitting
+        a bid for a prize being sold in an auction.
+    </p>
+    <p>
+        Before bidding, you will be given a 'prize value' which is the money value to you for
+        the item being auctioned. The 'prize value' is common to all participants.
+    </p>
+    <p>
+        Based on the prize value given, each participant will make a 'bid' and neither of the participants
+        will be able to see the other participant's bid.
+    </p>
+    <p>
+        After bidding the person with the highest bid will purchase the item being sold. In the event of
+        a tie bid, the winner will be randomly chosen. The winner's payoff will be given by prize value
+        minus their own bid. The other bidder (looser) will earn nothing.
+    </p>
+{% endblock %}

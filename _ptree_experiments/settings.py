@@ -70,6 +70,7 @@ settings = {
         'battle_of_the_sexes',
         'lemon_market',
         'showcase',
+        'common_value_auction',
         # lab results: displays lab results in a given session
         'lab_results',
     ],
