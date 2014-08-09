@@ -63,4 +63,4 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    return [Treatment.create(allocated_amount=100)]
+    return [Treatment.create(allocated_amount=1.00)]

@@ -59,8 +59,8 @@ class Match(ptree.models.BaseMatch):
 
 
     def set_payoffs(self):
-        husband = self.get_participant('husband')
-        wife = self.get_participant('wife')
+        husband = self.get_participant_by_role('husband')
+        wife = self.get_participant_by_role('wife')
 
         if husband.decision != wife.decision:
             husband.payoff = self.treatment.mismatch_amount
@@ -92,12 +92,10 @@ class Participant(ptree.models.BaseParticipant):
         return self.other_participants_in_match()[0]
 
     def role(self):
-        roles = {
-            1: 'husband',  # football preference
-            2: 'wife'  # opera preference
-        }
-
-        return roles[self.index_among_participants_in_match]
+        if self.index_among_participants_in_match == 1:
+            return 'husband'
+        if self.index_among_participants_in_match == 2:
+            return 'wife'
 
 
 def treatments():

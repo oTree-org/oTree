@@ -103,7 +103,7 @@ class Participant(ptree.models.BaseParticipant):
     subsession = models.ForeignKey(Subsession)
 
     def set_payoff(self):
-        #FIXME: move this to the match object, and use match.get_participant
+        #FIXME: move this to the match object, and use match.get_participant_by_index
         # TODO: re-structure payoff calculations to avoid negative payoffs
         if self.match.decision == 'Reject':
             if self.index_among_participants_in_match == 1:
@@ -128,4 +128,4 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
 
-    return [Treatment.create(fixed_payment=700)]
+    return [Treatment.create(fixed_payment=7.00)]

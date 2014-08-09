@@ -43,6 +43,7 @@ class Match(ptree.models.BaseMatch):
     sent_amount = models.MoneyField(
         null=True,
         doc="""Amount sent by P1""",
+        choices=money_range(0,1,0.05),
     )
 
     sent_back_amount = models.MoneyField(

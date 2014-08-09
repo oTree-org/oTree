@@ -75,6 +75,6 @@ class Participant(ptree.models.BaseParticipant):
 
 def treatments():
     return [Treatment.create(
-        volunteer_cost=40,
-        general_benefit=100,
+        volunteer_cost=0.40,
+        general_benefit=1.00,
     )]

@@ -40,17 +40,6 @@ class Match(ptree.models.BaseMatch):
 
     participants_per_match = 2
 
-    def row_participant(self):
-        for p in self.participants():
-            if p.role() == 'row':
-                return p
-
-    def column_participant(self):
-        for p in self.participants():
-            if p.role() == 'column':
-                return p
-
-
 class Participant(ptree.models.BaseParticipant):
 
     match = models.ForeignKey(Match, null = True)
@@ -92,30 +81,30 @@ class Participant(ptree.models.BaseParticipant):
                     'B': self.treatment.rowBcolumnB_column,
                 }
             }
-        self.payoff = payoff_matrix[self.match.row_participant().decision][self.match.column_participant().decision]
+
+        row_participant = self.match.get_participant_by_role('row')
+        column_participant = self.match.get_participant_by_role('column')
+        self.payoff = payoff_matrix[row_participant.decision][column_participant.decision]
 
     def role(self):
-
-        roles = {
-            1: 'row',
-            2: 'column'
-        }
-
-        return roles[self.index_among_participants_in_match]
+        if self.index_among_participants_in_match == 1:
+            return 'row'
+        if self.index_among_participants_in_match == 2:
+            return 'column'
 
 
 def treatments():
 
     return [Treatment.create(
-        rowAcolumnA_row=20,
-        rowAcolumnA_column=30,
+        rowAcolumnA_row=0.20,
+        rowAcolumnA_column=0.30,
 
-        rowAcolumnB_row=40,
-        rowAcolumnB_column=10,
+        rowAcolumnB_row=0.40,
+        rowAcolumnB_column=0.10,
 
-        rowBcolumnA_row=5,
-        rowBcolumnA_column=45,
+        rowBcolumnA_row=0.05,
+        rowBcolumnA_column=0.45,
 
-        rowBcolumnB_row=15,
-        rowBcolumnB_column=25,
+        rowBcolumnB_row=0.15,
+        rowBcolumnB_column=0.25,
     )]
