@@ -14,4 +14,4 @@ class OfferForm(Form):
         return {'offer_amount': 'How much will you offer?'}
 
     def choices(self):
-        return {'offer_amount': self.match.get_offer_field_choices()}
+        return {'offer_amount': self.match.offer_choices()}

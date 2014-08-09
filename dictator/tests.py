@@ -10,7 +10,7 @@ class ParticipantBot(Bot):
     def play(self):
 
         # basic assertions
-        assert (self.treatment.allocated_amount == 100)
+        assert (self.treatment.allocated_amount == 1.0)
         assert (self.match.participants_per_match == 2)
 
         # start game
