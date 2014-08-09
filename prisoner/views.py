@@ -4,6 +4,7 @@ from prisoner.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import Money, money_range
 import time
 
+
 class Decision(Page):
 
     """This page has the instructions and this is where the decision is made.
@@ -12,6 +13,7 @@ class Decision(Page):
     template_name = 'prisoner/Decision.html'
 
     def variables_for_template(self):
+
         return {'friends_amount': self.treatment.friends_amount,
                 'betrayed_amount': self.treatment.betrayed_amount,
                 'enemies_amount': self.treatment.enemies_amount,
@@ -42,7 +44,6 @@ class Results(Page):
                 'my_decision': self.participant.decision.lower(),
                 'other_participant_decision': self.participant.other_participant().decision.lower(),
                 'same_choice': self.participant.decision == self.participant.other_participant().decision}
-
 
 
 def pages():
