@@ -63,7 +63,7 @@ class Match(ptree.models.BaseMatch):
 
     def set_individual_share(self):
         """Calculates the amount each player in a group receives from the joint project"""
-        self.individual_share = int((self.contributions * self.treatment.multiplication_factor) / self.participants_per_match)
+        self.individual_share = self.contributions * self.treatment.multiplication_factor / self.participants_per_match
 
 
 class Participant(ptree.models.BaseParticipant):
