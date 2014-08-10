@@ -25,7 +25,7 @@ class Treatment(ptree.models.BaseTreatment):
     # </built-in>
 
     minimum_price = models.MoneyField(
-        default=0.2,
+        default=0.20,
         doc="""
         The minimum price that can be set i.e equivalent to marginal cost.
         """

@@ -21,31 +21,31 @@ class Treatment(ptree.models.BaseTreatment):
     # </built-in>
 
     football_husband_amount = models.MoneyField(
-        default=0.3,
+        default=0.30,
         doc="""
         Amount rewarded to husband if football is chosen
         """
     )
     football_wife_amount = models.MoneyField(
-        default=0.2,
+        default=0.20,
         doc="""
         Amount rewarded to wife if football is chosen
         """
     )
     mismatch_amount = models.MoneyField(
-        default=0,
+        default=0.00,
         doc="""
         Amount rewarded for choosing football and opera for either participants
         """
     )
     opera_husband_amount = models.MoneyField(
-        default=0.2,
+        default=0.20,
         doc="""
         Amount rewarded to husband if opera is chosen
         """
     )
     opera_wife_amount = models.MoneyField(
-        default=0.3,
+        default=0.30,
         doc="""
         Amount rewarded to wife if opera is chosen
         """
