@@ -196,6 +196,14 @@ def session_types():
             subsession_apps=['common_value_auction', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Tragedy of the commons',
+            base_pay=10.00,
+            participants_per_session=2,
+            participants_per_demo_session=2,
+            subsession_apps=['tragedy_of_the_commons', 'lab_results'],
+            doc=""""""
+        ),
 
     ]
 
