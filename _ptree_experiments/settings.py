@@ -47,6 +47,9 @@ settings = {
         '_ptree_experiments',
     ],
     'INSTALLED_PTREE_APPS': [
+
+        'lab_results',
+        'lying',
         'prisoner',
         'trust',
         'public_goods',
@@ -56,7 +59,7 @@ settings = {
         'survey',
         'bargaining',
         'guessing',
-        'lying',
+
         'matrix_symmetric',
         'matrix_asymmetric',
         'cournot_competition',
@@ -72,7 +75,7 @@ settings = {
         'showcase',
         'common_value_auction',
         # lab results: displays lab results in a given session
-        'lab_results',
+
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,

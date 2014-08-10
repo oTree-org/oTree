@@ -3,10 +3,6 @@ from lying.utilities import Page, MatchWaitPage, SubsessionWaitPage
 from ptree.common import Money, money_range
 
 
-class Start(Page):
-    template_name = 'lying/Start.html'
-
-
 class FlipCoins(Page):
 
     template_name = 'lying/CoinFlip.html'
@@ -34,4 +30,4 @@ class Results(Page):
 
 
 def pages():
-    return [Start, FlipCoins, Results]
+    return [FlipCoins, Results]

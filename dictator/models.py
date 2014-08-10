@@ -23,22 +23,28 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
+
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     allocated_amount = models.MoneyField(
-        null=True,
+        default=1.00,
         doc="""Initial amount allocated to the dictator"""
     )
 
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
     participants_per_match = 2
 
     offer_amount = models.MoneyField(
-        null=True,
+        default=None,
         doc="""Amount offered by the dictator"""
     )
 
@@ -49,9 +55,11 @@ class Match(ptree.models.BaseMatch):
 
 class Participant(ptree.models.BaseParticipant):
 
+    # <built-in>
     match = models.ForeignKey(Match, null=True)
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     def set_payoff(self):
         """Calculates player payoff"""
@@ -62,5 +70,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-
-    return [Treatment.create(allocated_amount=1.00)]
+    return [Treatment.create()]

@@ -15,22 +15,28 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
-    subsession = models.ForeignKey(Subsession)
 
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
                 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     participants_per_match = 1
 
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     def set_payoff(self):
         self.payoff = 0

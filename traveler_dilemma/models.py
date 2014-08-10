@@ -19,24 +19,27 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
-    reward = models.MoneyField(null=True,
+    reward = models.MoneyField(default=0.10,
                        doc="""Player's reward for the lowest claim""")
 
-    penalty = models.MoneyField(null=True,
+    penalty = models.MoneyField(default=0.10,
                        doc="""Player's deduction for the higher claim""")
 
-    max_amount = models.MoneyField(null=True,
+    max_amount = models.MoneyField(default=1.00,
                         doc="""The maximum claim to be requested""")
-    min_amount = models.MoneyField(null=True,
+    min_amount = models.MoneyField(default=0.20,
                         doc="""The minimum claim to be requested""")
 
 
 class Match(ptree.models.BaseMatch):
-
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     participants_per_match = 2
 
@@ -47,13 +50,15 @@ class Match(ptree.models.BaseMatch):
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     # claim by participant
     claim = models.MoneyField(
-        null=True,
+        default=None,
         doc="""
         Each participant's claim
         """
@@ -72,10 +77,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-
-    return [Treatment.create(
-        reward=0.10,
-        penalty=0.10,
-        max_amount=1.00,
-        min_amount=0.20,)
-    ]
+    return [Treatment.create()]

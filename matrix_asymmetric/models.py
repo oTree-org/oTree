@@ -18,41 +18,47 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
+
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
-    rowAcolumnA_row = models.MoneyField()
-    rowAcolumnA_column = models.MoneyField()
+    rowAcolumnA_row = models.MoneyField(default=0.20)
+    rowAcolumnA_column = models.MoneyField(default=0.30)
 
-    rowAcolumnB_row = models.MoneyField()
-    rowAcolumnB_column = models.MoneyField()
+    rowAcolumnB_row = models.MoneyField(default=0.40)
+    rowAcolumnB_column = models.MoneyField(default=0.10)
 
-    rowBcolumnA_row = models.MoneyField()
-    rowBcolumnA_column = models.MoneyField()
+    rowBcolumnA_row = models.MoneyField(default=0.05)
+    rowBcolumnA_column = models.MoneyField(default=0.45)
 
-    rowBcolumnB_row = models.MoneyField()
-    rowBcolumnB_column = models.MoneyField()
+    rowBcolumnB_row = models.MoneyField(default=0.15)
+    rowBcolumnB_column = models.MoneyField(default=0.25)
 
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     participants_per_match = 2
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     def other_participant(self):
         """Returns other participant in match"""
         return self.other_participants_in_match()[0]
 
     decision = models.CharField(
-        null=True,
-        max_length=2,
+        default=None,
         choices=['A', 'B'],
         doc='either A or B',
     )
@@ -94,17 +100,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-
-    return [Treatment.create(
-        rowAcolumnA_row=0.20,
-        rowAcolumnA_column=0.30,
-
-        rowAcolumnB_row=0.40,
-        rowAcolumnB_column=0.10,
-
-        rowBcolumnA_row=0.05,
-        rowBcolumnA_column=0.45,
-
-        rowBcolumnB_row=0.15,
-        rowBcolumnB_column=0.25,
-    )]
+    return [Treatment.create()]

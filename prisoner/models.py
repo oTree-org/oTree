@@ -17,38 +17,51 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
+
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     betray_amount = models.MoneyField(
-        doc="""amount a participant makes if he chooses 'Defect' and the other chooses 'Cooperate'"""
+        doc="""amount a participant makes if he chooses 'Defect' and the other chooses 'Cooperate'""",
+        default=0.30,
     )
+
     friends_amount = models.MoneyField(
-        doc="""amount both participants make if both participants choose 'Cooperate'"""
+        doc="""amount both participants make if both participants choose 'Cooperate'""",
+        default=0.20,
     )
     betrayed_amount = models.MoneyField(
-        doc="""amount a participant makes if he chooses 'Cooperate' and the other chooses 'Defect'"""
+        doc="""amount a participant makes if he chooses 'Cooperate' and the other chooses 'Defect'""",
+        default=0.10,
     )
 
     enemies_amount = models.MoneyField(
-        doc="""amount both participants make if both participants choose 'Defect'"""
+        doc="""amount both participants make if both participants choose 'Defect'""",
+        default=0.00,
     )
 
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
     participants_per_match = 2
 
 
 class Participant(ptree.models.BaseParticipant):
 
+    # <built-in>
     match = models.ForeignKey(Match, null=True)
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     decision = models.CharField(
-        max_length=10, null=True, verbose_name='What is your decision?',
+        default=None, verbose_name='What is your decision?',
         choices=['Cooperate', 'Defect'],
         doc="""This participant's decision"""
     )
@@ -69,8 +82,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-
-    return [Treatment.create(betray_amount=0.30,
-                             friends_amount=0.20,
-                             enemies_amount=0.10,
-                             betrayed_amount=0.00)]
+    return [Treatment.create()]

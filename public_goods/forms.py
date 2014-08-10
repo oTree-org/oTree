@@ -14,4 +14,4 @@ class ContributeForm(Form):
         return {'contributed_amount': 'How much do you want to contribute to the group project?'}
 
     def choices(self):
-        return {'contributed_amount': self.participant.contribute_choices()}
+        return {'contributed_amount': self.treatment.contribute_choices()}
