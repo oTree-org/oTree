@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
 doc = """
 Matrix Asymmetric is a game where there is no identical strategy sets for both players.
 Each player earns the different payoff when making the same choice against similar choices of his competitors.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/matrix_asymmetric">here</a></p>
+<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/matrix_asymmetric">here</a></p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'matrix_asymmetric'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -39,7 +39,7 @@ class Treatment(ptree.models.BaseTreatment):
     rowBcolumnB_column = models.MoneyField(default=0.25)
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
@@ -78,7 +78,7 @@ class Match(ptree.models.BaseMatch):
         column_participant.payoff = column_matrix[row_participant.decision][column_participant.decision]
 
 
-class Participant(ptree.models.BaseParticipant):
+class Participant(otree.models.BaseParticipant):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)

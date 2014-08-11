@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import bargaining.models as models
 from bargaining.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class RequestForm(Form):

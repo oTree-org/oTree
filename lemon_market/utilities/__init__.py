@@ -1,10 +1,10 @@
 # This file is auto-generated. Don't change anything in this file.
 import lemon_market.models as models
-import ptree.views
-import ptree.forms
-import ptree.test
+import otree.views
+import otree.forms
+import otree.test
 
-class Page(ptree.views.Page):
+class Page(otree.views.Page):
     z_models = models
 
     def z_autocomplete(self):
@@ -14,7 +14,7 @@ class Page(ptree.views.Page):
         self.participant = models.Participant()
 
 
-class SubsessionWaitPage(ptree.views.SubsessionWaitPage):
+class SubsessionWaitPage(otree.views.SubsessionWaitPage):
 
     z_models = models
 
@@ -22,7 +22,7 @@ class SubsessionWaitPage(ptree.views.SubsessionWaitPage):
         self.subsession = models.Subsession()
 
 
-class MatchWaitPage(ptree.views.MatchWaitPage):
+class MatchWaitPage(otree.views.MatchWaitPage):
 
     z_models = models
 
@@ -31,15 +31,7 @@ class MatchWaitPage(ptree.views.MatchWaitPage):
         self.treatment = models.Treatment()
         self.match = models.Match()
 
-class Form(ptree.forms.Form):
-
-    def z_autocomplete(self):
-        self.subsession = models.Subsession()
-        self.treatment = models.Treatment()
-        self.match = models.Match()
-        self.participant = models.Participant()
-
-class Bot(ptree.test.Bot):
+class Form(otree.forms.Form):
 
     def z_autocomplete(self):
         self.subsession = models.Subsession()
@@ -47,10 +39,18 @@ class Bot(ptree.test.Bot):
         self.match = models.Match()
         self.participant = models.Participant()
 
+class Bot(otree.test.Bot):
 
-class InitializeParticipant(ptree.views.InitializeParticipant):
+    def z_autocomplete(self):
+        self.subsession = models.Subsession()
+        self.treatment = models.Treatment()
+        self.match = models.Match()
+        self.participant = models.Participant()
+
+
+class InitializeParticipant(otree.views.InitializeParticipant):
     z_models = models
 
 
-class InitializeExperimenter(ptree.views.InitializeExperimenter):
+class InitializeExperimenter(otree.views.InitializeExperimenter):
     z_models = models

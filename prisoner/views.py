@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import prisoner.forms as forms
 from prisoner.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 import time
 
 

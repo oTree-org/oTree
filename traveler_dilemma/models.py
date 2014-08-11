@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
-from ptree.common import Money, money_range
+from otree.db import models
+import otree.models
+from otree.common import Money, money_range
 
 doc = """
 Traveler's dilemma game has two participants.
 Each participant is told to make a claim. Payoffs calculated according to the claims made.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/traveler_dilemma">here</a></p>
+<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/traveler_dilemma">here</a></p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'traveler_dilemma'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
@@ -35,7 +35,7 @@ class Treatment(ptree.models.BaseTreatment):
                         doc="""The minimum claim to be requested""")
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
@@ -48,7 +48,7 @@ class Match(ptree.models.BaseMatch):
         return money_range(self.treatment.min_amount, self.treatment.max_amount, 0.05)
 
 
-class Participant(ptree.models.BaseParticipant):
+class Participant(otree.models.BaseParticipant):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)

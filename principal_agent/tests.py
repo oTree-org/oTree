@@ -1,5 +1,5 @@
-import ptree.test
-from ptree.common import Money, money_range
+import otree.test
+from otree.common import Money, money_range
 import principal_agent.views as views
 from principal_agent.utilities import Bot
 
@@ -30,7 +30,7 @@ class ParticipantBot(Bot):
         self.submit(views.Accept, {'decision': 'Reject'})
 
 
-class ExperimenterBot(ExperimenterMixIn, ptree.test.ExperimenterBot):
+class ExperimenterBot(ExperimenterMixIn, otree.test.ExperimenterBot):
 
     def play(self):
         pass

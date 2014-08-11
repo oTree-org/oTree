@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import ptree.test
-from ptree.common import Money, money_range
+import otree.test
+from otree.common import Money, money_range
 import trust.views as views
 from trust.utilities import Bot
 import random

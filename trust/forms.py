@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import trust.models as models
 from trust.utilities import Form
-import ptree.forms
+import otree.forms
 from django import forms
 
 class SendForm(Form):

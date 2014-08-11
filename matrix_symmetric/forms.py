@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import matrix_symmetric.models as models
 from matrix_symmetric.utilities import Form
-import ptree.forms
+import otree.forms
 from django import forms
 
 

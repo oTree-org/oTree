@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import traveler_dilemma.models as models
 from traveler_dilemma.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class ClaimForm(Form):

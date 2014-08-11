@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import stag_hunt.forms as forms
 from stag_hunt.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Decide(Page):

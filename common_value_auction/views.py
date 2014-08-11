@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
+import otree.views
+import otree.views.concrete
 import common_value_auction.forms as forms
 from common_value_auction.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Introduction(Page):

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
 
 doc = """
@@ -11,17 +11,17 @@ doc = """
     Principal. The Principal offers a contract to the Agent, which can be accepted or rejected.
 </p>
 <p>
-    Source code <a href="https://github.com/wickens/ptree_library/tree/master/principal_agent">here</a>
+    Source code <a href="https://github.com/wickens/otree_library/tree/master/principal_agent">here</a>
 </p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'principal_agent'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -35,7 +35,7 @@ class Treatment(ptree.models.BaseTreatment):
     )
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
@@ -101,7 +101,7 @@ class Match(ptree.models.BaseMatch):
     participants_per_match = 2
 
 
-class Participant(ptree.models.BaseParticipant):
+class Participant(otree.models.BaseParticipant):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)

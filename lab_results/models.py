@@ -1,7 +1,7 @@
-"""Documentation at http://django-ptree.readthedocs.org/en/latest/app.html"""
+"""Documentation at http://django-otree.readthedocs.org/en/latest/app.html"""
 
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
 
 doc="""
@@ -9,18 +9,18 @@ Page that shows the results of the session.
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'lab_results'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
                 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
@@ -30,7 +30,7 @@ class Match(ptree.models.BaseMatch):
     participants_per_match = 1
 
 
-class Participant(ptree.models.BaseParticipant):
+class Participant(otree.models.BaseParticipant):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)

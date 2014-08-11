@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import public_goods.models as models
 from public_goods.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class ContributeForm(Form):

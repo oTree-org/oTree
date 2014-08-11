@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import ptree.views
+import otree.views
 import lemon_market.forms as forms
 from lemon_market.utilities import Page, MatchWaitPage, SubsessionWaitPage
 

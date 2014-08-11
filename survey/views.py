@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import survey.forms as forms
 from survey.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 class Start(Page):
 

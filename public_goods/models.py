@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
-from ptree.db import models
-import ptree.models
-from ptree.common import Money, money_range
+from otree.db import models
+import otree.models
+from otree.common import Money, money_range
 
 
 doc = """
 Public goods game. Single treatment. Four players can contribute to a joint project.
 The total contribution is multiplied by some factor, the resulting amount is then divided equally between the players.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/public_goods">here</a></p>
+<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/public_goods">here</a></p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'public_goods'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -38,7 +38,7 @@ class Treatment(ptree.models.BaseTreatment):
         return money_range(0, self.amount_allocated, 0.10)
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
@@ -66,7 +66,7 @@ class Match(ptree.models.BaseMatch):
         self.individual_share = self.contributions * self.treatment.multiplication_factor / self.participants_per_match
 
 
-class Participant(ptree.models.BaseParticipant):
+class Participant(otree.models.BaseParticipant):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)

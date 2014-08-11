@@ -2,7 +2,7 @@
 import battle_of_the_sexes.models as models
 from django import forms
 from battle_of_the_sexes.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class DecisionForm(Form):

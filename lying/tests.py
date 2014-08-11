@@ -1,5 +1,5 @@
-import ptree.test
-from ptree.common import Money, money_range
+import otree.test
+from otree.common import Money, money_range
 import lying.views as views
 from lying.utilities import Bot
 import random

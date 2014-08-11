@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import battle_of_the_sexes.forms as forms
 from battle_of_the_sexes.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Decide(Page):

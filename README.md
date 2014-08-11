@@ -1,9 +1,9 @@
-ptree_library
+otree_library
 =============
 
-Standard library of pTree games
+Standard library of oTree games
 
 See the demo here:
 
-http://demo.ptree.org/
+http://demo.otree.org/
 

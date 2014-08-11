@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import bertrand_competition.forms as forms
 from bertrand_competition.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Introduction(Page):

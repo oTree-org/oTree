@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import cournot_competition.models as models
 from cournot_competition.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class QuantityForm(Form):

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import private_value_auction.forms as forms
 from private_value_auction.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Introduction(Page):

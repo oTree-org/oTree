@@ -1,6 +1,6 @@
 from django.contrib import admin
 import guessing.models as models
-import ptree.adminlib as adminlib
+import otree.adminlib as adminlib
 
 class ParticipantAdmin(adminlib.ParticipantAdmin):
     readonly_fields = adminlib.get_callables(models.Participant)

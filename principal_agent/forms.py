@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import principal_agent.models as models
 from principal_agent.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class ContractForm(Form):

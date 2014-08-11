@@ -2,7 +2,7 @@
 import prisoner.models as models
 from django import forms
 from prisoner.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class DecisionForm(Form):

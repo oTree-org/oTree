@@ -2,8 +2,8 @@
 from . import models
 from django import forms
 from .utilities import Form
-from ptree.common import Money, money_range
-import ptree.forms
+from otree.common import Money, money_range
+import otree.forms
 
 
 class StartForm(Form):

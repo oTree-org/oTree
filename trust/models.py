@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Documentation at http://django-ptree.readthedocs.org/en/latest/app.html"""
-from ptree.db import models
-import ptree.models
-from ptree.common import money_range, Money
+"""Documentation at http://django-otree.readthedocs.org/en/latest/app.html"""
+from otree.db import models
+import otree.models
+from otree.common import money_range, Money
 
 
 doc = """
@@ -10,16 +10,16 @@ Trust game. Single treatment. Both players are given an initial sum.
 One player may give part of the sum to the other player, who actually receives triple the amount.
 The second player may then give part of the now-tripled amount back to the first player.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/trust">here</a></p>
+<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/trust">here</a></p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'trust'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -36,7 +36,7 @@ class Treatment(ptree.models.BaseTreatment):
     )
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
@@ -74,7 +74,7 @@ class Match(ptree.models.BaseMatch):
         return self.treatment.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
 
 
-class Participant(ptree.models.BaseParticipant):
+class Participant(otree.models.BaseParticipant):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)

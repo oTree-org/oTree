@@ -2,7 +2,7 @@
 import matching_pennies.models as models
 from django import forms
 from matching_pennies.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class PennySideForm(Form):

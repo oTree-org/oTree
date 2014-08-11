@@ -1,7 +1,7 @@
-import ptree.test
+import otree.test
 import common_value_auction.views as views
 from common_value_auction.utilities import Bot
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 import random
 
 

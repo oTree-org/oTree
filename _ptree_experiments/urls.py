@@ -1,9 +1,9 @@
 from django.conf.urls import *
-import ptree.urls
-from ptree.adminlib import autodiscover
+import otree.urls
+from otree.adminlib import autodiscover
 
 autodiscover()
 
 urlpatterns = patterns('',)
 
-ptree.urls.augment_urlpatterns(urlpatterns)
+otree.urls.augment_urlpatterns(urlpatterns)

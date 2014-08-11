@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import coordination.forms as forms
 from coordination.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Choice(Page):

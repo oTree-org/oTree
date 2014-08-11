@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import cournot_competition.forms as forms
 from cournot_competition.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Introduction(Page):

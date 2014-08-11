@@ -1,4 +1,4 @@
-import ptree.test
+import otree.test
 import showcase.views as views
 from showcase.utilities import Bot
 

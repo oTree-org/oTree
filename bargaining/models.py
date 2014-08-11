@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
-from ptree.common import Money, money_range
+from otree.db import models
+import otree.models
+from otree.common import Money, money_range
 
 
 doc = """
@@ -14,16 +14,16 @@ requested by the players is less than that available, both players get their req
 If their total request is greater than that available, neither player gets their request.
 </p>
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/bargaining">here</a></p>
+<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/bargaining">here</a></p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'bargaining'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
     # </built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
@@ -36,7 +36,7 @@ class Treatment(ptree.models.BaseTreatment):
     )
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
@@ -49,7 +49,7 @@ class Match(ptree.models.BaseMatch):
         return money_range(0, self.treatment.amount_shared, 0.05)
 
 
-class Participant(ptree.models.BaseParticipant):
+class Participant(otree.models.BaseParticipant):
     # <built-in>
     match = models.ForeignKey(Match, null=True)
     treatment = models.ForeignKey(Treatment, null=True)

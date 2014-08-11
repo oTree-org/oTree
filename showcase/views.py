@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
+import otree.views
+import otree.views.concrete
 import showcase.forms as forms
 from showcase.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import currency
+from otree.common import currency
 
 
 class Introduction(Page):

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import traveler_dilemma.forms as forms
 from traveler_dilemma.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Introduction(Page):

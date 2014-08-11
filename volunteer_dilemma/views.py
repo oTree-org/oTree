@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import volunteer_dilemma.forms as forms
 from volunteer_dilemma.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Decision(Page):

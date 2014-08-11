@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
-from ptree.common import Money, money_range
+from otree.db import models
+import otree.models
+from otree.common import Money, money_range
 import random
 
 
@@ -12,11 +12,11 @@ In Private Value Auction Game. Consists of multiple participants. Each participa
 bid for a prize being sold in an auction. The prize value is privately known to each participant and therefore
 uncertainty on the other participant's value. The winner is the participant with the highest bid value.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/private_value_auction">here</a></p>
+<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/private_value_auction">here</a></p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'private_value_auction'
 
@@ -28,7 +28,7 @@ class Subsession(ptree.models.BaseSubsession):
         random_highest_bidder.is_winner = True
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -42,7 +42,7 @@ class Treatment(ptree.models.BaseTreatment):
     )
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
@@ -56,7 +56,7 @@ class Match(ptree.models.BaseMatch):
         return money_range(0, self.treatment.price_value-0.2, 0.05) # range less than price value **uncertain aspect
 
 
-class Participant(ptree.models.BaseParticipant):
+class Participant(otree.models.BaseParticipant):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)

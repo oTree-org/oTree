@@ -1,5 +1,5 @@
-import ptree.test
-from ptree.common import Money, money_range
+import otree.test
+from otree.common import Money, money_range
 import stackelberg_competition.views as views
 from stackelberg_competition.utilities import Bot
 import random

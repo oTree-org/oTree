@@ -1,7 +1,7 @@
 import lying.models as models
-import ptree.forms
+import otree.forms
 from lying.utilities import Form
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 from decimal import Decimal
 
 class CoinFlipForm(Form):

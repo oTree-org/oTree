@@ -1,25 +1,25 @@
 import os
-import ptree.settings
+import otree.settings
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-if os.environ.get('PTREE_PRODUCTION'):
+if os.environ.get('OTREE_PRODUCTION'):
     DEBUG = False
 else:
     DEBUG = True
 
-if os.environ.get('IS_PTREE_DOT_ORG'):
-    ADMIN_PASSWORD = os.environ['PTREE_ADMIN_PASSWORD']
-    SECRET_KEY = os.environ['PTREE_SECRET_KEY']
+if os.environ.get('IS_OTREE_DOT_ORG'):
+    ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
+    SECRET_KEY = os.environ['OTREE_SECRET_KEY']
 else:
-    ADMIN_PASSWORD = 'ptree'
+    ADMIN_PASSWORD = 'otree'
     # don't share this with anybody.
     # Change this to something unique (e.g. mash your keyboard), and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
 
 # local database settings
 # add: export LOCALDEV=1 to .bashrc
-if os.environ.get("PTREE_LOCALDEV"):
+if os.environ.get("OTREE_LOCALDEV"):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -43,10 +43,10 @@ settings = {
     'DEBUG': DEBUG,
     'DATABASES': DATABASES,
     'INSTALLED_APPS': [
-        'ptree',
-        '_ptree_experiments',
+        'otree',
+        '_otree_experiments',
     ],
-    'INSTALLED_PTREE_APPS': [
+    'INSTALLED_OTREE_APPS': [
 
         'lab_results',
         'lying',
@@ -79,8 +79,8 @@ settings = {
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
-    'WSGI_APPLICATION': '_ptree_experiments.wsgi.application',
-    'ROOT_URLCONF': '_ptree_experiments.urls',
+    'WSGI_APPLICATION': '_otree_experiments.wsgi.application',
+    'ROOT_URLCONF': '_otree_experiments.urls',
 }
 
-ptree.settings.augment_settings(settings)
+otree.settings.augment_settings(settings)

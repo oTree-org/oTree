@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import coordination.models as models
 from coordination.utilities import Form
-import ptree.forms
+import otree.forms
 from django import forms
 
 
