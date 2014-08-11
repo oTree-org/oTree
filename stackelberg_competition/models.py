@@ -22,10 +22,13 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
+
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     total_capacity = models.PositiveIntegerField(
-        null=True,
+        default=60,
         doc="""
         Combined production capacity of both participants(firms)
         """
@@ -34,11 +37,13 @@ class Treatment(ptree.models.BaseTreatment):
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     price = models.MoneyField(
-        null=True,
+        default=None,
         doc="""
         Price of goods: P=600-q1-q2
         """
@@ -49,12 +54,14 @@ class Match(ptree.models.BaseMatch):
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     quantity = models.PositiveIntegerField(
-        null=True,
+        default=None,
         doc="""
         Quantity of goods to produce..
         """
@@ -70,5 +77,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-
-    return [Treatment.create(total_capacity=60)]
+    return [Treatment.create()]

@@ -9,39 +9,41 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
-
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
-
+    # </built-in>
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
     participants_per_match = 1
 
 
 class Participant(ptree.models.BaseParticipant):
 
+    # <built-in>
     match = models.ForeignKey(Match, null=True)
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     def set_payoff(self):
         """Calculate payoff, which is zero for the survey"""
         self.payoff = 0
 
-    q_country = CountryField(null=True, verbose_name='What is your country of citizenship?')
-    q_age = models.PositiveIntegerField(verbose_name='What is your age?', null=True)
-    q_gender = models.CharField(max_length=100, choices=['Male','Female'], null=True, verbose_name='What is your gender?')
+    q_country = CountryField(default=None, verbose_name='What is your country of citizenship?')
+    q_age = models.PositiveIntegerField(verbose_name='What is your age?', default=None)
+    q_gender = models.CharField(choices=['Male','Female'], default=None, verbose_name='What is your gender?')
 
-    crt_bat_float = models.DecimalField(null=True, max_digits=6, decimal_places=2)
-    crt_bat = models.PositiveIntegerField(null=True)
-    crt_widget = models.PositiveIntegerField(null=True)
-    crt_lake = models.PositiveIntegerField(null=True)
+    crt_bat_float = models.DecimalField(default=None, max_digits=6, decimal_places=2)
+    crt_bat = models.PositiveIntegerField(default=None)
+    crt_widget = models.PositiveIntegerField(default=None)
+    crt_lake = models.PositiveIntegerField(default=None)
 
 
 def treatments():
-
-    treatment = Treatment.create()
-
-    return [treatment]
+    return [Treatment.create()]

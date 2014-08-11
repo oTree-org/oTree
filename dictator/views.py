@@ -51,5 +51,3 @@ def pages():
             Offer,
             ResultsWaitPage,
             Results]
-
-

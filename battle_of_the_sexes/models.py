@@ -16,34 +16,36 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     football_husband_amount = models.MoneyField(
-        null=True,
+        default=0.30,
         doc="""
         Amount rewarded to husband if football is chosen
         """
     )
     football_wife_amount = models.MoneyField(
-        null=True,
+        default=0.20,
         doc="""
         Amount rewarded to wife if football is chosen
         """
     )
     mismatch_amount = models.MoneyField(
-        null=True,
+        default=0.00,
         doc="""
         Amount rewarded for choosing football and opera for either participants
         """
     )
     opera_husband_amount = models.MoneyField(
-        null=True,
+        default=0.20,
         doc="""
         Amount rewarded to husband if opera is chosen
         """
     )
     opera_wife_amount = models.MoneyField(
-        null=True,
+        default=0.30,
         doc="""
         Amount rewarded to wife if opera is chosen
         """
@@ -51,16 +53,17 @@ class Treatment(ptree.models.BaseTreatment):
 
 
 class Match(ptree.models.BaseMatch):
-
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     participants_per_match = 2
 
 
     def set_payoffs(self):
-        husband = self.get_participant('husband')
-        wife = self.get_participant('wife')
+        husband = self.get_participant_by_role('husband')
+        wife = self.get_participant_by_role('wife')
 
         if husband.decision != wife.decision:
             husband.payoff = self.treatment.mismatch_amount
@@ -76,13 +79,14 @@ class Match(ptree.models.BaseMatch):
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     decision = models.CharField(
-        null=True,
-        max_length=10,
+        default=None,
         choices=['football', 'opera'],
         doc='either football or opera',
     )
@@ -92,21 +96,11 @@ class Participant(ptree.models.BaseParticipant):
         return self.other_participants_in_match()[0]
 
     def role(self):
-        roles = {
-            1: 'husband',  # football preference
-            2: 'wife'  # opera preference
-        }
-
-        return roles[self.index_among_participants_in_match]
+        if self.index_among_participants_in_match == 1:
+            return 'husband'
+        if self.index_among_participants_in_match == 2:
+            return 'wife'
 
 
 def treatments():
-    return [
-        Treatment.create(
-            football_husband_amount=0.3,
-            football_wife_amount=0.2,
-            mismatch_amount=0,
-            opera_husband_amount=0.2,
-            opera_wife_amount=0.3
-        )
-    ]
+    return [Treatment.create()]

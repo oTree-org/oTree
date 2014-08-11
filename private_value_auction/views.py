@@ -16,10 +16,6 @@ class Bid(Page):
     def get_form_class(self):
         return forms.BidForm
 
-    def variables_for_template(self):
-        return {
-            'price_value': self.treatment.price_value,
-        }
 
 class ResultsWaitPage(SubsessionWaitPage):
 

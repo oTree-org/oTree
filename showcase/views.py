@@ -39,6 +39,18 @@ class AdminDemo(Page):
     template_name = 'showcase/AdminDemo.html'
 
 
+class Results(Page):
+
+    def variables_for_template(self):
+        if self.participant.payoff is None:
+            self.participant.set_payoff()
+        return {
+            'payoff': currency(self.participant.payoff)
+        }
+
+    template_name = 'showcase/Results.html'
+
+
 def pages():
     return [
         Introduction,
@@ -46,4 +58,5 @@ def pages():
         EmbedDemo,
         BootstrapWidgetDemo,
         AdminDemo,
+        Results,
     ]

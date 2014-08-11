@@ -18,7 +18,7 @@ class Subsession(ptree.models.BaseSubsession):
 
     name_in_url = 'guessing'
 
-    two_third_guesses = models.FloatField(null=True)
+    two_third_guesses = models.FloatField(default=None)
 
     def calculate_average(self):
         self.two_third_guesses = (2.0/3) * sum(p.guess_value for p in self.participants()) / len(self.participants())
@@ -37,24 +37,34 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
-    subsession = models.ForeignKey(Subsession)
 
-    winner_payoff = models.MoneyField(default=1)
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
+    winner_payoff = models.MoneyField(
+        default=1.00,
+        doc='Payoff to the winner'
+    )
 
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     participants_per_match = 1
 
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     is_winner = models.BooleanField(default=False,
         doc="""
@@ -63,7 +73,7 @@ class Participant(ptree.models.BaseParticipant):
     )
 
     guess_value = models.PositiveIntegerField(
-        null=True,
+        default=None,
         doc="""
         Each participant guess: between 0-100
         """
@@ -74,5 +84,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-
     return [Treatment.create()]

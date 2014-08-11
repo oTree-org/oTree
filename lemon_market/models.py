@@ -18,10 +18,13 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
+
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     max_bid_amount = models.MoneyField(
-        null=True,
+        default=1.00,
         doc="""
         Maximum allowed bid amount.
         """
@@ -30,17 +33,19 @@ class Treatment(ptree.models.BaseTreatment):
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     bid_amount = models.MoneyField(
-        null=True,
+        default=None,
         doc="""
         Amount bidded by the bidder
         """
     )
     random_value = models.MoneyField(
-        null=True,
+        default=None,
         doc="""
         Random value for the value of commodity to be auctioned.
         """
@@ -54,9 +59,11 @@ class Match(ptree.models.BaseMatch):
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     def set_payoff(self):
         self.match.calculate_value()
@@ -67,6 +74,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-    return [Treatment.create(
-        max_bid_amount = 1.00,
-    )]
+    return [Treatment.create()]

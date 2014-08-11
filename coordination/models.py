@@ -19,17 +19,20 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
+
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     match_amount = models.MoneyField(
-        null=True,
+        default=1.00,
         doc="""
         amount each participant is rewarded for having match choices
         """
     )
 
     mismatch_amount = models.MoneyField(
-        null=True,
+        default=0.00,
         doc="""
         amount each participant is rewarded for having different choices
         """
@@ -38,21 +41,24 @@ class Treatment(ptree.models.BaseTreatment):
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     participants_per_match = 2
 
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     choice = models.CharField(
-        null=True,
-        max_length=2,
+        default=None,
         choices=['A', 'B'],
         doc='either A or B',
     )
@@ -70,10 +76,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-
-    return [
-        Treatment.create(
-            match_amount = 10,
-            mismatch_amount = 0,
-        )
-    ]
+    return [Treatment.create()]

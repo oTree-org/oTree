@@ -21,32 +21,39 @@ class Subsession(ptree.models.BaseSubsession):
 
 class Treatment(ptree.models.BaseTreatment):
 
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     amount_allocated = models.MoneyField(
+        default=1.00,
         doc="""Initial amount allocated to each participant"""
     )
 
     increment_amount = models.MoneyField(
+        default=0.05,
         doc="""The increment between amount choices (in cents)"""
     )
 
 
 class Match(ptree.models.BaseMatch):
-
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
     participants_per_match = 2
 
 
 
     sent_amount = models.MoneyField(
-        null=True,
+        default=None,
         doc="""Amount sent by P1""",
+        choices=money_range(0,1,0.05),
     )
 
     sent_back_amount = models.MoneyField(
-        null=True,
+        default=None,
         doc="""Amount sent back by P2""",
     )
 
@@ -69,9 +76,11 @@ class Match(ptree.models.BaseMatch):
 
 class Participant(ptree.models.BaseParticipant):
 
+    # <built-in>
     match = models.ForeignKey(Match, null=True)
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     def set_payoff(self):
         """Method to calculate payoff for each participant"""
@@ -82,7 +91,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-    return [Treatment.create(
-        amount_allocated=1.00,
-        increment_amount=0.05
-    )]
+    return [Treatment.create()]

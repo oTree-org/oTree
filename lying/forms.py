@@ -1,7 +1,8 @@
 import lying.models as models
 import ptree.forms
 from lying.utilities import Form
-
+from ptree.common import Money, money_range
+from decimal import Decimal
 
 class CoinFlipForm(Form):
 
@@ -14,4 +15,6 @@ class CoinFlipForm(Form):
             return 'Number of heads cannot be more than {}'.format(self.treatment.number_of_flips)
 
     def choices(self):
-        return {'number_of_heads': range(0, self.treatment.number_of_flips + 1)}
+        return {
+            'number_of_heads': range(0, self.treatment.number_of_flips + 1),
+        }

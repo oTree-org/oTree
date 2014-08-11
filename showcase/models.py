@@ -17,54 +17,57 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
-    subsession = models.ForeignKey(Subsession)
 
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     participants_per_match = 1
 
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     demo_field1 = models.CharField(
-        null=True,
-        max_length=4,
+        default=None,
         choices=(('yes', 'yes'), ('no', 'no')),
         doc="""
         field With radiobutton input.
         """
     )
     demo_field2 = models.TextField(
-        null=True,
+        default=None,
         doc="""
         field with textarea input
         """
     )
     demo_field3 = models.CharField(
-        null=True,
-        max_length=50,
+        default=None,
         doc="""
         field with text input
         """
     )
     demo_field4 = models.CharField(
-        null=True,
-        max_length=10,
+        default=None,
         choices=(('accept', 'accept'), ('reject', 'reject')),
         doc="""
         field with select choices input
         """
     )
     demo_field5 = models.PositiveIntegerField(
-        null=True,
+        default=None,
         doc="""
         field with positive integers and only odd numbers - see form validation
         """

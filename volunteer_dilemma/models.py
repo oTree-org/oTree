@@ -23,12 +23,13 @@ class Treatment(ptree.models.BaseTreatment):
 
 
     volunteer_cost = models.MoneyField(
-        null=True,
+        default=0.40,
         doc="""
         Cost incurred by volunteering
         """)
+
     general_benefit = models.MoneyField(
-        null=True,
+        default=1.00,
         doc="""
         General benefit for all the participants, If at least one volunteers
         """
@@ -45,13 +46,16 @@ class Match(ptree.models.BaseMatch):
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
+    # </built-in>
 
     decision = models.CharField(
-        null=True,
-        max_length=10,
+        default=None,
         choices=['Volunteer', 'Ignore'],
         doc="""
         Participant's decision to volunteer
@@ -74,7 +78,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-    return [Treatment.create(
-        volunteer_cost=40,
-        general_benefit=100,
-    )]
+    return [Treatment.create()]

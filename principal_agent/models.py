@@ -22,10 +22,13 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
+
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     fixed_payment = models.MoneyField(
-        null=True,
+        default=7.00,
         doc="""
         Principal's fixed pay range: given as a range e.g -300 > x < 300
         """
@@ -34,42 +37,44 @@ class Treatment(ptree.models.BaseTreatment):
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     total_return = models.MoneyField(
-        null=True,
+        default=None,
         doc="""
         Total return from agent's effort = 70×(Agent Work effort)
         """
     )
     agent_fixed_pay = models.MoneyField(
-        null=True,
+        default=None,
         doc="""
         Amount offered as fixed pay to the agent.
         """
     )
     agent_return_share = models.MoneyField(
-        null=True,
+        default=None,
         doc="""
         Share of the total return
         """
     )
     agent_work_effort = models.PositiveIntegerField(
-        null=True,
+        default=None,
         doc="""
         Agent's work effort, ranging from 1-10: 1-lowest 10-highest
         """
     )
     agent_work_costs = models.MoneyField(
-        null=True,
+        default=None,
         doc="""
         Costs of work effort for agent
         """
     )
 
     decision = models.CharField(
-        max_length=10, null=True, verbose_name='What is your decision?',
+        default=None, verbose_name='What is your decision?',
         choices=['Accept', 'Reject'],
         doc="""Agent's decision"""
     )
@@ -98,12 +103,14 @@ class Match(ptree.models.BaseMatch):
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     def set_payoff(self):
-        #FIXME: move this to the match object, and use match.get_participant
+        #FIXME: move this to the match object, and use match.get_participant_by_index
         # TODO: re-structure payoff calculations to avoid negative payoffs
         if self.match.decision == 'Reject':
             if self.index_among_participants_in_match == 1:
@@ -127,5 +134,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-
-    return [Treatment.create(fixed_payment=700)]
+    return [Treatment.create()]

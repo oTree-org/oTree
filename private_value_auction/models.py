@@ -6,9 +6,11 @@ import ptree.models
 from ptree.common import Money, money_range
 import random
 
+
 doc = """
-In Private Value Auction Game. There are two participants anonymously paired. Each of the participants will submit a
-bid for a prize being sold in an auction. The winner is the participant with the highest bid value.
+In Private Value Auction Game. Consists of multiple participants. Each participant submits a
+bid for a prize being sold in an auction. The prize value is privately known to each participant and therefore
+uncertainty on the other participant's value. The winner is the participant with the highest bid value.
 
 <p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/private_value_auction">here</a></p>
 """
@@ -27,10 +29,13 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
+
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     price_value = models.MoneyField(
-        null=True,
+        default=2.00,
         doc="""
         Price value of the prize being sold in the auction
         """
@@ -39,24 +44,28 @@ class Treatment(ptree.models.BaseTreatment):
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     participants_per_match = 1
 
     def bid_choices(self):
         """Range of allowed bid values"""
-        return money_range(0, self.treatment.price_value, 0.05)
+        return money_range(0, self.treatment.price_value-0.2, 0.05) # range less than price value **uncertain aspect
 
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     bid_amount = models.MoneyField(
-        null=True,
+        default=None,
         doc="""
         Amount bidded by each participant
         """
@@ -81,5 +90,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-
-    return [Treatment.create(price_value=2.00)]
+    return [Treatment.create()]

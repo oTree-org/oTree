@@ -1,0 +1,18 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>You bidded {{ bid_amount }}.</p>
+    {% if is_winner %}
+        <p>You won the auction; your payoff therefore is {{ payoff }}.</p>
+    {% else %}
+        <p>You did not win the auction; your payoff therefore is {{ payoff }}.</p>
+    {% endif %}
+
+{% endblock %}

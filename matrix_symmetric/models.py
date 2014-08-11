@@ -20,35 +20,41 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
-    subsession = models.ForeignKey(Subsession)
 
-    self_A_other_A = models.MoneyField()
-    self_A_other_B = models.MoneyField()
-    self_B_other_A = models.MoneyField()
-    self_B_other_B = models.MoneyField()
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
+    self_A_other_A = models.MoneyField(default=0.10)
+    self_A_other_B = models.MoneyField(default=0.00)
+    self_B_other_A = models.MoneyField(default=0.30)
+    self_B_other_B = models.MoneyField(default=0.40)
 
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     participants_per_match = 2
 
 
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     def other_participant(self):
         """Returns other participant in match"""
         return self.other_participants_in_match()[0]
 
     decision = models.CharField(
-        null=True,
-        max_length=2,
+        default=None,
         choices=['A','B'],
         doc='either A or B',
     )
@@ -70,10 +76,4 @@ class Participant(ptree.models.BaseParticipant):
 
 
 def treatments():
-
-    return [Treatment.create(
-        self_A_other_A=0.10,
-        self_A_other_B=0.00,
-        self_B_other_A=0.30,
-        self_B_other_B=0.40
-    )]
+    return [Treatment.create()]

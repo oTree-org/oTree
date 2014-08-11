@@ -19,34 +19,41 @@ class Subsession(ptree.models.BaseSubsession):
 
 class Treatment(ptree.models.BaseTreatment):
 
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     amount_allocated = models.MoneyField(
-        null=True,
+        default=3.00,
         doc="""Amount allocated to each participant"""
     )
 
-    multiplication_factor = models.DecimalField(
-        null=True,
-        decimal_places=1,
-        max_digits=2,
+    multiplication_factor = models.FloatField(
+        default=1.6,
         doc="""The multiplication factor in group contribution"""
     )
+
+    def contribute_choices(self):
+        """Returns a list of allowed values for contribution"""
+        return money_range(0, self.amount_allocated, 0.10)
 
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
     participants_per_match = 4
 
     contributions = models.MoneyField(
-        null=True,
+        default=None,
         doc="""Total amount contributed by the group players"""
     )
 
     individual_share = models.MoneyField(
-        null=True,
+        default=None,
         doc="""The amount each player in the group receives out of the the total contributed (after multiplication by some factor)"""
     )
 
@@ -56,17 +63,19 @@ class Match(ptree.models.BaseMatch):
 
     def set_individual_share(self):
         """Calculates the amount each player in a group receives from the joint project"""
-        self.individual_share = int((self.contributions * self.treatment.multiplication_factor) / self.participants_per_match)
+        self.individual_share = self.contributions * self.treatment.multiplication_factor / self.participants_per_match
 
 
 class Participant(ptree.models.BaseParticipant):
 
+    # <built-in>
     match = models.ForeignKey(Match, null=True)
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     contributed_amount = models.MoneyField(
-        null=True,
+        default=None,
         doc="""The amount contributed by the player"""
     )
 
@@ -74,11 +83,7 @@ class Participant(ptree.models.BaseParticipant):
         """Calculate participant payoff"""
         self.payoff = (self.treatment.amount_allocated - self.contributed_amount) + self.match.individual_share
 
-    def contribute_choices(self):
-        """Returns a list of allowed values for contribution"""
-        return money_range(0, self.treatment.amount_allocated, 0.10)
 
 
 def treatments():
-
-    return [Treatment.create(amount_allocated=3.00, multiplication_factor=1.6)]
+    return [Treatment.create()]

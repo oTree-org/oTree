@@ -18,52 +18,47 @@ class Subsession(ptree.models.BaseSubsession):
 
 
 class Treatment(ptree.models.BaseTreatment):
+
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
-    rowAcolumnA_row = models.MoneyField()
-    rowAcolumnA_column = models.MoneyField()
+    rowAcolumnA_row = models.MoneyField(default=0.20)
+    rowAcolumnA_column = models.MoneyField(default=0.30)
 
-    rowAcolumnB_row = models.MoneyField()
-    rowAcolumnB_column = models.MoneyField()
+    rowAcolumnB_row = models.MoneyField(default=0.40)
+    rowAcolumnB_column = models.MoneyField(default=0.10)
 
-    rowBcolumnA_row = models.MoneyField()
-    rowBcolumnA_column = models.MoneyField()
+    rowBcolumnA_row = models.MoneyField(default=0.05)
+    rowBcolumnA_column = models.MoneyField(default=0.45)
 
-    rowBcolumnB_row = models.MoneyField()
-    rowBcolumnB_column = models.MoneyField()
+    rowBcolumnB_row = models.MoneyField(default=0.15)
+    rowBcolumnB_column = models.MoneyField(default=0.25)
 
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     participants_per_match = 2
 
-    def row_participant(self):
-        for p in self.participants():
-            if p.role() == 'row':
-                return p
-
-    def column_participant(self):
-        for p in self.participants():
-            if p.role() == 'column':
-                return p
-
-
 class Participant(ptree.models.BaseParticipant):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     def other_participant(self):
         """Returns other participant in match"""
         return self.other_participants_in_match()[0]
 
     decision = models.CharField(
-        null=True,
-        max_length=2,
+        default=None,
         choices=['A', 'B'],
         doc='either A or B',
     )
@@ -92,30 +87,17 @@ class Participant(ptree.models.BaseParticipant):
                     'B': self.treatment.rowBcolumnB_column,
                 }
             }
-        self.payoff = payoff_matrix[self.match.row_participant().decision][self.match.column_participant().decision]
+
+        row_participant = self.match.get_participant_by_role('row')
+        column_participant = self.match.get_participant_by_role('column')
+        self.payoff = payoff_matrix[row_participant.decision][column_participant.decision]
 
     def role(self):
-
-        roles = {
-            1: 'row',
-            2: 'column'
-        }
-
-        return roles[self.index_among_participants_in_match]
+        if self.index_among_participants_in_match == 1:
+            return 'row'
+        if self.index_among_participants_in_match == 2:
+            return 'column'
 
 
 def treatments():
-
-    return [Treatment.create(
-        rowAcolumnA_row=20,
-        rowAcolumnA_column=30,
-
-        rowAcolumnB_row=40,
-        rowAcolumnB_column=10,
-
-        rowBcolumnA_row=5,
-        rowBcolumnA_column=45,
-
-        rowBcolumnB_row=15,
-        rowBcolumnB_column=25,
-    )]
+    return [Treatment.create()]

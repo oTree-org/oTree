@@ -14,6 +14,9 @@ class ParticipantBot(Bot):
         assert (self.treatment.amount_allocated == 1.00)
         assert (self.match.participants_per_match == 2)
 
+        sent_amount = 0.5
+        sent_back_amount = 0.7
+
         # start game
         self.submit(views.Introduction)
 
@@ -30,10 +33,10 @@ class ParticipantBot(Bot):
 
     def play_p1(self):
         self.submit(views.Send,
-                    {"sent_amount": random.choice(self.match.send_choices())})
+                    {"sent_amount": 0.5})
 
     def play_p2(self):
-        self.submit(views.SendBack, {'sent_back_amount': 2.00})
+        self.submit(views.SendBack, {'sent_back_amount': 0.7})
 
 
 

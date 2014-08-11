@@ -11,7 +11,9 @@ class ParticipantBot(Bot):
     def play(self):
 
         # each player makes random decision
-        self.submit(views.Decision, {"decision": random.choice(self.participant.DECISION_CHOICES)[0]})
+        decision = random.choice((('Cooperate', 'Cooperate'), ('Defect', 'Defect')))[0]
+
+        self.submit(views.Decision, {"decision": decision})
 
         # submit results
         self.submit(views.Results)

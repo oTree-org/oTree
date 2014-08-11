@@ -23,29 +23,34 @@ class Subsession(ptree.models.BaseSubsession):
 
 class Treatment(ptree.models.BaseTreatment):
 
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     initial_amount = models.MoneyField(
-        null=True,
+        default=1.00,
         doc="""The value of the pennies given to each player"""
     )
 
 class Match(ptree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     participants_per_match = 2
 
 
 class Participant(ptree.models.BaseParticipant):
 
+    # <built-in>
     match = models.ForeignKey(Match, null=True)
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     penny_side = models.CharField(
-        max_length=5,
         choices=['heads', 'tails'],
         doc="""Heads or tails"""
     )
@@ -65,13 +70,11 @@ class Participant(ptree.models.BaseParticipant):
             self.payoff = 0
 
     def role(self):
-        roles = {
-            1: 'matcher',
-            2: 'mismatcher'
-        }
-        return roles[self.index_among_participants_in_match]
+        if self.index_among_participants_in_match == 1:
+            return 'matcher'
+        if self.index_among_participants_in_match == 2:
+            return 'mismatcher'
 
 
 def treatments():
-
-    return [Treatment.create(initial_amount=1.00)]
+    return [Treatment.create()]
