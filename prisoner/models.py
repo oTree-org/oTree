@@ -4,10 +4,8 @@ import ptree.models
 
 
 doc = """
-Prisoner's dilemma game. Single treatment. Two players are asked separately whether they want to cooperate or Defect.
-Their choices directly determine the payoffs.
-
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/prisoner">here</a></p>
+Prisoner's dilemma game. Single treatment. Two players are asked separately whether they want to cooperate or defect.
+Their choices directly determine the payoffs. Source code <a href="https://github.com/wickens/ptree_library/tree/master/prisoner" target="_blank">here</a>.
 """
 
 
@@ -23,21 +21,21 @@ class Treatment(ptree.models.BaseTreatment):
     # </built-in>
 
     betray_amount = models.MoneyField(
-        doc="""amount a participant makes if he chooses 'Defect' and the other chooses 'Cooperate'""",
+        doc="""amount a player makes if he chooses 'defect' and the other chooses 'cooperate'""",
         default=0.30,
     )
 
     friend_amount = models.MoneyField(
-        doc="""amount both participants make if both participants choose 'Cooperate'""",
+        doc="""amount both players make if both choose 'cooperate'""",
         default=0.20,
     )
     betrayed_amount = models.MoneyField(
-        doc="""amount a participant makes if he chooses 'Cooperate' and the other chooses 'Defect'""",
+        doc="""amount a player makes if he chooses 'cooperate' and the other chooses 'defect'""",
         default=0.10,
     )
 
     enemy_amount = models.MoneyField(
-        doc="""amount both participants make if both participants choose 'Defect'""",
+        doc="""amount both players make if both choose 'defect'""",
         default=0.00,
     )
 
@@ -63,23 +61,24 @@ class Participant(ptree.models.BaseParticipant):
     decision = models.CharField(
         default=None, verbose_name='What is your decision?',
         choices=['Cooperate', 'Defect'],
-        doc="""This participant's decision"""
+        doc="""This player's decision"""
     )
 
     def other_participant(self):
-        """Returns other participant in match"""
+        """Return other player in match"""
         return self.other_participants_in_match()[0]
 
     def set_payoff(self):
-        """Calculate participant payoff"""
+        """Calculate player payoff"""
         payoff_matrix = {'Cooperate': {'Cooperate': self.treatment.friend_amount,
                                        'Defect': self.treatment.betrayed_amount},
                          'Defect':   {'Cooperate': self.treatment.betray_amount,
-                                       'Defect': self.treatment.enemy_amount}}
+                                      'Defect': self.treatment.enemy_amount}}
 
         self.payoff = (payoff_matrix[self.decision]
                                     [self.other_participant().decision])
 
 
 def treatments():
+
     return [Treatment.create()]

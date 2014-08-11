@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 import prisoner.forms as forms
-from prisoner.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
-import time
+from prisoner.utilities import Page, MatchWaitPage
 
 
 class Decision(Page):
 
     """This page has the instructions and this is where the decision is made.
-    Presented to both participants in a match at the same time"""
+    Presented to both players in a match at the same time"""
 
     template_name = 'prisoner/Decision.html'
 
@@ -35,7 +33,7 @@ class ResultsWaitPage(MatchWaitPage):
 
 class Results(Page):
 
-    """Results page to show participants the decisions that were made and print the payoffs"""
+    """Results page to show players the decisions that were made and print the payoffs"""
 
     template_name = 'prisoner/Results.html'
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from ptree.db import models
 import ptree.models
 
