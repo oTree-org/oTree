@@ -59,7 +59,7 @@ class Participant(ptree.models.BaseParticipant):
     request_amount = models.MoneyField(
         default=None,
         doc="""
-        Amount requested by each participant..
+        Amount requested by this participant..
         """
     )
 

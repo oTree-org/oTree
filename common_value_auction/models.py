@@ -68,7 +68,7 @@ class Participant(ptree.models.BaseParticipant):
     bid_amount = models.MoneyField(
         default=None,
         doc="""
-        Amount bidded by each participant
+        Amount bidded by the participant
         """
     )
 

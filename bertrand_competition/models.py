@@ -60,14 +60,14 @@ class Participant(ptree.models.BaseParticipant):
     price = models.MoneyField(
         default=None,
         doc="""
-        Target price by a given participant.
+        The participant's target price
         """
     )
 
     is_winner = models.BooleanField(
         default=False,
         doc="""
-        Shows the winner in the competition.
+        Whether this participant is the winner of the match
         """
     )
 

@@ -29,8 +29,7 @@ class Decision(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
-            p.set_payoff()
+        self.match.set_payoffs()
 
 
 class Results(Page):

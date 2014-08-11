@@ -26,7 +26,10 @@ class Treatment(ptree.models.BaseTreatment):
     rowAcolumnA_row = models.MoneyField(default=0.20)
     rowAcolumnA_column = models.MoneyField(default=0.30)
 
-    rowAcolumnB_row = models.MoneyField(default=0.40)
+    rowAcolumnB_row = models.MoneyField(
+        default=0.40,
+        doc='''Amount row player gets, if row player chooses A and column player chooses B'''
+    )
     rowAcolumnB_column = models.MoneyField(default=0.10)
 
     rowBcolumnA_row = models.MoneyField(default=0.05)
@@ -45,6 +48,36 @@ class Match(ptree.models.BaseMatch):
 
     participants_per_match = 2
 
+    def set_payoffs(self):
+        row_participant = self.match.get_participant_by_role('row')
+        column_participant = self.match.get_participant_by_role('column')
+
+        row_matrix = {
+            'A': {
+                'A': self.treatment.rowAcolumnA_row,
+                'B': self.treatment.rowAcolumnB_row,
+            },
+            'B': {
+                'A': self.treatment.rowBcolumnA_row,
+                'B': self.treatment.rowBcolumnB_row,
+            }
+        }
+
+        column_matrix = {
+            'A': {
+                'A': self.treatment.rowAcolumnA_column,
+                'B': self.treatment.rowAcolumnB_column,
+            },
+            'B': {
+                'A': self.treatment.rowBcolumnA_column,
+                'B': self.treatment.rowBcolumnB_column,
+            }
+        }
+
+        row_participant.payoff = row_matrix[row_participant.decision][column_participant.decision]
+        column_participant.payoff = column_matrix[row_participant.decision][column_participant.decision]
+
+
 class Participant(ptree.models.BaseParticipant):
 
     # <built-in>
@@ -62,35 +95,6 @@ class Participant(ptree.models.BaseParticipant):
         choices=['A', 'B'],
         doc='either A or B',
     )
-
-    def set_payoff(self):
-        if self.role() == 'row':
-            payoff_matrix = {
-                'A': {
-                    'A': self.treatment.rowAcolumnA_row,
-                    'B': self.treatment.rowAcolumnB_row,
-                },
-                'B': {
-                    'A': self.treatment.rowBcolumnA_row,
-                    'B': self.treatment.rowBcolumnB_row,
-                }
-            }
-
-        else: #column
-            payoff_matrix = {
-                'A': {
-                    'A': self.treatment.rowAcolumnA_column,
-                    'B': self.treatment.rowAcolumnB_column,
-                },
-                'B': {
-                    'A': self.treatment.rowBcolumnA_column,
-                    'B': self.treatment.rowBcolumnB_column,
-                }
-            }
-
-        row_participant = self.match.get_participant_by_role('row')
-        column_participant = self.match.get_participant_by_role('column')
-        self.payoff = payoff_matrix[row_participant.decision][column_participant.decision]
 
     def role(self):
         if self.index_among_participants_in_match == 1:
