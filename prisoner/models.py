@@ -5,7 +5,8 @@ import ptree.models
 
 doc = """
 Prisoner's dilemma game. Single treatment. Two players are asked separately whether they want to cooperate or defect.
-Their choices directly determine the payoffs. Source code <a href="https://github.com/wickens/ptree_library/tree/master/prisoner" target="_blank">here</a>.
+Their choices directly determine the payoffs.
+Source code <a href="https://github.com/wickens/ptree_library/tree/master/prisoner" target="_blank">here</a>.
 """
 
 
@@ -64,7 +65,7 @@ class Participant(ptree.models.BaseParticipant):
         doc="""This player's decision"""
     )
 
-    def other_participant(self):
+    def other_player(self):
         """Return other player in match"""
         return self.other_participants_in_match()[0]
 
@@ -76,7 +77,7 @@ class Participant(ptree.models.BaseParticipant):
                                       'Defect': self.treatment.enemy_amount}}
 
         self.payoff = (payoff_matrix[self.decision]
-                                    [self.other_participant().decision])
+                                    [self.other_player().decision])
 
 
 def treatments():

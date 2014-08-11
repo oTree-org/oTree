@@ -24,7 +24,7 @@ class Decision(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def body_text(self):
-        return 'Waiting for the other participant to make a decision.'
+        return 'Waiting for the other player to make a decision.'
 
     def action(self):
         for p in self.match.participants():
@@ -40,8 +40,8 @@ class Results(Page):
     def variables_for_template(self):
         return {'my_payoff': self.participant.payoff,
                 'my_decision': self.participant.decision.lower(),
-                'other_participant_decision': self.participant.other_participant().decision.lower(),
-                'same_choice': self.participant.decision == self.participant.other_participant().decision}
+                'other_player_decision': self.participant.other_player().decision.lower(),
+                'same_choice': self.participant.decision == self.participant.other_player().decision}
 
 
 def pages():

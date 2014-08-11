@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
-"""Documentation at http://django-ptree.readthedocs.org/en/latest/app.html"""
 from ptree.db import models
 import ptree.models
-from ptree.common import money_range, Money
+from ptree.common import money_range
 
 
 doc = """
 Trust game. Single treatment. Both players are given an initial sum.
 One player may give part of the sum to the other player, who actually receives triple the amount.
 The second player may then give part of the now-tripled amount back to the first player.
-
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/trust">here</a></p>
+Source code <a href="https://github.com/wickens/ptree_library/tree/master/trust" target="_blank">here</a>.
 """
 
 
@@ -37,6 +35,7 @@ class Treatment(ptree.models.BaseTreatment):
 
 
 class Match(ptree.models.BaseMatch):
+
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
