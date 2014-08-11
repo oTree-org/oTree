@@ -7,6 +7,5 @@ from lab_results.utilities import Bot
 class ParticipantBot(Bot):
 
     def play(self):
+
         pass
-
-

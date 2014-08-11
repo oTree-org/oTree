@@ -27,7 +27,7 @@ class Treatment(ptree.models.BaseTreatment):
         default=0.30,
     )
 
-    friends_amount = models.MoneyField(
+    friend_amount = models.MoneyField(
         doc="""amount both participants make if both participants choose 'Cooperate'""",
         default=0.20,
     )
@@ -36,7 +36,7 @@ class Treatment(ptree.models.BaseTreatment):
         default=0.10,
     )
 
-    enemies_amount = models.MoneyField(
+    enemy_amount = models.MoneyField(
         doc="""amount both participants make if both participants choose 'Defect'""",
         default=0.00,
     )
@@ -72,10 +72,10 @@ class Participant(ptree.models.BaseParticipant):
 
     def set_payoff(self):
         """Calculate participant payoff"""
-        payoff_matrix = {'Cooperate': {'Cooperate': self.treatment.friends_amount,
+        payoff_matrix = {'Cooperate': {'Cooperate': self.treatment.friend_amount,
                                        'Defect': self.treatment.betrayed_amount},
                          'Defect':   {'Cooperate': self.treatment.betray_amount,
-                                       'Defect': self.treatment.enemies_amount}}
+                                       'Defect': self.treatment.enemy_amount}}
 
         self.payoff = (payoff_matrix[self.decision]
                                     [self.other_participant().decision])

@@ -1,10 +1,7 @@
-"""Documentation at http://django-ptree.readthedocs.org/en/latest/app.html"""
-
 from ptree.db import models
 import ptree.models
 
-
-doc="""
+doc = """
 Page that shows the results of the session.
 """
 
@@ -19,7 +16,8 @@ class Treatment(ptree.models.BaseTreatment):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-                
+
+
 class Match(ptree.models.BaseMatch):
 
     # <built-in>
