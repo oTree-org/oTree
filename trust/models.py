@@ -25,12 +25,12 @@ class Treatment(ptree.models.BaseTreatment):
 
     amount_allocated = models.MoneyField(
         default=1.00,
-        doc="""Initial amount allocated to each participant"""
+        doc="""Initial amount allocated to each player"""
     )
 
     increment_amount = models.MoneyField(
         default=0.05,
-        doc="""The increment between amount choices (in cents)"""
+        doc="""The increment between amount choices"""
     )
 
 
@@ -43,12 +43,10 @@ class Match(ptree.models.BaseMatch):
 
     participants_per_match = 2
 
-
-
     sent_amount = models.MoneyField(
         default=None,
         doc="""Amount sent by P1""",
-        choices=money_range(0,1,0.05),
+        choices=money_range(0, 1, 0.05),
     )
 
     sent_back_amount = models.MoneyField(
@@ -64,11 +62,11 @@ class Match(ptree.models.BaseMatch):
         """Range of allowed values during send back"""
         return money_range(0, self.sent_amount * 3, self.treatment.increment_amount)
 
-    def get_payoff_participant_1(self):
-        """Calculate P1 one payoff"""
+    def get_payoff_player_1(self):
+        """Calculate P1 payoff"""
         return self.treatment.amount_allocated - self.sent_amount + self.sent_back_amount
 
-    def get_payoff_participant_2(self):
+    def get_payoff_player_2(self):
         """Calculate P2 payoff"""
         return self.treatment.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
 
@@ -82,12 +80,13 @@ class Participant(ptree.models.BaseParticipant):
     # </built-in>
 
     def set_payoff(self):
-        """Method to calculate payoff for each participant"""
+        """Calculate payoff for each player"""
         if self.index_among_participants_in_match == 1:
-            self.payoff = self.match.get_payoff_participant_1()
+            self.payoff = self.match.get_payoff_player_1()
         elif self.index_among_participants_in_match == 2:
-            self.payoff = self.match.get_payoff_participant_2()
+            self.payoff = self.match.get_payoff_player_2()
 
 
 def treatments():
+
     return [Treatment.create()]

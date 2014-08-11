@@ -37,6 +37,3 @@ class ParticipantBot(Bot):
 
     def play_p2(self):
         self.submit(views.SendBack, {'sent_back_amount': 0.7})
-
-
-
