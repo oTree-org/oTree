@@ -1,5 +1,3 @@
-import otree.test
-from otree.common import Money, money_range
 import dictator.views as views
 from dictator.utilities import Bot
 import random
@@ -23,6 +21,5 @@ class PlayerBot(Bot):
         self.submit(views.Results)
 
     def play_p1(self):
+
         self.submit(views.Offer, {"offer_amount": random.choice(self.match.offer_choices())})
-
-

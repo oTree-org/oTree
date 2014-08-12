@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import dictator.models as models
 from dictator.utilities import Form
-import otree.forms
 
 
 class OfferForm(Form):
