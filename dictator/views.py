@@ -26,8 +26,7 @@ class Offer(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.players:
-            p.set_payoff()
+        self.match.set_payoffs()
 
     def body_text(self):
         if self.player.index_among_players_in_match == 2:
