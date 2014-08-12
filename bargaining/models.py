@@ -4,7 +4,6 @@
 from otree.db import models
 import otree.models
 from otree.common import Money, money_range
-from bargaining.utilities import BaseMatch
 
 doc = """
 <p>
@@ -36,7 +35,7 @@ class Treatment(otree.models.BaseTreatment):
     )
 
 
-class Match(BaseMatch):
+class Match(otree.models.BaseMatch):
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
