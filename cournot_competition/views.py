@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import cournot_competition.forms as forms
 from cournot_competition.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Introduction(Page):
@@ -22,7 +22,7 @@ class Compete(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
 class Results(Page):
@@ -33,9 +33,9 @@ class Results(Page):
     def variables_for_template(self):
 
         return {
-            'payoff': self.participant.payoff,
-            'quantity': self.participant.quantity,
-            'other_quantity': self.participant.other_participant().quantity,
+            'payoff': self.player.payoff,
+            'quantity': self.player.quantity,
+            'other_quantity': self.player.other_player().quantity,
             'price': self.match.price
         }
 

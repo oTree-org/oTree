@@ -1,22 +1,22 @@
-"""Documentation at http://django-ptree.readthedocs.org/en/latest/app.html"""
+"""Documentation at http://django-otree.readthedocs.org/en/latest/app.html"""
 
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
 
 doc="""
 In this game you are required to get a coin and flip it a number of times, while counting the number of heads
 you get. The payoff will be calculated by the number of heads that comes up.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/lying">here</a></p>
+<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/lying">here</a></p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
     name_in_url = 'lying'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -26,17 +26,17 @@ class Treatment(ptree.models.BaseTreatment):
     payoff_per_head = models.MoneyField(0.10)
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 1
+    players_per_match = 1
 
 
-class Participant(ptree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     subsession = models.ForeignKey(Subsession)
     match = models.ForeignKey(Match, null=True)

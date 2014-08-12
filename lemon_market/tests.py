@@ -1,10 +1,10 @@
-import ptree.test
+import otree.test
 import lemon_market.views as views
 from lemon_market.utilities import Bot
 import random
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 

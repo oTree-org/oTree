@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
 
 doc = """
-In Coordination game, There are two participants which are required to choose either A or B.
-If both Participants chooses the same choice then they both wins, otherwise they loose.
+In Coordination game, There are two players which are required to choose either A or B.
+If both Players chooses the same choice then they both wins, otherwise they loose.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/coordination">here</a></p>
+<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/coordination">here</a></p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'coordination'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -27,29 +27,39 @@ class Treatment(ptree.models.BaseTreatment):
     match_amount = models.MoneyField(
         default=1.00,
         doc="""
-        amount each participant is rewarded for having match choices
+        amount each player is rewarded for having match choices
         """
     )
 
     mismatch_amount = models.MoneyField(
         default=0.00,
         doc="""
-        amount each participant is rewarded for having different choices
+        amount each player is rewarded for having different choices
         """
     )
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    def z(self): self.players = [Player()]
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
+
+    def set_payoffs(self):
+        p1 = self.get_player_by_index(1)
+        p2 = self.get_player_by_index(2)
+
+        if p1.choice == p2.choice:
+            p1.payoff = p2.payoff = self.treatment.match_amount
+        else:
+            p1.payoff = p2.payoff = self.treatment.mismatch_amount
 
 
-class Participant(ptree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -63,16 +73,9 @@ class Participant(ptree.models.BaseParticipant):
         doc='either A or B',
     )
 
-    def other_participant(self):
-        """Returns other participant in match"""
-        return self.other_participants_in_match()[0]
-
-    def set_payoff(self):
-
-        if self.choice == self.other_participant().choice:
-            self.payoff = self.treatment.match_amount
-        else:
-            self.payoff = self.treatment.mismatch_amount
+    def other_player(self):
+        """Returns other player in match"""
+        return self.other_players_in_match()[0]
 
 
 def treatments():

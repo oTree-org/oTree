@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
 
 doc = """
 <p>
-    In Principal Agent Game, there are two participants: One acts as the Agent and the other acts as the
+    In Principal Agent Game, there are two players: One acts as the Agent and the other acts as the
     Principal. The Principal offers a contract to the Agent, which can be accepted or rejected.
 </p>
 <p>
-    Source code <a href="https://github.com/wickens/ptree_library/tree/master/principal_agent">here</a>
+    Source code <a href="https://github.com/wickens/otree_library/tree/master/principal_agent">here</a>
 </p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'principal_agent'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -35,7 +35,7 @@ class Treatment(ptree.models.BaseTreatment):
     )
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
@@ -98,10 +98,10 @@ class Match(ptree.models.BaseMatch):
 
         self.agent_work_costs = efforts_to_costs[self.agent_work_effort]
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(ptree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -110,10 +110,10 @@ class Participant(ptree.models.BaseParticipant):
     # </built-in>
 
     def set_payoff(self):
-        #FIXME: move this to the match object, and use match.get_participant_by_index
+        #FIXME: move this to the match object, and use match.get_player_by_index
         # TODO: re-structure payoff calculations to avoid negative payoffs
         if self.match.decision == 'Reject':
-            if self.index_among_participants_in_match == 1:
+            if self.index_among_players_in_match == 1:
                 self.payoff = 0
             else:
                 self.payoff = 100
@@ -121,7 +121,7 @@ class Participant(ptree.models.BaseParticipant):
             self.match.calculate_agent_work_cost()
             self.match.calculate_total_return()
 
-            if self.index_among_participants_in_match == 1:  # principal
+            if self.index_among_players_in_match == 1:  # principal
                 # [100% – Agent's return share in %]×(total return) – fixed payment
                 # if payoff < 0 ..then make it 0 - no negative payoffs
                 calc_payoff = (0.01 * (100 - self.match.agent_return_share) * self.match.total_return) - self.match.agent_fixed_pay

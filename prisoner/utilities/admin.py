@@ -1,10 +1,10 @@
 from django.contrib import admin
 import prisoner.models as models
-import ptree.adminlib as adminlib
+import otree.adminlib as adminlib
 
-class ParticipantAdmin(adminlib.ParticipantAdmin):
-    readonly_fields = adminlib.get_readonly_fields(models.Participant)
-    list_display = adminlib.get_list_display(models.Participant, readonly_fields)
+class PlayerAdmin(adminlib.PlayerAdmin):
+    readonly_fields = adminlib.get_readonly_fields(models.Player)
+    list_display = adminlib.get_list_display(models.Player, readonly_fields)
 
 class MatchAdmin(adminlib.MatchAdmin):
     readonly_fields = adminlib.get_readonly_fields(models.Match)
@@ -18,7 +18,7 @@ class SubsessionAdmin(adminlib.SubsessionAdmin):
     readonly_fields = adminlib.get_readonly_fields(models.Subsession)
     list_display = adminlib.get_list_display(models.Subsession, readonly_fields)
 
-admin.site.register(models.Participant, ParticipantAdmin)
+admin.site.register(models.Player, PlayerAdmin)
 admin.site.register(models.Match, MatchAdmin)
 admin.site.register(models.Treatment, TreatmentAdmin)
 admin.site.register(models.Subsession, SubsessionAdmin)

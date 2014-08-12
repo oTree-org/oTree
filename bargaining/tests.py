@@ -1,10 +1,10 @@
-import ptree.test
-from ptree.common import Money, money_range
+import otree.test
+from otree.common import Money, money_range
 import bargaining.views as views
 from bargaining.utilities import Bot
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 

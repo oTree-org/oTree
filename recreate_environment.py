@@ -6,7 +6,7 @@ import os
 import commit_and_push
 
 heroku_apps = {
-    'demo': 'ptree-demo',
+    'demo': 'otree-demo',
 }
 
 def main():
@@ -15,7 +15,7 @@ def main():
     syncdb = 'python manage.py syncdb --traceback'
 
     if environment == 'local':
-        open('_ptree_experiments/db.sqlite3', 'w').write('')
+        open('_otree_experiments/db.sqlite3', 'w').write('')
         os.system(syncdb)
         # then launch from PyCharm
     else:

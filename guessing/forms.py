@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import guessing.models as models
 from guessing.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class GuessForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['guess_value']
 
     def labels(self):

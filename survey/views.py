@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 import survey.forms as forms
 from survey.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 class Start(Page):
 
     template_name = 'survey/Start.html'
 
     def variables_for_template(self):
-        if self.participant.payoff is None:
-            self.participant.set_payoff()
+        if self.player.payoff is None:
+            self.player.set_payoff()
 
     def body_text(self):
-        return "Waiting for the other participants."
+        return "Waiting for the other players."
 
 
 class Demographics(Page):
@@ -27,7 +27,7 @@ class CognitiveReflectionTest(Page):
     template_name = 'survey/Survey.html'
 
     def after_valid_form_submission(self):
-        self.participant.crt_bat = self.participant.crt_bat_float * 100
+        self.player.crt_bat = self.player.crt_bat_float * 100
 
 
 class End(Page):

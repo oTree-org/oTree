@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
 
 doc = """
 <p>
-    In Stackelberg Competition, participants play as firm owners(in duopoly market), each deciding sequentially on how
-    much quantity to produce in order to make profit. The Participant to start is chosen randomly.
+    In Stackelberg Competition, players play as firm owners(in duopoly market), each deciding sequentially on how
+    much quantity to produce in order to make profit. The Player to start is chosen randomly.
 </p>
 <p>
-    Source code <a href="https://github.com/wickens/ptree_library/tree/master/stackelberg_competition">here</a>
+    Source code <a href="https://github.com/wickens/otree_library/tree/master/stackelberg_competition">here</a>
 </p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'stackelberg_competition'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -30,12 +30,12 @@ class Treatment(ptree.models.BaseTreatment):
     total_capacity = models.PositiveIntegerField(
         default=60,
         doc="""
-        Combined production capacity of both participants(firms)
+        Combined production capacity of both players(firms)
         """
     )
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
@@ -49,10 +49,10 @@ class Match(ptree.models.BaseMatch):
         """
         )
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(ptree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -67,12 +67,12 @@ class Participant(ptree.models.BaseParticipant):
         """
     )
 
-    def other_participant(self):
+    def other_player(self):
         """Returns the opponent of the current player"""
-        return self.other_participants_in_match()[0]
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
-        self.match.price = self.treatment.total_capacity - self.quantity - self.other_participant().quantity
+        self.match.price = self.treatment.total_capacity - self.quantity - self.other_player().quantity
         self.payoff = self.match.price * self.quantity
 
 

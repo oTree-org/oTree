@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
-from ptree.db import models
-import ptree.models
-from ptree.common import Money, money_range
+from otree.db import models
+import otree.models
+from otree.common import Money, money_range
 
 
 doc = """
 Public goods game. Single treatment. Four players can contribute to a joint project.
 The total contribution is multiplied by some factor, the resulting amount is then divided equally between the players.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/public_goods">here</a></p>
+<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/public_goods">here</a></p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'public_goods'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -25,7 +25,7 @@ class Treatment(ptree.models.BaseTreatment):
 
     amount_allocated = models.MoneyField(
         default=3.00,
-        doc="""Amount allocated to each participant"""
+        doc="""Amount allocated to each player"""
     )
 
     multiplication_factor = models.FloatField(
@@ -38,14 +38,14 @@ class Treatment(ptree.models.BaseTreatment):
         return money_range(0, self.amount_allocated, 0.10)
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 4
+    players_per_match = 4
 
     contributions = models.MoneyField(
         default=None,
@@ -57,16 +57,14 @@ class Match(ptree.models.BaseMatch):
         doc="""The amount each player in the group receives out of the the total contributed (after multiplication by some factor)"""
     )
 
-    def set_contributions(self):
-        """Sums up the amounts contributed to the joint project by each player in a group"""
-        self.contributions = sum(p.contributed_amount for p in self.participants())
-
-    def set_individual_share(self):
-        """Calculates the amount each player in a group receives from the joint project"""
-        self.individual_share = self.contributions * self.treatment.multiplication_factor / self.participants_per_match
+    def set_payoffs(self):
+        contributions = sum(p.contribution for p in self.players())
+        individual_share = contributions * self.treatment.multiplication_factor / self.players_per_match
+        for p in self.players():
+            p.payoff = (self.treatment.amount_allocated - p.contribution) + individual_share
 
 
-class Participant(ptree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -74,15 +72,10 @@ class Participant(ptree.models.BaseParticipant):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    contributed_amount = models.MoneyField(
+    contribution = models.MoneyField(
         default=None,
         doc="""The amount contributed by the player"""
     )
-
-    def set_payoff(self):
-        """Calculate participant payoff"""
-        self.payoff = (self.treatment.amount_allocated - self.contributed_amount) + self.match.individual_share
-
 
 
 def treatments():

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import stag_hunt.forms as forms
 from stag_hunt.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Decide(Page):
@@ -26,11 +26,11 @@ class Decide(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
     def body_text(self):
-        return "Waiting for the other participant."
+        return "Waiting for the other player."
 
 
 class Results(Page):
@@ -43,9 +43,9 @@ class Results(Page):
     def variables_for_template(self):
 
         return {
-            'payoff': self.participant.payoff,
-            'decision': self.participant.decision,
-            'other_decision': self.participant.other_participant().decision,
+            'payoff': self.player.payoff,
+            'decision': self.player.decision,
+            'other_decision': self.player.other_player().decision,
         }
 
 

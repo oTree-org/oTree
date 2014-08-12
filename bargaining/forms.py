@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import bargaining.models as models
 from bargaining.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class RequestForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['request_amount']
 
     def labels(self):

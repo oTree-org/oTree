@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import coordination.forms as forms
 from coordination.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Choice(Page):
@@ -24,11 +24,10 @@ class Choice(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
-            p.set_payoff()
+        self.match.set_payoffs()
 
     def body_text(self):
-        return "Waiting for the other participant."
+        return "Waiting for the other player."
 
 
 class Results(Page):
@@ -40,10 +39,10 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': self.participant.payoff,
-            'choice': self.participant.choice,
-            'other_choice': self.participant.other_participant().choice,
-            'same_choice': self.participant.choice == self.participant.other_participant().choice
+            'payoff': self.player.payoff,
+            'choice': self.player.choice,
+            'other_choice': self.player.other_player().choice,
+            'same_choice': self.player.choice == self.player.other_player().choice
         }
 
 

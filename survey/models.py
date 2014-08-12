@@ -1,29 +1,29 @@
 # -*- coding: utf-8 -*-
 from django_countries.fields import CountryField
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'survey'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 1
+    players_per_match = 1
 
 
-class Participant(ptree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)

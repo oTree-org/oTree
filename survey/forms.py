@@ -2,21 +2,21 @@
 from . import models
 from django import forms
 from .utilities import Form
-from ptree.common import Money, money_range
-import ptree.forms
+from otree.common import Money, money_range
+import otree.forms
 
 
 class StartForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = []
 
 
 class DemographicsForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['q_country',
                   'q_age',
                   'q_gender']
@@ -30,7 +30,7 @@ class DemographicsForm(Form):
 class CognitiveReflectionTestForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['crt_bat_float',
                   'crt_widget',
                   'crt_lake']

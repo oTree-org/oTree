@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import bertrand_competition.models as models
 from bertrand_competition.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class PriceForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['price']
 
     def labels(self):

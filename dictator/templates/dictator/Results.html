@@ -9,8 +9,8 @@
 {% block content %}
 
     <p>
-        {% if participant_id == 1 %}
-            As the dictator, you offered the other participant {{ offer_amount }}. Your payoff is therefore {{ payoff }}.
+        {% if player_id == 1 %}
+            As the dictator, you offered the other player {{ offer_amount }}. Your payoff is therefore {{ payoff }}.
         {% else %}
             The dictator offered you {{ offer_amount }}. Your payoff is therefore {{ payoff }}.
         {% endif %}

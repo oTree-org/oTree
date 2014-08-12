@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
 doc = """
 Matrix Asymmetric is a game where there is no identical strategy sets for both players.
 Each player earns the different payoff when making the same choice against similar choices of his competitors.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/matrix_asymmetric">here</a></p>
+<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/matrix_asymmetric">here</a></p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'matrix_asymmetric'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -26,7 +26,10 @@ class Treatment(ptree.models.BaseTreatment):
     rowAcolumnA_row = models.MoneyField(default=0.20)
     rowAcolumnA_column = models.MoneyField(default=0.30)
 
-    rowAcolumnB_row = models.MoneyField(default=0.40)
+    rowAcolumnB_row = models.MoneyField(
+        default=0.40,
+        doc='''Amount row player gets, if row player chooses A and column player chooses B'''
+    )
     rowAcolumnB_column = models.MoneyField(default=0.10)
 
     rowBcolumnA_row = models.MoneyField(default=0.05)
@@ -36,16 +39,46 @@ class Treatment(ptree.models.BaseTreatment):
     rowBcolumnB_column = models.MoneyField(default=0.25)
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
-class Participant(ptree.models.BaseParticipant):
+    def set_payoffs(self):
+        row_player = self.match.get_player_by_role('row')
+        column_player = self.match.get_player_by_role('column')
+
+        row_matrix = {
+            'A': {
+                'A': self.treatment.rowAcolumnA_row,
+                'B': self.treatment.rowAcolumnB_row,
+            },
+            'B': {
+                'A': self.treatment.rowBcolumnA_row,
+                'B': self.treatment.rowBcolumnB_row,
+            }
+        }
+
+        column_matrix = {
+            'A': {
+                'A': self.treatment.rowAcolumnA_column,
+                'B': self.treatment.rowAcolumnB_column,
+            },
+            'B': {
+                'A': self.treatment.rowBcolumnA_column,
+                'B': self.treatment.rowBcolumnB_column,
+            }
+        }
+
+        row_player.payoff = row_matrix[row_player.decision][column_player.decision]
+        column_player.payoff = column_matrix[row_player.decision][column_player.decision]
+
+
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -53,9 +86,9 @@ class Participant(ptree.models.BaseParticipant):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    def other_participant(self):
-        """Returns other participant in match"""
-        return self.other_participants_in_match()[0]
+    def other_player(self):
+        """Returns other player in match"""
+        return self.other_players_in_match()[0]
 
     decision = models.CharField(
         default=None,
@@ -63,39 +96,10 @@ class Participant(ptree.models.BaseParticipant):
         doc='either A or B',
     )
 
-    def set_payoff(self):
-        if self.role() == 'row':
-            payoff_matrix = {
-                'A': {
-                    'A': self.treatment.rowAcolumnA_row,
-                    'B': self.treatment.rowAcolumnB_row,
-                },
-                'B': {
-                    'A': self.treatment.rowBcolumnA_row,
-                    'B': self.treatment.rowBcolumnB_row,
-                }
-            }
-
-        else: #column
-            payoff_matrix = {
-                'A': {
-                    'A': self.treatment.rowAcolumnA_column,
-                    'B': self.treatment.rowAcolumnB_column,
-                },
-                'B': {
-                    'A': self.treatment.rowBcolumnA_column,
-                    'B': self.treatment.rowBcolumnB_column,
-                }
-            }
-
-        row_participant = self.match.get_participant_by_role('row')
-        column_participant = self.match.get_participant_by_role('column')
-        self.payoff = payoff_matrix[row_participant.decision][column_participant.decision]
-
     def role(self):
-        if self.index_among_participants_in_match == 1:
+        if self.index_among_players_in_match == 1:
             return 'row'
-        if self.index_among_participants_in_match == 2:
+        if self.index_among_players_in_match == 2:
             return 'column'
 
 

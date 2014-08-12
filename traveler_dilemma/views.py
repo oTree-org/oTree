@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import traveler_dilemma.forms as forms
 from traveler_dilemma.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Introduction(Page):
@@ -27,7 +27,7 @@ class Claim(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
 
@@ -37,9 +37,9 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'claim': self.participant.claim,
-            'other_claim': self.participant.other_participant().claim,
-            'payoff': self.participant.payoff
+            'claim': self.player.claim,
+            'other_claim': self.player.other_player().claim,
+            'payoff': self.player.payoff
         }
 
 

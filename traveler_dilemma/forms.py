@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import traveler_dilemma.models as models
 from traveler_dilemma.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class ClaimForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['claim']
 
     def labels(self):

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
@@ -11,17 +11,17 @@ Matching pennies. Single treatment. Two players are given a penny each, and will
 One player wants the outcome to match; the other wants the outcome not to match.
 If the outcomes match, the former player gets both pennies; if the outcomes do not match, the latter player gets both pennies.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/matching_pennies">here</a></p>
+<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/matching_pennies">here</a></p>
 """
 
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'matching_pennies'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -32,17 +32,17 @@ class Treatment(ptree.models.BaseTreatment):
         doc="""The value of the pennies given to each player"""
     )
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(ptree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -55,14 +55,14 @@ class Participant(ptree.models.BaseParticipant):
         doc="""Heads or tails"""
     )
 
-    def other_participant(self):
+    def other_player(self):
         """Returns the opponent of the current player"""
-        return self.other_participants_in_match()[0]
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
         """Calculates payoffs"""
 
-        pennies_match = self.penny_side == self.other_participant().penny_side
+        pennies_match = self.penny_side == self.other_player().penny_side
 
         if (self.role() == 'matcher' and pennies_match) or (self.role() == 'mismatcher' and not pennies_match):
             self.payoff = self.treatment.initial_amount * 2
@@ -70,9 +70,9 @@ class Participant(ptree.models.BaseParticipant):
             self.payoff = 0
 
     def role(self):
-        if self.index_among_participants_in_match == 1:
+        if self.index_among_players_in_match == 1:
             return 'matcher'
-        if self.index_among_participants_in_match == 2:
+        if self.index_among_players_in_match == 2:
             return 'mismatcher'
 
 

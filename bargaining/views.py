@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import bargaining.forms as forms
 from bargaining.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 class Introduction(Page):
 
@@ -29,8 +29,7 @@ class Request(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
-            p.set_payoff()
+        self.match.set_payoffs()
 
 class Results(Page):
 
@@ -38,9 +37,9 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': self.participant.payoff,
-            'request_amount': self.participant.request_amount,
-            'other_request': self.participant.other_participant().request_amount
+            'payoff': self.player.payoff,
+            'request_amount': self.player.request_amount,
+            'other_request': self.player.other_player().request_amount
         }
 
 

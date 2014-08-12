@@ -1,11 +1,11 @@
-import ptree.test
-from ptree.common import Money, money_range
+import otree.test
+from otree.common import Money, money_range
 import coordination.views as views
 from coordination.utilities import Bot
 import random
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 

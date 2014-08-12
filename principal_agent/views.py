@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import principal_agent.forms as forms
 from principal_agent.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Introduction(Page):
@@ -19,7 +19,7 @@ class Introduction(Page):
 class Offer(Page):
 
     def participate_condition(self):
-        return self.participant.index_among_participants_in_match == 1
+        return self.player.index_among_players_in_match == 1
 
     template_name = 'principal_agent/Offer.html'
 
@@ -37,7 +37,7 @@ class Accept(Page):
     template_name = 'principal_agent/Accept.html'
 
     def participate_condition(self):
-        return self.participant.index_among_participants_in_match == 2
+        return self.player.index_among_players_in_match == 2
 
     def get_form_class(self):
         return forms.DecisionForm
@@ -58,17 +58,17 @@ class WorkEffort(Page):
 
     def participate_condition(self):
         if self.match.decision == 'Accept':
-            return self.participant.index_among_participants_in_match == 2
+            return self.player.index_among_players_in_match == 2
 
 
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
     def body_text(self):
-        return "Waiting for the other participant."
+        return "Waiting for the other player."
 
 
 class Results(Page):
@@ -77,9 +77,9 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': self.participant.payoff,
+            'payoff': self.player.payoff,
             'rejected': self.match.decision == 'Reject',
-            'agent': self.participant.index_among_participants_in_match == 2
+            'agent': self.player.index_among_players_in_match == 2
         }
 
 

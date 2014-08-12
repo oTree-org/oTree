@@ -23,7 +23,7 @@ class Send(Page):
         return forms.SendForm
 
     def participate_condition(self):
-        return self.participant.index_among_participants_in_match == 1
+        return self.player.index_among_players_in_match == 1
 
     def variables_for_template(self):
         return {'amount_allocated': self.treatment.amount_allocated}
@@ -46,7 +46,7 @@ class SendBack(Page):
         return forms.SendBackForm
 
     def participate_condition(self):
-        return self.participant.index_among_participants_in_match == 2
+        return self.player.index_among_players_in_match == 2
 
     def variables_for_template(self):
         tripled_amount = self.match.sent_amount * 3
@@ -64,7 +64,7 @@ class ResultsWaitPage(MatchWaitPage):
         return 'Waiting for the other player to finish.'
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
 
@@ -85,7 +85,7 @@ class Results(Page):
                 'sent_amount': self.match.sent_amount,
                 'tripled_amount': tripled_amount,
                 'sent_back_amount': self.match.sent_back_amount,
-                'player_index': self.participant.index_among_participants_in_match,
+                'player_index': self.player.index_among_players_in_match,
                 'player1_payoff': player1_payoff,
                 'player2_payoff': player2_payoff}
 

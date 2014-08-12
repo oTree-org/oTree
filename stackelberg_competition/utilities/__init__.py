@@ -1,22 +1,22 @@
 # Don't change anything in this file.
 import stackelberg_competition.models as models
-import ptree.views
-import ptree.forms
+import otree.views
+import otree.forms
 
-import ptree.test
-from ptree.common import Money, money_range
+import otree.test
+from otree.common import Money, money_range
 
-class Page(ptree.views.Page):
+class Page(otree.views.Page):
     z_models = models
 
     def z_autocomplete(self):
         self.subsession = models.Subsession()
         self.treatment = models.Treatment()
         self.match = models.Match()
-        self.participant = models.Participant()
+        self.player = models.Player()
 
 
-class SubsessionWaitPage(ptree.views.SubsessionWaitPage):
+class SubsessionWaitPage(otree.views.SubsessionWaitPage):
 
     z_models = models
 
@@ -24,7 +24,7 @@ class SubsessionWaitPage(ptree.views.SubsessionWaitPage):
         self.subsession = models.Subsession()
 
 
-class MatchWaitPage(ptree.views.MatchWaitPage):
+class MatchWaitPage(otree.views.MatchWaitPage):
 
     z_models = models
 
@@ -33,26 +33,26 @@ class MatchWaitPage(ptree.views.MatchWaitPage):
         self.treatment = models.Treatment()
         self.match = models.Match()
 
-class Form(ptree.forms.Form):
+class Form(otree.forms.Form):
 
     def z_autocomplete(self):
         self.subsession = models.Subsession()
         self.treatment = models.Treatment()
         self.match = models.Match()
-        self.participant = models.Participant()
+        self.player = models.Player()
 
-class Bot(ptree.test.Bot):
+class Bot(otree.test.Bot):
 
     def z_autocomplete(self):
         self.subsession = models.Subsession()
         self.treatment = models.Treatment()
         self.match = models.Match()
-        self.participant = models.Participant()
+        self.player = models.Player()
 
 
-class InitializeParticipant(ptree.views.InitializeParticipant):
+class InitializePlayer(otree.views.InitializePlayer):
     z_models = models
 
 
-class InitializeExperimenter(ptree.views.InitializeExperimenter):
+class InitializeExperimenter(otree.views.InitializeExperimenter):
     z_models = models

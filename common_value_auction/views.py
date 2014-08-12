@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
+import otree.views
+import otree.views.concrete
 import common_value_auction.forms as forms
 from common_value_auction.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Introduction(Page):
@@ -28,7 +28,7 @@ class ResultsWaitPage(SubsessionWaitPage):
 
     def action(self):
         self.subsession.choose_winner()
-        for p in self.subsession.participants():
+        for p in self.subsession.players():
             p.set_payoff()
 
 
@@ -38,9 +38,9 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': self.participant.payoff,
-            'bid_amount': self.participant.bid_amount,
-            'is_winner': self.participant.is_winner
+            'payoff': self.player.payoff,
+            'bid_amount': self.player.bid_amount,
+            'is_winner': self.player.is_winner
         }
 
 

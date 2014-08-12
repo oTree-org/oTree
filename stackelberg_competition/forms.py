@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import stackelberg_competition.models as models
 from stackelberg_competition.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class QuantityForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['quantity']
 
     def labels(self):

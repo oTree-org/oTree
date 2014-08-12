@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import public_goods.forms as forms
 from public_goods.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 def variables_for_all_templates(self):
     return {'amount_allocated': self.treatment.amount_allocated}
@@ -13,13 +13,13 @@ class Introduction(Page):
     template_name = 'public_goods/Introduction.html'
 
     def variables_for_template(self):
-        return {'no_of_participants': self.match.participants_per_match,
+        return {'no_of_players': self.match.players_per_match,
                 'multiplication_factor': self.treatment.multiplication_factor}
 
 
 class Contribute(Page):
 
-    """Participant: Choose how much to contribute"""
+    """Player: Choose how much to contribute"""
 
     template_name = 'public_goods/Contribute.html'
 
@@ -30,10 +30,7 @@ class Contribute(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        self.match.set_contributions()
-        self.match.set_individual_share()
-        for p in self.match.participants():
-            p.set_payoff()
+        self.match.set_payoffs()
 
     def body_text(self):
         return "Waiting for other group members to contribute."
@@ -41,18 +38,18 @@ class ResultsWaitPage(MatchWaitPage):
 
 class Results(Page):
 
-    """Participants payoff: How much each has earned"""
+    """Players payoff: How much each has earned"""
 
     template_name = 'public_goods/Results.html'
 
     def variables_for_template(self):
 
-        participants = self.match.participants()
+        players = self.match.players()
 
         return {
-            'contributed_amount': self.participant.contributed_amount,
-            'participants': participants,
-            'id': self.participant.index_among_participants_in_match
+            'contribution': self.player.contribution,
+            'players': players,
+            'id': self.player.index_among_players_in_match
         }
 
 

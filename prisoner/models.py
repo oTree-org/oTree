@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
 
 doc = """
@@ -10,12 +10,12 @@ Source code <a href="https://github.com/wickens/ptree_library/tree/master/prison
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'prisoner'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -41,17 +41,17 @@ class Treatment(ptree.models.BaseTreatment):
     )
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(ptree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -66,12 +66,12 @@ class Participant(ptree.models.BaseParticipant):
     )
 
     def other_player(self):
-        """Return other player in match"""
-        return self.other_participants_in_match()[0]
+        """Returns other player in match"""
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
         """Calculate player payoff"""
-        payoff_matrix = {'Cooperate': {'Cooperate': self.treatment.friend_amount,
+        payoff_matrix = {'Cooperate': {'Cooperate': self.treatment.friends_amount,
                                        'Defect': self.treatment.betrayed_amount},
                          'Defect':   {'Cooperate': self.treatment.betray_amount,
                                       'Defect': self.treatment.enemy_amount}}

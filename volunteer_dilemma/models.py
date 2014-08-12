@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
 
 doc = """
-Volunteer's Dilemma Game. Two participants are asked separately whether they want to
+Volunteer's Dilemma Game. Two players are asked separately whether they want to
 volunteer or ignore. Their choices directly determine the payoffs.
 
-<p>Source code <a href="https://github.com/wickens/ptree_library/tree/master/volunteer_dilemma">here</a></p>
+<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/volunteer_dilemma">here</a></p>
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'volunteer_dilemma'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
 
 
@@ -31,20 +31,20 @@ class Treatment(ptree.models.BaseTreatment):
     general_benefit = models.MoneyField(
         default=1.00,
         doc="""
-        General benefit for all the participants, If at least one volunteers
+        General benefit for all the players, If at least one volunteers
         """
     )
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(ptree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     # <built-in>
@@ -58,19 +58,19 @@ class Participant(ptree.models.BaseParticipant):
         default=None,
         choices=['Volunteer', 'Ignore'],
         doc="""
-        Participant's decision to volunteer
+        Player's decision to volunteer
         """
     )
 
-    def other_participant(self):
+    def other_player(self):
         """Returns the opponent of the current player"""
-        return self.other_participants_in_match()[0]
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
-        """Calculate participant payoff"""
+        """Calculate player payoff"""
 
         self.payoff = 0
-        if self.decision == 'Volunteer' or self.other_participant().decision == 'Volunteer':
+        if self.decision == 'Volunteer' or self.other_player().decision == 'Volunteer':
             self.payoff += self.treatment.general_benefit
         if self.decision == 'Volunteer':
             self.payoff -= self.treatment.volunteer_cost

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
 
 doc = """
@@ -10,12 +10,12 @@ Stag Hunt
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'stag_hunt'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -47,17 +47,17 @@ class Treatment(ptree.models.BaseTreatment):
     )
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(ptree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -71,9 +71,9 @@ class Participant(ptree.models.BaseParticipant):
         doc='either Stag or Hare',
     )
 
-    def other_participant(self):
-        """Returns other participant in match"""
-        return self.other_participants_in_match()[0]
+    def other_player(self):
+        """Returns other player in match"""
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
 
@@ -87,7 +87,7 @@ class Participant(ptree.models.BaseParticipant):
                 'Hare': self.treatment.hare_hare_amount,
             }
         }
-        self.payoff = payoff_matrix[self.decision][self.other_participant().decision]
+        self.payoff = payoff_matrix[self.decision][self.other_player().decision]
 
 
 def treatments():

@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import prisoner.forms as forms
 from prisoner.utilities import Page, MatchWaitPage
+from prisoner.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from otree.common import Money, money_range
+import time
 
 
 class Decision(Page):
@@ -27,7 +30,7 @@ class ResultsWaitPage(MatchWaitPage):
         return 'Waiting for the other player to make a decision.'
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
 
@@ -38,10 +41,10 @@ class Results(Page):
     template_name = 'prisoner/Results.html'
 
     def variables_for_template(self):
-        return {'my_payoff': self.participant.payoff,
-                'my_decision': self.participant.decision.lower(),
-                'other_player_decision': self.participant.other_player().decision.lower(),
-                'same_choice': self.participant.decision == self.participant.other_player().decision}
+        return {'my_payoff': self.player.payoff,
+                'my_decision': self.player.decision.lower(),
+                'other_player_decision': self.player.other_player().decision.lower(),
+                'same_choice': self.player.decision == self.player.other_player().decision}
 
 
 def pages():

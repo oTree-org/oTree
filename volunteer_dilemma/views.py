@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import volunteer_dilemma.forms as forms
 from volunteer_dilemma.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Decision(Page):
@@ -27,7 +27,7 @@ class Decision(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
 class Results(Page):
@@ -36,8 +36,8 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'decision': self.participant.decision,
-            'payoff': self.participant.payoff,
+            'decision': self.player.decision,
+            'payoff': self.player.payoff,
         }
 
 

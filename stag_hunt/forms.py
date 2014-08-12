@@ -2,13 +2,13 @@
 import stag_hunt.models as models
 from django import forms
 from stag_hunt.utilities import Form
-import ptree.forms
+import otree.forms
 
 
 class DecisionForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['decision']
         widgets = {'decision': forms.RadioSelect()}
 

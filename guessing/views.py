@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import guessing.forms as forms
 from guessing.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Introduction(Page):
@@ -23,10 +23,10 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': self.participant.payoff,
-            'guess_value': self.participant.guess_value,
+            'payoff': self.player.payoff,
+            'guess_value': self.player.guess_value,
             'two_third_average': self.subsession.two_third_guesses,
-            'is_winner': self.participant.is_winner,
+            'is_winner': self.player.is_winner,
         }
 
 class ResultsWaitPage(SubsessionWaitPage):
@@ -34,7 +34,7 @@ class ResultsWaitPage(SubsessionWaitPage):
     def action(self):
         self.subsession.choose_winner()
 
-        for p in self.subsession.participants():
+        for p in self.subsession.players():
             p.set_payoff()
 
 def pages():

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import ptree.views
-import ptree.views.concrete
+import otree.views
+import otree.views.concrete
 import tragedy_of_the_commons.forms as forms
 from tragedy_of_the_commons.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 
 
 class Introduction(Page):
@@ -37,8 +37,7 @@ class Decision(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
-            p.set_payoff()
+        self.match.set_payoffs()
 
 
 class Results(Page):
@@ -47,7 +46,7 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': self.participant.payoff,
+            'payoff': self.player.payoff,
         }
 
 

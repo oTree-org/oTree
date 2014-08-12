@@ -1,12 +1,12 @@
-import ptree.test
-from ptree.common import Money, money_range
+import otree.test
+from otree.common import Money, money_range
 import bertrand_competition.views as views
 from bertrand_competition.utilities import Bot
 import random
-from ptree.common import money_range
+from otree.common import money_range
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
         # start

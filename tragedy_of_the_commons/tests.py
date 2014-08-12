@@ -1,11 +1,11 @@
-import ptree.test
+import otree.test
 import tragedy_of_the_commons.views as views
 from tragedy_of_the_commons.utilities import Bot
-from ptree.common import Money, money_range
+from otree.common import Money, money_range
 import random
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 

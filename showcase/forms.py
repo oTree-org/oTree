@@ -9,7 +9,7 @@ from crispy_forms.layout import HTML
 class DemoForm(Form):
     '''A form to showcase various form elements'''
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['demo_field1', 'demo_field2', 'demo_field3', 'demo_field4', 'demo_field5']
 
         # custom form widgets

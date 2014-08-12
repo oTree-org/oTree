@@ -8,7 +8,7 @@
 
 {% block content %}
 
-    <p>Tragedy of the commons game. Multiple participants are requested to cooperate in utilizing a common good or
+    <p>Tragedy of the commons game. Multiple players are requested to cooperate in utilizing a common good or
     defect at a cost.</p>
 
     <p>The payoffs are calculated as shown in the table below:</p>
@@ -19,12 +19,12 @@
             <th style="text-align:center; border:1px solid #ddd;">You: Defect</th>
         </tr>
         <tr>
-            <th style="border:1px solid #ddd;">Other Participants: Cooperate</th>
+            <th style="border:1px solid #ddd;">Other Players: Cooperate</th>
             <td style="border:1px solid #ddd;">{{ common_gain }}, {{ common_gain }}</td>
             <td style="border:1px solid #ddd;">{{ defect_gain }}, {{ common_cost }}</td>
         </tr>
         <tr>
-            <th style="border:1px solid #ddd;">Other Participants: Defect</th>
+            <th style="border:1px solid #ddd;">Other Players: Defect</th>
             <td style="border:1px solid #ddd;">{{ common_cost }}, {{ defect_gain }}</td>
             <td style="border:1px solid #ddd;">{{ common_loss }}, {{ common_loss }}</td>
         </tr>

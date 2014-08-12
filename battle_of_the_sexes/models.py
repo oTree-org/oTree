@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-ptree-docs/wiki"""
+"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 
-from ptree.db import models
-import ptree.models
+from otree.db import models
+import otree.models
 
 
 doc = """
@@ -10,12 +10,12 @@ Battle of the sexes.
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'battle_of_the_sexes'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
@@ -35,7 +35,7 @@ class Treatment(ptree.models.BaseTreatment):
     mismatch_amount = models.MoneyField(
         default=0.00,
         doc="""
-        Amount rewarded for choosing football and opera for either participants
+        Amount rewarded for choosing football and opera for either players
         """
     )
     opera_husband_amount = models.MoneyField(
@@ -52,18 +52,18 @@ class Treatment(ptree.models.BaseTreatment):
     )
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
     def set_payoffs(self):
-        husband = self.get_participant_by_role('husband')
-        wife = self.get_participant_by_role('wife')
+        husband = self.get_player_by_role('husband')
+        wife = self.get_player_by_role('wife')
 
         if husband.decision != wife.decision:
             husband.payoff = self.treatment.mismatch_amount
@@ -77,7 +77,7 @@ class Match(ptree.models.BaseMatch):
                 husband.payoff = self.treatment.opera_husband_amount
                 wife.payoff = self.treatment.opera_wife_amount
 
-class Participant(ptree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -91,14 +91,14 @@ class Participant(ptree.models.BaseParticipant):
         doc='either football or opera',
     )
 
-    def other_participant(self):
-        """Returns other participant in match"""
-        return self.other_participants_in_match()[0]
+    def other_player(self):
+        """Returns other player in match"""
+        return self.other_players_in_match()[0]
 
     def role(self):
-        if self.index_among_participants_in_match == 1:
+        if self.index_among_players_in_match == 1:
             return 'husband'
-        if self.index_among_participants_in_match == 2:
+        if self.index_among_players_in_match == 2:
             return 'wife'
 
 

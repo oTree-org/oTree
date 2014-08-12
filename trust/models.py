@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from ptree.db import models
-import ptree.models
-from ptree.common import money_range
+from otree.db import models
+import otree.models
+from otree.common import money_range, Money
 
 
 doc = """
@@ -12,12 +12,12 @@ Source code <a href="https://github.com/wickens/ptree_library/tree/master/trust"
 """
 
 
-class Subsession(ptree.models.BaseSubsession):
+class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'trust'
 
 
-class Treatment(ptree.models.BaseTreatment):
+class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -34,14 +34,16 @@ class Treatment(ptree.models.BaseTreatment):
     )
 
 
-class Match(ptree.models.BaseMatch):
+class Match(otree.models.BaseMatch):
 
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
+
+
 
     sent_amount = models.MoneyField(
         default=None,
@@ -71,7 +73,7 @@ class Match(ptree.models.BaseMatch):
         return self.treatment.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
 
 
-class Participant(ptree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -81,9 +83,9 @@ class Participant(ptree.models.BaseParticipant):
 
     def set_payoff(self):
         """Calculate payoff for each player"""
-        if self.index_among_participants_in_match == 1:
+        if self.index_among_players_in_match == 1:
             self.payoff = self.match.get_payoff_player_1()
-        elif self.index_among_participants_in_match == 2:
+        elif self.index_among_players_in_match == 2:
             self.payoff = self.match.get_payoff_player_2()
 
 
