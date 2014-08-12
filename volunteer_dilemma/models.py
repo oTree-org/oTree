@@ -9,7 +9,7 @@ doc = """
 Volunteer's Dilemma Game. Two players are asked separately whether they want to
 volunteer or ignore. Their choices directly determine the payoffs.
 
-Source code <a href="https://github.com/wickens/otree_library/tree/master/volunteer_dilemma" target="_blank">here</a>.
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/volunteer_dilemma" target="_blank">here</a>.
 """
 
 

@@ -1,5 +1,4 @@
-import otree.test
-from otree.common import Money, money_range
+
 import public_goods.views as views
 from public_goods.utilities import Bot
 import random

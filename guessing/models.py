@@ -10,7 +10,7 @@ doc = """
 Guessing Game. In this game, Players are asked to pick a number between 0 and 100, with the winner of the contest
 being the player who is closest to 2/3 times the average number picked of all players. In case of a tie between
 the players, the winner is picked randomly.
-Source code <a href="https://github.com/wickens/otree_library/tree/master/guessing" target="_blank">here</a>.
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/guessing" target="_blank">here</a>.
 """
 
 

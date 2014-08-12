@@ -14,7 +14,7 @@ requested by the players is less than that available, both players get their req
 If their total request is greater than that available, neither player gets their request.
 </p>
 
-Source code <a href="https://github.com/wickens/otree_library/tree/master/bargaining" target="_blank">here</a>.
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/bargaining" target="_blank">here</a>.
 """
 
 

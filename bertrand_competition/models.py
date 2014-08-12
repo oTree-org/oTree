@@ -9,7 +9,7 @@ doc = """
 In Bertrand Competition, players play as firm owners(in duopoly market), each deciding simultaneously on how
 much price to set for their products. The player with the lowest price carries the day and becomes the winner.
 
-Source code <a href="https://github.com/wickens/otree_library/tree/master/bertrand_competition" target="_blank">here</a>.
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/bertrand_competition" target="_blank">here</a>.
 """
 
 
