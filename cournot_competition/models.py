@@ -12,7 +12,7 @@ how much quantity to produce in order to make a profit. Players decide on choosi
 cooperating with others to improve profits.
 </p>
 <p>
-Source code <a href="https://github.com/wickens/otree_library/tree/master/cournot_competition">here</a>
+Source code <a href="https://github.com/wickens/otree_library/tree/master/cournot_competition">here</a>.
 </p>
 """
 
@@ -65,7 +65,7 @@ class Player(otree.models.BasePlayer):
     quantity = models.PositiveIntegerField(
         default=None,
         doc="""
-        Quantity of goods to produce..
+        Quantity of goods to produce.
         """
     )
 

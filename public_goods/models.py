@@ -7,8 +7,7 @@ from otree.common import Money, money_range
 doc = """
 Public goods game. Single treatment. Four players can contribute to a joint project.
 The total contribution is multiplied by some factor, the resulting amount is then divided equally between the players.
-
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/public_goods">here</a></p>
+Source code <a href="https://github.com/wickens/otree_library/tree/master/public_goods" target="_blank">here</a>.
 """
 
 

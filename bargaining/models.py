@@ -14,7 +14,7 @@ requested by the players is less than that available, both players get their req
 If their total request is greater than that available, neither player gets their request.
 </p>
 
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/bargaining">here</a></p>
+Source code <a href="https://github.com/wickens/otree_library/tree/master/bargaining" target="_blank">here</a>.
 """
 
 
@@ -68,7 +68,7 @@ class Player(otree.models.BasePlayer):
     request_amount = models.MoneyField(
         default=None,
         doc="""
-        Amount requested by this player..
+        Amount requested by this player.
         """
     )
 

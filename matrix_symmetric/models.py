@@ -10,7 +10,7 @@ doc = """
 Matrix Symmetric is a game in which the identity of the player does not change the resulting game facing that player.
 Each player earns the same payoff when making the same choice against similar choices of his competitors.
 
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/matrix_symmetric">here</a></p>
+Source code <a href="https://github.com/wickens/otree_library/tree/master/matrix_symmetric" target="_blank">here</a>.
 """
 
 

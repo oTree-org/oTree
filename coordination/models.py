@@ -9,7 +9,7 @@ doc = """
 In Coordination game, There are two players which are required to choose either A or B.
 If both Players chooses the same choice then they both wins, otherwise they loose.
 
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/coordination">here</a></p>
+Source code <a href="https://github.com/wickens/otree_library/tree/master/coordination" target="_blank">here</a>.
 """
 
 

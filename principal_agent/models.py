@@ -11,7 +11,7 @@ doc = """
     Principal. The Principal offers a contract to the Agent, which can be accepted or rejected.
 </p>
 <p>
-    Source code <a href="https://github.com/wickens/otree_library/tree/master/principal_agent">here</a>
+    Source code <a href="https://github.com/wickens/otree_library/tree/master/principal_agent">here</a>.
 </p>
 """
 

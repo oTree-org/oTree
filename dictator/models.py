@@ -13,7 +13,7 @@ The dictator must offer part of the money to the other player.
 The offered amount cannot be rejected.
 </p>
 
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/dictator">here</a></p>
+Source code <a href="https://github.com/wickens/otree_library/tree/master/dictator" target="_blank">here</a>.
 """
 
 
