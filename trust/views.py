@@ -64,8 +64,7 @@ class ResultsWaitPage(MatchWaitPage):
         return 'Waiting for the other player to finish.'
 
     def action(self):
-        for p in self.match.players:
-            p.set_payoff()
+        self.match.set_payoffs()
 
 
 class Results(Page):
@@ -76,8 +75,8 @@ class Results(Page):
 
     def variables_for_template(self):
 
-        player1_payoff = self.match.get_payoff_player_1()
-        player2_payoff = self.match.get_payoff_player_2()
+        player1_payoff = self.match.get_player_by_index(1).payoff
+        player2_payoff = self.match.get_player_by_index(2).payoff
 
         tripled_amount = self.match.sent_amount * 3
 

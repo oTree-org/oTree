@@ -62,14 +62,12 @@ class Match(otree.models.BaseMatch):
         """Range of allowed values during send back"""
         return money_range(0, self.sent_amount * 3, self.treatment.increment_amount)
 
-    def get_payoff_player_1(self):
-        """Calculate P1 payoff"""
-        return self.treatment.amount_allocated - self.sent_amount + self.sent_back_amount
+    def set_payoffs(self):
+        p1 = self.get_player_by_index(1)
+        p2 = self.get_player_by_index(2)
 
-    def get_payoff_player_2(self):
-        """Calculate P2 payoff"""
-        return self.treatment.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
-
+        p1.payoff = self.treatment.amount_allocated - self.sent_amount + self.sent_back_amount
+        p2.payoff = self.treatment.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
 
 class Player(otree.models.BasePlayer):
 
@@ -78,14 +76,6 @@ class Player(otree.models.BasePlayer):
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    def set_payoff(self):
-        """Calculate payoff for each player"""
-        if self.index_among_players_in_match == 1:
-            self.payoff = self.match.get_payoff_player_1()
-        elif self.index_among_players_in_match == 2:
-            self.payoff = self.match.get_payoff_player_2()
-
 
 def treatments():
 

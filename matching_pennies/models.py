@@ -51,7 +51,7 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     penny_side = models.CharField(
-        choices=['heads', 'tails'],
+        choices=['Heads', 'Tails'],
         doc="""Heads or tails"""
     )
 

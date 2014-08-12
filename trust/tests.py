@@ -28,11 +28,10 @@ class PlayerBot(Bot):
 
     def play_p1(self):
         # random send amount
-        sent_amount = random.choice(self.match.send_choices())
+
         self.submit(views.Send,
-                    {"sent_amount": sent_amount})
+                    {"sent_amount": 0.1})
 
     def play_p2(self):
         # random send back amount
-        sent_back_amount = random.choice(self.match.send_back_choices())
-        self.submit(views.SendBack, {'sent_back_amount': sent_back_amount})
+        self.submit(views.SendBack, {'sent_back_amount': 0.2})
