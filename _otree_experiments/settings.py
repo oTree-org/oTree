@@ -74,6 +74,7 @@ settings = {
         'lemon_market',
         'showcase',
         'common_value_auction',
+        'tragedy_of_the_commons',
         # lab results: displays lab results in a given session
 
     ],
