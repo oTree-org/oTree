@@ -1,9 +1,9 @@
-otree_library
-=============
+oTree
+=====
 
 Standard library of oTree games
 
-See the demo here:
+Demo: http://demo.otree.org/
 
-http://demo.otree.org/
+Documentation: https://github.com/oTree-org/oTree/wiki
 
