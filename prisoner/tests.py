@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import otree.test
-from otree.common import Money, money_range
 import prisoner.views as views
 from prisoner.utilities import Bot
 import random
@@ -17,6 +15,3 @@ class PlayerBot(Bot):
 
         # submit results
         self.submit(views.Results)
-
-
-

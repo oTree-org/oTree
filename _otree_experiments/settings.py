@@ -38,7 +38,7 @@ settings = {
     'ADMIN_PASSWORD': ADMIN_PASSWORD,
     'AWS_ACCESS_KEY_ID': os.environ.get('AWS_ACCESS_KEY_ID'),
     'AWS_SECRET_ACCESS_KEY': os.environ.get('AWS_SECRET_ACCESS_KEY'),
-    'CURRENCY_CODE': 'EUR',
+    'CURRENCY_CODE': 'USD',
     'LANGUAGE_CODE': 'en-us',
     'DEBUG': DEBUG,
     'DATABASES': DATABASES,

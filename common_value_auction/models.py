@@ -13,7 +13,7 @@ In Common Value Auction Game, there are multiple players with each player submit
 a bid for a prize being sold in an auction. The prize value is known and same to all players.
 The winner is the player with the highest bid value.
 
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/common_value_auction">here</a></p>
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/common_value_auction" target="_blank">here</a>.
 """
 
 

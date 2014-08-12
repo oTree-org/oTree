@@ -8,7 +8,7 @@ doc="""
 In this game you are required to get a coin and flip it a number of times, while counting the number of heads
 you get. The payoff will be calculated by the number of heads that comes up.
 
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/lying">here</a></p>
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/lying" target="_blank">here</a>.
 """
 
 

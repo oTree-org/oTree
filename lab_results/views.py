@@ -1,8 +1,9 @@
-from lab_results.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
-import lab_results.forms as forms
+# -*- coding: utf-8 -*-
+from lab_results.utilities import Page
+
 
 class RedemptionCode(Page):
+
     template_name = 'lab_results/RedemptionCode.html'
 
     def variables_for_template(self):
@@ -15,4 +16,5 @@ class RedemptionCode(Page):
 
 
 def pages():
+
     return [RedemptionCode]

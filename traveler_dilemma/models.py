@@ -9,7 +9,7 @@ doc = """
 Traveler's dilemma game has two players.
 Each player is told to make a claim. Payoffs calculated according to the claims made.
 
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/traveler_dilemma">here</a></p>
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/traveler_dilemma" target="_blank">here</a>.
 """
 
 

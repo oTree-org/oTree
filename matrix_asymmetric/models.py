@@ -8,7 +8,7 @@ doc = """
 Matrix Asymmetric is a game where there is no identical strategy sets for both players.
 Each player earns the different payoff when making the same choice against similar choices of his competitors.
 
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/matrix_asymmetric">here</a></p>
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/matrix_asymmetric" target="_blank">here</a>.
 """
 
 

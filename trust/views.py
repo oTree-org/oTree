@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import trust.forms as forms
-from trust.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from trust.utilities import Page, MatchWaitPage
+
 
 class Introduction(Page):
 
@@ -12,9 +13,9 @@ class Introduction(Page):
 
 class Send(Page):
 
-    """This page is only for player one
-    P1 sends some (all, some, or none) amount to P2
-    This amount is tripled by experimenter, i.e if sent amount by P1 is 10, amount received by P2 is 30"""
+    """This page is only for P1
+    P1 sends amount (all, some, or none) to P2
+    This amount is tripled by experimenter, i.e if sent amount by P1 is 0.50, amount received by P2 is 1.50"""
 
     template_name = 'trust/Send.html'
 
@@ -36,8 +37,8 @@ class SimpleWaitPage(MatchWaitPage):
 
 class SendBack(Page):
 
-    """This page is only for player two
-    P2 sends back some amount (of the tripled amount received) to P1 ranging from 0 to MAX they got"""
+    """This page is only for P2
+    P2 sends back some amount (of the tripled amount received) to P1"""
 
     template_name = 'trust/SendBack.html'
 
@@ -59,7 +60,7 @@ class SendBack(Page):
 
 class ResultsWaitPage(MatchWaitPage):
 
-    def wait_page_body_text(self):
+    def body_text(self):
         return 'Waiting for the other player to finish.'
 
     def action(self):

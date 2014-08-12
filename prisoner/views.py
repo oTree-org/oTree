@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import prisoner.forms as forms
-from prisoner.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
-import time
+from prisoner.utilities import Page, MatchWaitPage
 
 
 class Decision(Page):
@@ -14,9 +12,9 @@ class Decision(Page):
 
     def variables_for_template(self):
 
-        return {'friends_amount': self.treatment.friends_amount,
+        return {'friend_amount': self.treatment.friend_amount,
                 'betrayed_amount': self.treatment.betrayed_amount,
-                'enemies_amount': self.treatment.enemies_amount,
+                'enemy_amount': self.treatment.enemy_amount,
                 'betray_amount': self.treatment.betray_amount}
 
     def get_form_class(self):

@@ -11,7 +11,7 @@ doc = """
     much quantity to produce in order to make profit. The Player to start is chosen randomly.
 </p>
 <p>
-    Source code <a href="https://github.com/wickens/otree_library/tree/master/stackelberg_competition">here</a>
+    Source code <a href="https://github.com/oTree-org/oTree/tree/master/stackelberg_competition">here</a>.
 </p>
 """
 
@@ -63,7 +63,7 @@ class Player(otree.models.BasePlayer):
     quantity = models.PositiveIntegerField(
         default=None,
         doc="""
-        Quantity of goods to produce..
+        Quantity of goods to produce.
         """
     )
 

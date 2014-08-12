@@ -1,10 +1,8 @@
-"""Documentation at http://django-otree.readthedocs.org/en/latest/app.html"""
-
+# -*- coding: utf-8 -*-
 from otree.db import models
 import otree.models
 
-
-doc="""
+doc = """
 Page that shows the results of the session.
 """
 
@@ -19,7 +17,8 @@ class Treatment(otree.models.BaseTreatment):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-                
+
+
 class Match(otree.models.BaseMatch):
 
     # <built-in>

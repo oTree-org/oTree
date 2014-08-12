@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
-"""Documentation at http://django-otree.readthedocs.org/en/latest/app.html"""
 from otree.db import models
 import otree.models
-from otree.common import money_range, Money
+from otree.common import money_range
 
 
 doc = """
 Trust game. Single treatment. Both players are given an initial sum.
 One player may give part of the sum to the other player, who actually receives triple the amount.
 The second player may then give part of the now-tripled amount back to the first player.
-
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/trust">here</a></p>
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/trust" target="_blank">here</a>.
 """
 
 
@@ -32,11 +30,12 @@ class Treatment(otree.models.BaseTreatment):
 
     increment_amount = models.MoneyField(
         default=0.05,
-        doc="""The increment between amount choices (in cents)"""
+        doc="""The increment between amount choices"""
     )
 
 
 class Match(otree.models.BaseMatch):
+
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
@@ -44,12 +43,10 @@ class Match(otree.models.BaseMatch):
 
     players_per_match = 2
 
-
-
     sent_amount = models.MoneyField(
         default=None,
         doc="""Amount sent by P1""",
-        choices=money_range(0,1,0.05),
+        choices=money_range(0, 1, 0.05),
     )
 
     sent_back_amount = models.MoneyField(
@@ -66,7 +63,7 @@ class Match(otree.models.BaseMatch):
         return money_range(0, self.sent_amount * 3, self.treatment.increment_amount)
 
     def get_payoff_player_1(self):
-        """Calculate P1 one payoff"""
+        """Calculate P1 payoff"""
         return self.treatment.amount_allocated - self.sent_amount + self.sent_back_amount
 
     def get_payoff_player_2(self):
@@ -83,7 +80,7 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     def set_payoff(self):
-        """Method to calculate payoff for each player"""
+        """Calculate payoff for each player"""
         if self.index_among_players_in_match == 1:
             self.payoff = self.match.get_payoff_player_1()
         elif self.index_among_players_in_match == 2:
@@ -91,4 +88,5 @@ class Player(otree.models.BasePlayer):
 
 
 def treatments():
+
     return [Treatment.create()]

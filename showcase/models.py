@@ -7,7 +7,7 @@ import otree.models
 
 doc = """
 <p>A show case of various features that otree support. </p>
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/showcase">here</a></p>
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/showcase" target="_blank">here</a>.
 """
 
 

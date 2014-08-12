@@ -10,7 +10,7 @@ author = 'Dev'
 doc = """
 Tragedy of the commons.
 
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/tragedy_of_the_commons">here</a></p>
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/tragedy_of_the_commons" target="_blank">here</a>.
 """
 
 

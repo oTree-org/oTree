@@ -12,7 +12,7 @@ In Private Value Auction Game. Consists of multiple players. Each player submits
 bid for a prize being sold in an auction. The prize value is privately known to each player and therefore
 uncertainty on the other player's value. The winner is the player with the highest bid value.
 
-<p>Source code <a href="https://github.com/wickens/otree_library/tree/master/private_value_auction">here</a></p>
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/private_value_auction" target="_blank">here</a>.
 """
 
 

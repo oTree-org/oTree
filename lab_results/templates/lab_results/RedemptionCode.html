@@ -1,44 +1,37 @@
 {% extends "global/Base.html" %}
-
 {% load i18n %}
 {% load staticfiles %}
 
-{% block title %}Thank you{% endblock %}
+{% block title %}
+    Thank you
+{% endblock %}
+
 {% block content %}
 
-<div class="alert alert-success">
-    <strong>Success!</strong> You have completed the session.
-</div>
+    <div class="alert alert-success">
+        You have completed the experiment session.
+    </div>
 
-<p> </p>
+    <h4>Total pay calculation</h4>
 
-<h4>Total pay calculation</h4>
+    <table class="table">
+        <tr>
+            <th>Base pay</th>
+            <td>{{ base_pay }}</td>
+        </tr>
+        <tr>
+            <th>Bonus</th>
+            <td>{{ payoff_from_subsessions }}</td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <th>{{ total_pay }}</th>
+        </tr>
+    </table>
 
-<div>
-<table class="table">
-    <tr>
-        <th>Base pay</th>
-        <td>{{ base_pay }}</td>
-    </tr>
-    <tr>
-        <th>Bonus</th>
-        <td>{{ payoff_from_subsessions }}</td>
-    </tr>
-    <tr>
-        <th>Total</th>
-        <th>{{ total_pay }}</th>
-    </tr>
-</table>
-</div>
-
-<div class="panel panel-primary" >
-  <div class="panel-heading">
-      Please remain seated until we call your workstation ID.
-  </div>
-</div>
 
 {% endblock %}
 
 {% block form %}
-    <!-- form omitted -->
+
 {% endblock %}

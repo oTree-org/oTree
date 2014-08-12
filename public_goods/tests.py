@@ -1,5 +1,4 @@
-import otree.test
-from otree.common import Money, money_range
+# -*- coding: utf-8 -*-
 import public_goods.views as views
 from public_goods.utilities import Bot
 import random
@@ -13,7 +12,7 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # each player contributes random amount
-        self.submit(views.Contribute, {"contribution": random.choice(self.player.contribute_choices())})
+        self.submit(views.Contribute, {"contribution": random.choice(self.treatment.contribute_choices())})
 
         # submit results page
         self.submit(views.Results)
