@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import dictator.forms as forms
-from dictator.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
+from dictator.utilities import Page, MatchWaitPage
 
 
 class Introduction(Page):

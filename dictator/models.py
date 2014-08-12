@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
 from otree.db import models
 import otree.models
-from otree.common import Money, money_range
-
+from otree.common import money_range
 
 doc = """
-<p>
 Dictator game. Single Treatment. Two players, one of whom is the dictator.
 The dictator is given some amount of money, while the other player is given nothing.
 The dictator must offer part of the money to the other player.
 The offered amount cannot be rejected.
-</p>
-
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/dictator" target="_blank">here</a>.
 """
 
@@ -70,4 +65,5 @@ class Player(otree.models.BasePlayer):
 
 
 def treatments():
+
     return [Treatment.create()]
