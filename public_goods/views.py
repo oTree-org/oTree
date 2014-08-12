@@ -47,7 +47,7 @@ class Results(Page):
         players = self.match.players()
 
         return {
-            'contributed_amount': self.player.contributed_amount,
+            'contribution': self.player.contribution,
             'players': players,
             'id': self.player.index_among_players_in_match
         }

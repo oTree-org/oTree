@@ -47,6 +47,20 @@ class Match(otree.models.BaseMatch):
 
     players_per_match = 2
 
+    def set_payoffs(self):
+        if all(p.decision == 'defect' for p in self.players()):
+            for p in self.players():
+                p.payoff = self.treatment.common_loss
+        elif all(p.decision == 'cooperate' for p in self.players()):
+            for p in self.players():
+                p.payoff = self.treatment.common_gain
+        else:
+            for p in self.players():
+                if p.decision == 'defect':
+                    p.payoff = self.treatment.individual_gain - self.treatment.defect_costs
+                else:
+                    p.payoff = self.treatment.common_gain - self.treatment.defect_costs
+
 
 class Player(otree.models.BasePlayer):
 
@@ -65,21 +79,6 @@ class Player(otree.models.BasePlayer):
         """
     )
 
-    def set_payoff(self):
-        # TODO:
-        # - add more players: currently 2 players
-        # - modify the basic payoff logic
-        if self.decision == 'defect' and self.other_player().decision == 'defect':  # all defect:
-            self.payoff = self.treatment.common_loss
-        elif self.decision == 'cooperate' and self.other_player().decision == 'cooperate':  # all cooperate
-            self.payoff = self.treatment.common_gain
-        else:  # some cooperate and others defect
-            if self.decision == 'defect':
-                # defector
-                self.payoff = self.treatment.individual_gain - self.treatment.defect_costs
-            elif self.decision == 'cooperate':
-                # cooperative
-                self.payoff = self.treatment.common_gain - self.treatment.defect_costs
 
 
 def treatments():

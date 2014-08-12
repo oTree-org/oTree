@@ -15,6 +15,7 @@ class Page(otree.views.Page):
         self.player = models.Player()
 
 
+
 class SubsessionWaitPage(otree.views.SubsessionWaitPage):
 
     z_models = models

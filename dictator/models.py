@@ -52,6 +52,15 @@ class Match(otree.models.BaseMatch):
         """Range of allowed offers"""
         return money_range(0, self.treatment.allocated_amount, 0.05)
 
+    def set_payoffs(self):
+        p1 = self.get_player_by_index(1)
+        p2 = self.get_player_by_index(2)
+
+        p1.payoff = self.treatment.allocated_amount - self.offer_amount
+        p2.payoff = self.offer_amount
+
+    def z_autocomplete(self):
+        self.players = [Player()]
 
 class Player(otree.models.BasePlayer):
 
@@ -60,13 +69,6 @@ class Player(otree.models.BasePlayer):
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    def set_payoff(self):
-        """Calculates player payoff"""
-        if self.index_among_players_in_match == 1:
-            self.payoff = self.treatment.allocated_amount - self.match.offer_amount
-        else:
-            self.payoff = self.match.offer_amount
 
 
 def treatments():

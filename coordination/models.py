@@ -44,6 +44,7 @@ class Match(otree.models.BaseMatch):
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    def z(self): self.players = [Player()]
     # </built-in>
 
     players_per_match = 2

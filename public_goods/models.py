@@ -58,10 +58,10 @@ class Match(otree.models.BaseMatch):
     )
 
     def set_payoffs(self):
-        contributions = sum(p.contributed_amount for p in self.players())
+        contributions = sum(p.contribution for p in self.players())
         individual_share = contributions * self.treatment.multiplication_factor / self.players_per_match
         for p in self.players():
-            p.payoff = (self.treatment.amount_allocated - p.contributed_amount) + individual_share
+            p.payoff = (self.treatment.amount_allocated - p.contribution) + individual_share
 
 
 class Player(otree.models.BasePlayer):
@@ -72,7 +72,7 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    contributed_amount = models.MoneyField(
+    contribution = models.MoneyField(
         default=None,
         doc="""The amount contributed by the player"""
     )
