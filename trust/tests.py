@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import otree.test
-from otree.common import Money, money_range
 import trust.views as views
 from trust.utilities import Bot
 import random
@@ -13,9 +11,6 @@ class PlayerBot(Bot):
         # basic assertions
         assert (self.treatment.amount_allocated == 1.00)
         assert (self.match.players_per_match == 2)
-
-        sent_amount = 0.5
-        sent_back_amount = 0.7
 
         # start game
         self.submit(views.Introduction)
@@ -32,8 +27,12 @@ class PlayerBot(Bot):
         self.submit(views.Results)
 
     def play_p1(self):
+        # random send amount
+        sent_amount = random.choice(self.match.send_choices())
         self.submit(views.Send,
-                    {"sent_amount": 0.5})
+                    {"sent_amount": sent_amount})
 
     def play_p2(self):
-        self.submit(views.SendBack, {'sent_back_amount': 0.7})
+        # random send back amount
+        sent_back_amount = random.choice(self.match.send_back_choices())
+        self.submit(views.SendBack, {'sent_back_amount': sent_back_amount})
