@@ -6,7 +6,7 @@ import otree.models
 doc = """
 Prisoner's dilemma game. Single treatment. Two players are asked separately whether they want to cooperate or defect.
 Their choices directly determine the payoffs.
-Source code <a href="https://github.com/wickens/ptree_library/tree/master/prisoner" target="_blank">here</a>.
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/prisoner" target="_blank">here</a>.
 """
 
 
@@ -71,7 +71,7 @@ class Player(otree.models.BasePlayer):
 
     def set_payoff(self):
         """Calculate player payoff"""
-        payoff_matrix = {'Cooperate': {'Cooperate': self.treatment.friends_amount,
+        payoff_matrix = {'Cooperate': {'Cooperate': self.treatment.friend_amount,
                                        'Defect': self.treatment.betrayed_amount},
                          'Defect':   {'Cooperate': self.treatment.betray_amount,
                                       'Defect': self.treatment.enemy_amount}}

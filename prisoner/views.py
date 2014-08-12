@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 import prisoner.forms as forms
 from prisoner.utilities import Page, MatchWaitPage
-from prisoner.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
-import time
 
 
 class Decision(Page):

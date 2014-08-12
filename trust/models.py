@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 from otree.db import models
 import otree.models
-from otree.common import money_range, Money
+from otree.common import money_range
 
 
 doc = """
 Trust game. Single treatment. Both players are given an initial sum.
 One player may give part of the sum to the other player, who actually receives triple the amount.
 The second player may then give part of the now-tripled amount back to the first player.
-Source code <a href="https://github.com/wickens/ptree_library/tree/master/trust" target="_blank">here</a>.
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/trust" target="_blank">here</a>.
 """
 
 
@@ -42,8 +42,6 @@ class Match(otree.models.BaseMatch):
     # </built-in>
 
     players_per_match = 2
-
-
 
     sent_amount = models.MoneyField(
         default=None,

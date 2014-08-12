@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import trust.models as models
 from trust.utilities import Form
-import otree.forms
 from django import forms
 
 
