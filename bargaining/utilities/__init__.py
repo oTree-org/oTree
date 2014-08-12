@@ -1,7 +1,5 @@
 # Don't change anything in this file.
-from bargaining.models import Treatment, Subsession, Match
 import bargaining.models as models
-
 import otree.views
 import otree.forms
 import otree.test
