@@ -48,14 +48,14 @@ class Match(otree.models.BaseMatch):
     players_per_match = 2
 
     def set_payoffs(self):
-        if all(p.decision == 'defect' for p in self.players()):
-            for p in self.players():
+        if all(p.decision == 'defect' for p in self.players):
+            for p in self.players:
                 p.payoff = self.treatment.common_loss
-        elif all(p.decision == 'cooperate' for p in self.players()):
-            for p in self.players():
+        elif all(p.decision == 'cooperate' for p in self.players):
+            for p in self.players:
                 p.payoff = self.treatment.common_gain
         else:
-            for p in self.players():
+            for p in self.players:
                 if p.decision == 'defect':
                     p.payoff = self.treatment.individual_gain - self.treatment.defect_costs
                 else:

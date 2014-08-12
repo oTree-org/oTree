@@ -44,7 +44,7 @@ class Results(Page):
 
     def variables_for_template(self):
 
-        players = self.match.players()
+        players = self.match.players
 
         return {
             'contribution': self.player.contribution,

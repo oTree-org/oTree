@@ -59,8 +59,6 @@ class Match(otree.models.BaseMatch):
         p1.payoff = self.treatment.allocated_amount - self.offer_amount
         p2.payoff = self.offer_amount
 
-    def z_autocomplete(self):
-        self.players = [Player()]
 
 class Player(otree.models.BasePlayer):
 

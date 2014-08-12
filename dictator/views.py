@@ -27,7 +27,7 @@ class Offer(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.players():
+        for p in self.match.players:
             p.set_payoff()
 
     def body_text(self):
