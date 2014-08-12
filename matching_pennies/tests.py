@@ -5,12 +5,12 @@ from matching_pennies.utilities import Bot
 import random
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 
         # both players choose their heads or tails
-        choice = random.choice(self.participant.PENNY_CHOICES)[0]
+        choice = random.choice(self.player.PENNY_CHOICES)[0]
         self.submit(views.Choice, {"penny_side": choice})
 
         # results after choices

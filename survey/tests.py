@@ -4,7 +4,7 @@ import survey.views as views
 from survey.utilities import Bot
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 

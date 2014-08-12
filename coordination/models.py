@@ -6,8 +6,8 @@ import otree.models
 
 
 doc = """
-In Coordination game, There are two participants which are required to choose either A or B.
-If both Participants chooses the same choice then they both wins, otherwise they loose.
+In Coordination game, There are two players which are required to choose either A or B.
+If both Players chooses the same choice then they both wins, otherwise they loose.
 
 <p>Source code <a href="https://github.com/wickens/otree_library/tree/master/coordination">here</a></p>
 """
@@ -27,14 +27,14 @@ class Treatment(otree.models.BaseTreatment):
     match_amount = models.MoneyField(
         default=1.00,
         doc="""
-        amount each participant is rewarded for having match choices
+        amount each player is rewarded for having match choices
         """
     )
 
     mismatch_amount = models.MoneyField(
         default=0.00,
         doc="""
-        amount each participant is rewarded for having different choices
+        amount each player is rewarded for having different choices
         """
     )
 
@@ -46,10 +46,10 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -63,13 +63,13 @@ class Participant(otree.models.BaseParticipant):
         doc='either A or B',
     )
 
-    def other_participant(self):
-        """Returns other participant in match"""
-        return self.other_participants_in_match()[0]
+    def other_player(self):
+        """Returns other player in match"""
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
 
-        if self.choice == self.other_participant().choice:
+        if self.choice == self.other_player().choice:
             self.payoff = self.treatment.match_amount
         else:
             self.payoff = self.treatment.mismatch_amount

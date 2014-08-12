@@ -6,7 +6,7 @@ import random
 from otree.common import money_range
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
         # start

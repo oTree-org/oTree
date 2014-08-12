@@ -8,7 +8,7 @@ import time
 class Decision(Page):
 
     """This page has the instructions and this is where the decision is made.
-    Presented to both participants in a match at the same time"""
+    Presented to both players in a match at the same time"""
 
     template_name = 'prisoner/Decision.html'
 
@@ -26,24 +26,24 @@ class Decision(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def body_text(self):
-        return 'Waiting for the other participant to make a decision.'
+        return 'Waiting for the other player to make a decision.'
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
 
 class Results(Page):
 
-    """Results page to show participants the decisions that were made and print the payoffs"""
+    """Results page to show players the decisions that were made and print the payoffs"""
 
     template_name = 'prisoner/Results.html'
 
     def variables_for_template(self):
-        return {'my_payoff': self.participant.payoff,
-                'my_decision': self.participant.decision.lower(),
-                'other_participant_decision': self.participant.other_participant().decision.lower(),
-                'same_choice': self.participant.decision == self.participant.other_participant().decision}
+        return {'my_payoff': self.player.payoff,
+                'my_decision': self.player.decision.lower(),
+                'other_player_decision': self.player.other_player().decision.lower(),
+                'same_choice': self.player.decision == self.player.other_player().decision}
 
 
 def pages():

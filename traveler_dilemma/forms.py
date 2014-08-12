@@ -7,7 +7,7 @@ import otree.forms
 class ClaimForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['claim']
 
     def labels(self):

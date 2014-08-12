@@ -7,7 +7,7 @@ from decimal import Decimal
 class CoinFlipForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['number_of_heads']
 
     def number_of_heads_error_message(self, value):

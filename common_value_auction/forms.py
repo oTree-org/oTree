@@ -9,7 +9,7 @@ from otree.common import Money, money_range
 class BidForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['bid_amount']
 
     def labels(self):

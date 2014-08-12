@@ -28,7 +28,7 @@ class Treatment(otree.models.BaseTreatment):
     self_A_other_A = models.MoneyField(default=0.10)
     self_A_other_B = models.MoneyField(
         default=0.00,
-        doc='''How much I make if I choose A and the other participant chooses B'''
+        doc='''How much I make if I choose A and the other player chooses B'''
     )
     self_B_other_A = models.MoneyField(default=0.30)
     self_B_other_B = models.MoneyField(default=0.40)
@@ -41,10 +41,10 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -52,9 +52,9 @@ class Participant(otree.models.BaseParticipant):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    def other_participant(self):
-        """Returns other participant in match"""
-        return self.other_participants_in_match()[0]
+    def other_player(self):
+        """Returns other player in match"""
+        return self.other_players_in_match()[0]
 
     decision = models.CharField(
         default=None,
@@ -75,7 +75,7 @@ class Participant(otree.models.BaseParticipant):
             }
         }
 
-        self.payoff = payoff_matrix[self.decision][self.other_participant().decision]
+        self.payoff = payoff_matrix[self.decision][self.other_player().decision]
 
 
 def treatments():

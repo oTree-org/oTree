@@ -46,11 +46,11 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
     def set_payoffs(self):
-        row_participant = self.match.get_participant_by_role('row')
-        column_participant = self.match.get_participant_by_role('column')
+        row_player = self.match.get_player_by_role('row')
+        column_player = self.match.get_player_by_role('column')
 
         row_matrix = {
             'A': {
@@ -74,11 +74,11 @@ class Match(otree.models.BaseMatch):
             }
         }
 
-        row_participant.payoff = row_matrix[row_participant.decision][column_participant.decision]
-        column_participant.payoff = column_matrix[row_participant.decision][column_participant.decision]
+        row_player.payoff = row_matrix[row_player.decision][column_player.decision]
+        column_player.payoff = column_matrix[row_player.decision][column_player.decision]
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -86,9 +86,9 @@ class Participant(otree.models.BaseParticipant):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    def other_participant(self):
-        """Returns other participant in match"""
-        return self.other_participants_in_match()[0]
+    def other_player(self):
+        """Returns other player in match"""
+        return self.other_players_in_match()[0]
 
     decision = models.CharField(
         default=None,
@@ -97,9 +97,9 @@ class Participant(otree.models.BaseParticipant):
     )
 
     def role(self):
-        if self.index_among_participants_in_match == 1:
+        if self.index_among_players_in_match == 1:
             return 'row'
-        if self.index_among_participants_in_match == 2:
+        if self.index_among_players_in_match == 2:
             return 'column'
 
 

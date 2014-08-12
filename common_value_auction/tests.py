@@ -5,7 +5,7 @@ from otree.common import Money, money_range
 import random
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 

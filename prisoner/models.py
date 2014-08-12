@@ -23,21 +23,21 @@ class Treatment(otree.models.BaseTreatment):
     # </built-in>
 
     betray_amount = models.MoneyField(
-        doc="""amount a participant makes if he chooses 'Defect' and the other chooses 'Cooperate'""",
+        doc="""amount a player makes if he chooses 'Defect' and the other chooses 'Cooperate'""",
         default=0.30,
     )
 
     friends_amount = models.MoneyField(
-        doc="""amount both participants make if both participants choose 'Cooperate'""",
+        doc="""amount both players make if both players choose 'Cooperate'""",
         default=0.20,
     )
     betrayed_amount = models.MoneyField(
-        doc="""amount a participant makes if he chooses 'Cooperate' and the other chooses 'Defect'""",
+        doc="""amount a player makes if he chooses 'Cooperate' and the other chooses 'Defect'""",
         default=0.10,
     )
 
     enemies_amount = models.MoneyField(
-        doc="""amount both participants make if both participants choose 'Defect'""",
+        doc="""amount both players make if both players choose 'Defect'""",
         default=0.00,
     )
 
@@ -49,10 +49,10 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -63,22 +63,22 @@ class Participant(otree.models.BaseParticipant):
     decision = models.CharField(
         default=None, verbose_name='What is your decision?',
         choices=['Cooperate', 'Defect'],
-        doc="""This participant's decision"""
+        doc="""This player's decision"""
     )
 
-    def other_participant(self):
-        """Returns other participant in match"""
-        return self.other_participants_in_match()[0]
+    def other_player(self):
+        """Returns other player in match"""
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
-        """Calculate participant payoff"""
+        """Calculate player payoff"""
         payoff_matrix = {'Cooperate': {'Cooperate': self.treatment.friends_amount,
                                        'Defect': self.treatment.betrayed_amount},
                          'Defect':   {'Cooperate': self.treatment.betray_amount,
                                        'Defect': self.treatment.enemies_amount}}
 
         self.payoff = (payoff_matrix[self.decision]
-                                    [self.other_participant().decision])
+                                    [self.other_player().decision])
 
 
 def treatments():

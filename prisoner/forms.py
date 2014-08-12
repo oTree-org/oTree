@@ -8,6 +8,6 @@ import otree.forms
 class DecisionForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['decision']
         widgets = {'decision': forms.RadioSelect()}

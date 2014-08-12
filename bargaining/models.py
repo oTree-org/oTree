@@ -42,14 +42,14 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
     def request_choices(self):
         """Range of allowed request amount"""
         return money_range(0, self.treatment.amount_shared, 0.05)
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
     # <built-in>
     match = models.ForeignKey(Match, null=True)
     treatment = models.ForeignKey(Treatment, null=True)
@@ -59,16 +59,16 @@ class Participant(otree.models.BaseParticipant):
     request_amount = models.MoneyField(
         default=None,
         doc="""
-        Amount requested by this participant..
+        Amount requested by this player..
         """
     )
 
-    def other_participant(self):
+    def other_player(self):
         """Returns the opponent of the current player"""
-        return self.other_participants_in_match()[0]
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
-        if self.request_amount + self.other_participant().request_amount <= self.treatment.amount_shared:
+        if self.request_amount + self.other_player().request_amount <= self.treatment.amount_shared:
             self.payoff = self.request_amount
         else:
             self.payoff = 0

@@ -8,7 +8,7 @@ import otree.forms
 class PennySideForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['penny_side']
         widgets = {'penny_side': forms.RadioSelect()}
 

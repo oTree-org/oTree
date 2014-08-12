@@ -39,10 +39,10 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -55,14 +55,14 @@ class Participant(otree.models.BaseParticipant):
         doc="""Heads or tails"""
     )
 
-    def other_participant(self):
+    def other_player(self):
         """Returns the opponent of the current player"""
-        return self.other_participants_in_match()[0]
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
         """Calculates payoffs"""
 
-        pennies_match = self.penny_side == self.other_participant().penny_side
+        pennies_match = self.penny_side == self.other_player().penny_side
 
         if (self.role() == 'matcher' and pennies_match) or (self.role() == 'mismatcher' and not pennies_match):
             self.payoff = self.treatment.initial_amount * 2
@@ -70,9 +70,9 @@ class Participant(otree.models.BaseParticipant):
             self.payoff = 0
 
     def role(self):
-        if self.index_among_participants_in_match == 1:
+        if self.index_among_players_in_match == 1:
             return 'matcher'
-        if self.index_among_participants_in_match == 2:
+        if self.index_among_players_in_match == 2:
             return 'mismatcher'
 
 

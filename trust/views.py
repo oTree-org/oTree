@@ -12,7 +12,7 @@ class Introduction(Page):
 
 class Send(Page):
 
-    """This page is only for participant one
+    """This page is only for player one
     P1 sends some (all, some, or none) amount to P2
     This amount is tripled by experimenter, i.e if sent amount by P1 is 10, amount received by P2 is 30"""
 
@@ -22,7 +22,7 @@ class Send(Page):
         return forms.SendForm
 
     def participate_condition(self):
-        return self.participant.index_among_participants_in_match == 1
+        return self.player.index_among_players_in_match == 1
 
     def variables_for_template(self):
         return {'amount_allocated': self.treatment.amount_allocated}
@@ -31,12 +31,12 @@ class Send(Page):
 class SimpleWaitPage(MatchWaitPage):
 
     def body_text(self):
-        return 'The other participant has been given the opportunity to give money first. Please wait.'
+        return 'The other player has been given the opportunity to give money first. Please wait.'
 
 
 class SendBack(Page):
 
-    """This page is only for participant two
+    """This page is only for player two
     P2 sends back some amount (of the tripled amount received) to P1 ranging from 0 to MAX they got"""
 
     template_name = 'trust/SendBack.html'
@@ -45,7 +45,7 @@ class SendBack(Page):
         return forms.SendBackForm
 
     def participate_condition(self):
-        return self.participant.index_among_participants_in_match == 2
+        return self.player.index_among_players_in_match == 2
 
     def variables_for_template(self):
         tripled_amount = self.match.sent_amount * 3
@@ -60,23 +60,23 @@ class SendBack(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def wait_page_body_text(self):
-        return 'Waiting for the other participant to finish.'
+        return 'Waiting for the other player to finish.'
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
 
 class Results(Page):
 
-    """This page displays the earnings of each participant"""
+    """This page displays the earnings of each player"""
 
     template_name = 'trust/Results.html'
 
     def variables_for_template(self):
 
-        participant1_payoff = self.match.get_payoff_participant_1()
-        participant2_payoff = self.match.get_payoff_participant_2()
+        player1_payoff = self.match.get_payoff_player_1()
+        player2_payoff = self.match.get_payoff_player_2()
 
         tripled_amount = self.match.sent_amount * 3
 
@@ -84,9 +84,9 @@ class Results(Page):
                 'sent_amount': self.match.sent_amount,
                 'tripled_amount': tripled_amount,
                 'sent_back_amount': self.match.sent_back_amount,
-                'participant_index': self.participant.index_among_participants_in_match,
-                'participant1_payoff': participant1_payoff,
-                'participant2_payoff': participant2_payoff}
+                'player_index': self.player.index_among_players_in_match,
+                'player1_payoff': player1_payoff,
+                'player2_payoff': player2_payoff}
 
 
 def pages():

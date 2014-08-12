@@ -5,7 +5,7 @@ from battle_of_the_sexes.utilities import Bot
 import random
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 

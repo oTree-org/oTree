@@ -2,9 +2,9 @@ from django.contrib import admin
 import bertrand_competition.models as models
 import otree.adminlib as adminlib
 
-class ParticipantAdmin(adminlib.ParticipantAdmin):
-    readonly_fields = adminlib.get_callables(models.Participant)
-    list_display = adminlib.get_all_fields_for_table(models.Participant, readonly_fields)
+class PlayerAdmin(adminlib.PlayerAdmin):
+    readonly_fields = adminlib.get_callables(models.Player)
+    list_display = adminlib.get_all_fields_for_table(models.Player, readonly_fields)
 
 class MatchAdmin(adminlib.MatchAdmin):
     readonly_fields = adminlib.get_callables(models.Match)
@@ -18,7 +18,7 @@ class SubsessionAdmin(adminlib.SubsessionAdmin):
     readonly_fields = adminlib.get_callables(models.Subsession)
     list_display = adminlib.get_all_fields_for_table(models.Subsession, readonly_fields)
 
-admin.site.register(models.Participant, ParticipantAdmin)
+admin.site.register(models.Player, PlayerAdmin)
 admin.site.register(models.Match, MatchAdmin)
 admin.site.register(models.Treatment, TreatmentAdmin)
 admin.site.register(models.Subsession, SubsessionAdmin)

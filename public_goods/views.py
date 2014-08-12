@@ -13,13 +13,13 @@ class Introduction(Page):
     template_name = 'public_goods/Introduction.html'
 
     def variables_for_template(self):
-        return {'no_of_participants': self.match.participants_per_match,
+        return {'no_of_players': self.match.players_per_match,
                 'multiplication_factor': self.treatment.multiplication_factor}
 
 
 class Contribute(Page):
 
-    """Participant: Choose how much to contribute"""
+    """Player: Choose how much to contribute"""
 
     template_name = 'public_goods/Contribute.html'
 
@@ -32,7 +32,7 @@ class ResultsWaitPage(MatchWaitPage):
     def action(self):
         self.match.set_contributions()
         self.match.set_individual_share()
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
     def body_text(self):
@@ -41,18 +41,18 @@ class ResultsWaitPage(MatchWaitPage):
 
 class Results(Page):
 
-    """Participants payoff: How much each has earned"""
+    """Players payoff: How much each has earned"""
 
     template_name = 'public_goods/Results.html'
 
     def variables_for_template(self):
 
-        participants = self.match.participants()
+        players = self.match.players()
 
         return {
-            'contributed_amount': self.participant.contributed_amount,
-            'participants': participants,
-            'id': self.participant.index_among_participants_in_match
+            'contributed_amount': self.player.contributed_amount,
+            'players': players,
+            'id': self.player.index_among_players_in_match
         }
 
 

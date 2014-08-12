@@ -51,13 +51,13 @@ class Match(otree.models.BaseMatch):
         """
     )
 
-    participants_per_match = 1
+    players_per_match = 1
 
     def calculate_value(self):
         self.random_value = random.choice(money_range(0.00, 1.00))
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)

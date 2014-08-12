@@ -9,14 +9,14 @@ import otree.forms
 class StartForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = []
 
 
 class DemographicsForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['q_country',
                   'q_age',
                   'q_gender']
@@ -30,7 +30,7 @@ class DemographicsForm(Form):
 class CognitiveReflectionTestForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['crt_bat_float',
                   'crt_widget',
                   'crt_lake']

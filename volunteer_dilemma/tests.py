@@ -5,12 +5,12 @@ from volunteer_dilemma.utilities import Bot
 import random
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 
         # decision
-        self.submit(views.Decision, {"decision": random.choice(self.participant.DECISION_CHOICES)[0]})
+        self.submit(views.Decision, {"decision": random.choice(self.player.DECISION_CHOICES)[0]})
 
         # results
         self.submit(views.Results)

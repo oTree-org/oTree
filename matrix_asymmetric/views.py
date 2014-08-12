@@ -38,10 +38,10 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': self.participant.payoff,
-            'my_decision': self.participant.decision,
-            'other_decision': self.participant.other_participant().decision,
-            'same_decision': self.participant.decision == self.participant.other_participant().decision,
+            'payoff': self.player.payoff,
+            'my_decision': self.player.decision,
+            'other_decision': self.player.other_player().decision,
+            'same_decision': self.player.decision == self.player.other_player().decision,
         }
 
 

@@ -5,7 +5,7 @@ from public_goods.utilities import Bot
 import random
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 
@@ -13,7 +13,7 @@ class ParticipantBot(Bot):
         self.submit(views.Introduction)
 
         # each player contributes random amount
-        self.submit(views.Contribute, {"contributed_amount": random.choice(self.participant.contribute_choices())})
+        self.submit(views.Contribute, {"contributed_amount": random.choice(self.player.contribute_choices())})
 
         # submit results page
         self.submit(views.Results)

@@ -4,7 +4,7 @@ import bargaining.views as views
 from bargaining.utilities import Bot
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 

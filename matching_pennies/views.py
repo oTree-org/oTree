@@ -10,7 +10,7 @@ class Choice(Page):
     form_class = forms.PennySideForm
 
     def variables_for_template(self):
-        return {'role': self.participant.role(),
+        return {'role': self.player.role(),
                 'initial_amount': self.treatment.initial_amount,
                 'winner_amount': self.treatment.initial_amount * 2,
                 'loser_amount': Money(0)}
@@ -19,7 +19,7 @@ class Choice(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
     def body_text(self):
@@ -31,10 +31,10 @@ class Results(Page):
 
     def variables_for_template(self):
 
-        return {'my_choice': self.participant.penny_side,
-                'other_choice': self.participant.other_participant().penny_side,
-                'payoff': self.participant.payoff,
-                'role': self.participant.role()}
+        return {'my_choice': self.player.penny_side,
+                'other_choice': self.player.other_player().penny_side,
+                'payoff': self.player.payoff,
+                'role': self.player.role()}
 
 def pages():
 

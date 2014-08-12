@@ -5,7 +5,7 @@ from matrix_symmetric.utilities import Bot
 import random
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 

@@ -6,13 +6,13 @@ from trust.utilities import Bot
 import random
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
 
         # basic assertions
         assert (self.treatment.amount_allocated == 1.00)
-        assert (self.match.participants_per_match == 2)
+        assert (self.match.players_per_match == 2)
 
         sent_amount = 0.5
         sent_back_amount = 0.7
@@ -21,7 +21,7 @@ class ParticipantBot(Bot):
         self.submit(views.Introduction)
 
         # if p1, play send page
-        if self.participant.index_among_participants_in_match == 1:
+        if self.player.index_among_players_in_match == 1:
             self.play_p1()
 
         # else p2, play send back page

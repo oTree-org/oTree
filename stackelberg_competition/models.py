@@ -7,8 +7,8 @@ import otree.models
 
 doc = """
 <p>
-    In Stackelberg Competition, participants play as firm owners(in duopoly market), each deciding sequentially on how
-    much quantity to produce in order to make profit. The Participant to start is chosen randomly.
+    In Stackelberg Competition, players play as firm owners(in duopoly market), each deciding sequentially on how
+    much quantity to produce in order to make profit. The Player to start is chosen randomly.
 </p>
 <p>
     Source code <a href="https://github.com/wickens/otree_library/tree/master/stackelberg_competition">here</a>
@@ -30,7 +30,7 @@ class Treatment(otree.models.BaseTreatment):
     total_capacity = models.PositiveIntegerField(
         default=60,
         doc="""
-        Combined production capacity of both participants(firms)
+        Combined production capacity of both players(firms)
         """
     )
 
@@ -49,10 +49,10 @@ class Match(otree.models.BaseMatch):
         """
         )
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -67,12 +67,12 @@ class Participant(otree.models.BaseParticipant):
         """
     )
 
-    def other_participant(self):
+    def other_player(self):
         """Returns the opponent of the current player"""
-        return self.other_participants_in_match()[0]
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
-        self.match.price = self.treatment.total_capacity - self.quantity - self.other_participant().quantity
+        self.match.price = self.treatment.total_capacity - self.quantity - self.other_player().quantity
         self.payoff = self.match.price * self.quantity
 
 

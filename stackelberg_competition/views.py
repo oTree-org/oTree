@@ -17,7 +17,7 @@ class Introduction(Page):
 class ChoiceOne(Page):
 
     def participate_condition(self):
-        return self.participant.index_among_participants_in_match == 1
+        return self.player.index_among_players_in_match == 1
 
     template_name = 'stackelberg_competition/ChoiceOne.html'
 
@@ -28,7 +28,7 @@ class ChoiceOne(Page):
 class ChoiceTwo(Page):
 
     def participate_condition(self):
-        return self.participant.index_among_participants_in_match == 2
+        return self.player.index_among_players_in_match == 2
 
     template_name = 'stackelberg_competition/ChoiceTwo.html'
 
@@ -37,12 +37,12 @@ class ChoiceTwo(Page):
 
     def variables_for_template(self):
         return {
-            'other_quantity': self.participant.other_participant().quantity
+            'other_quantity': self.player.other_player().quantity
         }
 
 class ResultsWaitPage(MatchWaitPage):
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
 class Results(Page):
@@ -52,9 +52,9 @@ class Results(Page):
     def variables_for_template(self):
 
         return {
-            'payoff': self.participant.payoff,
-            'quantity': self.participant.quantity,
-            'other_quantity': self.participant.other_participant().quantity,
+            'payoff': self.player.payoff,
+            'quantity': self.player.quantity,
+            'other_quantity': self.player.other_player().quantity,
             'price': self.match.price
         }
 

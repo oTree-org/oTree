@@ -7,7 +7,7 @@ import otree.forms
 class RequestForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['request_amount']
 
     def labels(self):

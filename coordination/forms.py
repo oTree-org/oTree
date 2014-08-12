@@ -8,7 +8,7 @@ from django import forms
 class ChoiceForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['choice']
         widgets = {'choice': forms.RadioSelect()}
 

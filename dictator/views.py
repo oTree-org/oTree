@@ -10,7 +10,7 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {'allocated_amount': self.treatment.allocated_amount,
-                'participant_id': self.participant.index_among_participants_in_match}
+                'player_id': self.player.index_among_players_in_match}
 
 
 class Offer(Page):
@@ -21,17 +21,17 @@ class Offer(Page):
         return forms.OfferForm
 
     def participate_condition(self):
-        return self.participant.index_among_participants_in_match == 1
+        return self.player.index_among_players_in_match == 1
 
 
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
     def body_text(self):
-        if self.participant.index_among_participants_in_match == 2:
+        if self.player.index_among_players_in_match == 2:
             return "Waiting for the dictator to make an offer."
 
 
@@ -40,9 +40,9 @@ class Results(Page):
     template_name = 'dictator/Results.html'
 
     def variables_for_template(self):
-        return {'payoff': self.participant.payoff,
+        return {'payoff': self.player.payoff,
                 'offer_amount': self.match.offer_amount,
-                'participant_id': self.participant.index_among_participants_in_match}
+                'player_id': self.player.index_among_players_in_match}
 
 
 def pages():

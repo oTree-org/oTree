@@ -42,10 +42,10 @@ class AdminDemo(Page):
 class Results(Page):
 
     def variables_for_template(self):
-        if self.participant.payoff is None:
-            self.participant.set_payoff()
+        if self.player.payoff is None:
+            self.player.set_payoff()
         return {
-            'payoff': currency(self.participant.payoff)
+            'payoff': currency(self.player.payoff)
         }
 
     template_name = 'showcase/Results.html'

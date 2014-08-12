@@ -7,7 +7,7 @@ import otree.forms
 class ContributeForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['contributed_amount']
 
     def labels(self):

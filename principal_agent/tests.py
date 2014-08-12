@@ -4,13 +4,13 @@ import principal_agent.views as views
 from principal_agent.utilities import Bot
 
 
-class ParticipantBot(Bot):
+class PlayerBot(Bot):
 
     def play(self):
         # intro
         self.submit(views.Introduction)
 
-        if self.participant.index_among_participants_in_match == 1:
+        if self.player.index_among_players_in_match == 1:
             self.play_1()
 
         else:

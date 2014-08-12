@@ -7,7 +7,7 @@ import otree.forms
 class GuessForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['guess_value']
 
     def labels(self):

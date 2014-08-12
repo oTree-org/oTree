@@ -8,9 +8,9 @@ import random
 
 
 doc = """
-In Private Value Auction Game. Consists of multiple participants. Each participant submits a
-bid for a prize being sold in an auction. The prize value is privately known to each participant and therefore
-uncertainty on the other participant's value. The winner is the participant with the highest bid value.
+In Private Value Auction Game. Consists of multiple players. Each player submits a
+bid for a prize being sold in an auction. The prize value is privately known to each player and therefore
+uncertainty on the other player's value. The winner is the player with the highest bid value.
 
 <p>Source code <a href="https://github.com/wickens/otree_library/tree/master/private_value_auction">here</a></p>
 """
@@ -21,10 +21,10 @@ class Subsession(otree.models.BaseSubsession):
     name_in_url = 'private_value_auction'
 
     def choose_winner(self):
-        highest_bid = max(p.bid_amount for p in self.participants())
+        highest_bid = max(p.bid_amount for p in self.players())
         # could be a tie
-        participants_with_highest_bid = [p for p in self.participants() if p.bid_amount == highest_bid]
-        random_highest_bidder = random.choice(participants_with_highest_bid)
+        players_with_highest_bid = [p for p in self.players() if p.bid_amount == highest_bid]
+        random_highest_bidder = random.choice(players_with_highest_bid)
         random_highest_bidder.is_winner = True
 
 
@@ -49,14 +49,14 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 1
+    players_per_match = 1
 
     def bid_choices(self):
         """Range of allowed bid values"""
         return money_range(0, self.treatment.price_value-0.2, 0.05) # range less than price value **uncertain aspect
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -67,20 +67,20 @@ class Participant(otree.models.BaseParticipant):
     bid_amount = models.MoneyField(
         default=None,
         doc="""
-        Amount bidded by each participant
+        Amount bidded by each player
         """
     )
 
     is_winner = models.BooleanField(
         default=False,
         doc="""
-        Indicates whether the participant is the winner or not
+        Indicates whether the player is the winner or not
         """
     )
 
-    def other_participant(self):
-        """Returns other participant in match"""
-        return self.other_participants_in_match()[0]
+    def other_player(self):
+        """Returns other player in match"""
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
         if self.is_winner:

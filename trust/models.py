@@ -27,7 +27,7 @@ class Treatment(otree.models.BaseTreatment):
 
     amount_allocated = models.MoneyField(
         default=1.00,
-        doc="""Initial amount allocated to each participant"""
+        doc="""Initial amount allocated to each player"""
     )
 
     increment_amount = models.MoneyField(
@@ -42,7 +42,7 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
 
@@ -65,16 +65,16 @@ class Match(otree.models.BaseMatch):
         """Range of allowed values during send back"""
         return money_range(0, self.sent_amount * 3, self.treatment.increment_amount)
 
-    def get_payoff_participant_1(self):
+    def get_payoff_player_1(self):
         """Calculate P1 one payoff"""
         return self.treatment.amount_allocated - self.sent_amount + self.sent_back_amount
 
-    def get_payoff_participant_2(self):
+    def get_payoff_player_2(self):
         """Calculate P2 payoff"""
         return self.treatment.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -83,11 +83,11 @@ class Participant(otree.models.BaseParticipant):
     # </built-in>
 
     def set_payoff(self):
-        """Method to calculate payoff for each participant"""
-        if self.index_among_participants_in_match == 1:
-            self.payoff = self.match.get_payoff_participant_1()
-        elif self.index_among_participants_in_match == 2:
-            self.payoff = self.match.get_payoff_participant_2()
+        """Method to calculate payoff for each player"""
+        if self.index_among_players_in_match == 1:
+            self.payoff = self.match.get_payoff_player_1()
+        elif self.index_among_players_in_match == 2:
+            self.payoff = self.match.get_payoff_player_2()
 
 
 def treatments():

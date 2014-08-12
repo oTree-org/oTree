@@ -11,7 +11,7 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': self.participant.payoff,
+            'payoff': self.player.payoff,
         }
 
 
@@ -29,7 +29,7 @@ class Bid(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
 
@@ -39,7 +39,7 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': self.participant.payoff,
+            'payoff': self.player.payoff,
             'bid_amount': self.match.bid_amount,
             'random_value': self.match.random_value
         }

@@ -6,8 +6,8 @@ import otree.models
 from otree.common import Money, money_range
 
 doc = """
-Traveler's dilemma game has two participants.
-Each participant is told to make a claim. Payoffs calculated according to the claims made.
+Traveler's dilemma game has two players.
+Each player is told to make a claim. Payoffs calculated according to the claims made.
 
 <p>Source code <a href="https://github.com/wickens/otree_library/tree/master/traveler_dilemma">here</a></p>
 """
@@ -41,14 +41,14 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
     def claim_choices(self):
         """Range of allowed claim values"""
         return money_range(self.treatment.min_amount, self.treatment.max_amount, 0.05)
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -56,21 +56,21 @@ class Participant(otree.models.BaseParticipant):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    # claim by participant
+    # claim by player
     claim = models.MoneyField(
         default=None,
         doc="""
-        Each participant's claim
+        Each player's claim
         """
     )
 
-    def other_participant(self):
-        return self.other_participants_in_match()[0]
+    def other_player(self):
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
-        if self.claim < self.other_participant().claim:
+        if self.claim < self.other_player().claim:
             self.payoff = self.claim + self.treatment.reward
-        elif self.claim > self.other_participant().claim:
+        elif self.claim > self.other_player().claim:
             self.payoff = self.claim - self.treatment.penalty
         else:
             self.payoff = self.claim

@@ -7,7 +7,7 @@ import otree.forms
 class QuantityForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['quantity']
 
     def labels(self):

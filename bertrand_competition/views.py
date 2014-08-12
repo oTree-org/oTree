@@ -25,7 +25,7 @@ class Compete(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
 class Results(Page):
@@ -35,11 +35,11 @@ class Results(Page):
     def variables_for_template(self):
 
         return {
-            'payoff': self.participant.payoff,
-            'is_winner': self.participant.is_winner,
-            'price': self.participant.price,
-            'other_price': self.participant.other_participant().price,
-            'equal_price': self.participant.price == self.participant.other_participant().price,
+            'payoff': self.player.payoff,
+            'is_winner': self.player.is_winner,
+            'price': self.player.price,
+            'other_price': self.player.other_player().price,
+            'equal_price': self.player.price == self.player.other_player().price,
         }
 
 def pages():

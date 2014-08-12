@@ -33,10 +33,10 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 1
+    players_per_match = 1
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     subsession = models.ForeignKey(Subsession)
     match = models.ForeignKey(Match, null=True)

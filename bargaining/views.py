@@ -29,7 +29,7 @@ class Request(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.participants():
+        for p in self.match.players():
             p.set_payoff()
 
 class Results(Page):
@@ -38,9 +38,9 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': self.participant.payoff,
-            'request_amount': self.participant.request_amount,
-            'other_request': self.participant.other_participant().request_amount
+            'payoff': self.player.payoff,
+            'request_amount': self.player.request_amount,
+            'other_request': self.player.other_player().request_amount
         }
 
 

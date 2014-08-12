@@ -7,7 +7,7 @@ import otree.forms
 class BidForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['bid_amount']
 
     def choices(self):

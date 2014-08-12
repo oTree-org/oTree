@@ -12,7 +12,7 @@ class Page(otree.views.Page):
         self.subsession = models.Subsession()
         self.treatment = models.Treatment()
         self.match = models.Match()
-        self.participant = models.Participant()
+        self.player = models.Player()
 
 
 class SubsessionWaitPage(otree.views.SubsessionWaitPage):
@@ -38,7 +38,7 @@ class Form(otree.forms.Form):
         self.subsession = models.Subsession()
         self.treatment = models.Treatment()
         self.match = models.Match()
-        self.participant = models.Participant()
+        self.player = models.Player()
 
 class Bot(otree.test.Bot):
 
@@ -46,10 +46,10 @@ class Bot(otree.test.Bot):
         self.subsession = models.Subsession()
         self.treatment = models.Treatment()
         self.match = models.Match()
-        self.participant = models.Participant()
+        self.player = models.Player()
 
 
-class InitializeParticipant(otree.views.InitializeParticipant):
+class InitializePlayer(otree.views.InitializePlayer):
     z_models = models
 
 

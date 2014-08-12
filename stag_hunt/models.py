@@ -54,10 +54,10 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -71,9 +71,9 @@ class Participant(otree.models.BaseParticipant):
         doc='either Stag or Hare',
     )
 
-    def other_participant(self):
-        """Returns other participant in match"""
-        return self.other_participants_in_match()[0]
+    def other_player(self):
+        """Returns other player in match"""
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
 
@@ -87,7 +87,7 @@ class Participant(otree.models.BaseParticipant):
                 'Hare': self.treatment.hare_hare_amount,
             }
         }
-        self.payoff = payoff_matrix[self.decision][self.other_participant().decision]
+        self.payoff = payoff_matrix[self.decision][self.other_player().decision]
 
 
 def treatments():

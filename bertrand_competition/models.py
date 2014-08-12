@@ -6,8 +6,8 @@ import otree.models
 
 
 doc = """
-In Bertrand Competition, participants play as firm owners(in duopoly market), each deciding simultaneously on how
-much price to set for their products. The participant with the lowest price carries the day and becomes the winner.
+In Bertrand Competition, players play as firm owners(in duopoly market), each deciding simultaneously on how
+much price to set for their products. The player with the lowest price carries the day and becomes the winner.
 
 <p>Source code <a href="https://github.com/wickens/otree_library/tree/master/bertrand_competition">here</a></p>
 """
@@ -46,10 +46,10 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -60,28 +60,28 @@ class Participant(otree.models.BaseParticipant):
     price = models.MoneyField(
         default=None,
         doc="""
-        The participant's target price
+        The player's target price
         """
     )
 
     is_winner = models.BooleanField(
         default=False,
         doc="""
-        Whether this participant is the winner of the match
+        Whether this player is the winner of the match
         """
     )
 
-    def other_participant(self):
-        '''get the opponent participant'''
-        return self.other_participants_in_match()[0]
+    def other_player(self):
+        '''get the opponent player'''
+        return self.other_players_in_match()[0]
 
     def set_payoff(self):
-        if self.price < self.other_participant().price:
+        if self.price < self.other_player().price:
             self.is_winner = True
             self.payoff = self.price - self.treatment.minimum_price
-        elif self.price > self.other_participant().price:
+        elif self.price > self.other_player().price:
             self.payoff = 0
-        elif self.price == self.other_participant().price:
+        elif self.price == self.other_player().price:
             self.payoff = (self.price - self.treatment.minimum_price) / 2.0
 
 

@@ -8,8 +8,8 @@ from otree.common import Money, money_range
 doc = """
 <p>
 Dictator game. Single Treatment. Two players, one of whom is the dictator.
-The dictator is given some amount of money, while the other participant is given nothing.
-The dictator must offer part of the money to the other participant.
+The dictator is given some amount of money, while the other player is given nothing.
+The dictator must offer part of the money to the other player.
 The offered amount cannot be rejected.
 </p>
 
@@ -41,7 +41,7 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
     offer_amount = models.MoneyField(
         default=None,
@@ -53,7 +53,7 @@ class Match(otree.models.BaseMatch):
         return money_range(0, self.treatment.allocated_amount, 0.05)
 
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -63,7 +63,7 @@ class Participant(otree.models.BaseParticipant):
 
     def set_payoff(self):
         """Calculates player payoff"""
-        if self.index_among_participants_in_match == 1:
+        if self.index_among_players_in_match == 1:
             self.payoff = self.treatment.allocated_amount - self.match.offer_amount
         else:
             self.payoff = self.match.offer_amount

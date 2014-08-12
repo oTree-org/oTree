@@ -7,7 +7,7 @@ import otree.forms
 class PriceForm(Form):
 
     class Meta:
-        model = models.Participant
+        model = models.Player
         fields = ['price']
 
     def labels(self):

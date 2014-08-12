@@ -35,7 +35,7 @@ class Treatment(otree.models.BaseTreatment):
     mismatch_amount = models.MoneyField(
         default=0.00,
         doc="""
-        Amount rewarded for choosing football and opera for either participants
+        Amount rewarded for choosing football and opera for either players
         """
     )
     opera_husband_amount = models.MoneyField(
@@ -58,12 +58,12 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    participants_per_match = 2
+    players_per_match = 2
 
 
     def set_payoffs(self):
-        husband = self.get_participant_by_role('husband')
-        wife = self.get_participant_by_role('wife')
+        husband = self.get_player_by_role('husband')
+        wife = self.get_player_by_role('wife')
 
         if husband.decision != wife.decision:
             husband.payoff = self.treatment.mismatch_amount
@@ -77,7 +77,7 @@ class Match(otree.models.BaseMatch):
                 husband.payoff = self.treatment.opera_husband_amount
                 wife.payoff = self.treatment.opera_wife_amount
 
-class Participant(otree.models.BaseParticipant):
+class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
@@ -91,14 +91,14 @@ class Participant(otree.models.BaseParticipant):
         doc='either football or opera',
     )
 
-    def other_participant(self):
-        """Returns other participant in match"""
-        return self.other_participants_in_match()[0]
+    def other_player(self):
+        """Returns other player in match"""
+        return self.other_players_in_match()[0]
 
     def role(self):
-        if self.index_among_participants_in_match == 1:
+        if self.index_among_players_in_match == 1:
             return 'husband'
-        if self.index_among_participants_in_match == 2:
+        if self.index_among_players_in_match == 2:
             return 'wife'
 
 
