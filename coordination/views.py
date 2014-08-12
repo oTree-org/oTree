@@ -24,8 +24,7 @@ class Choice(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        for p in self.match.players():
-            p.set_payoff()
+        self.match.set_payoffs()
 
     def body_text(self):
         return "Waiting for the other player."

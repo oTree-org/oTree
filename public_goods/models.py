@@ -57,13 +57,11 @@ class Match(otree.models.BaseMatch):
         doc="""The amount each player in the group receives out of the the total contributed (after multiplication by some factor)"""
     )
 
-    def set_contributions(self):
-        """Sums up the amounts contributed to the joint project by each player in a group"""
-        self.contributions = sum(p.contributed_amount for p in self.players())
-
-    def set_individual_share(self):
-        """Calculates the amount each player in a group receives from the joint project"""
-        self.individual_share = self.contributions * self.treatment.multiplication_factor / self.players_per_match
+    def set_payoffs(self):
+        contributions = sum(p.contributed_amount for p in self.players())
+        individual_share = contributions * self.treatment.multiplication_factor / self.players_per_match
+        for p in self.players():
+            p.payoff = (self.treatment.amount_allocated - p.contributed_amount) + individual_share
 
 
 class Player(otree.models.BasePlayer):
@@ -78,11 +76,6 @@ class Player(otree.models.BasePlayer):
         default=None,
         doc="""The amount contributed by the player"""
     )
-
-    def set_payoff(self):
-        """Calculate player payoff"""
-        self.payoff = (self.treatment.amount_allocated - self.contributed_amount) + self.match.individual_share
-
 
 
 def treatments():

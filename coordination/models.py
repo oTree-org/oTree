@@ -48,6 +48,15 @@ class Match(otree.models.BaseMatch):
 
     players_per_match = 2
 
+    def set_payoffs(self):
+        p1 = self.get_player_by_index(1)
+        p2 = self.get_player_by_index(2)
+
+        if p1.choice == p2.choice:
+            p1.payoff = p2.payoff = self.treatment.match_amount
+        else:
+            p1.payoff = p2.payoff = self.treatment.mismatch_amount
+
 
 class Player(otree.models.BasePlayer):
 
@@ -66,13 +75,6 @@ class Player(otree.models.BasePlayer):
     def other_player(self):
         """Returns other player in match"""
         return self.other_players_in_match()[0]
-
-    def set_payoff(self):
-
-        if self.choice == self.other_player().choice:
-            self.payoff = self.treatment.match_amount
-        else:
-            self.payoff = self.treatment.mismatch_amount
 
 
 def treatments():

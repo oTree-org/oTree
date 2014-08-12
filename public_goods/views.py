@@ -30,10 +30,7 @@ class Contribute(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
-        self.match.set_contributions()
-        self.match.set_individual_share()
-        for p in self.match.players():
-            p.set_payoff()
+        self.match.set_payoffs()
 
     def body_text(self):
         return "Waiting for other group members to contribute."
