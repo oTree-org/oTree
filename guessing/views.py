@@ -32,10 +32,7 @@ class Results(Page):
 class ResultsWaitPage(SubsessionWaitPage):
 
     def action(self):
-        self.subsession.choose_winner()
-
-        for p in self.subsession.players():
-            p.set_payoff()
+        self.subsession.set_payoffs()
 
 def pages():
     return [

@@ -4,7 +4,7 @@
 from otree.db import models
 import otree.models
 from otree.common import Money, money_range
-
+from bargaining.utilities import BaseMatch
 
 doc = """
 <p>
@@ -36,7 +36,7 @@ class Treatment(otree.models.BaseTreatment):
     )
 
 
-class Match(otree.models.BaseMatch):
+class Match(BaseMatch):
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
@@ -49,12 +49,12 @@ class Match(otree.models.BaseMatch):
         return money_range(0, self.treatment.amount_shared, 0.05)
 
     def set_payoffs(self):
-        total_requested_amount = sum(p.request_amount for p in self.players())
+        total_requested_amount = sum(p.request_amount for p in self.players)
         if total_requested_amount > self.treatment.amount_shared:
-            for p in self.players():
+            for p in self.players:
                 p.payoff = p.request_amount
         else:
-            for p in self.players():
+            for p in self.players:
                 p.payoff = 0
 
 

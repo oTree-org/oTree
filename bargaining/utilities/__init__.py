@@ -1,5 +1,7 @@
 # Don't change anything in this file.
+from bargaining.models import Treatment, Subsession, Match
 import bargaining.models as models
+
 import otree.views
 import otree.forms
 import otree.test
@@ -55,3 +57,12 @@ class InitializePlayer(otree.views.InitializePlayer):
 
 class InitializeExperimenter(otree.views.InitializeExperimenter):
     z_models = models
+
+class BaseMatch(otree.models.BaseMatch):
+
+    def z(self):
+
+        self.players_foo = [models.Player()]
+
+    class Meta:
+        abstract = True

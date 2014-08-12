@@ -27,7 +27,7 @@ class ResultsWaitPage(MatchWaitPage):
         return 'Waiting for the other player to make a decision.'
 
     def action(self):
-        for p in self.match.players():
+        for p in self.match.players:
             p.set_payoff()
 
 

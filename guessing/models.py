@@ -21,19 +21,25 @@ class Subsession(otree.models.BaseSubsession):
     two_third_guesses = models.FloatField(default=None)
 
     def calculate_average(self):
-        self.two_third_guesses = (2.0/3) * sum(p.guess_value for p in self.players()) / len(self.players())
+        self.two_third_guesses = (2.0/3) * sum(p.guess_value for p in self.players) / len(self.players)
 
     def choose_winner(self):
         self.calculate_average()
         winner_so_far = None
         smallest_difference_so_far = 1000 #arbitrary big number
 
-        for p in self.players():
+        for p in self.players:
             difference = abs(p.guess_value - self.two_third_guesses)
             if difference < smallest_difference_so_far:
                 winner_so_far = p
                 smallest_difference_so_far = difference
         winner_so_far.is_winner = True
+
+        for p in self.players:
+            if p.is_winner:
+                p.payoff = p.treatment.winner_payoff
+            else:
+                p.payoff = 0
 
 
 class Treatment(otree.models.BaseTreatment):
@@ -78,9 +84,6 @@ class Player(otree.models.BasePlayer):
         Each player guess: between 0-100
         """
     )
-
-    def set_payoff(self):
-        self.payoff = self.treatment.winner_payoff if self.is_winner else 0
 
 
 def treatments():

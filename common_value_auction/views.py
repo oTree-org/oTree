@@ -28,7 +28,7 @@ class ResultsWaitPage(SubsessionWaitPage):
 
     def action(self):
         self.subsession.choose_winner()
-        for p in self.subsession.players():
+        for p in self.subsession.players:
             p.set_payoff()
 
 
