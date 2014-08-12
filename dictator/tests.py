@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import dictator.views as views
 from dictator.utilities import Bot
 import random
