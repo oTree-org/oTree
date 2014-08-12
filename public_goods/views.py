@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 import public_goods.forms as forms
-from public_goods.utilities import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
+from public_goods.utilities import Page, MatchWaitPage
+
 
 def variables_for_all_templates(self):
     return {'amount_allocated': self.treatment.amount_allocated}
+
 
 class Introduction(Page):
 
