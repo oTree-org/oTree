@@ -1,9 +1,7 @@
-oTree
-=======
+#oTree
 
-Documentation: https://github.com/oTree-org/oTree/wiki
 
-**Quick start**
+## Quick start
 
 Set the environment variable `OTREE_LOCALDEV` to 1
 
@@ -12,3 +10,6 @@ Set the environment variable `OTREE_LOCALDEV` to 1
     pip install requirements.txt
     python recreate_environment.py local
     python manage.py runserver
+
+## Full documentation
+https://github.com/oTree-org/oTree/wiki
