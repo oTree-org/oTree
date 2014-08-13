@@ -10,14 +10,11 @@ class PlayerBot(Bot):
     def play(self):
 
         # assertions
-        assert (self.treatment.number_of_flips == 10)
-        assert (self.treatment.payoff_per_head == 10)
-
-        # start game
-        self.submit(views.Start)
+        #assert (self.treatment.number_of_flips == 10)
+        assert (self.treatment.payoff_per_head == 0.10)
 
         # coin flip
-        self.submit(views.FlipCoins, {"number_of_heads": random.choice(range(1, 10, 1))})
+        self.submit(views.FlipCoins, {"number_of_heads": random.choice(range(1, 11, 1))})
 
         # results
         self.submit(views.Results)
