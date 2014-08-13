@@ -4,7 +4,7 @@ Set the environment variable `OTREE_LOCALDEV` to 1
 
     git clone git@github.com:oTree-org/oTree.git
     cd oTree
-    pip install requirements.txt
+    pip install -r requirements.txt
     python recreate_environment.py local
     python manage.py runserver
 
