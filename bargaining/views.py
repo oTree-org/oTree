@@ -29,6 +29,7 @@ class Request(Page):
 class ResultsWaitPage(MatchWaitPage):
 
     def action(self):
+        print 1/0
         self.match.set_payoffs()
 
 class Results(Page):

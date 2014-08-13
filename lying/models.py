@@ -22,8 +22,8 @@ class Treatment(otree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    number_of_flips = models.PositiveIntegerField(10)
-    payoff_per_head = models.MoneyField(0.10)
+    number_of_flips = models.PositiveIntegerField(default=10)
+    payoff_per_head = models.MoneyField(default=0.10)
 
 
 class Match(otree.models.BaseMatch):

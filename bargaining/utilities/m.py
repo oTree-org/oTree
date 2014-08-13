@@ -1,13 +1,19 @@
-import otree.models
+from otree.models import BasePlayer, BaseMatch, BaseTreatment, BaseSubsession
+#from bargaining.models import Player
+'''
+class BaseMatch(BaseMatch):
+    def z_autocomplete(self):
 
-class BasePlayer(otree.models.BasePlayer):
-    pass
+        self.players = [Player()]
 
-class BaseMatch(otree.models.BaseMatch):
-    pass
+    class Meta:
+        abstract = True
 
-class BaseTreatment(otree.models.BaseTreatment):
-    pass
+class BaseSubsession(BaseSubsession):
+    def z_autocomplete(self):
+        #from bargaining.models import Player
+        self.players = [Player()]
 
-class BaseSubsession(otree.models.BaseSubsession):
-    pass
+    class Meta:
+        abstract = True
+'''

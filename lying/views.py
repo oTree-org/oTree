@@ -11,6 +11,11 @@ class FlipCoins(Page):
         return forms.CoinFlipForm
 
     def variables_for_template(self):
+        # participant is an instance of sessionlib.SessionUser
+        #self.player.participant.vars['foo'] = 1
+
+        # session is an instance of sessionlib.Session
+        #self.subsession.session.vars['session_foo'] = 2
         return {'number_of_flips': self.treatment.number_of_flips,
                 'payoff_per_head': self.treatment.payoff_per_head}
 
@@ -23,7 +28,10 @@ class Results(Page):
     template_name = 'lying/Results.html'
 
     def variables_for_template(self):
+
         return {
+            #'foo': self.player.participant.vars['foo'],
+            #'session_foo': self.subsession.session.vars['session_foo'],
             'payoff': self.player.payoff,
             'number_of_heads': self.player.number_of_heads,
         }

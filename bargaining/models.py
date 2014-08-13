@@ -35,6 +35,7 @@ class Treatment(otree.models.BaseTreatment):
     )
 
 
+
 class Match(otree.models.BaseMatch):
     # <built-in>
     treatment = models.ForeignKey(Treatment)

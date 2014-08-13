@@ -9,6 +9,7 @@ def variables_for_all_templates(self):
         'role': self.player.role()
     }
 
+
 class Choice(Page):
 
     template_name = 'matching_pennies/Choice.html'
