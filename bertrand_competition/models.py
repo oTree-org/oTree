@@ -4,7 +4,6 @@
 from otree.db import models
 import otree.models
 
-
 doc = """
 In Bertrand Competition, players play as firm owners(in duopoly market), each deciding simultaneously on how
 much price to set for their products. The player with the lowest price carries the day and becomes the winner.

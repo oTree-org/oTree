@@ -28,7 +28,7 @@ class Treatment(otree.models.BaseTreatment):
     # </built-in>
 
     initial_amount = models.MoneyField(
-        default=1.00,
+        default=0.10,
         doc="""The value of the pennies given to each player"""
     )
 
@@ -40,6 +40,30 @@ class Match(otree.models.BaseMatch):
     # </built-in>
 
     players_per_match = 2
+
+    def set_payoffs(self):
+        matcher = self.get_player_by_role('matcher')
+        mismatcher = self.get_player_by_role('mismatcher')
+
+        if matcher.penny_side == mismatcher.penny_side:
+            matcher.payoff = self.treatment.initial_amount*2
+            mismatcher.payoff = 0
+        else:
+            matcher.payoff = 0
+            mismatcher.payoff = self.treatment.initial_amount*2
+
+        for p in [matcher, mismatcher]:
+            if self.subsession.round_number == 1:
+                p.participant.vars['history'] = []
+            else:
+                p.participant.vars['history'].append(
+                    {
+                        'round_number': self.subsession.round_number,
+                        'my_side': p.penny_side,
+                        'opponent_side': p.other_player().penny_side,
+                        'is_winner': p.is_winner,
+                    }
+                )
 
 
 class Player(otree.models.BasePlayer):
@@ -55,19 +79,13 @@ class Player(otree.models.BasePlayer):
         doc="""Heads or tails"""
     )
 
+    is_winner = models.NullBooleanField(
+        doc='Whether the participant won this round'
+    )
+
     def other_player(self):
         """Returns the opponent of the current player"""
         return self.other_players_in_match()[0]
-
-    def set_payoff(self):
-        """Calculates payoffs"""
-
-        pennies_match = self.penny_side == self.other_player().penny_side
-
-        if (self.role() == 'matcher' and pennies_match) or (self.role() == 'mismatcher' and not pennies_match):
-            self.payoff = self.treatment.initial_amount * 2
-        else:
-            self.payoff = 0
 
     def role(self):
         if self.index_among_players_in_match == 1:

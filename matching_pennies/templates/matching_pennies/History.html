@@ -1,0 +1,20 @@
+<h3>Round history</h3>
+
+<table class="table">
+    <tr>
+        <th>Round</th>
+        <th>Your side</th>
+        <th>Opponent's side</th>
+        <th>Winner</th>
+    </tr>
+
+    {% for h in history %}
+    <tr>
+        <td>{{ h.round_number }}</td>
+        <td>{{ h.my_side }}</td>
+        <td>{{ h.opponent_side }}</td>
+        <td>{% if h.is_winner %} You {% else %} Opponent {% endif %}</td>
+    </tr>
+    {% endfor %}
+
+</table>

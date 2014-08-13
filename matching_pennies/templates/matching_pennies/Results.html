@@ -25,4 +25,8 @@
         Your payoff is therefore {{ payoff }}.
     </p>
 
+    {% if round_number > 1 %}
+        {% include 'matching_pennies/History.html' %}
+    {% endif %}
+
 {% endblock %}

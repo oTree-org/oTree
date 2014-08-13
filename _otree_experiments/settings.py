@@ -17,20 +17,19 @@ else:
     # Change this to something unique (e.g. mash your keyboard), and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
 
-# local database settings
-# add: export LOCALDEV=1 to .bashrc
-if os.environ.get("OTREE_LOCALDEV"):
+
+if os.environ.get("HEROKU"):
+    import dj_database_url
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config()
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-# heroku database settings
-else:
-    import dj_database_url
-    DATABASES = {}
-    DATABASES['default'] = dj_database_url.config()
+
 
 settings = {
     'CREATE_DEFAULT_SUPERUSER': True,
