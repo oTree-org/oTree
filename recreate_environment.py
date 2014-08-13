@@ -10,7 +10,11 @@ heroku_apps = {
 }
 
 def main():
-    environment = sys.argv[1]
+    if len(sys.argv) <= 2:
+        # default to local
+        environment = 'local'
+    else:
+        environment = sys.argv[1]
 
     syncdb = 'python manage.py syncdb --traceback'
 
