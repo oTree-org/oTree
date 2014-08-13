@@ -1,6 +1,3 @@
-#oTree
-
-
 ## Quick start
 
 Set the environment variable `OTREE_LOCALDEV` to 1
