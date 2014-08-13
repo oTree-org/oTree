@@ -1,5 +1,5 @@
-*oTree*
-
+oTree
+=======
 
 Documentation: https://github.com/oTree-org/oTree/wiki
 
