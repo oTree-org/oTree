@@ -1,6 +1,6 @@
 ## Quick start
 
-Set the environment variable `OTREE_LOCALDEV` to 1 and restart your command window.
+Set the environment variable `OTREE_LOCALDEV` to `1` and restart your command window.
 
     git clone git@github.com:oTree-org/oTree.git
     cd oTree
