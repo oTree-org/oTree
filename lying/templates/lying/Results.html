@@ -8,12 +8,34 @@
 
 {% block content %}
 
-    <p>You got {{ number_of_heads }} heads.</p>
-    <p>Your payoff is {{ payoff }}.</p>
+    <table class="table">
+        <tr>
+            <th>Round</th>
+            <th>Number of heads</th>
+            <th>Your payoff</th>
+        </tr>
 
-    <p>
-        Debug:
-        Foo: {{ foo }}, Session_foo: {{ session_foo }}
-    </p>
+        {% for p in previous_players %}
+            <tr>
+                <td>{{ p.subsession.round_number }}</td>
+                <td>{{ p.number_of_heads }}</td>
+                <td>{{ p.payoff }}</td>
+            </tr>
+
+        {% endfor %}
+
+        <tr>
+            <td>{{ round_number }} (current round)</td>
+            <td>{{ number_of_heads }}</td>
+            <td>{{ payoff }}</td>
+        </tr>
+
+        <tr class="success">
+            <th>Total</th>
+            <th>{{ cumulative_number_of_heads }}</th>
+            <th>{{ cumulative_payoff }}</th>
+        </tr>
+
+    </table>
 
 {% endblock %}

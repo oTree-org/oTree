@@ -48,7 +48,7 @@ def session_types():
             name='Matching Pennies',
             base_pay=10.00,
             participants_per_session=12,
-            participants_per_demo_session=4,
+            participants_per_demo_session=2,
             subsession_apps=['matching_pennies']*3 + ['lab_results'],
             doc=""""""
         ),
@@ -81,7 +81,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=1,
-            subsession_apps=['lying', 'lab_results'],
+            subsession_apps=['lying']*5 + ['lab_results'],
             doc=""""""
         ),
         SessionType(
