@@ -27,14 +27,14 @@ class Results(Page):
 
     def variables_for_template(self):
 
-        previous_players = self.player.previous_players()
+        me_in_previous_rounds = self.player.me_in_previous_rounds()
 
         return {
             'payoff': self.player.payoff,
             'number_of_heads': self.player.number_of_heads,
-            'previous_players': previous_players,
-            'cumulative_payoff': sum(p.payoff for p in previous_players) + self.player.payoff,
-            'cumulative_number_of_heads': sum(p.number_of_heads for p in previous_players) + self.player.number_of_heads,
+            'me_in_previous_rounds': me_in_previous_rounds,
+            'cumulative_payoff': sum(p.payoff for p in me_in_previous_rounds) + self.player.payoff,
+            'cumulative_number_of_heads': sum(p.number_of_heads for p in me_in_previous_rounds) + self.player.number_of_heads,
         }
 
 def pages():

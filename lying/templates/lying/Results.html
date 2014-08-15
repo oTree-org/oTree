@@ -15,7 +15,7 @@
             <th>Your payoff</th>
         </tr>
 
-        {% for p in previous_players %}
+        {% for p in me_in_previous_rounds %}
             <tr>
                 <td>{{ p.subsession.round_number }}</td>
                 <td>{{ p.number_of_heads }}</td>
