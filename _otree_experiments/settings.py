@@ -20,11 +20,9 @@ else:
 
 if os.environ.get("HEROKU"):
     import dj_database_url
-    print 'creating postgres database'
     DATABASES = {}
     DATABASES['default'] = dj_database_url.config()
 else:
-    print 'creating sqlite db'
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
