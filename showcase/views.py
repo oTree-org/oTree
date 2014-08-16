@@ -57,6 +57,6 @@ def pages():
         FormsDemo,
         EmbedDemo,
         BootstrapWidgetDemo,
-        AdminDemo,
+        # AdminDemo # need to update this page, provide correct password and link, GIF screenshot, etc
         Results,
     ]
