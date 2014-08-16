@@ -10,7 +10,7 @@ class PlayerBot(Bot):
     def play(self):
 
         # decision
-        self.submit(views.Decision, {"decision": random.choice(self.player.DECISION_CHOICES)[0]})
+        self.submit(views.Decision, {"decision": random.choice(['Volunteer','Ignore'])})
 
         # results
         self.submit(views.Results)

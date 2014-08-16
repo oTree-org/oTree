@@ -13,7 +13,7 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # decision
-        self.submit(views.Decision, {"decision": random.choice((('cooperate', 'cooperate'), ('defect', 'defect')))[0]})
+        self.submit(views.Decision, {"decision": random.choice(['cooperate', 'defect'])})
 
         # results
         self.submit(views.Results)

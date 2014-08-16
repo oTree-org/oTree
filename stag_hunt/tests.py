@@ -10,7 +10,7 @@ class PlayerBot(Bot):
     def play(self):
 
         # random decision
-        choice = random.choice((('Stag', 'Stag'), ('Hare', 'Hare')))[0]
+        choice = random.choice(['Stag', 'Hare'])
 
         self.submit(views.Decide, {"decision": choice})
 

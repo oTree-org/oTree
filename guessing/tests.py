@@ -13,9 +13,9 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # make your guess
-        self.submit(views.Guess, {"guess_value": random.choice(range(0, 100))})
+        self.submit(views.Guess, {"guess_value": random.randint(0, 100)})
 
         self.submit(views.Results)
 
     def play_p2(self):
-        self.submit(views.Guess, {"guess_value": random.choice(range(0, 100))})
+        self.submit(views.Guess, {"guess_value": random.randint(0, 100)})

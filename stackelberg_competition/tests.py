@@ -24,10 +24,10 @@ class PlayerBot(Bot):
 
     def play_1(self):
         # Player One: quantity
-        self.submit(views.ChoiceOne, {'quantity': random.choice(range(1, (self.treatment.total_capacity)/2))})
+        self.submit(views.ChoiceOne, {'quantity': random.randint(1, self.treatment.total_capacity/2)})
 
     def play_2(self):
         # Player two: quantity
-        self.submit(views.ChoiceTwo, {'quantity': random.choice(range(1, (self.treatment.total_capacity)/2))})
+        self.submit(views.ChoiceTwo, {'quantity': random.randint(1, self.treatment.total_capacity/2)})
 
 

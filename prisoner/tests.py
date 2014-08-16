@@ -9,7 +9,7 @@ class PlayerBot(Bot):
     def play(self):
 
         # each player makes random decision
-        decision = random.choice((('Cooperate', 'Cooperate'), ('Defect', 'Defect')))[0]
+        decision = random.choice(['Cooperate', 'Defect'])
 
         self.submit(views.Decision, {"decision": decision})
 
