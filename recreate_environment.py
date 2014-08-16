@@ -10,7 +10,7 @@ heroku_apps = {
 }
 
 def main():
-    if len(sys.argv) <= 2:
+    if len(sys.argv) == 1:
         # default to local
         environment = 'local'
     else:

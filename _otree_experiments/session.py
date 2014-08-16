@@ -1,11 +1,11 @@
 from otree.session import SessionType
-
+import os
 
 def session_types():
 
     return [
         SessionType(
-            name="Show Case",
+            name="Showcase",
             base_pay=0,
             participants_per_demo_session=1,
             participants_per_session=1,
@@ -209,7 +209,8 @@ def session_types():
 
 
 def show_on_demo_page(session_type_name):
-
+    if os.environ.get('IS_OTREE_DOT_ORG') and session_type_name == "Showcase":
+        return False
     return True
 
 demo_page_intro_text = """
