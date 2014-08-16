@@ -1,3 +1,6 @@
+## Live demo
+http://demo.otree.org/
+
 ## Quick start
 
     git clone git@github.com:oTree-org/oTree.git
