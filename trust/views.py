@@ -63,7 +63,7 @@ class ResultsWaitPage(MatchWaitPage):
     def body_text(self):
         return 'Waiting for the other player to finish.'
 
-    def action(self):
+    def after_all_players_arrive(self):
         self.match.set_payoffs()
 
 

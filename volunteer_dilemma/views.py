@@ -26,7 +26,7 @@ class Decision(Page):
 
 class ResultsWaitPage(MatchWaitPage):
 
-    def action(self):
+    def after_all_players_arrive(self):
         for p in self.match.players:
             p.set_payoff()
 

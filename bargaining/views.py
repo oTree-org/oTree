@@ -28,7 +28,7 @@ class Request(Page):
 
 class ResultsWaitPage(MatchWaitPage):
 
-    def action(self):
+    def after_all_players_arrive(self):
         self.match.set_payoffs()
 
 class Results(Page):

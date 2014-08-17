@@ -31,7 +31,7 @@ class Results(Page):
 
 class ResultsWaitPage(SubsessionWaitPage):
 
-    def action(self):
+    def after_all_players_arrive(self):
         self.subsession.set_payoffs()
         print 'finished setting all payoffs'
 

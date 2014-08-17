@@ -27,7 +27,7 @@ class Decide(Page):
 
 class ResultsWaitPage(MatchWaitPage):
 
-    def action(self):
+    def after_all_players_arrive(self):
         self.match.set_payoffs()
 
     def body_text(self):
