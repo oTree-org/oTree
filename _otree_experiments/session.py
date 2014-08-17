@@ -5,13 +5,14 @@ def session_types():
 
     return [
         SessionType(
-            name="Showcase",
-            base_pay=0,
-            participants_per_demo_session=1,
-            participants_per_session=1,
-            subsession_apps=['showcase'],
+            name='Public Goods',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=4,
+            subsession_apps=['public_goods', 'lab_results'],
             doc=""""""
         ),
+
         SessionType(
             name="Prisoner Dilemma",
             base_pay=4.00,
@@ -20,6 +21,7 @@ def session_types():
             subsession_apps=['prisoner', 'lab_results'],
             doc=""""""
         ),
+
         SessionType(
             name='Trust',
             base_pay=10.00,
@@ -28,15 +30,7 @@ def session_types():
             subsession_apps=['trust', 'lab_results'],
             doc=""""""
         ),
-        SessionType(
-            name='Public Goods',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=4,
-            subsession_apps=['public_goods', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
+                SessionType(
             name='Dictator',
             base_pay=10.00,
             participants_per_session=2,
@@ -88,7 +82,7 @@ def session_types():
             name='Guessing',
             base_pay=10.00,
             participants_per_session=12,
-            participants_per_demo_session=5,
+            participants_per_demo_session=3,
             subsession_apps=['guessing', 'lab_results'],
             doc=""""""
         ),
@@ -204,8 +198,18 @@ def session_types():
             subsession_apps=['tragedy_of_the_commons', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name="Showcase",
+            base_pay=0,
+            participants_per_demo_session=1,
+            participants_per_session=1,
+            subsession_apps=['showcase'],
+            doc=""""""
+        ),
 
     ]
+
+
 
 
 def show_on_demo_page(session_type_name):

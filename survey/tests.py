@@ -9,10 +9,3 @@ class PlayerBot(Bot):
     def play(self):
 
         pass
-
-
-class ExperimenterBot(SubsessionMixIn, otree.test.ExperimenterBot):
-
-    def play(self):
-
-        pass

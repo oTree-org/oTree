@@ -21,6 +21,6 @@ class PlayerBot(Bot):
 
         self.submit(views.BootstrapWidgetDemo)
 
-        self.submit(views.AdminDemo)
+        #self.submit(views.AdminDemo)
 
         self.submit(views.Results)

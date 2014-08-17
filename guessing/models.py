@@ -23,7 +23,7 @@ class Subsession(otree.models.BaseSubsession):
     def calculate_average(self):
         self.two_third_guesses = (2.0/3) * sum(p.guess_value for p in self.players) / len(self.players)
 
-    def choose_winner(self):
+    def set_payoffs(self):
         self.calculate_average()
         winner_so_far = None
         smallest_difference_so_far = 1000 #arbitrary big number
@@ -40,6 +40,7 @@ class Subsession(otree.models.BaseSubsession):
                 p.payoff = p.treatment.winner_payoff
             else:
                 p.payoff = 0
+
 
 
 class Treatment(otree.models.BaseTreatment):

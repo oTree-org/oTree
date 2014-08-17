@@ -49,8 +49,8 @@ class Match(otree.models.BaseMatch):
     players_per_match = 2
 
     def set_payoffs(self):
-        row_player = self.match.get_player_by_role('row')
-        column_player = self.match.get_player_by_role('column')
+        row_player = self.get_player_by_role('row')
+        column_player = self.get_player_by_role('column')
 
         row_matrix = {
             'A': {

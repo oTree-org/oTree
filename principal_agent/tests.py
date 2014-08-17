@@ -22,15 +22,9 @@ class PlayerBot(Bot):
     def play_1(self):
         # P1 - offer
         self.submit(views.Offer,
-                    {'agent_fixed_pay': 550,
+                    {'agent_fixed_pay': 5.50,
                     'agent_return_share': 40})
 
     def play_2(self):
         # P2 - accept/reject
         self.submit(views.Accept, {'decision': 'Reject'})
-
-
-class ExperimenterBot(ExperimenterMixIn, otree.test.ExperimenterBot):
-
-    def play(self):
-        pass

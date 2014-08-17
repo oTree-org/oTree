@@ -33,6 +33,7 @@ class ResultsWaitPage(SubsessionWaitPage):
 
     def action(self):
         self.subsession.set_payoffs()
+        print 'finished setting all payoffs'
 
 def pages():
     return [

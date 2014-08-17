@@ -14,5 +14,5 @@ class ClaimForm(Form):
         return {'claim': "What's your Claim Amount?"}
 
     def choices(self):
-        return {'claim': self.match.get_claim_field_choices()}
+        return {'claim': self.match.claim_choices()}
 

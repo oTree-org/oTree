@@ -54,7 +54,7 @@ class Match(otree.models.BaseMatch):
         Amount offered as fixed pay to the agent.
         """
     )
-    agent_return_share = models.MoneyField(
+    agent_return_share = models.PositiveIntegerField(
         default=None,
         doc="""
         Share of the total return
