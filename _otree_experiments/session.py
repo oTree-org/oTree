@@ -82,7 +82,7 @@ def session_types():
             name='Guessing',
             base_pay=10.00,
             participants_per_session=12,
-            participants_per_demo_session=3,
+            participants_per_demo_session=10,
             subsession_apps=['guessing', 'lab_results'],
             doc=""""""
         ),

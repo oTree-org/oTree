@@ -20,16 +20,14 @@ class Bid(Page):
 
     def variables_for_template(self):
         return {
-            'prize_value': self.treatment.prize_value,
+            'prize_value': self.subsession.prize_value,
         }
 
 
 class ResultsWaitPage(SubsessionWaitPage):
 
     def after_all_players_arrive(self):
-        self.subsession.choose_winner()
-        for p in self.subsession.players:
-            p.set_payoff()
+        self.subsession.set_payoffs()
 
 
 class Results(Page):

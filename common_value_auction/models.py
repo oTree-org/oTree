@@ -21,12 +21,27 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'common_value_auction'
 
-    def choose_winner(self):
+    prize_value = models.MoneyField(
+        default=2.00,
+        doc="""
+        Value of the item to be auctioned.
+        """
+    )
+
+    def bid_choices(self):
+        """Range of allowed bid values"""
+        return money_range(0, self.prize_value, 0.05)
+
+    def set_payoffs(self):
         highest_bid = max(p.bid_amount for p in self.players)
         # could be a tie
         players_with_highest_bid = [p for p in self.players if p.bid_amount == highest_bid]
-        random_highest_bidder = random.choice(players_with_highest_bid)
-        random_highest_bidder.is_winner = True
+        winner = random.choice(players_with_highest_bid)
+        winner.is_winner = True
+        winner.payoff = self.prize_value - winner.bid_amount
+        for p in self.players:
+            if not p.is_winner:
+                p.payoff = 0
 
 
 class Treatment(otree.models.BaseTreatment):
@@ -34,13 +49,6 @@ class Treatment(otree.models.BaseTreatment):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    prize_value = models.MoneyField(
-        default=2.00,
-        doc="""
-        Value of the item to be auctioned.
-        """
-    )
 
 
 class Match(otree.models.BaseMatch):
@@ -50,11 +58,7 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 2
-
-    def bid_choices(self):
-        """Range of allowed bid values"""
-        return money_range(0, self.treatment.prize_value, 0.05)
+    players_per_match = 1
 
 
 class Player(otree.models.BasePlayer):
@@ -78,17 +82,6 @@ class Player(otree.models.BasePlayer):
         Indicates whether the player is the winner or not
         """
     )
-
-    def other_player(self):
-        """Returns other player in match"""
-        return self.other_players_in_match()[0]
-
-    def set_payoff(self):
-        if self.is_winner:
-            self.payoff = self.treatment.prize_value - self.bid_amount
-        else:
-            self.payoff = 0
-
 
 def treatments():
     return [Treatment.create()]

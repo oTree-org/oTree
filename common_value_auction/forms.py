@@ -16,4 +16,4 @@ class BidForm(Form):
         return {'bid_amount': 'How much do you want to bid?'}
 
     def choices(self):
-        return {'bid_amount': self.match.bid_choices()}
+        return {'bid_amount': self.subsession.bid_choices()}
