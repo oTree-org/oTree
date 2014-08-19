@@ -1,3 +1,6 @@
+## Homepage
+http://www.otree.org/
+
 ## Live demo
 http://demo.otree.org/
 
@@ -11,3 +14,4 @@ http://demo.otree.org/
 
 ## Full documentation
 https://github.com/oTree-org/oTree/wiki
+
