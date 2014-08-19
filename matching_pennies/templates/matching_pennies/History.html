@@ -8,12 +8,12 @@
         <th>Winner</th>
     </tr>
 
-    {% for h in history %}
+    {% for p in previous_players %}
     <tr>
-        <td>{{ h.round_number }}</td>
-        <td>{{ h.my_side }}</td>
-        <td>{{ h.opponent_side }}</td>
-        <td>{% if h.is_winner %} You {% else %} Opponent {% endif %}</td>
+        <td>{{ p.round_number }}</td>
+        <td>{{ p.my_side }}</td>
+        <td>{{ p.opponent_side }}</td>
+        <td>{% if p.is_winner %} You {% else %} Opponent {% endif %}</td>
     </tr>
     {% endfor %}
 

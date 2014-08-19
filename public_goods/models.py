@@ -13,7 +13,7 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/public_goods
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'public_goods'
+    name_in_url = 'foobar' #was public_goods
 
 
 class Treatment(otree.models.BaseTreatment):

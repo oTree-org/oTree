@@ -52,20 +52,6 @@ class Match(otree.models.BaseMatch):
             matcher.payoff = 0
             mismatcher.payoff = self.treatment.initial_amount*2
 
-        for p in [matcher, mismatcher]:
-            if self.subsession.round_number == 1:
-                p.participant.vars['history'] = []
-            else:
-                p.participant.vars['history'].append(
-                    {
-                        'round_number': self.subsession.round_number,
-                        'my_side': p.penny_side,
-                        'opponent_side': p.other_player().penny_side,
-                        'is_winner': p.is_winner,
-                    }
-                )
-
-
 
 class Player(otree.models.BasePlayer):
 

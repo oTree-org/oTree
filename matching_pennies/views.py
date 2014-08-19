@@ -40,8 +40,7 @@ class Results(Page):
         return {'my_choice': self.player.penny_side,
                 'other_choice': self.player.other_player().penny_side,
                 'payoff': self.player.payoff,
-                'role': self.player.role(),
-                'history': self.player.participant.vars['history']}
+                'role': self.player.role()}
 
 def pages():
 
