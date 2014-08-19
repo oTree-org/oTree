@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import public_goods.forms as forms
-from public_goods.utilities import Page, MatchWaitPage
+from public_goods._builtin import Page, MatchWaitPage
 
 
 def variables_for_all_templates(self):

@@ -1,7 +1,7 @@
 import otree.test
 from otree.common import Money, money_range
 import principal_agent.views as views
-from principal_agent.utilities import Bot
+from principal_agent._builtin import Bot
 
 
 class PlayerBot(Bot):

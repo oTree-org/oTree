@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import matching_pennies.forms as forms
-from matching_pennies.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from matching_pennies._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 def variables_for_all_templates(self):

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import bertrand_competition.forms as forms
-from bertrand_competition.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from bertrand_competition._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

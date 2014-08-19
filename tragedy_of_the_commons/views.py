@@ -2,7 +2,7 @@
 import otree.views
 import otree.views.concrete
 import tragedy_of_the_commons.forms as forms
-from tragedy_of_the_commons.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from tragedy_of_the_commons._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

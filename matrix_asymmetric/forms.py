@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import matrix_asymmetric.models as models
-from matrix_asymmetric.utilities import Form
+from matrix_asymmetric._builtin import Form
 import otree.forms
 from django import forms
 

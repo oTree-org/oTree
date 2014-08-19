@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import principal_agent.models as models
-from principal_agent.utilities import Form
+from principal_agent._builtin import Form
 import otree.forms
 
 

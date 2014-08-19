@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import volunteer_dilemma.forms as forms
-from volunteer_dilemma.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from volunteer_dilemma._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

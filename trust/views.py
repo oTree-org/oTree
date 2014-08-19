@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import trust.forms as forms
-from trust.utilities import Page, MatchWaitPage
+from trust._builtin import Page, MatchWaitPage
 
 
 class Introduction(Page):

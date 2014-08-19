@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import common_value_auction.models as models
 from django import forms
-from common_value_auction.utilities import Form
+from common_value_auction._builtin import Form
 from crispy_forms.layout import HTML
 from otree.common import Money, money_range
 

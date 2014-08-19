@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import prisoner.views as views
-from prisoner.utilities import Bot
+from prisoner._builtin import Bot
 import random
 
 

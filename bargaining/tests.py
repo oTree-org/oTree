@@ -1,7 +1,7 @@
 import otree.test
 from otree.common import Money, money_range
 import bargaining.views as views
-from bargaining.utilities import Bot
+from bargaining._builtin import Bot
 
 
 class PlayerBot(Bot):

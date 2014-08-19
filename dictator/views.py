@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dictator.forms as forms
-from dictator.utilities import Page, MatchWaitPage
+from dictator._builtin import Page, MatchWaitPage
 
 
 class Introduction(Page):

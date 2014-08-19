@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import trust.views as views
-from trust.utilities import Bot
+from trust._builtin import Bot
 import random
 
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import cournot_competition.forms as forms
-from cournot_competition.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from cournot_competition._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

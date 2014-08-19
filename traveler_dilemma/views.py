@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import traveler_dilemma.forms as forms
-from traveler_dilemma.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from traveler_dilemma._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

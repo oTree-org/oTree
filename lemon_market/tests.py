@@ -1,6 +1,6 @@
 import otree.test
 import lemon_market.views as views
-from lemon_market.utilities import Bot
+from lemon_market._builtin import Bot
 import random
 from otree.common import money_range
 

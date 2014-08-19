@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import stackelberg_competition.forms as forms
-from stackelberg_competition.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from stackelberg_competition._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import bargaining.models as models
-from bargaining.utilities import Form
+from bargaining._builtin import Form
 import otree.forms
 
 

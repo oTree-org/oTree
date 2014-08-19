@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import stag_hunt.models as models
 from django import forms
-from stag_hunt.utilities import Form
+from stag_hunt._builtin import Form
 import otree.forms
 
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import private_value_auction.forms as forms
-from private_value_auction.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from private_value_auction._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

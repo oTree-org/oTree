@@ -1,7 +1,7 @@
 import otree.test
 from otree.common import Money, money_range
 import battle_of_the_sexes.views as views
-from battle_of_the_sexes.utilities import Bot
+from battle_of_the_sexes._builtin import Bot
 import random
 
 

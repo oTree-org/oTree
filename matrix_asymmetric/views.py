@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import matrix_asymmetric.forms as forms
-from matrix_asymmetric.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from matrix_asymmetric._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

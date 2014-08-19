@@ -1,7 +1,7 @@
 import otree.test
 from otree.common import Money, money_range
 import matching_pennies.views as views
-from matching_pennies.utilities import Bot
+from matching_pennies._builtin import Bot
 import random
 
 

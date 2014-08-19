@@ -1,7 +1,7 @@
 import otree.test
 from otree.common import Money, money_range
 import traveler_dilemma.views as views
-from traveler_dilemma.utilities import Bot
+from traveler_dilemma._builtin import Bot
 import random
 
 

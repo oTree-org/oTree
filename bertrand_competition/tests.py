@@ -1,7 +1,7 @@
 import otree.test
 from otree.common import Money, money_range
 import bertrand_competition.views as views
-from bertrand_competition.utilities import Bot
+from bertrand_competition._builtin import Bot
 import random
 from otree.common import money_range
 

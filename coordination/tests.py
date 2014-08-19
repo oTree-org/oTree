@@ -1,7 +1,7 @@
 import otree.test
 from otree.common import Money, money_range
 import coordination.views as views
-from coordination.utilities import Bot
+from coordination._builtin import Bot
 import random
 
 

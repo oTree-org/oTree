@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import cournot_competition.models as models
-from cournot_competition.utilities import Form
+from cournot_competition._builtin import Form
 import otree.forms
 
 

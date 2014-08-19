@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import lemon_market.models as models
-from lemon_market.utilities import Form
+from lemon_market._builtin import Form
 
 
 class BidForm(Form):

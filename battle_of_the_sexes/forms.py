@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import battle_of_the_sexes.models as models
 from django import forms
-from battle_of_the_sexes.utilities import Form
+from battle_of_the_sexes._builtin import Form
 import otree.forms
 
 

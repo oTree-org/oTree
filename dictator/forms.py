@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dictator.models as models
-from dictator.utilities import Form
+from dictator._builtin import Form
 
 
 class OfferForm(Form):

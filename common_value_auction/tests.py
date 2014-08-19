@@ -1,6 +1,6 @@
 import otree.test
 import common_value_auction.views as views
-from common_value_auction.utilities import Bot
+from common_value_auction._builtin import Bot
 from otree.common import Money, money_range
 import random
 

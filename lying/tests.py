@@ -1,7 +1,7 @@
 import otree.test
 from otree.common import Money, money_range
 import lying.views as views
-from lying.utilities import Bot
+from lying._builtin import Bot
 import random
 
 

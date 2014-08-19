@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import traveler_dilemma.models as models
-from traveler_dilemma.utilities import Form
+from traveler_dilemma._builtin import Form
 import otree.forms
 
 

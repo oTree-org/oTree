@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import coordination.forms as forms
-from coordination.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from coordination._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

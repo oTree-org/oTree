@@ -1,5 +1,5 @@
 import lying.forms as forms
-from lying.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from lying._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 def variables_for_all_templates(self):

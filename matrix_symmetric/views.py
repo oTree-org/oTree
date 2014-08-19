@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import matrix_symmetric.forms as forms
-from matrix_symmetric.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from matrix_symmetric._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

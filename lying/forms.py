@@ -1,6 +1,6 @@
 import lying.models as models
 import otree.forms
-from lying.utilities import Form
+from lying._builtin import Form
 from otree.common import Money, money_range
 from decimal import Decimal
 

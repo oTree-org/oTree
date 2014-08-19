@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import bertrand_competition.models as models
-from bertrand_competition.utilities import Form
+from bertrand_competition._builtin import Form
 import otree.forms
 
 

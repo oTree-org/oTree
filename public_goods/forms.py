@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import public_goods.models as models
-from public_goods.utilities import Form
+from public_goods._builtin import Form
 
 
 class ContributeForm(Form):

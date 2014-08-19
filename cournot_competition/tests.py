@@ -1,7 +1,7 @@
 import otree.test
 from otree.common import Money, money_range
 import cournot_competition.views as views
-from cournot_competition.utilities import Bot
+from cournot_competition._builtin import Bot
 import random
 
 

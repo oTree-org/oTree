@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import guessing.models as models
-from guessing.utilities import Form
+from guessing._builtin import Form
 import otree.forms
 
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import public_goods.views as views
-from public_goods.utilities import Bot
+from public_goods._builtin import Bot
 import random
 
 

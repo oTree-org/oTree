@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import guessing.forms as forms
-from guessing.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from guessing._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

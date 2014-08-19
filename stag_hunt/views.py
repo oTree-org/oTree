@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import stag_hunt.forms as forms
-from stag_hunt.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from stag_hunt._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

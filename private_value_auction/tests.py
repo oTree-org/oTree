@@ -1,7 +1,7 @@
 import otree.test
 from otree.common import Money, money_range
 import private_value_auction.views as views
-from private_value_auction.utilities import Bot
+from private_value_auction._builtin import Bot
 import random
 
 

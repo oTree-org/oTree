@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import showcase.models as models
 from django import forms
-from showcase.utilities import Form
+from showcase._builtin import Form
 from crispy_forms.layout import HTML
 
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import prisoner.forms as forms
-from prisoner.utilities import Page, MatchWaitPage
+from prisoner._builtin import Page, MatchWaitPage
 
 
 class Decision(Page):

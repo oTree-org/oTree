@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import stackelberg_competition.models as models
-from stackelberg_competition.utilities import Form
+from stackelberg_competition._builtin import Form
 import otree.forms
 
 

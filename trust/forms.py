@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import trust.models as models
-from trust.utilities import Form
+from trust._builtin import Form
 from django import forms
 
 

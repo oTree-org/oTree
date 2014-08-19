@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from . import models
 from django import forms
-from .utilities import Form
+from ._builtin import Form
 from otree.common import Money, money_range
 import otree.forms
 

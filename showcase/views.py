@@ -2,7 +2,7 @@
 import otree.views
 import otree.views.concrete
 import showcase.forms as forms
-from showcase.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from showcase._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import currency
 
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import principal_agent.forms as forms
-from principal_agent.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from principal_agent._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 

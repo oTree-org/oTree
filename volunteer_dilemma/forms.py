@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import volunteer_dilemma.models as models
 from django import forms
-from volunteer_dilemma.utilities import Form
+from volunteer_dilemma._builtin import Form
 import otree.forms
 
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import otree.views
 import lemon_market.forms as forms
-from lemon_market.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from lemon_market._builtin import Page, MatchWaitPage, SubsessionWaitPage
 
 
 

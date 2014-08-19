@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import survey.forms as forms
-from survey.utilities import Page, MatchWaitPage, SubsessionWaitPage
+from survey._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 class Start(Page):

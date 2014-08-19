@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import prisoner.models as models
 from django import forms
-from prisoner.utilities import Form
+from prisoner._builtin import Form
 
 
 class DecisionForm(Form):
