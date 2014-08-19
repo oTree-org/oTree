@@ -213,11 +213,13 @@ def session_types():
 
 
 def show_on_demo_page(session_type_name):
-    if os.environ.get('IS_OTREE_DOT_ORG') and session_type_name == "Showcase":
-        return False
     return True
 
 demo_page_intro_text = """
+<p>
 Click on one of the below links to learn more and play.
-You can read the source code of these games <a href="https://github.com/wickens/otree_library">here</a>.
+You can read the source code of these games <a href="https://github.com/oTree-org/otree">here</a>.
+</p>
+
+<p>Homepage at <a href="http://www.otree.org/">oTree.org</a>.</p>
 """
