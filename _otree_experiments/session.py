@@ -221,5 +221,5 @@ Click on one of the below links to learn more and play.
 You can read the source code of these games <a href="https://github.com/oTree-org/otree">here</a>.
 </p>
 
-<p>Homepage at <a href="http://www.otree.org/">oTree.org</a>.</p>
+<p>For more information about oTree, go to <a href="http://www.otree.org/">oTree.org</a>.</p>
 """
