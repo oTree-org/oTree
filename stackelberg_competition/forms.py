@@ -14,5 +14,7 @@ class QuantityForm(Form):
         return {'quantity': 'Enter the quantity of goods to produce?'}
 
     def quantity_error_message(self, value):
-        if not 1 <= value <= (self.treatment.total_capacity)/2:
-            return 'Quantity should be between {} and {} units'.format(1, (self.treatment.total_capacity)/2)
+        lower_bound = 1
+        upper_bound = self.treatment.total_capacity/2
+        if not lower_bound <= value <= upper_bound:
+            return 'Quantity should be between {} and {} units'.format(lower_bound, upper_bound)

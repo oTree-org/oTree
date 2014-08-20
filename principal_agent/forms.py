@@ -17,8 +17,8 @@ class ContractForm(Form):
         }
 
     def agent_fixed_pay_error_message(self, value):
-        if (value < -self.treatment.fixed_payment) or (value > self.treatment.fixed_payment):
-            return 'Agent fixed pay should be between -{} and {}.'.format(self.treatment.fixed_payment, self.treatment.fixed_payment)
+        if abs(value) > self.treatment.fixed_payment:
+            return 'Agent fixed pay should be between {} and {}.'.format(-self.treatment.fixed_payment, self.treatment.fixed_payment)
 
     def agent_return_share_error_message(self, value):
         if value not in range(0, 101, 10):
@@ -49,5 +49,5 @@ class WorkEffortForm(Form):
         }
 
     def agent_work_effort_error_message(self, value):
-        if (value < 1) or (value > 10):
+        if not 1 <= value <= 10:
             return 'Work effort should be between 1-Lowest and 10 - highest.'

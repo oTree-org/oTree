@@ -216,10 +216,15 @@ def show_on_demo_page(session_type_name):
     return True
 
 demo_page_intro_text = """
+<ul>
+    <li><a href="https://github.com/oTree-org/otree">Source code</a> for the below games.</li>
+    <li><a href="http://www.otree.org/">oTree homepage</a>.</li>
+</ul>
+
 <p>
-Click on one of the below links to learn more and play.
-You can read the source code of these games <a href="https://github.com/oTree-org/otree">here</a>.
+Below are various games implemented with oTree. These games are all open source,
+and you can modify them as you wish to create your own variations. Click one to learn more and play.
 </p>
 
-<p>For more information about oTree, go to <a href="http://www.otree.org/">oTree.org</a>.</p>
+
 """

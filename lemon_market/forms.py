@@ -19,6 +19,6 @@ class BidForm(Form):
         return {'bid_amount': 'Bid Amount'}
 
     def bid_amount_error_message(self, value):
-        if (value < 0) or (value > self.treatment.max_bid_amount):
+        if not 0 <= value <= self.treatment.max_bid_amount:
             return 'Bid Amount should be between {} and {}'.format(0, self.treatment.max_bid_amount)
 

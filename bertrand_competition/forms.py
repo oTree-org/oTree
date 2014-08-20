@@ -14,5 +14,7 @@ class PriceForm(Form):
         return {'price': 'Enter your preferred price?'}
 
     def price_error_message(self, value):
-        if not self.treatment.minimum_price < value <= self.treatment.maximum_price:
-            return 'Price should be between {} and {}'.format(self.treatment.minimum_price+0.01, self.treatment.maximum_price)
+        lower = self.treatment.minimum_price+0.01
+        upper = self.treatment.maximum_price
+        if not lower <= value <= upper:
+            return 'Price should be between {} and {}'.format(lower, upper)
