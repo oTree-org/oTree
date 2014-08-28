@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import survey.forms as forms
-from survey._builtin import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
+from survey._builtin import Page
+
 
 class Start(Page):
 
@@ -37,8 +37,6 @@ class End(Page):
 
 def pages():
 
-    return [SubsessionWaitPage,
-            Start,
-            Demographics,
+    return [Demographics,
             CognitiveReflectionTest,
             End]

@@ -58,8 +58,8 @@ def session_types():
             name='Survey',
             base_pay=10.00,
             participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['survey', 'lab_results'],
+            participants_per_demo_session=1,
+            subsession_apps=['survey'],
             doc=""""""
         ),
         SessionType(

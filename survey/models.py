@@ -3,15 +3,18 @@ from django_countries.fields import CountryField
 from otree.db import models
 import otree.models
 
+
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'survey'
 
 
 class Treatment(otree.models.BaseTreatment):
+
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
+
 
 class Match(otree.models.BaseMatch):
 
@@ -37,7 +40,7 @@ class Player(otree.models.BasePlayer):
 
     q_country = CountryField(default=None, verbose_name='What is your country of citizenship?')
     q_age = models.PositiveIntegerField(verbose_name='What is your age?', default=None)
-    q_gender = models.CharField(choices=['Male','Female'], default=None, verbose_name='What is your gender?')
+    q_gender = models.CharField(choices=['Male', 'Female'], default=None, verbose_name='What is your gender?')
 
     crt_bat_float = models.DecimalField(default=None, max_digits=6, decimal_places=2)
     crt_bat = models.PositiveIntegerField(default=None)
@@ -46,4 +49,5 @@ class Player(otree.models.BasePlayer):
 
 
 def treatments():
+
     return [Treatment.create()]

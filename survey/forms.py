@@ -2,8 +2,7 @@
 from . import models
 from django import forms
 from ._builtin import Form
-from otree.common import Money, money_range
-import otree.forms
+from otree.common import Money
 
 
 class StartForm(Form):
@@ -43,4 +42,3 @@ class CognitiveReflectionTestForm(Form):
                'crt_lake': """In a lake, there is a patch of lily pads. Every day, the patch doubles in size.
                               If it takes 48 days for the patch to cover the entire lake,
                               how many days would it take for the patch to cover half of the lake?"""}
-
