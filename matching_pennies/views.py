@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import matching_pennies.forms as forms
-from matching_pennies._builtin import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
+from matching_pennies._builtin import Page, MatchWaitPage
+from otree.common import Money
+
 
 def variables_for_all_templates(self):
     return {
@@ -31,16 +32,18 @@ class ResultsWaitPage(MatchWaitPage):
     def body_text(self):
         return "Waiting for the other player to select heads or tails."
 
+
 class Results(Page):
 
     template_name = 'matching_pennies/Results.html'
 
     def variables_for_template(self):
 
-        return {'my_choice': self.player.penny_side,
-                'other_choice': self.player.other_player().penny_side,
+        return {'my_choice': self.player.penny_side.lower(),
+                'other_choice': self.player.other_player().penny_side.lower(),
                 'payoff': self.player.payoff,
                 'role': self.player.role()}
+
 
 def pages():
 
