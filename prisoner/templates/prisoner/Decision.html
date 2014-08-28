@@ -1,1 +1,53 @@
-{% extends "global/Base.html" %}{% load staticfiles %}{% load i18n %}{% block title %}    Your decision{% endblock %}{% block content %}    <p>        You have been randomly and anonymously paired with another player. Both of you see these same instructions.        You must privately choose whether you want to <b>cooperate</b> with the other player or <b>defect</b>.        The final amount you make will depend both on your and the other player's decision:    </p>    <ul>        <li>If both choose to cooperate, each will receive {{ friend_amount }}</li>        <li>If one chooses to cooperate but the other chooses to defect, the former will receive {{ betrayed_amount }} and the latter {{ betray_amount }}</li>        <li>If both choose to defect, each will receive {{ enemy_amount }}</li>    </ul>    <p>        These rules are summarized in the table below.    </p>    <table class="table table-condensed" style="width:60%">        <thead>        <tr>            <th></th>            <th>P1: Cooperate</th>            <th>P1: Defect</th>        </tr>        </thead>        <tbody>        <tr>            <th>P2: Cooperate</th>            <td>Each makes {{ friend_amount }}</td>            <td>P1 makes {{ betray_amount }}<br>P2 makes {{ betrayed_amount }}            </td>        </tr>        <tr>            <th>P2: defect</th>            <td>P1 makes {{ betrayed_amount }}<br>P2 makes {{ betray_amount }}            </td>            <td>Each makes {{ enemy_amount }}</td>        </tr>        </tbody>    </table>{% endblock %}
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+    Your decision
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You have been randomly and anonymously paired with another player. Both of you see these same instructions.
+        You must privately choose whether you want to <b>cooperate</b> with the other player or <b>defect</b>.
+        The final amount you make will depend both on your and the other player's decision:
+    </p>
+
+
+    <ul>
+        <li>If both choose to cooperate, each will receive {{ friend_amount }}</li>
+        <li>If one chooses to cooperate, but the other chooses to defect, the former will receive {{ betrayed_amount }} and the latter {{ betray_amount }}</li>
+        <li>If both choose to defect, each will receive {{ enemy_amount }}</li>
+    </ul>
+
+
+    <p>
+        These rules are summarized in the table below.
+    </p>
+
+    <table class="table table-condensed" style="width:60%">
+        <thead>
+        <tr>
+            <th></th>
+            <th>P1: Cooperate</th>
+            <th>P1: Defect</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>P2: Cooperate</th>
+            <td>Each makes {{ friend_amount }}</td>
+            <td>P1 makes {{ betray_amount }}<br>P2 makes {{ betrayed_amount }}
+            </td>
+        </tr>
+        <tr>
+            <th>P2: defect</th>
+            <td>P1 makes {{ betrayed_amount }}<br>P2 makes {{ betray_amount }}
+            </td>
+            <td>Each makes {{ enemy_amount }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
