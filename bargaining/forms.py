@@ -10,7 +10,7 @@ class RequestForm(Form):
         fields = ['request_amount']
 
     def labels(self):
-        return {'request_amount': 'Please make your request:'}
+        return {'request_amount': 'Amount requested:'}
 
     def choices(self):
         return {'request_amount': self.match.request_choices()}
