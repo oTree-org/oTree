@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 import bargaining.views as views
 from bargaining._builtin import Bot
+import random
 
 
 class PlayerBot(Bot):
@@ -10,7 +12,7 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # request
-        self.submit(views.Request, {"request_amount": 0.45})
+        self.submit(views.Request, {"request_amount": random.choice(self.match.request_choices())})
 
         # results
         self.submit(views.Results)
