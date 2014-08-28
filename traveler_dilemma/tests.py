@@ -1,5 +1,3 @@
-import otree.test
-from otree.common import Money, money_range
 import traveler_dilemma.views as views
 from traveler_dilemma._builtin import Bot
 import random
@@ -32,6 +30,3 @@ class PlayerBot(Bot):
 
     def play_p2(self):
         self.submit(views.Claim, {"claim": random.choice(self.match.claim_choices())})
-
-
-

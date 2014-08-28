@@ -3,12 +3,21 @@
 {% load i18n %}
 
 {% block title %}
-    Traveler's Dilemma: Results
+    Results
 {% endblock %}
 
 {% block content %}
-    <p>Your claim was {{ claim }}.</p>
-    <p>The other player's claim is {{ other_claim }}.</p>
-    <p>Your payoff is therefore {{ payoff }}.</p>
+
+    <p>
+        Your claim was {{ claim }}.
+    </p>
+
+    <p>
+        The other player's claim was {{ other_claim }}.
+    </p>
+
+    <p>
+        Your payoff is therefore {{ payoff }}.
+    </p>
 
 {% endblock %}

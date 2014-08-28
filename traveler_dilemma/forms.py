@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import traveler_dilemma.models as models
 from traveler_dilemma._builtin import Form
-import otree.forms
 
 
 class ClaimForm(Form):
@@ -11,8 +10,7 @@ class ClaimForm(Form):
         fields = ['claim']
 
     def labels(self):
-        return {'claim': "What's your Claim Amount?"}
+        return {'claim': "Please make a claim:"}
 
     def choices(self):
         return {'claim': self.match.claim_choices()}
-

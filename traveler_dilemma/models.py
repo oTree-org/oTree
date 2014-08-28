@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 """Documentation at https://github.com/wickens/django-otree-docs/wiki"""
-
 from otree.db import models
 import otree.models
-from otree.common import Money, money_range
+from otree.common import money_range
 
 doc = """
 Traveler's dilemma game has two players.
@@ -19,23 +18,25 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Treatment(otree.models.BaseTreatment):
+
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
     reward = models.MoneyField(default=0.10,
-                       doc="""Player's reward for the lowest claim""")
+                               doc="""Player's reward for the lowest claim""")
 
     penalty = models.MoneyField(default=0.10,
-                       doc="""Player's deduction for the higher claim""")
+                                doc="""Player's deduction for the higher claim""")
 
     max_amount = models.MoneyField(default=1.00,
-                        doc="""The maximum claim to be requested""")
+                                   doc="""The maximum claim to be requested""")
     min_amount = models.MoneyField(default=0.20,
-                        doc="""The minimum claim to be requested""")
+                                   doc="""The minimum claim to be requested""")
 
 
 class Match(otree.models.BaseMatch):
+
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
@@ -71,10 +72,11 @@ class Player(otree.models.BasePlayer):
         if self.claim < self.other_player().claim:
             self.payoff = self.claim + self.treatment.reward
         elif self.claim > self.other_player().claim:
-            self.payoff = self.claim - self.treatment.penalty
+            self.payoff = self.other_player().claim - self.treatment.penalty
         else:
             self.payoff = self.claim
 
 
 def treatments():
+
     return [Treatment.create()]

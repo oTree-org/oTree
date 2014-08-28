@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import traveler_dilemma.forms as forms
-from traveler_dilemma._builtin import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
+from traveler_dilemma._builtin import Page, MatchWaitPage
 
 
 class Introduction(Page):
@@ -9,12 +8,10 @@ class Introduction(Page):
     template_name = 'traveler_dilemma/Introduction.html'
 
     def variables_for_template(self):
-        return {
-            'max_amount': self.treatment.max_amount,
-            'min_amount': self.treatment.min_amount,
-            'reward': self.treatment.reward,
-            'penalty': self.treatment.penalty,
-        }
+        return {'max_amount': self.treatment.max_amount,
+                'min_amount': self.treatment.min_amount,
+                'reward': self.treatment.reward,
+                'penalty': self.treatment.penalty}
 
 
 class Claim(Page):
@@ -23,6 +20,7 @@ class Claim(Page):
 
     def get_form_class(self):
         return forms.ClaimForm
+
 
 class ResultsWaitPage(MatchWaitPage):
 
@@ -44,9 +42,8 @@ class Results(Page):
 
 
 def pages():
-    return [
-        Introduction,
-        Claim,
-        ResultsWaitPage,
-        Results
-    ]
+
+    return [Introduction,
+            Claim,
+            ResultsWaitPage,
+            Results]
