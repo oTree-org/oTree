@@ -10,39 +10,43 @@
 
     <p>
         You wanted the choices
-        {% if player_id == 1 %}
+        {% if role == 'matcher' %}
             to match.
         {% else %}
             not to match.
         {% endif%}
     </p>
 
-    <p>
-        You chose {{ my_choice }} and the other player chose {{ other_choice }}.
-    </p>
-
-    <p>
-        Your payoff is therefore {{ payoff }}.
-    </p>
-
-
-    <table class="table">
+    <table class="table" style="width:650px; margin-top:20px;">
         <tr>
             <th>Round</th>
             <th>Your side</th>
             <th>Opponent's side</th>
             <th>Winner</th>
+            <th>Your payoff</th>
         </tr>
-
         {% for p in me_in_previous_rounds %}
             <tr>
-                <td>{{ p.round_number }}</td>
-                <td>{{ p.my_side }}</td>
-                <td>{{ p.opponent_side }}</td>
+                <td>{{ p.subsession.round_number }}</td>
+                <td>{{ p.penny_side }}</td>
+                <td>{{ p.other_player.penny_side }}</td>
                 <td>{% if p.is_winner %} You {% else %} Opponent {% endif %}</td>
+                <td>{{ p.payoff }}</td>
             </tr>
         {% endfor %}
-
+        <tr>
+            <td>{{ round_number }}</td>
+            <td>{{ my_choice }}</td>
+            <td>{{ other_choice }}</td>
+            <td>{% if is_winner %} You {% else %} Opponent {% endif %}</td>
+            <td>{{ payoff }}</td>
+        </tr>
     </table>
+
+    {% if round_number < total_rounds %}
+        <p>
+            Please click "Next" to continue to the next round.
+        </p>
+    {% endif %}
 
 {% endblock %}

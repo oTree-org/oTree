@@ -6,6 +6,7 @@ from otree.common import Money
 
 def variables_for_all_templates(self):
     return {
+        'total_rounds': self.subsession.number_of_rounds,
         'round_number': self.subsession.round_number,
         'role': self.player.role()
     }
@@ -39,10 +40,10 @@ class Results(Page):
 
     def variables_for_template(self):
 
-        return {'my_choice': self.player.penny_side.lower(),
-                'other_choice': self.player.other_player().penny_side.lower(),
+        return {'my_choice': self.player.penny_side,
+                'other_choice': self.player.other_player().penny_side,
+                'is_winner': self.player.is_winner,
                 'payoff': self.player.payoff,
-                'role': self.player.role(),
                 'me_in_previous_rounds': self.player.me_in_previous_rounds()}
 
 

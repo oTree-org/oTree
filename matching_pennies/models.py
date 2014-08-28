@@ -44,9 +44,13 @@ class Match(otree.models.BaseMatch):
         if matcher.penny_side == mismatcher.penny_side:
             matcher.payoff = self.treatment.initial_amount*2
             mismatcher.payoff = 0
+            matcher.is_winner = True
+            mismatcher.is_winner = False
         else:
             matcher.payoff = 0
             mismatcher.payoff = self.treatment.initial_amount*2
+            matcher.is_winner = False
+            mismatcher.is_winner = True
 
 
 class Player(otree.models.BasePlayer):
@@ -78,4 +82,5 @@ class Player(otree.models.BasePlayer):
 
 
 def treatments():
+
     return [Treatment.create()]
