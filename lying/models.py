@@ -1,13 +1,11 @@
-"""Documentation at http://django-otree.readthedocs.org/en/latest/app.html"""
-
+# -*- coding: utf-8 -*-
 from otree.db import models
 import otree.models
 
 
-doc="""
-In this game you are required to get a coin and flip it a number of times, while counting the number of heads
-you get. The payoff will be calculated by the number of heads that comes up.
-
+doc = """
+In this game a player is required to get a coin and flip it a number of times, while counting the number of heads.
+The payoff will be calculated by the number of heads.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/lying" target="_blank">here</a>.
 """
 
@@ -42,11 +40,13 @@ class Player(otree.models.BasePlayer):
     match = models.ForeignKey(Match, null=True)
     treatment = models.ForeignKey(Treatment, null=True)
 
-    number_of_heads = models.PositiveIntegerField(default=None)
+    number_of_heads = models.PositiveIntegerField(default=None,
+                                                 )
 
     def set_payoff(self):
         self.payoff = self.number_of_heads * self.match.treatment.payoff_per_head
 
 
 def treatments():
+
     return [Treatment.create()]

@@ -1,12 +1,14 @@
+# -*- coding: utf-8 -*-
 import lying.forms as forms
-from lying._builtin import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
+from lying._builtin import Page
+
 
 def variables_for_all_templates(self):
     return {
         'round_number': self.subsession.round_number,
         'number_of_rounds': self.subsession.number_of_rounds
     }
+
 
 class FlipCoins(Page):
 
@@ -40,5 +42,8 @@ class Results(Page):
             'cumulative_number_of_heads': sum(p.number_of_heads for p in me_in_previous_rounds) + self.player.number_of_heads,
         }
 
+
 def pages():
-    return [FlipCoins, Results]
+
+    return [FlipCoins,
+            Results]
