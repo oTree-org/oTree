@@ -82,7 +82,7 @@ def session_types():
             name='Guessing',
             base_pay=10.00,
             participants_per_session=12,
-            participants_per_demo_session=10,
+            participants_per_demo_session=5,
             subsession_apps=['guessing', 'lab_results'],
             doc=""""""
         ),
@@ -122,7 +122,7 @@ def session_types():
             name='Private Value Auction',
             base_pay=10.00,
             participants_per_session=2,
-            participants_per_demo_session=5,
+            participants_per_demo_session=4,
             subsession_apps=['private_value_auction', 'lab_results'],
             doc=""""""
         ),

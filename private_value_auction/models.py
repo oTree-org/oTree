@@ -20,12 +20,17 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'private_value_auction'
 
-    def choose_winner(self):
+    def set_payoffs(self):
         highest_bid = max(p.bid_amount for p in self.players)
         # could be a tie
         players_with_highest_bid = [p for p in self.players if p.bid_amount == highest_bid]
         random_highest_bidder = random.choice(players_with_highest_bid)
         random_highest_bidder.is_winner = True
+        random_highest_bidder.payoff = self.treatment.price_value - self.bid_amount
+
+        for p in self.players:
+            if p != random_highest_bidder:
+                p.payoff = 0
 
 
 class Treatment(otree.models.BaseTreatment):
@@ -77,17 +82,6 @@ class Player(otree.models.BasePlayer):
         Indicates whether the player is the winner or not
         """
     )
-
-    def other_player(self):
-        """Returns other player in match"""
-        return self.other_players_in_match()[0]
-
-    def set_payoff(self):
-        if self.is_winner:
-            self.payoff = self.treatment.price_value - self.bid_amount
-        else:
-            self.payoff = 0
-
 
 def treatments():
     return [Treatment.create()]

@@ -100,6 +100,25 @@ class Match(otree.models.BaseMatch):
 
     players_per_match = 2
 
+    def set_payoffs(self):
+        '''FIXME: need to review if this is correct'''
+        # TODO: re-structure payoff calculations to avoid negative payoffs
+        principal = self.get_player_by_role('principal')
+        agent = self.get_player_by_role('agent')
+
+        if self.decision == 'Reject':
+            principal.payoff = 0
+            agent.payoff = 100
+        else:
+            self.calculate_agent_work_cost()
+            self.calculate_total_return()
+
+            # [100% – Agent's return share in %]×(total return) – fixed payment
+            principal.payoff = max(0, (0.01 * (100 - self.match.agent_return_share) * self.match.total_return) - self.match.agent_fixed_pay)
+            # [Agent's return share in %]×(total return) + fixed payment – cost of the Agent's work effort
+            # if payoff < 0 ..then make it 0 - no negative payoffs
+            agent.payoff = max(0, 0.01*self.agent_return_share * self.total_return + self.agent_fixed_pay - self.agent_work_costs)
+
 
 class Player(otree.models.BasePlayer):
 
@@ -109,29 +128,11 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    def set_payoff(self):
-        #FIXME: move this to the match object, and use match.get_player_by_index
-        # TODO: re-structure payoff calculations to avoid negative payoffs
-        if self.match.decision == 'Reject':
-            if self.index_among_players_in_match == 1:
-                self.payoff = 0
-            else:
-                self.payoff = 100
-        else:
-            self.match.calculate_agent_work_cost()
-            self.match.calculate_total_return()
-
-            if self.index_among_players_in_match == 1:  # principal
-                # [100% – Agent's return share in %]×(total return) – fixed payment
-                # if payoff < 0 ..then make it 0 - no negative payoffs
-                calc_payoff = (0.01 * (100 - self.match.agent_return_share) * self.match.total_return) - self.match.agent_fixed_pay
-                self.payoff = calc_payoff if calc_payoff > 0 else 0
-            else:  # agent
-                # [Agent's return share in %]×(total return) + fixed payment – cost of the Agent's work effort
-                # if payoff < 0 ..then make it 0 - no negative payoffs
-                calc_payoff = (0.01*self.match.agent_return_share * self.match.total_return) + (self.match.agent_fixed_pay - self.match.agent_work_costs)
-                self.payoff = calc_payoff if calc_payoff > 0 else 0
-
+    def role(self):
+        if self.index_among_players_in_match == 1:
+            return 'principal'
+        if self.index_among_players_in_match == 2:
+            return 'agent'
 
 def treatments():
     return [Treatment.create()]

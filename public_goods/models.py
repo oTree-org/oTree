@@ -13,7 +13,7 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/public_goods
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'foobar' #was public_goods
+    name_in_url = 'public_goods'
 
 
 class Treatment(otree.models.BaseTreatment):
@@ -45,16 +45,6 @@ class Match(otree.models.BaseMatch):
     # </built-in>
 
     players_per_match = 4
-
-    contributions = models.MoneyField(
-        default=None,
-        doc="""Total amount contributed by the group players"""
-    )
-
-    individual_share = models.MoneyField(
-        default=None,
-        doc="""The amount each player in the group receives out of the the total contributed (after multiplication by some factor)"""
-    )
 
     def set_payoffs(self):
         contributions = sum(p.contribution for p in self.players)

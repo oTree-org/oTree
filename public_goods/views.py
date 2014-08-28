@@ -44,12 +44,9 @@ class Results(Page):
     template_name = 'public_goods/Results.html'
 
     def variables_for_template(self):
-
-        players = self.match.players
-
         return {
             'contribution': self.player.contribution,
-            'players': players,
+            'players': self.match.players,
             'id': self.player.index_among_players_in_match
         }
 
