@@ -42,7 +42,7 @@ class Player(otree.models.BasePlayer):
 
     demo_field1 = models.CharField(
         default=None,
-        choices=(('yes', 'yes'), ('no', 'no')),
+        choices=['yes', 'no'],
         doc="""
         field With radiobutton input.
         """
@@ -61,7 +61,7 @@ class Player(otree.models.BasePlayer):
     )
     demo_field4 = models.CharField(
         default=None,
-        choices=(('accept', 'accept'), ('reject', 'reject')),
+        choices=['accept', 'reject'],
         doc="""
         field with select choices input
         """

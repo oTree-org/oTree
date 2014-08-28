@@ -20,7 +20,7 @@ class Bid(Page):
 class ResultsWaitPage(SubsessionWaitPage):
 
     def after_all_players_arrive(self):
-        self.subsession.choose_winner()
+        self.subsession.set_payoffs()
         for p in self.subsession.players:
             p.set_payoff()
 
