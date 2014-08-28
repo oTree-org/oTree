@@ -7,8 +7,17 @@
 {% endblock %}
 
 {% block content %}
-    <p>You requested {{ request_amount }}.</p>
-    <p>Your opponent requested {{ other_request }}.</p>
-    <p>Your payoff is therefore {{ payoff }}</p>
 
-{% endblock %}
+    <p>
+        You requested {{ request_amount }}.
+    </p>
+
+    <p>
+        The other player requested {{ other_request }}.
+    </p>
+
+    <p>
+        Your payoff is therefore {{ payoff }}.
+    </p>
+
+{% endblock

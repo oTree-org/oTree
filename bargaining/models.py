@@ -47,7 +47,7 @@ class Match(otree.models.BaseMatch):
 
     def set_payoffs(self):
         total_requested_amount = sum(p.request_amount for p in self.players)
-        if total_requested_amount > self.treatment.amount_shared:
+        if total_requested_amount < self.treatment.amount_shared:
             for p in self.players:
                 p.payoff = p.request_amount
         else:
