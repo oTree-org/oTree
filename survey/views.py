@@ -3,18 +3,6 @@ import survey.forms as forms
 from survey._builtin import Page
 
 
-class Start(Page):
-
-    template_name = 'survey/Start.html'
-
-    def variables_for_template(self):
-        if self.player.payoff is None:
-            self.player.set_payoff()
-
-    def body_text(self):
-        return "Waiting for the other players."
-
-
 class Demographics(Page):
 
     form_class = forms.DemographicsForm

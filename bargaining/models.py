@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 """Documentation at https://github.com/wickens/django-otree-docs/wiki"""
-
 from otree.db import models
 import otree.models
-from otree.common import Money, money_range
+from otree.common import money_range
 
 doc = """
-<p>
-The Bargaining Game is a two-player game used to model bargaining interactions. In this game,
-two players demand a portion of some amount of money. If the total amount
+The bargaining game is a two-player game used to model bargaining interactions.
+Two players demand a portion of some amount of money. If the total amount
 requested by the players is less than that available, both players get their request.
-If their total request is greater than that available, neither player gets their request.
-</p>
-
+If their total request is greater than that available, neither player is paid.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/bargaining" target="_blank">here</a>.
 """
 
@@ -23,6 +19,7 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Treatment(otree.models.BaseTreatment):
+
     # </built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
@@ -35,8 +32,8 @@ class Treatment(otree.models.BaseTreatment):
     )
 
 
-
 class Match(otree.models.BaseMatch):
+
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
@@ -59,6 +56,7 @@ class Match(otree.models.BaseMatch):
 
 
 class Player(otree.models.BasePlayer):
+
     # <built-in>
     match = models.ForeignKey(Match, null=True)
     treatment = models.ForeignKey(Treatment, null=True)
