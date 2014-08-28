@@ -42,7 +42,8 @@ class Results(Page):
         return {'my_choice': self.player.penny_side.lower(),
                 'other_choice': self.player.other_player().penny_side.lower(),
                 'payoff': self.player.payoff,
-                'role': self.player.role()}
+                'role': self.player.role(),
+                'me_in_previous_rounds': self.player.me_in_previous_rounds()}
 
 
 def pages():

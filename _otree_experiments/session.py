@@ -1,5 +1,5 @@
 from otree.session import SessionType
-import os
+
 
 def session_types():
 
@@ -30,7 +30,7 @@ def session_types():
             subsession_apps=['trust', 'lab_results'],
             doc=""""""
         ),
-                SessionType(
+        SessionType(
             name='Dictator',
             base_pay=10.00,
             participants_per_session=2,
@@ -210,21 +210,16 @@ def session_types():
     ]
 
 
-
-
 def show_on_demo_page(session_type_name):
     return True
 
 demo_page_intro_text = """
 <ul>
-    <li><a href="https://github.com/oTree-org/otree">Source code</a> for the below games.</li>
-    <li><a href="http://www.otree.org/">oTree homepage</a>.</li>
+    <li><a href="https://github.com/oTree-org/otree" target="_blank">Source code</a> for the below games.</li>
+    <li><a href="http://www.otree.org/" target="_blank">oTree homepage</a>.</li>
 </ul>
-
 <p>
 Below are various games implemented with oTree. These games are all open source,
 and you can modify them as you wish to create your own variations. Click one to learn more and play.
 </p>
-
-
 """

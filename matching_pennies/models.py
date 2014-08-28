@@ -1,19 +1,14 @@
 # -*- coding: utf-8 -*-
 """Documentation at https://github.com/wickens/django-otree-docs/wiki"""
-
 from otree.db import models
 import otree.models
-from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
 
 doc = """
 Matching pennies. Single treatment. Two players are given a penny each, and will at the same time choose either heads or tails.
 One player wants the outcome to match; the other wants the outcome not to match.
 If the outcomes match, the former player gets both pennies; if the outcomes do not match, the latter player gets both pennies.
-
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/matching_pennies" target="_blank">here</a>.
 """
-
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -31,6 +26,7 @@ class Treatment(otree.models.BaseTreatment):
         default=0.10,
         doc="""The value of the pennies given to each player"""
     )
+
 
 class Match(otree.models.BaseMatch):
 
