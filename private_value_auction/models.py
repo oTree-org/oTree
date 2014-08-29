@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
+"""Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
 import otree.models

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/wickens/django-otree-docs/wiki"""
+"""Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
 import otree.models
@@ -31,28 +31,30 @@ class Treatment(otree.models.BaseTreatment):
     general_benefit = models.MoneyField(
         default=1.00,
         doc="""
-        General benefit for all the players, If at least one volunteers
+        General benefit for all the players, if at least one volunteers
         """
     )
 
 
 class Match(otree.models.BaseMatch):
 
+    # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     players_per_match = 2
 
 
 class Player(otree.models.BasePlayer):
 
-    # <built-in>
+
     # <built-in>
     match = models.ForeignKey(Match, null=True)
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-    # </built-in>
+
 
     decision = models.CharField(
         default=None,
