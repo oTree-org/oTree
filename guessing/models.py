@@ -3,13 +3,11 @@
 
 from otree.db import models
 import otree.models
-from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
 
 doc = """
-Guessing Game. In this game, Players are asked to pick a number between 0 and 100, with the winner of the contest
-being the player who is closest to 2/3 times the average number picked of all players. In case of a tie between
-the players, the winner is picked randomly.
+In this game, players are asked to pick a number within a given range.
+The player wins whose guess is closest to two-thirds the average number picked by all players.
+In case of a tie between players, the winner is picked at random.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/guessing" target="_blank">here</a>.
 """
 
@@ -20,13 +18,11 @@ class Subsession(otree.models.BaseSubsession):
 
     two_third_guesses = models.FloatField(default=None)
 
-    def calculate_average(self):
+    def set_payoffs(self):
         self.two_third_guesses = (2.0/3) * sum(p.guess_value for p in self.players) / len(self.players)
 
-    def set_payoffs(self):
-        self.calculate_average()
         winner_so_far = None
-        smallest_difference_so_far = 1000 #arbitrary big number
+        smallest_difference_so_far = 1000   # arbitrary big number
 
         for p in self.players:
             difference = abs(p.guess_value - self.two_third_guesses)
@@ -40,7 +36,6 @@ class Subsession(otree.models.BaseSubsession):
                 p.payoff = p.treatment.winner_payoff
             else:
                 p.payoff = 0
-
 
 
 class Treatment(otree.models.BaseTreatment):
@@ -73,7 +68,8 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    is_winner = models.BooleanField(default=False,
+    is_winner = models.BooleanField(
+        default=False,
         doc="""
         True if player had the winning guess
         """
@@ -88,4 +84,5 @@ class Player(otree.models.BasePlayer):
 
 
 def treatments():
+
     return [Treatment.create()]

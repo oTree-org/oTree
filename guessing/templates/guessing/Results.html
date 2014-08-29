@@ -7,10 +7,22 @@
 {% endblock %}
 
 {% block content %}
-    <p>Actual 2/3 Average was {{ two_third_average }}.</p>
-    <p>Your guess value was {{ guess_value }}.</p>
 
-    <p>{% if is_winner %}You are the Winner! {% else %} You are not the Winner! {% endif %}</p>
-    <p>Your payoff is therefore {{ payoff }}.</p>
+    <p>
+        The actual two-third average was {{ two_third_average }}.
+    </p>
+
+    <p>
+        You guessed {{ guess_value }}, and are
+        {% if is_winner %}
+            the winner!
+        {% else %}
+            not the winner.
+        {% endif %}
+    </p>
+
+    <p>
+        Your payoff is {{ payoff }}.
+    </p>
 
 {% endblock %}
