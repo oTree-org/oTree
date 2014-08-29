@@ -9,20 +9,27 @@
 {% block content %}
 
     <p>
-        The actual two-third average was {{ two_third_average }}.
+        You picked {{ guess_value }}. The other players picked
+        {% for g in other_guesses %}
+            {% if forloop.counter < other_guesses_count %}
+                {{ g }},
+            {% else %}
+                and {{ g }}.
+            {% endif %}
+        {% endfor %}
     </p>
 
     <p>
-        You guessed {{ guess_value }}, and are
-        {% if is_winner %}
-            the winner!
-        {% else %}
-            not the winner.
-        {% endif %}
+        The two-thirds average is {{ two_third_average }}. The closest value is
+        {% for p in players %}
+            {% if p.is_winner %}
+                {{ p.guess_value }}.
+            {% endif %}
+        {% endfor %}
     </p>
 
     <p>
-        Your payoff is {{ payoff }}.
+        Your payoff is therefore {{ payoff }}.
     </p>
 
 {% endblock %}

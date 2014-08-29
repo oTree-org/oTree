@@ -25,10 +25,15 @@ class Results(Page):
     template_name = 'guessing/Results.html'
 
     def variables_for_template(self):
-        return {'payoff': self.player.payoff,
-                'guess_value': self.player.guess_value,
+        other_guesses = [p.guess_value for p in self.player.other_players_in_subsession()]
+
+        return {'guess_value': self.player.guess_value,
+                'other_guesses': other_guesses,
+                'other_guesses_count': len(other_guesses),
                 'two_third_average': round(self.subsession.two_third_guesses, 4),
-                'is_winner': self.player.is_winner}
+                'players': self.subsession.players,
+                'is_winner': self.player.is_winner,
+                'payoff': self.player.payoff}
 
 
 class ResultsWaitPage(SubsessionWaitPage):
