@@ -4,13 +4,15 @@
 from otree.db import models
 import otree.models
 
+PLAYERS_PER_MATCH = 3
 
 doc = """
-Volunteer's Dilemma Game. Two players are asked separately whether they want to
-volunteer or ignore. Their choices directly determine the payoffs.
+Volunteer's Dilemma Game. {} players are asked separately whether they want to
+volunteer or ignore. If at least one person volunteers, everybody receives a general benefit.
+But each person who volunteers incurs a cost.
 
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/volunteer_dilemma" target="_blank">here</a>.
-"""
+""".format(PLAYERS_PER_MATCH)
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -43,7 +45,7 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 3
+    players_per_match = PLAYERS_PER_MATCH
 
     def set_payoffs(self):
         """Calculate player payoff"""
