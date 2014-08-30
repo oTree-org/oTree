@@ -5,9 +5,7 @@ from otree.db import models
 import otree.models
 
 doc = """
-Matrix Asymmetric is a game where there is no identical strategy sets for both players.
-Each player earns the different payoff when making the same choice against similar choices of his competitors.
-
+In the asymmetric matrix game, the strategy sets for both players are different.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/matrix_asymmetric" target="_blank">here</a>.
 """
 
@@ -98,10 +96,11 @@ class Player(otree.models.BasePlayer):
 
     def role(self):
         if self.index_among_players_in_match == 1:
-            return 'row'
-        if self.index_among_players_in_match == 2:
             return 'column'
+        if self.index_among_players_in_match == 2:
+            return 'row'
 
 
 def treatments():
+
     return [Treatment.create()]

@@ -8,7 +8,12 @@
 
 {% block content %}
 
-    <table class="table">
+    <p>
+        The results for every round is shown in the table below.
+    </p>
+
+    <table class="table" style="width:500px; margin-top:20px;">
+
         <tr>
             <th>Round</th>
             <th>Number of heads</th>
@@ -30,16 +35,20 @@
             <td>{{ payoff }}</td>
         </tr>
 
-        <tr class="success">
-            <th>Total</th>
-            <th>{{ cumulative_number_of_heads }}</th>
-            <th>{{ cumulative_payoff }}</th>
-        </tr>
+        {% if round_number == number_of_rounds %}
+            <tr class="success">
+                <th>Total</th>
+                <th></th>
+                <th>{{ cumulative_payoff }}</th>
+            </tr>
+        {% endif %}
 
     </table>
 
     {% if round_number == number_of_rounds %}
-        <h2>You're done!</h2>
+        <p>
+            Please click "Next" to proceed.
+        </p>
     {% endif %}
 
 {% endblock %}

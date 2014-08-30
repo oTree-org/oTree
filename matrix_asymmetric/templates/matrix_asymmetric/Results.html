@@ -9,10 +9,10 @@
 {% block content %}
 
     <p>
-        {% if same_decision %}
-            Both of you chose {{ my_decision }}.
+        {% if same_choice %}
+            Both of you chose {{ my_choice }}.
         {% else %}
-            You chose {{ my_decision }}. The other player chose {{ other_decision }}.
+            You chose {{ my_choice }}; the other player chose {{ other_choice }}.
         {% endif %}
     </p>
 

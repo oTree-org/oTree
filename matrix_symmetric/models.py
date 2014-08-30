@@ -3,13 +3,9 @@
 
 from otree.db import models
 import otree.models
-from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
 
 doc = """
-Matrix Symmetric is a game in which the identity of the player does not change the resulting game facing that player.
-Each player earns the same payoff when making the same choice against similar choices of his competitors.
-
+In the symmetric matrix game, the payoffs for playing a particular strategy depend only on the other strategies employed, not on who is playing them.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/matrix_symmetric" target="_blank">here</a>.
 """
 
@@ -58,7 +54,7 @@ class Player(otree.models.BasePlayer):
 
     decision = models.CharField(
         default=None,
-        choices=['A','B'],
+        choices=['A', 'B'],
         doc='either A or B',
     )
 
@@ -79,4 +75,5 @@ class Player(otree.models.BasePlayer):
 
 
 def treatments():
+
     return [Treatment.create()]
