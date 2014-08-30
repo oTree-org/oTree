@@ -9,6 +9,9 @@
 {% block content %}
 
     <p>Your decision: <b>{{ decision }}</b></p>
-    <p>Your payoff is {{ payoff }}.</p>
+
+    <p>In your group, {{ num_volunteers }} {{ num_volunteers|pluralize:"person,people" }} chose "Volunteer".</p>
+
+    <p>Therefore, your payoff is {{ payoff }}.</p>
 
 {% endblock %}

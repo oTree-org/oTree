@@ -12,23 +12,16 @@ class Decision(Page):
         return forms.DecisionForm
 
     def variables_for_template(self):
-        vol_ign = self.treatment.general_benefit - self.treatment.volunteer_cost
-        vol_vol = self.treatment.general_benefit - self.treatment.volunteer_cost
-        ign_vol = self.treatment.general_benefit
-        ign_ign = 0
-
         return {
-            'vol_ign': vol_ign,
-            'ign_vol': ign_vol,
-            'vol_vol': vol_vol,
-            'ign_ign': ign_ign,
+            'general_benefit': self.treatment.general_benefit,
+            'volunteer_cost': self.treatment.volunteer_cost,
+            'num_other_players': self.match.players_per_match - 1,
         }
 
 class ResultsWaitPage(MatchWaitPage):
 
     def after_all_players_arrive(self):
-        for p in self.match.players:
-            p.set_payoff()
+        self.match.set_payoffs()
 
 class Results(Page):
 
@@ -38,6 +31,7 @@ class Results(Page):
         return {
             'decision': self.player.decision,
             'payoff': self.player.payoff,
+            'num_volunteers': len([p for p in self.match.players if p.decision == 'Volunteer']),
         }
 
 
