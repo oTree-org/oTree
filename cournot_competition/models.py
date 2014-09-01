@@ -25,7 +25,7 @@ class Treatment(otree.models.BaseTreatment):
 
     total_capacity = models.PositiveIntegerField(
         default=60,
-        doc="""Combined production capacity of both players (firms)"""
+        doc="""Total production capacity of all players"""
     )
 
     currency_per_point = models.MoneyField(
@@ -46,12 +46,12 @@ class Match(otree.models.BaseMatch):
 
     price_in_points = models.PositiveIntegerField(
         default=None,
-        doc="""Price of goods: P = T - \sum U_i, where T is total capacity and U_i is the number of units produced by player i"""
+        doc="""Unit price: P = T - \sum U_i, where T is total capacity and U_i is the number of units produced by player i"""
     )
 
     total_units = models.PositiveIntegerField(
         default=None,
-        doc="""Total units produced by all companies"""
+        doc="""Total units produced by all players"""
     )
 
     players_per_match = 3
@@ -78,7 +78,6 @@ class Player(otree.models.BasePlayer):
 
     units = models.PositiveIntegerField(
         default=None,
-
         doc="""Quantity of units to produce"""
     )
 

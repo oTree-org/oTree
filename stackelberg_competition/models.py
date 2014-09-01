@@ -6,13 +6,11 @@ import otree.models
 
 
 doc = """
-<p>
-    In Stackelberg Competition, players play as firm owners(in duopoly market), each deciding sequentially on how
-    much quantity to produce in order to make profit. The Player to start is chosen randomly.
-</p>
-<p>
-    Source code <a href="https://github.com/oTree-org/oTree/tree/master/stackelberg_competition">here</a>.
-</p>
+Each player represents a firm in duopoly market. Both firms produce the same kind of product.
+Players decide sequentially on how many units to produce. The total number of units produced determines the unit price,
+which in turn determines the profit for each player.
+The player who decides second is told how much the other player decided to produce. The order of the players is random.
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/stackelberg_competition" target="_blank">here</a>.
 """
 
 
@@ -29,10 +27,16 @@ class Treatment(otree.models.BaseTreatment):
 
     total_capacity = models.PositiveIntegerField(
         default=60,
-        doc="""
-        Combined production capacity of both players(firms)
-        """
+        doc="""Total production capacity of BOTH players"""
     )
+
+    currency_per_point = models.MoneyField(
+        default=0.01,
+        doc="""Currency units for a single point"""
+    )
+
+    def max_units_per_player(self):
+        return self.total_capacity / 2
 
 
 class Match(otree.models.BaseMatch):
@@ -42,12 +46,10 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    price = models.MoneyField(
+    price_in_points = models.PositiveIntegerField(
         default=None,
-        doc="""
-        Price of goods: P=600-q1-q2
-        """
-        )
+        doc="""Unit price: P = T - Q1 - Q2, where T is total capacity and Q_i are the units produced by the players"""
+    )
 
     players_per_match = 2
 
@@ -60,11 +62,13 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
+    payoff_in_points = models.PositiveIntegerField(
+        default=None,
+    )
+
     quantity = models.PositiveIntegerField(
         default=None,
-        doc="""
-        Quantity of goods to produce.
-        """
+        doc="""Quantity of units to produce"""
     )
 
     def other_player(self):
@@ -72,9 +76,11 @@ class Player(otree.models.BasePlayer):
         return self.other_players_in_match()[0]
 
     def set_payoff(self):
-        self.match.price = self.treatment.total_capacity - self.quantity - self.other_player().quantity
-        self.payoff = self.match.price * self.quantity
+        self.match.price_in_points = self.treatment.total_capacity - self.quantity - self.other_player().quantity
+        self.payoff_in_points = self.match.price_in_points * self.quantity
+        self.payoff = self.payoff_in_points * self.treatment.currency_per_point
 
 
 def treatments():
+
     return [Treatment.create()]

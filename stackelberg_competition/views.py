@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import stackelberg_competition.forms as forms
-from stackelberg_competition._builtin import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
+from stackelberg_competition._builtin import Page, MatchWaitPage
 
 
 class Introduction(Page):
@@ -9,9 +8,10 @@ class Introduction(Page):
     template_name = 'stackelberg_competition/Introduction.html'
 
     def variables_for_template(self):
-        return {
-            'total_capacity': self.treatment.total_capacity
-        }
+        return {'player_id': self.player.index_among_players_in_match,
+                'total_capacity': self.treatment.total_capacity,
+                'max_units_per_player': self.treatment.max_units_per_player(),
+                'currency_per_point': self.treatment.currency_per_point}
 
 
 class ChoiceOne(Page):
@@ -36,14 +36,15 @@ class ChoiceTwo(Page):
         return forms.QuantityForm
 
     def variables_for_template(self):
-        return {
-            'other_quantity': self.player.other_player().quantity
-        }
+        return {'other_quantity': self.player.other_player().quantity}
+
 
 class ResultsWaitPage(MatchWaitPage):
+
     def after_all_players_arrive(self):
         for p in self.match.players:
             p.set_payoff()
+
 
 class Results(Page):
 
@@ -51,20 +52,18 @@ class Results(Page):
 
     def variables_for_template(self):
 
-        return {
-            'payoff': self.player.payoff,
-            'quantity': self.player.quantity,
-            'other_quantity': self.player.other_player().quantity,
-            'price': self.match.price
-        }
+        return {'quantity': self.player.quantity,
+                'total_quantity': self.player.quantity + self.player.other_player().quantity,
+                'price_in_points': self.match.price_in_points,
+                'payoff_in_points': self.player.payoff_in_points,
+                'payoff': self.player.payoff}
 
 
 def pages():
-    return [
-        Introduction,
-        ChoiceOne,
-        MatchWaitPage,
-        ChoiceTwo,
-        ResultsWaitPage,
-        Results
-    ]
+
+    return [Introduction,
+            ChoiceOne,
+            MatchWaitPage,
+            ChoiceTwo,
+            ResultsWaitPage,
+            Results]

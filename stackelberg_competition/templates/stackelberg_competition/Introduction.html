@@ -7,29 +7,46 @@
 {% endblock %}
 
 {% block content %}
-    <p>
-    In Stackelberg Competition, players play as firm owners(in duopoly market), each deciding sequentially on how
-    much quantity to produce in order to make profit. The Player to start is chosen randomly.
-    </p>
-    <p>
-    The price of the goods is determined by the total production, given by the formula below:
-    <blockquote>
-         P={{ total_capacity }}-q1-q2
-        <br>
-        where:
-            <ul>
-                <li>P is the price</li>
-                <li> q1 is the quantity produced by Player 1 (Firm 1)</li>
-                <li> q2 is the quantity produced by Player 2 (Firm 2)</li>
-            </ul>
-    The profits are calculated as follows:<br>
 
-         Profit / Payoff = P*q <br>
-            where
-        <ul>
-            <li> P is the price </li>
-            <li>     q is the quantity</li>
-        </ul>
-    </blockquote>
+    <p>
+        You have been randomly and anonymously paired with another player,
+        and will each represent a company that produces the same kind of product.
     </p>
+
+    <p>
+        The task is to decide how many units of the product to manufacture.
+        This will be done sequentially, meaning one of you will decide first, and then the other.
+        The second player will be told how many units the first player decided to produce.
+        {% if player_id == 1 %}
+            <strong>You will be deciding first.</strong>
+        {% else %}
+            <strong>You will be deciding second.</strong>
+        {% endif %}
+    </p>
+
+    <p>
+        In this market, all produced units are sold, but the more that is produced, the lower the unit price will be.
+        Furthermore, the total production capacity is {{ total_capacity }}, each company can therefore produce at most {{ max_units_per_player }} units.
+    </p>
+
+    <p>
+        The unit price, measured in points, is calculated as follows:
+    </p>
+
+    <ul>
+        Unit price = {{ total_capacity }} – Units produced by your company – Units produced by the other company
+    </ul>
+
+    <p>
+        Once the unit price is obtained, your profit (also measured in points) is then calculated as follows:
+    </p>
+
+    <ul>
+        Profit = Unit price × Units produced by you
+    </ul>
+
+    <p>
+        For every profit point, you will receive {{ currency_per_point }}.
+    </p>
+
 {% endblock %}
