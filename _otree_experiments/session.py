@@ -1,5 +1,5 @@
 from otree.session import SessionType
-
+import os
 
 def session_types():
 
