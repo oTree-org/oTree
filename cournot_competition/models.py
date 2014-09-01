@@ -50,7 +50,7 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    price = models.MoneyField(
+    price_in_points = models.PositiveIntegerField(
         default=None,
         doc="""
         Price of goods: P=60-q1-q2
@@ -66,9 +66,9 @@ class Match(otree.models.BaseMatch):
 
     def set_payoffs(self):
         self.total_units = sum(p.units for p in self.players)
-        self.price = self.treatment.total_capacity - self.total_units
+        self.price_in_points = self.treatment.total_capacity - self.total_units
         for p in self.players:
-            p.payoff_in_points = self.price * p.units
+            p.payoff_in_points = self.price_in_points * p.units
             p.payoff = p.payoff_in_points * self.treatment.dollars_per_point
 
 

@@ -3,19 +3,14 @@ import cournot_competition.forms as forms
 from cournot_competition._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
-
-class Introduction(Page):
-    template_name = 'cournot_competition/Introduction.html'
+class Decide(Page):
+    template_name = 'cournot_competition/Decide.html'
 
     def variables_for_template(self):
         return {
             'total_capacity': self.treatment.total_capacity,
             'num_other_players': self.match.players_per_match - 1,
         }
-
-
-class Compete(Page):
-    template_name = 'cournot_competition/Compete.html'
 
     def get_form_class(self):
         return forms.UnitsForm
@@ -44,8 +39,7 @@ class Results(Page):
 
 def pages():
     return [
-        Introduction,
-        Compete,
+        Decide,
         ResultsWaitPage,
         Results
     ]

@@ -12,7 +12,7 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # compete quantity
-        self.submit(views.Compete, {'quantity': random.choice(range(1, (self.treatment.total_capacity)/2))})
+        self.submit(views.Decide, {'quantity': random.choice(range(1, (self.treatment.total_capacity)/2))})
 
         # results
         self.submit(views.Results)
