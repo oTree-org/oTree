@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import cournot_competition.models as models
 from cournot_competition._builtin import Form
-import otree.forms
 from django import forms
+
 
 class UnitsForm(Form):
 
