@@ -11,6 +11,7 @@ class Decide(Page):
         return forms.PriceForm
 
     def variables_for_template(self):
+        print 1/0
         return {
             'marginal_cost': self.treatment.marginal_cost,
             'maximum_price': self.treatment.maximum_price
