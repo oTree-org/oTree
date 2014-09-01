@@ -3,16 +3,17 @@ import bertrand_competition.forms as forms
 from bertrand_competition._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
-class Compete(Page):
+class Decide(Page):
 
-    template_name = 'bertrand_competition/Compete.html'
+    template_name = 'bertrand_competition/Decide.html'
 
     def get_form_class(self):
         return forms.PriceForm
 
     def variables_for_template(self):
+        print 1/0
         return {
-            'minimum_price': self.treatment.marginal_cost,
+            'marginal_cost': self.treatment.marginal_cost,
             'maximum_price': self.treatment.maximum_price
         }
 
@@ -39,8 +40,7 @@ class Results(Page):
 
 def pages():
     return [
-        Introduction,
-        Compete,
+        Decide,
         ResultsWaitPage,
         Results
     ]

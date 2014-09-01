@@ -137,8 +137,8 @@ def session_types():
         SessionType(
             name='Bertrand Competition',
             base_pay=10.00,
-            participants_per_session=2,
-            participants_per_demo_session=2,
+            participants_per_session=12,
+            participants_per_demo_session=3,
             subsession_apps=['bertrand_competition', 'lab_results'],
             doc=""""""
         ),
@@ -161,7 +161,7 @@ def session_types():
         SessionType(
             name='Stag Hunt',
             base_pay=10.00,
-            participants_per_session=2,
+            participants_per_session=12,
             participants_per_demo_session=2,
             subsession_apps=['stag_hunt', 'lab_results'],
             doc=""""""
@@ -169,7 +169,7 @@ def session_types():
         SessionType(
             name='Battle of the sexes',
             base_pay=10.00,
-            participants_per_session=2,
+            participants_per_session=12,
             participants_per_demo_session=2,
             subsession_apps=['battle_of_the_sexes', 'lab_results'],
             doc=""""""
@@ -185,7 +185,7 @@ def session_types():
         SessionType(
             name='Common Value Auction',
             base_pay=10.00,
-            participants_per_session=2,
+            participants_per_session=12,
             participants_per_demo_session=2,
             subsession_apps=['common_value_auction', 'lab_results'],
             doc=""""""
@@ -193,7 +193,7 @@ def session_types():
         SessionType(
             name='Tragedy of the commons',
             base_pay=10.00,
-            participants_per_session=2,
+            participants_per_session=12,
             participants_per_demo_session=2,
             subsession_apps=['tragedy_of_the_commons', 'lab_results'],
             doc=""""""

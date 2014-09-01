@@ -13,7 +13,7 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # compete price
-        self.submit(views.Compete, {'price': random.choice(money_range(self.treatment.minimum_price+0.01, self.treatment.maximum_price))})
+        self.submit(views.Decide, {'price': random.choice(money_range(self.treatment.minimum_price+0.01, self.treatment.maximum_price))})
 
         # results
         self.submit(views.Results)
