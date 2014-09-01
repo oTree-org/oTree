@@ -46,7 +46,7 @@ class Match(otree.models.BaseMatch):
 
     price_in_points = models.PositiveIntegerField(
         default=None,
-        doc="""Price of goods: P = 60 - q1 - q2"""
+        doc="""Price of goods: P = T - \sum U_i, where T is total capacity and U_i is the number of units produced by player i"""
     )
 
     total_units = models.PositiveIntegerField(
