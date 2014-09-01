@@ -8,8 +8,8 @@ class PlayerBot(Bot):
 
     def play(self):
 
-        # compete quantity
-        self.submit(views.Decide, {'quantity': random.choice(range(1, self.treatment.total_capacity / 2))})
+        # units to produce
+        self.submit(views.Decide, {'units': random.choice(range(0, self.treatment.max_units_per_player() + 1))})
 
         # results
         self.submit(views.Results)
