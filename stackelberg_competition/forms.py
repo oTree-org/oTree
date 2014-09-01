@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import stackelberg_competition.models as models
 from stackelberg_competition._builtin import Form
-import otree.forms
 
 
 class QuantityForm(Form):
@@ -11,10 +10,8 @@ class QuantityForm(Form):
         fields = ['quantity']
 
     def labels(self):
-        return {'quantity': 'Enter the quantity of goods to produce?'}
+        return {'quantity': 'How many units will you produce:'}
 
     def quantity_error_message(self, value):
-        lower_bound = 1
-        upper_bound = self.treatment.total_capacity/2
-        if not lower_bound <= value <= upper_bound:
-            return 'Quantity should be between {} and {} units'.format(lower_bound, upper_bound)
+        if not 0 <= value <= self.treatment.max_units_per_player():
+            return "The value must be a whole number between {} and {}, inclusive.".format(0, self.treatment.max_units_per_player())
