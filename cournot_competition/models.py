@@ -6,10 +6,9 @@ import otree.models
 
 
 doc = """
-In Cournot Competition, players play as firm owners(in duopoly market), each deciding simultaneously on
-how much quantity to produce in order to make a profit. Players decide on choosing to maximise their profits or
-cooperating with others to improve profits.
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/cournot_competition">here</a>.
+Each player represents a firm. The players have to decide simultaneously how many units to manufacture. All firms manufacture the same kind of product.
+The unit price will depend on the total number of units produced, which will determine the profits for each player.
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/cournot_competition" target="_blank">here</a>.
 """
 
 
@@ -29,9 +28,9 @@ class Treatment(otree.models.BaseTreatment):
         doc="""Combined production capacity of both players (firms)"""
     )
 
-    dollars_per_point = models.MoneyField(
+    currency_per_point = models.MoneyField(
         default=0.01,
-        doc="""Multiply spare units by this factor to determine unit price"""
+        doc="""Currency units for a single point"""
     )
 
     def max_units_per_player(self):
@@ -47,7 +46,7 @@ class Match(otree.models.BaseMatch):
 
     price_in_points = models.PositiveIntegerField(
         default=None,
-        doc="""Price of goods: P=60-q1-q2"""
+        doc="""Price of goods: P = 60 - q1 - q2"""
     )
 
     total_units = models.PositiveIntegerField(
@@ -62,7 +61,7 @@ class Match(otree.models.BaseMatch):
         self.price_in_points = self.treatment.total_capacity - self.total_units
         for p in self.players:
             p.payoff_in_points = self.price_in_points * p.units
-            p.payoff = p.payoff_in_points * self.treatment.dollars_per_point
+            p.payoff = p.payoff_in_points * self.treatment.currency_per_point
 
 
 class Player(otree.models.BasePlayer):
@@ -79,7 +78,8 @@ class Player(otree.models.BasePlayer):
 
     units = models.PositiveIntegerField(
         default=None,
-        doc="""Quantity of goods to produce"""
+
+        doc="""Quantity of units to produce"""
     )
 
 

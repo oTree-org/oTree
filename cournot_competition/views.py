@@ -4,11 +4,14 @@ from cournot_competition._builtin import Page, MatchWaitPage
 
 
 class Decide(Page):
+
     template_name = 'cournot_competition/Decide.html'
 
     def variables_for_template(self):
         return {'total_capacity': self.treatment.total_capacity,
-                'num_other_players': self.match.players_per_match - 1}
+                'max_units_per_player': self.treatment.max_units_per_player(),
+                'num_other_players': self.match.players_per_match - 1,
+                'currency_per_point': self.treatment.currency_per_point}
 
     def get_form_class(self):
         return forms.UnitsForm

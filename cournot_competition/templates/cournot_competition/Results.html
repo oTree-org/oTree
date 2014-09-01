@@ -8,31 +8,35 @@
 
 {% block content %}
 
-    <table class="table">
+    <p>The results are shown in the following table.</p>
+
+    <table class="table" style="width:400px">
+
         <tr>
-            <th>Units produced by you</th>
+            <td>Units produced by you</td>
             <td>{{ units }}</td>
         </tr>
 
         <tr>
-            <th>Total units produced by all {{ players_per_match }} companies</th>
+            <td>Total units by all {{ players_per_match }} companies</td>
             <td>{{ total_units }}</td>
         </tr>
 
         <tr>
-            <th>Unit price (in points)</th>
+            <td>Unit price (in points)</td>
             <td>{{ price_in_points }}</td>
         </tr>
 
         <tr>
-            <th>Your payoff (in points)</th>
+            <td>Your profit (in points)</td>
             <td>{{ payoff_in_points }}</td>
         </tr>
 
-        <tr>
-            <th>Your real payoff</th>
-            <td>{{ payoff }}</td>
+        <tr class="success">
+            <th>Your payoff</th>
+            <th>{{ payoff }}</th>
         </tr>
+
     </table>
 
 {% endblock %}
