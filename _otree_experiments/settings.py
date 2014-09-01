@@ -44,6 +44,7 @@ settings = {
     'INSTALLED_APPS': [
         'otree',
         '_otree_experiments',
+        'raven.contrib.django.raven_compat',
     ],
     'INSTALLED_OTREE_APPS': [
 
