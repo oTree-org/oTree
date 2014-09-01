@@ -35,6 +35,13 @@ class Treatment(otree.models.BaseTreatment):
         """
     )
 
+    dollars_per_point = models.MoneyField(
+        default=0.01,
+        doc='Multiply spare units by this factor to determine unit price'
+    )
+
+    def max_units_per_player(self):
+        return self.total_capacity/Match.players_per_match
 
 class Match(otree.models.BaseMatch):
 
@@ -46,11 +53,23 @@ class Match(otree.models.BaseMatch):
     price = models.MoneyField(
         default=None,
         doc="""
-        Price of goods: P=600-q1-q2
+        Price of goods: P=60-q1-q2
         """
         )
 
-    players_per_match = 2
+    total_units = models.PositiveIntegerField(
+        default=None,
+        doc='''Total units produced by all companies'''
+    )
+
+    players_per_match = 3
+
+    def set_payoffs(self):
+        self.total_units = sum(p.units for p in self.players)
+        self.price = self.treatment.total_capacity - self.total_units
+        for p in self.players:
+            p.payoff_in_points = self.price * p.units
+            p.payoff = p.payoff_in_points * self.treatment.dollars_per_point
 
 
 class Player(otree.models.BasePlayer):
@@ -61,22 +80,16 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
+    payoff_in_points = models.PositiveIntegerField(
+        default=None,
+    )
 
-    quantity = models.PositiveIntegerField(
+    units = models.PositiveIntegerField(
         default=None,
         doc="""
         Quantity of goods to produce.
         """
     )
-
-    def other_player(self):
-        """Returns the opponent of the current player"""
-        return self.other_players_in_match()[0]
-
-    def set_payoff(self):
-        #FIXME: should quantity be a MoneyField?
-        self.match.price = self.treatment.total_capacity - self.quantity - self.other_player().quantity
-        self.payoff = self.match.price * self.quantity
 
 
 def treatments():

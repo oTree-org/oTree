@@ -8,17 +8,18 @@
 
 {% block content %}
 
-    <p>Your Price was {{ price }}.</p>
-    <p>Opponent Price was {{ other_price }}. </p>
+    <p>Your price was {{ price }}.</p>
+
     <p>
-        {% if is_winner %}
-            You won the price competition, you had the lowest price.
-        {% elif equal_price %}
-            You both had the same price, hence equal share.
+        {% if is_sole_winner %}
+            You won the price competition; you had the lowest price.
+        {% elif is_shared_winner %}
+            {{ num_winners }} participants tied for the lowest price; you were one of them.
         {% else %}
-            You lost the price competition, you had the highest price.
+            You did not have the lowest price, which was {{ winning_price }}.
         {% endif %}
     </p>
+
     <p>Your payoff is therefore {{ payoff }}</p>
 
 {% endblock %}

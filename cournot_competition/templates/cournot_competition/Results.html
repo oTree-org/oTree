@@ -8,9 +8,31 @@
 
 {% block content %}
 
-    <p>Price was: {{ price }}</p>
-    <p>Your quantity was: {{ quantity }} </p>
-    <p>Opponent quantity was: {{ other_quantity }} </p>
-    <p>Your payoff is therefore: {{ payoff }}</p>
+    <table class="table">
+        <tr>
+            <th>Units produced by you</th>
+            <td>{{ units }}</td>
+        </tr>
+
+        <tr>
+            <th>Total units produced by all {{ players_per_match }} companies</th>
+            <td>{{ total_units }}</td>
+        </tr>
+
+        <tr>
+            <th>Unit price (in points)</th>
+            <td>{{ price_in_points }}</td>
+        </tr>
+
+        <tr>
+            <th>Your payoff (in points)</th>
+            <td>{{ payoff_in_points }}</td>
+        </tr>
+
+        <tr>
+            <th>Your real payoff</th>
+            <td>{{ payoff }}</td>
+        </tr>
+    </table>
 
 {% endblock %}

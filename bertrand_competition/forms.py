@@ -2,6 +2,8 @@
 import bertrand_competition.models as models
 from bertrand_competition._builtin import Form
 import otree.forms
+from django import forms
+from otree.common import Money, money_range
 
 
 class PriceForm(Form):
@@ -9,12 +11,11 @@ class PriceForm(Form):
     class Meta:
         model = models.Player
         fields = ['price']
+        widgets = {'price': forms.Select()}
 
     def labels(self):
-        return {'price': 'Enter your preferred price?'}
+        return {'price': 'What price do you choose?'}
 
-    def price_error_message(self, value):
-        lower = self.treatment.minimum_price+0.01
-        upper = self.treatment.maximum_price
-        if not lower <= value <= upper:
-            return 'Price should be between {} and {}'.format(lower, upper)
+    def choices(self):
+        # has to be above marginal cost, else they make no profit
+        return {'price': money_range(self.treatment.marginal_cost+0.01, self.treatment.maximum_price)}

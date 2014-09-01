@@ -8,17 +8,17 @@
 
 {% block content %}
 
-    {% if rejected %}
-        {% if agent %}
-            <p>You rejected the Contract.</p>
-        {% else %}
-            <p>The Contract was rejected. </p>
-        {% endif %}
-    {% else %}
+    {% if accepted %}
         {% if agent %}
             <p>You Accepted the Contract.</p>
         {% else %}
             <p>The Contract was Accepted. </p>
+        {% endif %}
+    {% else %}
+        {% if agent %}
+            <p>You rejected the Contract.</p>
+        {% else %}
+            <p>The Contract was rejected. </p>
         {% endif %}
     {% endif %}
 

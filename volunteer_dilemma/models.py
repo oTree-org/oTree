@@ -48,10 +48,7 @@ class Match(otree.models.BaseMatch):
     players_per_match = PLAYERS_PER_MATCH
 
     def set_payoffs(self):
-        """Calculate player payoff"""
-
-        someone_volunteered = any(p.decision == 'Volunteer' for p in self.players)
-        if someone_volunteered:
+        if any(p.decision == 'Volunteer' for p in self.players):
             baseline_amount = self.treatment.general_benefit
         else:
             baseline_amount = 0
@@ -63,13 +60,11 @@ class Match(otree.models.BaseMatch):
 
 class Player(otree.models.BasePlayer):
 
-
     # <built-in>
     match = models.ForeignKey(Match, null=True)
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
 
     decision = models.CharField(
         default=None,

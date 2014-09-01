@@ -2,19 +2,19 @@
 import cournot_competition.models as models
 from cournot_competition._builtin import Form
 import otree.forms
+from django import forms
 
-
-class QuantityForm(Form):
+class UnitsForm(Form):
 
     class Meta:
         model = models.Player
-        fields = ['quantity']
+        fields = ['units']
+        widgets = {'units': forms.Select()}
 
     def labels(self):
-        return {'quantity': 'Enter the quantity of goods to produce?'}
+        return {'units': 'How many units would you like to produce?'}
 
-    def quantity_error_message(self, value):
-        lower_bound = 1
-        upper_bound = self.treatment.total_capacity/2
-        if not lower_bound <= value <= upper_bound:
-            return 'Quantity should be between {} and {} units'.format(lower_bound, upper_bound)
+    def choices(self):
+        # what if every player donates the max, then the price would be 0.
+        # should 0 be an allowed production?
+        return {'units': range(1, self.treatment.max_units_per_player()+1)}

@@ -5,8 +5,9 @@ from otree.db import models
 import otree.models
 
 doc = """
-In Bertrand Competition, players play as firm owners(in duopoly market), each deciding simultaneously on how
-much price to set for their products. The player with the lowest price carries the day and becomes the winner.
+In Bertrand Competition, players play as firm owners, each deciding simultaneously on how
+much price to set for their products.
+The player with the lowest price carries the day and becomes the winner.
 
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/bertrand_competition" target="_blank">here</a>.
 """
@@ -23,7 +24,7 @@ class Treatment(otree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    minimum_price = models.MoneyField(
+    marginal_cost = models.MoneyField(
         default=0.20,
         doc="""
         The minimum price that can be set i.e equivalent to marginal cost.
@@ -33,7 +34,7 @@ class Treatment(otree.models.BaseTreatment):
     maximum_price = models.MoneyField(
         default=1.00,
         doc="""
-        The maximum price that can be set .
+        The maximum price that can be set.
         """
     )
 
@@ -45,7 +46,30 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 2
+    players_per_match = 3
+
+    num_winners = models.PositiveIntegerField(
+        default=None,
+        doc='Number of winners'
+    )
+
+    winning_price = models.MoneyField(
+        default=None,
+        doc='Winning price'
+    )
+
+    def set_payoffs(self):
+        self.winning_price = min(p.price for p in self.players)
+        self.num_winners = len([p for p in self.players if p.price == self.winning_price])
+        winner_payoff = (self.winning_price - self.treatment.marginal_cost) / self.num_winners
+
+        for p in self.players:
+            if p.price == self.winning_price:
+                p.is_a_winner = True
+                p.payoff = winner_payoff
+            else:
+                p.is_a_winner = False
+                p.payoff = 0
 
 
 class Player(otree.models.BasePlayer):
@@ -63,26 +87,18 @@ class Player(otree.models.BasePlayer):
         """
     )
 
-    is_winner = models.BooleanField(
+    is_a_winner = models.BooleanField(
         default=False,
         doc="""
-        Whether this player is the winner of the match
+        Whether this player is a winner of the match
         """
     )
 
-    def other_player(self):
-        '''get the opponent player'''
-        return self.other_players_in_match()[0]
+    def is_sole_winner(self):
+        return self.is_a_winner and self.match.num_winners == 1
 
-    def set_payoff(self):
-        if self.price < self.other_player().price:
-            self.is_winner = True
-            self.payoff = self.price - self.treatment.minimum_price
-        elif self.price > self.other_player().price:
-            self.payoff = 0
-        elif self.price == self.other_player().price:
-            self.payoff = (self.price - self.treatment.minimum_price) / 2.0
-
+    def is_shared_winner(self):
+        return self.is_a_winner and self.match.num_winners > 1
 
 def treatments():
     return [Treatment.create()]

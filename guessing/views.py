@@ -8,7 +8,7 @@ class Introduction(Page):
     template_name = 'guessing/Introduction.html'
 
     def variables_for_template(self):
-        return {'players_count': len(self.subsession.players),
+        return {'players_count': len(self.player.other_players_in_subsession()),
                 'winner_payoff': self.treatment.winner_payoff}
 
 

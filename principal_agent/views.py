@@ -3,6 +3,19 @@ import principal_agent.forms as forms
 from principal_agent._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
+def variables_for_all_templates(self):
+
+    efforts_returns_costs = []
+    for effort in range(1,10+1):
+        efforts_returns_costs.append([
+            effort,
+            self.treatment.return_from_effort(effort),
+            self.treatment.cost_from_effort(effort),
+        ])
+
+    return {
+        'efforts_returns_costs': efforts_returns_costs
+    }
 
 class Introduction(Page):
 
@@ -10,16 +23,16 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {
-            'fixed_payment': self.treatment.fixed_payment,
-            'reject_prncpl_pay': Money(0.00),
-            'reject_agt_pay': Money(1.00)
+            'fixed_payment': self.treatment.max_fixed_payment,
+            'reject_principal_pay': self.treatment.reject_principal_pay,
+            'reject_agent_pay': self.treatment.reject_agent_pay
         }
 
 
 class Offer(Page):
 
     def participate_condition(self):
-        return self.player.index_among_players_in_match == 1
+        return self.player.role() == 'principal'
 
     template_name = 'principal_agent/Offer.html'
 
@@ -28,7 +41,7 @@ class Offer(Page):
 
     def variables_for_template(self):
         return {
-            'fixed_payment': self.treatment.fixed_payment,
+            'fixed_payment': self.treatment.max_fixed_payment,
         }
 
 
@@ -37,7 +50,7 @@ class Accept(Page):
     template_name = 'principal_agent/Accept.html'
 
     def participate_condition(self):
-        return self.player.index_among_players_in_match == 2
+        return self.player.role() == 'agent'
 
     def get_form_class(self):
         return forms.DecisionForm
@@ -57,18 +70,12 @@ class WorkEffort(Page):
         return forms.WorkEffortForm
 
     def participate_condition(self):
-        if self.match.decision == 'Accept':
-            return self.player.index_among_players_in_match == 2
-
+        return self.player.role() == 'agent' and self.match.contract_accepted
 
 class ResultsWaitPage(MatchWaitPage):
 
     def after_all_players_arrive(self):
-        for p in self.match.players:
-            p.set_payoff()
-
-    def body_text(self):
-        return "Waiting for the other player."
+        self.match.set_payoffs()
 
 
 class Results(Page):
@@ -78,8 +85,8 @@ class Results(Page):
     def variables_for_template(self):
         return {
             'payoff': self.player.payoff,
-            'rejected': self.match.decision == 'Reject',
-            'agent': self.player.index_among_players_in_match == 2
+            'accepted': self.match.contract_accepted,
+            'agent': self.player.role() == 'agent'
         }
 
 

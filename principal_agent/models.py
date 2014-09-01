@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """Documentation at https://github.com/oTree-org/otree/wiki"""
-
+from __future__ import division
 from otree.db import models
 import otree.models
+from otree.common import Money
 
 
 doc = """
@@ -10,6 +11,11 @@ doc = """
     In Principal Agent Game, there are two players: One acts as the Agent and the other acts as the
     Principal. The Principal offers a contract to the Agent, which can be accepted or rejected.
 </p>
+
+<p>
+    This game is described <a href="www.nottingham.ac.uk/cedex/documents/papers/2006-04.pdf">here</a>.
+</p>
+
 <p>
     Source code <a href="https://github.com/oTree-org/oTree/tree/master/principal_agent">here</a>.
 </p>
@@ -27,13 +33,41 @@ class Treatment(otree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    fixed_payment = models.MoneyField(
+    max_fixed_payment = models.MoneyField(
         default=7.00,
         doc="""
-        Principal's fixed pay range: given as a range e.g -300 > x < 300
+        Maxmimum absolute value for agent's fixed pay
         """
     )
 
+    reject_principal_pay = models.MoneyField(
+        default=0,
+        doc='Amount the principal gets if the contract is rejected'
+    )
+
+    reject_agent_pay = models.MoneyField(
+        default=1.00,
+        doc='Amount the agent gets if the contract is rejected'
+    )
+
+    def cost_from_effort(self, effort):
+        costs = {
+            1: 0,
+            2: .20,
+            3: .40,
+            4: .60,
+            5: .90,
+            6: 1.20,
+            7: 1.60,
+            8: 2.00,
+            9: 2.50,
+            10: 3.00
+        }
+
+        return Money(costs[effort])
+
+    def return_from_effort(self, effort):
+        return effort*Money(0.70)
 
 class Match(otree.models.BaseMatch):
 
@@ -45,7 +79,7 @@ class Match(otree.models.BaseMatch):
     total_return = models.MoneyField(
         default=None,
         doc="""
-        Total return from agent's effort = 70×(Agent Work effort)
+        Total return from agent's effort = $0.70×(Agent Work effort)
         """
     )
     agent_fixed_pay = models.MoneyField(
@@ -54,70 +88,54 @@ class Match(otree.models.BaseMatch):
         Amount offered as fixed pay to the agent.
         """
     )
-    agent_return_share = models.PositiveIntegerField(
+
+    RETURN_SHARE_CHOICES = []
+    for percent in range(10,100+1,10):
+        RETURN_SHARE_CHOICES.append([percent/100, '{}%'.format(percent)])
+
+    agent_return_share = models.FloatField(
         default=None,
         doc="""
         Share of the total return
-        """
+        """,
+        choices=RETURN_SHARE_CHOICES,
     )
+
     agent_work_effort = models.PositiveIntegerField(
         default=None,
         doc="""
         Agent's work effort, ranging from 1-10: 1-lowest 10-highest
-        """
+        """,
+        choices=range(1,10+1)
     )
-    agent_work_costs = models.MoneyField(
+    agent_work_cost = models.MoneyField(
         default=None,
         doc="""
         Costs of work effort for agent
         """
     )
 
-    decision = models.CharField(
-        default=None, verbose_name='What is your decision?',
-        choices=['Accept', 'Reject'],
-        doc="""Agent's decision"""
+    contract_accepted = models.NullBooleanField(
+        default=None, verbose_name='Do you accept the contract?',
+        doc="""Whether the agent accepts the proposal"""
     )
-
-    def calculate_total_return(self):
-        self.total_return = self.agent_work_effort * 70
-
-    def calculate_agent_work_cost(self):
-        efforts_to_costs = {
-            1: 0,
-            2: 20,
-            3: 40,
-            4: 60,
-            5: 90,
-            6: 120,
-            7: 160,
-            8: 200,
-            9: 250,
-            10: 300
-        }
-
-        self.agent_work_costs = efforts_to_costs[self.agent_work_effort]
 
     players_per_match = 2
 
     def set_payoffs(self):
-        '''FIXME: need to review if this is correct'''
-        # TODO: re-structure payoff calculations to avoid negative payoffs
         principal = self.get_player_by_role('principal')
         agent = self.get_player_by_role('agent')
 
-        if self.decision == 'Reject':
-            principal.payoff = 0
-            agent.payoff = 100
+        if not self.contract_accepted:
+            principal.payoff = self.treatment.reject_principal_pay
+            agent.payoff = self.treatment.reject_agent_pay
         else:
-            self.calculate_agent_work_cost()
-            self.calculate_total_return()
+            self.agent_work_cost = self.treatment.cost_from_effort(self.agent_work_effort)
+            self.total_return = self.treatment.return_from_effort(self.agent_work_effort)
 
-            # [100% – Agent's return share in %]×(total return) – fixed payment
-            principal.payoff = max(0, (0.01 * (100 - self.match.agent_return_share) * self.match.total_return) - self.match.agent_fixed_pay)
-            # [Agent's return share in %]×(total return) + fixed payment – cost of the Agent's work effort
-            # if payoff < 0 ..then make it 0 - no negative payoffs
-            agent.payoff = max(0, 0.01*self.agent_return_share * self.total_return + self.agent_fixed_pay - self.agent_work_costs)
+            money_to_agent = self.agent_return_share*self.total_return + self.agent_fixed_pay
+            agent.payoff = money_to_agent - self.agent_work_cost
+            principal.payoff = self.total_return - money_to_agent
 
 
 class Player(otree.models.BasePlayer):

@@ -45,7 +45,7 @@ class Match(otree.models.BaseMatch):
 
     def offer_choices(self):
         """Range of allowed offers"""
-        return money_range(0, self.treatment.allocated_amount, 0.05)
+        return
 
     def set_payoffs(self):
         p1 = self.get_player_by_index(1)

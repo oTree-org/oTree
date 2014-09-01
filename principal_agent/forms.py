@@ -2,7 +2,8 @@
 import principal_agent.models as models
 from principal_agent._builtin import Form
 import otree.forms
-
+from django import forms
+from otree.common import money_range, Money
 
 class ContractForm(Form):
 
@@ -16,24 +17,20 @@ class ContractForm(Form):
             'agent_return_share': "Agent's Return Share"
         }
 
-    def agent_fixed_pay_error_message(self, value):
-        if abs(value) > self.treatment.fixed_payment:
-            return 'Agent fixed pay should be between {} and {}.'.format(-self.treatment.fixed_payment, self.treatment.fixed_payment)
-
-    def agent_return_share_error_message(self, value):
-        if value not in range(0, 101, 10):
-            return 'Agent return share should be in multiples of 10 .i.e 10%, 20%..,100%.'
-
+    def choices(self):
+        return {
+            'agent_fixed_pay': money_range(-self.treatment.max_fixed_payment, self.treatment.max_fixed_payment, 0.50),
+        }
 
 class DecisionForm(Form):
 
     class Meta:
         model = models.Match
-        fields = ['decision']
+        fields = ['contract_accepted']
 
     def labels(self):
         return {
-            'decision': "Accept or Reject?",
+            'contract_accepted': "Do you accept or reject the contract?",
         }
 
 
@@ -47,7 +44,3 @@ class WorkEffortForm(Form):
         return {
             'agent_work_effort': 'Your work effort on the Contract?'
         }
-
-    def agent_work_effort_error_message(self, value):
-        if not 1 <= value <= 10:
-            return 'Work effort should be between 1-Lowest and 10 - highest.'
