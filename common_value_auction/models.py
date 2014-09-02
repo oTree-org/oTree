@@ -7,10 +7,9 @@ import random
 
 
 doc = """
-In Common Value Auction Game, there are multiple players with each player submitting
-a bid for a item being sold in an auction. The item value is known and same to all players.
-The winner is the player with the highest bid value.
-
+In a common value auction game, players simultaneously bid on the item being auctioned.
+Prior to bidding, they are given an estimate of the actual value of the item. This actual value is revealed after the bidding.
+Bids are private. The player with the highest bid wins the auction, but payoff depends on the bid amount and the actual value.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/common_value_auction" target="_blank">here</a>.
 """
 
@@ -19,9 +18,11 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'common_value_auction'
 
+    def highest_bid(self):
+        return max(p.bid_amount for p in self.players)
+
     def set_winner(self):
-        highest_bid = max(p.bid_amount for p in self.players)
-        players_with_highest_bid = [p for p in self.players if p.bid_amount == highest_bid]
+        players_with_highest_bid = [p for p in self.players if p.bid_amount == self.highest_bid()]
         winner = random.choice(players_with_highest_bid)    # if tie, winner is chosen at random
         winner.is_winner = True
 
@@ -37,31 +38,31 @@ class Treatment(otree.models.BaseTreatment):
         doc="""Common value of the item to be auctioned, random for treatment"""
     )
 
-    item_value_min = models.MoneyField(
+    min_allowable_bid = models.MoneyField(
         default=None,
         doc="""Minimum value of item"""
     )
 
-    item_value_max = models.MoneyField(
+    max_allowable_bid = models.MoneyField(
         default=None,
         doc="""Maximum value of item"""
     )
 
-    item_value_error_margin = models.MoneyField(
+    estimate_error_margin = models.MoneyField(
         default=None,
         doc="""Error margin for the value estimates shown to the players"""
     )
 
     def generate_value_estimate(self):
-        minimum = self.item_value - self.item_value_error_margin
-        maximum = self.item_value + self.item_value_error_margin
+        minimum = self.item_value - self.estimate_error_margin
+        maximum = self.item_value + self.estimate_error_margin
 
         estimate = round(random.uniform(minimum, maximum), 1)
 
-        if estimate < self.item_value_min:
-            estimate = self.item_value_min
-        if estimate > self.item_value_max:
-            estimate = self.item_value_max
+        if estimate < self.min_allowable_bid:
+            estimate = self.min_allowable_bid
+        if estimate > self.max_allowable_bid:
+            estimate = self.max_allowable_bid
 
         return estimate
 
@@ -118,9 +119,9 @@ def treatments():
 
     treatment = Treatment.create(
         item_value=random_item_value,
-        item_value_min=min_value,
-        item_value_max=max_value,
-        item_value_error_margin=1.0
+        min_allowable_bid=min_value,
+        max_allowable_bid=max_value,
+        estimate_error_margin=1.0
     )
     treatment_list.append(treatment)
 

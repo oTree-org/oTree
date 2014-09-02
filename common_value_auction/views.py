@@ -24,9 +24,9 @@ class Bid(Page):
             self.player.item_value_estimate = self.treatment.generate_value_estimate()
 
         return {'item_value_estimate': self.player.item_value_estimate,
-                'error_margin': self.treatment.item_value_error_margin,
-                'min_bid': Money(self.treatment.item_value_min),
-                'max_bid': Money(self.treatment.item_value_max)}
+                'error_margin': self.treatment.estimate_error_margin,
+                'min_bid': Money(self.treatment.min_allowable_bid),
+                'max_bid': Money(self.treatment.max_allowable_bid)}
 
 
 class ResultsWaitPage(SubsessionWaitPage):
@@ -43,9 +43,12 @@ class Results(Page):
         if self.player.payoff is None:
             self.player.set_payoff()
 
-        return {'payoff': self.player.payoff,
+        return {'is_winner': self.player.is_winner,
+                'is_greedy': True if self.treatment.item_value - self.player.bid_amount < 0 else False,
                 'bid_amount': self.player.bid_amount,
-                'is_winner': self.player.is_winner}
+                'winning_bid': self.subsession.highest_bid(),
+                'item_value': self.treatment.item_value,
+                'payoff': self.player.payoff,}
 
 
 def pages():
