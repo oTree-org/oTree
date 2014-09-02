@@ -8,8 +8,7 @@ import random
 
 
 doc = """
-In Private Value Auction Game. Consists of multiple players. Each player submits a
-bid for a prize being sold in an auction. The prize value is privately known to each player and therefore
+In the private value auction game, each player submits a bid for an item that is being auctioned. The item value is privately known to each player and therefore
 uncertainty on the other player's value. The winner is the player with the highest bid value.
 
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/private_value_auction" target="_blank">here</a>.
@@ -58,7 +57,7 @@ class Match(otree.models.BaseMatch):
 
     def bid_choices(self):
         """Range of allowed bid values"""
-        return money_range(0, self.treatment.price_value-0.2, 0.05) # range less than price value **uncertain aspect
+        return money_range(0, self.treatment.price_value-0.2, 0.05)     # range less than price value **uncertain aspect
 
 
 class Player(otree.models.BasePlayer):
@@ -83,5 +82,7 @@ class Player(otree.models.BasePlayer):
         """
     )
 
+
 def treatments():
+
     return [Treatment.create()]

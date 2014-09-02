@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import private_value_auction.models as models
 from private_value_auction._builtin import Form
-import otree.forms
 
 
 class BidForm(Form):

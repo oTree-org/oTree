@@ -1,5 +1,4 @@
-import otree.test
-from otree.common import Money, money_range
+# -*- coding: utf-8 -*-
 import private_value_auction.views as views
 from private_value_auction._builtin import Bot
 import random
