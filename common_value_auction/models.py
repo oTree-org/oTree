@@ -25,9 +25,6 @@ class Subsession(otree.models.BaseSubsession):
         winner = random.choice(players_with_highest_bid)    # if tie, winner is chosen at random
         winner.is_winner = True
 
-        for p in self.players:
-            print p.is_winner
-
 
 class Treatment(otree.models.BaseTreatment):
 
