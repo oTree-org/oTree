@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import private_value_auction.forms as forms
-from private_value_auction._builtin import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
+from private_value_auction._builtin import Page, SubsessionWaitPage
 
 
 class Introduction(Page):
@@ -30,17 +29,14 @@ class Results(Page):
     template_name = 'private_value_auction/Results.html'
 
     def variables_for_template(self):
-        return {
-            'payoff': self.player.payoff,
-            'bid_amount': self.player.bid_amount,
-            'is_winner': self.player.is_winner
-        }
+        return {'payoff': self.player.payoff,
+                'bid_amount': self.player.bid_amount,
+                'is_winner': self.player.is_winner}
 
 
 def pages():
-    return [
-        Introduction,
-        Bid,
-        ResultsWaitPage,
-        Results
-    ]
+
+    return [Introduction,
+            Bid,
+            ResultsWaitPage,
+            Results]
