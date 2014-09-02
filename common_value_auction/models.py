@@ -7,10 +7,9 @@ import random
 
 
 doc = """
-In Common Value Auction Game, there are multiple players with each player submitting
-a bid for a item being sold in an auction. The item value is known and same to all players.
-The winner is the player with the highest bid value.
-
+In a common value auction game, players simultaneously bid on the item being auctioned.
+Prior to bidding, they are given an estimate of the actual value of the item. This actual value is revealed after the bidding.
+Bids are private. The player with the highest bid wins the auction, but payoff depends on the bid amount and the actual value.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/common_value_auction" target="_blank">here</a>.
 """
 
