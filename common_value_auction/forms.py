@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 import common_value_auction.models as models
-from django import forms
 from common_value_auction._builtin import Form
-from crispy_forms.layout import HTML
-from otree.common import Money, money_range
+from otree.common import Money
 
 
 class BidForm(Form):
@@ -13,7 +11,8 @@ class BidForm(Form):
         fields = ['bid_amount']
 
     def labels(self):
-        return {'bid_amount': 'How much do you want to bid?'}
+        return {'bid_amount': 'Bid amount:'}
 
-    def choices(self):
-        return {'bid_amount': self.subsession.bid_choices()}
+    def bid_amount_error_message(self, value):
+        if not self.treatment.item_value_min <= value <= self.treatment.item_value_max:
+            return 'The amount bidded must be between {} and {}, inclusive.'.format(Money(self.treatment.item_value_min), Money(self.treatment.item_value_max))

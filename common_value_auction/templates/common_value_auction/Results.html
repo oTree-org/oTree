@@ -8,7 +8,10 @@
 
 {% block content %}
 
-    <p>You bidded {{ bid_amount }}.</p>
+    <p>
+        You bidded {{ bid_amount }}.
+    </p>
+
     {% if is_winner %}
         <p>You won the auction; your payoff therefore is {{ payoff }}.</p>
     {% else %}

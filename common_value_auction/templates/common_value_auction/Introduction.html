@@ -8,20 +8,31 @@
 
 {% block content %}
 
-    <p>In Common Value Auction Game, there are multiple players with each player submitting
-        a bid for a prize being sold in an auction.
-    </p>
     <p>
-        Before bidding, you will be given a 'prize value' which is the money value to you for
-        the item being auctioned. The 'prize value' is common to all players.
+        You have been randomly and anonymously grouped with {{ other_players_count }} other
+        {% if other_players_count == 1 %}
+            player.
+        {% else %}
+            players.
+        {% endif %}
+        All players see these same instructions.
     </p>
+
     <p>
-        Based on the prize value given, each player will make a 'bid' and neither of the players
-        will be able to see the other player's bid.
+        Your task will be to bid for an item that is being auctioned.
+        Prior to bidding, each player will be given an estimate of the actual value of the item. The estimates may be different between players.
+        The actual value of the item, which is common to all players, will be revealed after the bidding has taken place.
     </p>
+
     <p>
-        After bidding the person with the highest bid will purchase the item being sold. In the event of
-        a tie bid, the winner will be randomly chosen. The winner's payoff will be given by prize value
-        minus their own bid. The other bidder (looser) will earn nothing.
+        Based on the value estimate, each player will submit a bid within a given range.
+        All bids are private and submitted at the same time.
     </p>
+
+    <p>
+        The highest bidder will receive the actual value of the item as payoff minus their own bid amount.
+        If the winner's bid amount is higher than the actual value of the item, the payoff will be zero.
+        In the event of a tie between two or more players, the winner will be chosen at random. Other players will receive nothing.
+    </p>
+
 {% endblock %}

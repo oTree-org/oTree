@@ -8,6 +8,14 @@
 
 {% block content %}
 
-    <p>The Prize Value is {{ prize_value }}.</p>
+    <p>
+        The value of the item is estimated to be {{ item_value_estimate }}.
+        This estimate may deviate from the actual value by at most {{ error_margin }}.
+    </p>
+
+    <p>
+        Please make your bid now. The amount can be between {{ min_bid }} and {{ max_bid }}, inclusive.
+        The amount submitted will be rounded to a single decimal place.
+    </p>
 
 {% endblock %}
