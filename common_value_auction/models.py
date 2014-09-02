@@ -38,31 +38,31 @@ class Treatment(otree.models.BaseTreatment):
         doc="""Common value of the item to be auctioned, random for treatment"""
     )
 
-    item_value_min = models.MoneyField(
+    min_allowable_bid = models.MoneyField(
         default=None,
         doc="""Minimum value of item"""
     )
 
-    item_value_max = models.MoneyField(
+    max_allowable_bid = models.MoneyField(
         default=None,
         doc="""Maximum value of item"""
     )
 
-    item_value_error_margin = models.MoneyField(
+    estimate_error_margin = models.MoneyField(
         default=None,
         doc="""Error margin for the value estimates shown to the players"""
     )
 
     def generate_value_estimate(self):
-        minimum = self.item_value - self.item_value_error_margin
-        maximum = self.item_value + self.item_value_error_margin
+        minimum = self.item_value - self.estimate_error_margin
+        maximum = self.item_value + self.estimate_error_margin
 
         estimate = round(random.uniform(minimum, maximum), 1)
 
-        if estimate < self.item_value_min:
-            estimate = self.item_value_min
-        if estimate > self.item_value_max:
-            estimate = self.item_value_max
+        if estimate < self.min_allowable_bid:
+            estimate = self.min_allowable_bid
+        if estimate > self.max_allowable_bid:
+            estimate = self.max_allowable_bid
 
         return estimate
 
@@ -119,9 +119,9 @@ def treatments():
 
     treatment = Treatment.create(
         item_value=random_item_value,
-        item_value_min=min_value,
-        item_value_max=max_value,
-        item_value_error_margin=1.0
+        min_allowable_bid=min_value,
+        max_allowable_bid=max_value,
+        estimate_error_margin=1.0
     )
     treatment_list.append(treatment)
 

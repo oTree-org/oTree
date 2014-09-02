@@ -24,9 +24,9 @@ class Bid(Page):
             self.player.item_value_estimate = self.treatment.generate_value_estimate()
 
         return {'item_value_estimate': self.player.item_value_estimate,
-                'error_margin': self.treatment.item_value_error_margin,
-                'min_bid': Money(self.treatment.item_value_min),
-                'max_bid': Money(self.treatment.item_value_max)}
+                'error_margin': self.treatment.estimate_error_margin,
+                'min_bid': Money(self.treatment.min_allowable_bid),
+                'max_bid': Money(self.treatment.max_allowable_bid)}
 
 
 class ResultsWaitPage(SubsessionWaitPage):
