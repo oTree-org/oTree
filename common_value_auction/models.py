@@ -19,6 +19,15 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'common_value_auction'
 
+    def set_winner(self):
+        highest_bid = max(p.bid_amount for p in self.players)
+        players_with_highest_bid = [p for p in self.players if p.bid_amount == highest_bid]
+        winner = random.choice(players_with_highest_bid)    # if tie, winner is chosen at random
+        winner.is_winner = True
+
+        for p in self.players:
+            print p.is_winner
+
 
 class Treatment(otree.models.BaseTreatment):
 
@@ -59,16 +68,6 @@ class Treatment(otree.models.BaseTreatment):
 
         return estimate
 
-    def set_payoffs(self):
-        highest_bid = max(p.bid_amount for p in self.players)
-        players_with_highest_bid = [p for p in self.players if p.bid_amount == highest_bid]
-        winner = random.choice(players_with_highest_bid)    # if tie, winner is chosen at random
-        winner.is_winner = True
-        winner.payoff = self.item_value - winner.bid_amount
-        for p in self.players:
-            if not p.is_winner:
-                p.payoff = 0
-
 
 class Match(otree.models.BaseMatch):
 
@@ -102,6 +101,14 @@ class Player(otree.models.BasePlayer):
         default=False,
         doc="""Indicates whether the player is the winner"""
     )
+
+    def set_payoff(self):
+        if self.is_winner:
+            self.payoff = self.treatment.item_value - self.bid_amount
+            if self.payoff < 0:
+                self.payoff = 0
+        else:
+            self.payoff = 0
 
 
 def treatments():

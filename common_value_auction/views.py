@@ -29,13 +29,19 @@ class Bid(Page):
                 'max_bid': Money(self.treatment.item_value_max)}
 
 
+class ResultsWaitPage(SubsessionWaitPage):
+
+    def after_all_players_arrive(self):
+        self.subsession.set_winner()
+
+
 class Results(Page):
 
     template_name = 'common_value_auction/Results.html'
 
     def variables_for_template(self):
-        if all(p.payoff is None for p in self.subsession.players):
-            self.treatment.set_payoffs()
+        if self.player.payoff is None:
+            self.player.set_payoff()
 
         return {'payoff': self.player.payoff,
                 'bid_amount': self.player.bid_amount,
@@ -46,5 +52,5 @@ def pages():
 
     return [Introduction,
             Bid,
-            SubsessionWaitPage,
+            ResultsWaitPage,
             Results]
