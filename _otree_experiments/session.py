@@ -206,7 +206,14 @@ def session_types():
             subsession_apps=['showcase'],
             doc=""""""
         ),
-
+        SessionType(
+            name="Quiz",
+            base_pay=0,
+            participants_per_demo_session=1,
+            participants_per_session=1,
+            subsession_apps=['quiz'],
+            doc=""""""
+        ),
     ]
 
 

@@ -59,7 +59,7 @@ settings = {
         'survey',
         'bargaining',
         'guessing',
-
+        'quiz',
         'matrix_symmetric',
         'matrix_asymmetric',
         'cournot_competition',
