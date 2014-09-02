@@ -1,5 +1,5 @@
 from otree.session import SessionType
-import os
+
 
 def session_types():
 
@@ -127,6 +127,14 @@ def session_types():
             doc=""""""
         ),
         SessionType(
+            name='Common Value Auction',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=2,
+            subsession_apps=['common_value_auction', 'lab_results'],
+            doc=""""""
+        ),
+        SessionType(
             name='Volunteer Dilemma',
             base_pay=10.00,
             participants_per_session=12,
@@ -180,14 +188,6 @@ def session_types():
             participants_per_session=12,
             participants_per_demo_session=1,
             subsession_apps=['lemon_market', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
-            name='Common Value Auction',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['common_value_auction', 'lab_results'],
             doc=""""""
         ),
         SessionType(
