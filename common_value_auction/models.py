@@ -19,9 +19,11 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'common_value_auction'
 
+    def highest_bid(self):
+        return max(p.bid_amount for p in self.players)
+
     def set_winner(self):
-        highest_bid = max(p.bid_amount for p in self.players)
-        players_with_highest_bid = [p for p in self.players if p.bid_amount == highest_bid]
+        players_with_highest_bid = [p for p in self.players if p.bid_amount == self.highest_bid()]
         winner = random.choice(players_with_highest_bid)    # if tie, winner is chosen at random
         winner.is_winner = True
 

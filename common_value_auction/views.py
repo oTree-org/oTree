@@ -43,9 +43,12 @@ class Results(Page):
         if self.player.payoff is None:
             self.player.set_payoff()
 
-        return {'payoff': self.player.payoff,
+        return {'is_winner': self.player.is_winner,
+                'is_greedy': True if self.treatment.item_value - self.player.bid_amount < 0 else False,
                 'bid_amount': self.player.bid_amount,
-                'is_winner': self.player.is_winner}
+                'winning_bid': self.subsession.highest_bid(),
+                'item_value': self.treatment.item_value,
+                'payoff': self.player.payoff,}
 
 
 def pages():
