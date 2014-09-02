@@ -127,6 +127,14 @@ def session_types():
             doc=""""""
         ),
         SessionType(
+            name='Common Value Auction',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=2,
+            subsession_apps=['common_value_auction', 'lab_results'],
+            doc=""""""
+        ),
+        SessionType(
             name='Volunteer Dilemma',
             base_pay=10.00,
             participants_per_session=12,
@@ -183,14 +191,6 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Common Value Auction',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['common_value_auction', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
             name='Tragedy of the commons',
             base_pay=10.00,
             participants_per_session=12,
@@ -207,7 +207,7 @@ def session_types():
             doc=""""""
         ),
 
-    ]
+        ]
 
 
 def show_on_demo_page(session_type_name):
