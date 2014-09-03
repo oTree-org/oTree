@@ -48,7 +48,7 @@ class Results(Page):
                 'bid_amount': self.player.bid_amount,
                 'winning_bid': self.subsession.highest_bid(),
                 'item_value': self.treatment.item_value,
-                'payoff': self.player.payoff,}
+                'payoff': self.player.payoff}
 
 
 def pages():

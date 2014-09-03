@@ -3,14 +3,13 @@
 
 from otree.db import models
 import otree.models
-from otree.common import Money, money_range
 import random
 
 
 doc = """
-In the private value auction game, each player submits a bid for an item that is being auctioned. The item value is privately known to each player and therefore
-uncertainty on the other player's value. The winner is the player with the highest bid value.
-
+In a private value auction game, players simultaneously bid on the item being auctioned.
+Each player knows only their private value of the item. The actual value of the item is not known.
+Bids are private. The player with the highest bid wins the auction, but payoff depends on the bid amount and the private value.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/private_value_auction" target="_blank">here</a>.
 """
 
@@ -19,17 +18,13 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'private_value_auction'
 
-    def set_payoffs(self):
-        highest_bid = max(p.bid_amount for p in self.players)
-        # could be a tie
-        players_with_highest_bid = [p for p in self.players if p.bid_amount == highest_bid]
-        random_highest_bidder = random.choice(players_with_highest_bid)
-        random_highest_bidder.is_winner = True
-        random_highest_bidder.payoff = self.treatment.price_value - self.bid_amount
+    def highest_bid(self):
+        return max(p.bid_amount for p in self.players)
 
-        for p in self.players:
-            if p != random_highest_bidder:
-                p.payoff = 0
+    def set_winner(self):
+        players_with_highest_bid = [p for p in self.players if p.bid_amount == self.highest_bid()]
+        winner = random.choice(players_with_highest_bid)    # if tie, winner is chosen at random
+        winner.is_winner = True
 
 
 class Treatment(otree.models.BaseTreatment):
@@ -38,11 +33,14 @@ class Treatment(otree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    price_value = models.MoneyField(
-        default=2.00,
-        doc="""
-        Price value of the prize being sold in the auction
-        """
+    min_allowable_bid = models.MoneyField(
+        default=0.0,
+        doc="""Minimum value of item"""
+    )
+
+    max_allowable_bid = models.MoneyField(
+        default=10.0,
+        doc="""Maximum value of item"""
     )
 
 
@@ -55,10 +53,6 @@ class Match(otree.models.BaseMatch):
 
     players_per_match = 1
 
-    def bid_choices(self):
-        """Range of allowed bid values"""
-        return money_range(0, self.treatment.price_value-0.2, 0.05)     # range less than price value **uncertain aspect
-
 
 class Player(otree.models.BasePlayer):
 
@@ -68,19 +62,31 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
+    private_value = models.MoneyField(
+        default=None,
+        doc="""How much the player values the item, generated randomly"""
+    )
+
     bid_amount = models.MoneyField(
         default=None,
-        doc="""
-        Amount bidded by each player
-        """
+        doc="""Amount bidded by the player"""
     )
 
     is_winner = models.BooleanField(
         default=False,
-        doc="""
-        Indicates whether the player is the winner or not
-        """
+        doc="""Indicates whether the player is the winner"""
     )
+
+    def generate_private_value(self):
+        return round(random.uniform(self.treatment.min_allowable_bid, self.treatment.max_allowable_bid), 1)
+
+    def set_payoff(self):
+        if self.is_winner:
+            self.payoff = self.private_value - self.bid_amount
+            if self.payoff < 0:
+                self.payoff = 0
+        else:
+            self.payoff = 0
 
 
 def treatments():
