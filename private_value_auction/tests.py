@@ -12,7 +12,7 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # bid
-        self.submit(views.Bid, {"bid_amount": random.choice(self.match.bid_choices())})
+        self.submit(views.Bid, {"bid_amount": round(random.uniform(self.treatment.min_allowable_bid, self.treatment.max_allowable_bid), 1)})
 
         # results
         self.submit(views.Results)
