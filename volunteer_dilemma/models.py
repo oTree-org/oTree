@@ -6,10 +6,9 @@ import otree.models
 
 
 doc = """
-Volunteer's Dilemma Game. Players are asked separately whether they want to
-volunteer or ignore. If at least one person volunteers, everybody receives a general benefit.
-But each person who volunteers incurs a cost.
-
+In the volunteer's dilemma game, players are asked separately whether or not they want to
+volunteer. If at least one player volunteers, every player receives a general benefit/payoff.
+The players who volunteer will, however, incur a given cost.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/volunteer_dilemma" target="_blank">here</a>.
 """
 
