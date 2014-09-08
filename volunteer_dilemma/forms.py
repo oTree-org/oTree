@@ -2,7 +2,6 @@
 import volunteer_dilemma.models as models
 from django import forms
 from volunteer_dilemma._builtin import Form
-import otree.forms
 
 
 class DecisionForm(Form):

@@ -4,15 +4,14 @@
 from otree.db import models
 import otree.models
 
-PLAYERS_PER_MATCH = 3
 
 doc = """
-Volunteer's Dilemma Game. {} players are asked separately whether they want to
+Volunteer's Dilemma Game. Players are asked separately whether they want to
 volunteer or ignore. If at least one person volunteers, everybody receives a general benefit.
 But each person who volunteers incurs a cost.
 
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/volunteer_dilemma" target="_blank">here</a>.
-""".format(PLAYERS_PER_MATCH)
+"""
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -21,20 +20,19 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Treatment(otree.models.BaseTreatment):
-    subsession = models.ForeignKey(Subsession)
 
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     volunteer_cost = models.MoneyField(
         default=0.40,
-        doc="""
-        Cost incurred by volunteering
-        """)
+        doc="""Cost incurred by volunteering"""
+    )
 
     general_benefit = models.MoneyField(
         default=1.00,
-        doc="""
-        General benefit for all the players, if at least one volunteers
-        """
+        doc="""General benefit for all the players, if at least one volunteers"""
     )
 
 
@@ -45,7 +43,7 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = PLAYERS_PER_MATCH
+    players_per_match = 3
 
     def set_payoffs(self):
         if any(p.decision == 'Volunteer' for p in self.players):
@@ -74,5 +72,7 @@ class Player(otree.models.BasePlayer):
         """
     )
 
+
 def treatments():
+
     return [Treatment.create()]
