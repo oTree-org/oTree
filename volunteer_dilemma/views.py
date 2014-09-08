@@ -27,9 +27,9 @@ class Results(Page):
     template_name = 'volunteer_dilemma/Results.html'
 
     def variables_for_template(self):
-        return {'decision': self.player.decision,
+        return {'volunteer': self.player.volunteer,
                 'payoff': self.player.payoff,
-                'num_volunteers': len([p for p in self.match.players if p.decision == 'Volunteer'])}
+                'num_volunteers': len([p for p in self.match.players if p.volunteer])}
 
 
 def pages():

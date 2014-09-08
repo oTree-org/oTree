@@ -25,14 +25,14 @@ class Treatment(otree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    volunteer_cost = models.MoneyField(
-        default=0.40,
-        doc="""Cost incurred by volunteering"""
-    )
-
     general_benefit = models.MoneyField(
         default=1.00,
-        doc="""General benefit for all the players, if at least one volunteers"""
+        doc="""Payoff for each player if at least one volunteers"""
+    )
+
+    volunteer_cost = models.MoneyField(
+        default=0.40,
+        doc="""Cost incurred by volunteering player"""
     )
 
 
@@ -46,13 +46,13 @@ class Match(otree.models.BaseMatch):
     players_per_match = 3
 
     def set_payoffs(self):
-        if any(p.decision == 'Volunteer' for p in self.players):
+        if any(p.volunteer for p in self.players):
             baseline_amount = self.treatment.general_benefit
         else:
             baseline_amount = 0
         for p in self.players:
             p.payoff = baseline_amount
-            if p.decision == 'Volunteer':
+            if p.volunteer:
                 p.payoff -= self.treatment.volunteer_cost
 
 
@@ -64,12 +64,9 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    decision = models.CharField(
+    volunteer = models.NullBooleanField(
         default=None,
-        choices=['Volunteer', 'Ignore'],
-        doc="""
-        Player's decision to volunteer
-        """
+        doc="""Whether player volunteers"""
     )
 
 
