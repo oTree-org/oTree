@@ -8,10 +8,24 @@
 
 {% block content %}
 
-    <p>Your decision: <b>{{ decision }}</b></p>
+    <p>
+        In your group,
+        {% if num_volunteers > 0 %}
+            {{ num_volunteers }} {{ num_volunteers|pluralize:"person,people" }}
+        {% else %}
+            no one
+        {% endif %}
+        {% if volunteer %}
+           decided to volunteer, including you.
+        {% elif num_volunteers > 0 %}
+            decided to volunteer. You decided not to volunteer.
+        {% else %}
+            decided to volunteer.
+        {% endif %}
+    </p>
 
-    <p>In your group, {{ num_volunteers }} {{ num_volunteers|pluralize:"person,people" }} chose "Volunteer".</p>
-
-    <p>Therefore, your payoff is {{ payoff }}.</p>
+    <p>
+        Your payoff is therefore {{ payoff }}.
+    </p>
 
 {% endblock %}

@@ -121,8 +121,8 @@ def session_types():
         SessionType(
             name='Private Value Auction',
             base_pay=10.00,
-            participants_per_session=2,
-            participants_per_demo_session=4,
+            participants_per_session=12,
+            participants_per_demo_session=2,
             subsession_apps=['private_value_auction', 'lab_results'],
             doc=""""""
         ),

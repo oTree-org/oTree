@@ -2,16 +2,14 @@
 import volunteer_dilemma.models as models
 from django import forms
 from volunteer_dilemma._builtin import Form
-import otree.forms
 
 
 class DecisionForm(Form):
 
     class Meta:
         model = models.Player
-        fields = ['decision']
-        widgets = {'decision': forms.RadioSelect()}
+        fields = ['volunteer']
+        widgets = {'volunteer': forms.RadioSelect()}
 
     def labels(self):
-        return {'decision': 'Volunteer or Ignore?'}
-
+        return {'volunteer': 'Do you wish to volunteer?'}
