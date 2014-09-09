@@ -4,6 +4,7 @@
 from otree.db import models
 import otree.models
 
+
 doc = """
 In the Bertrand competition game, players play firms and are asked to privately set the price of their product.
 The firm with the lowest price gets all the business and received a profit. Firms who offer higher prices receive zero profit.
