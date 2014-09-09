@@ -54,8 +54,8 @@ class Results(Page):
 def pages():
     return [
         Introduction,
-        FormsDemo,
         EmbedDemo,
+        FormsDemo,
         BootstrapWidgetDemo,
         # AdminDemo # need to update this page, provide correct password and link, GIF screenshot, etc
         Results,

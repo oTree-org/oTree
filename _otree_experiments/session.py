@@ -206,7 +206,11 @@ def session_types():
             subsession_apps=['showcase'],
             doc=""""""
         ),
-        SessionType(
+
+    ]
+
+unused_session_types = [
+    SessionType(
             name="Quiz",
             base_pay=0,
             participants_per_demo_session=1,
@@ -214,8 +218,7 @@ def session_types():
             subsession_apps=['quiz'],
             doc=""""""
         ),
-    ]
-
+]
 
 def show_on_demo_page(session_type_name):
     # set the below env var on servers that participants will see,
