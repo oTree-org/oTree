@@ -1,5 +1,5 @@
 from otree.session import SessionType
-
+import os
 
 def session_types():
 
@@ -218,7 +218,11 @@ def session_types():
 
 
 def show_on_demo_page(session_type_name):
-    return True
+    # set the below env var on servers that participants will see,
+    # since they should not be able to access the demo page
+    if os.environ.get('OTREE_PARTICIPANT_FACING_SITE'):
+        return False
+
 
 demo_page_intro_text = """
 <ul>
