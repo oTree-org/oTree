@@ -8,18 +8,30 @@
 
 {% block content %}
 
-    <p>Your price was {{ price }}.</p>
+    <p>The results are shown in the following table.</p>
 
-    <p>
-        {% if is_sole_winner %}
-            You won the price competition; you had the lowest price.
-        {% elif is_shared_winner %}
-            {{ num_winners }} participants tied for the lowest price; you were one of them.
-        {% else %}
-            You did not have the lowest price, which was {{ winning_price }}.
-        {% endif %}
-    </p>
+    <table class="table" style="width:300px">
 
-    <p>Your payoff is therefore {{ payoff }}</p>
+        <tr>
+            <td>Your price</td>
+            <td>{{ price }}</td>
+        </tr>
+
+        <tr>
+            <td>Lowest price</td>
+            <td>{{ winning_price }}</td>
+        </tr>
+
+        <tr>
+            <td>Firms offering lowest price</td>
+            <td>{{ num_winners }}</td>
+        </tr>
+
+        <tr class="success">
+            <th>Your profit</th>
+            <th>{{ payoff }}</th>
+        </tr>
+
+    </table>
 
 {% endblock %}
