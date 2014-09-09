@@ -222,6 +222,7 @@ def show_on_demo_page(session_type_name):
     # since they should not be able to access the demo page
     if os.environ.get('OTREE_PARTICIPANT_FACING_SITE'):
         return False
+    return True
 
 
 demo_page_intro_text = """
