@@ -5,10 +5,9 @@ from otree.db import models
 import otree.models
 
 doc = """
-In Bertrand Competition, players play as firm owners, each deciding simultaneously on how
-much price to set for their products.
-The player with the lowest price carries the day and becomes the winner.
-
+In the Bertrand competition game, players play firms and are asked to privately set the price of their product.
+The firm with the lowest price gets all the business and received a profit. Firms who offer higher prices receive zero profit.
+If multiple firms offer the same lowest price, business is divided equally amongst them.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/bertrand_competition" target="_blank">here</a>.
 """
 
