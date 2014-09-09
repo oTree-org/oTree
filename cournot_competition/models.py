@@ -57,7 +57,7 @@ class Match(otree.models.BaseMatch):
     players_per_match = 3
 
     def set_payoffs(self):
-        self.total_units = sum(p.units for p in self.players)
+        self.total_units = sum([p.units for p in self.players])
         self.price_in_points = self.treatment.total_capacity - self.total_units
         for p in self.players:
             p.payoff_in_points = self.price_in_points * p.units

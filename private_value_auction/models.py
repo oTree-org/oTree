@@ -20,7 +20,7 @@ class Subsession(otree.models.BaseSubsession):
     name_in_url = 'private_value_auction'
 
     def set_payoffs(self):
-        highest_bid = max(p.bid_amount for p in self.players)
+        highest_bid = max([p.bid_amount for p in self.players])
         # could be a tie
         players_with_highest_bid = [p for p in self.players if p.bid_amount == highest_bid]
         random_highest_bidder = random.choice(players_with_highest_bid)

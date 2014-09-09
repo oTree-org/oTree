@@ -19,7 +19,7 @@ class Subsession(otree.models.BaseSubsession):
     two_third_guesses = models.FloatField(default=None)
 
     def set_payoffs(self):
-        self.two_third_guesses = (2.0/3) * sum(p.guess_value for p in self.players) / len(self.players)
+        self.two_third_guesses = (2.0/3) * sum([p.guess_value for p in self.players]) / len(self.players)
 
         winner_so_far = None
         smallest_difference_so_far = 1000   # arbitrary big number

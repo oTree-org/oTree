@@ -59,7 +59,7 @@ class Match(otree.models.BaseMatch):
     )
 
     def set_payoffs(self):
-        self.winning_price = min(p.price for p in self.players)
+        self.winning_price = min([p.price for p in self.players])
         self.num_winners = len([p for p in self.players if p.price == self.winning_price])
         winner_payoff = (self.winning_price - self.treatment.marginal_cost) / self.num_winners
 

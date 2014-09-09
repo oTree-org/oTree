@@ -22,19 +22,19 @@ class Treatment(otree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    amount_allocated = models.MoneyField(
+    endowment = models.MoneyField(
         default=3.00,
         doc="""Amount allocated to each player"""
     )
 
-    multiplication_factor = models.FloatField(
+    efficiency_factor = models.FloatField(
         default=1.6,
         doc="""The multiplication factor in group contribution"""
     )
 
     def contribute_choices(self):
         """Returns a list of allowed values for contribution"""
-        return money_range(0, self.amount_allocated, 0.10)
+        return money_range(0, self.endowment, 0.10)
 
 
 class Match(otree.models.BaseMatch):
@@ -47,10 +47,10 @@ class Match(otree.models.BaseMatch):
     players_per_match = 4
 
     def set_payoffs(self):
-        contributions = sum(p.contribution for p in self.players)
-        individual_share = contributions * self.treatment.multiplication_factor / self.players_per_match
+        contributions = sum([p.contribution for p in self.players])
+        individual_share = contributions * self.treatment.efficiency_factor / self.players_per_match
         for p in self.players:
-            p.payoff = (self.treatment.amount_allocated - p.contribution) + individual_share
+            p.payoff = (self.treatment.endowment - p.contribution) + individual_share
 
 
 class Player(otree.models.BasePlayer):

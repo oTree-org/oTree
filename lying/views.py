@@ -38,8 +38,8 @@ class Results(Page):
             'payoff': self.player.payoff,
             'number_of_heads': self.player.number_of_heads,
             'me_in_previous_rounds': me_in_previous_rounds,
-            'cumulative_payoff': sum(p.payoff for p in me_in_previous_rounds) + self.player.payoff,
-            'cumulative_number_of_heads': sum(p.number_of_heads for p in me_in_previous_rounds) + self.player.number_of_heads,
+            'cumulative_payoff': sum([p.payoff for p in me_in_previous_rounds]) + self.player.payoff,
+            'cumulative_number_of_heads': sum([p.number_of_heads for p in me_in_previous_rounds]) + self.player.number_of_heads,
         }
 
 

@@ -4,7 +4,7 @@ from public_goods._builtin import Page, MatchWaitPage
 
 
 def variables_for_all_templates(self):
-    return {'amount_allocated': self.treatment.amount_allocated}
+    return {'endowment': self.treatment.endowment}
 
 
 class Introduction(Page):
@@ -15,7 +15,7 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {'no_of_players': self.match.players_per_match,
-                'multiplication_factor': self.treatment.multiplication_factor}
+                'efficiency_factor': self.treatment.efficiency_factor}
 
 
 class Contribute(Page):
