@@ -26,16 +26,12 @@ class Treatment(otree.models.BaseTreatment):
 
     marginal_cost = models.MoneyField(
         default=0.20,
-        doc="""
-        The minimum price that can be set i.e equivalent to marginal cost.
-        """
+        doc="""Marginal cost of production, effectively the minimum price (exclusive)"""
     )
 
     maximum_price = models.MoneyField(
         default=1.00,
-        doc="""
-        The maximum price that can be set.
-        """
+        doc="""The maximum price"""
     )
 
 
@@ -50,12 +46,12 @@ class Match(otree.models.BaseMatch):
 
     num_winners = models.PositiveIntegerField(
         default=None,
-        doc='Number of winners'
+        doc="""How many players offer lowest price"""
     )
 
     winning_price = models.MoneyField(
         default=None,
-        doc='Winning price'
+        doc="""Lowest price"""
     )
 
     def set_payoffs(self):
@@ -82,16 +78,12 @@ class Player(otree.models.BasePlayer):
 
     price = models.MoneyField(
         default=None,
-        doc="""
-        The player's target price
-        """
+        doc="""Price player chooses to sell product for"""
     )
 
     is_a_winner = models.BooleanField(
         default=False,
-        doc="""
-        Whether this player is a winner of the match
-        """
+        doc="""Whether this player offered lowest price"""
     )
 
     def is_sole_winner(self):
@@ -100,5 +92,7 @@ class Player(otree.models.BasePlayer):
     def is_shared_winner(self):
         return self.is_a_winner and self.match.num_winners > 1
 
+
 def treatments():
+
     return [Treatment.create()]
