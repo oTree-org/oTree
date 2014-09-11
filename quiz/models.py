@@ -31,10 +31,6 @@ class Match(otree.models.BaseMatch):
 
     players_per_match = 1
 
-    def set_payoffs(self):
-        for p in self.players:
-            p.payoff = 0 # change to whatever the payoff should be
-
 
 class Player(otree.models.BasePlayer):
     # <built-in>

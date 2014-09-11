@@ -3,6 +3,7 @@
 
 from otree.db import models
 import otree.models
+from otree.common import Money, money_range
 import random
 
 
@@ -19,7 +20,7 @@ class Subsession(otree.models.BaseSubsession):
     name_in_url = 'private_value_auction'
 
     def highest_bid(self):
-        return max(p.bid_amount for p in self.players)
+        return max([p.bid_amount for p in self.players])
 
     def set_winner(self):
         players_with_highest_bid = [p for p in self.players if p.bid_amount == self.highest_bid()]

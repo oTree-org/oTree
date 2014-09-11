@@ -1,5 +1,5 @@
 from otree.session import SessionType
-
+import os
 
 def session_types():
 
@@ -206,7 +206,11 @@ def session_types():
             subsession_apps=['showcase'],
             doc=""""""
         ),
-        SessionType(
+
+    ]
+
+unused_session_types = [
+    SessionType(
             name="Quiz",
             base_pay=0,
             participants_per_demo_session=1,
@@ -214,11 +218,15 @@ def session_types():
             subsession_apps=['quiz'],
             doc=""""""
         ),
-    ]
-
+]
 
 def show_on_demo_page(session_type_name):
+    # set the below env var on servers that participants will see,
+    # since they should not be able to access the demo page
+    if os.environ.get('OTREE_PARTICIPANT_FACING_SITE'):
+        return False
     return True
+
 
 demo_page_intro_text = """
 <ul>
