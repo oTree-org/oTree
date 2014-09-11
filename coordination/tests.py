@@ -1,5 +1,4 @@
-import otree.test
-from otree.common import Money, money_range
+# -*- coding: utf-8 -*-
 import coordination.views as views
 from coordination._builtin import Bot
 import random
@@ -15,4 +14,3 @@ class PlayerBot(Bot):
 
         # results
         self.submit(views.Results)
-
