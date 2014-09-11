@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import stag_hunt.forms as forms
-from stag_hunt._builtin import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
+from stag_hunt._builtin import Page, MatchWaitPage
 
 
 class Decide(Page):
@@ -15,12 +14,10 @@ class Decide(Page):
         return forms.DecisionForm
 
     def variables_for_template(self):
-        return {
-            'stag_stag': self.treatment.stag_stag_amount,
-            'stag_hare': self.treatment.stag_hare_amount,
-            'hare_stag': self.treatment.hare_stag_amount,
-            'hare_hare': self.treatment.hare_hare_amount,
-        }
+        return {'stag_stag': self.treatment.stag_stag_amount,
+                'stag_hare': self.treatment.stag_hare_amount,
+                'hare_stag': self.treatment.hare_stag_amount,
+                'hare_hare': self.treatment.hare_hare_amount}
 
 
 class ResultsWaitPage(MatchWaitPage):
@@ -42,16 +39,13 @@ class Results(Page):
 
     def variables_for_template(self):
 
-        return {
-            'payoff': self.player.payoff,
-            'decision': self.player.decision,
-            'other_decision': self.player.other_player().decision,
-        }
+        return {'payoff': self.player.payoff,
+                'decision': self.player.decision,
+                'other_decision': self.player.other_player().decision}
 
 
 def pages():
-    return [
-        Decide,
-        ResultsWaitPage,
-        Results
-    ]
+
+    return [Decide,
+            ResultsWaitPage,
+            Results]
