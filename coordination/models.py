@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
+
 from otree.db import models
 import otree.models
 
 
 doc = """
-In Coordination game, There are two players which are required to choose either A or B.
-If both Players chooses the same choice then they both wins, otherwise they loose.
-
+In the coordination game, two players are required to choose either A or B. Payoff to the players
+is determined by whether the choices match or not.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/coordination" target="_blank">here</a>.
 """
 
@@ -26,16 +26,12 @@ class Treatment(otree.models.BaseTreatment):
 
     match_amount = models.MoneyField(
         default=1.00,
-        doc="""
-        amount each player is rewarded for having match choices
-        """
+        doc="""Payoff for each player if choices match"""
     )
 
     mismatch_amount = models.MoneyField(
         default=0.00,
-        doc="""
-        amount each player is rewarded for having different choices
-        """
+        doc="""Payoff for each player if choices don't match"""
     )
 
 
@@ -69,7 +65,7 @@ class Player(otree.models.BasePlayer):
     choice = models.CharField(
         default=None,
         choices=['A', 'B'],
-        doc='either A or B',
+        doc="""Either A or B""",
     )
 
     def other_player(self):
@@ -78,4 +74,5 @@ class Player(otree.models.BasePlayer):
 
 
 def treatments():
+
     return [Treatment.create()]

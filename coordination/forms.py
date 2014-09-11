@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import coordination.models as models
 from coordination._builtin import Form
-import otree.forms
 from django import forms
 
 
@@ -13,4 +12,4 @@ class ChoiceForm(Form):
         widgets = {'choice': forms.RadioSelect()}
 
     def labels(self):
-        return {'choice': 'Your Choice?'}
+        return {'choice': 'Please make a choice:'}

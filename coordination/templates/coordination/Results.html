@@ -8,13 +8,16 @@
 
 {% block content %}
 
-    {% if same_choice %}
-        <p>You both chose {{ choice }}.</p>
-    {% else %}
-        <p>You chose {{ choice }} and the other player chose {{ other_choice }}.</p>
-    {% endif %}
     <p>
-        Your payoff is {{ payoff }}.
+        {% if same_choice %}
+            Both of you chose {{ choice }}.
+        {% else %}
+            You chose {{ choice }} while the other player chose {{ other_choice }}.
+        {% endif %}
+    </p>
+
+    <p>
+        Your payoff is therefore {{ payoff }}.
     </p>
 
 {% endblock %}

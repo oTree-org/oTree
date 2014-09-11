@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import coordination.forms as forms
-from coordination._builtin import Page, MatchWaitPage, SubsessionWaitPage
-from otree.common import Money, money_range
+from coordination._builtin import Page, MatchWaitPage
 
 
 class Choice(Page):
@@ -15,10 +14,8 @@ class Choice(Page):
         return forms.ChoiceForm
 
     def variables_for_template(self):
-        return {
-            'match_amount': self.treatment.match_amount,
-            'mismatch_amount': self.treatment.mismatch_amount,
-        }
+        return {'match_amount': self.treatment.match_amount,
+                'mismatch_amount': self.treatment.mismatch_amount}
 
 
 class ResultsWaitPage(MatchWaitPage):
@@ -38,17 +35,14 @@ class Results(Page):
     template_name = 'coordination/Results.html'
 
     def variables_for_template(self):
-        return {
-            'payoff': self.player.payoff,
-            'choice': self.player.choice,
-            'other_choice': self.player.other_player().choice,
-            'same_choice': self.player.choice == self.player.other_player().choice
-        }
+        return {'payoff': self.player.payoff,
+                'choice': self.player.choice,
+                'other_choice': self.player.other_player().choice,
+                'same_choice': self.player.choice == self.player.other_player().choice}
 
 
 def pages():
-    return [
-        Choice,
-        ResultsWaitPage,
-        Results
-    ]
+
+    return [Choice,
+            ResultsWaitPage,
+            Results]
