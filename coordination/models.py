@@ -7,9 +7,8 @@ import otree.models
 
 
 doc = """
-In Coordination game, There are two players which are required to choose either A or B.
-If both Players chooses the same choice then they both wins, otherwise they loose.
-
+In the coordination game, two players are required to choose either A or B. Payoff to the players
+is determined by whether the choices match or not.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/coordination" target="_blank">here</a>.
 """
 

@@ -9,28 +9,16 @@
 {% block content %}
 
     <p>
-        In Coordination game, There are two players which are required to choose either A or B.
-        If both Players chooses the same choice then they both wins, otherwise they loose.
+        You have been randomly and anonymously paired with another player. Both of you see these same instructions.
     </p>
+
     <p>
-        The payoff matrix is as shown below:
+        The two of you must now choose either <strong>A</strong> or <strong>B</strong>. The payoff is determined as follows:
     </p>
-    <table class="table" style="table-layout:fixed; max-width:500px; margin-top:15px;">
-        <tr>
-            <th style="border:0; border-right:1px solid #ddd; width:30%;"></th>
-            <th style="text-align:center; border:1px solid #ddd;">P1: Choice A</th>
-            <th style="text-align:center; border:1px solid #ddd;">P1: Choice B</th>
-        </tr>
-        <tr>
-            <th style="border:1px solid #ddd;">P2: Choice A</th>
-            <td style="border:1px solid #ddd;">{{ match_amount }}, {{ match_amount }}</td>
-            <td style="border:1px solid #ddd;">{{ mismatch_amount }}, {{ mismatch_amount }}</td>
-        </tr>
-        <tr>
-            <th style="border:1px solid #ddd;">P2: Choice B</th>
-            <td style="border:1px solid #ddd;">{{ mismatch_amount }}, {{ mismatch_amount }}</td>
-            <td style="border:1px solid #ddd;">{{ match_amount }}, {{ match_amount }}</td>
-        </tr>
-    </table>
+
+    <ul>
+        <li>If both choose A or both choose B, each receives {{ match_amount }}</li>
+        <li>If one chooses A and the other B, each receives {{ mismatch_amount }}</li>
+    </ul>
 
 {% endblock %}

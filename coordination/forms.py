@@ -12,4 +12,4 @@ class ChoiceForm(Form):
         widgets = {'choice': forms.RadioSelect()}
 
     def labels(self):
-        return {'choice': 'Your Choice?'}
+        return {'choice': 'Please make a choice:'}
