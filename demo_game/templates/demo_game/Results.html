@@ -9,7 +9,23 @@
 {% block content %}
 
     <p>
-        This page shows the payoffs to each Player. Your payoff is {{ payoff }}.
+        This page shows the payoffs to each participant. You do not make any money in this experiment.
+        But just for fun let us pretend you did, and the currency was Japanese Yen. And suppose there
+        was a base participation fee of 100 Yen. And then suppose you earned some money according to
+        your answers on the form fields page.
+    </p>
+    <p><h4>Total payoff calculation</h4>
+        <table class="table">
+        <thead>
+          <tr><th>Question</th><th>Payoff</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>¥7.0</td></tr>
+          <tr><td>2</td><td>¥40.0</td></tr>
+          <tr><td><b>base participation pay</b></td><td>¥100.0</td></tr>
+
+        </tbody>
+      </table>
     </p>
 
 {% endblock %}

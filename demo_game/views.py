@@ -110,6 +110,11 @@ class Results(Page):
     template_name = 'demo_game/Results.html'
 
 
+class Finish(Page):
+
+    template_name = 'demo_game/Finish.html'
+
+
 def pages():
     return [
         Introduction,
@@ -119,7 +124,8 @@ def pages():
         FeedbackTwo,
         #EmbedDemo,
         FormsDemo,
-        BootstrapWidgetDemo,
+        #BootstrapWidgetDemo,
         # AdminDemo # need to update this page, provide correct password and link, GIF screenshot, etc
         Results,
+        Finish,
     ]
