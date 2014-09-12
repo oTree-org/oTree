@@ -72,7 +72,7 @@ settings = {
         'stag_hunt',
         'battle_of_the_sexes',
         'lemon_market',
-        'showcase',
+        'demo_game',
         'common_value_auction',
         'tragedy_of_the_commons',
         # lab results: displays lab results in a given session

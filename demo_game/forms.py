@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-import showcase.models as models
+import demo_game.models as models
 from django import forms
-from showcase._builtin import Form
+from demo_game._builtin import Form
 from crispy_forms.layout import HTML
 
 
 # show case forms
 class DemoForm(Form):
-    '''A form to showcase various form elements'''
+    '''A form to demo_game various form elements'''
     class Meta:
         model = models.Player
         fields = ['demo_field1', 'demo_field2', 'demo_field3', 'demo_field4', 'demo_field5']

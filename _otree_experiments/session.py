@@ -203,7 +203,7 @@ def session_types():
             base_pay=0,
             participants_per_demo_session=1,
             participants_per_session=1,
-            subsession_apps=['showcase'],
+            subsession_apps=['demo_game'],
             doc=""""""
         ),
 

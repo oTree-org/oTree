@@ -7,13 +7,13 @@ import otree.models
 
 doc = """
 <p>A show case of various features that otree support. </p>
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/showcase" target="_blank">here</a>.
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/demo_game" target="_blank">here</a>.
 """
 
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'showcase'
+    name_in_url = 'demo_game'
 
 
 class Treatment(otree.models.BaseTreatment):

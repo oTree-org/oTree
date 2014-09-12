@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 import otree.views
 import otree.views.concrete
-import showcase.forms as forms
-from showcase._builtin import Page, MatchWaitPage, SubsessionWaitPage
+import demo_game.forms as forms
+from demo_game._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import currency
 
 
 class Introduction(Page):
 
-    template_name = 'showcase/Introduction.html'
+    template_name = 'demo_game/Introduction.html'
 
 
 class FormsDemo(Page):
 
-    template_name = 'showcase/FormsDemo.html'
+    template_name = 'demo_game/FormsDemo.html'
 
     def get_form_class(self):
         return forms.DemoForm
@@ -21,22 +21,22 @@ class FormsDemo(Page):
 
 class EmbedDemo(Page):
 
-    template_name = 'showcase/EmbedDemo.html'
+    template_name = 'demo_game/EmbedDemo.html'
 
 
 class BootstrapWidgetDemo(Page):
 
-    template_name = 'showcase/BootstrapWidgetsDemo.html'
+    template_name = 'demo_game/BootstrapWidgetsDemo.html'
 
 
 class BootstrapWidgetDemo(Page):
 
-    template_name = 'showcase/BootstrapWidgetsDemo.html'
+    template_name = 'demo_game/BootstrapWidgetsDemo.html'
 
 
 class AdminDemo(Page):
 
-    template_name = 'showcase/AdminDemo.html'
+    template_name = 'demo_game/AdminDemo.html'
 
 
 class Results(Page):
@@ -48,7 +48,7 @@ class Results(Page):
             'payoff': currency(self.player.payoff)
         }
 
-    template_name = 'showcase/Results.html'
+    template_name = 'demo_game/Results.html'
 
 
 def pages():

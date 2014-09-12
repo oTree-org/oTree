@@ -1,6 +1,6 @@
 import otree.test
-import showcase.views as views
-from showcase._builtin import Bot
+import demo_game.views as views
+from demo_game._builtin import Bot
 
 
 class PlayerBot(Bot):
