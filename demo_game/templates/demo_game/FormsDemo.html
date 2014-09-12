@@ -8,25 +8,32 @@
 {% endblock %}
 
 {% block title %}
-    Forms / User Inputs
+    Forms for participant input
 {% endblock %}
 
 {% block content %}
 
     <p>
-        Forms provides elements that allow players in various experiments to interact with by entering data to it.
-        oTree supports a number of them. Including but not limited to: RadioButtons, Checkboxes, TextInput, TextArea,
-        Select Choices and more. This is illustrated below.<br>
-        Note: All Inputs are required, and validated. For example, Inputting a text on a numerical field  or having a
-        blank field will raise a validation error.
-    </p>
-    <p>
-        More on form elements can be found in <a href="https://docs.djangoproject.com/en/dev/topics/forms/">django
-        documentation.</a>
+        Forms allow players to enter data. We already saw a numerical field that validated input to be an odd
+        negative or any positive number in understanding question 1. Understanding question 2 had radio buttons
+        which are for multiple choice questions with one correct answer.
     </p>
 
 {% endblock %}
 
 {% block content_below_submit_button %}
+    <p>
+    <b>Note:</b> In all the form fields on this page we require an input, do validation, and then check for
+        correctness (in the  understanding questions we chose to give you immediate feedback on correctness,
+        here we choose not to).
+    </p>
+    <p>More on form elements can be found in Django’s documentation. If you want to know where to find that
+        documentation, just for fun we hid it in a tooltip. Hover over me for the link.<br>
+    <a href="https://docs.djangoproject.com/en/dev/topics/forms/">
+        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left"
+        title= "https://docs.djangoproject.com/en/dev/topics/forms/">
+        django forms documentation
+    </button></a>
+    </p>
     {% include 'demo_game/Instructions.html' %}
 {% endblock %}

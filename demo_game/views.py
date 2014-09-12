@@ -117,7 +117,7 @@ def pages():
         FeedbackOne,
         QuestionTwo,
         FeedbackTwo,
-        EmbedDemo,
+        #EmbedDemo,
         FormsDemo,
         BootstrapWidgetDemo,
         # AdminDemo # need to update this page, provide correct password and link, GIF screenshot, etc

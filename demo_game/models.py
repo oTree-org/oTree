@@ -49,7 +49,7 @@ class Player(otree.models.BasePlayer):
 
     demo_field1 = models.CharField(
         default=None,
-        choices=['yes', 'no'],
+        choices=['0', '1', '2', 'do not know'],
         doc="""
         field With radiobutton input.
         """
@@ -62,6 +62,7 @@ class Player(otree.models.BasePlayer):
     )
     demo_field3 = models.CharField(
         default=None,
+        max_length=5,
         doc="""
         field with text input
         """
@@ -82,8 +83,8 @@ class Player(otree.models.BasePlayer):
 
     QUESTION_2_CHOICES = ['Embed images', 'Dynamic visualizations using HighCharts', 'Time travel (opens in pop up window)', 'Embed video', 'Embed audio']
 
-    training_question_1 = models.PositiveIntegerField(null=True, verbose_name=' ')
-    training_question_2 = models.CharField(max_length=100, null=True, choices=QUESTION_2_CHOICES, verbose_name=' ')
+    training_question_1 = models.PositiveIntegerField(null=True, verbose_name='')
+    training_question_2 = models.CharField(max_length=100, null=True, choices=QUESTION_2_CHOICES, verbose_name='')
 
     # check correct answers
     def is_training_question_1_correct(self):
