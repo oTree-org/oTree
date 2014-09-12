@@ -6,7 +6,10 @@ import otree.models
 
 
 doc = """
-<p>A show case of various features that otree support. </p>
+<p>
+A simple 1-player game demonstrating some of oTree’s basic capabilities,
+as well as its interaction with some plugins.
+</p>
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/demo_game" target="_blank">here</a>.
 """
 
@@ -21,6 +24,10 @@ class Treatment(otree.models.BaseTreatment):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
+
+    training_1_correct = 2
+    training_2_correct = 'Time travel (opens in pop up window)'
+
 
 class Match(otree.models.BaseMatch):
 
@@ -72,6 +79,18 @@ class Player(otree.models.BasePlayer):
         field with positive integers and only odd numbers - see form validation
         """
     )
+
+    QUESTION_2_CHOICES = ['Embed images', 'Dynamic visualizations using HighCharts', 'Time travel (opens in pop up window)', 'Embed video', 'Embed audio']
+
+    training_question_1 = models.PositiveIntegerField(null=True, verbose_name=' ')
+    training_question_2 = models.CharField(max_length=100, null=True, choices=QUESTION_2_CHOICES, verbose_name=' ')
+
+    # check correct answers
+    def is_training_question_1_correct(self):
+        return self.training_question_1 == self.treatment.training_1_correct
+
+    def is_training_question_2_correct(self):
+        return self.training_question_2 == self.treatment.training_2_correct
 
     def set_payoff(self):
         self.payoff = 0

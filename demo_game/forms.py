@@ -3,6 +3,7 @@ import demo_game.models as models
 from django import forms
 from demo_game._builtin import Form
 from crispy_forms.layout import HTML
+from django.utils.translation import ugettext_lazy as _, ugettext
 
 
 # show case forms
@@ -42,3 +43,32 @@ class DemoForm(Form):
                 'demo_field4', HTML('<p>Allows for selection of only one input from the given select list</p>'),
                 'demo_field5', HTML('<p>Allows for entry of only positive odd numbers</p>'),
                 ]
+
+
+class QuestionForm1(Form):
+
+    class Meta:
+        model = models.Player
+        fields = ['training_question_1']
+
+    def order(self):
+        return [
+            HTML(u'<p>{}</p>'.format(ugettext('How many understanding questions are there? \
+            Please enter an odd negative number, zero or any positive number:'),)),
+            'training_question_1',
+        ]
+
+
+class QuestionForm2(Form):
+
+    class Meta:
+        model = models.Player
+        fields = ['training_question_2']
+
+        widgets = {'training_question_2': forms.RadioSelect()}
+
+    def order(self):
+        return [
+            HTML(u'<h4>{}</h4>'.format(ugettext('All the following are possible in oTree except one?'),)),
+            'training_question_2',
+        ]
