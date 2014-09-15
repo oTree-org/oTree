@@ -1,0 +1,38 @@
+{% extends "global/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head_content  %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}custom.css" />
+{% endblock %}
+
+{% block title %}
+    Understanding question ({{ num_q }} of {{ total_q }})
+{% endblock %}
+
+{% block content %}
+    {% if num_q == 1 %}
+    <p>
+        This first screen is to give a template for understanding questions and to show you a numeric entry
+        field with restricted values. Just for fun the field accepts any answer that is an odd negative number
+        or any positive number including 0. Thus it will reject an invalid entry of, say -2, and ask you to try
+        again after you click next, but if you enter a valid, but wrong answer, say 1 it will accept it but give
+        you feedback.
+    </p>
+    {% else %}
+    <p>
+        oTree can easily embed images, audio and video. <br>
+        These can also be randomized by treatment or match or whatever. But sometimes one wants to create graphics
+        on the fly. In oTree external plugins can be used for such specific purposes. For example below is a dynamic
+        visualization using HighCharts.
+    </p>
+    <div><img src="{{ STATIC_URL }}demo_game/highcharts.png" height="400" width="400"/></div>
+    {% endif %}
+
+
+{% endblock %}
+
+{% block content_below_submit_button %}
+    {% include 'demo_game/Instructions.html' %}
+{% endblock %}

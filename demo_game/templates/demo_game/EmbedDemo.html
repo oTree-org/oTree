@@ -2,6 +2,11 @@
 {% load staticfiles %}
 {% load i18n %}
 
+{% block head_content  %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}custom.css" />
+{% endblock %}
+
 {% block title %}
     Rich Multimedia
 {% endblock %}
@@ -14,13 +19,13 @@
 
     <h4>Dynamic visualizations</h4>
     <div>
-        {% include 'showcase/HighChartsDemo.html' %}
+        {% include 'demo_game/HighChartsDemo.html' %}
     </div>
     <br>
 
     <h4>Embedding Images</h4>
     <p>An image describing Public goods game.</p>
-    <div><img src="{{ STATIC_URL }}showcase/publicgoods.jpeg" /></div>
+    <div><img src="{{ STATIC_URL }}demo_game/publicgoods.jpeg" /></div>
     <br>
 
     <h4>Embedding Videos</h4>
@@ -32,4 +37,8 @@
         Please click 'Next' to view more features.
     </p>
 
+{% endblock %}
+
+{% block content_below_submit_button %}
+    {% include 'demo_game/Instructions.html' %}
 {% endblock %}

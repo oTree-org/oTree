@@ -2,6 +2,11 @@
 {% load staticfiles %}
 {% load i18n %}
 
+{% block head_content  %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}custom.css" />
+{% endblock %}
+
 {% block title %}
     Bootstrap Widgets Demo
 {% endblock %}
@@ -19,8 +24,8 @@
         <h3 class="panel-title">Game Instructions</h3>
       </div>
       <div class="panel-body">
-        Games/Experiments have several players each with a different role to play. For example, In Principle Agent
-        Game, we have two players: Principle and Agent. The Principle offers the Agent a contract which can be
+        Games/Experiments have several players each with a different role to play. For example, In Principal Agent
+        Game, we have two players: Principal and Agent. The Principal offers the Agent a contract which can be
         accepted or rejected depending on the terms.
       </div>
     </div>
@@ -140,4 +145,8 @@
         For more on bootstrap widgets and components please <a href="http://getbootstrap.com/components/"> click here</a>
     </p>
 
+{% endblock %}
+
+{% block content_below_submit_button %}
+    {% include 'demo_game/Instructions.html' %}
 {% endblock %}

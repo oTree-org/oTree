@@ -18,6 +18,22 @@ else:
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
 
 
+if os.environ.get("OTREE_LOCALDEV"):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'OPTIONS': {
+                'timeout': 20,
+            }
+        }
+    }
+else:
+    import dj_database_url
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config()
+
+''' TODO: Chris: please provide infomation on how to set heroku vars
 if os.environ.get("HEROKU"):
     import dj_database_url
     DATABASES = {}
@@ -29,7 +45,7 @@ else:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-
+'''
 
 settings = {
     'CREATE_DEFAULT_SUPERUSER': True,
@@ -72,7 +88,7 @@ settings = {
         'stag_hunt',
         'battle_of_the_sexes',
         'lemon_market',
-        'showcase',
+        'demo_game',
         'common_value_auction',
         'tragedy_of_the_commons',
         # lab results: displays lab results in a given session
