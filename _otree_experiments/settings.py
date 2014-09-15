@@ -17,23 +17,6 @@ else:
     # Change this to something unique (e.g. mash your keyboard), and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
 
-
-if os.environ.get("OTREE_LOCALDEV"):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-            'OPTIONS': {
-                'timeout': 20,
-            }
-        }
-    }
-else:
-    import dj_database_url
-    DATABASES = {}
-    DATABASES['default'] = dj_database_url.config()
-
-''' TODO: Chris: please provide infomation on how to set heroku vars
 if os.environ.get("HEROKU"):
     import dj_database_url
     DATABASES = {}
@@ -45,7 +28,6 @@ else:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-'''
 
 settings = {
     'CREATE_DEFAULT_SUPERUSER': True,
