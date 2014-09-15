@@ -1,5 +1,5 @@
 # This file is auto-generated. Don't change anything in this file.
-import showcase.models as models
+import demo_game.models as models
 import otree.views
 import otree.forms
 import otree.test

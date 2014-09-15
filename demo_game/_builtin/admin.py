@@ -1,5 +1,5 @@
 from django.contrib import admin
-import showcase.models as models
+import demo_game.models as models
 import otree.adminlib as adminlib
 
 class PlayerAdmin(adminlib.PlayerAdmin):

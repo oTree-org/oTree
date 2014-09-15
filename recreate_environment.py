@@ -7,6 +7,7 @@ import commit_and_push
 
 heroku_apps = {
     'demo': 'otree-demo',
+    'chen-dev': 'pacific-journey-6479',
 }
 
 def main():
