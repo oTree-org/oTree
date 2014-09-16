@@ -2,7 +2,6 @@
 import stag_hunt.models as models
 from django import forms
 from stag_hunt._builtin import Form
-import otree.forms
 
 
 class DecisionForm(Form):
@@ -13,4 +12,4 @@ class DecisionForm(Form):
         widgets = {'decision': forms.RadioSelect()}
 
     def labels(self):
-        return {'decision': 'Your Decision?'}
+        return {'decision': "Please make a choice:"}

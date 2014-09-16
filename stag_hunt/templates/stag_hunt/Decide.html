@@ -9,28 +9,36 @@
 {% block content %}
 
     <p>
-        In Stag Hunt game, there are two players which are required to choose whether to hunt a stag or hare.
-        Hunting stag requires the effort of both players.
-        The payoff are calculated as follows:
+        You have been randomly and anonymously paired with another player. Both of you see these same instructions.
     </p>
+
     <p>
-        The payoff matrix is as shown below:
+        The two of you must privately decide whether to hunt a <strong>stag</strong> or a <strong>hare</strong>.
+        To hunt a stag, you must have the cooperation of the other player in order to succeed.
+        You can hunt a hare without the other player, but a hare is worth less than a stag.
+        This is reflected in the payoffs shown in the table below.
     </p>
-    <table class="table" style="table-layout:fixed; max-width:500px; margin-top:15px;">
+
+    <p>
+        In each table cell, the amount to the left is the payoff for player P1 and the amount to the right is the payoff for player P2.
+        Your are <strong>P{{ player_index }}</strong>.
+    </p>
+
+    <table class="table" style="width:350px; margin-top:20px">
         <tr>
-            <th style="border:0; border-right:1px solid #ddd; width:30%;"></th>
-            <th style="text-align:center; border:1px solid #ddd;">Stag</th>
-            <th style="text-align:center; border:1px solid #ddd;">Hare</th>
+            <th></th>
+            <th>P1: Stag</th>
+            <th>P1: Hare</th>
         </tr>
         <tr>
-            <th style="border:1px solid #ddd;">Stag</th>
-            <td style="border:1px solid #ddd;">{{ stag_stag }}, {{ stag_stag }}</td>
-            <td style="border:1px solid #ddd;">{{ stag_hare }}, {{ hare_stag }}</td>
+            <th>P2: Stag</th>
+            <td>{{ stag_stag }}, {{ stag_stag }}</td>
+            <td>{{ hare_stag }}, {{ stag_hare }}</td>
         </tr>
         <tr>
-            <th style="border:1px solid #ddd;">Hare</th>
-            <td style="border:1px solid #ddd;">{{ hare_stag }}, {{ stag_hare }}</td>
-            <td style="border:1px solid #ddd;">{{ hare_hare }}, {{ hare_hare }}</td>
+            <th>P2: Hare</th>
+            <td>{{ stag_hare }}, {{ hare_stag }}</td>
+            <td>{{ hare_hare }}, {{ hare_hare }}</td>
         </tr>
     </table>
 

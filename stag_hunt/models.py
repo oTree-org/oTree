@@ -6,7 +6,11 @@ import otree.models
 
 
 doc = """
-Stag Hunt
+Stag hunt is a game that describes a conflict between safety and social cooperation.
+Two players go out on a hunt, and each can privately choose to hunt a stag or hunt a hare.
+To hunt a stag, a player must have the cooperation of the other player in order to succeed.
+A player can hunt a hare without the other player, but a hare is worth less than a stag.
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/stag_hunt" target="_blank">here</a>.
 """
 
 
@@ -23,27 +27,22 @@ class Treatment(otree.models.BaseTreatment):
 
     stag_stag_amount = models.MoneyField(
         default=0.20,
-        doc="""
-        Amount rewarded for choosing both stag
-        """
+        doc="""Payoff if both players choose stag"""
     )
+
     stag_hare_amount = models.MoneyField(
         default=0.00,
-        doc="""
-        Amount rewarded for choosing stag and hare
-        """
+        doc="""Payoff if the player chooses stag but the other hare"""
     )
+
     hare_stag_amount = models.MoneyField(
         default=0.10,
-        doc="""
-        Amount rewarded for choosing hare and stag
-        """
+        doc="""Payoff if the player chooses hare but the other stag"""
     )
+
     hare_hare_amount = models.MoneyField(
         default=0.10,
-        doc="""
-        Amount rewarded for choosing both hare
-        """
+        doc="""Payoff if both players choose hare"""
     )
 
 
@@ -68,7 +67,7 @@ class Player(otree.models.BasePlayer):
     decision = models.CharField(
         default=None,
         choices=['Stag', 'Hare'],
-        doc='either Stag or Hare',
+        doc="""The player's choice""",
     )
 
     def other_player(self):
@@ -91,4 +90,5 @@ class Player(otree.models.BasePlayer):
 
 
 def treatments():
+
     return [Treatment.create()]

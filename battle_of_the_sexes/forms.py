@@ -2,7 +2,6 @@
 import battle_of_the_sexes.models as models
 from django import forms
 from battle_of_the_sexes._builtin import Form
-import otree.forms
 
 
 class DecisionForm(Form):
@@ -13,4 +12,4 @@ class DecisionForm(Form):
         widgets = {'decision': forms.RadioSelect()}
 
     def labels(self):
-        return {'decision': 'Your Decision?'}
+        return {'decision': 'Please make a choice:'}
