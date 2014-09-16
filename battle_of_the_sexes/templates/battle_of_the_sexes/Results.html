@@ -8,7 +8,16 @@
 
 {% block content %}
 
-    <p>You chose {{ decision }}. The other player chose {{ other_decision }}. </p>
-    <p>Your payoff is {{ payoff }}.</p>
+    <p>
+        {% if decision == other_decision %}
+            Both you and your {{ other_role }} chose {{ decision }}.
+        {% else %}
+            You chose {{ decision }}. Your {{ other_role }} chose {{ other_decision }}.
+        {% endif %}
+    </p>
+
+    <p>
+        Your payoff is therefore {{ payoff }}.
+    </p>
 
 {% endblock %}

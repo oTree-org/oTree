@@ -6,7 +6,9 @@ import otree.models
 
 
 doc = """
-Battle of the sexes.
+In the battle of the sexes, two players are paired as a couple and must privately decide whether attend the opera or watch football.
+The husband and wife prefer football and the opera, respectively, but both prefer to go to the same place rather than different ones.
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/battle_of_the_sexes" target="_blank">here</a>.
 """
 
 
@@ -16,50 +18,41 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Treatment(otree.models.BaseTreatment):
+
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
     football_husband_amount = models.MoneyField(
         default=0.30,
-        doc="""
-        Amount rewarded to husband if football is chosen
-        """
+        doc="""Amount rewarded to husband if football is chosen"""
     )
     football_wife_amount = models.MoneyField(
         default=0.20,
-        doc="""
-        Amount rewarded to wife if football is chosen
-        """
+        doc="""Amount rewarded to wife if football is chosen"""
     )
     mismatch_amount = models.MoneyField(
         default=0.00,
-        doc="""
-        Amount rewarded for choosing football and opera for either players
-        """
+        doc="""Amount rewarded for choosing football and opera for either players"""
     )
     opera_husband_amount = models.MoneyField(
         default=0.20,
-        doc="""
-        Amount rewarded to husband if opera is chosen
-        """
+        doc="""Amount rewarded to husband if opera is chosen"""
     )
     opera_wife_amount = models.MoneyField(
         default=0.30,
-        doc="""
-        Amount rewarded to wife if opera is chosen
-        """
+        doc="""Amount rewarded to wife if opera is chosen"""
     )
 
 
 class Match(otree.models.BaseMatch):
+
     # <built-in>
     treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
     players_per_match = 2
-
 
     def set_payoffs(self):
         husband = self.get_player_by_role('husband')
@@ -77,6 +70,7 @@ class Match(otree.models.BaseMatch):
                 husband.payoff = self.treatment.opera_husband_amount
                 wife.payoff = self.treatment.opera_wife_amount
 
+
 class Player(otree.models.BasePlayer):
 
     # <built-in>
@@ -87,8 +81,8 @@ class Player(otree.models.BasePlayer):
 
     decision = models.CharField(
         default=None,
-        choices=['football', 'opera'],
-        doc='either football or opera',
+        choices=(('football', 'Football'), ('opera', 'Opera')),
+        doc="""Either football or the opera"""
     )
 
     def other_player(self):
@@ -103,4 +97,5 @@ class Player(otree.models.BasePlayer):
 
 
 def treatments():
+
     return [Treatment.create()]

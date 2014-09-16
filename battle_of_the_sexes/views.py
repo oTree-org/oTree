@@ -15,14 +15,12 @@ class Decide(Page):
         return forms.DecisionForm
 
     def variables_for_template(self):
-        return {
-            'role': self.player.role(),
-            'fbl_husband_amt': self.treatment.football_husband_amount,
-            'fbl_wife_amt': self.treatment.football_wife_amount,
-            'fbl_opr_amt': self.treatment.mismatch_amount,
-            'opr_husband_amt': self.treatment.opera_husband_amount,
-            'opr_wife_amt': self.treatment.opera_wife_amount
-        }
+        return {'role': self.player.role(),
+                'fbl_husband_amt': self.treatment.football_husband_amount,
+                'fbl_wife_amt': self.treatment.football_wife_amount,
+                'fbl_opr_amt': self.treatment.mismatch_amount,
+                'opr_husband_amt': self.treatment.opera_husband_amount,
+                'opr_wife_amt': self.treatment.opera_wife_amount}
 
 
 class ResultsWaitPage(MatchWaitPage):
@@ -43,16 +41,14 @@ class Results(Page):
 
     def variables_for_template(self):
 
-        return {
-            'payoff': self.player.payoff,
-            'decision': self.player.decision,
-            'other_decision': self.player.other_player().decision,
-        }
+        return {'other_role': self.player.other_player().role(),
+                'decision': self.player.decision,
+                'other_decision': self.player.other_player().decision,
+                'payoff': self.player.payoff}
 
 
 def pages():
-    return [
-        Decide,
-        ResultsWaitPage,
-        Results
-    ]
+
+    return [Decide,
+            ResultsWaitPage,
+            Results]
