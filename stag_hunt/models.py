@@ -6,7 +6,11 @@ import otree.models
 
 
 doc = """
-Stag Hunt
+Stag hunt is a game that describes a conflict between safety and social cooperation.
+Two players go out on a hunt, and each can privately choose to hunt a stag or hunt a hare.
+To hunt a stag, a player must have the cooperation of the other player in order to succeed.
+A player can hunt a hare without the other player, but a hare is worth less than a stag.
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/stag_hunt" target="_blank">here</a>.
 """
 
 
