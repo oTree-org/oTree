@@ -37,6 +37,7 @@ class Match(otree.models.BaseMatch):
         return sum(p.hours_fished for p in self.players)
 
     def set_payoffs(self):
+        # TODO: re-do the payoff calculation
         for p in self.players:
             per_hour_gain = self.treatment.common_share / self.calculate_total_hours()
             p.payoff = per_hour_gain * p.hours_fished

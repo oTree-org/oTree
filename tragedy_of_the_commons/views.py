@@ -19,6 +19,7 @@ class Decide(Page):
     def variables_for_template(self):
         return {
             'common_share': self.treatment.common_share,
+            'num_p': len(self.match.players),
         }
 
 
