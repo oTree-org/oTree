@@ -6,12 +6,15 @@ from crispy_forms.layout import HTML
 from otree.common import Money, money_range
 
 
-class DecisionForm(Form):
+class DecideForm(Form):
 
     class Meta:
         model = models.Player
-        fields = ['decision']
-        widgets = {'decision': forms.RadioSelect()}
+        fields = ['hours_fished']
+
+    def hours_fished_error_message(self, value):
+        if not 0 <= value <= 10:
+            return 'The value must be a whole number between {} and {}, inclusive.'.format(0, 10)
 
     def labels(self):
-        return {'decision': 'Make a decision:'}
+        return {'hours_fished': 'How many hours do you want to fish?'}

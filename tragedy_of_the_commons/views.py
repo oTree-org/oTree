@@ -1,33 +1,25 @@
 # -*- coding: utf-8 -*-
+import otree.views
+import otree.views.concrete
 import tragedy_of_the_commons.forms as forms
 from tragedy_of_the_commons._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
 
 
-class Introduction(Page):
+class Decide(Page):
 
     def participate_condition(self):
         return True
 
-    template_name = 'tragedy_of_the_commons/Introduction.html'
-
-    def variables_for_template(self):
-
-        return {'common_gain': self.treatment.common_gain,
-                'common_loss': self.treatment.common_loss,
-                'common_cost': self.treatment.individual_gain - self.treatment.defect_costs,
-                'defect_gain': self.treatment.common_gain - self.treatment.defect_costs}
-
-
-class Decision(Page):
-
-    def participate_condition(self):
-        return True
-
-    template_name = 'tragedy_of_the_commons/Decision.html'
+    template_name = 'tragedy_of_the_commons/Decide.html'
 
     def get_form_class(self):
-        return forms.DecisionForm
+        return forms.DecideForm
+
+    def variables_for_template(self):
+        return {
+            'common_share': self.treatment.common_share,
+        }
 
 
 class ResultsWaitPage(MatchWaitPage):
@@ -41,12 +33,14 @@ class Results(Page):
     template_name = 'tragedy_of_the_commons/Results.html'
 
     def variables_for_template(self):
-        return {'payoff': self.player.payoff}
+        return {
+            'payoff': self.player.payoff,
+        }
 
 
 def pages():
-
-    return [Introduction,
-            Decision,
-            ResultsWaitPage,
-            Results]
+    return [
+        Decide,
+        ResultsWaitPage,
+        Results
+    ]
