@@ -20,10 +20,11 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Treatment(otree.models.BaseTreatment):
+
     subsession = models.ForeignKey(Subsession)
 
     common_gain = models.MoneyField(
-        doc="""""",
+        doc="""If both players """,
         default=1.00
     )
     common_loss = models.MoneyField(
@@ -64,22 +65,20 @@ class Match(otree.models.BaseMatch):
 
 class Player(otree.models.BasePlayer):
 
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
 
     def other_player(self):
-        """Returns other player in match. Only valid for 2-player matches."""
+        """Returns other player in match"""
         return self.other_players_in_match()[0]
 
     decision = models.CharField(
-        choices = ['cooperate', 'defect'],
-        doc="""
-        Players decision: cooperate or Defect
-        """
+        choices=['cooperate', 'defect'],
+        doc="""Cooperate or defect"""
     )
 
 
-
 def treatments():
+
     return [Treatment.create()]

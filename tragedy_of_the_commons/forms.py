@@ -14,4 +14,4 @@ class DecisionForm(Form):
         widgets = {'decision': forms.RadioSelect()}
 
     def labels(self):
-        return {'decision': 'Your Decision?'}
+        return {'decision': 'Make a decision:'}
