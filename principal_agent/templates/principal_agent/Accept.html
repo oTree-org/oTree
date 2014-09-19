@@ -3,20 +3,16 @@
 {% load i18n %}
 
 {% block title %}
-    Accept
+    Response
 {% endblock %}
 
 {% block content %}
 
-    <h3>Agent</h3>
-    <p>
-        The Principal has offered a contract with the following details:
-        <ul>
-            <li>Your Fixed Pay: {{ fixed_pay }}</li>
-            <li>Your Returns on Share: {{ return_share }}%</li>
-        </ul>
-        Please do accept or reject the contract.
+    <p>You are <strong>Player B</strong>. Player A has offered you a contract with the following details:</p>
 
-    </p>
+    <ul>
+        <li>Fixed payment: {{ fixed_pay }}</li>
+        <li>Return share: {{ return_share }}%</li>
+    </ul>
 
 {% endblock %}

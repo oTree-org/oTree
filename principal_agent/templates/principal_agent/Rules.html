@@ -1,59 +1,73 @@
 {% load i18n %}
 
 <style type="text/css">
-    h4.panel-sub-heading {
-        margin-top:20px;
-    }
     ul {
         list-style-type:circle;
         padding-left:20px;
     }
 </style>
 
-<div class="well well-lg" style="padding-top:3px; padding-bottom:5px; margin-top:20px;">
+<div class="well well-lg" style="padding-top:0px; padding-bottom:0px; margin-top:20px;">
 
     <div class="panel-body">
 
-        <h4 class="panel-sub-heading">Principal's role</h4>
+        <h4 class="panel-sub-heading">
+            Rules
+        </h4>
 
-        <p>Creates a contract by deciding on the fixed payment and the Agent's returns share.</p>
-
-        <h4 class="panel-sub-heading">Agent's role</h4>
-
-        <p>Decides on whether to accept or reject the Contract.</p>
-
-        <h4 class="panel-sub-heading">Rules</h4>
-
-        <p>For contract offers the following rules hold: <br>
-            −{{ fixed_payment }} ≤ fixed payment ≤ {{ fixed_payment }} <br>
-            The Agent's return share: between 0% and 100% (0%, 10%, 20%,…,100%).
-        </p>
-
-        <h4 class="panel-sub-heading">Payoffs</h4>
         <p>
-            The Agent gets:<br>
-            [Agent's return share in %]×(total return) + fixed payment – cost of the Agent's work effort
-        </p>
-        <p>
-            The Principal gets: <br>
-            [100% – Agent's return share in %]×(total return) – fixed payment
+            Player A will propose a contract to Player B. The contract includes two figures that must be chosen as follows:
         </p>
 
-        <p>Table showing the relationship between the Agent's effort and the generated total return from their costs</p>
-        <table class="table">
+        <ul>
+            <li><i>Fixed payment</i>, which can be chosen as any number from at least –{{ fixed_payment }} to at most {{ fixed_payment }}</li>
+            <li><i>Return share</i>, which can be chosen as a multiple of 10%, that is 10%, 20%, … , 90%, or 100%</li>
+        </ul>
+
+        <p>Note that a negative fixed payment means that Player B will have to pay the amount to Player A.</p>
+
+        <p>
+            Once Player A has submitted the contract, Player B must decides whether to accept or to reject it.
+        </p>
+
+        <p>
+            If rejected:
+        </p>
+
+        <ul>
+            <li>Player A will receive {{ reject_principal_pay }}</li>
+            <li>Player B will receive {{ reject_agent_pay }}</li>
+        </ul>
+
+
+        <p>
+            If accepted, Player B then chooses a <i>level of effort</i>, which can be any whole number from at least 1 to at most 10.
+            Effort exertion is costly only to Player B. The exerted level of effort determines the <i>total return</i>,
+            which is to be apportioned according to the proposed return share.
+        </p>
+
+        <ul>
+            <li>Player A will receive: <br /> (100% – [B's return share in %]) × [total return] – [B's fixed payment]</li>
+            <li>Player B will receive: <br /> [B's return share in %] × [total return] + [B's fixed payment] – [B's effort cost]</li>
+        </ul>
+
+        <p>The following table shows the relationship between Player B's effort, the cost of effort, and the resulting total return:</p>
+
+        <table class="table table-condensed" style="width:350px">
             <tr>
-                <th>Agent's work effort</th>
-                <th>Total return from Agent's effort</th>
-                <th>Cost of work effort by Agent</th>
+                <th>B's effort level</th>
+                <th>B's effort cost</th>
+                <th>Total return</th>
             </tr>
-
             {% for effort, return, cost in efforts_returns_costs %}
                 <tr>
                     <td>{{ effort }}</td>
+                    <td>–{{ cost }}</td>
                     <td>{{ return }}</td>
-                    <td>{{ cost }}</td>
                 </tr>
             {% endfor %}
         </table>
+
     </div>
+
 </div>
