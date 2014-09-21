@@ -81,14 +81,6 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Lying',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=1,
-            subsession_apps=['lying']*5 + ['lab_results'],
-            doc=""""""
-        ),
-        SessionType(
             name='Guessing',
             base_pay=10.00,
             participants_per_session=12,

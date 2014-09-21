@@ -48,7 +48,9 @@ settings = {
     'INSTALLED_OTREE_APPS': [
 
         'lab_results',
-        'lying',
+        # lying is not a common game, but it does have an example of round history,
+        # which should be moved to a different game (e.g. a classic like PD or PG)
+        #'lying',
         'prisoner',
         'trust',
         'public_goods',
