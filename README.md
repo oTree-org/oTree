@@ -15,5 +15,5 @@ http://demo.otree.org/
 ## Full documentation
 https://github.com/oTree-org/oTree/wiki
 
-## Questions?
+## Contact email
 info@otree.org
