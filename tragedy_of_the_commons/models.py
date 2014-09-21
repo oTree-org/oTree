@@ -9,8 +9,6 @@ author = 'Dev'
 
 doc = """
 Tragedy of the commons.
-
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/tragedy_of_the_commons" target="_blank">here</a>.
 """
 
 
@@ -20,66 +18,47 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Treatment(otree.models.BaseTreatment):
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
-    common_gain = models.MoneyField(
-        doc="""""",
-        default=1.00
-    )
-    common_loss = models.MoneyField(
-        doc="""""",
-        default=0.00
-    )
-    individual_gain = models.MoneyField(
-        doc="""""",
-        default=2.00
-    )
-    defect_costs = models.MoneyField(
-        doc="""""",
-        default=0.20
-    )
+    common_share = models.MoneyField(null=True, doc='''Amount to be shared by all participants''')
 
 
 class Match(otree.models.BaseMatch):
-
-    treatment = models.ForeignKey(Treatment)
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    treatment = models.ForeignKey(Treatment)
+    # </built-in>
 
     players_per_match = 2
 
+    def calculate_total_hours(self):
+        return sum(p.hours_fished for p in self.players)
+
     def set_payoffs(self):
-        if all([p.decision == 'defect' for p in self.players]):
-            for p in self.players:
-                p.payoff = self.treatment.common_loss
-        elif all([p.decision == 'cooperate' for p in self.players]):
-            for p in self.players:
-                p.payoff = self.treatment.common_gain
-        else:
-            for p in self.players:
-                if p.decision == 'defect':
-                    p.payoff = self.treatment.individual_gain - self.treatment.defect_costs
-                else:
-                    p.payoff = self.treatment.common_gain - self.treatment.defect_costs
+        # TODO: re-do the payoff calculation
+        for p in self.players:
+            per_hour_gain = self.treatment.common_share / self.calculate_total_hours()
+            p.payoff = per_hour_gain * p.hours_fished
 
 
 class Player(otree.models.BasePlayer):
-
-    match = models.ForeignKey(Match, null = True)
-    treatment = models.ForeignKey(Treatment, null = True)
+    # <built-in>
     subsession = models.ForeignKey(Subsession)
+    treatment = models.ForeignKey(Treatment, null = True)
+    match = models.ForeignKey(Match, null = True)
+    # </built-in>
 
-    def other_player(self):
-        """Returns other player in match. Only valid for 2-player matches."""
-        return self.other_players_in_match()[0]
-
-    decision = models.CharField(
-        choices = ['cooperate', 'defect'],
+    hours_fished = models.PositiveIntegerField(
+        default=None,
         doc="""
-        Players decision: cooperate or Defect
+        Participant's hours to fish.
         """
     )
 
 
-
 def treatments():
-    return [Treatment.create()]
+    return [Treatment.create(
+        common_share = 20.00
+    )]

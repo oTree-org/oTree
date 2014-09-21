@@ -17,6 +17,7 @@ else:
     # Change this to something unique (e.g. mash your keyboard), and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
 
+# How to set heroku vars: https://devcenter.heroku.com/articles/config-vars
 if os.environ.get("HEROKU"):
     import dj_database_url
     DATABASES = {}
