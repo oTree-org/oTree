@@ -36,8 +36,8 @@ settings = {
     'ADMIN_PASSWORD': ADMIN_PASSWORD,
     'AWS_ACCESS_KEY_ID': os.environ.get('AWS_ACCESS_KEY_ID'),
     'AWS_SECRET_ACCESS_KEY': os.environ.get('AWS_SECRET_ACCESS_KEY'),
-    'CURRENCY_CODE': 'USD',
-    'LANGUAGE_CODE': 'en-us',
+    'CURRENCY_CODE': 'USD', # e.g. EUR, CAD, GBP, CHF, CNY, JPY
+    'LANGUAGE_CODE': 'en-us', # e.g. en-gb, de-de, it-it, fr-fr. see: https://docs.djangoproject.com/en/1.6/topics/i18n/
     'DEBUG': DEBUG,
     'DATABASES': DATABASES,
     'INSTALLED_APPS': [
