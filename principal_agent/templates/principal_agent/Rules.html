@@ -1,9 +1,15 @@
 {% load i18n %}
 
+<link rel="stylesheet" type="text/css" href="/static/katex/katex.min.css">
+<script src="/static/katex/katex.min.js" type="text/javascript"></script>
+
 <style type="text/css">
     ul {
         list-style-type:circle;
         padding-left:20px;
+    }
+    h3.panel-sub-heading {
+        padding-bottom:10px;
     }
 </style>
 
@@ -11,9 +17,9 @@
 
     <div class="panel-body">
 
-        <h4 class="panel-sub-heading">
+        <h3 class="panel-sub-heading">
             Rules
-        </h4>
+        </h3>
 
         <p>
             Player A will propose a contract to Player B. The contract includes two figures that must be chosen as follows:
@@ -38,7 +44,6 @@
             <li>Player A will receive {{ reject_principal_pay }}</li>
             <li>Player B will receive {{ reject_agent_pay }}</li>
         </ul>
-
 
         <p>
             If accepted, Player B then chooses a <i>level of effort</i>, which can be any whole number from at least 1 to at most 10.
