@@ -25,8 +25,9 @@ class Treatment(otree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_1_correct = 2
+    training_1_correct = 3
     training_2_correct = 'Time travel (opens in pop up window)'
+    training_3_correct = 'Any of the above'
 
 
 class Match(otree.models.BaseMatch):
@@ -54,37 +55,20 @@ class Player(otree.models.BasePlayer):
         field With radiobutton input.
         """
     )
-    demo_field2 = models.TextField(
-        default=None,
-        doc="""
-        field with textarea input
-        """
-    )
-    demo_field3 = models.CharField(
+    demo_field2 = models.CharField(
         default=None,
         max_length=5,
         doc="""
         field with text input
         """
     )
-    demo_field4 = models.CharField(
-        default=None,
-        choices=['accept', 'reject'],
-        doc="""
-        field with select choices input
-        """
-    )
-    demo_field5 = models.PositiveIntegerField(
-        default=None,
-        doc="""
-        field with positive integers and only odd numbers - see form validation
-        """
-    )
 
     QUESTION_2_CHOICES = ['Embed images', 'Dynamic visualizations using HighCharts', 'Time travel (opens in pop up window)', 'Embed video', 'Embed audio']
+    QUESTION_3_CHOICES = ['Windows', 'Mac OS X', 'iOS', 'Android', 'Any of the above']
 
-    training_question_1 = models.PositiveIntegerField(null=True, verbose_name='')
+    training_question_1 = models.IntegerField(null=True, verbose_name='')
     training_question_2 = models.CharField(max_length=100, null=True, choices=QUESTION_2_CHOICES, verbose_name='')
+    training_question_3 = models.CharField(max_length=100, null=True, choices=QUESTION_3_CHOICES, verbose_name='')
 
     # check correct answers
     def is_training_question_1_correct(self):
@@ -92,6 +76,9 @@ class Player(otree.models.BasePlayer):
 
     def is_training_question_2_correct(self):
         return self.training_question_2 == self.treatment.training_2_correct
+
+    def is_training_question_3_correct(self):
+        return self.training_question_3 == self.treatment.training_3_correct
 
     def set_payoff(self):
         self.payoff = 0

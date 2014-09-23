@@ -1,3 +1,5 @@
+# This file is auto-generated.
+
 from django.contrib import admin
 import lemon_market.models as models
 import otree.adminlib as adminlib
