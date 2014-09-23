@@ -54,30 +54,11 @@ class Player(otree.models.BasePlayer):
         field With radiobutton input.
         """
     )
-    demo_field2 = models.TextField(
-        default=None,
-        doc="""
-        field with textarea input
-        """
-    )
-    demo_field3 = models.CharField(
+    demo_field2 = models.CharField(
         default=None,
         max_length=5,
         doc="""
         field with text input
-        """
-    )
-    demo_field4 = models.CharField(
-        default=None,
-        choices=['accept', 'reject'],
-        doc="""
-        field with select choices input
-        """
-    )
-    demo_field5 = models.PositiveIntegerField(
-        default=None,
-        doc="""
-        field with positive integers and only odd numbers - see form validation
         """
     )
 

@@ -2,7 +2,7 @@
 import otree.views
 import otree.views.concrete
 import demo_game.forms as forms
-from demo_game._builtin import Page, MatchWaitPage, SubsessionWaitPage
+from demo_game._builtin import Page
 from otree.common import currency
 
 
@@ -122,10 +122,7 @@ def pages():
         FeedbackOne,
         QuestionTwo,
         FeedbackTwo,
-        #EmbedDemo,
         FormsDemo,
-        #BootstrapWidgetDemo,
-        # AdminDemo # need to update this page, provide correct password and link, GIF screenshot, etc
         Results,
         Finish,
     ]
