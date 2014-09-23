@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from lab_results._builtin import Page
-import lab_results.forms # empty import so we get test coverage
 
 class RedemptionCode(Page):
 

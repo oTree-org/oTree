@@ -32,10 +32,6 @@ class Treatment(otree.models.BaseTreatment):
         doc="""The multiplication factor in group contribution"""
     )
 
-    def contribute_choices(self):
-        """Returns a list of allowed values for contribution"""
-        return money_range(0, self.endowment, 0.10)
-
 
 class Match(otree.models.BaseMatch):
 
@@ -65,6 +61,10 @@ class Player(otree.models.BasePlayer):
         default=None,
         doc="""The amount contributed by the player"""
     )
+
+    # FIXME: dropdown not working, money in a form field should be converted from money to numeric
+    #def contribution_choices(self):
+    #    return money_range(0, self.treatment.endowment, 0.10)
 
 
 def treatments():

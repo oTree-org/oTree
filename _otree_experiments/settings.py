@@ -46,12 +46,22 @@ settings = {
         'raven.contrib.django.raven_compat',
     ],
     'INSTALLED_OTREE_APPS': [
+        'public_goods',
+        'lab_results',
+        'prisoner',
+        'cournot_competition',
+    ],
+    'SECRET_KEY': SECRET_KEY,
+    'BASE_DIR': BASE_DIR,
+    'WSGI_APPLICATION': '_otree_experiments.wsgi.application',
+    'ROOT_URLCONF': '_otree_experiments.urls',
+}
+
+otree.settings.augment_settings(settings)
+
+UNUSED_APPS = [
 
         'lab_results',
-        # lying is not a common game, but it does have an example of round history,
-        # which should be moved to a different game (e.g. a classic like PD or PG)
-        #'lying',
-        'prisoner',
         'trust',
         'public_goods',
         'dictator',
@@ -63,7 +73,6 @@ settings = {
         #'quiz',
         'matrix_symmetric',
         'matrix_asymmetric',
-        'cournot_competition',
         'stackelberg_competition',
         'private_value_auction',
         'volunteer_dilemma',
@@ -79,10 +88,3 @@ settings = {
         # lab results: displays lab results in a given session
 
     ],
-    'SECRET_KEY': SECRET_KEY,
-    'BASE_DIR': BASE_DIR,
-    'WSGI_APPLICATION': '_otree_experiments.wsgi.application',
-    'ROOT_URLCONF': '_otree_experiments.urls',
-}
-
-otree.settings.augment_settings(settings)

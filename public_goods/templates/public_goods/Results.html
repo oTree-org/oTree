@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles %}
+{% load staticfiles floppyforms %}
 {% load i18n %}
 
 {% block title %}
@@ -36,5 +36,7 @@
             $('[id="{{ id }}"]').toggleClass("success");
         });
     </script>
+
+    {% include 'otree/NextButton.html' %}
 
 {% endblock %}
