@@ -17,10 +17,11 @@ class DemoForm(Form):
             'demo_field1': forms.RadioSelect(),
             'demo_field3': forms.TextInput(),
         }
-
+    '''
     def demo_field2_error_message(self, value):
         if value != 'oTree':
             return 'The software platform name is not {}. Hint: oTree'.format(value)
+    '''
 
     def labels(self):
         return {
