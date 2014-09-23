@@ -18,6 +18,10 @@ class DemoForm(Form):
             'demo_field3': forms.TextInput(),
         }
 
+    def demo_field2_error_message(self, value):
+        if value != 'oTree':
+            return 'The software platform name is not {}. Hint: oTree'.format(value)
+
     def labels(self):
         return {
             'demo_field1': '<p>Here is a radio button which is when there is only one correct answer:</p>'
@@ -42,6 +46,10 @@ class QuestionForm1(Form):
             'training_question_1',
         ]
 
+    def training_question_1_error_message(self, value):
+        if value < 0 and abs(value) % 2 == 0:
+            return 'Please enter an odd negative number, zero or any positive number.'
+
 
 class QuestionForm2(Form):
 
@@ -54,4 +62,18 @@ class QuestionForm2(Form):
         return [
             HTML(u'<h4>{}</h4>'.format(ugettext('All the following are possible in oTree except one?'),)),
             'training_question_2',
+        ]
+
+
+class QuestionForm3(Form):
+
+    class Meta:
+        model = models.Player
+        fields = ['training_question_3']
+        widgets = {'training_question_3': forms.RadioSelect()}
+
+    def order(self):
+        return [
+            HTML(u'<h4>{}</h4>'.format(ugettext('What operating system is required to use oTree?'),)),
+            'training_question_3',
         ]

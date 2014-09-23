@@ -8,7 +8,7 @@ from otree.common import currency
 
 def variables_for_all_templates(self):
     return {
-        'total_q': 2,  # total number of questions to help participants understand study
+        'total_q': 3,  # total number of questions to help participants understand study
     }
 
 
@@ -75,6 +75,35 @@ class FeedbackTwo(Page):
                 }
 
 
+class QuestionThree(Page):
+    template_name = 'demo_game/Question.html'
+
+    def participate_condition(self):
+        return True
+
+    def get_form_class(self):
+        return forms.QuestionForm3
+
+    def variables_for_template(self):
+        return {'num_q': 3}
+
+
+class FeedbackThree(Page):
+    template_name = 'demo_game/Feedback.html'
+
+    def participate_condition(self):
+        return True
+
+    def variables_for_template(self):
+        return {'num_q': 3,
+                'question': "What operating system is required to use oTree?",
+                'answer': self.player.training_question_3,
+                'correct': self.treatment.training_3_correct,
+                'explanation': "The correct answer is any of the above operating system.",
+                'is_correct': self.player.is_training_question_3_correct(),
+                }
+
+
 class FormsDemo(Page):
 
     template_name = 'demo_game/FormsDemo.html'
@@ -122,6 +151,8 @@ def pages():
         FeedbackOne,
         QuestionTwo,
         FeedbackTwo,
+        QuestionThree,
+        FeedbackThree,
         FormsDemo,
         Results,
         Finish,
