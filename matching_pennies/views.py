@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import matching_pennies.forms as forms
+import matching_pennies.models as models
 from matching_pennies._builtin import Page, MatchWaitPage
 from otree.common import Money
 
@@ -15,7 +15,9 @@ def variables_for_all_templates(self):
 class Choice(Page):
 
     template_name = 'matching_pennies/Choice.html'
-    form_class = forms.PennySideForm
+
+    form_model = models.Player
+    form_fields = ['penny_side']
 
     def variables_for_template(self):
         return {

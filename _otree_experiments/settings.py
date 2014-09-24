@@ -52,6 +52,7 @@ settings = {
         'cournot_competition',
         'trust',
         'dictator',
+        'matching_pennies',
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
@@ -62,7 +63,6 @@ settings = {
 otree.settings.augment_settings(settings)
 
 UNUSED_APPS = [
-        'matching_pennies',
         'traveler_dilemma',
         'survey',
         'bargaining',
