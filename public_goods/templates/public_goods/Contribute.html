@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms %}
+{% load staticfiles floppyforms otree %}
 {% load i18n %}
 
 {% block title %}
@@ -14,6 +14,6 @@
 
     {% formrow form.contribution with label='How much do you want to contribute to the group project?' %}
 
-    {% include 'otree/NextButton.html' %}
+    {% next_button %}
 
 {% endblock %}

@@ -62,9 +62,12 @@ class Player(otree.models.BasePlayer):
         doc="""The amount contributed by the player"""
     )
 
-    # FIXME: dropdown not working, money in a form field should be converted from money to numeric
-    #def contribution_choices(self):
-    #    return money_range(0, self.treatment.endowment, 0.10)
+    #def contribution_error_message(self, value):
+    #    if not 0 <= value <= self.treatment.endowment:
+    #        return 'Not within allowed range'
+
+    def contribution_choices(self):
+        return money_range(0, self.treatment.endowment, 0.10)
 
 
 def treatments():

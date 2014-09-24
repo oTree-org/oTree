@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms %}
+{% load staticfiles floppyforms otree %}
 {% load i18n %}
 
 {% block title %}
@@ -37,6 +37,6 @@
         });
     </script>
 
-    {% include 'otree/NextButton.html' %}
+    {% next_button %}
 
 {% endblock %}
