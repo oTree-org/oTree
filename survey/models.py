@@ -2,6 +2,7 @@
 from django_countries.fields import CountryField
 from otree.db import models
 import otree.models
+from otree import forms
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -38,9 +39,15 @@ class Player(otree.models.BasePlayer):
         """Calculate payoff, which is zero for the survey"""
         self.payoff = 0
 
+    def q_gender_choices(self):
+        return ['Male', 'Female']
+
+    def q_age_choices(self):
+        return range(13, 125)
+
     q_country = CountryField(default=None, verbose_name='What is your country of citizenship?')
     q_age = models.PositiveIntegerField(verbose_name='What is your age?', default=None)
-    q_gender = models.CharField(choices=['Male', 'Female'], default=None, verbose_name='What is your gender?')
+    q_gender = models.CharField(default=None, verbose_name='What is your gender?', widget=forms.RadioSelect())
 
     crt_bat_float = models.DecimalField(default=None, max_digits=6, decimal_places=2)
     crt_bat = models.PositiveIntegerField(default=None)

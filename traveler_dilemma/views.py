@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import traveler_dilemma.forms as forms
+import traveler_dilemma.models as models
 from traveler_dilemma._builtin import Page, MatchWaitPage
 
 
@@ -18,8 +18,8 @@ class Claim(Page):
 
     template_name = 'traveler_dilemma/Claim.html'
 
-    def get_form_class(self):
-        return forms.ClaimForm
+    form_model = models.Player
+    form_fields = ['claim']
 
 
 class ResultsWaitPage(MatchWaitPage):

@@ -3,6 +3,7 @@
 from otree.db import models
 import otree.models
 from otree.common import money_range
+from otree import forms
 
 doc = """
 Traveler's dilemma game has two players.
@@ -44,10 +45,6 @@ class Match(otree.models.BaseMatch):
 
     players_per_match = 2
 
-    def claim_choices(self):
-        """Range of allowed claim values"""
-        return money_range(self.treatment.min_amount, self.treatment.max_amount, 0.05)
-
 
 class Player(otree.models.BasePlayer):
 
@@ -64,6 +61,10 @@ class Player(otree.models.BasePlayer):
         Each player's claim
         """
     )
+
+    def claim_choices(self):
+        """Range of allowed claim values"""
+        return money_range(self.treatment.min_amount, self.treatment.max_amount, 0.05)
 
     def other_player(self):
         return self.other_players_in_match()[0]

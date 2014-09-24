@@ -16,8 +16,8 @@ class Bid(Page):
 
     template_name = 'common_value_auction/Bid.html'
 
-    model = models.Player
-    fields = ['bid_amount']
+    form_model = models.Player
+    form_fields = ['bid_amount']
 
     def variables_for_template(self):
         if self.player.item_value_estimate is None:

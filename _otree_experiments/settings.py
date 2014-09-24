@@ -51,6 +51,12 @@ settings = {
         'prisoner',
         'cournot_competition',
         'trust',
+        'dictator',
+        'matching_pennies',
+        'traveler_dilemma',
+        'survey',
+        'bargaining',
+        'guessing',
         'common_value_auction',
     ],
     'SECRET_KEY': SECRET_KEY,
@@ -62,14 +68,6 @@ settings = {
 otree.settings.augment_settings(settings)
 
 UNUSED_APPS = [
-        'lab_results',
-        'public_goods',
-        'dictator',
-        'matching_pennies',
-        'traveler_dilemma',
-        'survey',
-        'bargaining',
-        'guessing',
         #'quiz',
         'matrix_symmetric',
         'matrix_asymmetric',

@@ -82,6 +82,9 @@ class Player(otree.models.BasePlayer):
         """
     )
 
+    def guess_value_choices(self):
+        return range(0, 101)
+
 
 def treatments():
 

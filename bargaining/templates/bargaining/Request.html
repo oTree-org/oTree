@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-% load staticfiles %}
+{% load staticfiles floppyforms otree %}
 {% load i18n %}
 
 {% block title %}
@@ -9,5 +9,9 @@
 {% block content %}
 
     <p>Please request an amount. You and the other player have a total of {{ amount_shared }} to share.</p>
+
+    {% formrow form.request_amount with label='Amount requested:' %}
+
+    {% next_button %}
     
 {% endblock %}

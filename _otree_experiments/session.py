@@ -37,44 +37,6 @@ def session_types():
             subsession_apps=['trust', 'lab_results'],
             doc=""""""
         ),
-
-    ]
-
-unused_session_types = [
-    SessionType(
-            name="Quiz",
-            base_pay=0,
-            participants_per_demo_session=1,
-            participants_per_session=1,
-            subsession_apps=['quiz'],
-            doc=""""""
-        ),
-    # Temporary removal of tragedy of commons and lemons game pending further development
-    SessionType(
-            name='Lemon Market',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=1,
-            subsession_apps=['lemon_market', 'lab_results'],
-            doc=""""""
-        ),
-    SessionType(
-        name='Tragedy of the commons',
-        base_pay=10.00,
-        participants_per_session=2,
-        participants_per_demo_session=2,
-        subsession_apps=['tragedy_of_the_commons', 'lab_results'],
-        doc=""""""
-    ),
-    SessionType(
-            name="Demo Game",
-            base_pay=0,
-            participants_per_demo_session=1,
-            participants_per_session=1,
-            subsession_apps=['demo_game'],
-            doc=""""""
-        ),
-
         SessionType(
             name='Dictator',
             base_pay=10.00,
@@ -124,39 +86,6 @@ unused_session_types = [
             doc=""""""
         ),
         SessionType(
-            name='Matrix Symmetric',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['matrix_symmetric', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
-            name='Matrix Asymmetric',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['matrix_asymmetric', 'lab_results'],
-            doc=""""""
-        ),
-
-        SessionType(
-            name='Stackelberg Competition',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['stackelberg_competition', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
-            name='Private Value Auction',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['private_value_auction', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
             name='Common Value Auction',
             base_pay=10.00,
             participants_per_session=12,
@@ -164,54 +93,123 @@ unused_session_types = [
             subsession_apps=['common_value_auction', 'lab_results'],
             doc=""""""
         ),
-        SessionType(
-            name='Volunteer Dilemma',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=3,
-            subsession_apps=['volunteer_dilemma', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
-            name='Bertrand Competition',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=3,
-            subsession_apps=['bertrand_competition', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
-            name='Principal Agent',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['principal_agent', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
-            name='Coordination',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['coordination', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
-            name='Stag Hunt',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['stag_hunt', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
-            name='Battle of the sexes',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['battle_of_the_sexes', 'lab_results'],
-            doc=""""""
-        ),
+    ]
+
+unused_session_types = [
+    SessionType(
+        name="Quiz",
+        base_pay=0,
+        participants_per_demo_session=1,
+        participants_per_session=1,
+        subsession_apps=['quiz'],
+        doc=""""""
+    ),
+    # Temporary removal of tragedy of commons and lemons game pending further development
+    SessionType(
+        name='Lemon Market',
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=1,
+        subsession_apps=['lemon_market', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name='Tragedy of the commons',
+        base_pay=10.00,
+        participants_per_session=2,
+        participants_per_demo_session=2,
+        subsession_apps=['tragedy_of_the_commons', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name="Demo Game",
+        base_pay=0,
+        participants_per_demo_session=1,
+        participants_per_session=1,
+        subsession_apps=['demo_game'],
+        doc=""""""
+    ),
+    SessionType(
+        name='Matrix Symmetric',
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=2,
+        subsession_apps=['matrix_symmetric', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name='Matrix Asymmetric',
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=2,
+        subsession_apps=['matrix_asymmetric', 'lab_results'],
+        doc=""""""
+    ),
+
+    SessionType(
+        name='Stackelberg Competition',
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=2,
+        subsession_apps=['stackelberg_competition', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name='Private Value Auction',
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=2,
+        subsession_apps=['private_value_auction', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name='Volunteer Dilemma',
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=3,
+        subsession_apps=['volunteer_dilemma', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name='Bertrand Competition',
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=3,
+        subsession_apps=['bertrand_competition', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name='Principal Agent',
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=2,
+        subsession_apps=['principal_agent', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name='Coordination',
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=2,
+        subsession_apps=['coordination', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name='Stag Hunt',
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=2,
+        subsession_apps=['stag_hunt', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name='Battle of the sexes',
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=2,
+        subsession_apps=['battle_of_the_sexes', 'lab_results'],
+        doc=""""""
+    ),
 ]
 
 
