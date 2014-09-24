@@ -44,7 +44,7 @@ class Results(Page):
             self.player.set_payoff()
 
         return {'is_winner': self.player.is_winner,
-                'is_greedy': True if self.treatment.item_value - self.player.bid_amount < 0 else False,
+                'is_greedy': self.treatment.item_value - self.player.bid_amount < 0,
                 'bid_amount': self.player.bid_amount,
                 'winning_bid': self.subsession.highest_bid(),
                 'item_value': self.treatment.item_value,
