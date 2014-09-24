@@ -37,7 +37,14 @@ def session_types():
             subsession_apps=['trust', 'lab_results'],
             doc=""""""
         ),
-
+        SessionType(
+            name='Dictator',
+            base_pay=10.00,
+            participants_per_session=2,
+            participants_per_demo_session=2,
+            subsession_apps=['dictator', 'lab_results'],
+            doc=""""""
+        ),
     ]
 
 unused_session_types = [
@@ -75,14 +82,7 @@ unused_session_types = [
             doc=""""""
         ),
 
-        SessionType(
-            name='Dictator',
-            base_pay=10.00,
-            participants_per_session=2,
-            participants_per_demo_session=2,
-            subsession_apps=['dictator', 'lab_results'],
-            doc=""""""
-        ),
+
         SessionType(
             name='Matching Pennies',
             base_pay=10.00,

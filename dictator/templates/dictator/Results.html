@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-% load staticfiles %}
+{% load staticfiles floppyforms otree %}
 {% load i18n %}
 
 {% block title %}
@@ -15,5 +15,7 @@
             The dictator offered you {{ offer_amount }}. Your payoff is therefore {{ payoff }}.
         {% endif %}
     </p>
+
+    {% next_button %}
 
 {% endblock %}

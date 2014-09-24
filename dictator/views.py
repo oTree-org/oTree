@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import dictator.forms as forms
+import dictator.models as models
 from dictator._builtin import Page, MatchWaitPage
 
 
@@ -16,8 +16,8 @@ class Offer(Page):
 
     template_name = 'dictator/Offer.html'
 
-    def get_form_class(self):
-        return forms.OfferForm
+    form_model = models.Match
+    form_fields = ['offer_amount']
 
     def participate_condition(self):
         return self.player.index_among_players_in_match == 1
