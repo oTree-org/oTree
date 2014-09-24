@@ -95,6 +95,10 @@ class Player(otree.models.BasePlayer):
         doc="""Amount bidded by the player"""
     )
 
+    def bid_amount_error_message(self, value):
+        if not self.treatment.min_allowable_bid <= value <= self.treatment.max_allowable_bid:
+            return 'The amount bidded must be between {} and {}, inclusive.'.format(self.treatment.min_allowable_bid, self.treatment.max_allowable_bid)
+
     is_winner = models.BooleanField(
         default=False,
         doc="""Indicates whether the player is the winner"""
@@ -107,6 +111,7 @@ class Player(otree.models.BasePlayer):
                 self.payoff = 0
         else:
             self.payoff = 0
+
 
 
 def treatments():

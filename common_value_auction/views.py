@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import common_value_auction.forms as forms
+import common_value_auction.models as models
 from common_value_auction._builtin import Page, SubsessionWaitPage
 from otree.common import Money
 
@@ -16,8 +16,8 @@ class Bid(Page):
 
     template_name = 'common_value_auction/Bid.html'
 
-    def get_form_class(self):
-        return forms.BidForm
+    model = models.Player
+    fields = ['bid_amount']
 
     def variables_for_template(self):
         if self.player.item_value_estimate is None:

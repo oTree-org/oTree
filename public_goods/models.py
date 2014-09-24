@@ -2,7 +2,7 @@
 from otree.db import models
 import otree.models
 from otree.common import Money, money_range
-
+from otree import forms
 
 doc = """
 Public goods game. Single treatment. Four players can contribute to a joint project.
@@ -68,6 +68,7 @@ class Player(otree.models.BasePlayer):
 
     def contribution_choices(self):
         return money_range(0, self.treatment.endowment, 0.10)
+
 
 
 def treatments():

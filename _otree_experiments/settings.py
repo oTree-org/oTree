@@ -51,6 +51,7 @@ settings = {
         'prisoner',
         'cournot_competition',
         'trust',
+        'common_value_auction',
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
@@ -82,7 +83,7 @@ UNUSED_APPS = [
         'battle_of_the_sexes',
         'lemon_market',
         'demo_game',
-        'common_value_auction',
+
         'tragedy_of_the_commons',
         # lab results: displays lab results in a given session
 
