@@ -54,6 +54,7 @@ settings = {
         'dictator',
         'matching_pennies',
         'traveler_dilemma',
+        'survey',
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
@@ -64,7 +65,7 @@ settings = {
 otree.settings.augment_settings(settings)
 
 UNUSED_APPS = [
-        'survey',
+
         'bargaining',
         'guessing',
         #'quiz',

@@ -1,18 +1,27 @@
 # -*- coding: utf-8 -*-
-import survey.forms as forms
+import survey.models as models
 from survey._builtin import Page
+from otree.common import Money
 
 
 class Demographics(Page):
 
-    form_class = forms.DemographicsForm
-    template_name = 'survey/Survey.html'
+    template_name = 'survey/Survey_Demo.html'
+
+    form_model = models.Player
+    form_fields = ['q_country',
+                  'q_age',
+                  'q_gender']
 
 
 class CognitiveReflectionTest(Page):
 
-    form_class = forms.CognitiveReflectionTestForm
-    template_name = 'survey/Survey.html'
+    template_name = 'survey/Survey_Cog.html'
+
+    form_model = models.Player
+    form_fields = ['crt_bat_float',
+                  'crt_widget',
+                  'crt_lake']
 
     def after_valid_form_submission(self):
         self.player.crt_bat = self.player.crt_bat_float * 100
