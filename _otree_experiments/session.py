@@ -53,6 +53,14 @@ def session_types():
             subsession_apps=['matching_pennies']*3 + ['lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Traveler Dilemma',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=2,
+            subsession_apps=['traveler_dilemma', 'lab_results'],
+            doc=""""""
+        ),
     ]
 
 unused_session_types = [
@@ -90,16 +98,6 @@ unused_session_types = [
             doc=""""""
         ),
 
-
-
-        SessionType(
-            name='Traveler Dilemma',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['traveler_dilemma', 'lab_results'],
-            doc=""""""
-        ),
         SessionType(
             name='Survey',
             base_pay=10.00,
