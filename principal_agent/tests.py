@@ -2,6 +2,7 @@
 from otree.common import Money, money_range
 import principal_agent.views as views
 from principal_agent._builtin import Bot
+import random
 
 
 class PlayerBot(Bot):
@@ -20,11 +21,20 @@ class PlayerBot(Bot):
         self.submit(views.Results)
 
     def play_1(self):
-        # P1 - offer
+        # P1/A - propose contract
+
+        fixed_pay = random.choice(money_range(-self.treatment.max_fixed_payment, self.treatment.max_fixed_payment, 0.50))
+        return_share = random.choice([x/100.0 for x in range(10, 110, 10)])
+
         self.submit(views.Offer,
-                    {'agent_fixed_pay': 5.50,
-                    'agent_return_share': 40})
+                    {'agent_fixed_pay': fixed_pay,
+                     'agent_return_share': return_share})
 
     def play_2(self):
-        # P2 - accept/reject
-        self.submit(views.Accept, {'decision': 'Reject'})
+        # P2/B - accept or reject contract
+
+        self.submit(views.Accept, {'contract_accepted': random.choice([True, False])})
+
+        # effort level only if contract is accepted
+        if self.match.contract_accepted:
+            self.submit(views.WorkEffort, {'agent_work_effort': random.choice(range(1, 11))})
