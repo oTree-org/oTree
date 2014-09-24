@@ -54,11 +54,11 @@ class Match(otree.models.BaseMatch):
         doc="""Amount sent back by P2""",
     )
 
-    def send_amount_choices(self):
+    def sent_amount_choices(self):
         """Range of allowed values during send"""
         return money_range(0, self.treatment.amount_allocated, self.treatment.increment_amount)
 
-    def send_back_amount_choices(self):
+    def sent_back_amount_choices(self):
         """Range of allowed values during send back"""
         return money_range(0, self.sent_amount * 3, self.treatment.increment_amount)
 
