@@ -41,10 +41,6 @@ class Match(otree.models.BaseMatch):
 
     players_per_match = 2
 
-    def request_choices(self):
-        """Range of allowed request amount"""
-        return money_range(0, self.treatment.amount_shared, 0.05)
-
     def set_payoffs(self):
         total_requested_amount = sum([p.request_amount for p in self.players])
         if total_requested_amount < self.treatment.amount_shared:
@@ -69,6 +65,10 @@ class Player(otree.models.BasePlayer):
         Amount requested by this player.
         """
     )
+
+    def request_amount_choices(self):
+        """Range of allowed request amount"""
+        return money_range(0, self.treatment.amount_shared, 0.05)
 
     def other_player(self):
         """Returns the opponent of the current player"""

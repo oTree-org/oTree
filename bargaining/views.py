@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-import bargaining.forms as forms
+import bargaining.models as models
 from bargaining._builtin import Page, MatchWaitPage, SubsessionWaitPage
 from otree.common import Money, money_range
+
 
 class Introduction(Page):
 
@@ -17,8 +18,8 @@ class Request(Page):
 
     template_name = 'bargaining/Request.html'
 
-    def get_form_class(self):
-        return forms.RequestForm
+    form_model = models.Player
+    form_fields = ['request_amount']
 
     def variables_for_template(self):
         return {
@@ -30,6 +31,7 @@ class ResultsWaitPage(MatchWaitPage):
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()
+
 
 class Results(Page):
 
