@@ -77,6 +77,14 @@ def session_types():
             subsession_apps=['bargaining', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Guessing',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=5,
+            subsession_apps=['guessing', 'lab_results'],
+            doc=""""""
+        ),
     ]
 
 unused_session_types = [
@@ -111,15 +119,6 @@ unused_session_types = [
         participants_per_demo_session=1,
         participants_per_session=1,
         subsession_apps=['demo_game'],
-        doc=""""""
-    ),
-
-    SessionType(
-        name='Guessing',
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=5,
-        subsession_apps=['guessing', 'lab_results'],
         doc=""""""
     ),
     SessionType(

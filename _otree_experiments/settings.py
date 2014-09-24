@@ -56,6 +56,7 @@ settings = {
         'traveler_dilemma',
         'survey',
         'bargaining',
+        'guessing',
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
@@ -66,9 +67,6 @@ settings = {
 otree.settings.augment_settings(settings)
 
 UNUSED_APPS = [
-
-
-        'guessing',
         #'quiz',
         'matrix_symmetric',
         'matrix_asymmetric',
