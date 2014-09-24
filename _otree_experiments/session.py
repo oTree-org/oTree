@@ -6,15 +6,6 @@ def session_types():
 
     return [
         SessionType(
-            name="Demo Game",
-            base_pay=0,
-            participants_per_demo_session=1,
-            participants_per_session=1,
-            subsession_apps=['demo_game'],
-            doc=""""""
-        ),
-
-        SessionType(
             name='Public Goods',
             base_pay=10.00,
             participants_per_session=12,
@@ -22,7 +13,6 @@ def session_types():
             subsession_apps=['public_goods', 'lab_results'],
             doc=""""""
         ),
-
         SessionType(
             name="Prisoner Dilemma",
             base_pay=4.00,
@@ -31,7 +21,14 @@ def session_types():
             subsession_apps=['prisoner', 'lab_results'],
             doc=""""""
         ),
-
+        SessionType(
+            name='Cournot Competition',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=3,
+            subsession_apps=['cournot_competition', 'lab_results'],
+            doc=""""""
+        ),
         SessionType(
             name='Trust',
             base_pay=10.00,
@@ -40,6 +37,44 @@ def session_types():
             subsession_apps=['trust', 'lab_results'],
             doc=""""""
         ),
+
+    ]
+
+unused_session_types = [
+    SessionType(
+            name="Quiz",
+            base_pay=0,
+            participants_per_demo_session=1,
+            participants_per_session=1,
+            subsession_apps=['quiz'],
+            doc=""""""
+        ),
+    # Temporary removal of tragedy of commons and lemons game pending further development
+    SessionType(
+            name='Lemon Market',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=1,
+            subsession_apps=['lemon_market', 'lab_results'],
+            doc=""""""
+        ),
+    SessionType(
+        name='Tragedy of the commons',
+        base_pay=10.00,
+        participants_per_session=2,
+        participants_per_demo_session=2,
+        subsession_apps=['tragedy_of_the_commons', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+            name="Demo Game",
+            base_pay=0,
+            participants_per_demo_session=1,
+            participants_per_session=1,
+            subsession_apps=['demo_game'],
+            doc=""""""
+        ),
+
         SessionType(
             name='Dictator',
             base_pay=10.00,
@@ -104,14 +139,7 @@ def session_types():
             subsession_apps=['matrix_asymmetric', 'lab_results'],
             doc=""""""
         ),
-        SessionType(
-            name='Cournot Competition',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=3,
-            subsession_apps=['cournot_competition', 'lab_results'],
-            doc=""""""
-        ),
+
         SessionType(
             name='Stackelberg Competition',
             base_pay=10.00,
@@ -184,35 +212,6 @@ def session_types():
             subsession_apps=['battle_of_the_sexes', 'lab_results'],
             doc=""""""
         ),
-
-    ]
-
-unused_session_types = [
-    SessionType(
-            name="Quiz",
-            base_pay=0,
-            participants_per_demo_session=1,
-            participants_per_session=1,
-            subsession_apps=['quiz'],
-            doc=""""""
-        ),
-    # Temporary removal of tragedy of commons and lemons game pending further development
-    SessionType(
-            name='Lemon Market',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=1,
-            subsession_apps=['lemon_market', 'lab_results'],
-            doc=""""""
-        ),
-    SessionType(
-        name='Tragedy of the commons',
-        base_pay=10.00,
-        participants_per_session=2,
-        participants_per_demo_session=2,
-        subsession_apps=['tragedy_of_the_commons', 'lab_results'],
-        doc=""""""
-    ),
 ]
 
 

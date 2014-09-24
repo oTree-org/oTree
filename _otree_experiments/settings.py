@@ -50,6 +50,7 @@ settings = {
         'lab_results',
         'prisoner',
         'cournot_competition',
+        'trust',
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
@@ -60,9 +61,7 @@ settings = {
 otree.settings.augment_settings(settings)
 
 UNUSED_APPS = [
-
         'lab_results',
-        'trust',
         'public_goods',
         'dictator',
         'matching_pennies',

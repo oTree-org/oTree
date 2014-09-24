@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import trust.forms as forms
+import trust.models as models
 from trust._builtin import Page, MatchWaitPage
 
 
@@ -19,8 +19,8 @@ class Send(Page):
 
     template_name = 'trust/Send.html'
 
-    def get_form_class(self):
-        return forms.SendForm
+    form_model = models.Match
+    form_fields = ['sent_amount']
 
     def participate_condition(self):
         return self.player.index_among_players_in_match == 1
@@ -42,8 +42,8 @@ class SendBack(Page):
 
     template_name = 'trust/SendBack.html'
 
-    def get_form_class(self):
-        return forms.SendBackForm
+    form_model = models.Match
+    form_fields = ['sent_back_amount']
 
     def participate_condition(self):
         return self.player.index_among_players_in_match == 2

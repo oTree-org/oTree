@@ -2,6 +2,7 @@
 from otree.db import models
 import otree.models
 from otree.common import money_range
+from otree import forms
 
 
 doc = """
@@ -46,7 +47,6 @@ class Match(otree.models.BaseMatch):
     sent_amount = models.MoneyField(
         default=None,
         doc="""Amount sent by P1""",
-        choices=money_range(0, 1, 0.05),
     )
 
     sent_back_amount = models.MoneyField(
@@ -54,11 +54,11 @@ class Match(otree.models.BaseMatch):
         doc="""Amount sent back by P2""",
     )
 
-    def send_choices(self):
+    def send_amount_choices(self):
         """Range of allowed values during send"""
         return money_range(0, self.treatment.amount_allocated, self.treatment.increment_amount)
 
-    def send_back_choices(self):
+    def send_back_amount_choices(self):
         """Range of allowed values during send back"""
         return money_range(0, self.sent_amount * 3, self.treatment.increment_amount)
 
@@ -69,6 +69,7 @@ class Match(otree.models.BaseMatch):
         p1.payoff = self.treatment.amount_allocated - self.sent_amount + self.sent_back_amount
         p2.payoff = self.treatment.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
 
+
 class Player(otree.models.BasePlayer):
 
     # <built-in>
@@ -76,6 +77,7 @@ class Player(otree.models.BasePlayer):
     treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
+
 
 def treatments():
 
