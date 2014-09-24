@@ -20,14 +20,16 @@
         again after you click next, but if you enter a valid, but wrong answer, say 1 it will accept it but give
         you feedback.
     </p>
-    {% else %}
+    {% elif num_q == 2 %}
     <p>
         oTree can easily embed images, audio and video. <br>
         These can also be randomized by treatment or match or whatever. But sometimes one wants to create graphics
         on the fly. In oTree external plugins can be used for such specific purposes. For example below is a dynamic
         visualization using HighCharts.
     </p>
-    <div><img src="{{ STATIC_URL }}demo_game/highcharts.png" height="400" width="400"/></div>
+        {% include 'demo_game/HighChartsDemo.html' %}
+    {% else %}
+
     {% endif %}
 
 

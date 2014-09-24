@@ -184,22 +184,7 @@ def session_types():
             subsession_apps=['battle_of_the_sexes', 'lab_results'],
             doc=""""""
         ),
-        SessionType(
-            name='Lemon Market',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=1,
-            subsession_apps=['lemon_market', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
-            name='Tragedy of the commons',
-            base_pay=10.00,
-            participants_per_session=2,
-            participants_per_demo_session=2,
-            subsession_apps=['tragedy_of_the_commons', 'lab_results'],
-            doc=""""""
-        ),
+
     ]
 
 unused_session_types = [
@@ -211,7 +196,25 @@ unused_session_types = [
             subsession_apps=['quiz'],
             doc=""""""
         ),
+    # Temporary removal of tragedy of commons and lemons game pending further development
+    SessionType(
+            name='Lemon Market',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=1,
+            subsession_apps=['lemon_market', 'lab_results'],
+            doc=""""""
+        ),
+    SessionType(
+        name='Tragedy of the commons',
+        base_pay=10.00,
+        participants_per_session=2,
+        participants_per_demo_session=2,
+        subsession_apps=['tragedy_of_the_commons', 'lab_results'],
+        doc=""""""
+    ),
 ]
+
 
 def show_on_demo_page(session_type_name):
     # set the below env var on servers that participants will see,

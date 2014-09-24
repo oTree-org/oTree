@@ -36,6 +36,15 @@ class Offer(Page):
         return forms.ContractForm
 
 
+class OfferWaitPage(MatchWaitPage):
+
+    def body_text(self):
+        if self.player.role() == 'agent':
+            return "Waiting for Player A to propose a contract."
+        else:
+            return "Waiting for Player B."
+
+
 class Accept(Page):
 
     template_name = 'principal_agent/Accept.html'
@@ -64,6 +73,10 @@ class WorkEffort(Page):
 
 class ResultsWaitPage(MatchWaitPage):
 
+    def body_text(self):
+        if self.player.role() == 'principal':
+            return "Waiting for Player B to respond."
+
     def after_all_players_arrive(self):
         self.match.set_payoffs()
 
@@ -73,15 +86,19 @@ class Results(Page):
     template_name = 'principal_agent/Results.html'
 
     def variables_for_template(self):
-        return {'payoff': self.player.payoff,
-                'accepted': self.match.contract_accepted,
-                'agent': self.player.role() == 'agent'}
+        return {'accepted': self.match.contract_accepted,
+                'agent': self.player.role() == 'agent',
+                'fixed_pay': self.match.agent_fixed_pay,
+                'return_share': int(self.match.agent_return_share * 100),
+                'effort_level': self.match.agent_work_effort,
+                'payoff': self.player.payoff}
 
 
 def pages():
+
     return [Introduction,
             Offer,
-            MatchWaitPage,
+            OfferWaitPage,
             Accept,
             WorkEffort,
             ResultsWaitPage,

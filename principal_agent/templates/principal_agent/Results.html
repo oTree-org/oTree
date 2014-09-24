@@ -8,20 +8,47 @@
 
 {% block content %}
 
-    {% if accepted %}
-        {% if agent %}
-            <p>You Accepted the Contract.</p>
+    <p>
+        {% if accepted %}
+            {% if agent %}
+                You accepted the contract.
+            {% else %}
+                Player B accepted your contract.
+            {% endif %}
         {% else %}
-            <p>The Contract was Accepted. </p>
+            {% if agent %}
+                You rejected the contract.
+            {% else %}
+                Player B rejected your contract.
+            {% endif %}
         {% endif %}
-    {% else %}
-        {% if agent %}
-            <p>You rejected the Contract.</p>
-        {% else %}
-            <p>The Contract was rejected. </p>
-        {% endif %}
-    {% endif %}
+        The details are given in the table below.
+    </p>
 
-    <p>Your payoff is {{ payoff }}.</p>
+    <table class="table table-condensed" style="width:350px; margin-top:20px; margin-bottom:10px">
+        <tr>
+            <th>Fixed payment</th>
+            <th>Return share</th>
+            {% if accepted %}
+                <th>{% if agent %}Your{% else %}B's{% endif %} effort level</th>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>{{ fixed_pay }}</td>
+            <td>{{ return_share }}%</td>
+            {% if accepted %}
+                <td>{{ effort_level }}</td>
+            {% endif %}
+        </tr>
+    </table>
+
+    <p>
+        Your payoff is therefore {{ payoff }}.
+    </p>
+
+{% endblock %}
+{% block content_below_submit_button %}
+
+    {% include 'principal_agent/Rules.html' %}
 
 {% endblock %}

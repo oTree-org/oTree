@@ -9,18 +9,20 @@ class PlayerBot(Bot):
 
         self.submit(views.Introduction)
 
-        self.submit(views.FormsDemo, {
+        self.submit(views.QuestionOne, {
             'demo_field1': 'yes',
-            'demo_field2': 'demo text',
-            'demo_field3': 'sample text',
-            'demo_field4': 'accept',
-            'demo_field5': 3,
         })
 
-        self.submit(views.EmbedDemo)
+        self.submit(views.FeedbackOne)
 
-        self.submit(views.BootstrapWidgetDemo)
+        self.submit(views.QuestionTwo, {
+            'demo_field2': 'Embed images',
+        })
 
-        #self.submit(views.AdminDemo)
+        self.submit(views.FeedbackTwo)
+
+        self.submit(views.FormsDemo)
 
         self.submit(views.Results)
+
+        self.submit(views.Finish)
