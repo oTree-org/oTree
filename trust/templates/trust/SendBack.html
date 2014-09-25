@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles %}
+{% load staticfiles floppyforms otree %}
 {% load i18n %}
 
 {% block title %}
@@ -16,5 +16,8 @@
     <p>
         Please select how much of the now-tripled amount you wish to give back to the other player.
     </p>
+
+    {% formrow form.sent_back_amount with label='How much would you like to give?' %}
+    {% next_button %}
 
 {% endblock %}

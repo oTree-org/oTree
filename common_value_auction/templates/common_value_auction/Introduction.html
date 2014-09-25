@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles %}
+{% load staticfiles floppyforms otree %}
 {% load i18n %}
 
 {% block title %}
@@ -34,5 +34,7 @@
         If the winner's bid amount is higher than the actual value of the item, the payoff will be zero.
         In the event of a tie between two or more players, the winner will be chosen at random. Other players will receive nothing.
     </p>
+
+    {% next_button %}
 
 {% endblock %}

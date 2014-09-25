@@ -1,6 +1,6 @@
 {% extends "global/Base.html" %}
 {% load i18n %}
-{% load staticfiles %}
+{% load staticfiles floppyforms otree %}
 
 {% block title %}
     Survey
@@ -11,6 +11,12 @@
     <p>
         Please answer the following questions.
     </p>
+
+    {% formrow form.q_country %}
+    {% formrow form.q_age %}
+    {% formrow form.q_gender %}
+
+    {% next_button %}
 
 {% endblock %}
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import public_goods.forms as forms
+import public_goods.models as models
 from public_goods._builtin import Page, MatchWaitPage
 
 
@@ -22,10 +22,10 @@ class Contribute(Page):
 
     """Player: Choose how much to contribute"""
 
-    template_name = 'public_goods/Contribute.html'
+    form_model = models.Player
+    form_fields = ['contribution']
 
-    def get_form_class(self):
-        return forms.ContributeForm
+    template_name = 'public_goods/Contribute.html'
 
 
 class ResultsWaitPage(MatchWaitPage):

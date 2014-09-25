@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles %}
+{% load staticfiles floppyforms otree %}
 {% load i18n %}
 
 {% block title %}
@@ -11,5 +11,9 @@
     <p>
         Please choose how much to contribute.
     </p>
+
+    {% formrow form.contribution with label='How much do you want to contribute to the group project?' %}
+
+    {% next_button %}
 
 {% endblock %}

@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles %}
+{% load staticfiles floppyforms otree %}
 {% load i18n %}
 
 {% block title %}
@@ -29,5 +29,7 @@
     <p>
         Please click "Next" to proceed.
     </p>
+
+    {% next_button %}
 
 {% endblock %}

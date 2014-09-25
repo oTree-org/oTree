@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from otree.db import models
 import otree.models
-
+from otree import forms
 
 doc = """
 Prisoner's dilemma game. Single treatment. Two players are asked separately whether they want to cooperate or defect.
@@ -60,10 +60,13 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     decision = models.CharField(
-        default=None, verbose_name='What is your decision?',
-        choices=['Cooperate', 'Defect'],
-        doc="""This player's decision"""
+        default=None,
+        doc="""This player's decision""",
+        widget=forms.RadioSelect()
     )
+
+    def decision_choices(self):
+        return ['Cooperate', 'Defect']
 
     def other_player(self):
         """Returns other player in match"""

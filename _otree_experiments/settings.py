@@ -36,8 +36,8 @@ settings = {
     'ADMIN_PASSWORD': ADMIN_PASSWORD,
     'AWS_ACCESS_KEY_ID': os.environ.get('AWS_ACCESS_KEY_ID'),
     'AWS_SECRET_ACCESS_KEY': os.environ.get('AWS_SECRET_ACCESS_KEY'),
-    'CURRENCY_CODE': 'USD',
-    'LANGUAGE_CODE': 'en-us',
+    'CURRENCY_CODE': 'USD', # e.g. EUR, CAD, GBP, CHF, CNY, JPY
+    'LANGUAGE_CODE': 'en-us', # e.g. en-gb, de-de, it-it, fr-fr. see: https://docs.djangoproject.com/en/1.6/topics/i18n/
     'DEBUG': DEBUG,
     'DATABASES': DATABASES,
     'INSTALLED_APPS': [
@@ -46,24 +46,31 @@ settings = {
         'raven.contrib.django.raven_compat',
     ],
     'INSTALLED_OTREE_APPS': [
-
-        'lab_results',
-        # lying is not a common game, but it does have an example of round history,
-        # which should be moved to a different game (e.g. a classic like PD or PG)
-        #'lying',
-        'prisoner',
-        'trust',
         'public_goods',
+        'lab_results',
+        'prisoner',
+        'cournot_competition',
+        'trust',
         'dictator',
         'matching_pennies',
         'traveler_dilemma',
         'survey',
         'bargaining',
         'guessing',
+        'common_value_auction',
+    ],
+    'SECRET_KEY': SECRET_KEY,
+    'BASE_DIR': BASE_DIR,
+    'WSGI_APPLICATION': '_otree_experiments.wsgi.application',
+    'ROOT_URLCONF': '_otree_experiments.urls',
+}
+
+otree.settings.augment_settings(settings)
+
+UNUSED_APPS = [
         #'quiz',
         'matrix_symmetric',
         'matrix_asymmetric',
-        'cournot_competition',
         'stackelberg_competition',
         'private_value_auction',
         'volunteer_dilemma',
@@ -74,15 +81,8 @@ settings = {
         'battle_of_the_sexes',
         'lemon_market',
         'demo_game',
-        'common_value_auction',
+
         'tragedy_of_the_commons',
         # lab results: displays lab results in a given session
 
     ],
-    'SECRET_KEY': SECRET_KEY,
-    'BASE_DIR': BASE_DIR,
-    'WSGI_APPLICATION': '_otree_experiments.wsgi.application',
-    'ROOT_URLCONF': '_otree_experiments.urls',
-}
-
-otree.settings.augment_settings(settings)

@@ -2,6 +2,7 @@
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 from otree.db import models
 import otree.models
+from otree import forms
 
 doc = """
 Matching pennies. Single treatment. Two players are given a penny each, and will at the same time choose either heads or tails.
@@ -63,7 +64,8 @@ class Player(otree.models.BasePlayer):
 
     penny_side = models.CharField(
         choices=['Heads', 'Tails'],
-        doc="""Heads or tails"""
+        doc="""Heads or tails""",
+        widget=forms.RadioSelect()
     )
 
     is_winner = models.NullBooleanField(

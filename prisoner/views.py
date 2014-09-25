@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import prisoner.forms as forms
+import prisoner.models as models
 from prisoner._builtin import Page, MatchWaitPage
 
 
@@ -10,15 +10,15 @@ class Decision(Page):
 
     template_name = 'prisoner/Decision.html'
 
+    form_model = models.Player
+    form_fields = ['decision']
+
     def variables_for_template(self):
 
         return {'friend_amount': self.treatment.friend_amount,
                 'betrayed_amount': self.treatment.betrayed_amount,
                 'enemy_amount': self.treatment.enemy_amount,
                 'betray_amount': self.treatment.betray_amount}
-
-    def get_form_class(self):
-        return forms.DecisionForm
 
 
 class ResultsWaitPage(MatchWaitPage):

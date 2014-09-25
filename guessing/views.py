@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import guessing.forms as forms
+import guessing.models as models
 from guessing._builtin import Page, SubsessionWaitPage
 
 
@@ -16,8 +16,8 @@ class Guess(Page):
 
     template_name = 'guessing/Guess.html'
 
-    def get_form_class(self):
-        return forms.GuessForm
+    form_model = models.Player
+    form_fields = ['guess_value']
 
 
 class Results(Page):

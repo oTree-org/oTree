@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles %}
+{% load staticfiles floppyforms otree %}
 {% load i18n %}
 
 {% block title %}
@@ -49,5 +49,10 @@
         </tr>
         </tbody>
     </table>
+
+    {% formrow form.decision with label='What is your decision?' %}
+
+    {% next_button %}
+
 
 {% endblock %}

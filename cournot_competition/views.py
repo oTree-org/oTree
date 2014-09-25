@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import cournot_competition.forms as forms
+import cournot_competition.models as models
 from cournot_competition._builtin import Page, MatchWaitPage
 
 
@@ -13,8 +13,8 @@ class Decide(Page):
                 'num_other_players': self.match.players_per_match - 1,
                 'currency_per_point': self.treatment.currency_per_point}
 
-    def get_form_class(self):
-        return forms.UnitsForm
+    form_model = models.Player
+    form_fields = ['units']
 
 
 class ResultsWaitPage(MatchWaitPage):

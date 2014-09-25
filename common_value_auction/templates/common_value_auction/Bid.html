@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles %}
+{% load staticfiles floppyforms otree %}
 {% load i18n %}
 
 {% block title %}
@@ -16,5 +16,10 @@
     <p>
         Please make your bid now. The amount can be between {{ min_bid }} and {{ max_bid }}, inclusive.
     </p>
+
+    {% formrow form.bid_amount with label='Bid amount' %}
+
+    {% next_button %}
+
 
 {% endblock %}

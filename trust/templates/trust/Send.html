@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles %}
+{% load staticfiles floppyforms otree %}
 {% load i18n %}
 
 {% block title %}
@@ -16,5 +16,8 @@
         The selected amount will be automatically tripled by the experimenter;
         this is the amount that will reach the other player, who will then be given the opportunity to give part of it back to you.
     </p>
+
+    {% formrow form.sent_amount with label='How much would you like to give?' %}
+    {% next_button %}
 
 {% endblock %}

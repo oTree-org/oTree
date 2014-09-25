@@ -2,6 +2,7 @@
 from otree.db import models
 import otree.models
 from otree.common import money_range
+from otree import forms
 
 doc = """
 Dictator game. Single Treatment. Two players, one of whom is the dictator.
@@ -43,9 +44,8 @@ class Match(otree.models.BaseMatch):
         doc="""Amount offered by the dictator"""
     )
 
-    def offer_choices(self):
-        """Range of allowed offers"""
-        return
+    def offer_amount_choices(self):
+        return money_range(0, self.treatment.allocated_amount, 0.05)
 
     def set_payoffs(self):
         p1 = self.get_player_by_index(1)
