@@ -8,7 +8,10 @@ http://demo.otree.org/
 
     git clone git@github.com:oTree-org/oTree.git
     cd oTree
-    pip install -r requirements.txt # on Windows: gc .\requirements.txt | foreach {pip install $_}
+    # if you are using Mac ("pip install -r" sometimes fails to install psycopg2, which is unnecessary locally)
+    cat requirements.txt | while read PACKAGE; do pip install "$PACKAGE"; done
+    # if you are using Windows
+    gc .\requirements.txt | foreach {pip install $_}
     python recreate_environment.py
     python manage.py runserver
 
