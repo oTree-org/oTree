@@ -8,7 +8,7 @@ http://demo.otree.org/
 
     git clone git@github.com:oTree-org/oTree.git
     cd oTree
-    pip install -r requirements.txt # on Windows: gc .\requirements.txt | foreach {pip install $_}
+    pip install -r _requirements/base.txt
     python recreate_environment.py
     python manage.py runserver
 
