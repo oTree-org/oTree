@@ -67,7 +67,7 @@ settings = {
 
 otree.settings.augment_settings(settings)
 
-# FIXME: convert the below apps to use the new API
+# FIXME: convert the below apps to use the new API (remove forms.py)
 DISABLED_APPS = [
         'matrix_symmetric',
         'matrix_asymmetric',

@@ -95,7 +95,7 @@ def session_types():
         ),
     ]
 
-# FIXME: convert the below apps to use the new API
+# FIXME: convert the below apps to use the new API (remove forms.py)
 disabled_session_types = [
     SessionType(
         name="Quiz",
