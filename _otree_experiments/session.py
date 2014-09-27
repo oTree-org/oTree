@@ -95,7 +95,8 @@ def session_types():
         ),
     ]
 
-unused_session_types = [
+# FIXME: convert the below apps to use the new API
+disabled_session_types = [
     SessionType(
         name="Quiz",
         base_pay=0,

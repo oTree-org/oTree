@@ -67,8 +67,8 @@ settings = {
 
 otree.settings.augment_settings(settings)
 
-UNUSED_APPS = [
-        #'quiz',
+# FIXME: convert the below apps to use the new API
+DISABLED_APPS = [
         'matrix_symmetric',
         'matrix_asymmetric',
         'stackelberg_competition',
