@@ -16,4 +16,4 @@ http://demo.otree.org/
 https://github.com/oTree-org/oTree/wiki
 
 ## Contact email
-info@otree.org
+chris@otree.org
