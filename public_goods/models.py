@@ -2,7 +2,7 @@
 from otree.db import models
 import otree.models
 from otree.common import Money, money_range
-from otree import forms
+from otree import widgets
 
 doc = """
 Public goods game. Single treatment. Four players can contribute to a joint project.
@@ -59,7 +59,8 @@ class Player(otree.models.BasePlayer):
 
     contribution = models.MoneyField(
         default=None,
-        doc="""The amount contributed by the player"""
+        doc="""The amount contributed by the player""",
+        widget=widgets.RangeInput(),
     )
 
     #def contribution_error_message(self, value):
