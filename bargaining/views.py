@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import bargaining.models as models
-from bargaining._builtin import Page, MatchWaitPage, SubsessionWaitPage
+from bargaining._builtin import Page, WaitPage
 from otree.common import Money, money_range
 
 
@@ -27,7 +27,11 @@ class Request(Page):
         }
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()

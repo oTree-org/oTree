@@ -46,11 +46,11 @@ settings = {
         'raven.contrib.django.raven_compat',
     ],
     'INSTALLED_OTREE_APPS': [
-        'public_goods',
+        'trust',
         'lab_results',
+        'public_goods',
         'prisoner',
         'cournot_competition',
-        'trust',
         'dictator',
         'matching_pennies',
         'traveler_dilemma',
@@ -58,6 +58,7 @@ settings = {
         'bargaining',
         'guessing',
         'common_value_auction',
+
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
@@ -69,6 +70,7 @@ otree.settings.augment_settings(settings)
 
 # FIXME: convert the below apps to use the new API (remove forms.py)
 DISABLED_APPS = [
+
         'matrix_symmetric',
         'matrix_asymmetric',
         'stackelberg_competition',

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import stackelberg_competition.forms as forms
-from stackelberg_competition._builtin import Page, MatchWaitPage
+import stackelberg_competition.models as models
+from stackelberg_competition._builtin import Page, WaitPage
 
 
 class Introduction(Page):
@@ -39,7 +39,9 @@ class ChoiceTwo(Page):
         return {'other_quantity': self.player.other_player().quantity}
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         for p in self.match.players:

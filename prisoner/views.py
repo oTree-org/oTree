@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import prisoner.models as models
-from prisoner._builtin import Page, MatchWaitPage
+from prisoner._builtin import Page, WaitPage
 
 
 class Decision(Page):
@@ -21,7 +21,9 @@ class Decision(Page):
                 'betray_amount': self.treatment.betray_amount}
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def body_text(self):
         return 'Waiting for the other player to make a decision.'

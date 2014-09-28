@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dictator.models as models
-from dictator._builtin import Page, MatchWaitPage
+from dictator._builtin import Page, WaitPage
 
 
 class Introduction(Page):
@@ -23,7 +23,9 @@ class Offer(Page):
         return self.player.index_among_players_in_match == 1
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()

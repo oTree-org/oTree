@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import matrix_asymmetric.forms as forms
-from matrix_asymmetric._builtin import Page, MatchWaitPage
+import matrix_asymmetric.models as models
+from matrix_asymmetric._builtin import Page, WaitPage
 
 
 class Decision(Page):
@@ -22,7 +22,9 @@ class Decision(Page):
                 'rowBcolumnB_column': self.treatment.rowBcolumnB_column}
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()

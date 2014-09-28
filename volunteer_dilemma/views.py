@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import volunteer_dilemma.forms as forms
-from volunteer_dilemma._builtin import Page, MatchWaitPage
+import volunteer_dilemma.models as models
+from volunteer_dilemma._builtin import Page, WaitPage
 
 
 class Decision(Page):
@@ -16,7 +16,9 @@ class Decision(Page):
                 'num_other_players': self.match.players_per_match - 1}
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()

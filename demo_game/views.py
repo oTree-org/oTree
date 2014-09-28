@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import otree.views
 import otree.views.concrete
-import demo_game.forms as forms
+import demo_game.models as models
 from demo_game._builtin import Page
 from otree.common import currency
 

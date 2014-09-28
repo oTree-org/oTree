@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import traveler_dilemma.models as models
-from traveler_dilemma._builtin import Page, MatchWaitPage
+from traveler_dilemma._builtin import Page, WaitPage
 
 
 class Introduction(Page):
@@ -22,7 +22,9 @@ class Claim(Page):
     form_fields = ['claim']
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         for p in self.match.players:

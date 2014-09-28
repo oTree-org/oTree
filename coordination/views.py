@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import coordination.forms as forms
-from coordination._builtin import Page, MatchWaitPage
+import coordination.models as models
+from coordination._builtin import Page, WaitPage
 
 
 class Choice(Page):
@@ -18,7 +18,9 @@ class Choice(Page):
                 'mismatch_amount': self.treatment.mismatch_amount}
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()

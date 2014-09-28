@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import public_goods.models as models
-from public_goods._builtin import Page, MatchWaitPage
+from public_goods._builtin import Page, WaitPage
 
 
 def variables_for_all_templates(self):
@@ -28,7 +28,9 @@ class Contribute(Page):
     template_name = 'public_goods/Contribute.html'
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()

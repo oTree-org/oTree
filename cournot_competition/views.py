@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import cournot_competition.models as models
-from cournot_competition._builtin import Page, MatchWaitPage
+from cournot_competition._builtin import Page, WaitPage
 
 
 class Decide(Page):
@@ -17,7 +17,9 @@ class Decide(Page):
     form_fields = ['units']
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()

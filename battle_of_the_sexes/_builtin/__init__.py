@@ -14,16 +14,7 @@ class Page(otree.views.Page):
         self.match = models.Match()
         self.player = models.Player()
 
-
-class SubsessionWaitPage(otree.views.SubsessionWaitPage):
-
-    z_models = models
-
-    def z_autocomplete(self):
-        self.subsession = models.Subsession()
-
-
-class MatchWaitPage(otree.views.MatchWaitPage):
+class WaitPage(otree.views.MatchWaitPage):
 
     z_models = models
 
