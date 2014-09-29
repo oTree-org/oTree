@@ -1,0 +1,30 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree %}
+{% load i18n %}
+
+{% block head_content  %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}custom.css" />
+{% endblock %}
+
+{% block title %}
+    Transaction (Period {{ round_num }} of {{ num_of_rounds }})
+{% endblock %}
+
+{% block content %}
+
+    <p>
+    {% if transaction %}
+        You just bought (sold) N shares at the price of $P. Now, your positions are the following:
+    {% else %}
+        No transaction took place this period. Your positions are not changed:
+    {% endif %}
+     </p>
+    <h5>Cash: [cash position of the participant];  Shares: [# of shares held by the participant]</h5>
+
+    {% next_button %}
+
+    {% include 'asset_market/Rules.html' %}
+
+
+{% endblock %}

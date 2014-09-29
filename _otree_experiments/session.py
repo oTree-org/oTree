@@ -93,6 +93,14 @@ def session_types():
             subsession_apps=['common_value_auction', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Asset Market',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=2,
+            subsession_apps=['asset_market']*5 + ['lab_results'],
+            doc=""""""
+        ),
     ]
 
 # FIXME: convert the below apps to use the new API (remove forms.py)

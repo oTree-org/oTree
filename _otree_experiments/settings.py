@@ -58,6 +58,7 @@ settings = {
         'bargaining',
         'guessing',
         'common_value_auction',
+        'asset_market',
 
     ],
     'SECRET_KEY': SECRET_KEY,

@@ -3,7 +3,6 @@ import asset_market.models as models
 import otree.views
 import otree.forms
 import otree.test
-from otree.common import Money, money_range
 
 class Page(otree.views.Page):
     z_models = models
@@ -13,7 +12,6 @@ class Page(otree.views.Page):
         self.treatment = models.Treatment()
         self.match = models.Match()
         self.player = models.Player()
-
 
 
 class WaitPage(otree.views.WaitPage):
