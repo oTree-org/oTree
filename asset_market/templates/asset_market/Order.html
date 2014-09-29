@@ -1,11 +1,5 @@
 {% extends "global/Base.html" %}
 {% load staticfiles floppyforms otree %}
-{% load i18n %}
-
-{% block head_content  %}
-    {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}custom.css" />
-{% endblock %}
 
 {% block title %}
     Submit Order (Period {{ round_num }} of {{ num_of_rounds }})
