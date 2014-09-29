@@ -6,6 +6,14 @@ def session_types():
 
     return [
         SessionType(
+            name="Demo Game",
+            base_pay=0,
+            participants_per_demo_session=1,
+            participants_per_session=1,
+            subsession_apps=['demo_game'],
+            doc=""""""
+        ),
+        SessionType(
             name='Public Goods',
             base_pay=10.00,
             participants_per_session=12,
@@ -130,14 +138,7 @@ disabled_session_types = [
         subsession_apps=['tragedy_of_the_commons', 'lab_results'],
         doc=""""""
     ),
-    SessionType(
-        name="Demo Game",
-        base_pay=0,
-        participants_per_demo_session=1,
-        participants_per_session=1,
-        subsession_apps=['demo_game'],
-        doc=""""""
-    ),
+
     SessionType(
         name='Matrix Symmetric',
         base_pay=10.00,

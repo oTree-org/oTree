@@ -12,17 +12,16 @@
 {% endblock %}
 
 {% block content %}
-        <p>{{ question }}</p>
-        <p class="text-info">Your Answer: {{ answer }}</p>
-        {% if is_correct %}
-            <p class="text-success">Correct!</p>
-        {% else %}
-            <p class="text-danger">Wrong!
-            Correct answer: {{ correct }}<br>{{ explanation }}</p>
-        {% endif %}
+    <p>{{ question }}</p>
+    <p class="text-info">Your Answer: {{ answer }}</p>
+    {% if is_correct %}
+        <p class="text-success">Correct!</p>
+    {% else %}
+        <p class="text-danger">Wrong!
+        Correct answer: {{ correct }}<br>{{ explanation }}</p>
+    {% endif %}
 
-{% endblock %}
+    {% next_button %}
+    {% include 'demo_game/Instructions.html' %}
 
-{% block content_below_submit_button %}
-    {% include 'demo_game/Instructions.html" %}
 {% endblock %}

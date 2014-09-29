@@ -46,6 +46,7 @@ settings = {
         'raven.contrib.django.raven_compat',
     ],
     'INSTALLED_OTREE_APPS': [
+        'demo_game',
         'trust',
         'lab_results',
         'public_goods',
@@ -83,8 +84,6 @@ DISABLED_APPS = [
         'stag_hunt',
         'battle_of_the_sexes',
         'lemon_market',
-        'demo_game',
-
         'tragedy_of_the_commons',
         # lab results: displays lab results in a given session
 

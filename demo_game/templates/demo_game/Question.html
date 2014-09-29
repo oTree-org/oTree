@@ -19,6 +19,7 @@
         or any positive number including 0. Thus it will reject an invalid entry of, say -2, and ask you to try
         again after you click next, but if you enter a valid, but wrong answer, say 1 it will accept it but give
         you feedback.
+        {% formrow form.training_question_1 with label="" %}
     </p>
     {% elif num_q == 2 %}
     <p>
@@ -26,15 +27,16 @@
         These can also be randomized by treatment or match or whatever. But sometimes one wants to create graphics
         on the fly. In oTree external plugins can be used for such specific purposes. For example below is a dynamic
         visualization using HighCharts.
+        {% formrow form.training_question_2 with label="" %}
     </p>
         {% include 'demo_game/HighChartsDemo.html' %}
     {% else %}
-
+        {% formrow form.training_question_3 with label="" %}
     {% endif %}
 
 
-{% endblock %}
 
-{% block content_below_submit_button %}
+    {% next_button %}
     {% include 'demo_game/Instructions.html' %}
+
 {% endblock %}

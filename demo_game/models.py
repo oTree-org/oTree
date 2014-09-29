@@ -3,6 +3,7 @@
 
 from otree.db import models
 import otree.models
+from otree import forms
 
 
 doc = """
@@ -51,9 +52,8 @@ class Player(otree.models.BasePlayer):
     demo_field1 = models.CharField(
         default=None,
         choices=['0', '1', '2', 'do not know'],
-        doc="""
-        field With radiobutton input.
-        """
+        doc="""field With radiobutton input.""",
+        widget=forms.RadioSelect(),
     )
     demo_field2 = models.CharField(
         default=None,
@@ -67,8 +67,8 @@ class Player(otree.models.BasePlayer):
     QUESTION_3_CHOICES = ['Windows', 'Mac OS X', 'iOS', 'Android', 'Any of the above']
 
     training_question_1 = models.IntegerField(null=True, verbose_name='')
-    training_question_2 = models.CharField(max_length=100, null=True, choices=QUESTION_2_CHOICES, verbose_name='')
-    training_question_3 = models.CharField(max_length=100, null=True, choices=QUESTION_3_CHOICES, verbose_name='')
+    training_question_2 = models.CharField(max_length=100, null=True, choices=QUESTION_2_CHOICES, verbose_name='', widget=forms.RadioSelect())
+    training_question_3 = models.CharField(max_length=100, null=True, choices=QUESTION_3_CHOICES, verbose_name='', widget=forms.RadioSelect())
 
     # check correct answers
     def is_training_question_1_correct(self):
