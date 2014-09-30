@@ -62,9 +62,9 @@ class Player(otree.models.BasePlayer):
         """
     )
 
-    def claim_choices(self):
-        """Range of allowed claim values"""
-        return money_range(self.treatment.min_amount, self.treatment.max_amount, 0.05)
+    #def claim_choices(self):
+    #    """Range of allowed claim values"""
+    #    return money_range(self.treatment.min_amount, self.treatment.max_amount, 0.05)
 
     def other_player(self):
         return self.other_players_in_match()[0]
