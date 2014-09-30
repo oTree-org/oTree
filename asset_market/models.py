@@ -8,7 +8,7 @@ from otree.common import Money, money_range
 from otree import forms
 
 
-author = 'Your name here'
+author = 'Dev'
 
 doc = """
 In this asset market, there are 2 participants. Both of you are endowed with $20 cash and 5 shares of stock.
@@ -28,7 +28,6 @@ class Treatment(otree.models.BaseTreatment):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-
     understanding_1_correct = 'P=2.5, N=2'
     understanding_2_correct = '$8, $12'
 
@@ -39,11 +38,26 @@ class Match(otree.models.BaseMatch):
     treatment = models.ForeignKey(Treatment)
     # </built-in>
 
-    players_per_match = 1
+    players_per_match = 2
+
+    # transaction fields
+    is_transaction = models.BooleanField(default=False, doc="""Indicates whether there is a transaction""")
+    transaction_price = models.MoneyField(null=True, doc="""Given by 0.5*(BP+SP)""")
+    shares_traded = models.PositiveIntegerField(null=True)
 
     def set_payoffs(self):
         for p in self.players:
-            p.payoff = 0 # change to whatever the payoff should be
+            p.payoff = 0  # TODO modify this
+
+    def set_transaction(self):
+        for p in self.players:
+            if p.order_type != None and p.order_type != p.other_player().order_type and (p.bp != 0 or p.sp != 0) :
+                if p.order_type == "Buy Order" and (p.bp >= p.other_player().sp):
+                    self.transaction_price = 0.5*(p.bp+p.other_player().sp)
+                    self.shares_traded = min(p.bn, p.other_player().sn)
+                    self.is_transaction = True
+                    # TODO reduce shares and amount
+
 
 
 class Player(otree.models.BasePlayer):
@@ -52,6 +66,17 @@ class Player(otree.models.BasePlayer):
     treatment = models.ForeignKey(Treatment, null = True)
     match = models.ForeignKey(Match, null = True)
     # </built-in>
+
+    # initial shares and cash
+    cash = models.MoneyField(default=20)
+    shares = models.PositiveIntegerField(default=5)
+
+    # order fields
+    order_type = models.CharField(max_length=10, choices=['Buy Order', 'Sell Order', 'None'], widget=forms.RadioSelect())
+    bp = models.MoneyField(default=0.00, doc="""maximum buying price per share""")
+    bn = models.PositiveIntegerField(default=0, doc="""number of shares willing to buy""")
+    sp = models.MoneyField(default=0.00, doc="""minimum selling price per share""")
+    sn = models.PositiveIntegerField(default=0, doc="""number of shares willing to sell.""")
 
     def other_player(self):
         """Returns other player in match. Only valid for 2-player matches."""

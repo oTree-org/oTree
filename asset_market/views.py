@@ -9,7 +9,10 @@ def variables_for_all_templates(self):
     return {
         'total_q': 2,
         'round_num': self.subsession.round_number,
-        'num_of_rounds': self.subsession.number_of_rounds,
+        'num_of_rounds': self.subsession.number_of_rounds,  # no of periods
+        'num_participants': self.match.players_per_match,
+        'cash': self.player.cash,
+        'shares': self.player.shares,
     }
 
 class Introduction(Page):
@@ -94,13 +97,24 @@ class Order(Page):
     def participate_condition(self):
         return True
 
+    form_model = models.Player
+    form_fields = ['order_type', 'bp', 'bn', 'sp', 'sn']
+
     template_name = 'asset_market/Order.html'
 
     def variables_for_template(self):
         return {
-            'some_value': 2,
+            'cash': self.player.cash,
+            'shares': self.player.shares,
         }
 
+
+class TransactionWaitPage(WaitPage):
+
+    group = models.Match
+
+    def after_all_players_arrive(self):
+        self.match.set_transaction()
 
 class Transaction(Page):
 
@@ -111,7 +125,9 @@ class Transaction(Page):
 
     def variables_for_template(self):
         return {
-            'some_value': 2,
+            'cash': self.player.cash,
+            'shares': self.player.shares,
+            'transaction': self.match.is_transaction,
         }
 
 
@@ -124,7 +140,8 @@ class Dividend(Page):
 
     def variables_for_template(self):
         return {
-            'some_value': 2,
+            'cash': self.player.cash,
+            'shares': self.player.shares,
         }
 
 class ResultsWaitPage(WaitPage):
@@ -150,6 +167,7 @@ def pages():
         QuestionTwo,
         FeedbackTwo,
         Order,
+        TransactionWaitPage,
         Transaction,
         Dividend,
         ResultsWaitPage,

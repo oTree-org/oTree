@@ -9,12 +9,12 @@
 
     <p>
     {% if transaction %}
-        You just bought (sold) N shares at the price of $P. Now, your positions are the following:
+        You just bought (sold) {{ shares_traded }} shares at the price of {{ price }}. Now, your positions are the following:
     {% else %}
         No transaction took place this period. Your positions are not changed:
     {% endif %}
      </p>
-    <h5>Cash: [cash position of the participant];  Shares: [# of shares held by the participant]</h5>
+    <h5 class="text-info">Cash: {{ cash }};  Shares: {{ shares }}</h5>
 
     {% next_button %}
 
