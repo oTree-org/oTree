@@ -46,11 +46,12 @@ settings = {
         'raven.contrib.django.raven_compat',
     ],
     'INSTALLED_OTREE_APPS': [
-        'public_goods',
+        'demo_game',
+        'trust',
         'lab_results',
+        'public_goods',
         'prisoner',
         'cournot_competition',
-        'trust',
         'dictator',
         'matching_pennies',
         'traveler_dilemma',
@@ -58,6 +59,8 @@ settings = {
         'bargaining',
         'guessing',
         'common_value_auction',
+        'asset_market',
+
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
@@ -67,8 +70,9 @@ settings = {
 
 otree.settings.augment_settings(settings)
 
-UNUSED_APPS = [
-        #'quiz',
+# FIXME: convert the below apps to use the new API (remove forms.py)
+DISABLED_APPS = [
+
         'matrix_symmetric',
         'matrix_asymmetric',
         'stackelberg_competition',
@@ -80,8 +84,6 @@ UNUSED_APPS = [
         'stag_hunt',
         'battle_of_the_sexes',
         'lemon_market',
-        'demo_game',
-
         'tragedy_of_the_commons',
         # lab results: displays lab results in a given session
 

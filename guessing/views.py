@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import guessing.models as models
-from guessing._builtin import Page, SubsessionWaitPage
+from guessing._builtin import Page, WaitPage
 
 
 class Introduction(Page):
@@ -36,7 +36,9 @@ class Results(Page):
                 'payoff': self.player.payoff}
 
 
-class ResultsWaitPage(SubsessionWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.subsession.set_payoffs()

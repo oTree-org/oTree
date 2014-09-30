@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import bertrand_competition.forms as forms
-from bertrand_competition._builtin import Page, MatchWaitPage
+import bertrand_competition.models as models
+from bertrand_competition._builtin import Page, WaitPage
 
 
 class Decide(Page):
@@ -16,7 +16,9 @@ class Decide(Page):
                 'maximum_price': self.treatment.maximum_price}
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()

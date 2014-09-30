@@ -6,6 +6,14 @@ def session_types():
 
     return [
         SessionType(
+            name="Demo Game",
+            base_pay=0,
+            participants_per_demo_session=1,
+            participants_per_session=1,
+            subsession_apps=['demo_game'],
+            doc=""""""
+        ),
+        SessionType(
             name='Public Goods',
             base_pay=10.00,
             participants_per_session=12,
@@ -93,9 +101,18 @@ def session_types():
             subsession_apps=['common_value_auction', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Asset Market',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=2,
+            subsession_apps=['asset_market']*5 + ['lab_results'],
+            doc=""""""
+        ),
     ]
 
-unused_session_types = [
+# FIXME: convert the below apps to use the new API (remove forms.py)
+disabled_session_types = [
     SessionType(
         name="Quiz",
         base_pay=0,
@@ -121,14 +138,7 @@ unused_session_types = [
         subsession_apps=['tragedy_of_the_commons', 'lab_results'],
         doc=""""""
     ),
-    SessionType(
-        name="Demo Game",
-        base_pay=0,
-        participants_per_demo_session=1,
-        participants_per_session=1,
-        subsession_apps=['demo_game'],
-        doc=""""""
-    ),
+
     SessionType(
         name='Matrix Symmetric',
         base_pay=10.00,

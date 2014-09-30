@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import otree.views
 import otree.views.concrete
-import demo_game.forms as forms
+import demo_game.models as models
 from demo_game._builtin import Page
 from otree.common import currency
 
@@ -23,8 +23,8 @@ class QuestionOne(Page):
     def participate_condition(self):
         return True
 
-    def get_form_class(self):
-        return forms.QuestionForm1
+    form_model = models.Player
+    form_fields = ['training_question_1']
 
     def variables_for_template(self):
         return {'num_q': 1}
@@ -52,8 +52,8 @@ class QuestionTwo(Page):
     def participate_condition(self):
         return True
 
-    def get_form_class(self):
-        return forms.QuestionForm2
+    form_model = models.Player
+    form_fields = ['training_question_2']
 
     def variables_for_template(self):
         return {'num_q': 2}
@@ -81,8 +81,8 @@ class QuestionThree(Page):
     def participate_condition(self):
         return True
 
-    def get_form_class(self):
-        return forms.QuestionForm3
+    form_model = models.Player
+    form_fields = ['training_question_3']
 
     def variables_for_template(self):
         return {'num_q': 3}
@@ -108,8 +108,8 @@ class FormsDemo(Page):
 
     template_name = 'demo_game/FormsDemo.html'
 
-    def get_form_class(self):
-        return forms.DemoForm
+    form_model = models.Player
+    form_fields = ['demo_field1', 'demo_field2']
 
 
 class EmbedDemo(Page):

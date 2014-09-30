@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import battle_of_the_sexes.forms as forms
-from battle_of_the_sexes._builtin import Page, MatchWaitPage, SubsessionWaitPage
+import battle_of_the_sexes.models as models
+from battle_of_the_sexes._builtin import Page, WaitPage
 from otree.common import Money, money_range
 
 
@@ -23,7 +23,9 @@ class Decide(Page):
                 'opr_wife_amt': self.treatment.opera_wife_amount}
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()

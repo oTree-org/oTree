@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import principal_agent.forms as forms
-from principal_agent._builtin import Page, MatchWaitPage, SubsessionWaitPage
+import principal_agent.models as models
+from principal_agent._builtin import Page, WaitPage
 from otree.common import Money, money_range
 
 
@@ -36,7 +36,9 @@ class Offer(Page):
         return forms.ContractForm
 
 
-class OfferWaitPage(MatchWaitPage):
+class OfferWaitPage(WaitPage):
+
+    group = models.Match
 
     def body_text(self):
         if self.player.role() == 'agent':
@@ -68,10 +70,9 @@ class WorkEffort(Page):
         return forms.WorkEffortForm
 
     def participate_condition(self):
-        return self.player.role() == 'agent' and self.match.contract_accepted
+        return self.player.role() == 'agent' and self.match.contract_acceptedWaitPage):
 
-
-class ResultsWaitPage(MatchWaitPage):
+    group = models.MatchsWaitPage(MatchWaitPage):
 
     def body_text(self):
         if self.player.role() == 'principal':

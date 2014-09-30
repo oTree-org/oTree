@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import matrix_symmetric.forms as forms
-from matrix_symmetric._builtin import Page, MatchWaitPage
+import matrix_symmetric.models as models
+from matrix_symmetric._builtin import Page, WaitPage
 
 
 class Decision(Page):
@@ -17,7 +17,9 @@ class Decision(Page):
                 'self_B_other_B': self.treatment.self_B_other_B}
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         for p in self.match.players:

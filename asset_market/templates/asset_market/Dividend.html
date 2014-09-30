@@ -1,0 +1,22 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree %}
+
+{% block title %}
+    Dividend Distribution (Period {{ round_num }} of {{ num_of_rounds }})
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        The dividend per share for Period 1 is $X. You have N shares thus receive $N*X for dividends in total.
+        Now your positions are the following:
+    </p>
+
+    <h5>Cash: [cash position of the participant];  Shares: [# of shares held by the participant]</h5>
+
+    {% next_button %}
+
+    {% include 'asset_market/Rules.html' %}
+
+
+{% endblock %}

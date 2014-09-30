@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import otree.views
-import lemon_marketold.forms as forms
-from lemon_marketold._builtin import Page, MatchWaitPage, SubsessionWaitPage
+import lemon_marketold.models as models
+from lemon_marketold._builtin import Page, WaitPage
 
 
 
@@ -26,7 +26,9 @@ class Bid(Page):
         return forms.BidForm
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         for p in self.match.players:

@@ -1,28 +1,21 @@
 {% extends "global/Base.html" %}
 {% load staticfiles floppyforms otree %}
-{% load i18n %}
-
-{% block head_content  %}
-    {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}custom.css" />
-{% endblock %}
 
 {% block title %}
     Your feedback for understanding question ({{ num_q }} of {{ total_q }})
 {% endblock %}
 
 {% block content %}
-        <p>{{ question }}</p>
-        <p class="text-info">Your Answer: {{ answer }}</p>
-        {% if is_correct %}
-            <p class="text-success">Correct!</p>
-        {% else %}
-            <p class="text-danger">Wrong!
-            Correct answer: {{ correct }}<br>{{ explanation }}</p>
-        {% endif %}
+    <p>{{ question }}</p>
+    <p class="text-info">Your Answer: {{ answer }}</p>
+    {% if is_correct %}
+        <p class="text-success">Correct!</p>
+    {% else %}
+        <p class="text-danger">Wrong!
+        Correct answer: {{ correct }}<br>{{ explanation }}</p>
+    {% endif %}
 
-{% endblock %}
-
-{% block content_below_submit_button %}
+    {% next_button %}
     {% include 'demo_game/Instructions.html' %}
+
 {% endblock %}

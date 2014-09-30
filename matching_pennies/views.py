@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import matching_pennies.models as models
-from matching_pennies._builtin import Page, MatchWaitPage
+from matching_pennies._builtin import Page, WaitPage
 from otree.common import Money
 
 
@@ -27,7 +27,9 @@ class Choice(Page):
         }
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()

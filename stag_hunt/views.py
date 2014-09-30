@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import stag_hunt.forms as forms
-from stag_hunt._builtin import Page, MatchWaitPage
+import stag_hunt.models as models
+from stag_hunt._builtin import Page, WaitPage
 
 
 class Decide(Page):
@@ -21,7 +21,9 @@ class Decide(Page):
                 'hare_hare': self.treatment.hare_hare_amount}
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         for p in self.match.players:

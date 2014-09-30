@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import otree.views
 import otree.views.concrete
-import tragedy_of_the_commons.forms as forms
-from tragedy_of_the_commons._builtin import Page, MatchWaitPage, SubsessionWaitPage
+import tragedy_of_the_commons.models as models
+from tragedy_of_the_commons._builtin import Page, WaitPage
 from otree.common import Money, money_range
 
 
@@ -23,7 +23,9 @@ class Decide(Page):
         }
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import otree.views
 import otree.views.concrete
-import quiz.forms as forms
-from quiz._builtin import Page, MatchWaitPage, SubsessionWaitPage
+import quiz.models as models
+from quiz._builtin import Page, WaitPage
 from otree.common import Money, money_range
 
 def variables_for_all_templates(self):

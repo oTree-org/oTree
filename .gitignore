@@ -1,7 +1,7 @@
 venv
 *.pyc
 staticfiles
-./otree_subsessions/db.sqlite3
+./_otree_experiments/db.sqlite3
 .idea
 *~
 *.sqlite3

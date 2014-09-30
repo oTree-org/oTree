@@ -1,11 +1,5 @@
 {% extends "global/Base.html" %}
 {% load staticfiles floppyforms otree %}
-{% load i18n %}
-
-{% block head_content  %}
-    {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}custom.css" />
-{% endblock %}
 
 {% block title %}
     Introduction
@@ -21,8 +15,7 @@
         Please read the instructions below, then press ‘Next’ for 3 understanding questions to follow.
     </p>
 
-{% endblock %}
-
-{% block content_below_submit_button %}
+    {% next_button %}
     {% include 'demo_game/Instructions.html' %}
+
 {% endblock %}

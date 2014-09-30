@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import trust.models as models
-from trust._builtin import Page, MatchWaitPage
+from trust._builtin import Page, WaitPage
 
 
 class Introduction(Page):
@@ -29,7 +29,9 @@ class Send(Page):
         return {'amount_allocated': self.treatment.amount_allocated}
 
 
-class SimpleWaitPage(MatchWaitPage):
+class SimpleWaitPage(WaitPage):
+
+    group = models.Match
 
     def body_text(self):
         return 'The other player has been given the opportunity to give money first. Please wait.'
@@ -58,7 +60,9 @@ class SendBack(Page):
                 'total_amount': total_amount}
 
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def body_text(self):
         return 'Waiting for the other player to finish.'

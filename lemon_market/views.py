@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import otree.views
 import otree.views.concrete
-import lemon_market.forms as forms
-from lemon_market._builtin import Page, MatchWaitPage, SubsessionWaitPage
+import lemon_market.models as models
+from lemon_market._builtin import Page, WaitPage
 from otree.common import Money, money_range
 
 def variables_for_all_templates(self):
@@ -26,7 +26,9 @@ class Introduction(Page):
             'my_variable_here': 1,
         }
 
-class ResultsWaitPage(MatchWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Match
 
     def after_all_players_arrive(self):
         self.match.set_payoffs()

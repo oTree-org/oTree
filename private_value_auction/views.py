@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import private_value_auction.forms as forms
-from private_value_auction._builtin import Page, SubsessionWaitPage
+import private_value_auction.models as models
+from private_value_auction._builtin import Page, WaitPage
 from otree.common import Money
 
 
@@ -25,7 +25,9 @@ class Bid(Page):
                 'max_bid': Money(self.treatment.max_allowable_bid)}
 
 
-class ResultsWaitPage(SubsessionWaitPage):
+class ResultsWaitPage(WaitPage):
+
+    group = models.Subsession
 
     def after_all_players_arrive(self):
         self.subsession.set_winner()
