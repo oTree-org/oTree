@@ -3,6 +3,7 @@
 
 from otree.db import models
 import otree.models
+from otree import forms
 
 
 doc = """
@@ -63,7 +64,7 @@ class Match(otree.models.BaseMatch):
             wife.payoff = self.treatment.mismatch_amount
 
         else:
-            if husband.decision == 'football':
+            if husband.decision == 'Football':
                 husband.payoff = self.treatment.football_husband_amount
                 wife.payoff = self.treatment.football_wife_amount
             else:
@@ -81,9 +82,12 @@ class Player(otree.models.BasePlayer):
 
     decision = models.CharField(
         default=None,
-        choices=(('football', 'Football'), ('opera', 'Opera')),
-        doc="""Either football or the opera"""
+        doc="""Either football or the opera""",
+        widget=forms.RadioSelect()
     )
+
+    def decision_choices(self):
+        return ['Football', 'Opera']
 
     def other_player(self):
         """Returns other player in match"""

@@ -2,7 +2,6 @@
 import stag_hunt.models as models
 import otree.views
 import otree.forms
-
 import otree.test
 from otree.common import Money, money_range
 

@@ -1,45 +1,56 @@
 # -*- coding: utf-8 -*-
 import otree.views
-import otree.views.concrete
 import lemon_market.models as models
 from lemon_market._builtin import Page, WaitPage
-from otree.common import Money, money_range
 
-def variables_for_all_templates(self):
-    return {
-        # example:
-        #'my_field': self.player.my_field,
-    }
+
 
 class Introduction(Page):
+
+    template_name = 'lemon_market/Introduction.html'
+
+    def variables_for_template(self):
+        return {
+            'payoff': self.player.payoff,
+        }
+
+
+class Bid(Page):
 
     def participate_condition(self):
         return True
 
-    template_name = 'lemon_market/MyPage.html'
+    template_name = 'lemon_market/Bid.html'
 
-    def get_form_class(self):
-        return forms.MyForm
+    form_model = models.Match
+    form_fields = ['bid_amount']
 
-    def variables_for_template(self):
-        return {
-            'my_variable_here': 1,
-        }
 
 class ResultsWaitPage(WaitPage):
 
     group = models.Match
 
     def after_all_players_arrive(self):
-        self.match.set_payoffs()
+        for p in self.match.players:
+            p.set_payoff()
+
 
 class Results(Page):
 
     template_name = 'lemon_market/Results.html'
 
+    def variables_for_template(self):
+        return {
+            'payoff': self.player.payoff,
+            'bid_amount': self.match.bid_amount,
+            'random_value': self.match.random_value
+        }
+
+
 def pages():
     return [
         Introduction,
+        Bid,
         ResultsWaitPage,
         Results
     ]

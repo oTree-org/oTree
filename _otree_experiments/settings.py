@@ -67,8 +67,10 @@ settings = {
         'bertrand_competition',
         'principal_agent',
         'coordination',
-        # in progress
-        'asset_market',
+        'stag_hunt',
+        'battle_of_the_sexes',
+        'lemon_market',
+        'tragedy_of_the_commons',
 
     ],
     'SECRET_KEY': SECRET_KEY,
@@ -79,13 +81,9 @@ settings = {
 
 otree.settings.augment_settings(settings)
 
-# FIXME: convert the below apps to use the new API (remove forms file)
+# FIXME: complete the apps below
 DISABLED_APPS = [
-
-        'stag_hunt',
-        'battle_of_the_sexes',
-        'lemon_market',
-        'tragedy_of_the_commons',
+        'asset_market',
         # lab results: displays lab results in a given session
 
     ],
