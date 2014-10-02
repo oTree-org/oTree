@@ -21,8 +21,8 @@ class ChoiceOne(Page):
 
     template_name = 'stackelberg_competition/ChoiceOne.html'
 
-    def get_form_class(self):
-        return forms.QuantityForm
+    form_model = models.Player
+    form_fields = ['quantity']
 
 
 class ChoiceTwo(Page):
@@ -32,8 +32,8 @@ class ChoiceTwo(Page):
 
     template_name = 'stackelberg_competition/ChoiceTwo.html'
 
-    def get_form_class(self):
-        return forms.QuantityForm
+    form_model = models.Player
+    form_fields = ['quantity']
 
     def variables_for_template(self):
         return {'other_quantity': self.player.other_player().quantity}
@@ -65,7 +65,6 @@ def pages():
 
     return [Introduction,
             ChoiceOne,
-            MatchWaitPage,
             ChoiceTwo,
             ResultsWaitPage,
             Results]

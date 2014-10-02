@@ -71,6 +71,9 @@ class Player(otree.models.BasePlayer):
         doc="""Quantity of units to produce"""
     )
 
+    def quantity_choices(self):
+        return range(0, self.treatment.max_units_per_player()+1)
+
     def other_player(self):
         """Returns the opponent of the current player"""
         return self.other_players_in_match()[0]

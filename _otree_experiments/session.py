@@ -117,6 +117,22 @@ def session_types():
             subsession_apps=['matrix_asymmetric', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Stackelberg Competition',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=2,
+            subsession_apps=['stackelberg_competition', 'lab_results'],
+            doc=""""""
+        ),
+        SessionType(
+            name='Private Value Auction',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=2,
+            subsession_apps=['private_value_auction', 'lab_results'],
+            doc=""""""
+        ),
         # in progress
         SessionType(
             name='Asset Market',
@@ -155,22 +171,7 @@ disabled_session_types = [
         subsession_apps=['tragedy_of_the_commons', 'lab_results'],
         doc=""""""
     ),
-    SessionType(
-        name='Stackelberg Competition',
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=2,
-        subsession_apps=['stackelberg_competition', 'lab_results'],
-        doc=""""""
-    ),
-    SessionType(
-        name='Private Value Auction',
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=2,
-        subsession_apps=['private_value_auction', 'lab_results'],
-        doc=""""""
-    ),
+
     SessionType(
         name='Volunteer Dilemma',
         base_pay=10.00,

@@ -61,6 +61,8 @@ settings = {
         'common_value_auction',
         'matrix_symmetric',
         'matrix_asymmetric',
+        'stackelberg_competition',
+        'private_value_auction',
         # in progress
         'asset_market',
 
@@ -75,8 +77,6 @@ otree.settings.augment_settings(settings)
 
 # FIXME: convert the below apps to use the new API (remove forms file)
 DISABLED_APPS = [
-        'stackelberg_competition',
-        'private_value_auction',
         'volunteer_dilemma',
         'bertrand_competition',
         'principal_agent',
