@@ -59,6 +59,9 @@ settings = {
         'bargaining',
         'guessing',
         'common_value_auction',
+        'matrix_symmetric',
+        'matrix_asymmetric',
+        # in progress
         'asset_market',
 
     ],
@@ -70,11 +73,8 @@ settings = {
 
 otree.settings.augment_settings(settings)
 
-# FIXME: convert the below apps to use the new API (remove forms.py)
+# FIXME: convert the below apps to use the new API (remove forms file)
 DISABLED_APPS = [
-
-        'matrix_symmetric',
-        'matrix_asymmetric',
         'stackelberg_competition',
         'private_value_auction',
         'volunteer_dilemma',

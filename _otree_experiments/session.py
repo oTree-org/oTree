@@ -102,6 +102,23 @@ def session_types():
             doc=""""""
         ),
         SessionType(
+            name='Matrix Symmetric',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=2,
+            subsession_apps=['matrix_symmetric', 'lab_results'],
+            doc=""""""
+        ),
+        SessionType(
+            name='Matrix Asymmetric',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=2,
+            subsession_apps=['matrix_asymmetric', 'lab_results'],
+            doc=""""""
+        ),
+        # in progress
+        SessionType(
             name='Asset Market',
             base_pay=10.00,
             participants_per_session=12,
@@ -111,7 +128,7 @@ def session_types():
         ),
     ]
 
-# FIXME: convert the below apps to use the new API (remove forms.py)
+# FIXME: convert the below apps to use the new API (remove forms file)
 disabled_session_types = [
     SessionType(
         name="Quiz",
@@ -138,24 +155,6 @@ disabled_session_types = [
         subsession_apps=['tragedy_of_the_commons', 'lab_results'],
         doc=""""""
     ),
-
-    SessionType(
-        name='Matrix Symmetric',
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=2,
-        subsession_apps=['matrix_symmetric', 'lab_results'],
-        doc=""""""
-    ),
-    SessionType(
-        name='Matrix Asymmetric',
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=2,
-        subsession_apps=['matrix_asymmetric', 'lab_results'],
-        doc=""""""
-    ),
-
     SessionType(
         name='Stackelberg Competition',
         base_pay=10.00,

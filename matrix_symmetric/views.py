@@ -7,8 +7,8 @@ class Decision(Page):
 
     template_name = 'matrix_symmetric/Decision.html'
 
-    def get_form_class(self):
-        return forms.DecisionForm
+    form_model = models.Player
+    form_fields = ['decision']
 
     def variables_for_template(self):
         return {'self_A_other_A': self.treatment.self_A_other_A,
