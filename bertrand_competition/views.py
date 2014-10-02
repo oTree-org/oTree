@@ -7,8 +7,8 @@ class Decide(Page):
 
     template_name = 'bertrand_competition/Decide.html'
 
-    def get_form_class(self):
-        return forms.PriceForm
+    form_model = models.Player
+    form_fields = ['price']
 
     def variables_for_template(self):
         return {'num_other_players': self.match.players_per_match - 1,

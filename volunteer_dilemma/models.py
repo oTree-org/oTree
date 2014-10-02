@@ -3,6 +3,7 @@
 
 from otree.db import models
 import otree.models
+from otree import forms
 
 
 doc = """
@@ -65,7 +66,8 @@ class Player(otree.models.BasePlayer):
 
     volunteer = models.NullBooleanField(
         default=None,
-        doc="""Whether player volunteers"""
+        doc="""Whether player volunteers""",
+        widget=forms.RadioSelect(),
     )
 
 

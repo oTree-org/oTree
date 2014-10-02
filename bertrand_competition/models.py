@@ -3,6 +3,7 @@
 
 from otree.db import models
 import otree.models
+from otree.common import money_range
 
 
 doc = """
@@ -80,6 +81,9 @@ class Player(otree.models.BasePlayer):
         default=None,
         doc="""Price player chooses to sell product for"""
     )
+
+    def price_choices(self):
+        return money_range(self.treatment.marginal_cost, self.treatment.maximum_price, 0.05)
 
     is_a_winner = models.BooleanField(
         default=False,

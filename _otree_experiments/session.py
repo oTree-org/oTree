@@ -133,6 +133,22 @@ def session_types():
             subsession_apps=['private_value_auction', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Volunteer Dilemma',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=3,
+            subsession_apps=['volunteer_dilemma', 'lab_results'],
+            doc=""""""
+        ),
+        SessionType(
+            name='Bertrand Competition',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=3,
+            subsession_apps=['bertrand_competition', 'lab_results'],
+            doc=""""""
+        ),
         # in progress
         SessionType(
             name='Asset Market',
@@ -169,23 +185,6 @@ disabled_session_types = [
         participants_per_session=2,
         participants_per_demo_session=2,
         subsession_apps=['tragedy_of_the_commons', 'lab_results'],
-        doc=""""""
-    ),
-
-    SessionType(
-        name='Volunteer Dilemma',
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=3,
-        subsession_apps=['volunteer_dilemma', 'lab_results'],
-        doc=""""""
-    ),
-    SessionType(
-        name='Bertrand Competition',
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=3,
-        subsession_apps=['bertrand_competition', 'lab_results'],
         doc=""""""
     ),
     SessionType(
