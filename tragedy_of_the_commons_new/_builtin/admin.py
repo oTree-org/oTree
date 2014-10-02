@@ -1,7 +1,7 @@
 # This file is auto-generated.
 
 from django.contrib import admin
-import tragedy_of_the_commons.models as models
+import tragedy_of_the_commons_new.models as models
 import otree.adminlib as adminlib
 
 class PlayerAdmin(adminlib.PlayerAdmin):

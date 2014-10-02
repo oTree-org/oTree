@@ -1,5 +1,5 @@
 # This file is auto-generated. Don't change anything in this file.
-import tragedy_of_the_commons.models as models
+import tragedy_of_the_commons_new.models as models
 import otree.views
 import otree.forms
 import otree.test

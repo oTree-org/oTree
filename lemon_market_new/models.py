@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
 import otree.models
 from otree.common import Money, money_range
+
 
 author = 'Your name here'
 
@@ -53,6 +55,11 @@ class Player(otree.models.BasePlayer):
         Description of this field, for documentation
         """
     )
+
+    def my_field_error_message(self, value):
+        if not 0 <= value <= 10:
+            return 'Value is not in allowed range'
+
 
     def role(self):
         # you can make this depend of self.index_among_players_in_match
