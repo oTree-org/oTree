@@ -149,6 +149,22 @@ def session_types():
             subsession_apps=['bertrand_competition', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name='Principal Agent',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=2,
+            subsession_apps=['principal_agent', 'lab_results'],
+            doc=""""""
+        ),
+        SessionType(
+            name='Coordination',
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=2,
+            subsession_apps=['coordination', 'lab_results'],
+            doc=""""""
+        ),
         # in progress
         SessionType(
             name='Asset Market',
@@ -187,22 +203,7 @@ disabled_session_types = [
         subsession_apps=['tragedy_of_the_commons', 'lab_results'],
         doc=""""""
     ),
-    SessionType(
-        name='Principal Agent',
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=2,
-        subsession_apps=['principal_agent', 'lab_results'],
-        doc=""""""
-    ),
-    SessionType(
-        name='Coordination',
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=2,
-        subsession_apps=['coordination', 'lab_results'],
-        doc=""""""
-    ),
+
     SessionType(
         name='Stag Hunt',
         base_pay=10.00,

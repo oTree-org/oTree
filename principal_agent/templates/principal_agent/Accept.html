@@ -15,9 +15,8 @@
         <li>Return share: {{ return_share }}%</li>
     </ul>
 
-{% endblock %}
-{% block content_below_submit_button %}
-
+    {% formrow form.contract_accepted with label='Do you accept the contract?' %}
+    {% next_button %}
     {% include 'principal_agent/Rules.html' %}
 
 {% endblock %}

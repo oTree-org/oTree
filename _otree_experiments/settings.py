@@ -65,6 +65,8 @@ settings = {
         'private_value_auction',
         'volunteer_dilemma',
         'bertrand_competition',
+        'principal_agent',
+        'coordination',
         # in progress
         'asset_market',
 
@@ -79,8 +81,7 @@ otree.settings.augment_settings(settings)
 
 # FIXME: convert the below apps to use the new API (remove forms file)
 DISABLED_APPS = [
-        'principal_agent',
-        'coordination',
+
         'stag_hunt',
         'battle_of_the_sexes',
         'lemon_market',

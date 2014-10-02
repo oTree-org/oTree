@@ -10,8 +10,8 @@ class Choice(Page):
 
     template_name = 'coordination/Choice.html'
 
-    def get_form_class(self):
-        return forms.ChoiceForm
+    form_model = models.Player
+    form_fields = ['choice']
 
     def variables_for_template(self):
         return {'match_amount': self.treatment.match_amount,

@@ -32,8 +32,8 @@ class Offer(Page):
 
     template_name = 'principal_agent/Offer.html'
 
-    def get_form_class(self):
-        return forms.ContractForm
+    form_model = models.Match
+    form_fields = ['agent_fixed_pay', 'agent_return_share']
 
 
 class OfferWaitPage(WaitPage):
@@ -54,8 +54,8 @@ class Accept(Page):
     def participate_condition(self):
         return self.player.role() == 'agent'
 
-    def get_form_class(self):
-        return forms.DecisionForm
+    form_model = models.Match
+    form_fields = ['contract_accepted']
 
     def variables_for_template(self):
         return {'fixed_pay': self.match.agent_fixed_pay,
@@ -66,14 +66,14 @@ class WorkEffort(Page):
 
     template_name = 'principal_agent/WorkEffort.html'
 
-    def get_form_class(self):
-        return forms.WorkEffortForm
+    form_model = models.Match
+    form_fields = ['agent_work_effort']
 
     def participate_condition(self):
-        return self.player.role() == 'agent' and self.match.contract_acceptedWaitPage):
+        return self.player.role() == 'agent' and self.match.contract_accepted
 
-    group = models.MatchsWaitPage(MatchWaitPage):
-
+class ResultsWaitPage(WaitPage):
+    group = models.Match
     def body_text(self):
         if self.player.role() == 'principal':
             return "Waiting for Player B to respond."

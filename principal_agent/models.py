@@ -3,7 +3,8 @@
 from __future__ import division
 from otree.db import models
 import otree.models
-from otree.common import Money
+from otree.common import Money, money_range
+from otree import forms
 
 
 doc = """
@@ -82,21 +83,16 @@ class Match(otree.models.BaseMatch):
         doc="""Amount offered as fixed pay to agent"""
     )
 
-    RETURN_SHARE_CHOICES = []
-    for percent in range(10, 100+1, 10):
-        RETURN_SHARE_CHOICES.append([percent/100, '{}%'.format(percent)])
-
     agent_return_share = models.FloatField(
         default=None,
         doc="""Agent's share of total return""",
-        choices=RETURN_SHARE_CHOICES
     )
 
     agent_work_effort = models.PositiveIntegerField(
         default=None,
         doc="""Agent's work effort, [1, 10]""",
-        choices=range(1, 10+1)
     )
+
 
     agent_work_cost = models.MoneyField(
         default=None,
@@ -105,8 +101,24 @@ class Match(otree.models.BaseMatch):
 
     contract_accepted = models.NullBooleanField(
         default=None,
-        doc="""Whether agent accepts proposal"""
+        doc="""Whether agent accepts proposal""",
+        widget=forms.RadioSelect(),
     )
+
+    # choices
+    def agent_fixed_pay_choices(self):
+        return money_range(-self.treatment.max_fixed_payment, self.treatment.max_fixed_payment, 0.50)
+
+    def agent_work_effort_choices(self):
+        return range(1, 10+1)
+
+    def agent_return_share_choices(self):
+        RETURN_SHARE_CHOICES = []
+        for percent in range(10, 100+1, 10):
+            RETURN_SHARE_CHOICES.append([percent/100, '{}%'.format(percent)])
+
+        return RETURN_SHARE_CHOICES
+
 
     def set_payoffs(self):
         principal = self.get_player_by_role('principal')
