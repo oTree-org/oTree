@@ -2,34 +2,42 @@
 {% load staticfiles floppyforms otree %}
 
 {% block title %}
-    Forms for participant input
+    Forms for Participant Input
 {% endblock %}
 
 {% block content %}
 
     <p>
-        Forms allow players to enter data. We already saw a numerical field that validated input to be an odd
-        negative or any positive number in understanding question 1. Understanding question 2 had radio buttons
-        which are for multiple choice questions with one correct answer.
+        Forms allow Participants to enter data. We already saw a numerical field that validated input to be an odd
+        negative or any positive number in understanding question 1.
     </p>
+
     <p>
-        Here is a radio button which is when there is only one correct answer:
+        As seen in understanding question 2, radio buttons are for multiple choice questions with one correct answer.
     </p>
-    {% formrow form.demo_field1 with label="I am a radio button. How many answers can you select here?" %}
+
+    <p>
+        {% formrow form.demo_field1 with label="I am a radio button. How many answers can you select here?" %}
+    </p>
 
     <p>
         I am a text input field, meaning I have a restriction of characters, in this case to 5
         characters. For unlimited character entry one would use a text area field (these field names are Django \
         jargon by the way which is familiar to many Python programmers).
     </p>
-    {% formrow form.demo_field2 with label="I am a text input field. Please enter no more than 5 letters or numbers.What is the name of this software platform?" %}
 
-    {% next_button %}
     <p>
-    <b>Note:</b> In all the form fields on this page we require an input, do validation, and then check for
+        {% formrow form.demo_field2 with label="I am a text input field. Please enter no more than 5 letters or numbers. What is the name of this software platform?" %}
+    </p>
+
+    <p>
+        <b>Note:</b> In all the form fields on this page we require an input, do validation, and then check for
         correctness (in the  understanding questions we chose to give you immediate feedback on correctness,
         here we choose not to).
     </p>
+
+    {% next_button %}
+
     {% include 'demo_game/Instructions.html' %}
 
 {% endblock %}

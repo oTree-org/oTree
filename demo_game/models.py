@@ -27,8 +27,9 @@ class Treatment(otree.models.BaseTreatment):
     # </built-in>
 
     training_1_correct = 3
-    training_2_correct = 'Time travel (opens in pop up window)'
-    training_3_correct = 'Any of the above'
+    training_2_correct = "Time travel (opens in pop up window)"
+    training_3_correct = "Any of the above"
+    training_4_correct = "Any participants' input/choice"
 
 
 class Match(otree.models.BaseMatch):
@@ -65,10 +66,12 @@ class Player(otree.models.BasePlayer):
 
     QUESTION_2_CHOICES = ['Embed images', 'Dynamic visualizations using HighCharts', 'Time travel (opens in pop up window)', 'Embed video', 'Embed audio']
     QUESTION_3_CHOICES = ['Windows', 'Mac OS X', 'iOS', 'Android', 'Any of the above']
+    QUESTION_4_CHOICES = ["Any participants' input/choice", "Time spent on each page", "Invalid attempts from participants", "Answers to understanding questions", "Questionnaire input"]
 
     training_question_1 = models.IntegerField(null=True, verbose_name='')
     training_question_2 = models.CharField(max_length=100, null=True, choices=QUESTION_2_CHOICES, verbose_name='', widget=forms.RadioSelect())
     training_question_3 = models.CharField(max_length=100, null=True, choices=QUESTION_3_CHOICES, verbose_name='', widget=forms.RadioSelect())
+    training_question_4 = models.CharField(max_length=100, null=True, choices=QUESTION_4_CHOICES, verbose_name='', widget=forms.RadioSelect())
 
     # check correct answers
     def is_training_question_1_correct(self):
@@ -79,6 +82,9 @@ class Player(otree.models.BasePlayer):
 
     def is_training_question_3_correct(self):
         return self.training_question_3 == self.treatment.training_3_correct
+
+    def is_training_question_4_correct(self):
+        return self.training_question_4 == self.treatment.training_4_correct
 
     def set_payoff(self):
         self.payoff = 0
