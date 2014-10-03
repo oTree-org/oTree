@@ -1,0 +1,20 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+
+{% block title %}
+    Understanding Question ({{ num_q }} of {{ total_q }})
+{% endblock %}
+
+{% block content %}
+
+    {% if num_q == 1 %}
+        <p>
+            {% formrow form.training_question_1 with label='Suppose Player 1 picked "Heads" and Player 2 guessed "Tails". Which of the following will be the result of that round?' %}
+        </p>
+    {% endif %}
+
+    {% next_button %}
+
+    {% include 'matching_pennies/Instructions.html' %}
+
+{% endblock %}

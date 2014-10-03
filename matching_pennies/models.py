@@ -16,12 +16,19 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'matching_pennies'
 
+    def pick_match_groups(self, previous_round_match_groups):
+        match_groups = previous_round_match_groups
+        match_groups.reverse()
+        return match_groups
+
 
 class Treatment(otree.models.BaseTreatment):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
+
+    training_1_correct = 'Player 1 gets 100 points, Player 2 gets 0 points'
 
     initial_amount = models.MoneyField(
         default=0.10,
@@ -62,6 +69,17 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
+    training_question_1 = models.CharField(max_length=100, null=True, verbose_name='', widget=forms.RadioSelect())
+
+    def training_question_1_choices(self):
+        return ['Player 1 gets 0 points, Player 2 gets 0 points',
+                'Player 1 gets 100 points, Player 2 gets 100 points',
+                'Player 1 gets 100 points, Player 2 gets 0 points',
+                'Player 1 gets 0 points, Player 2 gets 100 points']
+
+    def is_training_question_1_correct(self):
+        return self.training_question_1 == self.treatment.training_1_correct
+
     penny_side = models.CharField(
         choices=['Heads', 'Tails'],
         doc="""Heads or tails""",
@@ -78,9 +96,9 @@ class Player(otree.models.BasePlayer):
 
     def role(self):
         if self.index_among_players_in_match == 1:
-            return 'matcher'
+            return 'Player 1'
         if self.index_among_players_in_match == 2:
-            return 'mismatcher'
+            return 'Player 2'
 
 
 def treatments():
