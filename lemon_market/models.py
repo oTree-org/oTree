@@ -3,13 +3,14 @@
 
 from otree.db import models
 import otree.models
+import random
 from otree.common import Money, money_range
 
-author = 'Your name here'
 
 doc = """
-Description of this app.
+Lemon market.
 """
+
 
 class Subsession(otree.models.BaseSubsession):
 
@@ -17,46 +18,63 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Treatment(otree.models.BaseTreatment):
+
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-
-class Match(otree.models.BaseMatch):
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    treatment = models.ForeignKey(Treatment)
-    # </built-in>
-
-    players_per_match = 1
-
-    def set_payoffs(self):
-        for p in self.players:
-            p.payoff = 0 # change to whatever the payoff should be
-
-
-class Player(otree.models.BasePlayer):
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    treatment = models.ForeignKey(Treatment, null = True)
-    match = models.ForeignKey(Match, null = True)
-    # </built-in>
-
-    def other_player(self):
-        """Returns other player in match. Only valid for 2-player matches."""
-        return self.other_players_in_match()[0]
-
-    # example field
-    my_field = models.MoneyField(
-        default=None,
+    max_bid_amount = models.MoneyField(
+        default=1.00,
         doc="""
-        Description of this field, for documentation
+        Maximum allowed bid amount.
         """
     )
 
-    def role(self):
-        # you can make this depend of self.index_among_players_in_match
-        return ''
+
+class Match(otree.models.BaseMatch):
+
+    # <built-in>
+    treatment = models.ForeignKey(Treatment)
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
+    bid_amount = models.MoneyField(
+        default=None,
+        doc="""
+        Amount bidded by the bidder
+        """
+    )
+    random_value = models.MoneyField(
+        default=None,
+        doc="""
+        Random value for the value of commodity to be auctioned.
+        """
+    )
+
+    players_per_match = 1
+
+    def calculate_value(self):
+        self.random_value = random.choice(money_range(0.00, 1.00))
+
+    def bid_amount_choices(self):
+        return money_range(0, self.treatment.max_bid_amount, 0.05)
+
+
+class Player(otree.models.BasePlayer):
+
+    # <built-in>
+    match = models.ForeignKey(Match, null=True)
+    treatment = models.ForeignKey(Treatment, null=True)
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
+    def set_payoff(self):
+        self.match.calculate_value()
+        if self.match.bid_amount > self.match.random_value:
+            self.payoff = 0
+        else:
+            self.payoff = (1.5 * self.treatment.max_bid_amount) - self.match.bid_amount
+
 
 def treatments():
     return [Treatment.create()]

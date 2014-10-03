@@ -8,7 +8,7 @@ from otree.common import currency
 
 def variables_for_all_templates(self):
     return {
-        'total_q': 3,  # total number of questions to help participants understand study
+        'total_q': 4,  # total number of questions to help participants understand study
     }
 
 
@@ -41,7 +41,7 @@ class FeedbackOne(Page):
                 'question': "How many understanding questions are there? Please enter an odd negative number, zero or any positive number:",
                 'answer': self.player.training_question_1,
                 'correct': self.treatment.training_1_correct,
-                'explanation': "The correct answer is that there are 3 understanding questions.",
+                'explanation': "There are 3 understanding questions.",
                 'is_correct': self.player.is_training_question_1_correct(),
                 }
 
@@ -70,7 +70,7 @@ class FeedbackTwo(Page):
                 'question': "All the following are possible in oTree except one?",
                 'answer': self.player.training_question_2,
                 'correct': self.treatment.training_2_correct,
-                'explanation': "The correct answer is all except time travel.",
+                'explanation': "The correct answer is Time travel (opens in pop up window)",
                 'is_correct': self.player.is_training_question_2_correct(),
                 }
 
@@ -102,6 +102,36 @@ class FeedbackThree(Page):
                 'explanation': "The correct answer is any of the above operating system.",
                 'is_correct': self.player.is_training_question_3_correct(),
                 }
+
+
+class QuestionFour(Page):
+    template_name = 'demo_game/Question.html'
+
+    def participate_condition(self):
+        return True
+
+    form_model = models.Player
+    form_fields = ['training_question_4']
+
+    def variables_for_template(self):
+        return {'num_q': 4}
+
+
+class FeedbackFour(Page):
+    template_name = 'demo_game/Feedback.html'
+
+    def participate_condition(self):
+        return True
+
+    def variables_for_template(self):
+        return {'num_q': 4,
+                'question': "What kind of data is included when you export a CSV from oTree?",
+                'answer': self.player.training_question_4,
+                'correct': self.treatment.training_4_correct,
+                'explanation': "The correct answer is Any participants’ input/choice.",
+                'is_correct': self.player.is_training_question_4_correct(),
+                }
+
 
 
 class FormsDemo(Page):
@@ -153,6 +183,8 @@ def pages():
         FeedbackTwo,
         QuestionThree,
         FeedbackThree,
+        QuestionFour,
+        FeedbackFour,
         FormsDemo,
         Results,
         Finish,

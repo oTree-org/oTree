@@ -27,8 +27,9 @@ class Treatment(otree.models.BaseTreatment):
     # </built-in>
 
     training_1_correct = 3
-    training_2_correct = 'Time travel (opens in pop up window)'
-    training_3_correct = 'Any of the above'
+    training_2_correct = "Time travel (opens in pop up window)"
+    training_3_correct = "Any of the above"
+    training_4_correct = "Any participants' input/choice"
 
 
 class Match(otree.models.BaseMatch):
@@ -51,7 +52,6 @@ class Player(otree.models.BasePlayer):
 
     demo_field1 = models.CharField(
         default=None,
-        choices=['0', '1', '2', 'do not know'],
         doc="""field With radiobutton input.""",
         widget=forms.RadioSelect(),
     )
@@ -63,12 +63,26 @@ class Player(otree.models.BasePlayer):
         """
     )
 
-    QUESTION_2_CHOICES = ['Embed images', 'Dynamic visualizations using HighCharts', 'Time travel (opens in pop up window)', 'Embed video', 'Embed audio']
-    QUESTION_3_CHOICES = ['Windows', 'Mac OS X', 'iOS', 'Android', 'Any of the above']
+    def demo_field1_choices(self):
+        return ['0', '1', '2', 'do not know']
 
-    training_question_1 = models.IntegerField(null=True, verbose_name='')
-    training_question_2 = models.CharField(max_length=100, null=True, choices=QUESTION_2_CHOICES, verbose_name='', widget=forms.RadioSelect())
-    training_question_3 = models.CharField(max_length=100, null=True, choices=QUESTION_3_CHOICES, verbose_name='', widget=forms.RadioSelect())
+    training_question_1 = models.IntegerField(null=True, verbose_name='', widget=forms.TextInput())
+    training_question_2 = models.CharField(max_length=100, null=True, verbose_name='', widget=forms.RadioSelect())
+    training_question_3 = models.CharField(max_length=100, null=True, verbose_name='', widget=forms.RadioSelect())
+    training_question_4 = models.CharField(max_length=100, null=True, verbose_name='', widget=forms.RadioSelect())
+
+    def training_question_2_choices(self):
+        return ['Embed images', 'Dynamic visualizations using HighCharts', 'Time travel (opens in pop up window)', 'Embed video', 'Embed audio']
+
+    def training_question_3_choices(self):
+        return ['Windows', 'Mac OS X', 'iOS', 'Android', 'Any of the above']
+
+    def training_question_4_choices(self):
+        return ["Any participants' input/choice", "Time spent on each page", "Invalid attempts from participants", "Answers to understanding questions", "Questionnaire input"]
+
+    def training_question_1_error_message(self, value):
+        if value < 0 and abs(value) % 2 == 0:
+            return 'Please enter an odd negative number, zero or any positive number.'
 
     # check correct answers
     def is_training_question_1_correct(self):
@@ -79,6 +93,9 @@ class Player(otree.models.BasePlayer):
 
     def is_training_question_3_correct(self):
         return self.training_question_3 == self.treatment.training_3_correct
+
+    def is_training_question_4_correct(self):
+        return self.training_question_4 == self.treatment.training_4_correct
 
     def set_payoff(self):
         self.payoff = 0

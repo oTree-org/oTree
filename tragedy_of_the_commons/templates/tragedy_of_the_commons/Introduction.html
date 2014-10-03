@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree %}
+{% load staticfiles floppyforms otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -29,5 +29,7 @@
             <td style="border:1px solid #ddd;">{{ common_loss }}, {{ common_loss }}</td>
         </tr>
     </table>
+
+    {% next_button %}
 
 {% endblock %}

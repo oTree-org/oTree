@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree %}
+{% load staticfiles floppyforms otree_tags %}
 
 {% block title %}
     Results
@@ -7,14 +7,16 @@
 
 {% block content %}
 
+    <p>Thank you! You have completed all questions.</p>
+
     <p>
         This page shows the payoffs to each participant. You do not make any money in this experiment.
         But just for fun let us pretend you did, and the currency was Japanese Yen. And suppose there
         was a base participation fee of 100 Yen. And then suppose you earned some money according to
         your answers on the form fields page.
     </p>
-    <p><h4>Total payoff calculation</h4>
-        <table class="table">
+
+    <table class="table">
         <thead>
           <tr><th>Question</th><th>Payoff</th></tr>
         </thead>
@@ -24,7 +26,18 @@
           <tr><td>Participation fee</td><td>¥100.0</td></tr>
           <tr><th>Total payoff</th><th>¥147.0</th></tr>
         </tbody>
-      </table>
+    </table>
+
+    <p>
+        In laboratory, each participant will receive a paper with own payoffs in addition. Usually,
+        the participant has to sign the paper before collecting his/her payoffs. A PDF file could be
+        generated from oTree for printing: [picture of the PDF file]
     </p>
+    <p>
+        With AMT, a code for payoff collection will be generated such as the one below:
+        [picture of a generated AMT code].
+    </p>
+
+    {% next_button %}
 
 {% endblock %}

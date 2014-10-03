@@ -14,7 +14,8 @@ class Page(otree.views.Page):
         self.match = models.Match()
         self.player = models.Player()
 
-class WaitPage(otree.views.MatchWaitPage):
+
+class WaitPage(otree.views.WaitPage):
 
     z_models = models
 

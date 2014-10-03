@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree %}
+{% load staticfiles floppyforms otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -11,5 +11,8 @@
     <p>The other player decided to produce {{ other_quantity }} units.</p>
 
     <p>Please decide how much you want to produce.</p>
+
+    {% formrow form.quantity with label='How many units will you produce:' %}
+    {% next_button %}
 
 {% endblock %}

@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree %}
+{% load staticfiles floppyforms otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -41,5 +41,8 @@
             <td>{{ hare_hare }}, {{ hare_hare }}</td>
         </tr>
     </table>
+
+    {% formrow form.decision with label='Please make a choice:' %}
+    {% next_button %}
 
 {% endblock %}

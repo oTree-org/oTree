@@ -3,6 +3,7 @@
 
 from otree.db import models
 import otree.models
+from otree import forms
 
 doc = """
 In the symmetric matrix game, the payoffs for playing a particular strategy depend only on the other strategies employed, not on who is playing them.
@@ -54,9 +55,12 @@ class Player(otree.models.BasePlayer):
 
     decision = models.CharField(
         default=None,
-        choices=['A', 'B'],
         doc='either A or B',
+        widget=forms.RadioSelect(),
     )
+
+    def decision_choices(self):
+        return ['A', 'B']
 
     def set_payoff(self):
 

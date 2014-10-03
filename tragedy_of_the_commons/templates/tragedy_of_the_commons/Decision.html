@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree %}
+{% load staticfiles floppyforms otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -8,6 +8,7 @@
 
 {% block content %}
 
-
+    {% formrow form.decision with label='Make a decision:' %}
+    {% next_button %}
 
 {% endblock %}

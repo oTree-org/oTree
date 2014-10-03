@@ -3,6 +3,7 @@
 
 from otree.db import models
 import otree.models
+from otree import forms
 
 
 doc = """
@@ -66,9 +67,12 @@ class Player(otree.models.BasePlayer):
 
     decision = models.CharField(
         default=None,
-        choices=['Stag', 'Hare'],
         doc="""The player's choice""",
+        widget=forms.RadioSelect()
     )
+
+    def decision_choices(self):
+        return ['Stag', 'Hare']
 
     def other_player(self):
         """Returns other player in match"""

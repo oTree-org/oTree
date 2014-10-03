@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree %}
+{% load staticfiles floppyforms otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -28,5 +28,7 @@
         -If bid greater or equal than value of commodity. The owner accepts and purchase is made. <br>
         Payoff is 1.5 x the value minus bid amount i.e (1.5 x value - bid amount).
     </p>
+
+    {% next_button %}
 
 {% endblock %}

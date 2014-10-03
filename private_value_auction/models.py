@@ -19,14 +19,6 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'private_value_auction'
 
-    def highest_bid(self):
-        return max([p.bid_amount for p in self.players])
-
-    def set_winner(self):
-        players_with_highest_bid = [p for p in self.players if p.bid_amount == self.highest_bid()]
-        winner = random.choice(players_with_highest_bid)    # if tie, winner is chosen at random
-        winner.is_winner = True
-
 
 class Treatment(otree.models.BaseTreatment):
 
@@ -52,7 +44,17 @@ class Match(otree.models.BaseMatch):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 1
+    players_per_match = 2
+
+
+    def highest_bid(self):
+        return max([p.bid_amount for p in self.players])
+
+
+    def set_winner(self):
+        players_with_highest_bid = [p for p in self.players if p.bid_amount == self.highest_bid()]
+        winner = random.choice(players_with_highest_bid)    # if tie, winner is chosen at random
+        winner.is_winner = True
 
 
 class Player(otree.models.BasePlayer):
@@ -72,6 +74,9 @@ class Player(otree.models.BasePlayer):
         default=None,
         doc="""Amount bidded by the player"""
     )
+
+    def bid_amount_choices(self):
+        return money_range(self.treatment.min_allowable_bid, self.treatment.max_allowable_bid, 0.05)
 
     is_winner = models.BooleanField(
         default=False,

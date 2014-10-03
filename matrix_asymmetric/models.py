@@ -3,6 +3,7 @@
 
 from otree.db import models
 import otree.models
+from otree import forms
 
 doc = """
 In the asymmetric matrix game, the strategy sets for both players are different.
@@ -90,9 +91,12 @@ class Player(otree.models.BasePlayer):
 
     decision = models.CharField(
         default=None,
-        choices=['A', 'B'],
         doc='either A or B',
+        widget=forms.RadioSelect()
     )
+
+    def decision_choices(self):
+        return ['A', 'B']
 
     def role(self):
         if self.index_among_players_in_match == 1:

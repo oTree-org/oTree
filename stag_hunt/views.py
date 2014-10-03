@@ -10,8 +10,8 @@ class Decide(Page):
 
     template_name = 'stag_hunt/Decide.html'
 
-    def get_form_class(self):
-        return forms.DecisionForm
+    form_model = models.Player
+    form_fields = ['decision']
 
     def variables_for_template(self):
         return {'player_index': self.player.index_among_players_in_match,

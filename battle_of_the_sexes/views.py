@@ -11,8 +11,8 @@ class Decide(Page):
 
     template_name = 'battle_of_the_sexes/Decide.html'
 
-    def get_form_class(self):
-        return forms.DecisionForm
+    form_model = models.Player
+    form_fields = ['decision']
 
     def variables_for_template(self):
         return {'role': self.player.role(),

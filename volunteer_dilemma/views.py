@@ -7,8 +7,8 @@ class Decision(Page):
 
     template_name = 'volunteer_dilemma/Decision.html'
 
-    def get_form_class(self):
-        return forms.DecisionForm
+    form_model = models.Player
+    form_fields = ['volunteer']
 
     def variables_for_template(self):
         return {'general_benefit': self.treatment.general_benefit,

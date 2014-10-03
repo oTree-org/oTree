@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree %}
+{% load staticfiles floppyforms otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -9,5 +9,8 @@
 {% block content %}
 
     <p>You are the <b>bidder.</b></p>
+
+    {% formrow form.bid_amount with label='Bid Amount' %}
+    {% next_button %}
 
 {% endblock %}

@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree %}
+{% load staticfiles floppyforms otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -38,5 +38,7 @@
         </tr>
 
     </table>
+
+    {% next_button %}
 
 {% endblock %}

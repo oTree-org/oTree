@@ -59,20 +59,6 @@ settings = {
         'bargaining',
         'guessing',
         'common_value_auction',
-        'asset_market',
-
-    ],
-    'SECRET_KEY': SECRET_KEY,
-    'BASE_DIR': BASE_DIR,
-    'WSGI_APPLICATION': '_otree_experiments.wsgi.application',
-    'ROOT_URLCONF': '_otree_experiments.urls',
-}
-
-otree.settings.augment_settings(settings)
-
-# FIXME: convert the below apps to use the new API (remove forms.py)
-DISABLED_APPS = [
-
         'matrix_symmetric',
         'matrix_asymmetric',
         'stackelberg_competition',
@@ -85,6 +71,19 @@ DISABLED_APPS = [
         'battle_of_the_sexes',
         'lemon_market',
         'tragedy_of_the_commons',
+
+    ],
+    'SECRET_KEY': SECRET_KEY,
+    'BASE_DIR': BASE_DIR,
+    'WSGI_APPLICATION': '_otree_experiments.wsgi.application',
+    'ROOT_URLCONF': '_otree_experiments.urls',
+}
+
+otree.settings.augment_settings(settings)
+
+# FIXME: complete the apps below
+DISABLED_APPS = [
+        'asset_market',
         # lab results: displays lab results in a given session
 
     ],

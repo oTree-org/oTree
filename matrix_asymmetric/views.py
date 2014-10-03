@@ -7,8 +7,8 @@ class Decision(Page):
 
     template_name = 'matrix_asymmetric/Decision.html'
 
-    def get_form_class(self):
-        return forms.DecisionForm
+    form_model = models.Player
+    form_fields = ['decision']
 
     def variables_for_template(self):
         return {'player_id': self.player.index_among_players_in_match,
