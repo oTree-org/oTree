@@ -18,7 +18,8 @@ class Subsession(otree.models.BaseSubsession):
 
     def pick_match_groups(self, previous_round_match_groups):
         match_groups = previous_round_match_groups
-        match_groups.reverse()
+        for group in match_groups:
+            group.reverse()
         return match_groups
 
 
@@ -30,9 +31,9 @@ class Treatment(otree.models.BaseTreatment):
 
     training_1_correct = 'Player 1 gets 100 points, Player 2 gets 0 points'
 
-    initial_amount = models.MoneyField(
-        default=0.10,
-        doc="""The value of the pennies given to each player"""
+    point_value = models.MoneyField(
+        default=0.01,
+        doc="""Monetary value of each game point"""
     )
 
 
@@ -45,20 +46,24 @@ class Match(otree.models.BaseMatch):
 
     players_per_match = 2
 
-    def set_payoffs(self):
-        matcher = self.get_player_by_role('matcher')
-        mismatcher = self.get_player_by_role('mismatcher')
+    def set_points(self):
+        p1 = self.get_player_by_role('Player 1')
+        p2 = self.get_player_by_role('Player 2')
 
-        if matcher.penny_side == mismatcher.penny_side:
-            matcher.payoff = self.treatment.initial_amount*2
-            mismatcher.payoff = 0
-            matcher.is_winner = True
-            mismatcher.is_winner = False
+        if p2.penny_side == p1.penny_side:
+            p2.points_earned = 100
+            p2.is_winner = True
+            p1.points_earned = 0
+            p1.is_winner = False
         else:
-            matcher.payoff = 0
-            mismatcher.payoff = self.treatment.initial_amount*2
-            matcher.is_winner = False
-            mismatcher.is_winner = True
+            p2.points_earned = 0
+            p1.points_earned = 100
+            p2.is_winner = False
+            p1.is_winner = True
+
+    def set_payoffs(self):
+        for player in self.players:
+            player.payoff = sum(p.points_earned for p in player.me_in_previous_rounds() + [player]) * self.treatment.point_value
 
 
 class Player(otree.models.BasePlayer):
@@ -80,6 +85,11 @@ class Player(otree.models.BasePlayer):
     def is_training_question_1_correct(self):
         return self.training_question_1 == self.treatment.training_1_correct
 
+    points_earned = models.PositiveIntegerField(
+        default=0,
+        doc="""Points earned"""
+    )
+
     penny_side = models.CharField(
         choices=['Heads', 'Tails'],
         doc="""Heads or tails""",
@@ -87,7 +97,7 @@ class Player(otree.models.BasePlayer):
     )
 
     is_winner = models.NullBooleanField(
-        doc='Whether the participant won this round'
+        doc="""Whether player won the round"""
     )
 
     def other_player(self):

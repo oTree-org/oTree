@@ -3,52 +3,33 @@
 {% load i18n %}
 
 {% block title %}
-    Results
+    Results for Round {{ round_number }} of {{ total_rounds }}
 {% endblock %}
 
 {% block content %}
 
     <p>
-        You wanted the choices
-        {% if role == 'matcher' %}
-            to match.
+        {% if role == 'Player 1' %}
+            You were Player 1. You chose "{{ my_choice }}", Player 2 guessed "{{ other_choice }}".
         {% else %}
-            not to match.
+            You were Player 2. You guessed "{{ my_choice }}", Player 1 chose "{{ other_choice }}".
         {% endif%}
     </p>
 
-    <table class="table" style="width:650px; margin-top:20px;">
-        <tr>
-            <th>Round</th>
-            <th>Your side</th>
-            <th>Opponent's side</th>
-            <th>Winner</th>
-            <th>Your payoff</th>
-        </tr>
-        {% for p in me_in_previous_rounds %}
-            <tr>
-                <td>{{ p.subsession.round_number }}</td>
-                <td>{{ p.penny_side }}</td>
-                <td>{{ p.other_player.penny_side }}</td>
-                <td>{% if p.is_winner %} You {% else %} Opponent {% endif %}</td>
-                <td>{{ p.payoff }}</td>
-            </tr>
-        {% endfor %}
-        <tr>
-            <td>{{ round_number }}</td>
-            <td>{{ my_choice }}</td>
-            <td>{{ other_choice }}</td>
-            <td>{% if is_winner %} You {% else %} Opponent {% endif %}</td>
-            <td>{{ payoff }}</td>
-        </tr>
-    </table>
+    <p>
+        In this round, you win {{ my_points }} and your opponent wins {{ other_points }} points.
+    </p>
 
-    {% if round_number < total_rounds %}
-        <p>
-            Please click "Next" to continue to the next round.
-        </p>
-    {% endif %}
+    <p>
+        {% if round_number < total_rounds %}
+            Please click "Next" to proceed to the next round where you will play against the same opponent but your roles will be switched.
+        {% else %}
+            All rounds are now finished.
+        {% endif %}
+    </p>
 
     {% next_button %}
+
+    {% include 'matching_pennies/Instructions.html' %}
 
 {% endblock %}

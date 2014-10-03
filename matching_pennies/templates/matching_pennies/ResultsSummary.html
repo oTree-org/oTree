@@ -1,0 +1,38 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Results for Rounds 1–{{ total_rounds }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        This is a summary of the rounds played.
+    </p>
+
+    <table class="table" style="width:450px; margin-top:20px;">
+        {% for p in me_in_previous_rounds %}
+            <tr>
+                <td>Round {{ p.subsession.round_number }}</td>
+                <td>You were {{ p.role }} and {% if p.is_winner %} won {% else %} lost {% endif %}</td>
+                <td>Points earned: {{ p.points_earned }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td>Round {{ round_number }}</td>
+            <td>You were {{ role }} and {% if is_winner %} won {% else %} lost {% endif %}</td>
+            <td>Points earned: {{ points_earned }}</td>
+        </tr>
+    </table>
+
+    <p>
+        In order to get paid, please complete the questionnaire that now follows.
+    </p>
+
+    {% next_button %}
+
+    {% include 'matching_pennies/Instructions.html' %}
+
+{% endblock %}

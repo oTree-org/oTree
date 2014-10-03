@@ -5,7 +5,8 @@ from otree.common import Money
 
 
 def variables_for_all_templates(self):
-    return {'total_q': 1,
+    return {'point_value': self.treatment.point_value,
+            'total_q': 1,
             'total_rounds': self.subsession.number_of_rounds,
             'round_number': self.subsession.round_number,
             'role': self.player.role()}
@@ -15,12 +16,16 @@ class Introduction(Page):
 
     template_name = 'matching_pennies/Introduction.html'
 
+    def participate_condition(self):
+        return self.subsession.round_number == 1
+
 
 class QuestionOne(Page):
+
     template_name = 'matching_pennies/Question.html'
 
     def participate_condition(self):
-        return True
+        return self.subsession.round_number == 1
 
     form_model = models.Player
     form_fields = ['training_question_1']
@@ -30,10 +35,11 @@ class QuestionOne(Page):
 
 
 class FeedbackOne(Page):
+
     template_name = 'matching_pennies/Feedback.html'
 
     def participate_condition(self):
-        return True
+        return self.subsession.round_number == 1
 
     def variables_for_template(self):
         return {'num_q': 1,
@@ -52,21 +58,18 @@ class Choice(Page):
     form_model = models.Player
     form_fields = ['penny_side']
 
-    def variables_for_template(self):
-        return {'initial_amount': self.treatment.initial_amount,
-                'winner_amount': self.treatment.initial_amount * 2,
-                'loser_amount': Money(0)}
-
 
 class ResultsWaitPage(WaitPage):
 
     group = models.Match
 
     def after_all_players_arrive(self):
-        self.match.set_payoffs()
+        self.match.set_points()
+        if self.subsession.round_number == self.subsession.number_of_rounds:
+            self.match.set_payoffs()
 
     def body_text(self):
-        return "Waiting for the other player to select heads or tails."
+        return "We need to wait for your opponent."
 
 
 class Results(Page):
@@ -77,9 +80,24 @@ class Results(Page):
 
         return {'my_choice': self.player.penny_side,
                 'other_choice': self.player.other_player().penny_side,
-                'is_winner': self.player.is_winner,
-                'payoff': self.player.payoff,
+                'my_points': self.player.points_earned,
+                'other_points': self.player.other_player().points_earned,
+                'my_payoff': self.player.payoff,
+                'other_payoff': self.player.other_player().payoff,
                 'me_in_previous_rounds': self.player.me_in_previous_rounds()}
+
+
+class ResultsSummary(Page):
+
+    template_name = 'matching_pennies/ResultsSummary.html'
+
+    def participate_condition(self):
+        return self.subsession.round_number == self.subsession.number_of_rounds
+
+    def variables_for_template(self):
+
+        return {'me_in_previous_rounds': self.player.me_in_previous_rounds(),
+                'points_earned': self.player.points_earned}
 
 
 def pages():
@@ -89,4 +107,5 @@ def pages():
             FeedbackOne,
             Choice,
             ResultsWaitPage,
-            Results]
+            Results,
+            ResultsSummary]
