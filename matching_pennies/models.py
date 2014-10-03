@@ -5,10 +5,10 @@ import otree.models
 from otree import forms
 
 doc = """
-Matching pennies. Single treatment. Two players are given a penny each, and will at the same time choose either heads or tails.
-One player wants the outcome to match; the other wants the outcome not to match.
-If the outcomes match, the former player gets both pennies; if the outcomes do not match, the latter player gets both pennies.
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/matching_pennies" target="_blank">here</a>.
+<p>This is the familiar playground game "Matching Pennies". In this implementation, players are randomly matched in the
+beginning and then continue to play against the same opponent. Their roles alter deterministically.</p>
+<p>The game is preceded by one understanding question (in a real experiment, you would often have more of these).</p>
+<p>Source code <a href="https://github.com/oTree-org/oTree/tree/master/matching_pennies" target="_blank">here</a>.</p>
 """
 
 

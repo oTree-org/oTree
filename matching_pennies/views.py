@@ -12,6 +12,11 @@ def variables_for_all_templates(self):
     }
 
 
+class Introduction(Page):
+
+    template_name = 'matching_pennies/Introduction.html'
+
+
 class Choice(Page):
 
     template_name = 'matching_pennies/Choice.html'
@@ -53,6 +58,7 @@ class Results(Page):
 
 def pages():
 
-    return [Choice,
+    return [Introduction,
+            Choice,
             ResultsWaitPage,
             Results]
