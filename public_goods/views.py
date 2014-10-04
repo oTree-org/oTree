@@ -58,7 +58,7 @@ class ResultsWaitPage(WaitPage):
         self.match.set_payoffs()
 
     def body_text(self):
-        return "Waiting for other participants members to contribute."
+        return "Waiting for other participants to contribute."
 
 
 class Results(Page):
