@@ -12,20 +12,29 @@
         This is a summary of the rounds played.
     </p>
 
-    <table class="table" style="width:450px; margin-top:20px;">
+    <table class="table" style="width:400px; margin-top:20px;">
+        <tr>
+            <th>Round</th>
+            <th>Player and outcome</th>
+            <th>Points</th>
+        </tr>
         {% for p in me_in_previous_rounds %}
             <tr>
-                <td>Round {{ p.subsession.round_number }}</td>
+                <td>{{ p.subsession.round_number }}</td>
                 <td>You were {{ p.role }} and {% if p.is_winner %} won {% else %} lost {% endif %}</td>
-                <td>Points earned: {{ p.points_earned }}</td>
+                <td>{{ p.points_earned }}</td>
             </tr>
         {% endfor %}
         <tr>
-            <td>Round {{ round_number }}</td>
+            <td>{{ round_number }}</td>
             <td>You were {{ role }} and {% if is_winner %} won {% else %} lost {% endif %}</td>
-            <td>Points earned: {{ points_earned }}</td>
+            <td>{{ points_earned }}</td>
         </tr>
     </table>
+
+    <p>
+        In total you earned {{ total_points_earned }} points which corresponds to {{ payoff }}.
+    </p>
 
     <p>
         In order to get paid, please complete the questionnaire that now follows.

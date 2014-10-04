@@ -97,7 +97,9 @@ class ResultsSummary(Page):
     def variables_for_template(self):
 
         return {'me_in_previous_rounds': self.player.me_in_previous_rounds(),
-                'points_earned': self.player.points_earned}
+                'points_earned': self.player.points_earned,
+                'total_points_earned': sum(p.points_earned for p in self.player.me_in_previous_rounds() + [self.player]),
+                'payoff': self.player.payoff}
 
 
 def pages():
