@@ -7,7 +7,7 @@ from otree import forms
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'survey'
+    name_in_url = 'survey_sample'
 
 
 class Treatment(otree.models.BaseTreatment):

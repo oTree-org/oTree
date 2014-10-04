@@ -98,6 +98,7 @@ class ResultsSummary(Page):
 
         return {'me_in_previous_rounds': self.player.me_in_previous_rounds(),
                 'points_earned': self.player.points_earned,
+                'is_winner': self.player.is_winner,
                 'total_points_earned': sum(p.points_earned for p in self.player.me_in_previous_rounds() + [self.player]),
                 'payoff': self.player.payoff}
 

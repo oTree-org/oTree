@@ -69,9 +69,7 @@ settings = {
         'coordination',
         'stag_hunt',
         'battle_of_the_sexes',
-        'lemon_market',
-        'tragedy_of_the_commons',
-
+        'survey_sample'
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
@@ -84,6 +82,7 @@ otree.settings.augment_settings(settings)
 # FIXME: complete the apps below
 DISABLED_APPS = [
         'asset_market',
+        'lemon_market',
+        'tragedy_of_the_commons',
         # lab results: displays lab results in a given session
-
     ],

@@ -52,8 +52,8 @@ class Match(otree.models.BaseMatch):
 
         if p2.penny_side == p1.penny_side:
             p2.points_earned = 100
-            p2.is_winner = True
             p1.points_earned = 0
+            p2.is_winner = True
             p1.is_winner = False
         else:
             p2.points_earned = 0
