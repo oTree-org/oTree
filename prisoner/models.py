@@ -4,8 +4,9 @@ import otree.models
 from otree import forms
 
 doc = """
-Prisoner's dilemma game. Single treatment. Two players are asked separately whether they want to cooperate or defect.
+Two players are asked separately whether they want to cooperate or defect.
 Their choices directly determine the payoffs.
+<br/ >
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/prisoner" target="_blank">here</a>.
 """
 
