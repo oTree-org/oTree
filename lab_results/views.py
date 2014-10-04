@@ -3,7 +3,7 @@ from lab_results._builtin import Page
 
 class RedemptionCode(Page):
 
-    template_name = 'lab_results/RedemptionCode.html'
+    template_name = 'lab_results/LabResults.html'
 
     def variables_for_template(self):
         self.player.set_payoff()

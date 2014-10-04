@@ -1,0 +1,72 @@
+{% extends "global/Base.html" %}
+{% load i18n %}
+{% load staticfiles floppyforms otree_tags %}
+
+{% block title %}
+    Thank you
+{% endblock %}
+
+{% block content %}
+
+    <div class="alert alert-success">
+        You have completed the experiment session.
+    </div>
+
+    <p>
+        Your payoff is as follows:
+    </p>
+
+    <table class="table" style="width:400px">
+        <tr>
+            <td>Payoff from experiment</td>
+            <td>{{ payoff_from_subsessions }}</td>
+        </tr>
+        <tr>
+            <td>Participation fee</td>
+            <td>{{ base_pay }}</td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <th>{{ total_pay }}</th>
+        </tr>
+    </table>
+
+    <p>
+        <em>Below are examples of messages that would be displayed for different experimental settings.</em>
+    </p>
+
+    <div class="panel panel-default" style="margin-bottom:10px">
+        <div class="panel-body">
+            <p><strong>Laboratory:</strong></p>
+            <p>Please remain seated until your number is called. Then take your number card, and proceed to the cashier.</p>
+            <p><em>Note: For the cashier in the laboratory, oTree can print a list of payments for all participants as a PDF.
+                Click <a href="example PDF" target="_blank">here</a> to see an example.</em></p>
+        </div>
+    </div>
+
+    <div class="panel panel-default" style="margin-bottom:10px">
+        <div class="panel-body">
+            <p><strong>AMT—Amazon's <a href="https://www.mturk.com/mturk/welcome" target="_blank">online labor market</a>:</strong></p>
+            <p>Here is your redemption code:</p>
+            <p style="font-size:150%"><b>cegavokiz</b></p>
+            <p>Please enter this code on the HIT page.</p>
+        </div>
+    </div>
+
+    <div class="panel panel-default" style="margin-bottom:10px">
+        <div class="panel-body">
+            <p><strong>Classroom:</strong></p>
+            <p>If you want to keep track of how students did, the easiest thing is to assign the starting links to students by name.
+                It is even possible to give each student a single permanent link for a whole semester; so no need to waste time in each
+                lecture with handing out new links and keeping track of which student uses which link. Alternatively, you may just give
+                students anonymous links or secret nicknames.
+            </p>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block form %}
+
+{% endblock %}
