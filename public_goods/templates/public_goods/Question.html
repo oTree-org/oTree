@@ -1,0 +1,20 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+
+{% block title %}
+    Understanding Question 1 of 1
+{% endblock %}
+
+{% block content %}
+    <p>
+        Suppose in a group, 1 participant contributes 80 points, 1 participant contributes 40, and 1 participant contributes nothing.
+        What is the payoff of the participant who contributed 80 points?
+    </p>
+
+    {% formrow form.question with label="Please enter a non-negative integer:" %}
+
+    {% next_button %}
+
+    {% include 'public_goods/Instructions.html' %}
+
+{% endblock %}

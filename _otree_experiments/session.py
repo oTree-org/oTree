@@ -17,7 +17,7 @@ def session_types():
             name='Public Goods',
             base_pay=10.00,
             participants_per_session=12,
-            participants_per_demo_session=4,
+            participants_per_demo_session=3,
             subsession_apps=['public_goods', 'lab_results'],
             doc=""""""
         ),

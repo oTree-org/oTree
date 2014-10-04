@@ -8,12 +8,10 @@
 
 {% block content %}
 
-    <p>
-        Please choose how much to contribute.
-    </p>
-
-    {% formrow form.contribution with label="How much do you want to contribute to the group project?" %}
+    {% formrow form.contribution with label="How much do you want to contribute to the project?" %}
 
     {% next_button %}
+
+    {% include 'public_goods/Instructions.html' %}
 
 {% endblock %}
