@@ -1,5 +1,5 @@
 from django.contrib import admin
-import survey.models as models
+import survey_sample.models as models
 import otree.adminlib as adminlib
 
 class PlayerAdmin(adminlib.PlayerAdmin):

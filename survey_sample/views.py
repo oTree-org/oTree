@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import survey.models as models
-from survey._builtin import Page
+import survey_sample.models as models
+from survey_sample._builtin import Page
 from otree.common import Money
 
 

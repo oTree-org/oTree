@@ -1,4 +1,4 @@
-from survey._builtin import Bot
+from survey_sample._builtin import Bot
 
 
 class PlayerBot(Bot):
