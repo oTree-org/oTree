@@ -38,7 +38,7 @@ class FeedbackOne(Page):
 
     def variables_for_template(self):
         return {'num_q': 1,
-                'question': "How many understanding questions are there? Please enter an odd negative number, zero or any positive number:",
+                'question': "How many understanding questions are there? Please enter an odd negative integer, or a non-negative integer.",
                 'answer': self.player.training_question_1,
                 'correct': self.treatment.training_1_correct,
                 'explanation': "There are 3 understanding questions.",
@@ -70,7 +70,7 @@ class FeedbackTwo(Page):
                 'question': "All the following are possible in oTree except one?",
                 'answer': self.player.training_question_2,
                 'correct': self.treatment.training_2_correct,
-                'explanation': "The correct answer is Time travel (opens in pop up window)",
+                'explanation': "Time travel (opens in pop up window)",
                 'is_correct': self.player.is_training_question_2_correct(),
                 }
 
@@ -99,7 +99,7 @@ class FeedbackThree(Page):
                 'question': "What operating system is required to use oTree?",
                 'answer': self.player.training_question_3,
                 'correct': self.treatment.training_3_correct,
-                'explanation': "The correct answer is any of the above operating system.",
+                'explanation': "Any of the above operating system.",
                 'is_correct': self.player.is_training_question_3_correct(),
                 }
 
@@ -128,7 +128,7 @@ class FeedbackFour(Page):
                 'question': "What kind of data is included when you export a CSV from oTree?",
                 'answer': self.player.training_question_4,
                 'correct': self.treatment.training_4_correct,
-                'explanation': "The correct answer is Any participants’ input/choice.",
+                'explanation': "Any participants’ input/choice.",
                 'is_correct': self.player.is_training_question_4_correct(),
                 }
 
@@ -168,7 +168,7 @@ class Results(Page):
 
     template_name = 'demo_game/Results.html'
 
-
+# TODO Replace this page with a lab results app..with a more detailed page..See DEMO GAME 3.docx By Shuya page 7
 class Finish(Page):
 
     template_name = 'demo_game/Finish.html'
