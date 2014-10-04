@@ -8,7 +8,7 @@
 {% block content %}
 
     <p>
-        Your answer, <span  class="text-info">{{ answer }}</span>, was {% if is_correct %}<span class="text-success">correct</span>
+        Your answer <span  class="text-info">{{ answer }}</span> was {% if is_correct %}<span class="text-success">correct</span>
         {% else %}<span class="text-danger">incorrect.</span>{% endif %}
     </p>
     <p>
