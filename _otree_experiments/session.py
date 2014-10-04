@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from otree.session import SessionType
 import os
 
@@ -22,7 +23,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Prisoner Dilemma",
+            name="Prisoners' Dilemma",
             base_pay=4.00,
             participants_per_demo_session=2,
             participants_per_session=2,
@@ -62,7 +63,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Traveler Dilemma',
+            name="Travelers' Dilemma",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -102,7 +103,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Symmetric Matrix Game',
+            name='2 x 2 Matrix Game (Symmetric)',
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -110,7 +111,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Asymmetric Matrix Game',
+            name='2 x 2 Matrix Game (Asymmetric)',
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -134,7 +135,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Volunteer Dilemma',
+            name="Volunteers' Dilemma",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=3,
@@ -174,7 +175,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Battle of the sexes',
+            name='Battle of the Sexes',
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
