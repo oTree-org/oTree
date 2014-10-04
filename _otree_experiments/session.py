@@ -38,7 +38,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Trust',
+            name='Trust Game',
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -46,7 +46,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Dictator',
+            name='Dictator Game',
             base_pay=10.00,
             participants_per_session=2,
             participants_per_demo_session=2,
@@ -78,7 +78,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Bargaining',
+            name='Bargaining Game',
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -86,7 +86,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Guessing',
+            name='Guessing Game',
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=5,
@@ -102,7 +102,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Matrix Symmetric',
+            name='Symmetric Matrix Game',
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -110,7 +110,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Matrix Asymmetric',
+            name='Asymmetric Matrix Game',
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -158,7 +158,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Coordination',
+            name='Coordination Game',
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -181,24 +181,8 @@ def session_types():
             subsession_apps=['battle_of_the_sexes', 'lab_results'],
             doc=""""""
         ),
-        SessionType(
-            name='Lemon Market',
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=1,
-            subsession_apps=['lemon_market', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
-            name='Tragedy of the commons',
-            base_pay=10.00,
-            participants_per_session=2,
-            participants_per_demo_session=2,
-            subsession_apps=['tragedy_of_the_commons', 'lab_results'],
-            doc=""""""
-        ),
 
-    ]
+        ]
 
 # FIXME: completed the apps below
 disabled_session_types = [
@@ -219,7 +203,23 @@ disabled_session_types = [
         subsession_apps=['asset_market']*5 + ['lab_results'],
         doc=""""""
     ),
-]
+    SessionType(
+        name='Lemon Market',
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=1,
+        subsession_apps=['lemon_market', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name='Tragedy of the commons',
+        base_pay=10.00,
+        participants_per_session=2,
+        participants_per_demo_session=2,
+        subsession_apps=['tragedy_of_the_commons', 'lab_results'],
+        doc=""""""
+    ),
+    ]
 
 
 def show_on_demo_page(session_type_name):
