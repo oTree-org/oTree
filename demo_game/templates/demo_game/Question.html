@@ -8,12 +8,11 @@
 {% block content %}
     {% if num_q == 1 %}
     <p>
-        This first screen is to give a template for understanding questions and to show you a numeric entry
-        field with restricted values. Just for fun the field accepts any answer that is an odd negative number
-        or any positive number including 0. Thus it will reject an invalid entry of, say -2, and ask you to try
-        again after you click next, but if you enter a valid, but wrong answer, say 1 it will accept it but give
-        you feedback.
-        {% formrow form.training_question_1 with label="How many understanding questions are there? Please enter an odd negative number, zero or any positive number:" %}
+        This first screen is to give a template for understanding questions and to show you a numeric entry field with restricted values.
+        Just for fun the field accepts any answer that is an odd negative integer or a non-negative integer. Thus it will reject an invalid
+        entry of, say -2, and ask you to try again after you click next, but if you enter a valid, but wrong answer, say 1 it will accept it
+        but give you feedback.
+        {% formrow form.training_question_1 with label="How many understanding questions are there?" %}
     </p>
     {% elif num_q == 2 %}
     <p>

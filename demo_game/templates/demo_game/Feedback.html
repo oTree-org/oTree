@@ -2,7 +2,7 @@
 {% load staticfiles floppyforms otree_tags %}
 
 {% block title %}
-    Your feedback for understanding question ({{ num_q }} of {{ total_q }})
+    Solution to Understanding Question  ({{ num_q }} of {{ total_q }})
 {% endblock %}
 
 {% block content %}
@@ -10,9 +10,9 @@
     <p>{{ question }}</p>
     <p class="text-info">Your Answer: {{ answer }}</p>
     {% if is_correct %}
-        <p class="text-success">Your answer is correct. {{ explanation }}.</p>
+        <p class="text-success">Your answer is correct. {{ explanation }}</p>
     {% else %}
-        <p class="text-danger">Your answer is incorrect. {{ explanation }}.</p>
+        <p class="text-danger">Your answer is incorrect. Correct answer is: {{ explanation }}</p>
     {% endif %}
 
     {% next_button %}

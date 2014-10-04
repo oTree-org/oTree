@@ -82,7 +82,7 @@ class Player(otree.models.BasePlayer):
 
     def training_question_1_error_message(self, value):
         if value < 0 and abs(value) % 2 == 0:
-            return 'Please enter an odd negative number, zero or any positive number.'
+            return 'Your entry is invalid.'
 
     # check correct answers
     def is_training_question_1_correct(self):
