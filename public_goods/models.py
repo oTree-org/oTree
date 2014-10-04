@@ -7,9 +7,10 @@ from otree import forms
 
 doc = """
 This is a one-period public goods game with 3 players. Assignment to groups is random.
+<br />
 The game is preceded by one understanding question (in a real experiment you would often have more).
 <br />
-(Source code: available <a href="https://github.com/oTree-org/oTree/tree/master/public_goods" target="_blank">here</a>)
+Source code <a href="https://github.com/oTree-org/oTree/tree/master/public_goods" target="_blank">here</a>
 
 """
 
