@@ -8,34 +8,29 @@
 
 {% block content %}
 
-    <p>
-        The payoffs for the group members are listed below. Your payoff is highlighted.
-    </p>
+    <table class="table-condensed" style="width:500px; margin-top:20px;">
+        <tr><td>You contributed:</td><td>{{ my_contribution }} points</td></tr>
+        <tr><td>Other participants contributed:</td><td>{{ other_contribution }} points</td></tr>
+        <tr><td>Total contribution:</td><td>{{ total_contribution }} points</td></tr>
 
-    <table class="table table-condensed" style="width:500px; margin-top:20px;">
-        <thead>
-        <tr>
-            <th>Initial Amount</th>
-            <th>Contribution</th>
-            <th>Final Payoff</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for p in players %}
-            <tr>
-                <td id="{{ p.index_among_players_in_match }}">{{ endowment }}</td>
-                <td id="{{ p.index_among_players_in_match }}">{{ p.contribution }}</td>
-                <td id="{{ p.index_among_players_in_match }}">{{ p.payoff }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
+        <tr><td colspan="2"><hr/></td></tr>
+
+        <tr><td>Total earnings from the project:</td><td>{{ total_earnings }} points</td></tr>
+        <tr><td>Your earnings from the project:</td><td>{{ share_earnings }} points</td></tr>
+
+        <tr><td colspan="2"><hr/></td></tr>
+
+        <tr><td>Thus in total you earned:</td><td>{{ payoff }}</td></tr>
+        <tr><td>In addition you get a participation fee of:</td><td>{{ base_pay }}</td></tr>
+
+        <tr><td colspan="2"><hr/></td></tr>
+
+        <tr><td>So in sum you will get:</td><td>{{ total_pay }}</td></tr>
     </table>
-
-    <script>
-        $(document).ready(function(){
-            $('[id="{{ id }}"]').toggleClass("success");
-        });
-    </script>
+    <p></p>
+    <p>
+        In order to get paid, please complete the questionnaire that now follows.
+    </p>
 
     {% next_button %}
 
