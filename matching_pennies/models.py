@@ -6,7 +6,7 @@ from otree import forms
 
 doc = """
 <p>This is the familiar playground game "Matching Pennies". In this implementation, players are randomly matched in the
-beginning and then continue to play against the same opponent. Their roles alter deterministically.</p>
+beginning and then continue to play against the same opponent for 3 periods. Their roles might alter across periods.</p>
 <p>The game is preceded by one understanding question (in a real experiment, you would often have more of these).</p>
 <p>Source code <a href="https://github.com/oTree-org/oTree/tree/master/matching_pennies" target="_blank">here</a>.</p>
 """
