@@ -18,17 +18,9 @@ class Subsession(otree.models.BaseSubsession):
     name_in_url = 'quiz'
 
 
-class Treatment(otree.models.BaseTreatment):
-    """Leave this class empty"""
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
-
 class Match(otree.models.BaseMatch):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
-    treatment = models.ForeignKey(Treatment)
     # </built-in>
 
     players_per_match = 1

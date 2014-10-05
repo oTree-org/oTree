@@ -38,16 +38,8 @@ class Subsession(otree.models.BaseSubsession):
     )
 
 
-class Treatment(otree.models.BaseTreatment):
-    """Leave this class empty"""
-
-    subsession = models.ForeignKey(Subsession)
-
-
-
 class Match(otree.models.BaseMatch):
 
-    treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
 
     players_per_match = 2
@@ -70,7 +62,6 @@ class Match(otree.models.BaseMatch):
 class Player(otree.models.BasePlayer):
 
     match = models.ForeignKey(Match, null=True)
-    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
 
     def other_player(self):

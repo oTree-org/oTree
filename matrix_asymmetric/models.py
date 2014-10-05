@@ -32,17 +32,9 @@ class Subsession(otree.models.BaseSubsession):
     rowBcolumnB_column = models.MoneyField(default=0.25)
 
 
-class Treatment(otree.models.BaseTreatment):
-    """Leave this class empty"""
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
 class Match(otree.models.BaseMatch):
 
     # <built-in>
-    treatment = models.ForeignKey(Treatment)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
@@ -82,7 +74,6 @@ class Player(otree.models.BasePlayer):
 
     # <built-in>
     match = models.ForeignKey(Match, null=True)
-    treatment = models.ForeignKey(Treatment, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
