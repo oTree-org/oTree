@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
@@ -16,13 +17,6 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'cournot_competition'
 
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     total_capacity = models.PositiveIntegerField(
         default=60,
         doc="""Total production capacity of all players"""
@@ -35,6 +29,15 @@ class Treatment(otree.models.BaseTreatment):
 
     def max_units_per_player(self):
         return self.total_capacity / Match.players_per_match
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
 
 
 class Match(otree.models.BaseMatch):
@@ -58,10 +61,10 @@ class Match(otree.models.BaseMatch):
 
     def set_payoffs(self):
         self.total_units = sum([p.units for p in self.players])
-        self.price_in_points = self.treatment.total_capacity - self.total_units
+        self.price_in_points = self.subsession.total_capacity - self.total_units
         for p in self.players:
             p.payoff_in_points = self.price_in_points * p.units
-            p.payoff = p.payoff_in_points * self.treatment.currency_per_point
+            p.payoff = p.payoff_in_points * self.subsession.currency_per_point
 
 
 class Player(otree.models.BasePlayer):
@@ -82,8 +85,8 @@ class Player(otree.models.BasePlayer):
     )
 
     def units_error_message(self, value):
-        if not 0 <= value <= self.treatment.max_units_per_player():
-            return "The value must be a whole number between {} and {}, inclusive.".format(0, self.treatment.max_units_per_player())
+        if not 0 <= value <= self.subsession.max_units_per_player():
+            return "The value must be a whole number between {} and {}, inclusive.".format(0, self.subsession.max_units_per_player())
 
 def treatments():
 

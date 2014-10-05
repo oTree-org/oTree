@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import bertrand_competition.models as models
 from bertrand_competition._builtin import Page, WaitPage
 
@@ -12,8 +13,8 @@ class Decide(Page):
 
     def variables_for_template(self):
         return {'num_other_players': self.match.players_per_match - 1,
-                'marginal_cost': self.treatment.marginal_cost,
-                'maximum_price': self.treatment.maximum_price}
+                'marginal_cost': self.subsession.marginal_cost,
+                'maximum_price': self.subsession.maximum_price}
 
 
 class ResultsWaitPage(WaitPage):

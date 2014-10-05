@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+from __future__ import division
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
 import otree.models
 from otree.common import Money, money_range
-from otree import forms
+from otree import widgets
 
 
 author = 'Dev'
@@ -22,14 +24,16 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'asset_market'
 
+    understanding_1_correct = 'P=2.5, N=2'
+    understanding_2_correct = '$8, $12'
 
 class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    understanding_1_correct = 'P=2.5, N=2'
-    understanding_2_correct = '$8, $12'
+
 
 
 class Match(otree.models.BaseMatch):
@@ -72,7 +76,7 @@ class Player(otree.models.BasePlayer):
     shares = models.PositiveIntegerField(default=5)
 
     # order fields
-    order_type = models.CharField(max_length=10, choices=['Buy Order', 'Sell Order', 'None'], widget=forms.RadioSelect())
+    order_type = models.CharField(max_length=10, choices=['Buy Order', 'Sell Order', 'None'], widget=widgets.RadioSelect())
     bp = models.MoneyField(default=0.00, doc="""maximum buying price per share""")
     bn = models.PositiveIntegerField(default=0, doc="""number of shares willing to buy""")
     sp = models.MoneyField(default=0.00, doc="""minimum selling price per share""")
@@ -85,15 +89,15 @@ class Player(otree.models.BasePlayer):
     QUESTION_1_CHOICES = ['P=3, N=2','P=2, N=3','P=2.5, N=3','P=2.5, N=2','No transaction will take place',]
     QUESTION_2_CHOICES = ['$8, $12', '$12, $8', '$8, $8', '$12, $12', '$10, $10']
 
-    understanding_question_1 = models.CharField(max_length=100, null=True, choices=QUESTION_1_CHOICES, verbose_name='', widget=forms.RadioSelect())
-    understanding_question_2 = models.CharField(max_length=100, null=True, choices=QUESTION_2_CHOICES, verbose_name='', widget=forms.RadioSelect())
+    understanding_question_1 = models.CharField(max_length=100, null=True, choices=QUESTION_1_CHOICES, verbose_name='', widget=widgets.RadioSelect())
+    understanding_question_2 = models.CharField(max_length=100, null=True, choices=QUESTION_2_CHOICES, verbose_name='', widget=widgets.RadioSelect())
 
     # check correct answers
     def is_understanding_question_1_correct(self):
-        return self.understanding_question_1 == self.treatment.understanding_1_correct
+        return self.understanding_question_1 == self.subsession.understanding_1_correct
 
     def is_understanding_question_2_correct(self):
-        return self.understanding_question_2 == self.treatment.understanding_2_correct
+        return self.understanding_question_2 == self.subsession.understanding_2_correct
 
 
     def my_field_error_message(self, value):

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import otree.views
 import otree.views.concrete
 import demo_game.models as models
@@ -40,7 +41,7 @@ class FeedbackOne(Page):
         return {'num_q': 1,
                 'question': "How many understanding questions are there? Please enter an odd negative integer, or a non-negative integer.",
                 'answer': self.player.training_question_1,
-                'correct': self.treatment.training_1_correct,
+                'correct': self.subsession.training_1_correct,
                 'explanation': "There are 3 understanding questions.",
                 'is_correct': self.player.is_training_question_1_correct(),
                 }
@@ -69,7 +70,7 @@ class FeedbackTwo(Page):
         return {'num_q': 2,
                 'question': "All the following are possible in oTree except one?",
                 'answer': self.player.training_question_2,
-                'correct': self.treatment.training_2_correct,
+                'correct': self.subsession.training_2_correct,
                 'explanation': "Time travel (opens in pop up window)",
                 'is_correct': self.player.is_training_question_2_correct(),
                 }
@@ -98,7 +99,7 @@ class FeedbackThree(Page):
         return {'num_q': 3,
                 'question': "What operating system is required to use oTree?",
                 'answer': self.player.training_question_3,
-                'correct': self.treatment.training_3_correct,
+                'correct': self.subsession.training_3_correct,
                 'explanation': "Any of the above operating system.",
                 'is_correct': self.player.is_training_question_3_correct(),
                 }
@@ -127,7 +128,7 @@ class FeedbackFour(Page):
         return {'num_q': 4,
                 'question': "What kind of data is included when you export a CSV from oTree?",
                 'answer': self.player.training_question_4,
-                'correct': self.treatment.training_4_correct,
+                'correct': self.subsession.training_4_correct,
                 'explanation': "Any participants’ input/choice.",
                 'is_correct': self.player.is_training_question_4_correct(),
                 }

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import volunteer_dilemma.models as models
 from volunteer_dilemma._builtin import Page, WaitPage
 
@@ -11,8 +12,8 @@ class Decision(Page):
     form_fields = ['volunteer']
 
     def variables_for_template(self):
-        return {'general_benefit': self.treatment.general_benefit,
-                'volunteer_cost': self.treatment.volunteer_cost,
+        return {'general_benefit': self.subsession.general_benefit,
+                'volunteer_cost': self.subsession.volunteer_cost,
                 'num_other_players': self.match.players_per_match - 1}
 
 

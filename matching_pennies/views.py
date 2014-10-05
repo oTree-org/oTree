@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import matching_pennies.models as models
 from matching_pennies._builtin import Page, WaitPage
 from otree.common import Money
 
 
 def variables_for_all_templates(self):
-    return {'point_value': self.treatment.point_value,
+    return {'point_value': self.subsession.point_value,
             'total_q': 1,
             'total_rounds': self.subsession.number_of_rounds,
             'round_number': self.subsession.round_number,
@@ -45,7 +46,7 @@ class FeedbackOne(Page):
         return {'num_q': 1,
                 'question': 'Suppose Player 1 picked "Heads" and Player 2 guessed "Tails". Which of the following will be the result of that round?',
                 'answer': self.player.training_question_1,
-                'correct': self.treatment.training_1_correct,
+                'correct': self.subsession.training_1_correct,
                 'explanation': 'Player 1 gets 100 points, Player 2 gets 0 points',
                 'is_correct': self.player.is_training_question_1_correct(),
                 }

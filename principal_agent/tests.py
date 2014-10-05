@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 from otree.common import Money, money_range
 import principal_agent.views as views
 from principal_agent._builtin import Bot
@@ -23,7 +24,7 @@ class PlayerBot(Bot):
     def play_1(self):
         # P1/A - propose contract
 
-        fixed_pay = random.choice(money_range(-self.treatment.max_fixed_payment, self.treatment.max_fixed_payment, 0.50))
+        fixed_pay = random.choice(money_range(-self.subsession.max_fixed_payment, self.subsession.max_fixed_payment, 0.50))
         return_share = random.choice([x/100.0 for x in range(10, 110, 10)])
 
         self.submit(views.Offer,

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
@@ -33,21 +34,23 @@ class Subsession(otree.models.BaseSubsession):
 
         for p in self.players:
             if p.is_winner:
-                p.payoff = p.treatment.winner_payoff
+                p.payoff = p.subsession.winner_payoff
             else:
                 p.payoff = 0
-
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     winner_payoff = models.MoneyField(
         default=1.00,
         doc='Payoff to the winner'
     )
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
 
 
 class Match(otree.models.BaseMatch):

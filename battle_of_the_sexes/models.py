@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
 import otree.models
-from otree import forms
+from otree import widgets
 
 
 doc = """
@@ -16,13 +17,6 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/battle_of_th
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'battle_of_the_sexes'
-
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     football_husband_amount = models.MoneyField(
         default=0.30,
@@ -45,6 +39,15 @@ class Treatment(otree.models.BaseTreatment):
         doc="""Amount rewarded to wife if opera is chosen"""
     )
 
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
+
+
 
 class Match(otree.models.BaseMatch):
 
@@ -60,16 +63,16 @@ class Match(otree.models.BaseMatch):
         wife = self.get_player_by_role('wife')
 
         if husband.decision != wife.decision:
-            husband.payoff = self.treatment.mismatch_amount
-            wife.payoff = self.treatment.mismatch_amount
+            husband.payoff = self.subsession.mismatch_amount
+            wife.payoff = self.subsession.mismatch_amount
 
         else:
             if husband.decision == 'Football':
-                husband.payoff = self.treatment.football_husband_amount
-                wife.payoff = self.treatment.football_wife_amount
+                husband.payoff = self.subsession.football_husband_amount
+                wife.payoff = self.subsession.football_wife_amount
             else:
-                husband.payoff = self.treatment.opera_husband_amount
-                wife.payoff = self.treatment.opera_wife_amount
+                husband.payoff = self.subsession.opera_husband_amount
+                wife.payoff = self.subsession.opera_wife_amount
 
 
 class Player(otree.models.BasePlayer):
@@ -83,7 +86,7 @@ class Player(otree.models.BasePlayer):
     decision = models.CharField(
         default=None,
         doc="""Either football or the opera""",
-        widget=forms.RadioSelect()
+        widget=widgets.RadioSelect()
     )
 
     def decision_choices(self):

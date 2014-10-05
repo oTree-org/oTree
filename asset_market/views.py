@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+from __future__ import division
+from __future__ import division
 import otree.views
 import asset_market.models as models
 from asset_market._builtin import Page, WaitPage
@@ -57,7 +59,7 @@ class FeedbackOne(Page):
         return {
             'num_q': 1,
             'answer': self.player.understanding_question_1,
-            'correct': self.treatment.understanding_1_correct,
+            'correct': self.subsession.understanding_1_correct,
             'is_correct': self.player.is_understanding_question_1_correct(),
         }
 
@@ -87,7 +89,7 @@ class FeedbackTwo(Page):
         return {
             'num_q': 2,
             'answer': self.player.understanding_question_2,
-            'correct': self.treatment.understanding_2_correct,
+            'correct': self.subsession.understanding_2_correct,
             'is_correct': self.player.is_understanding_question_2_correct(),
         }
 

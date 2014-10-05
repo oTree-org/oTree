@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
@@ -16,19 +17,21 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'lemon_market'
 
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     max_bid_amount = models.MoneyField(
         default=1.00,
         doc="""
         Maximum allowed bid amount.
         """
     )
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
 
 
 class Match(otree.models.BaseMatch):
@@ -57,7 +60,7 @@ class Match(otree.models.BaseMatch):
         self.random_value = random.choice(money_range(0.00, 1.00))
 
     def bid_amount_choices(self):
-        return money_range(0, self.treatment.max_bid_amount, 0.05)
+        return money_range(0, self.subsession.max_bid_amount, 0.05)
 
 
 class Player(otree.models.BasePlayer):
@@ -73,7 +76,7 @@ class Player(otree.models.BasePlayer):
         if self.match.bid_amount > self.match.random_value:
             self.payoff = 0
         else:
-            self.payoff = (1.5 * self.treatment.max_bid_amount) - self.match.bid_amount
+            self.payoff = (1.5 * self.subsession.max_bid_amount) - self.match.bid_amount
 
 
 def treatments():

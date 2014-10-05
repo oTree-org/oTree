@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 from otree.db import models
 import otree.models
-from otree import forms
+from otree import widgets
 
 doc = """
 This is a one-shot prisoner dilemma game. Two players are asked separately whether they want to cooperate or defect.
@@ -14,13 +15,6 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/prisoner" ta
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'prisoner'
-
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     betray_amount = models.MoneyField(
         doc="""amount a player makes if he chooses 'defect' and the other chooses 'cooperate'""",
@@ -40,6 +34,15 @@ class Treatment(otree.models.BaseTreatment):
         doc="""amount both players make if both choose 'defect'""",
         default=0.00,
     )
+
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
 
 class Match(otree.models.BaseMatch):
@@ -63,7 +66,7 @@ class Player(otree.models.BasePlayer):
     decision = models.CharField(
         default=None,
         doc="""This player's decision""",
-        widget=forms.RadioSelect()
+        widget=widgets.RadioSelect()
     )
 
     def decision_choices(self):
@@ -75,10 +78,10 @@ class Player(otree.models.BasePlayer):
 
     def set_payoff(self):
         """Calculate player payoff"""
-        payoff_matrix = {'Cooperate': {'Cooperate': self.treatment.friend_amount,
-                                       'Defect': self.treatment.betrayed_amount},
-                         'Defect':   {'Cooperate': self.treatment.betray_amount,
-                                      'Defect': self.treatment.enemy_amount}}
+        payoff_matrix = {'Cooperate': {'Cooperate': self.subsession.friend_amount,
+                                       'Defect': self.subsession.betrayed_amount},
+                         'Defect':   {'Cooperate': self.subsession.betray_amount,
+                                      'Defect': self.subsession.enemy_amount}}
 
         self.payoff = (payoff_matrix[self.decision]
                                     [self.other_player().decision])

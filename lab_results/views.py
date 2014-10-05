@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 from lab_results._builtin import Page
 
 class RedemptionCode(Page):

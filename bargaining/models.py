@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 from otree.db import models
 import otree.models
@@ -17,19 +18,21 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'bargaining'
 
-
-class Treatment(otree.models.BaseTreatment):
-
-    # </built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     amount_shared = models.MoneyField(
         default=1.00,
         doc="""
         Amount to be shared by both players
         """
     )
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # </built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
 
 
 class Match(otree.models.BaseMatch):
@@ -43,7 +46,7 @@ class Match(otree.models.BaseMatch):
 
     def set_payoffs(self):
         total_requested_amount = sum([p.request_amount for p in self.players])
-        if total_requested_amount < self.treatment.amount_shared:
+        if total_requested_amount < self.subsession.amount_shared:
             for p in self.players:
                 p.payoff = p.request_amount
         else:
@@ -68,7 +71,7 @@ class Player(otree.models.BasePlayer):
 
     def request_amount_choices(self):
         """Range of allowed request amount"""
-        return money_range(0, self.treatment.amount_shared, 0.05)
+        return money_range(0, self.subsession.amount_shared, 0.05)
 
     def other_player(self):
         """Returns the opponent of the current player"""

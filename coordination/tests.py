@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import coordination.views as views
 from coordination._builtin import Bot
 import random

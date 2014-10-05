@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
@@ -18,13 +19,6 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'bertrand_competition'
 
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     marginal_cost = models.MoneyField(
         default=0.20,
         doc="""Marginal cost of production, effectively the minimum price (exclusive)"""
@@ -34,6 +28,15 @@ class Treatment(otree.models.BaseTreatment):
         default=1.00,
         doc="""The maximum price"""
     )
+
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
 
 class Match(otree.models.BaseMatch):
@@ -58,7 +61,7 @@ class Match(otree.models.BaseMatch):
     def set_payoffs(self):
         self.winning_price = min([p.price for p in self.players])
         self.num_winners = len([p for p in self.players if p.price == self.winning_price])
-        winner_payoff = (self.winning_price - self.treatment.marginal_cost) / self.num_winners
+        winner_payoff = (self.winning_price - self.subsession.marginal_cost) / self.num_winners
 
         for p in self.players:
             if p.price == self.winning_price:
@@ -83,7 +86,7 @@ class Player(otree.models.BasePlayer):
     )
 
     def price_choices(self):
-        return money_range(self.treatment.marginal_cost, self.treatment.maximum_price, 0.05)
+        return money_range(self.subsession.marginal_cost, self.subsession.maximum_price, 0.05)
 
     is_a_winner = models.BooleanField(
         default=False,

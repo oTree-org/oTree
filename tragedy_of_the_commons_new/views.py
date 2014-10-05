@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+from __future__ import division
 import otree.views
 import tragedy_of_the_commons_new.models as models
 from tragedy_of_the_commons_new._builtin import Page, WaitPage

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import bargaining.views as views
 from bargaining._builtin import Bot
 import random

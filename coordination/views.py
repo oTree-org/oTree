@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import coordination.models as models
 from coordination._builtin import Page, WaitPage
 
@@ -14,8 +15,8 @@ class Choice(Page):
     form_fields = ['choice']
 
     def variables_for_template(self):
-        return {'match_amount': self.treatment.match_amount,
-                'mismatch_amount': self.treatment.mismatch_amount}
+        return {'match_amount': self.subsession.match_amount,
+                'mismatch_amount': self.subsession.mismatch_amount}
 
 
 class ResultsWaitPage(WaitPage):

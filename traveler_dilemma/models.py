@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 from otree.db import models
 import otree.models
 from otree.common import money_range
-from otree import forms
+from otree import widgets
 
 doc = """
 Traveler's dilemma game has two players.
@@ -17,13 +18,6 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'traveler_dilemma'
 
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     reward = models.MoneyField(default=0.10,
                                doc="""Player's reward for the lowest claim""")
 
@@ -34,6 +28,15 @@ class Treatment(otree.models.BaseTreatment):
                                    doc="""The maximum claim to be requested""")
     min_amount = models.MoneyField(default=0.20,
                                    doc="""The minimum claim to be requested""")
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
 
 
 class Match(otree.models.BaseMatch):
@@ -64,16 +67,16 @@ class Player(otree.models.BasePlayer):
 
     #def claim_choices(self):
     #    """Range of allowed claim values"""
-    #    return money_range(self.treatment.min_amount, self.treatment.max_amount, 0.05)
+    #    return money_range(self.subsession.min_amount, self.subsession.max_amount, 0.05)
 
     def other_player(self):
         return self.other_players_in_match()[0]
 
     def set_payoff(self):
         if self.claim < self.other_player().claim:
-            self.payoff = self.claim + self.treatment.reward
+            self.payoff = self.claim + self.subsession.reward
         elif self.claim > self.other_player().claim:
-            self.payoff = self.other_player().claim - self.treatment.penalty
+            self.payoff = self.other_player().claim - self.subsession.penalty
         else:
             self.payoff = self.claim
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import matrix_symmetric.models as models
 from matrix_symmetric._builtin import Page, WaitPage
 
@@ -11,10 +12,10 @@ class Decision(Page):
     form_fields = ['decision']
 
     def variables_for_template(self):
-        return {'self_A_other_A': self.treatment.self_A_other_A,
-                'self_A_other_B': self.treatment.self_A_other_B,
-                'self_B_other_A': self.treatment.self_B_other_A,
-                'self_B_other_B': self.treatment.self_B_other_B}
+        return {'self_A_other_A': self.subsession.self_A_other_A,
+                'self_A_other_B': self.subsession.self_A_other_B,
+                'self_B_other_A': self.subsession.self_B_other_A,
+                'self_B_other_B': self.subsession.self_B_other_B}
 
 
 class ResultsWaitPage(WaitPage):

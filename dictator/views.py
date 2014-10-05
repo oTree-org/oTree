@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import dictator.models as models
 from dictator._builtin import Page, WaitPage
 
@@ -8,7 +9,7 @@ class Introduction(Page):
     template_name = 'dictator/Introduction.html'
 
     def variables_for_template(self):
-        return {'allocated_amount': self.treatment.allocated_amount,
+        return {'allocated_amount': self.subsession.allocated_amount,
                 'player_id': self.player.index_among_players_in_match}
 
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import guessing.views as views
 from guessing._builtin import Bot
 import random

@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
 import otree.models
-from otree import forms
+from otree import widgets
 
 doc = """
 In the symmetric matrix game, the payoffs for playing a particular strategy depend only on the other strategies employed, not on who is playing them.
@@ -15,13 +16,6 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'matrix_symmetric'
 
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     self_A_other_A = models.MoneyField(default=0.10)
     self_A_other_B = models.MoneyField(
         default=0.00,
@@ -30,6 +24,13 @@ class Treatment(otree.models.BaseTreatment):
     self_B_other_A = models.MoneyField(default=0.30)
     self_B_other_B = models.MoneyField(default=0.40)
 
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
 class Match(otree.models.BaseMatch):
 
@@ -56,7 +57,7 @@ class Player(otree.models.BasePlayer):
     decision = models.CharField(
         default=None,
         doc='either A or B',
-        widget=forms.RadioSelect(),
+        widget=widgets.RadioSelect(),
     )
 
     def decision_choices(self):
@@ -66,12 +67,12 @@ class Player(otree.models.BasePlayer):
 
         payoff_matrix = {
             'A': {
-                'A': self.treatment.self_A_other_A,
-                'B': self.treatment.self_A_other_B,
+                'A': self.subsession.self_A_other_A,
+                'B': self.subsession.self_A_other_B,
             },
             'B': {
-                'A': self.treatment.self_B_other_A,
-                'B': self.treatment.self_B_other_B,
+                'A': self.subsession.self_B_other_A,
+                'B': self.subsession.self_B_other_B,
             }
         }
 

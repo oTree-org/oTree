@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import stag_hunt.views as views
 from stag_hunt._builtin import Bot
 import random

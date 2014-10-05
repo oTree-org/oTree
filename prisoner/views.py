@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import prisoner.models as models
 from prisoner._builtin import Page, WaitPage
 
@@ -15,10 +16,10 @@ class Decision(Page):
 
     def variables_for_template(self):
 
-        return {'friend_amount': self.treatment.friend_amount,
-                'betrayed_amount': self.treatment.betrayed_amount,
-                'enemy_amount': self.treatment.enemy_amount,
-                'betray_amount': self.treatment.betray_amount}
+        return {'friend_amount': self.subsession.friend_amount,
+                'betrayed_amount': self.subsession.betrayed_amount,
+                'enemy_amount': self.subsession.enemy_amount,
+                'betray_amount': self.subsession.betray_amount}
 
 
 class ResultsWaitPage(WaitPage):

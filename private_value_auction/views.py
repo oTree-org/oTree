@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import private_value_auction.models as models
 from private_value_auction._builtin import Page, WaitPage
 from otree.common import Money
@@ -21,8 +22,8 @@ class Bid(Page):
             self.player.private_value = self.player.generate_private_value()
 
         return {'private_value': self.player.private_value,
-                'min_bid': Money(self.treatment.min_allowable_bid),
-                'max_bid': Money(self.treatment.max_allowable_bid)}
+                'min_bid': Money(self.subsession.min_allowable_bid),
+                'max_bid': Money(self.subsession.max_allowable_bid)}
 
 
 class ResultsWaitPage(WaitPage):

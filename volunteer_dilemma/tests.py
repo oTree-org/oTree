@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import volunteer_dilemma.views as views
 from volunteer_dilemma._builtin import Bot
 import random

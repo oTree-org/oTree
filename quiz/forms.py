@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import quiz.models as models
 from django import forms
 from quiz._builtin import Form

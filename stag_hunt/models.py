@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
 import otree.models
-from otree import forms
+from otree import widgets
 
 
 doc = """
@@ -18,13 +19,6 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/stag_hunt" t
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'stag_hunt'
-
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     stag_stag_amount = models.MoneyField(
         default=0.20,
@@ -45,6 +39,15 @@ class Treatment(otree.models.BaseTreatment):
         default=0.10,
         doc="""Payoff if both players choose hare"""
     )
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
 
 
 class Match(otree.models.BaseMatch):
@@ -68,7 +71,7 @@ class Player(otree.models.BasePlayer):
     decision = models.CharField(
         default=None,
         doc="""The player's choice""",
-        widget=forms.RadioSelect()
+        widget=widgets.RadioSelect()
     )
 
     def decision_choices(self):
@@ -82,12 +85,12 @@ class Player(otree.models.BasePlayer):
 
         payoff_matrix = {
             'Stag': {
-                'Stag': self.treatment.stag_stag_amount,
-                'Hare': self.treatment.stag_hare_amount,
+                'Stag': self.subsession.stag_stag_amount,
+                'Hare': self.subsession.stag_hare_amount,
             },
             'Hare': {
-                'Stag': self.treatment.hare_stag_amount,
-                'Hare': self.treatment.hare_hare_amount,
+                'Stag': self.subsession.hare_stag_amount,
+                'Hare': self.subsession.hare_hare_amount,
             }
         }
         self.payoff = payoff_matrix[self.decision][self.other_player().decision]

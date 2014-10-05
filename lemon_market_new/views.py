@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+from __future__ import division
 import otree.views
 import lemon_market_new.models as models
 from lemon_market_new._builtin import Page, WaitPage

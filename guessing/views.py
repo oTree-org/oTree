@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import guessing.models as models
 from guessing._builtin import Page, WaitPage
 
@@ -9,7 +10,7 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {'players_count': len(self.player.other_players_in_subsession()),
-                'winner_payoff': self.treatment.winner_payoff}
+                'winner_payoff': self.subsession.winner_payoff}
 
 
 class Guess(Page):

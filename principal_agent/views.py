@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import principal_agent.models as models
 from principal_agent._builtin import Page, WaitPage
 from otree.common import Money, money_range
@@ -10,13 +11,13 @@ def variables_for_all_templates(self):
     for effort in range(1, 10+1):
         efforts_returns_costs.append(
             [effort,
-             self.treatment.return_from_effort(effort),
-             self.treatment.cost_from_effort(effort)]
+             self.subsession.return_from_effort(effort),
+             self.subsession.cost_from_effort(effort)]
         )
 
-    return {'fixed_payment': self.treatment.max_fixed_payment,
-            'reject_principal_pay': self.treatment.reject_principal_pay,
-            'reject_agent_pay': self.treatment.reject_agent_pay,
+    return {'fixed_payment': self.subsession.max_fixed_payment,
+            'reject_principal_pay': self.subsession.reject_principal_pay,
+            'reject_agent_pay': self.subsession.reject_agent_pay,
             'efforts_returns_costs': efforts_returns_costs}
 
 

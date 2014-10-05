@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
@@ -25,13 +26,6 @@ class Subsession(otree.models.BaseSubsession):
         players_with_highest_bid = [p for p in self.players if p.bid_amount == self.highest_bid()]
         winner = random.choice(players_with_highest_bid)    # if tie, winner is chosen at random
         winner.is_winner = True
-
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     item_value = models.MoneyField(
         default=None,
@@ -67,6 +61,15 @@ class Treatment(otree.models.BaseTreatment):
         return estimate
 
 
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
+
 class Match(otree.models.BaseMatch):
 
     # <built-in>
@@ -96,8 +99,8 @@ class Player(otree.models.BasePlayer):
     )
 
     def bid_amount_error_message(self, value):
-        if not self.treatment.min_allowable_bid <= value <= self.treatment.max_allowable_bid:
-            return 'The amount bidded must be between {} and {}, inclusive.'.format(self.treatment.min_allowable_bid, self.treatment.max_allowable_bid)
+        if not self.subsession.min_allowable_bid <= value <= self.subsession.max_allowable_bid:
+            return 'The amount bidded must be between {} and {}, inclusive.'.format(self.subsession.min_allowable_bid, self.subsession.max_allowable_bid)
 
     is_winner = models.BooleanField(
         default=False,
@@ -106,7 +109,7 @@ class Player(otree.models.BasePlayer):
 
     def set_payoff(self):
         if self.is_winner:
-            self.payoff = self.treatment.item_value - self.bid_amount
+            self.payoff = self.subsession.item_value - self.bid_amount
             if self.payoff < 0:
                 self.payoff = 0
         else:

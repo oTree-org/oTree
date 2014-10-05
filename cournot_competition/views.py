@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import cournot_competition.models as models
 from cournot_competition._builtin import Page, WaitPage
 
@@ -8,10 +9,10 @@ class Decide(Page):
     template_name = 'cournot_competition/Decide.html'
 
     def variables_for_template(self):
-        return {'total_capacity': self.treatment.total_capacity,
-                'max_units_per_player': self.treatment.max_units_per_player(),
+        return {'total_capacity': self.subsession.total_capacity,
+                'max_units_per_player': self.subsession.max_units_per_player(),
                 'num_other_players': self.match.players_per_match - 1,
-                'currency_per_point': self.treatment.currency_per_point}
+                'currency_per_point': self.subsession.currency_per_point}
 
     form_model = models.Player
     form_fields = ['units']

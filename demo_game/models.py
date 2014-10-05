@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
 import otree.models
-from otree import forms
+from otree import widgets
 
 
 doc = """
@@ -19,17 +20,19 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'demo_game'
 
+    training_1_correct = 3
+    training_2_correct = "Time travel (opens in pop up window)"
+    training_3_correct = "Any of the above"
+    training_4_correct = "Any participants' input/choice"
+
 
 class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_1_correct = 3
-    training_2_correct = "Time travel (opens in pop up window)"
-    training_3_correct = "Any of the above"
-    training_4_correct = "Any participants' input/choice"
 
 
 class Match(otree.models.BaseMatch):
@@ -53,7 +56,7 @@ class Player(otree.models.BasePlayer):
     demo_field1 = models.CharField(
         default=None,
         doc="""field With radiobutton input.""",
-        widget=forms.RadioSelect(),
+        widget=widgets.RadioSelect(),
     )
     demo_field2 = models.CharField(
         default=None,
@@ -66,10 +69,10 @@ class Player(otree.models.BasePlayer):
     def demo_field1_choices(self):
         return ['0', '1', '2', 'do not know']
 
-    training_question_1 = models.IntegerField(null=True, verbose_name='', widget=forms.TextInput())
-    training_question_2 = models.CharField(max_length=100, null=True, verbose_name='', widget=forms.RadioSelect())
-    training_question_3 = models.CharField(max_length=100, null=True, verbose_name='', widget=forms.RadioSelect())
-    training_question_4 = models.CharField(max_length=100, null=True, verbose_name='', widget=forms.RadioSelect())
+    training_question_1 = models.IntegerField(null=True, verbose_name='', widget=widgets.TextInput())
+    training_question_2 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
+    training_question_3 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
+    training_question_4 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
 
     def training_question_2_choices(self):
         return ['Embed images', 'Dynamic visualizations using HighCharts', 'Time travel (opens in pop up window)', 'Embed video', 'Embed audio']
@@ -86,16 +89,16 @@ class Player(otree.models.BasePlayer):
 
     # check correct answers
     def is_training_question_1_correct(self):
-        return self.training_question_1 == self.treatment.training_1_correct
+        return self.training_question_1 == self.subsession.training_1_correct
 
     def is_training_question_2_correct(self):
-        return self.training_question_2 == self.treatment.training_2_correct
+        return self.training_question_2 == self.subsession.training_2_correct
 
     def is_training_question_3_correct(self):
-        return self.training_question_3 == self.treatment.training_3_correct
+        return self.training_question_3 == self.subsession.training_3_correct
 
     def is_training_question_4_correct(self):
-        return self.training_question_4 == self.treatment.training_4_correct
+        return self.training_question_4 == self.subsession.training_4_correct
 
     def set_payoff(self):
         self.payoff = 0

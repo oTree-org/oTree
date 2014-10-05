@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
@@ -19,13 +20,6 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'private_value_auction'
 
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     min_allowable_bid = models.MoneyField(
         default=0.0,
         doc="""Minimum value of item"""
@@ -35,6 +29,15 @@ class Treatment(otree.models.BaseTreatment):
         default=10.0,
         doc="""Maximum value of item"""
     )
+
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
 
 class Match(otree.models.BaseMatch):
@@ -76,7 +79,7 @@ class Player(otree.models.BasePlayer):
     )
 
     def bid_amount_choices(self):
-        return money_range(self.treatment.min_allowable_bid, self.treatment.max_allowable_bid, 0.05)
+        return money_range(self.subsession.min_allowable_bid, self.subsession.max_allowable_bid, 0.05)
 
     is_winner = models.BooleanField(
         default=False,
@@ -84,7 +87,7 @@ class Player(otree.models.BasePlayer):
     )
 
     def generate_private_value(self):
-        return round(random.uniform(self.treatment.min_allowable_bid, self.treatment.max_allowable_bid), 1)
+        return round(random.uniform(self.subsession.min_allowable_bid, self.subsession.max_allowable_bid), 1)
 
     def set_payoff(self):
         if self.is_winner:

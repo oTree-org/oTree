@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 from __future__ import division
 from otree.db import models
 import otree.models
 from otree.common import Money, money_range
-from otree import forms
+from otree import widgets
 
 
 doc = """
@@ -18,13 +19,6 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/principal_ag
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'principal_agent'
-
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     max_fixed_payment = models.MoneyField(
         default=7.00,
@@ -62,6 +56,15 @@ class Treatment(otree.models.BaseTreatment):
 
     def return_from_effort(self, effort):
         return effort*Money(self.agent_work_effort_base_return)
+
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
 
 class Match(otree.models.BaseMatch):
@@ -102,12 +105,12 @@ class Match(otree.models.BaseMatch):
     contract_accepted = models.NullBooleanField(
         default=None,
         doc="""Whether agent accepts proposal""",
-        widget=forms.RadioSelect(),
+        widget=widgets.RadioSelect(),
     )
 
     # choices
     def agent_fixed_pay_choices(self):
-        return money_range(-self.treatment.max_fixed_payment, self.treatment.max_fixed_payment, 0.50)
+        return money_range(-self.subsession.max_fixed_payment, self.subsession.max_fixed_payment, 0.50)
 
     def agent_work_effort_choices(self):
         return range(1, 10+1)
@@ -125,11 +128,11 @@ class Match(otree.models.BaseMatch):
         agent = self.get_player_by_role('agent')
 
         if not self.contract_accepted:
-            principal.payoff = self.treatment.reject_principal_pay
-            agent.payoff = self.treatment.reject_agent_pay
+            principal.payoff = self.subsession.reject_principal_pay
+            agent.payoff = self.subsession.reject_agent_pay
         else:
-            self.agent_work_cost = self.treatment.cost_from_effort(self.agent_work_effort)
-            self.total_return = self.treatment.return_from_effort(self.agent_work_effort)
+            self.agent_work_cost = self.subsession.cost_from_effort(self.agent_work_effort)
+            self.total_return = self.subsession.return_from_effort(self.agent_work_effort)
 
             money_to_agent = self.agent_return_share*self.total_return + self.agent_fixed_pay
             agent.payoff = money_to_agent - self.agent_work_cost

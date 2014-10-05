@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import matrix_symmetric.views as views
 from matrix_symmetric._builtin import Bot
 import random

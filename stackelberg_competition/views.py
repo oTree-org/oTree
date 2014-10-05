@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import stackelberg_competition.models as models
 from stackelberg_competition._builtin import Page, WaitPage
 
@@ -9,9 +10,9 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {'player_id': self.player.index_among_players_in_match,
-                'total_capacity': self.treatment.total_capacity,
-                'max_units_per_player': self.treatment.max_units_per_player(),
-                'currency_per_point': self.treatment.currency_per_point}
+                'total_capacity': self.subsession.total_capacity,
+                'max_units_per_player': self.subsession.max_units_per_player(),
+                'currency_per_point': self.subsession.currency_per_point}
 
 
 class ChoiceOne(Page):

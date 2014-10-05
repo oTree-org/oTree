@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 from otree.db import models
 import otree.models
 from otree.common import money_range
-from otree import forms
+from otree import widgets
 
 doc = """
 Dictator game. Single Treatment. Two players, one of whom is the dictator.
@@ -17,17 +18,19 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'dictator'
 
+    allocated_amount = models.MoneyField(
+        default=1.00,
+        doc="""Initial amount allocated to the dictator"""
+    )
+
 
 class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    allocated_amount = models.MoneyField(
-        default=1.00,
-        doc="""Initial amount allocated to the dictator"""
-    )
 
 
 class Match(otree.models.BaseMatch):
@@ -45,13 +48,13 @@ class Match(otree.models.BaseMatch):
     )
 
     def offer_amount_choices(self):
-        return money_range(0, self.treatment.allocated_amount, 0.05)
+        return money_range(0, self.subsession.allocated_amount, 0.05)
 
     def set_payoffs(self):
         p1 = self.get_player_by_index(1)
         p2 = self.get_player_by_index(2)
 
-        p1.payoff = self.treatment.allocated_amount - self.offer_amount
+        p1.payoff = self.subsession.allocated_amount - self.offer_amount
         p2.payoff = self.offer_amount
 
 

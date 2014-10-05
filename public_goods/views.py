@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import public_goods.models as models
 from public_goods._builtin import Page, WaitPage
 
 
 def variables_for_all_templates(self):
-    return {'endowment': self.treatment.endowment}
+    return {'endowment': self.subsession.endowment}
 
 
 class Introduction(Page):
@@ -15,7 +16,7 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {'no_of_players': self.match.players_per_match,
-                'efficiency_factor': self.treatment.efficiency_factor}
+                'efficiency_factor': self.subsession.efficiency_factor}
 
 
 class Question(Page):
@@ -74,7 +75,7 @@ class Results(Page):
         total_contribution = sum([c.contribution for c in self.match.players])
         total_earnings = float(total_contribution) * 1.8
         share_earnings = float(total_earnings) / 3
-        individual_earnings = (self.treatment.endowment - current_player.contribution) + share_earnings
+        individual_earnings = (self.subsession.endowment - current_player.contribution) + share_earnings
         base_points = 10
         total_points = individual_earnings + base_points
 

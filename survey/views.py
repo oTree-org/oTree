@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import survey.models as models
 from survey._builtin import Page
 from otree.common import Money

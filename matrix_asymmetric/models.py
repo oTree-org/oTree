@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
 import otree.models
-from otree import forms
+from otree import widgets
 
 doc = """
 In the asymmetric matrix game, the strategy sets for both players are different.
@@ -14,13 +15,6 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/matrix_asymm
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'matrix_asymmetric'
-
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     rowAcolumnA_row = models.MoneyField(default=0.20)
     rowAcolumnA_column = models.MoneyField(default=0.30)
@@ -38,6 +32,13 @@ class Treatment(otree.models.BaseTreatment):
     rowBcolumnB_column = models.MoneyField(default=0.25)
 
 
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
 class Match(otree.models.BaseMatch):
 
     # <built-in>
@@ -53,23 +54,23 @@ class Match(otree.models.BaseMatch):
 
         row_matrix = {
             'A': {
-                'A': self.treatment.rowAcolumnA_row,
-                'B': self.treatment.rowAcolumnB_row,
+                'A': self.subsession.rowAcolumnA_row,
+                'B': self.subsession.rowAcolumnB_row,
             },
             'B': {
-                'A': self.treatment.rowBcolumnA_row,
-                'B': self.treatment.rowBcolumnB_row,
+                'A': self.subsession.rowBcolumnA_row,
+                'B': self.subsession.rowBcolumnB_row,
             }
         }
 
         column_matrix = {
             'A': {
-                'A': self.treatment.rowAcolumnA_column,
-                'B': self.treatment.rowAcolumnB_column,
+                'A': self.subsession.rowAcolumnA_column,
+                'B': self.subsession.rowAcolumnB_column,
             },
             'B': {
-                'A': self.treatment.rowBcolumnA_column,
-                'B': self.treatment.rowBcolumnB_column,
+                'A': self.subsession.rowBcolumnA_column,
+                'B': self.subsession.rowBcolumnB_column,
             }
         }
 
@@ -92,7 +93,7 @@ class Player(otree.models.BasePlayer):
     decision = models.CharField(
         default=None,
         doc='either A or B',
-        widget=forms.RadioSelect()
+        widget=widgets.RadioSelect()
     )
 
     def decision_choices(self):

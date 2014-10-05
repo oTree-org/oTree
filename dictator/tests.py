@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import dictator.views as views
 from dictator._builtin import Bot
 import random
@@ -9,7 +10,7 @@ class PlayerBot(Bot):
     def play(self):
 
         # basic assertions
-        assert (self.treatment.allocated_amount == 1.0)
+        assert (self.subsession.allocated_amount == 1.0)
         assert (self.match.players_per_match == 2)
 
         # start game

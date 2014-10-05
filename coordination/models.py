@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 
 from otree.db import models
 import otree.models
-from otree import forms
+from otree import widgets
 
 
 doc = """
@@ -18,13 +19,6 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'coordination'
 
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     match_amount = models.MoneyField(
         default=1.00,
         doc="""Payoff for each player if choices match"""
@@ -34,6 +28,15 @@ class Treatment(otree.models.BaseTreatment):
         default=0.00,
         doc="""Payoff for each player if choices don't match"""
     )
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
 
 
 class Match(otree.models.BaseMatch):
@@ -50,9 +53,9 @@ class Match(otree.models.BaseMatch):
         p2 = self.get_player_by_index(2)
 
         if p1.choice == p2.choice:
-            p1.payoff = p2.payoff = self.treatment.match_amount
+            p1.payoff = p2.payoff = self.subsession.match_amount
         else:
-            p1.payoff = p2.payoff = self.treatment.mismatch_amount
+            p1.payoff = p2.payoff = self.subsession.mismatch_amount
 
 
 class Player(otree.models.BasePlayer):
@@ -66,7 +69,7 @@ class Player(otree.models.BasePlayer):
     choice = models.CharField(
         default=None,
         doc="""Either A or B""",
-        widget = forms.RadioSelect()
+        widget = widgets.RadioSelect()
     )
 
     def choice_choices(self):

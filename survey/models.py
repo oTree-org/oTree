@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 from django_countries.fields import CountryField
 from otree.db import models
 import otree.models
-from otree import forms
+from otree import widgets
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -11,6 +12,7 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -47,7 +49,7 @@ class Player(otree.models.BasePlayer):
 
     q_country = CountryField(default=None, verbose_name='What is your country of citizenship?')
     q_age = models.PositiveIntegerField(verbose_name='What is your age?', default=None)
-    q_gender = models.CharField(default=None, verbose_name='What is your gender?', widget=forms.RadioSelect())
+    q_gender = models.CharField(default=None, verbose_name='What is your gender?', widget=widgets.RadioSelect())
 
     crt_bat_float = models.DecimalField(default=None, max_digits=6, decimal_places=2)
     crt_bat = models.PositiveIntegerField(default=None)

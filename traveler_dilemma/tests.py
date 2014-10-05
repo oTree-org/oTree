@@ -8,8 +8,8 @@ class PlayerBot(Bot):
     def play(self):
 
         # basic assertions
-        assert (self.treatment.max_amount == 1.00)
-        assert (self.treatment.min_amount == 0.20)
+        assert (self.subsession.max_amount == 1.00)
+        assert (self.subsession.min_amount == 0.20)
 
         # start game
         self.submit(views.Introduction)

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
 import otree.models
 from otree.common import Money, money_range
-from otree import forms
+from otree import widgets
 
 author = 'Dev'
 
@@ -18,11 +19,6 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/tragedy_of_t
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'tragedy_of_the_commons'
-
-
-class Treatment(otree.models.BaseTreatment):
-
-    subsession = models.ForeignKey(Subsession)
 
     common_gain = models.MoneyField(
         doc="""If both players """,
@@ -42,6 +38,13 @@ class Treatment(otree.models.BaseTreatment):
     )
 
 
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    subsession = models.ForeignKey(Subsession)
+
+
+
 class Match(otree.models.BaseMatch):
 
     treatment = models.ForeignKey(Treatment)
@@ -52,16 +55,16 @@ class Match(otree.models.BaseMatch):
     def set_payoffs(self):
         if all([p.decision == 'defect' for p in self.players]):
             for p in self.players:
-                p.payoff = self.treatment.common_loss
+                p.payoff = self.subsession.common_loss
         elif all([p.decision == 'cooperate' for p in self.players]):
             for p in self.players:
-                p.payoff = self.treatment.common_gain
+                p.payoff = self.subsession.common_gain
         else:
             for p in self.players:
                 if p.decision == 'defect':
-                    p.payoff = self.treatment.individual_gain - self.treatment.defect_costs
+                    p.payoff = self.subsession.individual_gain - self.subsession.defect_costs
                 else:
-                    p.payoff = self.treatment.common_gain - self.treatment.defect_costs
+                    p.payoff = self.subsession.common_gain - self.subsession.defect_costs
 
 
 class Player(otree.models.BasePlayer):
@@ -77,7 +80,7 @@ class Player(otree.models.BasePlayer):
     decision = models.CharField(
         null=True,
         doc="""Cooperate or defect""",
-        widget=forms.RadioSelect()
+        widget=widgets.RadioSelect()
     )
 
     def decision_choices(self):

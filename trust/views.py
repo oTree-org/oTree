@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import trust.models as models
 from trust._builtin import Page, WaitPage
 
@@ -8,7 +9,7 @@ class Introduction(Page):
     template_name = 'trust/Introduction.html'
 
     def variables_for_template(self):
-        return {'amount_allocated': self.treatment.amount_allocated}
+        return {'amount_allocated': self.subsession.amount_allocated}
 
 
 class Send(Page):
@@ -26,7 +27,7 @@ class Send(Page):
         return self.player.index_among_players_in_match == 1
 
     def variables_for_template(self):
-        return {'amount_allocated': self.treatment.amount_allocated}
+        return {'amount_allocated': self.subsession.amount_allocated}
 
 
 class SimpleWaitPage(WaitPage):
@@ -52,9 +53,9 @@ class SendBack(Page):
 
     def variables_for_template(self):
         tripled_amount = self.match.sent_amount * 3
-        total_amount = self.treatment.amount_allocated + tripled_amount
+        total_amount = self.subsession.amount_allocated + tripled_amount
 
-        return {'amount_allocated': self.treatment.amount_allocated,
+        return {'amount_allocated': self.subsession.amount_allocated,
                 'sent_amount': self.match.sent_amount,
                 'tripled_amount': tripled_amount,
                 'total_amount': total_amount}
@@ -84,7 +85,7 @@ class Results(Page):
 
         tripled_amount = self.match.sent_amount * 3
 
-        return {'amount_allocated': self.treatment.amount_allocated,
+        return {'amount_allocated': self.subsession.amount_allocated,
                 'sent_amount': self.match.sent_amount,
                 'tripled_amount': tripled_amount,
                 'sent_back_amount': self.match.sent_back_amount,

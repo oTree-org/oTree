@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
@@ -19,6 +20,7 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>

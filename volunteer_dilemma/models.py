@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
 import otree.models
-from otree import forms
+from otree import widgets
 
 
 doc = """
@@ -18,13 +19,6 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'volunteer_dilemma'
 
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     general_benefit = models.MoneyField(
         default=1.00,
         doc="""Payoff for each player if at least one volunteers"""
@@ -34,6 +28,15 @@ class Treatment(otree.models.BaseTreatment):
         default=0.40,
         doc="""Cost incurred by volunteering player"""
     )
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
 
 
 class Match(otree.models.BaseMatch):
@@ -47,13 +50,13 @@ class Match(otree.models.BaseMatch):
 
     def set_payoffs(self):
         if any(p.volunteer for p in self.players):
-            baseline_amount = self.treatment.general_benefit
+            baseline_amount = self.subsession.general_benefit
         else:
             baseline_amount = 0
         for p in self.players:
             p.payoff = baseline_amount
             if p.volunteer:
-                p.payoff -= self.treatment.volunteer_cost
+                p.payoff -= self.subsession.volunteer_cost
 
 
 class Player(otree.models.BasePlayer):
@@ -67,7 +70,7 @@ class Player(otree.models.BasePlayer):
     volunteer = models.NullBooleanField(
         default=None,
         doc="""Whether player volunteers""",
-        widget=forms.RadioSelect(),
+        widget=widgets.RadioSelect(),
     )
 
 

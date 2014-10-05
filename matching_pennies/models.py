@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 from otree.db import models
 import otree.models
-from otree import forms
+from otree import widgets
 
 doc = """
 <p>This is the familiar playground game "Matching Pennies". In this implementation, players are randomly matched in the
@@ -22,19 +23,21 @@ class Subsession(otree.models.BaseSubsession):
             group.reverse()
         return match_groups
 
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     training_1_correct = 'Player 1 gets 100 points, Player 2 gets 0 points'
 
     point_value = models.MoneyField(
         default=0.01,
         doc="""Monetary value of each game point"""
     )
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
 
 
 class Match(otree.models.BaseMatch):
@@ -63,7 +66,7 @@ class Match(otree.models.BaseMatch):
 
     def set_payoffs(self):
         for player in self.players:
-            player.payoff = sum(p.points_earned for p in player.me_in_previous_rounds() + [player]) * self.treatment.point_value
+            player.payoff = sum(p.points_earned for p in player.me_in_previous_rounds() + [player]) * self.subsession.point_value
 
 
 class Player(otree.models.BasePlayer):
@@ -74,7 +77,7 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_question_1 = models.CharField(max_length=100, null=True, verbose_name='', widget=forms.RadioSelect())
+    training_question_1 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
 
     def training_question_1_choices(self):
         return ['Player 1 gets 0 points, Player 2 gets 0 points',
@@ -83,7 +86,7 @@ class Player(otree.models.BasePlayer):
                 'Player 1 gets 0 points, Player 2 gets 100 points']
 
     def is_training_question_1_correct(self):
-        return self.training_question_1 == self.treatment.training_1_correct
+        return self.training_question_1 == self.subsession.training_1_correct
 
     points_earned = models.PositiveIntegerField(
         default=0,
@@ -93,7 +96,7 @@ class Player(otree.models.BasePlayer):
     penny_side = models.CharField(
         choices=['Heads', 'Tails'],
         doc="""Heads or tails""",
-        widget=forms.RadioSelect()
+        widget=widgets.RadioSelect()
     )
 
     is_winner = models.NullBooleanField(

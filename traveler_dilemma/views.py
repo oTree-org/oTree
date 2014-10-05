@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import traveler_dilemma.models as models
 from traveler_dilemma._builtin import Page, WaitPage
 
@@ -8,10 +9,10 @@ class Introduction(Page):
     template_name = 'traveler_dilemma/Introduction.html'
 
     def variables_for_template(self):
-        return {'max_amount': self.treatment.max_amount,
-                'min_amount': self.treatment.min_amount,
-                'reward': self.treatment.reward,
-                'penalty': self.treatment.penalty}
+        return {'max_amount': self.subsession.max_amount,
+                'min_amount': self.subsession.min_amount,
+                'reward': self.subsession.reward,
+                'penalty': self.subsession.penalty}
 
 
 class Claim(Page):

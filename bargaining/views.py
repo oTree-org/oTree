@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import bargaining.models as models
 from bargaining._builtin import Page, WaitPage
 from otree.common import Money, money_range
@@ -10,7 +11,7 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {
-            'amount_shared': self.treatment.amount_shared,
+            'amount_shared': self.subsession.amount_shared,
         }
 
 
@@ -23,7 +24,7 @@ class Request(Page):
 
     def variables_for_template(self):
         return {
-            'amount_shared': self.treatment.amount_shared,
+            'amount_shared': self.subsession.amount_shared,
         }
 
 

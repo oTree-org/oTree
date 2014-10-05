@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 
 from otree.db import models
@@ -18,13 +19,6 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'stackelberg_competition'
 
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     total_capacity = models.PositiveIntegerField(
         default=60,
         doc="""Total production capacity of BOTH players"""
@@ -37,6 +31,15 @@ class Treatment(otree.models.BaseTreatment):
 
     def max_units_per_player(self):
         return self.total_capacity / 2
+
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
 
 
 class Match(otree.models.BaseMatch):
@@ -72,16 +75,16 @@ class Player(otree.models.BasePlayer):
     )
 
     def quantity_choices(self):
-        return range(0, self.treatment.max_units_per_player()+1)
+        return range(0, self.subsession.max_units_per_player()+1)
 
     def other_player(self):
         """Returns the opponent of the current player"""
         return self.other_players_in_match()[0]
 
     def set_payoff(self):
-        self.match.price_in_points = self.treatment.total_capacity - self.quantity - self.other_player().quantity
+        self.match.price_in_points = self.subsession.total_capacity - self.quantity - self.other_player().quantity
         self.payoff_in_points = self.match.price_in_points * self.quantity
-        self.payoff = self.payoff_in_points * self.treatment.currency_per_point
+        self.payoff = self.payoff_in_points * self.subsession.currency_per_point
 
 
 def treatments():

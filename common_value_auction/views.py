@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import common_value_auction.models as models
 from common_value_auction._builtin import Page, WaitPage
 from otree.common import Money
@@ -21,12 +22,12 @@ class Bid(Page):
 
     def variables_for_template(self):
         if self.player.item_value_estimate is None:
-            self.player.item_value_estimate = self.treatment.generate_value_estimate()
+            self.player.item_value_estimate = self.subsession.generate_value_estimate()
 
         return {'item_value_estimate': self.player.item_value_estimate,
-                'error_margin': self.treatment.estimate_error_margin,
-                'min_bid': Money(self.treatment.min_allowable_bid),
-                'max_bid': Money(self.treatment.max_allowable_bid)}
+                'error_margin': self.subsession.estimate_error_margin,
+                'min_bid': Money(self.subsession.min_allowable_bid),
+                'max_bid': Money(self.subsession.max_allowable_bid)}
 
 
 class ResultsWaitPage(WaitPage):
@@ -46,10 +47,10 @@ class Results(Page):
             self.player.set_payoff()
 
         return {'is_winner': self.player.is_winner,
-                'is_greedy': self.treatment.item_value - self.player.bid_amount < 0,
+                'is_greedy': self.subsession.item_value - self.player.bid_amount < 0,
                 'bid_amount': self.player.bid_amount,
                 'winning_bid': self.subsession.highest_bid(),
-                'item_value': self.treatment.item_value,
+                'item_value': self.subsession.item_value,
                 'payoff': self.player.payoff}
 
 

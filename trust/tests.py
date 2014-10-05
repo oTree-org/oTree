@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import trust.views as views
 from trust._builtin import Bot
 import random
@@ -9,7 +10,7 @@ class PlayerBot(Bot):
     def play(self):
 
         # basic assertions
-        assert (self.treatment.amount_allocated == 1.00)
+        assert (self.subsession.amount_allocated == 1.00)
         assert (self.match.players_per_match == 2)
 
         # start game

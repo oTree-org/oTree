@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 from otree.db import models
 import otree.models
 from otree.common import money_range
-from otree import forms
+from otree import widgets
 
 
 doc = """
@@ -17,13 +18,6 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'trust'
 
-
-class Treatment(otree.models.BaseTreatment):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     amount_allocated = models.MoneyField(
         default=1.00,
         doc="""Initial amount allocated to each player"""
@@ -33,6 +27,15 @@ class Treatment(otree.models.BaseTreatment):
         default=0.05,
         doc="""The increment between amount choices"""
     )
+
+class Treatment(otree.models.BaseTreatment):
+    """Leave this class empty"""
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
+
 
 
 class Match(otree.models.BaseMatch):
@@ -56,18 +59,18 @@ class Match(otree.models.BaseMatch):
 
     def sent_amount_choices(self):
         """Range of allowed values during send"""
-        return money_range(0, self.treatment.amount_allocated, self.treatment.increment_amount)
+        return money_range(0, self.subsession.amount_allocated, self.subsession.increment_amount)
 
     def sent_back_amount_choices(self):
         """Range of allowed values during send back"""
-        return money_range(0, self.sent_amount * 3, self.treatment.increment_amount)
+        return money_range(0, self.sent_amount * 3, self.subsession.increment_amount)
 
     def set_payoffs(self):
         p1 = self.get_player_by_index(1)
         p2 = self.get_player_by_index(2)
 
-        p1.payoff = self.treatment.amount_allocated - self.sent_amount + self.sent_back_amount
-        p2.payoff = self.treatment.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
+        p1.payoff = self.subsession.amount_allocated - self.sent_amount + self.sent_back_amount
+        p2.payoff = self.subsession.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
 
 
 class Player(otree.models.BasePlayer):

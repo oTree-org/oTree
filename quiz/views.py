@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import otree.views
 import otree.views.concrete
 import quiz.models as models
