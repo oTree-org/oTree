@@ -70,5 +70,3 @@ class Player(otree.models.BasePlayer):
             self.payoff = (1.5 * self.subsession.max_bid_amount) - self.match.bid_amount
 
 
-def treatments():
-    return [Treatment.create()]

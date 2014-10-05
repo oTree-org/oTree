@@ -91,6 +91,3 @@ class Player(otree.models.BasePlayer):
         return self.is_a_winner and self.match.num_winners > 1
 
 
-def treatments():
-
-    return [Treatment.create()]

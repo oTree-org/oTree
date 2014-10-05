@@ -139,12 +139,9 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     def role(self):
-        if self.index_among_players_in_match == 1:
+        if self.id_in_match == 1:
             return 'principal'
-        if self.index_among_players_in_match == 2:
+        if self.id_in_match == 2:
             return 'agent'
 
 
-def treatments():
-
-    return [Treatment.create()]

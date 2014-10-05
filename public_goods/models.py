@@ -79,5 +79,4 @@ class Player(otree.models.BasePlayer):
         if not 0 <= value <= self.subsession.endowment:
             return 'Your entry is invalid.'
 
-def treatments():
-    return [Treatment.create()]
+

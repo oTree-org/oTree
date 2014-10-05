@@ -89,6 +89,3 @@ class Player(otree.models.BasePlayer):
             self.payoff = 0
 
 
-def treatments():
-
-    return [Treatment.create()]

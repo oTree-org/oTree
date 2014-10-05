@@ -72,6 +72,3 @@ class Player(otree.models.BasePlayer):
             self.payoff = self.claim
 
 
-def treatments():
-
-    return [Treatment.create()]

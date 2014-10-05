@@ -73,6 +73,3 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
 
-def treatments():
-
-    return [Treatment.create()]

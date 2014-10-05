@@ -48,6 +48,3 @@ class Player(otree.models.BasePlayer):
     crt_lake = models.PositiveIntegerField(default=None)
 
 
-def treatments():
-
-    return [Treatment.create()]

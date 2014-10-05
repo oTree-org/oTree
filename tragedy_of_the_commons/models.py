@@ -78,6 +78,3 @@ class Player(otree.models.BasePlayer):
         return ['cooperate', 'defect']
 
 
-def treatments():
-
-    return [Treatment.create()]

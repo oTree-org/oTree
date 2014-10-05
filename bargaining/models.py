@@ -67,6 +67,3 @@ class Player(otree.models.BasePlayer):
         return self.other_players_in_match()[0]
 
 
-def treatments():
-
-    return [Treatment.create()]

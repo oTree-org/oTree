@@ -78,6 +78,3 @@ class Player(otree.models.BasePlayer):
         self.payoff = self.payoff_in_points * self.subsession.currency_per_point
 
 
-def treatments():
-
-    return [Treatment.create()]

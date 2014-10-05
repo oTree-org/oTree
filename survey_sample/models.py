@@ -38,6 +38,3 @@ class Player(otree.models.BasePlayer):
     q_gender = models.CharField(default=None, verbose_name='Please indicate your gender:', widget=widgets.RadioSelect())
 
 
-def treatments():
-
-    return [Treatment.create()]

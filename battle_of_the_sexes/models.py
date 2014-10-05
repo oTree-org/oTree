@@ -88,12 +88,9 @@ class Player(otree.models.BasePlayer):
         return self.other_players_in_match()[0]
 
     def role(self):
-        if self.index_among_players_in_match == 1:
+        if self.id_in_match == 1:
             return 'husband'
-        if self.index_among_players_in_match == 2:
+        if self.id_in_match == 2:
             return 'wife'
 
 
-def treatments():
-
-    return [Treatment.create()]

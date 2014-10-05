@@ -108,7 +108,7 @@ class Player(otree.models.BasePlayer):
 
 
 
-def treatments():
+id_in_matchtments():
 
     treatment_list = []
 

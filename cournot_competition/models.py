@@ -79,6 +79,3 @@ class Player(otree.models.BasePlayer):
         if not 0 <= value <= self.subsession.max_units_per_player():
             return "The value must be a whole number between {} and {}, inclusive.".format(0, self.subsession.max_units_per_player())
 
-def treatments():
-
-    return [Treatment.create()]

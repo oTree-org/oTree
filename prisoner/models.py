@@ -78,6 +78,4 @@ class Player(otree.models.BasePlayer):
                                     [self.other_player().decision])
 
 
-def treatments():
 
-    return [Treatment.create()]

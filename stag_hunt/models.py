@@ -87,6 +87,3 @@ class Player(otree.models.BasePlayer):
         self.payoff = payoff_matrix[self.decision][self.other_player().decision]
 
 
-def treatments():
-
-    return [Treatment.create()]

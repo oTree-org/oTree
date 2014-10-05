@@ -80,6 +80,3 @@ class Player(otree.models.BasePlayer):
         return range(0, 101)
 
 
-def treatments():
-
-    return [Treatment.create()]
