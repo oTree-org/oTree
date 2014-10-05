@@ -69,22 +69,25 @@ class Results(Page):
 
     def variables_for_template(self):
         # calculations here
-        my_contribution = self.player.contribution
-        other_contribution = sum([c.contribution for c in self.match.players])
-        total_contribution = other_contribution + my_contribution
+        player_current = self.player
+        other_players = self.player.other_players_in_match
+        total_contribution = sum([c.contribution for c in self.match.players])
         total_earnings = float(total_contribution) * 1.8
         share_earnings = float(total_earnings) / 3
-        individual_earnings = (self.treatment.endowment - my_contribution) + share_earnings
+        individual_earnings = (self.treatment.endowment - player_current.contribution) + share_earnings
+        base_points = 10
+        total_points = individual_earnings + base_points
 
         return {
-            'my_contribution': my_contribution,
-            'other_contribution': other_contribution,
+            'player_current': player_current,
+            'other_players': other_players,
             'total_contribution': total_contribution,
             'total_earnings': total_earnings,
             'share_earnings': share_earnings,
+            'individual_earnings': individual_earnings,
             'payoff': self.player.payoff,
-            'base_pay': self.player.participant.session.base_pay,
-            'total_pay': self.player.participant.total_pay()
+            'base_points': base_points,
+            'total_points': total_points
         }
 
 class FeedbackQ(Page):
