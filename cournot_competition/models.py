@@ -7,8 +7,8 @@ import otree.models
 
 
 doc = """
-In Cournot competition, players simultaneously decide the units of products to manufacture. 
-The unit selling price depends on the total units produced. In this implementation, there are 3 firms competing for 1 period.
+In Cournot competition, firms simultaneously decide the units of products to manufacture. 
+The unit selling price depends on the total units produced. In this implementation, there are 2 firms competing for 1 period.
 <br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/cournot_competition" target="_blank">here</a>.
 """
