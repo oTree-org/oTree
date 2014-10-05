@@ -85,7 +85,6 @@ class Results(Page):
             'total_earnings': total_earnings,
             'share_earnings': share_earnings,
             'individual_earnings': individual_earnings,
-            'payoff': self.player.payoff,
             'base_points': base_points,
             'total_points': total_points
         }
