@@ -14,6 +14,9 @@ Bids are private. The player with the highest bid wins the auction, but payoff d
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/common_value_auction" target="_blank">here</a>.
 """
 
+min_value = 0.0
+max_value = 10.0
+random_item_value = round(random.uniform(min_value, max_value), 1)
 
 class Subsession(otree.models.BaseSubsession):
 
@@ -28,22 +31,22 @@ class Subsession(otree.models.BaseSubsession):
         winner.is_winner = True
 
     item_value = models.MoneyField(
-        default=None,
+        default=lambda: random_item_value,
         doc="""Common value of the item to be auctioned, random for treatment"""
     )
 
     min_allowable_bid = models.MoneyField(
-        default=None,
+        default=min_value,
         doc="""Minimum value of item"""
     )
 
     max_allowable_bid = models.MoneyField(
-        default=None,
+        default=max_value,
         doc="""Maximum value of item"""
     )
 
     estimate_error_margin = models.MoneyField(
-        default=None,
+        default=1.00,
         doc="""Error margin for the value estimates shown to the players"""
     )
 
@@ -105,23 +108,3 @@ class Player(otree.models.BasePlayer):
                 self.payoff = 0
         else:
             self.payoff = 0
-
-
-
-id_in_matchtments():
-
-    treatment_list = []
-
-    min_value = 0.0
-    max_value = 10.0
-    random_item_value = round(random.uniform(min_value, max_value), 1)
-
-    treatment = Treatment.create(
-        item_value=random_item_value,
-        min_allowable_bid=min_value,
-        max_allowable_bid=max_value,
-        estimate_error_margin=1.0
-    )
-    treatment_list.append(treatment)
-
-    return treatment_list
