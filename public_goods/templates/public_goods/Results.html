@@ -9,7 +9,7 @@
 {% block content %}
 
     <table class="table-condensed" style="width:500px; margin-top:20px;">
-        <tr><td>You contributed:</td><td>{{ player_current.contribution }} points</td></tr>
+        <tr><td>You contributed:</td><td>{{ current_player.contribution }} points</td></tr>
         <tr><td>Other participants contributed:</td><td></td></tr>
         {% for p in other_players %}
             <tr><td></td><td>{{ p.contribution }} points</td></tr>
@@ -25,7 +25,7 @@
         <tr><td colspan="2"><hr/></td></tr>
 
         <tr><td>Thus in total you earned:</td><td>{{ individual_earnings }} points</td></tr>
-        <tr><td>In addition you get a participation fee of:</td><td>{{ base_points }}</td></tr>
+        <tr><td>In addition you get a participation fee of:</td><td>{{ base_points }} points</td></tr>
 
         <tr><td colspan="2"><hr/></td></tr>
 

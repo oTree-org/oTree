@@ -69,17 +69,17 @@ class Results(Page):
 
     def variables_for_template(self):
         # calculations here
-        player_current = self.player
+        current_player = self.player
         other_players = self.player.other_players_in_match
         total_contribution = sum([c.contribution for c in self.match.players])
         total_earnings = float(total_contribution) * 1.8
         share_earnings = float(total_earnings) / 3
-        individual_earnings = (self.treatment.endowment - player_current.contribution) + share_earnings
+        individual_earnings = (self.treatment.endowment - current_player.contribution) + share_earnings
         base_points = 10
         total_points = individual_earnings + base_points
 
         return {
-            'player_current': player_current,
+            'current_player': current_player,
             'other_players': other_players,
             'total_contribution': total_contribution,
             'total_earnings': total_earnings,
