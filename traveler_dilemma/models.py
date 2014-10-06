@@ -8,7 +8,8 @@ from otree import widgets
 
 doc = """
 Traveler's dilemma involves two players.
-Each player makes a claim. Both claims are payoff-relevant for both players.
+Each player makes a claim. Both claims are payoff-relevant for both players. 
+The game is largely based on <a href="http://www.jstor.org/stable/2117865" target="_blank">Basu(1994)</a>.
 <br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/traveler_dilemma" target="_blank">here</a>.
 """
