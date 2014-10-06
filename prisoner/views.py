@@ -6,9 +6,6 @@ from prisoner._builtin import Page, WaitPage
 
 class Decision(Page):
 
-    """This page has the instructions and this is where the decision is made.
-    Presented to both players in a group at the same time"""
-
     template_name = 'prisoner/Decision.html'
 
     form_model = models.Player
@@ -35,8 +32,6 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
-
-    """Results page to show players the decisions that were made and print the payoffs"""
 
     template_name = 'prisoner/Results.html'
 

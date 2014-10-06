@@ -4,11 +4,11 @@ from otree.db import models
 import otree.models
 from otree import widgets
 
+
 doc = """
-This is a one-shot prisoner dilemma game. Two players are asked separately whether they want to cooperate or defect.
-Their choices directly determine the payoffs.
-<br/ >
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/prisoner" target="_blank">here</a>.
+<p>This is a one-shot "Prisoner's Dilemma". Two players are asked separately whether they want to cooperate or defect.
+Their choices directly determine the payoffs.</p>
+<p>Source code <a href="https://github.com/oTree-org/oTree/tree/master/prisoner" target="_blank">here</a>.</p>
 """
 
 
@@ -16,26 +16,24 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'prisoner'
 
-    betray_amount = models.MoneyField(
-        doc="""amount a player makes if he chooses 'defect' and the other chooses 'cooperate'""",
-        default=0.30,
-    )
+    betray_amount = models.PositiveIntegerField(
+        doc="""Points made if player defects and the other cooperates""",
+        default=300,
+        )
 
-    friend_amount = models.MoneyField(
-        doc="""amount both players make if both choose 'cooperate'""",
-        default=0.20,
-    )
-    betrayed_amount = models.MoneyField(
-        doc="""amount a player makes if he chooses 'cooperate' and the other chooses 'defect'""",
-        default=0.10,
-    )
+    friend_amount = models.PositiveIntegerField(
+        doc="""Points made if both players cooperate""",
+        default=200,
+        )
+    betrayed_amount = models.PositiveIntegerField(
+        doc="""Points made if player cooperates and the other defects""",
+        default=100,
+        )
 
-    enemy_amount = models.MoneyField(
-        doc="""amount both players make if both choose 'defect'""",
-        default=0.00,
-    )
-
-
+    enemy_amount = models.PositiveIntegerField(
+        doc="""Points made if both players defect""",
+        default=0,
+        )
 
 
 class Group(otree.models.BaseGroup):
@@ -54,6 +52,11 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
+    points_earned = models.PositiveIntegerField(
+        default=0,
+        doc="""Points earned"""
+    )
+
     decision = models.CharField(
         default=None,
         doc="""This player's decision""",
@@ -64,18 +67,14 @@ class Player(otree.models.BasePlayer):
         return ['Cooperate', 'Defect']
 
     def other_player(self):
-        """Returns other player in group"""
         return self.other_players_in_group()[0]
 
-    def set_payoff(self):
-        """Calculate player payoff"""
-        payoff_matrix = {'Cooperate': {'Cooperate': self.subsession.friend_amount,
+    def set_points(self):
+        points_matrix = {'Cooperate': {'Cooperate': self.subsession.friend_amount,
                                        'Defect': self.subsession.betrayed_amount},
                          'Defect':   {'Cooperate': self.subsession.betray_amount,
                                       'Defect': self.subsession.enemy_amount}}
 
-        self.payoff = (payoff_matrix[self.decision]
-                                    [self.other_player().decision])
-
-
-
+        self.points_earned = (points_matrix[self.decision]
+                                           [self.other_player().decision])
+2

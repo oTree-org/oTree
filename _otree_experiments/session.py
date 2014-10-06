@@ -24,7 +24,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Prisoners' Dilemma",
+            name="Prisoner's Dilemma",
             base_pay=4.00,
             participants_per_demo_session=2,
             participants_per_session=2,
@@ -64,7 +64,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Travelers' Dilemma",
+            name="Traveler's Dilemma",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -136,7 +136,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Volunteers' Dilemma",
+            name="Volunteer's Dilemma",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=3,
