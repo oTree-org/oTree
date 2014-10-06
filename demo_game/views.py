@@ -134,28 +134,12 @@ class FeedbackFour(Page):
                 }
 
 
-
 class FormsDemo(Page):
 
     template_name = 'demo_game/FormsDemo.html'
 
     form_model = models.Player
     form_fields = ['demo_field1', 'demo_field2']
-
-
-class EmbedDemo(Page):
-
-    template_name = 'demo_game/EmbedDemo.html'
-
-
-class BootstrapWidgetDemo(Page):
-
-    template_name = 'demo_game/BootstrapWidgetsDemo.html'
-
-
-class AdminDemo(Page):
-
-    template_name = 'demo_game/AdminDemo.html'
 
 
 class Results(Page):
@@ -169,7 +153,7 @@ class Results(Page):
 
     template_name = 'demo_game/Results.html'
 
-# TODO Replace this page with a lab results app..with a more detailed page..See DEMO GAME 3.docx By Shuya page 7
+
 class Finish(Page):
 
     template_name = 'demo_game/Finish.html'

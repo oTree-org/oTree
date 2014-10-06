@@ -10,18 +10,33 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         self.submit(views.QuestionOne, {
-            'demo_field1': 'yes',
+            'training_question_1': '5',
         })
 
         self.submit(views.FeedbackOne)
 
         self.submit(views.QuestionTwo, {
-            'demo_field2': 'Embed images',
+            'training_question_2': 'Time travel (opens in pop up window)',
         })
 
         self.submit(views.FeedbackTwo)
 
-        self.submit(views.FormsDemo)
+        self.submit(views.QuestionThree, {
+            'training_question_3': 'Any of the above',
+        })
+
+        self.submit(views.FeedbackThree)
+
+        self.submit(views.QuestionFour, {
+            'training_question_4': 'Time spent on each page',
+        })
+
+        self.submit(views.FeedbackFour)
+
+        self.submit(views.FormsDemo, {
+            'demo_field1': '1',
+            'demo_field2': 'otree'
+        })
 
         self.submit(views.Results)
 
