@@ -33,11 +33,15 @@
     </table>
 
     <p>
-        In total you earned {{ total_points_earned }} points which corresponds to {{ payoff }}.
+        You earned {{ total_points_earned }} points. In addition to that, you get a participation fee of {{ base_points }} points.
     </p>
 
     <p>
-        In order to get paid, please complete the questionnaire that now follows.
+        In total, you receive {{ total_plus_base }} points.
+    </p>
+
+    <p>
+        To complete the study, please answer the short questionnaire that will now follow.
     </p>
 
     {% next_button %}

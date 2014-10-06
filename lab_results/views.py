@@ -2,6 +2,7 @@
 from __future__ import division
 from lab_results._builtin import Page
 
+
 class RedemptionCode(Page):
 
     template_name = 'lab_results/LabResults.html'

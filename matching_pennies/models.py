@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
-from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
+from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
 
+
 doc = """
 <p>This is the familiar playground game "Matching Pennies". In this implementation, players are randomly grouped in the
-beginning and then continue to play against the same opponent for 3 rounds. Their roles might alter across rounds.</p>
+beginning and then continue to play against the same opponent for 3 rounds. Their roles alters between rounds.</p>
 <p>The game is preceded by one understanding question (in a real experiment, you would often have more of these).</p>
 <p>Source code <a href="https://github.com/oTree-org/oTree/tree/master/matching_pennies" target="_blank">here</a>.</p>
 """
@@ -24,13 +25,6 @@ class Subsession(otree.models.BaseSubsession):
         return group_groups
 
     training_1_correct = 'Player 1 gets 100 points, Player 2 gets 0 points'
-
-    point_value = models.MoneyField(
-        default=0.01,
-        doc="""Monetary value of each game point"""
-    )
-
-
 
 
 class Group(otree.models.BaseGroup):
@@ -55,10 +49,6 @@ class Group(otree.models.BaseGroup):
             p1.points_earned = 100
             p2.is_winner = False
             p1.is_winner = True
-
-    def set_payoffs(self):
-        for player in self.players:
-            player.payoff = sum(p.points_earned for p in player.me_in_previous_rounds() + [player]) * self.subsession.point_value
 
 
 class Player(otree.models.BasePlayer):
@@ -103,5 +93,3 @@ class Player(otree.models.BasePlayer):
             return 'Player 1'
         if self.id_in_group == 2:
             return 'Player 2'
-
-

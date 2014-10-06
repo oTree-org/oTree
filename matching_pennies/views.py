@@ -6,8 +6,7 @@ from otree.common import Money
 
 
 def variables_for_all_templates(self):
-    return {'point_value': self.subsession.point_value,
-            'total_q': 1,
+    return {'total_q': 1,
             'total_rounds': self.subsession.number_of_rounds,
             'round_number': self.subsession.round_number,
             'role': self.player.role()}
@@ -66,11 +65,9 @@ class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
         self.group.set_points()
-        if self.subsession.round_number == self.subsession.number_of_rounds:
-            self.group.set_payoffs()
 
     def body_text(self):
-        return "We need to wait for your opponent."
+        return "Waiting for your opponent."
 
 
 class Results(Page):
@@ -96,12 +93,15 @@ class ResultsSummary(Page):
         return self.subsession.round_number == self.subsession.number_of_rounds
 
     def variables_for_template(self):
+        total_points_earned = sum(p.points_earned for p in self.player.me_in_previous_rounds() + [self.player])
+        base_points = 50
 
         return {'me_in_previous_rounds': self.player.me_in_previous_rounds(),
                 'points_earned': self.player.points_earned,
                 'is_winner': self.player.is_winner,
-                'total_points_earned': sum(p.points_earned for p in self.player.me_in_previous_rounds() + [self.player]),
-                'payoff': self.player.payoff}
+                'total_points_earned': total_points_earned,
+                'base_points': base_points,
+                'total_plus_base': total_points_earned + base_points}
 
 
 def pages():
