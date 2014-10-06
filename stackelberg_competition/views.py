@@ -56,6 +56,17 @@ class ChoiceOne(Page):
     form_fields = ['quantity']
 
 
+class ChoiceTwoWaitPage(WaitPage):
+
+    scope = models.Group
+
+    def body_text(self):
+        if self.player.id_in_group == 1:
+            return "Waiting for the other participant to decide."
+        else:
+            return 'You are to decide second. Waiting for the other participant to decide first.'
+
+
 class ChoiceTwo(Page):
 
     def participate_condition(self):
@@ -74,9 +85,12 @@ class ResultsWaitPage(WaitPage):
 
     scope = models.Group
 
+    def body_text(self):
+        return "Waiting for the other participant to decide."
+
     def after_all_players_arrive(self):
         for p in self.group.players:
-            p.set_payoff()
+            p.set_points()
 
 
 class Results(Page):
@@ -86,10 +100,13 @@ class Results(Page):
     def variables_for_template(self):
 
         return {'quantity': self.player.quantity,
+                'other_quantity': self.player.other_player().quantity,
                 'total_quantity': self.player.quantity + self.player.other_player().quantity,
+                'total_capacity': self.subsession.total_capacity,
                 'price': self.group.price,
-                'payoff_in_points': self.player.payoff_in_points,
-                'payoff': self.player.payoff}
+                'points_earned': self.player.points_earned,
+                'base_points': 50,
+                'total_plus_base': self.player.points_earned + 50}
 
 
 def pages():
@@ -98,6 +115,7 @@ def pages():
             QuestionOne,
             FeedbackOne,
             ChoiceOne,
+            ChoiceTwoWaitPage,
             ChoiceTwo,
             ResultsWaitPage,
             Results]

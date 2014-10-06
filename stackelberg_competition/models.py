@@ -65,8 +65,9 @@ class Player(otree.models.BasePlayer):
         doc="""Quantity of units to produce"""
     )
 
-    def quantity_choices(self):
-        return range(0, self.subsession.max_units_per_player()+1)
+    def quantity_error_message(self, value):
+        if not 0 <= value <= self.subsession.max_units_per_player():
+            return "The value must be an integer between 0 and {}, inclusive.".format(self.subsession.max_units_per_player())
 
     def other_player(self):
         return self.other_players_in_group()[0]
