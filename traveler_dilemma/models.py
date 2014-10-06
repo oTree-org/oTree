@@ -31,8 +31,6 @@ class Subsession(otree.models.BaseSubsession):
                                    doc="""The minimum claim to be requested""")
 
 
-
-
 class Group(otree.models.BaseGroup):
 
     # <built-in>
@@ -57,9 +55,9 @@ class Player(otree.models.BasePlayer):
         """
     )
 
-    #def claim_choices(self):
-    #    """Range of allowed claim values"""
-    #    return money_range(self.subsession.min_amount, self.subsession.max_amount, 0.05)
+    def claim_choices(self):
+        """Range of allowed claim values"""
+        return money_range(self.subsession.min_amount, self.subsession.max_amount, 0.05)
 
     def other_player(self):
         return self.other_players_in_group()[0]
