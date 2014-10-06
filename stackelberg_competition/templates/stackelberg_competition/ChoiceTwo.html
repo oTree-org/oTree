@@ -8,11 +8,14 @@
 
 {% block content %}
 
-    <p>The other player decided to produce {{ other_quantity }} units.</p>
+    <p>
+        The other firm produced {{ other_quantity }} units. How many units will you produce?
+    </p>
 
-    <p>Please decide how much you want to produce.</p>
+    {% formrow form.quantity with label='Number of units:' %}
 
-    {% formrow form.quantity with label='How many units will you produce:' %}
     {% next_button %}
+
+    {% include 'stackelberg_competition/Instructions.html' %}
 
 {% endblock %}

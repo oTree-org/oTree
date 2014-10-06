@@ -39,8 +39,7 @@ class FeedbackOne(Page):
                 'answer': self.player.training_question_1,
                 'correct': self.subsession.training_1_correct,
                 'explanation': "Alice gets 300 points, Bob gets 0 points",
-                'is_correct': self.player.is_training_question_1_correct(),
-                }
+                'is_correct': self.player.is_training_question_1_correct()}
 
 
 class Decision(Page):

@@ -1,0 +1,20 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+
+{% block title %}
+    Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+    {% if num_q == 1 %}
+        <p>
+            {% formrow form.training_question_1 with label="Suppose firm A first decided to produce 20 units. Then firm B would be informed of firm A's production and decided to produce 30 units. What would be the profit for firm B?" %}
+        </p>
+    {% endif %}
+
+    {% next_button %}
+
+    {% include 'stackelberg_competition/Instructions.html' %}
+
+{% endblock %}

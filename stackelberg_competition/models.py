@@ -4,6 +4,7 @@ from __future__ import division
 
 from otree.db import models
 import otree.models
+from otree import widgets
 
 
 doc = """
@@ -20,18 +21,13 @@ class Subsession(otree.models.BaseSubsession):
 
     total_capacity = models.PositiveIntegerField(
         default=60,
-        doc="""Total production capacity of BOTH players"""
-    )
-
-    currency_per_point = models.MoneyField(
-        default=0.01,
-        doc="""Currency units for a single point"""
+        doc="""Total production capacity of both players"""
     )
 
     def max_units_per_player(self):
-        return self.total_capacity / 2
+        return int(self.total_capacity / 2)
 
-
+    training_1_correct = 300
 
 
 class Group(otree.models.BaseGroup):
@@ -40,12 +36,12 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    price_in_points = models.PositiveIntegerField(
+    players_per_group = 2
+
+    price = models.PositiveIntegerField(
         default=None,
         doc="""Unit price: P = T - Q1 - Q2, where T is total capacity and Q_i are the units produced by the players"""
     )
-
-    players_per_group = 2
 
 
 class Player(otree.models.BasePlayer):
@@ -55,7 +51,12 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    payoff_in_points = models.PositiveIntegerField(
+    training_question_1 = models.PositiveIntegerField(null=True, verbose_name='')
+
+    def is_training_question_1_correct(self):
+        return self.training_question_1 == self.subsession.training_1_correct
+
+    points_earned = models.PositiveIntegerField(
         default=None,
     )
 
@@ -64,16 +65,13 @@ class Player(otree.models.BasePlayer):
         doc="""Quantity of units to produce"""
     )
 
-    def quantity_choices(self):
-        return range(0, self.subsession.max_units_per_player()+1)
+    def quantity_error_message(self, value):
+        if not 0 <= value <= self.subsession.max_units_per_player():
+            return "The value must be an integer between 0 and {}, inclusive.".format(self.subsession.max_units_per_player())
 
     def other_player(self):
-        """Returns the opponent of the current player"""
         return self.other_players_in_group()[0]
 
-    def set_payoff(self):
-        self.group.price_in_points = self.subsession.total_capacity - self.quantity - self.other_player().quantity
-        self.payoff_in_points = self.group.price_in_points * self.quantity
-        self.payoff = self.payoff_in_points * self.subsession.currency_per_point
-
-
+    def set_points(self):
+        self.group.price = self.subsession.total_capacity - self.quantity - self.other_player().quantity
+        self.points_earned = self.group.price * self.quantity

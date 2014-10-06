@@ -8,9 +8,14 @@
 
 {% block content %}
 
-    <p>Please decide how much you want to produce. The other player will go second.</p>
+    <p>
+        You are to decide first. How many units will you produce?
+    </p>
 
-    {% formrow form.quantity with label='How many units will you produce:' %}
+    {% formrow form.quantity with label='Number of units:' %}
+
     {% next_button %}
+
+    {% include 'stackelberg_competition/Instructions.html' %}
 
 {% endblock %}

@@ -1,0 +1,28 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+
+{% block title %}
+    Solution to Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        The question was: {{ question }}
+    </p>
+
+    <p>
+        You answered: {{ answer }}
+    </p>
+
+    {% if is_correct %}
+        <p class="text-success">Your answer is correct.</p>
+    {% else %}
+        <p class="text-danger">Your answer is incorrect. {{ explanation }}.</p>
+    {% endif %}
+
+    {% next_button %}
+
+    {% include 'stackelberg_competition/Instructions.html' %}
+
+{% endblock %}
