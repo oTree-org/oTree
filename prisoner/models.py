@@ -16,24 +16,27 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'prisoner'
 
-    betray_amount = models.PositiveIntegerField(
+    defect_cooperate_amount = models.PositiveIntegerField(
         doc="""Points made if player defects and the other cooperates""",
         default=300,
-        )
+    )
 
-    friend_amount = models.PositiveIntegerField(
+    cooperate_amount = models.PositiveIntegerField(
         doc="""Points made if both players cooperate""",
         default=200,
-        )
-    betrayed_amount = models.PositiveIntegerField(
-        doc="""Points made if player cooperates and the other defects""",
-        default=100,
-        )
+    )
 
-    enemy_amount = models.PositiveIntegerField(
-        doc="""Points made if both players defect""",
+    cooperate_defect_amount = models.PositiveIntegerField(
+        doc="""Points made if player cooperates and the other defects""",
         default=0,
-        )
+    )
+
+    defect_amount = models.PositiveIntegerField(
+        doc="""Points made if both players defect""",
+        default=100,
+    )
+
+    training_1_correct = "Alice gets 300 points, Bob gets 0 points"
 
 
 class Group(otree.models.BaseGroup):
@@ -51,6 +54,17 @@ class Player(otree.models.BasePlayer):
     group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
+
+    training_question_1 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
+
+    def training_question_1_choices(self):
+        return ['Alice gets 300 points, Bob gets 0 points',
+                'Alice gets 200 points, Bob gets 200 points',
+                'Alice gets 0 points, Bob gets 300 points',
+                'Alice gets 100 points, Bob gets 100 points']
+
+    def is_training_question_1_correct(self):
+        return self.training_question_1 == self.subsession.training_1_correct
 
     points_earned = models.PositiveIntegerField(
         default=0,
@@ -70,10 +84,10 @@ class Player(otree.models.BasePlayer):
         return self.other_players_in_group()[0]
 
     def set_points(self):
-        points_matrix = {'Cooperate': {'Cooperate': self.subsession.friend_amount,
-                                       'Defect': self.subsession.betrayed_amount},
-                         'Defect':   {'Cooperate': self.subsession.betray_amount,
-                                      'Defect': self.subsession.enemy_amount}}
+        points_matrix = {'Cooperate': {'Cooperate': self.subsession.cooperate_amount,
+                                       'Defect': self.subsession.cooperate_defect_amount},
+                         'Defect':   {'Cooperate': self.subsession.defect_cooperate_amount,
+                                      'Defect': self.subsession.defect_amount}}
 
         self.points_earned = (points_matrix[self.decision]
                                            [self.other_player().decision])

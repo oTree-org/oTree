@@ -16,9 +16,9 @@
 
 
     <ul>
-        <li>If both choose to cooperate, each will receive {{ friend_amount }}</li>
-        <li>If one chooses to cooperate, but the other chooses to defect, the former will receive {{ betrayed_amount }} and the latter {{ betray_amount }}</li>
-        <li>If both choose to defect, each will receive {{ enemy_amount }}</li>
+        <li>If both choose to cooperate, each will receive {{ cooperate_amount }}</li>
+        <li>If one chooses to cooperate, but the other chooses to defect, the former will receive {{ cooperate_defect_amount }} and the latter {{ defect_cooperate_amount }}</li>
+        <li>If both choose to defect, each will receive {{ defect_amount }}</li>
     </ul>
 
 
@@ -37,15 +37,15 @@
         <tbody>
         <tr>
             <th>P2: Cooperate</th>
-            <td>Each makes {{ friend_amount }}</td>
-            <td>P1 makes {{ betray_amount }}<br>P2 makes {{ betrayed_amount }}
+            <td>Each makes {{ cooperate_amount }}</td>
+            <td>P1 makes {{ defect_cooperate_amount }}<br>P2 makes {{ cooperate_defect_amount }}
             </td>
         </tr>
         <tr>
             <th>P2: defect</th>
-            <td>P1 makes {{ betrayed_amount }}<br>P2 makes {{ betray_amount }}
+            <td>P1 makes {{ cooperate_defect_amount }}<br>P2 makes {{ defect_cooperate_amount }}
             </td>
-            <td>Each makes {{ enemy_amount }}</td>
+            <td>Each makes {{ defect_amount }}</td>
         </tr>
         </tbody>
     </table>
@@ -54,5 +54,6 @@
 
     {% next_button %}
 
+    {% include 'prisoner/Instructions.html' %}
 
 {% endblock %}
