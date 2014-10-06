@@ -4,15 +4,45 @@ import stackelberg_competition.models as models
 from stackelberg_competition._builtin import Page, WaitPage
 
 
+def variables_for_all_templates(self):
+
+    return {'total_capacity': self.subsession.total_capacity,
+            'max_units_per_player': self.subsession.max_units_per_player(),
+            'total_q': 1}
+
+
 class Introduction(Page):
 
     template_name = 'stackelberg_competition/Introduction.html'
 
     def variables_for_template(self):
-        return {'player_id': self.player.id_in_group,
-                'total_capacity': self.subsession.total_capacity,
-                'max_units_per_player': self.subsession.max_units_per_player(),
-                'currency_per_point': self.subsession.currency_per_point}
+        return {'player_id': self.player.id_in_group}
+
+
+class QuestionOne(Page):
+
+    template_name = 'stackelberg_competition/Question.html'
+
+    form_model = models.Player
+    form_fields = ['training_question_1']
+
+    def variables_for_template(self):
+        return {'num_q': 1}
+
+
+class FeedbackOne(Page):
+
+    template_name = 'stackelberg_competition/Feedback.html'
+
+    def variables_for_template(self):
+        return {'num_q': 1,
+                'question': """Suppose firm A first decided to produce 20 units. Then firm B would be informed of firm A's production and decided to produce 30 units.
+                               What would be the profit for firm B?""",
+                'answer': self.player.training_question_1,
+                'correct': self.subsession.training_1_correct,
+                'explanation': """Total units produced were 20 + 30 = 50. The unit selling price was 60 – 50 = 10.
+                                  The profit for firm B would be the product of the unit selling price and the unit produced by firm B, that is 10 × 30 = 300""",
+                'is_correct': self.player.is_training_question_1_correct()}
 
 
 class ChoiceOne(Page):
@@ -57,7 +87,7 @@ class Results(Page):
 
         return {'quantity': self.player.quantity,
                 'total_quantity': self.player.quantity + self.player.other_player().quantity,
-                'price_in_points': self.group.price_in_points,
+                'price': self.group.price,
                 'payoff_in_points': self.player.payoff_in_points,
                 'payoff': self.player.payoff}
 
@@ -65,6 +95,8 @@ class Results(Page):
 def pages():
 
     return [Introduction,
+            QuestionOne,
+            FeedbackOne,
             ChoiceOne,
             ChoiceTwo,
             ResultsWaitPage,
