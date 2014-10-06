@@ -11,13 +11,13 @@ class PlayerBot(Bot):
 
         # basic assertions
         assert (self.subsession.amount_allocated == 1.00)
-        assert (self.match.players_per_match == 2)
+        assert (self.group.players_per_group == 2)
 
         # start game
         self.submit(views.Introduction)
 
         # if p1, play send page
-        if self.player.index_among_players_in_match == 1:
+        if self.player.id_in_group == 1:
             self.play_p1()
 
         # else p2, play send back page

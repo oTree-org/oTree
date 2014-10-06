@@ -6,7 +6,7 @@ import otree.models
 from otree import widgets
 
 doc = """
-<p>This is the familiar playground game "Matching Pennies". In this implementation, players are randomly matched in the
+<p>This is the familiar playground game "Matching Pennies". In this implementation, players are randomly grouped in the
 beginning and then continue to play against the same opponent for 3 rounds. Their roles might alter across rounds.</p>
 <p>The game is preceded by one understanding question (in a real experiment, you would often have more of these).</p>
 <p>Source code <a href="https://github.com/oTree-org/oTree/tree/master/matching_pennies" target="_blank">here</a>.</p>
@@ -17,11 +17,11 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'matching_pennies'
 
-    def pick_match_groups(self, previous_round_match_groups):
-        match_groups = previous_round_match_groups
-        for group in match_groups:
+    def pick_group_groups(self, previous_round_group_groups):
+        group_groups = previous_round_group_groups
+        for group in group_groups:
             group.reverse()
-        return match_groups
+        return group_groups
 
     training_1_correct = 'Player 1 gets 100 points, Player 2 gets 0 points'
 
@@ -33,13 +33,13 @@ class Subsession(otree.models.BaseSubsession):
 
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 2
+    players_per_group = 2
 
     def set_points(self):
         p1 = self.get_player_by_role('Player 1')
@@ -64,7 +64,7 @@ class Match(otree.models.BaseMatch):
 class Player(otree.models.BasePlayer):
 
     # <built-in>
-    match = models.ForeignKey(Match, null=True)
+    group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
@@ -96,12 +96,12 @@ class Player(otree.models.BasePlayer):
 
     def other_player(self):
         """Returns the opponent of the current player"""
-        return self.other_players_in_match()[0]
+        return self.other_players_in_group()[0]
 
     def role(self):
-        if self.id_in_match == 1:
+        if self.id_in_group == 1:
             return 'Player 1'
-        if self.id_in_match == 2:
+        if self.id_in_group == 2:
             return 'Player 2'
 
 

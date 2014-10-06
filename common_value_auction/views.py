@@ -32,7 +32,7 @@ class Bid(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Subsession
+    scope = models.Subsession
 
     def after_all_players_arrive(self):
         self.subsession.set_winner()

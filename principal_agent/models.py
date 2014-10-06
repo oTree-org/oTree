@@ -60,13 +60,13 @@ class Subsession(otree.models.BaseSubsession):
 
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 2
+    players_per_group = 2
 
     total_return = models.MoneyField(
         default=None,
@@ -134,14 +134,14 @@ class Match(otree.models.BaseMatch):
 class Player(otree.models.BasePlayer):
 
     # <built-in>
-    match = models.ForeignKey(Match, null=True)
+    group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
     def role(self):
-        if self.id_in_match == 1:
+        if self.id_in_group == 1:
             return 'principal'
-        if self.id_in_match == 2:
+        if self.id_in_group == 2:
             return 'agent'
 
 

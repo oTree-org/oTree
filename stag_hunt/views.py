@@ -15,7 +15,7 @@ class Decide(Page):
     form_fields = ['decision']
 
     def variables_for_template(self):
-        return {'player_index': self.player.index_among_players_in_match,
+        return {'player_index': self.player.id_in_group,
                 'stag_stag': self.subsession.stag_stag_amount,
                 'stag_hare': self.subsession.stag_hare_amount,
                 'hare_stag': self.subsession.hare_stag_amount,
@@ -24,10 +24,10 @@ class Decide(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        for p in self.match.players:
+        for p in self.group.players:
             p.set_payoff()
 
     def body_text(self):

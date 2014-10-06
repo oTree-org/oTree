@@ -32,13 +32,13 @@ class Subsession(otree.models.BaseSubsession):
 
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 3
+    players_per_group = 3
 
     num_winners = models.PositiveIntegerField(
         default=None,
@@ -67,7 +67,7 @@ class Match(otree.models.BaseMatch):
 class Player(otree.models.BasePlayer):
 
     # <built-in>
-    match = models.ForeignKey(Match, null=True)
+    group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
@@ -85,9 +85,9 @@ class Player(otree.models.BasePlayer):
     )
 
     def is_sole_winner(self):
-        return self.is_a_winner and self.match.num_winners == 1
+        return self.is_a_winner and self.group.num_winners == 1
 
     def is_shared_winner(self):
-        return self.is_a_winner and self.match.num_winners > 1
+        return self.is_a_winner and self.group.num_winners > 1
 
 

@@ -25,25 +25,25 @@ class Subsession(otree.models.BaseSubsession):
     self_B_other_B = models.MoneyField(default=0.40)
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 2
+    players_per_group = 2
 
 
 class Player(otree.models.BasePlayer):
 
     # <built-in>
-    match = models.ForeignKey(Match, null=True)
+    group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
     def other_player(self):
-        """Returns other player in match"""
-        return self.other_players_in_match()[0]
+        """Returns other player in group"""
+        return self.other_players_in_group()[0]
 
     decision = models.CharField(
         default=None,

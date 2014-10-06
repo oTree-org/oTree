@@ -20,11 +20,11 @@ class Send(Page):
 
     template_name = 'trust/Send.html'
 
-    form_model = models.Match
+    form_model = models.Group
     form_fields = ['sent_amount']
 
     def participate_condition(self):
-        return self.player.index_among_players_in_match == 1
+        return self.player.id_in_group == 1
 
     def variables_for_template(self):
         return {'amount_allocated': self.subsession.amount_allocated}
@@ -32,7 +32,7 @@ class Send(Page):
 
 class SimpleWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def body_text(self):
         return 'The other player has been given the opportunity to give money first. Please wait.'
@@ -45,31 +45,31 @@ class SendBack(Page):
 
     template_name = 'trust/SendBack.html'
 
-    form_model = models.Match
+    form_model = models.Group
     form_fields = ['sent_back_amount']
 
     def participate_condition(self):
-        return self.player.index_among_players_in_match == 2
+        return self.player.id_in_group == 2
 
     def variables_for_template(self):
-        tripled_amount = self.match.sent_amount * 3
+        tripled_amount = self.group.sent_amount * 3
         total_amount = self.subsession.amount_allocated + tripled_amount
 
         return {'amount_allocated': self.subsession.amount_allocated,
-                'sent_amount': self.match.sent_amount,
+                'sent_amount': self.group.sent_amount,
                 'tripled_amount': tripled_amount,
                 'total_amount': total_amount}
 
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def body_text(self):
         return 'Waiting for the other player to finish.'
 
     def after_all_players_arrive(self):
-        self.match.set_payoffs()
+        self.group.set_payoffs()
 
 
 class Results(Page):
@@ -80,16 +80,16 @@ class Results(Page):
 
     def variables_for_template(self):
 
-        player1_payoff = self.match.get_player_by_index(1).payoff
-        player2_payoff = self.match.get_player_by_index(2).payoff
+        player1_payoff = self.group.get_player_by_id(1).payoff
+        player2_payoff = self.group.get_player_by_id(2).payoff
 
-        tripled_amount = self.match.sent_amount * 3
+        tripled_amount = self.group.sent_amount * 3
 
         return {'amount_allocated': self.subsession.amount_allocated,
-                'sent_amount': self.match.sent_amount,
+                'sent_amount': self.group.sent_amount,
                 'tripled_amount': tripled_amount,
-                'sent_back_amount': self.match.sent_back_amount,
-                'player_index': self.player.index_among_players_in_match,
+                'sent_back_amount': self.group.sent_back_amount,
+                'player_index': self.player.id_in_group,
                 'player1_payoff': player1_payoff,
                 'player2_payoff': player2_payoff}
 

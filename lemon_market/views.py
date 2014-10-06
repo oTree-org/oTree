@@ -23,16 +23,16 @@ class Bid(Page):
 
     template_name = 'lemon_market/Bid.html'
 
-    form_model = models.Match
+    form_model = models.Group
     form_fields = ['bid_amount']
 
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        for p in self.match.players:
+        for p in self.group.players:
             p.set_payoff()
 
 
@@ -43,8 +43,8 @@ class Results(Page):
     def variables_for_template(self):
         return {
             'payoff': self.player.payoff,
-            'bid_amount': self.match.bid_amount,
-            'random_value': self.match.random_value
+            'bid_amount': self.group.bid_amount,
+            'random_value': self.group.random_value
         }
 
 

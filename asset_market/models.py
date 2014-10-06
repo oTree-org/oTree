@@ -28,12 +28,12 @@ class Subsession(otree.models.BaseSubsession):
     understanding_2_correct = '$8, $12'
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 2
+    players_per_group = 2
 
     # transaction fields
     is_transaction = models.BooleanField(default=False, doc="""Indicates whether there is a transaction""")
@@ -58,8 +58,7 @@ class Match(otree.models.BaseMatch):
 class Player(otree.models.BasePlayer):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
-    treatment = models.ForeignKey(Treatment, null = True)
-    match = models.ForeignKey(Match, null = True)
+    group = models.ForeignKey(Group, null = True)
     # </built-in>
 
     # initial shares and cash
@@ -74,8 +73,8 @@ class Player(otree.models.BasePlayer):
     sn = models.PositiveIntegerField(default=0, doc="""number of shares willing to sell.""")
 
     def other_player(self):
-        """Returns other player in match. Only valid for 2-player matches."""
-        return self.other_players_in_match()[0]
+        """Returns other player in group. Only valid for 2-player groupes."""
+        return self.other_players_in_group()[0]
 
     QUESTION_1_CHOICES = ['P=3, N=2','P=2, N=3','P=2.5, N=3','P=2.5, N=2','No transaction will take place',]
     QUESTION_2_CHOICES = ['$8, $12', '$12, $8', '$8, $8', '$12, $12', '$10, $10']
@@ -97,6 +96,6 @@ class Player(otree.models.BasePlayer):
 
 
     def role(self):
-        # you can make this depend of self.id_in_match
+        # you can make this depend of self.id_in_group
         return ''
 

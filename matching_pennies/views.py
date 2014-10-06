@@ -62,12 +62,12 @@ class Choice(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        self.match.set_points()
+        self.group.set_points()
         if self.subsession.round_number == self.subsession.number_of_rounds:
-            self.match.set_payoffs()
+            self.group.set_payoffs()
 
     def body_text(self):
         return "We need to wait for your opponent."

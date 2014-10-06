@@ -15,7 +15,7 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # player 1: claim
-        if self.player.index_among_players_in_match == 1:
+        if self.player.id_in_group == 1:
             self.play_p1()
 
         # player 2: claim
@@ -26,7 +26,7 @@ class PlayerBot(Bot):
         print self.player.payoff
 
     def play_p1(self):
-        self.submit(views.Claim, {"claim": random.choice(self.match.claim_choices())})
+        self.submit(views.Claim, {"claim": random.choice(self.group.claim_choices())})
 
     def play_p2(self):
-        self.submit(views.Claim, {"claim": random.choice(self.match.claim_choices())})
+        self.submit(views.Claim, {"claim": random.choice(self.group.claim_choices())})

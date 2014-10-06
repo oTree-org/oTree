@@ -35,17 +35,17 @@ class Subsession(otree.models.BaseSubsession):
 
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 3
+    players_per_group = 3
 
     def set_payoffs(self):
         contributions = sum([p.contribution for p in self.players])
-        individual_share = contributions * self.subsession.efficiency_factor / self.players_per_match
+        individual_share = contributions * self.subsession.efficiency_factor / self.players_per_group
         for p in self.players:
             p.points = (self.subsession.endowment - p.contribution) + individual_share
             p.payoff = float(p.points) / 100
@@ -54,7 +54,7 @@ class Match(otree.models.BaseMatch):
 class Player(otree.models.BasePlayer):
 
     # <built-in>
-    match = models.ForeignKey(Match, null=True)
+    group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 

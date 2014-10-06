@@ -29,12 +29,12 @@ class Subsession(otree.models.BaseSubsession):
     )
 
     def max_units_per_player(self):
-        return self.total_capacity / Match.players_per_match
+        return int(self.total_capacity / Group.players_per_group)
 
 
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -50,7 +50,7 @@ class Match(otree.models.BaseMatch):
         doc="""Total units produced by all players"""
     )
 
-    players_per_match = 3
+    players_per_group = 3
 
     def set_payoffs(self):
         self.total_units = sum([p.units for p in self.players])
@@ -63,7 +63,7 @@ class Match(otree.models.BaseMatch):
 class Player(otree.models.BasePlayer):
 
     # <built-in>
-    match = models.ForeignKey(Match, null=True)
+    group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 

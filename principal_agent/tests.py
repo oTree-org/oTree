@@ -12,7 +12,7 @@ class PlayerBot(Bot):
         # intro
         self.submit(views.Introduction)
 
-        if self.player.index_among_players_in_match == 1:
+        if self.player.id_in_group == 1:
             self.play_1()
 
         else:
@@ -37,5 +37,5 @@ class PlayerBot(Bot):
         self.submit(views.Accept, {'contract_accepted': random.choice([True, False])})
 
         # effort level only if contract is accepted
-        if self.match.contract_accepted:
+        if self.group.contract_accepted:
             self.submit(views.WorkEffort, {'agent_work_effort': random.choice(range(1, 11))})

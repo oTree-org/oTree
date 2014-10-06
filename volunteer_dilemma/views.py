@@ -14,15 +14,15 @@ class Decision(Page):
     def variables_for_template(self):
         return {'general_benefit': self.subsession.general_benefit,
                 'volunteer_cost': self.subsession.volunteer_cost,
-                'num_other_players': self.match.players_per_match - 1}
+                'num_other_players': self.group.players_per_group - 1}
 
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        self.match.set_payoffs()
+        self.group.set_payoffs()
 
 
 class Results(Page):
@@ -32,7 +32,7 @@ class Results(Page):
     def variables_for_template(self):
         return {'volunteer': self.player.volunteer,
                 'payoff': self.player.payoff,
-                'num_volunteers': len([p for p in self.match.players if p.volunteer])}
+                'num_volunteers': len([p for p in self.group.players if p.volunteer])}
 
 
 def pages():

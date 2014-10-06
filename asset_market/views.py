@@ -12,7 +12,7 @@ def variables_for_all_templates(self):
         'total_q': 2,
         'round_num': self.subsession.round_number,
         'num_of_rounds': self.subsession.number_of_rounds,  # no of periods
-        'num_participants': self.match.players_per_match,
+        'num_participants': self.group.players_per_group,
         'cash': self.player.cash,
         'shares': self.player.shares,
     }
@@ -113,10 +113,10 @@ class Order(Page):
 
 class TransactionWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        self.match.set_transaction()
+        self.group.set_transaction()
 
 class Transaction(Page):
 
@@ -129,7 +129,7 @@ class Transaction(Page):
         return {
             'cash': self.player.cash,
             'shares': self.player.shares,
-            'transaction': self.match.is_transaction,
+            'transaction': self.group.is_transaction,
         }
 
 
@@ -148,10 +148,10 @@ class Dividend(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        self.match.set_payoffs()
+        self.group.set_payoffs()
 
 class Results(Page):
 

@@ -15,16 +15,16 @@ class Choice(Page):
     form_fields = ['choice']
 
     def variables_for_template(self):
-        return {'match_amount': self.subsession.match_amount,
+        return {'group_amount': self.subsession.group_amount,
                 'mismatch_amount': self.subsession.mismatch_amount}
 
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        self.match.set_payoffs()
+        self.group.set_payoffs()
 
     def body_text(self):
         return "Waiting for the other player."

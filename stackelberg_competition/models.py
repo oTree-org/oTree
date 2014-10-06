@@ -34,7 +34,7 @@ class Subsession(otree.models.BaseSubsession):
 
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -45,13 +45,13 @@ class Match(otree.models.BaseMatch):
         doc="""Unit price: P = T - Q1 - Q2, where T is total capacity and Q_i are the units produced by the players"""
     )
 
-    players_per_match = 2
+    players_per_group = 2
 
 
 class Player(otree.models.BasePlayer):
 
     # <built-in>
-    match = models.ForeignKey(Match, null=True)
+    group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
@@ -69,11 +69,11 @@ class Player(otree.models.BasePlayer):
 
     def other_player(self):
         """Returns the opponent of the current player"""
-        return self.other_players_in_match()[0]
+        return self.other_players_in_group()[0]
 
     def set_payoff(self):
-        self.match.price_in_points = self.subsession.total_capacity - self.quantity - self.other_player().quantity
-        self.payoff_in_points = self.match.price_in_points * self.quantity
+        self.group.price_in_points = self.subsession.total_capacity - self.quantity - self.other_player().quantity
+        self.payoff_in_points = self.group.price_in_points * self.quantity
         self.payoff = self.payoff_in_points * self.subsession.currency_per_point
 
 

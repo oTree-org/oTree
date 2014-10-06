@@ -12,7 +12,7 @@ class Decision(Page):
     form_fields = ['decision']
 
     def variables_for_template(self):
-        return {'player_id': self.player.index_among_players_in_match,
+        return {'player_id': self.player.id_in_group,
                 'rowAcolumnA_row': self.subsession.rowAcolumnA_row,
                 'rowAcolumnA_column': self.subsession.rowAcolumnA_column,
                 'rowAcolumnB_row': self.subsession.rowAcolumnB_row,
@@ -25,10 +25,10 @@ class Decision(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        self.match.set_payoffs()
+        self.group.set_payoffs()
 
 
 class Results(Page):

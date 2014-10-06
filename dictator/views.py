@@ -10,29 +10,29 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {'allocated_amount': self.subsession.allocated_amount,
-                'player_id': self.player.index_among_players_in_match}
+                'player_id': self.player.id_in_group}
 
 
 class Offer(Page):
 
     template_name = 'dictator/Offer.html'
 
-    form_model = models.Match
+    form_model = models.Group
     form_fields = ['offer_amount']
 
     def participate_condition(self):
-        return self.player.index_among_players_in_match == 1
+        return self.player.id_in_group == 1
 
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        self.match.set_payoffs()
+        self.group.set_payoffs()
 
     def body_text(self):
-        if self.player.index_among_players_in_match == 2:
+        if self.player.id_in_group == 2:
             return "Waiting for the dictator to make an offer."
 
 
@@ -42,8 +42,8 @@ class Results(Page):
 
     def variables_for_template(self):
         return {'payoff': self.player.payoff,
-                'offer_amount': self.match.offer_amount,
-                'player_id': self.player.index_among_players_in_match}
+                'offer_amount': self.group.offer_amount,
+                'player_id': self.player.id_in_group}
 
 
 def pages():

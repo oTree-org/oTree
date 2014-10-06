@@ -28,10 +28,10 @@ class Bid(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        self.match.set_winner()
+        self.group.set_winner()
 
 
 class Results(Page):
@@ -45,7 +45,7 @@ class Results(Page):
         return {'is_winner': self.player.is_winner,
                 'is_greedy': self.player.private_value - self.player.bid_amount < 0,
                 'bid_amount': self.player.bid_amount,
-                'winning_bid': self.match.highest_bid(),
+                'winning_bid': self.group.highest_bid(),
                 'private_value': self.player.private_value,
                 'payoff': self.player.payoff}
 

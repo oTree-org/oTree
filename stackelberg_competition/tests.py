@@ -12,11 +12,11 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # player one
-        if self.player.index_among_players_in_match == 1:
+        if self.player.id_in_group == 1:
             self.play_1()
 
         # player two
-        elif self.player.index_among_players_in_match == 2:
+        elif self.player.id_in_group == 2:
             self.play_2()
 
         self.submit(views.Results)

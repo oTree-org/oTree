@@ -39,7 +39,7 @@ class Results(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
         self.subsession.set_payoffs()

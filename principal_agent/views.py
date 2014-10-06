@@ -33,13 +33,13 @@ class Offer(Page):
 
     template_name = 'principal_agent/Offer.html'
 
-    form_model = models.Match
+    form_model = models.Group
     form_fields = ['agent_fixed_pay', 'agent_return_share']
 
 
 class OfferWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def body_text(self):
         if self.player.role() == 'agent':
@@ -55,32 +55,32 @@ class Accept(Page):
     def participate_condition(self):
         return self.player.role() == 'agent'
 
-    form_model = models.Match
+    form_model = models.Group
     form_fields = ['contract_accepted']
 
     def variables_for_template(self):
-        return {'fixed_pay': self.match.agent_fixed_pay,
-                'return_share': int(self.match.agent_return_share * 100)}
+        return {'fixed_pay': self.group.agent_fixed_pay,
+                'return_share': int(self.group.agent_return_share * 100)}
 
 
 class WorkEffort(Page):
 
     template_name = 'principal_agent/WorkEffort.html'
 
-    form_model = models.Match
+    form_model = models.Group
     form_fields = ['agent_work_effort']
 
     def participate_condition(self):
-        return self.player.role() == 'agent' and self.match.contract_accepted
+        return self.player.role() == 'agent' and self.group.contract_accepted
 
 class ResultsWaitPage(WaitPage):
-    group = models.Match
+    scope = models.Group
     def body_text(self):
         if self.player.role() == 'principal':
             return "Waiting for Player B to respond."
 
     def after_all_players_arrive(self):
-        self.match.set_payoffs()
+        self.group.set_payoffs()
 
 
 class Results(Page):
@@ -88,11 +88,11 @@ class Results(Page):
     template_name = 'principal_agent/Results.html'
 
     def variables_for_template(self):
-        return {'accepted': self.match.contract_accepted,
+        return {'accepted': self.group.contract_accepted,
                 'agent': self.player.role() == 'agent',
-                'fixed_pay': self.match.agent_fixed_pay,
-                'return_share': int(self.match.agent_return_share * 100),
-                'effort_level': self.match.agent_work_effort,
+                'fixed_pay': self.group.agent_fixed_pay,
+                'return_share': int(self.group.agent_return_share * 100),
+                'effort_level': self.group.agent_work_effort,
                 'payoff': self.player.payoff}
 
 

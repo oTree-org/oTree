@@ -12,17 +12,17 @@ class Decide(Page):
     form_fields = ['price']
 
     def variables_for_template(self):
-        return {'num_other_players': self.match.players_per_match - 1,
+        return {'num_other_players': self.group.players_per_group - 1,
                 'marginal_cost': self.subsession.marginal_cost,
                 'maximum_price': self.subsession.maximum_price}
 
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        self.match.set_payoffs()
+        self.group.set_payoffs()
 
 
 class Results(Page):
@@ -35,8 +35,8 @@ class Results(Page):
                 'is_shared_winner': self.player.is_shared_winner(),
                 'price': self.player.price,
                 'payoff': self.player.payoff,
-                'num_winners': self.match.num_winners,
-                'winning_price': self.match.winning_price}
+                'num_winners': self.group.num_winners,
+                'winning_price': self.group.winning_price}
 
 
 def pages():

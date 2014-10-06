@@ -32,13 +32,13 @@ class Subsession(otree.models.BaseSubsession):
     rowBcolumnB_column = models.MoneyField(default=0.25)
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 2
+    players_per_group = 2
 
     def set_payoffs(self):
         row_player = self.get_player_by_role('row')
@@ -73,13 +73,13 @@ class Match(otree.models.BaseMatch):
 class Player(otree.models.BasePlayer):
 
     # <built-in>
-    match = models.ForeignKey(Match, null=True)
+    group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
     def other_player(self):
-        """Returns other player in match"""
-        return self.other_players_in_match()[0]
+        """Returns other player in group"""
+        return self.other_players_in_group()[0]
 
     decision = models.CharField(
         default=None,
@@ -91,9 +91,9 @@ class Player(otree.models.BasePlayer):
         return ['A', 'B']
 
     def role(self):
-        if self.id_in_match == 1:
+        if self.id_in_group == 1:
             return 'column'
-        if self.id_in_match == 2:
+        if self.id_in_group == 2:
             return 'row'
 
 

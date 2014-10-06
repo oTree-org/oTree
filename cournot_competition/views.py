@@ -11,7 +11,7 @@ class Decide(Page):
     def variables_for_template(self):
         return {'total_capacity': self.subsession.total_capacity,
                 'max_units_per_player': self.subsession.max_units_per_player(),
-                'num_other_players': self.match.players_per_match - 1,
+                'num_other_players': self.group.players_per_group - 1,
                 'currency_per_point': self.subsession.currency_per_point}
 
     form_model = models.Player
@@ -20,10 +20,10 @@ class Decide(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        self.match.set_payoffs()
+        self.group.set_payoffs()
 
 
 class Results(Page):
@@ -33,9 +33,9 @@ class Results(Page):
     def variables_for_template(self):
 
         return {'units': self.player.units,
-                'total_units': self.match.total_units,
-                'players_per_match': self.match.players_per_match,
-                'price_in_points': self.match.price_in_points,
+                'total_units': self.group.total_units,
+                'players_per_group': self.group.players_per_group,
+                'price_in_points': self.group.price_in_points,
                 'payoff_in_points': self.player.payoff_in_points,
                 'payoff': self.player.payoff}
 

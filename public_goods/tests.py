@@ -13,7 +13,7 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # each player contributes random amount
-        self.submit(views.Contribute, {"contribution": random.choice(self.subsession.contribute_choices())})
+        self.submit(views.Contribute, {"contribution": random.uniform(0, self.subsession.endowment)})
 
         # submit results page
         self.submit(views.Results)

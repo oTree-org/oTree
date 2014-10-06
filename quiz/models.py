@@ -18,19 +18,18 @@ class Subsession(otree.models.BaseSubsession):
     name_in_url = 'quiz'
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 1
+    players_per_group = 1
 
 
 class Player(otree.models.BasePlayer):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
-    treatment = models.ForeignKey(Treatment, null = True)
-    match = models.ForeignKey(Match, null = True)
+    group = models.ForeignKey(Group, null = True)
     # </built-in>
 
     q_doctor = models.PositiveIntegerField(

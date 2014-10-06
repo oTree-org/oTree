@@ -15,7 +15,7 @@ class Introduction(Page):
     template_name = 'public_goods/Introduction.html'
 
     def variables_for_template(self):
-        return {'no_of_players': self.match.players_per_match,
+        return {'no_of_players': self.group.players_per_group,
                 'efficiency_factor': self.subsession.efficiency_factor}
 
 
@@ -53,10 +53,10 @@ class Contribute(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        self.match.set_payoffs()
+        self.group.set_payoffs()
 
     def body_text(self):
         return "Waiting for other participants to contribute."
@@ -71,8 +71,8 @@ class Results(Page):
     def variables_for_template(self):
         # calculations here
         current_player = self.player
-        other_players = self.player.other_players_in_match
-        total_contribution = sum([c.contribution for c in self.match.players])
+        other_players = self.player.other_players_in_group
+        total_contribution = sum([c.contribution for c in self.group.players])
         total_earnings = float(total_contribution) * 1.8
         share_earnings = float(total_earnings) / 3
         individual_earnings = (self.subsession.endowment - current_player.contribution) + share_earnings

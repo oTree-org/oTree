@@ -27,7 +27,7 @@ class Subsession(otree.models.BaseSubsession):
 
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -46,7 +46,7 @@ class Match(otree.models.BaseMatch):
         """
     )
 
-    players_per_match = 1
+    players_per_group = 1
 
     def calculate_value(self):
         self.random_value = random.choice(money_range(0.00, 1.00))
@@ -58,15 +58,15 @@ class Match(otree.models.BaseMatch):
 class Player(otree.models.BasePlayer):
 
     # <built-in>
-    match = models.ForeignKey(Match, null=True)
+    group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
     def set_payoff(self):
-        self.match.calculate_value()
-        if self.match.bid_amount > self.match.random_value:
+        self.group.calculate_value()
+        if self.group.bid_amount > self.group.random_value:
             self.payoff = 0
         else:
-            self.payoff = (1.5 * self.subsession.max_bid_amount) - self.match.bid_amount
+            self.payoff = (1.5 * self.subsession.max_bid_amount) - self.group.bid_amount
 
 

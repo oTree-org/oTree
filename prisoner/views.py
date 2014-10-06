@@ -7,7 +7,7 @@ from prisoner._builtin import Page, WaitPage
 class Decision(Page):
 
     """This page has the instructions and this is where the decision is made.
-    Presented to both players in a match at the same time"""
+    Presented to both players in a group at the same time"""
 
     template_name = 'prisoner/Decision.html'
 
@@ -24,13 +24,13 @@ class Decision(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def body_text(self):
         return 'Waiting for the other player to make a decision.'
 
     def after_all_players_arrive(self):
-        for p in self.match.players:
+        for p in self.group.players:
             p.set_payoff()
 
 

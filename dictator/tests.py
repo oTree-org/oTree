@@ -11,17 +11,17 @@ class PlayerBot(Bot):
 
         # basic assertions
         assert (self.subsession.allocated_amount == 1.0)
-        assert (self.match.players_per_match == 2)
+        assert (self.group.players_per_group == 2)
 
         # start game
         self.submit(views.Introduction)
 
         # dictator
-        if self.player.index_among_players_in_match == 1:
+        if self.player.id_in_group == 1:
             self.play_p1()
 
         self.submit(views.Results)
 
     def play_p1(self):
 
-        self.submit(views.Offer, {"offer_amount": random.choice(self.match.offer_choices())})
+        self.submit(views.Offer, {"offer_amount": random.choice(self.group.offer_amount_choices())})

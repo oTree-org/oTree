@@ -31,13 +31,14 @@ class Subsession(otree.models.BaseSubsession):
 
 
 
-class Match(otree.models.BaseMatch):
+
+class Group(otree.models.BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 2
+    players_per_group = 2
 
     sent_amount = models.MoneyField(
         default=None,
@@ -58,8 +59,8 @@ class Match(otree.models.BaseMatch):
         return money_range(0, self.sent_amount * 3, self.subsession.increment_amount)
 
     def set_payoffs(self):
-        p1 = self.get_player_by_index(1)
-        p2 = self.get_player_by_index(2)
+        p1 = self.get_player_by_id(1)
+        p2 = self.get_player_by_id(2)
 
         p1.payoff = self.subsession.amount_allocated - self.sent_amount + self.sent_back_amount
         p2.payoff = self.subsession.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
@@ -68,7 +69,7 @@ class Match(otree.models.BaseMatch):
 class Player(otree.models.BasePlayer):
 
     # <built-in>
-    match = models.ForeignKey(Match, null=True)
+    group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 

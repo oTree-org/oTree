@@ -9,7 +9,7 @@ class Introduction(Page):
     template_name = 'stackelberg_competition/Introduction.html'
 
     def variables_for_template(self):
-        return {'player_id': self.player.index_among_players_in_match,
+        return {'player_id': self.player.id_in_group,
                 'total_capacity': self.subsession.total_capacity,
                 'max_units_per_player': self.subsession.max_units_per_player(),
                 'currency_per_point': self.subsession.currency_per_point}
@@ -18,7 +18,7 @@ class Introduction(Page):
 class ChoiceOne(Page):
 
     def participate_condition(self):
-        return self.player.index_among_players_in_match == 1
+        return self.player.id_in_group == 1
 
     template_name = 'stackelberg_competition/ChoiceOne.html'
 
@@ -29,7 +29,7 @@ class ChoiceOne(Page):
 class ChoiceTwo(Page):
 
     def participate_condition(self):
-        return self.player.index_among_players_in_match == 2
+        return self.player.id_in_group == 2
 
     template_name = 'stackelberg_competition/ChoiceTwo.html'
 
@@ -42,10 +42,10 @@ class ChoiceTwo(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    group = models.Match
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        for p in self.match.players:
+        for p in self.group.players:
             p.set_payoff()
 
 
@@ -57,7 +57,7 @@ class Results(Page):
 
         return {'quantity': self.player.quantity,
                 'total_quantity': self.player.quantity + self.player.other_player().quantity,
-                'price_in_points': self.match.price_in_points,
+                'price_in_points': self.group.price_in_points,
                 'payoff_in_points': self.player.payoff_in_points,
                 'payoff': self.player.payoff}
 

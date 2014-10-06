@@ -19,12 +19,12 @@ class Subsession(otree.models.BaseSubsession):
     name_in_url = 'lemon_market_new'
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_match = 1
+    players_per_group = 1
 
     def set_payoffs(self):
         for p in self.players:
@@ -34,13 +34,12 @@ class Match(otree.models.BaseMatch):
 class Player(otree.models.BasePlayer):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
-    treatment = models.ForeignKey(Treatment, null = True)
-    match = models.ForeignKey(Match, null = True)
+    group = models.ForeignKey(Group, null = True)
     # </built-in>
 
     def other_player(self):
-        """Returns other player in match. Only valid for 2-player matches."""
-        return self.other_players_in_match()[0]
+        """Returns other player in group. Only valid for 2-player groupes."""
+        return self.other_players_in_group()[0]
 
     # example field
     my_field = models.MoneyField(
@@ -56,6 +55,6 @@ class Player(otree.models.BasePlayer):
 
 
     def role(self):
-        # you can make this depend of self.id_in_match
+        # you can make this depend of self.id_in_group
         return ''
 

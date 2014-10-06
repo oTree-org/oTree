@@ -28,7 +28,7 @@ def session_types():
             base_pay=4.00,
             participants_per_demo_session=2,
             participants_per_session=2,
-            subsession_apps=['prisoner', 'lab_results'],
+            subsession_apps=['prisoner', 'prisoner', 'lab_results'],
             doc=""""""
         ),
         SessionType(

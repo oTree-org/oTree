@@ -38,11 +38,11 @@ class Subsession(otree.models.BaseSubsession):
     )
 
 
-class Match(otree.models.BaseMatch):
+class Group(otree.models.BaseGroup):
 
     subsession = models.ForeignKey(Subsession)
 
-    players_per_match = 2
+    players_per_group = 2
 
     def set_payoffs(self):
         if all([p.decision == 'defect' for p in self.players]):
@@ -61,12 +61,12 @@ class Match(otree.models.BaseMatch):
 
 class Player(otree.models.BasePlayer):
 
-    match = models.ForeignKey(Match, null=True)
+    group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
 
     def other_player(self):
-        """Returns other player in match"""
-        return self.other_players_in_match()[0]
+        """Returns other player in group"""
+        return self.other_players_in_group()[0]
 
     decision = models.CharField(
         null=True,
