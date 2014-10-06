@@ -7,9 +7,9 @@ from otree.common import money_range
 from otree import widgets
 
 doc = """
-Traveler's dilemma involves two players.
-Each player makes a claim. Both claims are payoff-relevant for both players. 
-The game is largely based on <a href="http://www.jstor.org/stable/2117865" target="_blank">Basu(1994)</a>.
+Kaushik Basu's famous traveller's dilemma (<a href="http://www.jstor.org/stable/2117865" target="_blank">AER 1994</a>). 
+It is a 2-player game. 
+The game is framed as a traveller's dilemma and intended for classroom/teaching use.
 <br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/traveler_dilemma" target="_blank">here</a>.
 """
