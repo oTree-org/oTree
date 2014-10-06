@@ -6,10 +6,10 @@ import otree.models
 from otree.common import money_range
 
 doc = """
-The bargaining game is a two-player game used to model bargaining interactions.
-Two players demand a portion of some amount of money. If the total amount
-requested by the players is less than that available, both players get their request.
-If their total request is greater than that available, neither player is paid.
+This bargaining game involves 2 players. Each demands for a portion of some available amount. 
+If the sum of demands is no larger than the available amount, both players get demanded portions. 
+Otherwise, both get nothing.
+<br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/bargaining" target="_blank">here</a>.
 """
 

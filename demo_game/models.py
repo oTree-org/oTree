@@ -20,7 +20,7 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'demo_game'
 
-    training_1_correct = 3
+    training_1_correct = 4
     training_2_correct = "Time travel (opens in pop up window)"
     training_3_correct = "Any of the above"
     training_4_correct = "Any participants' input/choice"

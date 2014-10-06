@@ -7,9 +7,10 @@ from otree.common import money_range
 from otree import widgets
 
 doc = """
-Traveler's dilemma game has two players.
-Each player is told to make a claim. Payoffs calculated according to the claims made.
-
+Traveler's dilemma involves two players.
+Each player makes a claim. Both claims are payoff-relevant for both players. 
+The game is largely based on <a href="http://www.jstor.org/stable/2117865" target="_blank">Basu(1994)</a>.
+<br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/traveler_dilemma" target="_blank">here</a>.
 """
 
@@ -28,8 +29,6 @@ class Subsession(otree.models.BaseSubsession):
                                    doc="""The maximum claim to be requested""")
     min_amount = models.MoneyField(default=0.20,
                                    doc="""The minimum claim to be requested""")
-
-
 
 
 class Group(otree.models.BaseGroup):
@@ -56,9 +55,9 @@ class Player(otree.models.BasePlayer):
         """
     )
 
-    #def claim_choices(self):
-    #    """Range of allowed claim values"""
-    #    return money_range(self.subsession.min_amount, self.subsession.max_amount, 0.05)
+    def claim_choices(self):
+        """Range of allowed claim values"""
+        return money_range(self.subsession.min_amount, self.subsession.max_amount, 0.05)
 
     def other_player(self):
         return self.other_players_in_group()[0]

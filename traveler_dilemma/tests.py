@@ -26,7 +26,7 @@ class PlayerBot(Bot):
         print self.player.payoff
 
     def play_p1(self):
-        self.submit(views.Claim, {"claim": random.choice(self.group.claim_choices())})
+        self.submit(views.Claim, {"claim": random.choice(self.player.claim_choices())})
 
     def play_p2(self):
-        self.submit(views.Claim, {"claim": random.choice(self.group.claim_choices())})
+        self.submit(views.Claim, {"claim": random.choice(self.player.claim_choices())})
