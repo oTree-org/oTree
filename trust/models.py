@@ -7,9 +7,9 @@ from otree import widgets
 
 
 doc = """
-Trust game. Single treatment. Both players are given an initial sum.
-One player may give part of the sum to the other player, who actually receives triple the amount.
-The second player may then give part of the now-tripled amount back to the first player.
+In this one-period implementation, the first mover could give part of her or his endowment to the second mover. 
+This amount will be tripled and passed to the second mover, who could return part of her or his possession to the first player.
+<br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/trust" target="_blank">here</a>.
 """
 
