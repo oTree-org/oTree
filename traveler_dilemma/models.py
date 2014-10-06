@@ -7,9 +7,9 @@ from otree.common import money_range
 from otree import widgets
 
 doc = """
-Traveler's dilemma game has two players.
-Each player is told to make a claim. Payoffs calculated according to the claims made.
-
+Traveler's dilemma involves two players.
+Each player makes a claim. Both claims are payoff-relevant for both players.
+<br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/traveler_dilemma" target="_blank">here</a>.
 """
 
