@@ -3,54 +3,12 @@
 {% load i18n %}
 
 {% block title %}
-    Your decision
+    Your Choice
 {% endblock %}
 
 {% block content %}
 
-    <p>
-        You have been randomly and anonymously paired with another player. Both of you see these same instructions.
-        You must privately choose whether you want to <b>cooperate</b> with the other player or <b>defect</b>.
-        The final amount you make will depend both on your and the other player's decision:
-    </p>
-
-
-    <ul>
-        <li>If both choose to cooperate, each will receive {{ cooperate_amount }}</li>
-        <li>If one chooses to cooperate, but the other chooses to defect, the former will receive {{ cooperate_defect_amount }} and the latter {{ defect_cooperate_amount }}</li>
-        <li>If both choose to defect, each will receive {{ defect_amount }}</li>
-    </ul>
-
-
-    <p>
-        These rules are summarized in the table below.
-    </p>
-
-    <table class="table table-condensed" style="width:60%">
-        <thead>
-        <tr>
-            <th></th>
-            <th>P1: Cooperate</th>
-            <th>P1: Defect</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th>P2: Cooperate</th>
-            <td>Each makes {{ cooperate_amount }}</td>
-            <td>P1 makes {{ defect_cooperate_amount }}<br>P2 makes {{ cooperate_defect_amount }}
-            </td>
-        </tr>
-        <tr>
-            <th>P2: defect</th>
-            <td>P1 makes {{ cooperate_defect_amount }}<br>P2 makes {{ defect_cooperate_amount }}
-            </td>
-            <td>Each makes {{ defect_amount }}</td>
-        </tr>
-        </tbody>
-    </table>
-
-    {% formrow form.decision with label="What is your decision?" %}
+    {% formrow form.decision with label="I choose to:" %}
 
     {% next_button %}
 

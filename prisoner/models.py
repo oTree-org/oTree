@@ -91,4 +91,3 @@ class Player(otree.models.BasePlayer):
 
         self.points_earned = (points_matrix[self.decision]
                                            [self.other_player().decision])
-2
