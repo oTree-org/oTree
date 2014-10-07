@@ -93,3 +93,6 @@ class Player(otree.models.BasePlayer):
             return 'Player 1'
         if self.id_in_group == 2:
             return 'Player 2'
+
+    def set_payoff(self):
+        self.payoff = 0

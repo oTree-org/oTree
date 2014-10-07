@@ -13,6 +13,6 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # make your guess
-        self.submit(views.Guess, {"guess_value": random.randint(1, 100)})
+        self.submit(views.Guess, {"guess_value": random.randint(0, 100)})
 
         self.submit(views.Results)

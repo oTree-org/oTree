@@ -75,6 +75,7 @@ class Results(Page):
     template_name = 'matching_pennies/Results.html'
 
     def variables_for_template(self):
+        self.player.set_payoff()
 
         return {'my_choice': self.player.penny_side,
                 'other_choice': self.player.other_player().penny_side,

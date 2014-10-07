@@ -26,5 +26,3 @@ class PlayerBot(Bot):
         # submitted in last round
         if round == rounds:
             self.submit(views.ResultsSummary)
-
-        # FIXME: payoff is still None at the end of the subsession.

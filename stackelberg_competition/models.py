@@ -75,3 +75,6 @@ class Player(otree.models.BasePlayer):
     def set_points(self):
         self.group.price = self.subsession.total_capacity - self.quantity - self.other_player().quantity
         self.points_earned = self.group.price * self.quantity
+
+    def set_payoff(self):
+        self.payoff = 0

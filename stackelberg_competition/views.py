@@ -98,6 +98,7 @@ class Results(Page):
     template_name = 'stackelberg_competition/Results.html'
 
     def variables_for_template(self):
+        self.player.set_payoff()
 
         return {'quantity': self.player.quantity,
                 'other_quantity': self.player.other_player().quantity,
