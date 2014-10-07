@@ -1,1 +1,60 @@
-{% extends "global/Base.html" %}{% load staticfiles floppyforms otree_tags %}{% load i18n %}{% block title %}    <Results></Results>{% endblock %}{% block content %}    <p>The results are shown in the following table.</p>    <table class="table table-test" style="width:400px; margin-bottom:10px">        <tr>            <td>Your firm produced:</td>            <td>{{ quantity }} units</td>        </tr>        <tr>            <td>The other firm produced:</td>            <td>{{ other_quantity }} units</td>        </tr>        <tr>            <td>Total production:</td>            <td>{{ total_quantity }} units</td>        </tr>        <tr>            <td style="border-top-width:4px">Unit selling price:</td>            <td style="border-top-width:4px">{{ total_capacity }} – {{ total_quantity }} = {{ price }}</td>        </tr>        <tr>            <td>Your profit:</td>            <td>{{ points_earned }} points</td>        </tr>        <tr>            <td style="border-top-width:4px">In addition, you get a participation fee:</td>            <td style="border-top-width:4px">{{ base_points }} points</td>        </tr>        <tr>            <td style="border-top-width:4px">In total, you receive:</td>            <td style="border-top-width:4px">{{ total_plus_base }} points</td>        </tr>    </table>    <p>        To complete the study, please answer the questionnaire that will now follow.    </p>    {% next_button %}    {% include 'stackelberg_competition/Instructions.html' %}{% endblock %}
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>The results are shown in the following table.</p>
+
+    <table class="table table-test" style="width:400px; margin-bottom:10px">
+
+        <tr>
+            <td>Your firm produced:</td>
+            <td>{{ quantity }} units</td>
+        </tr>
+
+        <tr>
+            <td>The other firm produced:</td>
+            <td>{{ other_quantity }} units</td>
+        </tr>
+
+        <tr>
+            <td>Total production:</td>
+            <td>{{ total_quantity }} units</td>
+        </tr>
+
+        <tr>
+            <td style="border-top-width:4px">Unit selling price:</td>
+            <td style="border-top-width:4px">{{ total_capacity }} – {{ total_quantity }} = {{ price }}</td>
+        </tr>
+
+        <tr>
+            <td>Your profit:</td>
+            <td>{{ points_earned }} points</td>
+        </tr>
+
+        <tr>
+            <td style="border-top-width:4px">In addition, you get a participation fee:</td>
+            <td style="border-top-width:4px">{{ base_points }} points</td>
+        </tr>
+
+        <tr>
+            <td style="border-top-width:4px">In total, you receive:</td>
+            <td style="border-top-width:4px">{{ total_plus_base }} points</td>
+        </tr>
+
+    </table>
+
+    <p>
+        To complete the study, please answer the questionnaire that will now follow.
+    </p>
+
+    {% next_button %}
+
+    {% include 'stackelberg_competition/Instructions.html' %}
+
+{% endblock %}
