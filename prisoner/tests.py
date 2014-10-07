@@ -7,13 +7,6 @@ import random
 
 class PlayerBot(Bot):
 
-
-    def play_p1(self):
-        self.submit(views.Decision, {"decision": random.choice(['Cooperate', 'Defect'])})
-
-    def play_p1(self):
-        self.submit(views.Decision, {"decision": random.choice(['Cooperate', 'Defect'])})
-
     def play(self):
 
         self.submit(views.Introduction)
