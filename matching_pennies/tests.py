@@ -10,9 +10,21 @@ class PlayerBot(Bot):
 
     def play(self):
 
-        # both players choose their heads or tails
-        choice = random.choice(['Heads', 'Tails'])
-        self.submit(views.Choice, {"penny_side": choice})
+        rounds = self.subsession.number_of_rounds
+        round = self.subsession.round_number
 
-        # results after choices
+        if round == 1:
+            # only submitted on round 1
+            self.submit(views.Introduction)
+            self.submit(views.QuestionOne, {'training_question_1': 'Player 1 gets 0 points, Player 2 gets 0 points'})
+            self.submit(views.FeedbackOne)
+
+        # repeated for the no. of rounds
+        self.submit(views.Choice, {"penny_side": random.choice(['Heads', 'Tails'])})
         self.submit(views.Results)
+
+        # submitted in last round
+        if round == rounds:
+            self.submit(views.ResultsSummary)
+
+        # FIXME: payoff is still None at the end of the subsession.

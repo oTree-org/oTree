@@ -80,8 +80,8 @@ class Results(Page):
 
     def variables_for_template(self):
 
-        player1_payoff = self.group.get_player_by_id(1).payoff
-        player2_payoff = self.group.get_player_by_id(2).payoff
+        player1_payoff = self.group.get_player_by_index(1).payoff
+        player2_payoff = self.group.get_player_by_index(2).payoff
 
         tripled_amount = self.group.sent_amount * 3
 

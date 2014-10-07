@@ -43,8 +43,8 @@ class Group(otree.models.BaseGroup):
         return money_range(0, self.subsession.allocated_amount, 0.05)
 
     def set_payoffs(self):
-        p1 = self.get_player_by_id(1)
-        p2 = self.get_player_by_id(2)
+        p1 = self.get_player_by_index(1)
+        p2 = self.get_player_by_index(2)
 
         p1.payoff = self.subsession.allocated_amount - self.offer_amount
         p2.payoff = self.offer_amount
