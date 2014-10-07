@@ -55,7 +55,7 @@ class ResultsWaitPage(WaitPage):
     scope = models.Group
 
     def body_text(self):
-        return 'Waiting for the other player to choose.'
+        return 'Waiting for the other participant to choose.'
 
     def after_all_players_arrive(self):
         for p in self.group.players:
