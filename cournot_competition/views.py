@@ -65,6 +65,7 @@ class Results(Page):
     template_name = 'cournot_competition/Results.html'
 
     def variables_for_template(self):
+        self.player.set_payoff()
 
         return {'units': self.player.units,
                 'other_units': self.player.other_player().units,

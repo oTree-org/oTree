@@ -81,3 +81,6 @@ class Player(otree.models.BasePlayer):
     def other_player(self):
         return self.other_players_in_group()[0]
 
+    def set_payoff(self):
+        self.payoff = 0
+
