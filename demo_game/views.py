@@ -9,7 +9,7 @@ from otree.common import currency
 
 def variables_for_all_templates(self):
     return {
-        'total_q': 4,  # total number of questions to help participants understand study
+        'total_q': 5,  # total number of questions to help participants understand study
     }
 
 
@@ -126,11 +126,40 @@ class FeedbackFour(Page):
 
     def variables_for_template(self):
         return {'num_q': 4,
-                'question': "What kind of data is included when you export a CSV from oTree?",
+                'question': "What can be monitored during the experiment via the admin console?",
                 'answer': self.player.training_question_4,
                 'correct': self.subsession.training_4_correct,
-                'explanation': "Any participants’ input/choice.",
+                'explanation': "All of the above.",
                 'is_correct': self.player.is_training_question_4_correct(),
+                }
+
+
+class QuestionFive(Page):
+    template_name = 'demo_game/Question.html'
+
+    def participate_condition(self):
+        return True
+
+    form_model = models.Player
+    form_fields = ['training_question_5']
+
+    def variables_for_template(self):
+        return {'num_q': 5}
+
+
+class FeedbackFive(Page):
+    template_name = 'demo_game/Feedback.html'
+
+    def participate_condition(self):
+        return True
+
+    def variables_for_template(self):
+        return {'num_q': 5,
+                'question': "What kind of data is included when you export a CSV from oTree?",
+                'answer': self.player.training_question_5,
+                'correct': self.subsession.training_5_correct,
+                'explanation': "Any participants’ input/choice.",
+                'is_correct': self.player.is_training_question_5_correct(),
                 }
 
 
@@ -170,6 +199,8 @@ def pages():
         FeedbackThree,
         QuestionFour,
         FeedbackFour,
+        QuestionFive,
+        FeedbackFive,
         FormsDemo,
         Results,
         Finish,

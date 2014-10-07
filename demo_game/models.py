@@ -23,9 +23,8 @@ class Subsession(otree.models.BaseSubsession):
     training_1_correct = 4
     training_2_correct = "Time travel (opens in pop up window)"
     training_3_correct = "Any of the above"
-    training_4_correct = "Any participants' input/choice"
-
-
+    training_4_correct = "All of the above"
+    training_5_correct = "Any participants' input/choice"
 
 
 class Group(otree.models.BaseGroup):
@@ -64,6 +63,7 @@ class Player(otree.models.BasePlayer):
     training_question_2 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
     training_question_3 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
     training_question_4 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
+    training_question_5 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
 
     def training_question_2_choices(self):
         return ['Embed images', 'Dynamic visualizations using HighCharts', 'Time travel (opens in pop up window)', 'Embed video', 'Embed audio']
@@ -72,7 +72,11 @@ class Player(otree.models.BasePlayer):
         return ['Windows', 'Mac OS X', 'iOS', 'Android', 'Any of the above']
 
     def training_question_4_choices(self):
+        return ["Calculation of payoff", "Progress of players through pages", "Values submitted by the players", "Whether players have visited the game", "All of the above"]
+
+    def training_question_5_choices(self):
         return ["Any participants' input/choice", "Time spent on each page", "Invalid attempts from participants", "Answers to understanding questions", "Questionnaire input"]
+
 
     def training_question_1_error_message(self, value):
         if value < 0 and abs(value) % 2 == 0:
@@ -90,6 +94,9 @@ class Player(otree.models.BasePlayer):
 
     def is_training_question_4_correct(self):
         return self.training_question_4 == self.subsession.training_4_correct
+
+    def is_training_question_5_correct(self):
+        return self.training_question_5 == self.subsession.training_5_correct
 
     def set_payoff(self):
         self.payoff = 0

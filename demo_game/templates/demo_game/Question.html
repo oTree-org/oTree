@@ -29,8 +29,20 @@
     </p>
 
     {% elif num_q == 4 %}
+    <p>
+        <video width="320" height="240" controls>
+            <source src="https://dl.dropboxusercontent.com/u/188666511/console.mp4" type="video/mp4">
+        </video>
+        <br/>
+        The silent video above is the admin console in action. It demonstrates some functions of the admin console.
+        {% formrow form.training_question_4 with label="What can be monitored during the experiment via the admin console?" %}
+    </p>
+
+    {% elif num_q == 5 %}
+    <p>
         <img src="{{ STATIC_URL }}/images/csvexport.png" alt="admin csv export"/>
-        <p>{% formrow form.training_question_4 with label="What kind of data is included when you export a CSV from oTree?" %}</p>
+        {% formrow form.training_question_5 with label="What kind of data is included when you export a CSV from oTree?" %}
+    </p>
     {% endif %}
 
     {% next_button %}
