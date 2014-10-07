@@ -7,12 +7,23 @@ import random
 
 class PlayerBot(Bot):
 
+
+    def play_p1(self):
+        self.submit(views.Decision, {"decision": random.choice(['Cooperate', 'Defect'])})
+
+    def play_p1(self):
+        self.submit(views.Decision, {"decision": random.choice(['Cooperate', 'Defect'])})
+
     def play(self):
 
-        # each player makes random decision
-        decision = random.choice(['Cooperate', 'Defect'])
+        self.submit(views.Introduction)
 
-        self.submit(views.Decision, {"decision": decision})
+        self.submit(views.QuestionOne, {'training_question_1': 'Alice gets 300 points, Bob gets 0 points'})
 
-        # submit results
+        self.submit(views.FeedbackOne)
+
+        self.submit(views.Decision, {"decision": random.choice(['Cooperate', 'Defect'])})
+
         self.submit(views.Results)
+        
+        # FIXME: payoff is still None at the end of the subsession
