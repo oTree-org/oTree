@@ -90,7 +90,7 @@ def session_types():
         SessionType(
             name='Guessing Game',
             base_pay=10.00,
-            participants_per_session=12,
+            participants_per_session=10,
             participants_per_demo_session=5,
             subsession_apps=['guessing', 'lab_results'],
             doc=""""""
