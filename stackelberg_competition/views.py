@@ -15,9 +15,6 @@ class Introduction(Page):
 
     template_name = 'stackelberg_competition/Introduction.html'
 
-    def variables_for_template(self):
-        return {'player_id': self.player.id_in_group}
-
 
 class QuestionOne(Page):
 

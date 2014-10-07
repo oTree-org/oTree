@@ -4,15 +4,46 @@ import cournot_competition.models as models
 from cournot_competition._builtin import Page, WaitPage
 
 
+def variables_for_all_templates(self):
+
+    return {'total_capacity': self.subsession.total_capacity,
+            'max_units_per_player': self.subsession.max_units_per_player(),
+            'total_q': 1}
+
+
+class Introduction(Page):
+
+    template_name = 'cournot_competition/Introduction.html'
+
+
+class QuestionOne(Page):
+
+    template_name = 'cournot_competition/Question.html'
+
+    form_model = models.Player
+    form_fields = ['training_question_1']
+
+    def variables_for_template(self):
+        return {'num_q': 1}
+
+
+class FeedbackOne(Page):
+
+    template_name = 'cournot_competition/Feedback.html'
+
+    def variables_for_template(self):
+        return {'num_q': 1,
+                'question': """Suppose firm Q produced 20 units and firm P produced 30 units. What would be the profit for firm P?""",
+                'answer': self.player.training_question_1,
+                'correct': self.subsession.training_1_correct,
+                'explanation': """Total units produced were 20 + 30 = 50. The unit selling price was 60 – 50 = 10.
+                                  The profit for firm P would be the product of the unit selling price and the unit produced by firm P, that is 10 × 30 = 300""",
+                'is_correct': self.player.is_training_question_1_correct()}
+
+
 class Decide(Page):
 
     template_name = 'cournot_competition/Decide.html'
-
-    def variables_for_template(self):
-        return {'total_capacity': self.subsession.total_capacity,
-                'max_units_per_player': self.subsession.max_units_per_player(),
-                'num_other_players': self.group.players_per_group - 1,
-                'currency_per_point': self.subsession.currency_per_point}
 
     form_model = models.Player
     form_fields = ['units']
@@ -22,8 +53,11 @@ class ResultsWaitPage(WaitPage):
 
     scope = models.Group
 
+    def body_text(self):
+        return "Waiting for the other participant to decide."
+
     def after_all_players_arrive(self):
-        self.group.set_payoffs()
+        self.group.set_points()
 
 
 class Results(Page):
@@ -33,15 +67,20 @@ class Results(Page):
     def variables_for_template(self):
 
         return {'units': self.player.units,
+                'other_units': self.player.other_player().units,
                 'total_units': self.group.total_units,
-                'players_per_group': self.group.players_per_group,
-                'price_in_points': self.group.price_in_points,
-                'payoff_in_points': self.player.payoff_in_points,
-                'payoff': self.player.payoff}
+                'total_capacity': self.subsession.total_capacity,
+                'price': self.group.price,
+                'points_earned': self.player.points_earned,
+                'base_points': 50,
+                'total_plus_base': self.player.points_earned + 50}
 
 
 def pages():
 
-    return [Decide,
+    return [Introduction,
+            QuestionOne,
+            FeedbackOne,
+            Decide,
             ResultsWaitPage,
             Results]

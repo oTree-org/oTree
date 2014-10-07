@@ -10,33 +10,51 @@
 
     <p>The results are shown in the following table.</p>
 
-    <table class="table" style="width:400px">
+    <table class="table table-test" style="width:400px; margin-bottom:10px">
 
         <tr>
-            <td>Units produced by you</td>
-            <td>{{ units }}</td>
+            <td>Your firm produced:</td>
+            <td>{{ units }} units</td>
         </tr>
 
         <tr>
-            <td>Total units by all {{ players_per_match }} companies</td>
-            <td>{{ total_units }}</td>
+            <td>The other firm produced:</td>
+            <td>{{ other_units }} units</td>
         </tr>
 
         <tr>
-            <td>Unit price (in points)</td>
-            <td>{{ price_in_points }}</td>
+            <td>Total production:</td>
+            <td>{{ total_units }} units</td>
         </tr>
 
         <tr>
-            <td>Your profit (in points)</td>
-            <td>{{ payoff_in_points }}</td>
+            <td style="border-top-width:4px">Unit selling price:</td>
+            <td style="border-top-width:4px">{{ total_capacity }} – {{ total_units }} = {{ price }}</td>
         </tr>
 
-        <tr class="success">
-            <th>Your payoff</th>
-            <th>{{ payoff }}</th>
+        <tr>
+            <td>Your profit:</td>
+            <td>{{ points_earned }} points</td>
+        </tr>
+
+        <tr>
+            <td style="border-top-width:4px">In addition, you get a participation fee:</td>
+            <td style="border-top-width:4px">{{ base_points }} points</td>
+        </tr>
+
+        <tr>
+            <td style="border-top-width:4px">In total, you receive:</td>
+            <td style="border-top-width:4px">{{ total_plus_base }} points</td>
         </tr>
 
     </table>
+
+    <p>
+        To complete the study, please answer the questionnaire that will now follow.
+    </p>
+
+    {% next_button %}
+
+    {% include 'cournot_competition/Instructions.html' %}
 
 {% endblock %}

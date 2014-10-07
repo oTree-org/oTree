@@ -8,10 +8,9 @@ from otree import widgets
 
 
 doc = """
-In Stackelberg competition, firms decide sequentially on how many units to produce. The unit selling price depends on the total units produced. 
-In this one-period implementation, the order of play is randomly determined.
-<br />
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/stackelberg_competition" target="_blank">here</a>.
+<p>In Stackelberg competition, firms decide sequentially on how many units to produce. The unit selling price depends on the total units produced.
+In this one-period implementation, the order of play is randomly determined.</p>
+<p>Source code <a href="https://github.com/oTree-org/oTree/tree/master/stackelberg_competition" target="_blank">here</a>.</p>
 """
 
 
