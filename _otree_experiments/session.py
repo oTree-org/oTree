@@ -154,7 +154,7 @@ def session_types():
         SessionType(
             name='Principal Agent',
             base_pay=10.00,
-            participants_per_session=12,
+            participants_per_session=30,
             participants_per_demo_session=2,
             subsession_apps=['principal_agent', 'lab_results'],
             doc=""""""
