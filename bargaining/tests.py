@@ -13,7 +13,7 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # request
-        self.submit(views.Request, {"request_amount": random.choice(self.group.request_choices())})
+        self.submit(views.Request, {"request_amount": random.choice(self.player.request_amount_choices())})
 
         # results
         self.submit(views.Results)

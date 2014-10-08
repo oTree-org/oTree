@@ -55,7 +55,7 @@ class ResultsWaitPage(WaitPage):
     scope = models.Group
 
     def body_text(self):
-        return 'Waiting for the other player to choose.'
+        return 'Waiting for the other participant to choose.'
 
     def after_all_players_arrive(self):
         for p in self.group.players:
@@ -69,8 +69,9 @@ class Results(Page):
     def variables_for_template(self):
         base_points = 50
 
-        return {'my_payoff': self.player.payoff,
-                'my_decision': self.player.decision.lower(),
+        self.player.set_payoff()
+
+        return {'my_decision': self.player.decision.lower(),
                 'other_player_decision': self.player.other_player().decision.lower(),
                 'same_choice': self.player.decision == self.player.other_player().decision,
                 'points_earned': self.player.points_earned,

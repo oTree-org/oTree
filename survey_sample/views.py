@@ -12,6 +12,10 @@ class Survey(Page):
     form_model = models.Player
     form_fields = ['q_gender']
 
+    def variables_for_template(self):
+        self.player.set_payoff()
+        return None
+
 
 def pages():
 

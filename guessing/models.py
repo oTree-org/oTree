@@ -17,10 +17,19 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'guessing'
 
+
+class Group(otree.models.BaseGroup):
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
+    players_per_group = 5
+
     two_third_guesses = models.FloatField(default=None)
 
     def set_payoffs(self):
-        self.two_third_guesses = (2.0/3) * sum([p.guess_value for p in self.players]) / len(self.players)
+        self.two_third_guesses = (2/3) * sum([p.guess_value for p in self.players]) / len(self.players)
 
         winner_so_far = None
         smallest_difference_so_far = 1000   # arbitrary big number
@@ -34,7 +43,7 @@ class Subsession(otree.models.BaseSubsession):
 
         for p in self.players:
             if p.is_winner:
-                p.payoff = p.subsession.winner_payoff
+                p.payoff = p.group.winner_payoff
             else:
                 p.payoff = 0
 
@@ -42,17 +51,6 @@ class Subsession(otree.models.BaseSubsession):
         default=1.00,
         doc='Payoff to the winner'
     )
-
-
-
-
-class Group(otree.models.BaseGroup):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
-    players_per_group = 1
 
 
 class Player(otree.models.BasePlayer):

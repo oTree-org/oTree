@@ -11,6 +11,9 @@ class PlayerBot(Bot):
 
         self.submit(views.Introduction)
 
+        self.submit(views.QuestionOne, {'training_question_1': 20})
+        self.submit(views.FeedbackOne)
+
         # player one
         if self.player.id_in_group == 1:
             self.play_1()
@@ -26,3 +29,4 @@ class PlayerBot(Bot):
 
     def play_2(self):
         self.submit(views.ChoiceTwo, {'quantity': random.randint(0, self.subsession.max_units_per_player())})
+

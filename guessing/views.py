@@ -10,7 +10,7 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {'players_count': len(self.player.other_players_in_subsession()),
-                'winner_payoff': self.subsession.winner_payoff}
+                'winner_payoff': self.group.winner_payoff}
 
 
 class Guess(Page):
@@ -31,7 +31,7 @@ class Results(Page):
         return {'guess_value': self.player.guess_value,
                 'other_guesses': other_guesses,
                 'other_guesses_count': len(other_guesses),
-                'two_third_average': round(self.subsession.two_third_guesses, 4),
+                'two_third_average': round(self.group.two_third_guesses, 4),
                 'players': self.subsession.players,
                 'is_winner': self.player.is_winner,
                 'payoff': self.player.payoff}
@@ -42,7 +42,7 @@ class ResultsWaitPage(WaitPage):
     scope = models.Group
 
     def after_all_players_arrive(self):
-        self.subsession.set_payoffs()
+        self.group.set_payoffs()
 
 
 def pages():

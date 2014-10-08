@@ -35,8 +35,8 @@ def session_types():
             name='Cournot Competition',
             base_pay=10.00,
             participants_per_session=12,
-            participants_per_demo_session=3,
-            subsession_apps=['cournot_competition', 'lab_results'],
+            participants_per_demo_session=2,
+            subsession_apps=['cournot_competition', 'survey_sample', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -90,7 +90,7 @@ def session_types():
         SessionType(
             name='Guessing Game',
             base_pay=10.00,
-            participants_per_session=12,
+            participants_per_session=10,
             participants_per_demo_session=5,
             subsession_apps=['guessing', 'lab_results'],
             doc=""""""

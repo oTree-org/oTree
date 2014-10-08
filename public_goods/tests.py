@@ -9,11 +9,14 @@ class PlayerBot(Bot):
 
     def play(self):
 
-        # all players
         self.submit(views.Introduction)
 
-        # each player contributes random amount
-        self.submit(views.Contribute, {"contribution": random.uniform(0, self.subsession.endowment)})
+        self.submit(views.Question, {"question": 92})
 
-        # submit results page
+        self.submit(views.Feedback)
+
+        self.submit(views.Contribute, {"contribution": random.choice(range(0, self.subsession.endowment))})
+
         self.submit(views.Results)
+
+        self.submit(views.FeedbackQ, {"feedbackq": "Very well"})

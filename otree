@@ -1,0 +1,191 @@
+#!/usr/bin/env python
+"""
+This script can call django management commands and self defined commands
+(see COMMANDS).
+
+Type './otree help' to get a list of all available commands.
+The help message you will see then is splitted into the two sections:
+
+deployment commands:
+    These commands are the custom commands defined in the COMMANDS dictionary.
+
+project commands:
+    Those are the django management command, like runserver, migrate, etc.
+"""
+
+import argparse
+import os
+import sys
+import textwrap
+
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument('subcommand', nargs=1)
+
+
+COMMANDS = {}
+
+
+###########################################################################
+#                                recreate                                 #
+###########################################################################
+
+
+heroku_apps = {
+    'demo': 'otree-demo',
+    'chen-dev': 'pacific-journey-6479',
+}
+
+
+def recreate(args):
+    import commit_and_push
+
+    syncdb = 'python manage.py syncdb --traceback'
+
+    if args.environment == 'local':
+        with open('_otree_experiments/db.sqlite3', 'w') as db:
+            db.write('')
+        django_command([sys.argv[0], 'syncdb', '--traceback'])
+        # then launch from PyCharm
+    else:
+        # heroku
+        if args.environment == 'production':
+            confirmed = raw_input('Enter "y" if you are sure you want to reset the production database.').lower() == 'y'
+            if not confirmed:
+                print 'exit.'
+                return
+
+        reset_db = 'heroku pg:reset DATABASE --confirm {}'.format(
+            heroku_apps[args.environment])
+        os.system(reset_db)
+
+        commit_and_push.run(args.environment)
+
+        heroku_run_command = 'heroku run {} --remote {}'
+
+        syncdb = heroku_run_command.format(syncdb, args.environment)
+        os.system(syncdb)
+
+recreate.parser = argparse.ArgumentParser(description='recreate')
+recreate.parser.add_argument('recreate', nargs=1)
+recreate.parser.add_argument(
+    'environment', nargs='?', default='local',
+    choices=['local', 'production'] + list(heroku_apps.keys()),
+    help="""
+        Give the environment on which you want to deploy the otree instance.
+        Use 'local' to setup your local project.
+        Use 'production' to deploy to heroku.
+    """)
+
+COMMANDS['recreate'] = recreate
+
+
+###########################################################################
+#                                  help                                   #
+###########################################################################
+
+
+def show_help(args):
+    if args.subcommand:
+        # If there was a argument given after 'help', then show the help
+        # message for this command.
+        if args.subcommand in COMMANDS:
+            command = COMMANDS[args.subcommand]
+            print(command.parser.format_help())
+            return
+
+        # If the command is not part of the otree script, then it might be a
+        # django command. So display the help for the django command.
+        else:
+            django_command([sys.argv[0], 'help', args.subcommand])
+            return
+
+    MESSAGE = """\
+        Usage: {script_name} subcommand [options] [args]
+
+        Call this script with a command name as first argument to execute this
+        command. There are two main command types available:
+
+
+        ========== DEPLOYMENT COMMANDS ==========
+
+        The deployment commands assist you in deploying your oTree instance to
+        heroku.
+
+
+        {script_help}
+
+        Type '{script_name} help <subcommand>' for help on a specific subcommand.
+
+        Available subcommands:
+
+        {deployment_commands}
+
+
+        ========== PROJECT COMMANDS ==========
+
+        Project commands are executed on your local oTree installation and
+        provide you with development helpers.
+
+    """
+    MESSAGE = textwrap.dedent(MESSAGE)
+
+    deployment_commands = sorted(COMMANDS.keys())
+    deployment_commands = [(' ' * 4) + command for command in deployment_commands]
+    deployment_commands = '\n'.join(deployment_commands)
+
+    print(MESSAGE.format(
+        deployment_commands=deployment_commands,
+        script_name=os.path.basename(sys.argv[0]),
+        script_help=parser.format_help()))
+
+    django_command([sys.argv[0], 'help'])
+
+
+show_help.parser = argparse.ArgumentParser(description='help')
+show_help.parser.add_argument('help', nargs=1)
+show_help.parser.add_argument('subcommand', nargs='?')
+
+COMMANDS['help'] = show_help
+
+
+###########################################################################
+#                             django commands                             #
+###########################################################################
+
+
+def django_command(argv):
+    import django.conf
+    import _otree_experiments.settings
+
+    if not django.conf.settings.configured:
+        django.conf.settings.configure(**_otree_experiments.settings.settings)
+
+    from django.core.management import execute_from_command_line
+    execute_from_command_line(argv)
+
+
+###########################################################################
+#                                  main                                   #
+###########################################################################
+
+
+def main(arguments):
+    args, unknown_args = parser.parse_known_args(arguments)
+    if args.subcommand:
+        command_name = args.subcommand[0]
+        # First try to find the command name in the custom made commands.
+        if command_name in COMMANDS:
+            command = COMMANDS[command_name]
+            command_args = command.parser.parse_args(arguments)
+            command(command_args)
+            return
+        # If there is no custom command, then run everything as if this
+        # was the project's manage.py script.
+        else:
+            django_command(sys.argv)
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

@@ -8,7 +8,7 @@ class PlayerBot(Bot):
     def play(self):
 
         # random decision
-        choice = random.choice(['football', 'opera'])
+        choice = random.choice(['Football', 'Opera'])
 
         self.submit(views.Decide, {"decision": choice})
 
