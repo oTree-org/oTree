@@ -41,8 +41,8 @@ class Group(otree.models.BaseGroup):
     players_per_group = 2
 
     def set_payoffs(self):
-        p1 = self.get_player_by_index(1)
-        p2 = self.get_player_by_index(2)
+        p1 = self.get_player_by_id(1)
+        p2 = self.get_player_by_id(2)
 
         if p1.choice == p2.choice:
             p1.payoff = p2.payoff = self.subsession.group_amount

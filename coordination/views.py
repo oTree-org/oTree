@@ -32,6 +32,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
+
     def participate_condition(self):
         return True
 
