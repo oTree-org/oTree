@@ -8,14 +8,14 @@ import time
 
 
 def sleep_seconds():
-    return random.choice(range(10, 15, 1))
+    return random.choice(range(5, 30, 1))
 
 
 class PlayerBot(Bot):
 
     def play(self):
         # intro
-        time.sleep(10)
+        time.sleep(5)
         self.submit(views.Introduction)
 
         if self.player.id_in_group == 1:
