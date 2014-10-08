@@ -82,8 +82,7 @@ class Results(Page):
                 'my_points': self.player.points_earned,
                 'other_points': self.player.other_player().points_earned,
                 'my_payoff': self.player.payoff,
-                'other_payoff': self.player.other_player().payoff,
-                'me_in_previous_rounds': self.player.me_in_previous_rounds()}
+                'other_payoff': self.player.other_player().payoff}
 
 
 class ResultsSummary(Page):
@@ -94,10 +93,10 @@ class ResultsSummary(Page):
         return self.subsession.round_number == self.subsession.number_of_rounds
 
     def variables_for_template(self):
-        total_points_earned = sum(p.points_earned for p in self.player.me_in_previous_rounds() + [self.player])
+        total_points_earned = sum(p.points_earned for p in self.player.me_in_all_rounds())
         base_points = 50
 
-        return {'me_in_previous_rounds': self.player.me_in_previous_rounds(),
+        return {'me_in_all_rounds': self.player.me_in_all_rounds(),
                 'points_earned': self.player.points_earned,
                 'is_winner': self.player.is_winner,
                 'total_points_earned': total_points_earned,

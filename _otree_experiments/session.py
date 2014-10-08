@@ -16,7 +16,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Public Goods',
+            name="Public Goods",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=3,
@@ -32,7 +32,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Cournot Competition',
+            name="Cournot Competition",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -40,7 +40,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Trust Game',
+            name="Trust Game",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -48,7 +48,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Dictator Game',
+            name="Dictator Game",
             base_pay=10.00,
             participants_per_session=2,
             participants_per_demo_session=2,
@@ -56,7 +56,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Matching Pennies',
+            name="Matching Pennies",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -72,7 +72,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Survey',
+            name="Survey",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=1,
@@ -80,7 +80,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Bargaining Game',
+            name="Bargaining Game",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -88,7 +88,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Guessing Game',
+            name="Guessing Game",
             base_pay=10.00,
             participants_per_session=10,
             participants_per_demo_session=5,
@@ -96,7 +96,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Common Value Auction',
+            name="Common Value Auction",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -104,7 +104,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='2 x 2 Matrix Game (Symmetric)',
+            name="2 x 2 Matrix Game (Symmetric)",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -112,7 +112,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='2 x 2 Matrix Game (Asymmetric)',
+            name="2 x 2 Matrix Game (Asymmetric)",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -120,7 +120,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Stackelberg Competition',
+            name="Stackelberg Competition",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -128,7 +128,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Private Value Auction',
+            name="Private Value Auction",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -144,7 +144,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Bertrand Competition',
+            name="Bertrand Competition",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=3,
@@ -152,7 +152,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Principal Agent',
+            name="Principal Agent",
             base_pay=10.00,
             participants_per_session=30,
             participants_per_demo_session=2,
@@ -160,7 +160,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Coordination Game',
+            name="Coordination Game",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -168,7 +168,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Stag Hunt',
+            name="Stag Hunt",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -176,7 +176,7 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='Battle of the Sexes',
+            name="Battle of the Sexes",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -198,7 +198,7 @@ disabled_session_types = [
     ),
     # in progress
     SessionType(
-        name='Asset Market',
+        name="Asset Market",
         base_pay=10.00,
         participants_per_session=12,
         participants_per_demo_session=2,
@@ -206,7 +206,7 @@ disabled_session_types = [
         doc=""""""
     ),
     SessionType(
-        name='Lemon Market',
+        name="Lemon Market",
         base_pay=10.00,
         participants_per_session=12,
         participants_per_demo_session=1,
@@ -214,7 +214,7 @@ disabled_session_types = [
         doc=""""""
     ),
     SessionType(
-        name='Tragedy of the commons',
+        name="Tragedy of the commons",
         base_pay=10.00,
         participants_per_session=2,
         participants_per_demo_session=2,

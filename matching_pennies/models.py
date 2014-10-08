@@ -18,11 +18,11 @@ class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'matching_pennies'
 
-    def pick_group_groups(self, previous_round_group_groups):
-        group_groups = previous_round_group_groups
-        for group in group_groups:
+    def next_round_groups(self, this_round_groups):
+        groups = this_round_groups
+        for group in groups:
             group.reverse()
-        return group_groups
+        return groups
 
     training_1_correct = 'Player 1 gets 100 points, Player 2 gets 0 points'
 
