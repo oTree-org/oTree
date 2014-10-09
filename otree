@@ -39,8 +39,6 @@ heroku_apps = {
 
 
 def recreate(args):
-    import commit_and_push
-
     syncdb = 'python manage.py syncdb --traceback'
 
     if args.environment == 'local':
@@ -60,7 +58,7 @@ def recreate(args):
             heroku_apps[args.environment])
         os.system(reset_db)
 
-        commit_and_push.run(args.environment)
+        _commit_and_push(args.environment)
 
         heroku_run_command = 'heroku run {} --remote {}'
 
@@ -79,6 +77,31 @@ recreate.parser.add_argument(
     """)
 
 COMMANDS['recreate'] = recreate
+
+
+###########################################################################
+#                             commit and push                             #
+###########################################################################
+
+
+def _commit_and_push(environment):
+    os.system('git commit -am "."')
+    os.system('git push {} master'.format(environment))
+
+
+def commit_and_push(args):
+    _commit_and_push(args.environment)
+
+commit_and_push.parser = argparse.ArgumentParser(description='commit_and_push')
+commit_and_push.parser.add_argument('commit_and_push', nargs=1)
+commit_and_push.parser.add_argument(
+    'environment', nargs=1,
+    help="""
+        Give the environment on which you want to push the changes.
+        Use 'production' to deploy to heroku.
+    """)
+
+COMMANDS['commit_and_push'] = commit_and_push
 
 
 ###########################################################################
