@@ -20,7 +20,7 @@ def main():
     syncdb = 'python manage.py syncdb --traceback'
 
     if environment == 'local':
-        open('_otree_experiments/db.sqlite3', 'w').write('')
+        open('db.sqlite3', 'w').write('')
         os.system(syncdb)
         # then launch from PyCharm
     else:

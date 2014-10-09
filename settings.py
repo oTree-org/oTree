@@ -42,7 +42,6 @@ settings = {
     'DATABASES': DATABASES,
     'INSTALLED_APPS': [
         'otree',
-        '_otree_experiments',
         'raven.contrib.django.raven_compat',
     ],
     'INSTALLED_OTREE_APPS': [
@@ -73,8 +72,7 @@ settings = {
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
-    'WSGI_APPLICATION': '_otree_experiments.wsgi.application',
-    'ROOT_URLCONF': '_otree_experiments.urls',
+    'WSGI_APPLICATION': 'wsgi.application',
 }
 
 otree.settings.augment_settings(settings)
