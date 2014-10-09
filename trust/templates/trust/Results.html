@@ -1,1 +1,27 @@
-{% extends "global/Base.html" %}{% load staticfiles floppyforms otree_tags %}{% load i18n %}{% block title %}    Results{% endblock %}{% block content %}    <p>        {% if player_index == 1 %}            The initial sum was {{ amount_allocated }}, of which you decided to give {{ sent_amount }}.            The experimenter tripled this amount, resulting in {{ tripled_amount }}, of which the other player decided to give you {{ sent_back_amount }}.        {% else %}            The initial sum was {{ amount_allocated }}. The other player decided to give {{ sent_amount }}.            The experimenter tripled this amount, resulting in {{ tripled_amount }}, of which you decided to give {{ sent_back_amount }} back to the other player.        {% endif %}    </p>    <p>        {% if player_index == 1 %}            Your final payoff is therefore {{ player1_payoff }}. The other player receives {{ player2_payoff }}.        {% else %}            Your final payoff is therefore {{ player2_payoff }}. The other player receives {{ player1_payoff }}.        {% endif %}    </p>    {% next_button %}{% endblock %}
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+<table class=table style='width: auto'>
+    <tr><th>Participant A sent B</th><td>{{sent_amount}}</td></tr>
+    <tr><th>Participant B received from A</th><td>{{tripled_amount}}</td></tr>
+    <tr><th>Participant B sent A</th><td>{{sent_back_amount}}</td></tr>
+    <tr><th>Participant A received from B</th><td>{{sent_back_amount}}</td></tr>
+    <tr><th>As Participant {{role}}, you have</th><td>{{result}}</td></tr>
+    <tr><th>In addition you get a participation fee of</th><td>{{bonus}}</td></tr>
+    <tr><th>So in sum you will get</th><td>{{total}}</td></tr>
+</table>
+
+<p>To complete the study, please answer a short questionnaire that will now follow.</p>
+
+<p>{% next_button %}</p>
+
+    {% include instructions %}
+
+{% endblock %}
+
