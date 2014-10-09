@@ -86,12 +86,11 @@ COMMANDS['recreate'] = recreate
 
 def _commit_and_push(environment):
     os.system('git commit -am "."')
-    print 'git push {} master'.format(environment)
     os.system('git push {} master'.format(environment))
 
 
 def commit_and_push(args):
-    _commit_and_push(args.environment)
+    _commit_and_push(args.environment[0])
 
 commit_and_push.parser = argparse.ArgumentParser(description='commit_and_push')
 commit_and_push.parser.add_argument('commit_and_push', nargs=1)
