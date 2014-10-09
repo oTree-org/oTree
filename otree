@@ -86,6 +86,7 @@ COMMANDS['recreate'] = recreate
 
 def _commit_and_push(environment):
     os.system('git commit -am "."')
+    print 'git push {} master'.format(environment)
     os.system('git push {} master'.format(environment))
 
 
