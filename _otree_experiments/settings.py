@@ -69,7 +69,8 @@ settings = {
         'coordination',
         'stag_hunt',
         'battle_of_the_sexes',
-        'survey_sample'
+        'survey_sample',
+        'rock_paper_scissorts'
     ],
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
