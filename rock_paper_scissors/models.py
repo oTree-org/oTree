@@ -83,7 +83,10 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
 
-    training_question_1 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
+    training_question_1 = models.CharField(
+        max_length=100, null=True, verbose_name='',
+        widget=widgets.RadioSelect()
+    )
 
     def training_question_1_choices(self):
         choices = []
@@ -100,7 +103,7 @@ class Player(otree.models.BasePlayer):
         doc="""Points earned"""
     )
 
-    penny_side = models.CharField(
+    rps_choice = models.CharField(
         choices=RPS,
         doc="""{}, {} o {}""",format(*RPS).title(),
         widget=widgets.RadioSelect()

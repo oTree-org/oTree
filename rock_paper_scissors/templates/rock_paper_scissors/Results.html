@@ -1,1 +1,35 @@
-{% extends "global/Base.html" %}{% load staticfiles %}{% load i18n %}{% block title %}    Page title{% endblock %}{% block content %}<!--Documentation on how to write a django template here:https://docs.djangoproject.com/en/dev/topics/templates/Bootstrap comes pre-loaded, so you can use any Bootstrap elements:http://getbootstrap.com/components/-->    {% next_button %}{% endblock %}
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Results for Round {{ round_number }} of {{ total_rounds }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        {% if role == 'Player 1' %}
+            You were Player 1. You chose "{{ my_choice }}", Player 2 chose "{{ other_choice }}".
+        {% else %}
+            You were Player 2. You guessed "{{ my_choice }}", Player 1 chose "{{ other_choice }}".
+        {% endif%}
+    </p>
+
+    <p>
+        In this round, you win {{ my_points }} points and your opponent wins {{ other_points }} points.
+    </p>
+
+    <p>
+        {% if round_number < total_rounds %}
+            Please click "Next" to proceed to the next round where you will play against the same.
+        {% else %}
+            All rounds are now finished.
+        {% endif %}
+    </p>
+
+    {% next_button %}
+
+    {% include 'rock_paper_scissors/Instructions.html' %}
+
+{% endblock %}
