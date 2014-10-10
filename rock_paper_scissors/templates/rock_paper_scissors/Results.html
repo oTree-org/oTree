@@ -9,11 +9,9 @@
 {% block content %}
 
     <p>
-        {% if role == 'Player 1' %}
-            You were Player 1. You chose "{{ my_choice }}", Player 2 chose "{{ other_choice }}".
-        {% else %}
-            You were Player 2. You guessed "{{ my_choice }}", Player 1 chose "{{ other_choice }}".
-        {% endif%}
+
+        You were {{role}}. You chose "{{ my_choice }}" and your opponent chose "{{ other_choice }}".
+
     </p>
 
     <p>

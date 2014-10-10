@@ -86,7 +86,7 @@ class Results(Page):
 
 class ResultsSummary(Page):
 
-    template_name = 'matching_pennies/ResultsSummary.html'
+    template_name = 'rock_paper_scissors/ResultsSummary.html'
 
     def participate_condition(self):
         return self.subsession.round_number == self.subsession.number_of_rounds
