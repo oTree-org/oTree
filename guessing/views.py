@@ -9,7 +9,7 @@ class Introduction(Page):
     template_name = 'guessing/Introduction.html'
 
     def variables_for_template(self):
-        return {'players_count': len(self.player.other_players_in_subsession()),
+        return {'players_count': len(self.player.get_others_in_subsession()),
                 'winner_payoff': self.group.winner_payoff}
 
 
@@ -26,13 +26,13 @@ class Results(Page):
     template_name = 'guessing/Results.html'
 
     def variables_for_template(self):
-        other_guesses = [p.guess_value for p in self.player.other_players_in_subsession()]
+        other_guesses = [p.guess_value for p in self.player.get_others_in_subsession()]
 
         return {'guess_value': self.player.guess_value,
                 'other_guesses': other_guesses,
                 'other_guesses_count': len(other_guesses),
                 'two_third_average': round(self.group.two_third_guesses, 4),
-                'players': self.subsession.players,
+                'players': self.subsession.get_players(),
                 'is_winner': self.player.is_winner,
                 'payoff': self.player.payoff}
 

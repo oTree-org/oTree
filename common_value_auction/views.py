@@ -10,7 +10,7 @@ class Introduction(Page):
     template_name = 'common_value_auction/Introduction.html'
 
     def variables_for_template(self):
-        return {'other_players_count': len(self.subsession.players)-1}
+        return {'other_players_count': len(self.subsession.get_players())-1}
 
 
 class Bid(Page):

@@ -5,13 +5,14 @@ import otree.models
 from otree.common import money_range
 from otree import widgets
 
+MULTIPLICATION_FACTOR = 3
 
 doc = """
 In this one-period implementation, the first mover could give part of her or his endowment to the second mover. 
-This amount will be tripled and passed to the second mover, who could return part of her or his possession to the first player.
+This amount will be multiplied by {} and passed to the second mover, who could return part of her or his possession to the first player.
 <br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/trust" target="_blank">here</a>.
-"""
+""".format(MULTIPLICATION_FACTOR)
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -28,6 +29,10 @@ class Subsession(otree.models.BaseSubsession):
         doc="""The increment between amount choices"""
     )
 
+    multiplication_factor = models.FloatField(
+        default=MULTIPLICATION_FACTOR,
+        doc="""The factor by which player 1's donation is multiplied"""
+    )
 
 
 
@@ -52,18 +57,19 @@ class Group(otree.models.BaseGroup):
 
     def sent_amount_choices(self):
         """Range of allowed values during send"""
-        return money_range(0, self.subsession.amount_allocated, self.subsession.increment_amount)
+        money_values = money_range(0, self.subsession.amount_allocated, self.subsession.increment_amount)
+        return [(v, '{} (other participant gets {})'.format(v, v*self.subsession.multiplication_factor)) for v in money_values]
 
     def sent_back_amount_choices(self):
         """Range of allowed values during send back"""
-        return money_range(0, self.sent_amount * 3, self.subsession.increment_amount)
+        return money_range(0, self.sent_amount * MULTIPLICATION_FACTOR, self.subsession.increment_amount)
 
     def set_payoffs(self):
         p1 = self.get_player_by_id(1)
         p2 = self.get_player_by_id(2)
 
         p1.payoff = self.subsession.amount_allocated - self.sent_amount + self.sent_back_amount
-        p2.payoff = self.subsession.amount_allocated + self.sent_amount * 3 - self.sent_back_amount
+        p2.payoff = self.subsession.amount_allocated + self.sent_amount * MULTIPLICATION_FACTOR - self.sent_back_amount
 
 
 class Player(otree.models.BasePlayer):

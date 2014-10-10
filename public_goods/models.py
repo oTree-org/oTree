@@ -44,9 +44,9 @@ class Group(otree.models.BaseGroup):
     players_per_group = 3
 
     def set_payoffs(self):
-        contributions = sum([p.contribution for p in self.players])
+        contributions = sum([p.contribution for p in self.get_players()])
         individual_share = contributions * self.subsession.efficiency_factor / self.players_per_group
-        for p in self.players:
+        for p in self.get_players():
             p.points = (self.subsession.endowment - p.contribution) + individual_share
             p.payoff = p.points / 100
 

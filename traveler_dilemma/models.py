@@ -60,7 +60,7 @@ class Player(otree.models.BasePlayer):
         return money_range(self.subsession.min_amount, self.subsession.max_amount, 0.05)
 
     def other_player(self):
-        return self.other_players_in_group()[0]
+        return self.get_others_in_group()[0]
 
     def set_payoff(self):
         if self.claim < self.other_player().claim:

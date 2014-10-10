@@ -71,6 +71,7 @@ settings = {
         'battle_of_the_sexes',
         'survey_sample'
     ],
+    'ACCESS_CODE_FOR_OPEN_SESSION': 'my_access_code',
     'SECRET_KEY': SECRET_KEY,
     'BASE_DIR': BASE_DIR,
     'WSGI_APPLICATION': '_otree_experiments.wsgi.application',

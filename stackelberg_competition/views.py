@@ -86,7 +86,7 @@ class ResultsWaitPage(WaitPage):
         return "Waiting for the other participant to decide."
 
     def after_all_players_arrive(self):
-        for p in self.group.players:
+        for p in self.group.get_players():
             p.set_points()
 
 

@@ -45,14 +45,14 @@ class Group(otree.models.BaseGroup):
     players_per_group = 2
 
     def set_payoffs(self):
-        if all([p.decision == 'defect' for p in self.players]):
-            for p in self.players:
+        if all([p.decision == 'defect' for p in self.get_players()]):
+            for p in self.get_players():
                 p.payoff = self.subsession.common_loss
-        elif all([p.decision == 'cooperate' for p in self.players]):
-            for p in self.players:
+        elif all([p.decision == 'cooperate' for p in self.get_players()]):
+            for p in self.get_players():
                 p.payoff = self.subsession.common_gain
         else:
-            for p in self.players:
+            for p in self.get_players():
                 if p.decision == 'defect':
                     p.payoff = self.subsession.individual_gain - self.subsession.defect_costs
                 else:
@@ -66,7 +66,7 @@ class Player(otree.models.BasePlayer):
 
     def other_player(self):
         """Returns other player in group"""
-        return self.other_players_in_group()[0]
+        return self.get_others_in_group()[0]
 
     decision = models.CharField(
         null=True,

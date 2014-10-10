@@ -52,7 +52,7 @@ class SendBack(Page):
         return self.player.id_in_group == 2
 
     def variables_for_template(self):
-        tripled_amount = self.group.sent_amount * 3
+        tripled_amount = self.group.sent_amount * self.subsession.multiplication_factor
         total_amount = self.subsession.amount_allocated + tripled_amount
 
         return {'amount_allocated': self.subsession.amount_allocated,
@@ -83,7 +83,7 @@ class Results(Page):
         player1_payoff = self.group.get_player_by_id(1).payoff
         player2_payoff = self.group.get_player_by_id(2).payoff
 
-        tripled_amount = self.group.sent_amount * 3
+        tripled_amount = self.group.sent_amount * self.subsession.multiplication_factor
 
         return {'amount_allocated': self.subsession.amount_allocated,
                 'sent_amount': self.group.sent_amount,

@@ -86,7 +86,7 @@ class Player(otree.models.BasePlayer):
 
     def other_player(self):
         """Returns the opponent of the current player"""
-        return self.other_players_in_group()[0]
+        return self.get_others_in_group()[0]
 
     def role(self):
         if self.id_in_group == 1:

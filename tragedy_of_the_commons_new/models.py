@@ -27,7 +27,7 @@ class Group(otree.models.BaseGroup):
     players_per_group = 1
 
     def set_payoffs(self):
-        for p in self.players:
+        for p in self.get_players():
             p.payoff = 0 # change to whatever the payoff should be
 
 
@@ -39,7 +39,7 @@ class Player(otree.models.BasePlayer):
 
     def other_player(self):
         """Returns other player in group. Only valid for 2-player groupes."""
-        return self.other_players_in_group()[0]
+        return self.get_others_in_group()[0]
 
     # example field
     my_field = models.MoneyField(
