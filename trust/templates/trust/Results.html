@@ -7,15 +7,19 @@
 {% endblock %}
 
 {% block content %}
-<table class=table style='width: auto'>
-    <tr><th>Participant A sent B</th><td>{{sent_amount}}</td></tr>
-    <tr><th>Participant B received from A</th><td>{{tripled_amount}}</td></tr>
-    <tr><th>Participant B sent A</th><td>{{sent_back_amount}}</td></tr>
-    <tr><th>Participant A received from B</th><td>{{sent_back_amount}}</td></tr>
-    <tr><th>As Participant {{role}}, you have</th><td>{{result}}</td></tr>
-    <tr><th>In addition you get a participation fee of</th><td>{{bonus}}</td></tr>
-    <tr><th>So in sum you will get</th><td>{{total}}</td></tr>
-</table>
+<p>
+{% if role == 'A' %}
+You chose to send participant B {{sent_amount}} points. Participant B returned {{sent_back_amount}} points.
+</p>
+<p>
+You were initially endowed with 100 points, chose to send {{sent_amount}}, received {{sent_back_amount}} points thus you now have [100-{{sent_amount}}+{{sent_back_amount}}] points.
+{% else %}
+Participant A sent you {{sent_amount}} points. They were tripled so you received {{tripled_amount}} points. You chose to return {{sent_back_amount}} points.
+</p>
+<p>
+You were initially endowed with 0 points, received {{tripled_amount}}, chose to return {{sent_back_amount}} points thus you now have [3*{{sent_amount}}-{{sent_back_amount}}] points.
+{% endif %}
+</p>
 
 <p>To complete the study, please answer a short questionnaire that will now follow.</p>
 

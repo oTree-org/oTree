@@ -25,7 +25,7 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Group(otree.models.BaseGroup):
-    BONUS = 10
+    BONUS = 0
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -47,16 +47,14 @@ class Group(otree.models.BaseGroup):
         p1.payoff = p2.payoff = 0
         p1.points = self.BONUS + self.subsession.amount_allocated\
             - self.sent_amount + self.sent_back_amount
-        p2.points = self.BONUS + self.subsession.amount_allocated\
-            + self.sent_amount * 3 - self.sent_back_amount
+        p2.points = self.BONUS + self.sent_amount * 3 - self.sent_back_amount
 
     def sent_amount_error_message(self, value):
         if not 0 <= value <= self.subsession.amount_allocated:
             return 'Your entry is invalid.'
 
     def sent_back_amount_error_message(self, value):
-        if not 0 <= value <= self.subsession.amount_allocated\
-                + self.sent_amount * 3:
+        if not 0 <= value <= self.sent_amount * 3:
             return 'Your entry is invalid.'
 
 
@@ -67,9 +65,9 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
     training_answer_x = models.PositiveIntegerField(
-        null=True, verbose_name='X would be:')
+        null=True, verbose_name='Participant A would have')
     training_answer_y = models.PositiveIntegerField(
-        null=True, verbose_name='Y would be:')
+        null=True, verbose_name='Participant B would have')
     points = models.PositiveIntegerField()
     feedback = models.PositiveIntegerField(
         choices=(

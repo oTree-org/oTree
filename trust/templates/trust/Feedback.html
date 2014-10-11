@@ -6,30 +6,32 @@ Solution to Understanding Question {{ num_q }} of {{ total_q }}
 {% endblock %}
 
 {% block content %}
-{% ifequal x 60 %}
+{% ifequal x 130 %}
 <p class="text-success">
-Your answer {{x}} for X was correct.
+Your answer {{x}} for participant A was correct.
 </p>
 {% else %}
 <p class="text-danger">
-Your answer {{x}} for X was incorrect.
+Your answer {{x}} for participant A was incorrect.
 </p>
 {% endifequal %}
-{% ifequal y 130 %}
+{% ifequal y 10 %}
 <p class="text-success">
-Your answer {{y}} for Y was correct.
+Your answer {{y}} for participant B was correct.
 </p>
 {% else %}
 <p class="text-danger">
-Your answer {{y}} for Y was incorrect.
+Your answer {{y}} for participant B was incorrect.
 </p>
 {% endifequal %}
 <p>
-Suppose that participant A sent 20 points to participant B. Having received X points, participant B sent 50 points to participant A. In the end, participant A had Y points. What are X and Y respectively?
+Suppose that participant A sent 20 points to participant B. Having received the tripled amount, participant B sent 50 points to participant A. In the end, how much would participant A and B have?
 </p>
-<p><strong>Solution: X=60 and Y=130.</strong></p>
-<p><strong>Explanation:</strong> Participant A first sent 20 points to participant B. It was tripled thus participant B received 20*3=60 points, that is X equal 60.
-Then participant B sent 50 points to participant A. Participant A received exactly 50 points. Hence at last participant A had 100-20+50=130 points, that is Y equal 130.
+<p>
+<strong>Solution:</strong> Participant A would have 130 points and B 10 points.
+</p>
+<p>
+<strong>Explanation:</strong> Participant A first sent 20 points to B. It was tripled thus B received 20*3=60 points. Then participant B sent 50 points to A. Participant A received exactly 50 points. Hence at last A would have 100-20+50=130 points and B would have 60-50=10 points.
 </p>
 <p>
 {% next_button %}

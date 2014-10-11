@@ -20,10 +20,9 @@ class Question1(Page):
     template_name = 'global/Question.html'
     form_model = models.Player
     form_fields = 'training_answer_x', 'training_answer_y'
-    question = '''Suppose that participant A sent 20
-        points to participant B. Having received X points, participant B sent
-        50 points to participant A. In the end, participant A had Y points.
-        What are X and Y respectively?'''
+    question = '''Suppose that participant A sent 20 points to participant B.
+        Having received the tripled amount, participant B sent 50 points to
+        participant A. In the end, how much would participant A and B have?'''
 
     def participate_condition(self):
         return self.subsession.round_number == 1
@@ -83,9 +82,7 @@ class SimpleWaitPage(WaitPage):
     scope = models.Group
 
     def body_text(self):
-        if self.player.id_in_group == 1:
-            return 'Waiting for participant B to decide.'
-        return 'You are participant B.  Waiting for participant A to decide.'
+        return 'Waiting for other participant to decide.'
 
 
 class SendBack(Page):
@@ -103,13 +100,12 @@ class SendBack(Page):
 
     def variables_for_template(self):
         tripled_amount = self.group.sent_amount * 3
-        total_amount = self.subsession.amount_allocated + tripled_amount
 
         return {'amount_allocated': self.subsession.amount_allocated,
                 'sent_amount': self.group.sent_amount,
                 'tripled_amount': tripled_amount,
-                'prompt': 'Please enter a number from 0 to %s:' % total_amount,
-                'total_amount': total_amount}
+                'prompt':
+                'Please enter a number from 0 to %s:' % tripled_amount}
 
 
 class ResultsWaitPage(WaitPage):
