@@ -7,7 +7,7 @@ from otree import widgets
 
 doc = """
 This is a standard 2-player trust game where the amount sent by player 1 gets tripled. 
-The trust game was first proposed by <a href="http://econweb.ucsd.edu/~jandreon/Econ264/papers/Berg%20et%20al%20GEB%201995.pdf" targe="_blank">Berg, Dickhaut, and McCabe (1995)</a>.
+The trust game was first proposed by <a href="http://econweb.ucsd.edu/~jandreon/Econ264/papers/Berg%20et%20al%20GEB%201995.pdf" target="_blank">Berg, Dickhaut, and McCabe (1995)</a>.
 <br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/trust"
 target="_blank">here</a>.
