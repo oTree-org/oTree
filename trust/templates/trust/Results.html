@@ -9,15 +9,15 @@
 {% block content %}
 <p>
 {% if role == 'A' %}
-You chose to send participant B {{sent_amount}} points. Participant B returned {{sent_back_amount}} points.
+You chose to send participant B <strong>{{sent_amount}} points</strong>. Participant B returned <strong>{{sent_back_amount}} points</strong>.
 </p>
 <p>
-You were initially endowed with 100 points, chose to send {{sent_amount}}, received {{sent_back_amount}} points thus you now have [100-{{sent_amount}}+{{sent_back_amount}}] points.
+You were initially endowed with <strong>100 points</strong>, chose to send <strong>{{sent_amount}} points</strong>, received <strong>{{sent_back_amount}} points</strong> thus you now have <strong>100-{{sent_amount}}+{{sent_back_amount}} points</strong>.
 {% else %}
-Participant A sent you {{sent_amount}} points. They were tripled so you received {{tripled_amount}} points. You chose to return {{sent_back_amount}} points.
+Participant A sent you <strong>{{sent_amount}} points</strong>. They were tripled so you received <strong>{{tripled_amount}} points</strong>. You chose to return <strong>{{sent_back_amount}} points</strong>.
 </p>
 <p>
-You were initially endowed with 0 points, received {{tripled_amount}}, chose to return {{sent_back_amount}} points thus you now have [3*{{sent_amount}}-{{sent_back_amount}}] points.
+You were initially endowed with <strong>0 points</strong>, received <strong>{{tripled_amount}} points</strong>, chose to return <strong>{{sent_back_amount}} points</strong> thus you now have <strong>{{tripled_amount}}-{{sent_back_amount}} points</strong>.
 {% endif %}
 </p>
 
