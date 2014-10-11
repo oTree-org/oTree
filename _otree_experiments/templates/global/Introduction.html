@@ -1,0 +1,12 @@
+{% extends "global/Base.html" %}
+{% load otree_tags %}
+
+{% block title %}Introduction{% endblock %}
+
+{% block content %}
+{% include instructions %}
+<p>
+On the next page, you will have to answer one question to make sure you understand the instructions correctly.
+</p>
+{% next_button %}
+{% endblock %}
