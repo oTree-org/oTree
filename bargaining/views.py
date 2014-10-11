@@ -6,7 +6,7 @@ from otree.common import Money, money_range
 
 
 def variables_for_all_templates(self):
-    return dict(instructions='bargaining/Instructions.html')
+    return dict(total_q=1, instructions='bargaining/Instructions.html')
 
 
 class Introduction(Page):
