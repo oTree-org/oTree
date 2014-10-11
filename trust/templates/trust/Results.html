@@ -1,1 +1,31 @@
-{% extends "global/Base.html" %}{% load staticfiles floppyforms otree_tags %}{% load i18n %}{% block title %}    Results{% endblock %}{% block content %}    <p>        {% if player_index == 1 %}            The initial sum was {{ amount_allocated }}, of which you decided to give {{ sent_amount }}.            The experimenter tripled this amount, resulting in {{ tripled_amount }}, of which the other player decided to give you {{ sent_back_amount }}.        {% else %}            The initial sum was {{ amount_allocated }}. The other player decided to give {{ sent_amount }}.            The experimenter tripled this amount, resulting in {{ tripled_amount }}, of which you decided to give {{ sent_back_amount }} back to the other player.        {% endif %}    </p>    <p>        {% if player_index == 1 %}            Your final payoff is therefore {{ player1_payoff }}. The other player receives {{ player2_payoff }}.        {% else %}            Your final payoff is therefore {{ player2_payoff }}. The other player receives {{ player1_payoff }}.        {% endif %}    </p>    {% next_button %}{% endblock %}
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+<p>
+{% if role == 'A' %}
+You chose to send participant B <strong>{{sent_amount}} points</strong>. Participant B returned <strong>{{sent_back_amount}} points</strong>.
+</p>
+<p>
+You were initially endowed with <strong>100 points</strong>, chose to send <strong>{{sent_amount}} points</strong>, received <strong>{{sent_back_amount}} points</strong> thus you now have <strong>100-{{sent_amount}}+{{sent_back_amount}} points</strong>.
+{% else %}
+Participant A sent you <strong>{{sent_amount}} points</strong>. They were tripled so you received <strong>{{tripled_amount}} points</strong>. You chose to return <strong>{{sent_back_amount}} points</strong>.
+</p>
+<p>
+You were initially endowed with <strong>0 points</strong>, received <strong>{{tripled_amount}} points</strong>, chose to return <strong>{{sent_back_amount}} points</strong> thus you now have <strong>{{tripled_amount}}-{{sent_back_amount}} points</strong>.
+{% endif %}
+</p>
+
+<p>To complete the study, please answer a short questionnaire that will now follow.</p>
+
+<p>{% next_button %}</p>
+
+    {% include instructions %}
+
+{% endblock %}
+
