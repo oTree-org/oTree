@@ -6,10 +6,8 @@ from otree import widgets
 
 
 doc = """
-In this one-period implementation, the first mover could give part of her or
-his endowment to the second mover.
-This amount will be tripled and passed to the second mover, who could return
-part of her or his possession to the first player.
+This is a standard 2-player trust game where the amount sent by player 1 gets tripled. 
+The trust game was first proposed by <a href="http://econweb.ucsd.edu/~jandreon/Econ264/papers/Berg%20et%20al%20GEB%201995.pdf" targe="_blank">Berg, Dickhaut, and McCabe (1995)</a>.
 <br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/trust"
 target="_blank">here</a>.
