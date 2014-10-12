@@ -7,9 +7,9 @@ from otree.common import money_range
 from otree import widgets
 
 doc = """
-Kaushik Basu's famous traveller's dilemma (<a href="http://www.jstor.org/stable/2117865" target="_blank">AER 1994</a>). 
+Kaushik Basu's famous traveler's dilemma (<a href="http://www.jstor.org/stable/2117865" target="_blank">AER 1994</a>). 
 It is a 2-player game. 
-The game is framed as a traveller's dilemma and intended for classroom/teaching use.
+The game is framed as a traveler's dilemma and intended for classroom/teaching use.
 <br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/traveler_dilemma" target="_blank">here</a>.
 """
