@@ -25,7 +25,7 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Group(otree.models.BaseGroup):
-    BONUS = 0
+    BONUS = 10
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
