@@ -43,7 +43,7 @@ class Group(otree.models.BaseGroup):
                 p.points = p.request_amount + self.BONUS
         else:
             for p in self.players:
-                p.points = 0
+                p.points = self.BONUS
         for p in self.players:
             p.payoff = 0
 
