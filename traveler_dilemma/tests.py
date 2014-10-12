@@ -8,11 +8,14 @@ class PlayerBot(Bot):
     def play(self):
 
         # basic assertions
-        assert (self.subsession.max_amount == 1.00)
-        assert (self.subsession.min_amount == 0.20)
+        assert (self.subsession.max_amount == 100)
+        assert (self.subsession.min_amount == 2)
 
         # start game
         self.submit(views.Introduction)
+        self.submit(views.Question1, dict(
+            training_answer_mine=1, training_answer_others=2))
+        self.submit(views.Feedback1)
 
         # player 1: claim
         if self.player.id_in_group == 1:
@@ -23,10 +26,10 @@ class PlayerBot(Bot):
             self.play_p2()
 
         self.submit(views.Results)
-        print self.player.payoff
+        self.submit(views.Question2, dict(feedback=3))
 
     def play_p1(self):
-        self.submit(views.Claim, {"claim": random.choice(self.player.claim_choices())})
+        self.submit(views.Claim, {"claim": random.randrange(2, 100)})
 
     def play_p2(self):
-        self.submit(views.Claim, {"claim": random.choice(self.player.claim_choices())})
+        self.submit(views.Claim, {"claim": random.randrange(2, 100)})
