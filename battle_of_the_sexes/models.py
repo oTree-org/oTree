@@ -8,8 +8,8 @@ from otree import widgets
 
 
 doc = """
-In the battle of the sexes, two players are paired as a couple and must privately decide whether attend the opera or watch football.
-The husband and wife prefer football and the opera, respectively, but both prefer to go to the same place rather than different ones.
+This is a 2-player 2-strategy coordination game. The name and story originated from <a href="http://books.google.ch/books?id=uqDDAgAAQBAJ&lpg=PP1&ots=S-DC4LemnS&lr&pg=PP1#v=onepage&q&f=false" target="_blank">Luce and Raiffa (1957)</a>.
+<br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/battle_of_the_sexes" target="_blank">here</a>.
 """
 

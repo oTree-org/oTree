@@ -8,10 +8,11 @@
 
 {% block content %}
 
-    <p>Please request an amount. You and the other player have a total of {{ amount_shared }} to share.</p>
+    <p>How many points will you demand for yourself?</p>
 
-    {% formrow form.request_amount with label="Amount requested:" %}
+    {% formrow form.request_amount with label="Please enter a number from 0 to 100" %}
 
-    {% next_button %}
+    <p>{% next_button %}</p>
+    {% include instructions %}
     
 {% endblock %}
