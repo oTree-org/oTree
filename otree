@@ -160,12 +160,6 @@ COMMANDS['help'] = show_help
 
 
 def django_command(argv):
-    import django.conf
-    settings_module = importlib.import_module(os.environ['DJANGO_SETTINGS_MODULE'])
-
-    if not django.conf.settings.configured:
-        django.conf.settings.configure(**settings_module.settings)
-
     from django.core.management import execute_from_command_line
     execute_from_command_line(argv)
 
