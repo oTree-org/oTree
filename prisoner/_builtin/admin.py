@@ -1,5 +1,5 @@
 from django.contrib import admin
-import prisoner.models as models
+from .. import models
 import otree.adminlib as adminlib
 
 class PlayerAdmin(adminlib.PlayerAdmin):

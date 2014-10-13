@@ -1,5 +1,5 @@
 # Don't change anything in this file.
-import volunteer_dilemma.models as models
+from .. import models
 import otree.views
 import otree.forms
 

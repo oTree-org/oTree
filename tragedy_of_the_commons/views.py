@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import tragedy_of_the_commons.models as models
-from tragedy_of_the_commons._builtin import Page, WaitPage
+from . import models
+from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 
 

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import matching_pennies.models as models
-from matching_pennies._builtin import Page, WaitPage
-from otree.common import Money
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
 
 
 def variables_for_all_templates(self):

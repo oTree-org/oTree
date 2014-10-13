@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import volunteer_dilemma.models as models
-from volunteer_dilemma._builtin import Page, WaitPage
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
 
 
 class Decision(Page):

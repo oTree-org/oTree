@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import matrix_symmetric.models as models
-from matrix_symmetric._builtin import Page, WaitPage
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
 
 
 class Decision(Page):

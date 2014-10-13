@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import volunteer_dilemma.views as views
-from volunteer_dilemma._builtin import Bot
+from . import views
+from ._builtin import Bot
 import random
+from otree.common import Money, money_range
 
 
 class PlayerBot(Bot):
@@ -10,7 +11,7 @@ class PlayerBot(Bot):
     def play(self):
 
         # decision
-        self.submit(views.Decision, {"volunteer": bool(random.getrandbits(1))})
+        self.submit(views.Decision, {"volunteer": random.choice([True, False])})
 
         # results
         self.submit(views.Results)

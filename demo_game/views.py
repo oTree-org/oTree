@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import otree.views
-import otree.views.concrete
-import demo_game.models as models
-from demo_game._builtin import Page
-from otree.common import currency
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
 
 
 def variables_for_all_templates(self):

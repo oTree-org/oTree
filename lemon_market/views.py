@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import otree.views
-import lemon_market.models as models
-from lemon_market._builtin import Page, WaitPage
-
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
 
 class Introduction(Page):
 

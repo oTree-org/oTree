@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import prisoner.models as models
-from prisoner._builtin import Page, WaitPage
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
 
 def variables_for_all_templates(self):
 

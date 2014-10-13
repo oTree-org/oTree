@@ -1,7 +1,9 @@
-import battle_of_the_sexes.views as views
-from battle_of_the_sexes._builtin import Bot
+# -*- coding: utf-8 -*-
+from __future__ import division
+from . import views
+from ._builtin import Bot
 import random
-
+from otree.common import Money, money_range
 
 class PlayerBot(Bot):
 

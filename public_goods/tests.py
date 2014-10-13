@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import public_goods.views as views
-from public_goods._builtin import Bot
+from . import views
+from ._builtin import Bot
 import random
-
+from otree.common import Money, money_range
 
 class PlayerBot(Bot):
 

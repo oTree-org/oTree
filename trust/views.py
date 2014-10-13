@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import trust.models as models
-from trust._builtin import Page, WaitPage
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
 
 
 def variables_for_all_templates(self):
@@ -77,7 +78,7 @@ class Send(Page):
         return {'amount_allocated': self.subsession.amount_allocated}
 
 
-class SimpleWaitPage(WaitPage):
+class WaitPage(WaitPage):
 
     scope = models.Group
 
@@ -112,9 +113,6 @@ class ResultsWaitPage(WaitPage):
 
     scope = models.Group
 
-    def body_text(self):
-        return 'Waiting for the other player to finish.'
-
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
@@ -144,7 +142,7 @@ def pages():
             Question1,
             Feedback1,
             Send,
-            SimpleWaitPage,
+            WaitPage,
             SendBack,
             ResultsWaitPage,
             Results,

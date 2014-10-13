@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import principal_agent.models as models
-from principal_agent._builtin import Page, WaitPage
+from . import models
+from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 
 

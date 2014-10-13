@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from __future__ import division
-from __future__ import division
-import otree.views
-import asset_market.models as models
-from asset_market._builtin import Page, WaitPage
+from . import models
+from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 
 def variables_for_all_templates(self):

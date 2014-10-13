@@ -44,10 +44,9 @@ class Group(otree.models.BaseGroup):
                 p.points = p.request_amount + self.BONUS
         else:
             for p in players:
-                p.points = 0
+                p.points = self.BONUS
         for p in players:
             p.payoff = 0
-    
 
 
 class Player(otree.models.BasePlayer):
@@ -83,4 +82,4 @@ class Player(otree.models.BasePlayer):
 
     def other_player(self):
         """Returns the opponent of the current player"""
-        return self.get_others_in_group()[0]
+        return self.other_players_in_group()[0]

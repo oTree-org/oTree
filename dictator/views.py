@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import dictator.models as models
-from dictator._builtin import Page, WaitPage
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
 
 class Introduction(Page):
 

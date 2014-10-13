@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from otree.common import Money, money_range
-import principal_agent.views as views
-from principal_agent._builtin import Bot
+from . import views
+from ._builtin import Bot
 import random
+from otree.common import Money, money_range
 import time
 
 

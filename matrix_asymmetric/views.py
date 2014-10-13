@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import matrix_asymmetric.models as models
-from matrix_asymmetric._builtin import Page, WaitPage
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
 
 
 class Decision(Page):

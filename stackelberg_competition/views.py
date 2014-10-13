@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import stackelberg_competition.models as models
-from stackelberg_competition._builtin import Page, WaitPage
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
 
 def variables_for_all_templates(self):
 

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import private_value_auction.views as views
-from private_value_auction._builtin import Bot
+from . import views
+from ._builtin import Bot
 import random
-
+from otree.common import Money, money_range
 
 class PlayerBot(Bot):
 

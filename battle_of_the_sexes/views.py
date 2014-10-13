@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import battle_of_the_sexes.models as models
-from battle_of_the_sexes._builtin import Page, WaitPage
+from . import models
+from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 
 

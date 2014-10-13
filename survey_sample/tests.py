@@ -1,5 +1,9 @@
-from survey_sample._builtin import Bot
-from survey_sample import views
+# -*- coding: utf-8 -*-
+from __future__ import division
+from . import views
+from ._builtin import Bot
+import random
+from otree.common import Money, money_range
 
 class PlayerBot(Bot):
 
