@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+# <standard imports>
 from __future__ import division
 from otree.db import models
 import otree.models
-from otree.common import money_range
 from otree import widgets
+from otree.common import Money, money_range
+import random
+# </standard imports>
+
 
 doc = """
 Dictator game. Single Treatment. Two players, one of whom is the dictator.

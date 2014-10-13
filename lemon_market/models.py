@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+# <standard imports>
 from __future__ import division
-"""Documentation at https://github.com/oTree-org/otree/wiki"""
-
 from otree.db import models
 import otree.models
-import random
+from otree import widgets
 from otree.common import Money, money_range
+import random
+# </standard imports>
 
 
 doc = """

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+# <standard imports>
 from __future__ import division
 from otree.db import models
 import otree.models
+from otree import widgets
 from otree.common import Money, money_range
-from otree import widgets
-from otree import widgets
+import random
+# </standard imports>
 
 doc = """
 This is a one-period public goods game with 3 players. Assignment to groups is random.

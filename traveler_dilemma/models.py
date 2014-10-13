@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+# <standard imports>
 from __future__ import division
-"""Documentation at https://github.com/oTree-org/otree/wiki"""
 from otree.db import models
 import otree.models
-from otree.common import money_range
 from otree import widgets
+from otree.common import Money, money_range
+import random
+# </standard imports>
 
 doc = """
 Kaushik Basu's famous traveler's dilemma (<a href="http://www.jstor.org/stable/2117865" target="_blank">AER 1994</a>). 
