@@ -47,9 +47,9 @@ class Group(otree.models.BaseGroup):
     )
 
     def set_points(self):
-        self.total_units = sum([p.units for p in self.players])
+        self.total_units = sum([p.units for p in self.get_players()])
         self.price = self.subsession.total_capacity - self.total_units
-        for p in self.players:
+        for p in self.get_players():
             p.points_earned = self.price * p.units
 
 
@@ -79,7 +79,7 @@ class Player(otree.models.BasePlayer):
             return "The value must be a whole number between {} and {}, inclusive.".format(0, self.subsession.max_units_per_player())
 
     def other_player(self):
-        return self.other_players_in_group()[0]
+        return self.get_others_in_group()[0]
 
     def set_payoff(self):
         self.payoff = 0

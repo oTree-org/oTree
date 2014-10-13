@@ -41,11 +41,11 @@ class Group(otree.models.BaseGroup):
     shares_traded = models.PositiveIntegerField(null=True)
 
     def set_payoffs(self):
-        for p in self.players:
+        for p in self.get_players():
             p.payoff = 0  # TODO modify this
 
     def set_transaction(self):
-        for p in self.players:
+        for p in self.get_players():
             if p.order_type != None and p.order_type != p.other_player().order_type and (p.bp != 0 or p.sp != 0) :
                 if p.order_type == "Buy Order" and (p.bp >= p.other_player().sp):
                     self.transaction_price = 0.5*(p.bp+p.other_player().sp)
@@ -74,7 +74,7 @@ class Player(otree.models.BasePlayer):
 
     def other_player(self):
         """Returns other player in group. Only valid for 2-player groupes."""
-        return self.other_players_in_group()[0]
+        return self.get_others_in_group()[0]
 
     QUESTION_1_CHOICES = ['P=3, N=2','P=2, N=3','P=2.5, N=3','P=2.5, N=2','No transaction will take place',]
     QUESTION_2_CHOICES = ['$8, $12', '$12, $8', '$8, $8', '$12, $12', '$10, $10']

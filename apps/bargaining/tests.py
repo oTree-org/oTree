@@ -11,9 +11,13 @@ class PlayerBot(Bot):
 
         # start
         self.submit(views.Introduction)
+        self.submit(views.Question1, dict(
+            training_amount_mine=1, training_amount_other=2))
+        self.submit(views.Feedback1)
 
         # request
-        self.submit(views.Request, {"request_amount": random.choice(self.player.request_amount_choices())})
+        self.submit(views.Request, {"request_amount": random.randrange(
+            self.subsession.amount_shared)})
 
         # results
         self.submit(views.Results)

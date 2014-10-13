@@ -32,7 +32,7 @@ class Results(Page):
     def variables_for_template(self):
         return {'volunteer': self.player.volunteer,
                 'payoff': self.player.payoff,
-                'num_volunteers': len([p for p in self.group.players if p.volunteer])}
+                'num_volunteers': len([p for p in self.group.get_players() if p.volunteer])}
 
 
 def pages():

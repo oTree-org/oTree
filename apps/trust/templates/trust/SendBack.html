@@ -3,21 +3,16 @@
 {% load i18n %}
 
 {% block title %}
-    Your choice
+    Your Choice
 {% endblock %}
 
 {% block content %}
+<p>
+You are Participant B. Participant A sent you {{sent_amount}} and you received {{tripled_amount}}. Now you have {{tripled_amount}}. How many points will you send to participant A?
+</p>
 
-    <p>
-        The other player was selected to give money first, and chose to give {{ sent_amount }} of the initial sum.
-        The experimenter tripled this amount; you have therefore received {{ tripled_amount }} in addition to your initial {{ amount_allocated }}.
-    </p>
-
-    <p>
-        Please select how much of the now-tripled amount you wish to give back to the other player.
-    </p>
-
-    {% formrow form.sent_back_amount with label="How much would you like to give?" %}
-    {% next_button %}
+    {% formrow form.sent_back_amount with label=prompt %}
+    <p>{% next_button %}</p>
+    {% include instructions %}
 
 {% endblock %}

@@ -39,11 +39,11 @@ class Group(otree.models.BaseGroup):
     players_per_group = 3
 
     def set_payoffs(self):
-        if any(p.volunteer for p in self.players):
+        if any(p.volunteer for p in self.get_players()):
             baseline_amount = self.subsession.general_benefit
         else:
             baseline_amount = 0
-        for p in self.players:
+        for p in self.get_players():
             p.payoff = baseline_amount
             if p.volunteer:
                 p.payoff -= self.subsession.volunteer_cost

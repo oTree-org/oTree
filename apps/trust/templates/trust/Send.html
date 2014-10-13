@@ -3,21 +3,20 @@
 {% load i18n %}
 
 {% block title %}
-    Your choice
+    Your Choice
 {% endblock %}
 
 {% block content %}
 
     <p>
-        You have been given {{ amount_allocated }}. Please select the amount you wish to give to the other player.
+    You are Participant A. Now you have {{amount_allocated}} points. How many points will you send to participant B?
     </p>
 
+    {% formrow form.sent_amount with label="Please enter a number from 0 to 100:" %}
     <p>
-        The selected amount will be automatically tripled by the experimenter;
-        this is the amount that will reach the other player, who will then be given the opportunity to give part of it back to you.
+    {% next_button %}
     </p>
 
-    {% formrow form.sent_amount with label="How much would you like to give?" %}
-    {% next_button %}
+    {% include instructions %}
 
 {% endblock %}

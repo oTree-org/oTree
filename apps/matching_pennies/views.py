@@ -93,10 +93,11 @@ class ResultsSummary(Page):
         return self.subsession.round_number == self.subsession.number_of_rounds
 
     def variables_for_template(self):
-        total_points_earned = sum(p.points_earned for p in self.player.me_in_all_rounds())
+        me_in_all_rounds = self.player.me_in_all_rounds()
+        total_points_earned = sum([p.points_earned for p in me_in_all_rounds])
         base_points = 50
 
-        return {'me_in_all_rounds': self.player.me_in_all_rounds(),
+        return {'me_in_all_rounds': me_in_all_rounds,
                 'points_earned': self.player.points_earned,
                 'is_winner': self.player.is_winner,
                 'total_points_earned': total_points_earned,

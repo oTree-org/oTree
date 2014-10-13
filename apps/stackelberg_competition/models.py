@@ -69,7 +69,7 @@ class Player(otree.models.BasePlayer):
             return "The value must be an integer between 0 and {}, inclusive.".format(self.subsession.max_units_per_player())
 
     def other_player(self):
-        return self.other_players_in_group()[0]
+        return self.get_others_in_group()[0]
 
     def set_points(self):
         self.group.price = self.subsession.total_capacity - self.quantity - self.other_player().quantity

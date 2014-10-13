@@ -2,7 +2,6 @@
 from __future__ import division
 import trust.views as views
 from trust._builtin import Bot
-import random
 
 
 class PlayerBot(Bot):
@@ -10,11 +9,14 @@ class PlayerBot(Bot):
     def play(self):
 
         # basic assertions
-        assert (self.subsession.amount_allocated == 1.00)
+        assert (self.subsession.amount_allocated == 100)
         assert (self.group.players_per_group == 2)
 
         # start game
         self.submit(views.Introduction)
+        self.submit(views.Question1, dict(
+            training_answer_x=1, training_answer_y=2))
+        self.submit(views.Feedback1)
 
         # if p1, play send page
         if self.player.id_in_group == 1:
@@ -26,13 +28,13 @@ class PlayerBot(Bot):
 
         # finally, show results
         self.submit(views.Results)
+        self.submit(views.Question2, dict(feedback=4))
 
     def play_p1(self):
         # random send amount
 
-        self.submit(views.Send,
-                    {"sent_amount": 0.1})
+        self.submit(views.Send, {"sent_amount": 4})
 
     def play_p2(self):
         # random send back amount
-        self.submit(views.SendBack, {'sent_back_amount': 0.2})
+        self.submit(views.SendBack, {'sent_back_amount': 8})

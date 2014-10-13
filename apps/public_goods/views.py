@@ -71,8 +71,8 @@ class Results(Page):
     def variables_for_template(self):
         # calculations here
         current_player = self.player
-        other_players = self.player.other_players_in_group
-        total_contribution = sum([c.contribution for c in self.group.players])
+        other_players = self.player.get_others_in_group
+        total_contribution = sum([c.contribution for c in self.group.get_players()])
         total_earnings = float(total_contribution) * 1.8
         share_earnings = float(total_earnings) / 3
         individual_earnings = (self.subsession.endowment - current_player.contribution) + share_earnings
