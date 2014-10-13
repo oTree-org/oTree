@@ -20,12 +20,15 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/asset_market
 
 """
 
+class Constants:
+    understanding_1_correct = 'P=2.5, N=2'
+    understanding_2_correct = '$8, $12'
+
+
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'asset_market'
 
-    understanding_1_correct = 'P=2.5, N=2'
-    understanding_2_correct = '$8, $12'
 
 
 class Group(otree.models.BaseGroup):

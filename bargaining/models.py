@@ -14,17 +14,14 @@ Otherwise, both get nothing.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/bargaining" target="_blank">here</a>.
 """
 
+class Constants:
+    amount_shared = 100
+
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'bargaining'
 
-    amount_shared = models.PositiveIntegerField(
-        default=100,
-        doc="""
-        Amount to be shared by both players
-        """
-    )
 
 
 class Group(otree.models.BaseGroup):
