@@ -15,5 +15,7 @@ Understanding Question {{ num_q }} of {{ total_q }}
 {{form}}
 </p>
 <p>{% next_button %}</p>
+{% if instructions and not hide_instructions %}
 {% include instructions %}
+{% endif %}
 {% endblock %}
