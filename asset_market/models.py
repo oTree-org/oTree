@@ -43,11 +43,11 @@ class Group(otree.models.BaseGroup):
     is_dividend = models.BooleanField(default=False, doc="""Indicates whether dividend is issued""")
 
     def set_payoffs(self):
-        for p in self.players:
+        for p in self.get_players():
             p.payoff = 0
 
     def set_transaction(self):
-        for p in self.players:
+        for p in self.get_players():
             if (p.sp != 0 and p.sn != 0) or (p.bp != 0 and p.bn != 0):
                 if p.role() == 'Buyer':
 
@@ -70,7 +70,7 @@ class Group(otree.models.BaseGroup):
                 pass
 
     def set_dividend(self):
-        for p in self.players:
+        for p in self.get_players():
             # set dividend - a random value 1 or 2
             self.dividend_per_share = randint(1,2)
 
@@ -113,7 +113,7 @@ class Player(otree.models.BasePlayer):
 
     def other_player(self):
         """Returns other player in group. Only valid for 2-player groups."""
-        return self.other_players_in_group()[0]
+        return self.get_others_in_group()[0]
 
     def role(self):
         # TODO randomize player roles in each round

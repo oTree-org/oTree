@@ -75,7 +75,7 @@ class Player(otree.models.BasePlayer):
             return 'Your entry is invalid.'
 
     def other_player(self):
-        return self.other_players_in_group()[0]
+        return self.get_others_in_group()[0]
 
     def set_payoff(self):
         other = self.other_player().claim
