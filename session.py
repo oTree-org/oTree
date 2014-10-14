@@ -183,18 +183,26 @@ def session_types():
             subsession_apps=['battle_of_the_sexes', 'lab_results'],
             doc=""""""
         ),
+        SessionType(
+            # in-progress
+            name="Asset Market",
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=2,
+            subsession_apps=['asset_market']*5 + ['lab_results'],
+            doc=""""""
+        ),
 
         ]
 
-# FIXME: completed the apps below
+# FIXME: complete the apps below
 disabled_session_types = [
-    # in progress
     SessionType(
-        name="Asset Market",
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=2,
-        subsession_apps=['asset_market']*5 + ['lab_results'],
+        name="Quiz",
+        base_pay=0,
+        participants_per_demo_session=1,
+        participants_per_session=1,
+        subsession_apps=['quiz'],
         doc=""""""
     ),
     SessionType(

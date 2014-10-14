@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from . import models
-from ._builtin import Page, WaitPage
-from otree.common import Money, money_range
-from .models import Constants
+import traveler_dilemma.models as models
+from traveler_dilemma._builtin import Page, WaitPage
+
 
 def variables_for_all_templates(self):
     return dict(instructions='traveler_dilemma/Instructions.html')
@@ -61,7 +60,7 @@ class ResultsWaitPage(WaitPage):
     scope = models.Group
 
     def after_all_players_arrive(self):
-        for p in self.group.get_players():
+        for p in self.group.players:
             p.set_payoff()
 
 
