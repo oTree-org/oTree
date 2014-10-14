@@ -20,14 +20,6 @@ import sys
 import textwrap
 
 
-script_path = os.path.dirname(os.path.abspath(__file__))
-
-
-# Add the 'apps/' directory to the sys.path in order to make the apps there
-# available without the 'apps.' prefix.
-sys.path.insert(0, os.path.join(script_path, 'apps'))
-
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 
 
@@ -191,12 +183,6 @@ COMMANDS['help'] = show_help
 
 
 def django_command(argv):
-    import django.conf
-    settings_module = importlib.import_module(os.environ['DJANGO_SETTINGS_MODULE'])
-
-    if not django.conf.settings.configured:
-        django.conf.settings.configure(**settings_module.settings)
-
     from django.core.management import execute_from_command_line
     execute_from_command_line(argv)
 

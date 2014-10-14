@@ -30,53 +30,56 @@ else:
         }
     }
 
-settings = {
-    'CREATE_DEFAULT_SUPERUSER': True,
-    'ADMIN_USERNAME': 'admin',
-    'ADMIN_PASSWORD': ADMIN_PASSWORD,
-    'AWS_ACCESS_KEY_ID': os.environ.get('AWS_ACCESS_KEY_ID'),
-    'AWS_SECRET_ACCESS_KEY': os.environ.get('AWS_SECRET_ACCESS_KEY'),
-    'CURRENCY_CODE': 'EUR', # e.g. EUR, CAD, GBP, CHF, CNY, JPY
-    'LANGUAGE_CODE': 'en-us', # e.g. en-gb, de-de, it-it, fr-fr. see: https://docs.djangoproject.com/en/1.6/topics/i18n/
-    'DEBUG': DEBUG,
-    'DATABASES': DATABASES,
-    'INSTALLED_APPS': [
-        'otree',
-        'raven.contrib.django.raven_compat',
-    ],
-    'INSTALLED_OTREE_APPS': [
-        'demo_game',
-        'trust',
-        'lab_results',
-        'public_goods',
-        'prisoner',
-        'cournot_competition',
-        'dictator',
-        'matching_pennies',
-        'traveler_dilemma',
-        'survey',
-        'bargaining',
-        'guessing',
-        'common_value_auction',
-        'matrix_symmetric',
-        'matrix_asymmetric',
-        'stackelberg_competition',
-        'private_value_auction',
-        'volunteer_dilemma',
-        'bertrand_competition',
-        'principal_agent',
-        'coordination',
-        'stag_hunt',
-        'battle_of_the_sexes',
-        'survey_sample'
-    ],
-    'ACCESS_CODE_FOR_OPEN_SESSION': 'my_access_code',
-    'SECRET_KEY': SECRET_KEY,
-    'BASE_DIR': BASE_DIR,
-    'WSGI_APPLICATION': 'wsgi.application',
-}
+CREATE_DEFAULT_SUPERUSER = True
+ADMIN_USERNAME = 'admin'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
-otree.settings.augment_settings(settings)
+# e.g. EUR, CAD, GBP, CHF, CNY, JPY
+CURRENCY_CODE = 'EUR'
+
+# e.g. en-gb, de-de, it-it, fr-fr. see: https://docs.djangoproject.com/en/1.6/topics/i18n/
+LANGUAGE_CODE = 'en-us'
+
+INSTALLED_APPS = [
+    'otree',
+    'raven.contrib.django.raven_compat',
+]
+
+INSTALLED_OTREE_APPS = [
+    'demo_game',
+    'trust',
+    'lab_results',
+    'public_goods',
+    'prisoner',
+    'cournot_competition',
+    'dictator',
+    'matching_pennies',
+    'traveler_dilemma',
+    'survey',
+    'bargaining',
+    'guessing',
+    'common_value_auction',
+    'matrix_symmetric',
+    'matrix_asymmetric',
+    'stackelberg_competition',
+    'private_value_auction',
+    'volunteer_dilemma',
+    'bertrand_competition',
+    'principal_agent',
+    'coordination',
+    'stag_hunt',
+    'battle_of_the_sexes',
+    'survey_sample',
+]
+
+SECRET_KEY = SECRET_KEY
+BASE_DIR = BASE_DIR
+WSGI_APPLICATION = 'wsgi.application'
+
+SESSION_MODULE = 'session'
+
+otree.settings.augment_settings(globals())
 
 # FIXME: complete the apps below
 DISABLED_APPS = [
