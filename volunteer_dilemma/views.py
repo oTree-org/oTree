@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import volunteer_dilemma.models as models
-from volunteer_dilemma._builtin import Page, WaitPage
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
+from .models import Constants
 
 class Decision(Page):
 
@@ -12,8 +13,8 @@ class Decision(Page):
     form_fields = ['volunteer']
 
     def variables_for_template(self):
-        return {'general_benefit': self.subsession.general_benefit,
-                'volunteer_cost': self.subsession.volunteer_cost,
+        return {'general_benefit': Constants.general_benefit,
+                'volunteer_cost': Constants.volunteer_cost,
                 'num_other_players': self.group.players_per_group - 1}
 
 
@@ -32,7 +33,7 @@ class Results(Page):
     def variables_for_template(self):
         return {'volunteer': self.player.volunteer,
                 'payoff': self.player.payoff,
-                'num_volunteers': len([p for p in self.group.players if p.volunteer])}
+                'num_volunteers': len([p for p in self.group.get_players() if p.volunteer])}
 
 
 def pages():

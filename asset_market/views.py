@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from __future__ import division
-from __future__ import division
-import otree.views
-import asset_market.models as models
-from asset_market._builtin import Page, WaitPage
+from . import models
+from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
+from .models import Constants
+
 
 def variables_for_all_templates(self):
     return {
@@ -13,9 +12,8 @@ def variables_for_all_templates(self):
         'round_num': self.subsession.round_number,
         'num_of_rounds': self.subsession.number_of_rounds,  # no of periods
         'num_participants': self.group.players_per_group,
-        'cash': self.player.cash,
-        'shares': self.player.shares,
     }
+
 
 class Introduction(Page):
 
@@ -48,6 +46,7 @@ class QuestionOne(Page):
             'num_q': 1,
         }
 
+
 class FeedbackOne(Page):
 
     def participate_condition(self):
@@ -59,9 +58,10 @@ class FeedbackOne(Page):
         return {
             'num_q': 1,
             'answer': self.player.understanding_question_1,
-            'correct': self.subsession.understanding_1_correct,
+            'correct': Constants.understanding_1_correct,
             'is_correct': self.player.is_understanding_question_1_correct(),
         }
+
 
 class QuestionTwo(Page):
 
@@ -78,6 +78,7 @@ class QuestionTwo(Page):
             'num_q': 2,
         }
 
+
 class FeedbackTwo(Page):
 
     def participate_condition(self):
@@ -89,23 +90,43 @@ class FeedbackTwo(Page):
         return {
             'num_q': 2,
             'answer': self.player.understanding_question_2,
-            'correct': self.subsession.understanding_2_correct,
+            'correct': Constants.understanding_2_correct,
             'is_correct': self.player.is_understanding_question_2_correct(),
         }
 
 
-class Order(Page):
+class BuyOrder(Page):
 
     def participate_condition(self):
-        return True
+        return self.player.role() == 'Buyer'
 
     form_model = models.Player
-    form_fields = ['order_type', 'bp', 'bn', 'sp', 'sn']
+    form_fields = ['bp', 'bn']
 
     template_name = 'asset_market/Order.html'
 
     def variables_for_template(self):
         return {
+            'buy': True if self.player.role() == 'Buyer' else False,
+            'role': self.player.role,
+            'cash': self.player.cash,
+            'shares': self.player.shares,
+        }
+
+
+class SellOrder(Page):
+
+    def participate_condition(self):
+        return self.player.role() == 'Seller'
+
+    form_model = models.Player
+    form_fields = ['sp', 'sn']
+
+    template_name = 'asset_market/Order.html'
+
+    def variables_for_template(self):
+        return {
+            'role': self.player.role(),
             'cash': self.player.cash,
             'shares': self.player.shares,
         }
@@ -116,7 +137,9 @@ class TransactionWaitPage(WaitPage):
     scope = models.Group
 
     def after_all_players_arrive(self):
-        self.group.set_transaction()
+        if not self.group.is_transaction:
+            self.group.set_transaction()
+
 
 class Transaction(Page):
 
@@ -127,10 +150,21 @@ class Transaction(Page):
 
     def variables_for_template(self):
         return {
+            'transaction': self.group.is_transaction,
+            'shares_traded': self.group.shares_traded,
+            'transaction_price': self.group.transaction_price,
+            'buyer': True if self.player.role() == 'Buyer' else False,
             'cash': self.player.cash,
             'shares': self.player.shares,
-            'transaction': self.group.is_transaction,
         }
+
+
+class DividendWaitPage(WaitPage):
+    scope = models.Group
+
+    def after_all_players_arrive(self):
+        if not self.group.is_dividend:
+            self.group.set_dividend()
 
 
 class Dividend(Page):
@@ -142,9 +176,12 @@ class Dividend(Page):
 
     def variables_for_template(self):
         return {
+            'dividend': self.group.dividend_per_share,
+            'dividend_gain': self.group.dividend_per_share * self.player.shares,
             'cash': self.player.cash,
             'shares': self.player.shares,
         }
+
 
 class ResultsWaitPage(WaitPage):
 
@@ -153,12 +190,14 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
+
 class Results(Page):
 
     def participate_condition(self):
         return self.subsession.round_number == self.subsession.number_of_rounds
 
     template_name = 'asset_market/Results.html'
+
 
 def pages():
     return [
@@ -168,9 +207,11 @@ def pages():
         FeedbackOne,
         QuestionTwo,
         FeedbackTwo,
-        Order,
+        BuyOrder,
+        SellOrder,
         TransactionWaitPage,
         Transaction,
+        DividendWaitPage,
         Dividend,
         ResultsWaitPage,
         Results

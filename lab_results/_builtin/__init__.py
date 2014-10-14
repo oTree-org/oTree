@@ -1,4 +1,4 @@
-import lab_results.models as models
+from .. import models
 import otree.views
 import otree.test
 from otree.common import Money, money_range

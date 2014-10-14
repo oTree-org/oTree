@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import otree.views
-import lemon_market.models as models
-from lemon_market._builtin import Page, WaitPage
-
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
+from .models import Constants
 
 class Introduction(Page):
 
@@ -32,7 +31,7 @@ class ResultsWaitPage(WaitPage):
     scope = models.Group
 
     def after_all_players_arrive(self):
-        for p in self.group.players:
+        for p in self.group.get_players():
             p.set_payoff()
 
 

@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+# <standard imports>
 from __future__ import division
-"""Documentation at https://github.com/oTree-org/otree/wiki"""
-
 from otree.db import models
 import otree.models
+from otree import widgets
+from otree.common import Money, money_range
 import random
-
+# </standard imports>
 
 doc = """
 In a common value auction game, players simultaneously bid on the item being auctioned.
@@ -14,52 +15,41 @@ Bids are private. The player with the highest bid wins the auction, but payoff d
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/common_value_auction" target="_blank">here</a>.
 """
 
-min_value = 0.0
-max_value = 10.0
-random_item_value = round(random.uniform(min_value, max_value), 1)
+class Constants:
+    min_allowable_bid = Money(0.0)
+    max_allowable_bid = Money(10.0)
+
+    # Error margin for the value estimates shown to the players
+    estimate_error_margin = Money(1.00)
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'common_value_auction'
 
     def highest_bid(self):
-        return max([p.bid_amount for p in self.players])
+        return max([p.bid_amount for p in self.get_players()])
 
     def set_winner(self):
-        players_with_highest_bid = [p for p in self.players if p.bid_amount == self.highest_bid()]
+        players_with_highest_bid = [p for p in self.get_players() if p.bid_amount == self.highest_bid()]
         winner = random.choice(players_with_highest_bid)    # if tie, winner is chosen at random
         winner.is_winner = True
 
     item_value = models.MoneyField(
-        default=lambda: random_item_value,
+        default=lambda: round(random.uniform(Constants.min_allowable_bid, Constants.max_allowable_bid), 1),
         doc="""Common value of the item to be auctioned, random for treatment"""
     )
 
-    min_allowable_bid = models.MoneyField(
-        default=min_value,
-        doc="""Minimum value of item"""
-    )
-
-    max_allowable_bid = models.MoneyField(
-        default=max_value,
-        doc="""Maximum value of item"""
-    )
-
-    estimate_error_margin = models.MoneyField(
-        default=1.00,
-        doc="""Error margin for the value estimates shown to the players"""
-    )
 
     def generate_value_estimate(self):
-        minimum = self.item_value - self.estimate_error_margin
-        maximum = self.item_value + self.estimate_error_margin
+        minimum = self.item_value - Constants.estimate_error_margin
+        maximum = self.item_value + Constants.estimate_error_margin
 
         estimate = round(random.uniform(minimum, maximum), 1)
 
-        if estimate < self.min_allowable_bid:
-            estimate = self.min_allowable_bid
-        if estimate > self.max_allowable_bid:
-            estimate = self.max_allowable_bid
+        if estimate < Constants.min_allowable_bid:
+            estimate = Constants.min_allowable_bid
+        if estimate > Constants.max_allowable_bid:
+            estimate = Constants.max_allowable_bid
 
         return estimate
 
@@ -93,8 +83,8 @@ class Player(otree.models.BasePlayer):
     )
 
     def bid_amount_error_message(self, value):
-        if not self.subsession.min_allowable_bid <= value <= self.subsession.max_allowable_bid:
-            return 'The amount bidded must be between {} and {}, inclusive.'.format(self.subsession.min_allowable_bid, self.subsession.max_allowable_bid)
+        if not Constants.min_allowable_bid <= value <= Constants.max_allowable_bid:
+            return 'The amount bidded must be between {} and {}, inclusive.'.format(Constants.min_allowable_bid, Constants.max_allowable_bid)
 
     is_winner = models.BooleanField(
         default=False,

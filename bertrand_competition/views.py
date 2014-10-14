@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import bertrand_competition.models as models
-from bertrand_competition._builtin import Page, WaitPage
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
+from .models import Constants
 
 class Decide(Page):
 
@@ -13,8 +14,8 @@ class Decide(Page):
 
     def variables_for_template(self):
         return {'num_other_players': self.group.players_per_group - 1,
-                'marginal_cost': self.subsession.marginal_cost,
-                'maximum_price': self.subsession.maximum_price}
+                'marginal_cost': Constants.marginal_cost,
+                'maximum_price': Constants.maximum_price}
 
 
 class ResultsWaitPage(WaitPage):

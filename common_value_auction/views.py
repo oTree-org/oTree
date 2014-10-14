@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import common_value_auction.models as models
-from common_value_auction._builtin import Page, WaitPage
-from otree.common import Money
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
+from .models import Constants
 
 class Introduction(Page):
 
     template_name = 'common_value_auction/Introduction.html'
 
     def variables_for_template(self):
-        return {'other_players_count': len(self.subsession.players)-1}
+        return {'other_players_count': len(self.subsession.get_players())-1}
 
 
 class Bid(Page):
@@ -25,9 +25,9 @@ class Bid(Page):
             self.player.item_value_estimate = self.subsession.generate_value_estimate()
 
         return {'item_value_estimate': self.player.item_value_estimate,
-                'error_margin': self.subsession.estimate_error_margin,
-                'min_bid': Money(self.subsession.min_allowable_bid),
-                'max_bid': Money(self.subsession.max_allowable_bid)}
+                'error_margin': Constants.estimate_error_margin,
+                'min_bid': Money(Constants.min_allowable_bid),
+                'max_bid': Money(Constants.max_allowable_bid)}
 
 
 class ResultsWaitPage(WaitPage):

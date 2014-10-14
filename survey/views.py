@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import survey.models as models
-from survey._builtin import Page
-from otree.common import Money
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
+from .models import Constants
 
 class Demographics(Page):
 

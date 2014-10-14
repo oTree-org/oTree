@@ -1,9 +1,10 @@
-import otree.test
-import lemon_market.views as views
-from lemon_market._builtin import Bot
+# -*- coding: utf-8 -*-
+from __future__ import division
+from . import views
+from ._builtin import Bot
 import random
-from otree.common import money_range
-
+from otree.common import Money, money_range
+from .models import Constants
 class PlayerBot(Bot):
 
     def play(self):
@@ -12,7 +13,7 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # bid
-        self.submit(views.Bid, {'bid_amount': random.choice(money_range(0, self.subsession.max_bid_amount))})
+        self.submit(views.Bid, {'bid_amount': random.choice(money_range(0, Constants.max_bid_amount))})
 
         # results
         self.submit(views.Results)

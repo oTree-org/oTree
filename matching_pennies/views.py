@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import matching_pennies.models as models
-from matching_pennies._builtin import Page, WaitPage
-from otree.common import Money
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
+from .models import Constants
 
 def variables_for_all_templates(self):
 
@@ -46,7 +46,7 @@ class FeedbackOne(Page):
         return {'num_q': 1,
                 'question': 'Suppose Player 1 picked "Heads" and Player 2 guessed "Tails". Which of the following will be the result of that round?',
                 'answer': self.player.training_question_1,
-                'correct': self.subsession.training_1_correct,
+                'correct': Constants.training_1_correct,
                 'explanation': 'Player 1 gets 100 points, Player 2 gets 0 points',
                 'is_correct': self.player.is_training_question_1_correct()}
 
@@ -93,10 +93,11 @@ class ResultsSummary(Page):
         return self.subsession.round_number == self.subsession.number_of_rounds
 
     def variables_for_template(self):
-        total_points_earned = sum(p.points_earned for p in self.player.me_in_all_rounds())
+        me_in_all_rounds = self.player.me_in_all_rounds()
+        total_points_earned = sum([p.points_earned for p in me_in_all_rounds])
         base_points = 50
 
-        return {'me_in_all_rounds': self.player.me_in_all_rounds(),
+        return {'me_in_all_rounds': me_in_all_rounds,
                 'points_earned': self.player.points_earned,
                 'is_winner': self.player.is_winner,
                 'total_points_earned': total_points_earned,

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import tragedy_of_the_commons.views as views
-from tragedy_of_the_commons._builtin import Bot
-from otree.common import Money, money_range
+from . import views
+from ._builtin import Bot
 import random
-
+from otree.common import Money, money_range
+from .models import Constants
 
 class PlayerBot(Bot):
 

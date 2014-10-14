@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import cournot_competition.views as views
-from cournot_competition._builtin import Bot
+from . import views
+from ._builtin import Bot
 import random
-
+from otree.common import Money, money_range
+from .models import Constants
 
 class PlayerBot(Bot):
 
@@ -14,7 +15,7 @@ class PlayerBot(Bot):
         self.submit(views.FeedbackOne)
 
         # units to produce
-        self.submit(views.Decide, {'units': random.choice(range(0, self.subsession.max_units_per_player() + 1))})
+        self.submit(views.Decide, {'units': random.choice(range(0, Constants.max_units_per_player + 1))})
 
         # results
         self.submit(views.Results)

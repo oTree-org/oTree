@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import matrix_asymmetric.models as models
-from matrix_asymmetric._builtin import Page, WaitPage
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
+from .models import Constants
 
 class Decision(Page):
 
@@ -13,14 +14,14 @@ class Decision(Page):
 
     def variables_for_template(self):
         return {'player_id': self.player.id_in_group,
-                'rowAcolumnA_row': self.subsession.rowAcolumnA_row,
-                'rowAcolumnA_column': self.subsession.rowAcolumnA_column,
-                'rowAcolumnB_row': self.subsession.rowAcolumnB_row,
-                'rowAcolumnB_column': self.subsession.rowAcolumnB_column,
-                'rowBcolumnA_row': self.subsession.rowBcolumnA_row,
-                'rowBcolumnA_column': self.subsession.rowBcolumnA_column,
-                'rowBcolumnB_row': self.subsession.rowBcolumnB_row,
-                'rowBcolumnB_column': self.subsession.rowBcolumnB_column}
+                'rowAcolumnA_row': Constants.rowAcolumnA_row,
+                'rowAcolumnA_column': Constants.rowAcolumnA_column,
+                'rowAcolumnB_row': Constants.rowAcolumnB_row,
+                'rowAcolumnB_column': Constants.rowAcolumnB_column,
+                'rowBcolumnA_row': Constants.rowBcolumnA_row,
+                'rowBcolumnA_column': Constants.rowBcolumnA_column,
+                'rowBcolumnB_row': Constants.rowBcolumnB_row,
+                'rowBcolumnB_column': Constants.rowBcolumnB_column}
 
 
 class ResultsWaitPage(WaitPage):

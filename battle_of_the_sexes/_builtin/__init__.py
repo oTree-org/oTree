@@ -1,5 +1,5 @@
 # Don't change anything in this file.
-import battle_of_the_sexes.models as models
+from .. import models
 import otree.views
 import otree.forms
 import otree.test

@@ -1,0 +1,7 @@
+{% extends "global/Instructions.html" %}
+
+{% block instructions %}
+<p>
+You have been randomly and anonymously paired with another participant. There are {{amount_shared}} points for you to divide. Both of you have to simultaneously and independently demand a portion of the {{amount_shared}} points for yourselves. If the sum of your demands is smaller or equal to {{amount_shared}}, both of you get what you demanded. If the sum of your demands is larger than {{amount_shared}}, both of you get nothing.
+</p>
+{% endblock %}

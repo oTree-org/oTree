@@ -1,5 +1,5 @@
 # Don't change anything in this file.
-import private_value_auction.models as models
+from .. import models
 import otree.views
 import otree.forms
 

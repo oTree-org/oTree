@@ -154,7 +154,7 @@ def session_types():
         SessionType(
             name="Principal Agent",
             base_pay=10.00,
-            participants_per_session=30,
+            participants_per_session=12,
             participants_per_demo_session=2,
             subsession_apps=['principal_agent', 'lab_results'],
             doc=""""""
@@ -184,19 +184,18 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Rock - Paper - Scissors",
+            # in-progress
+            name="Asset Market",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
-            subsession_apps=(
-                ['rock_paper_scissors'] * 3 + ['survey_sample', 'lab_results']
-            ),
+            subsession_apps=['asset_market']*5 + ['lab_results'],
             doc=""""""
         ),
 
         ]
 
-# FIXME: completed the apps below
+# FIXME: complete the apps below
 disabled_session_types = [
     SessionType(
         name="Quiz",

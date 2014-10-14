@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from lab_results._builtin import Page
-
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
+from .models import Constants
 class RedemptionCode(Page):
 
     template_name = 'lab_results/LabResults.html'

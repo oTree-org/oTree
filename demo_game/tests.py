@@ -1,7 +1,10 @@
-import otree.test
-import demo_game.views as views
-from demo_game._builtin import Bot
-
+# -*- coding: utf-8 -*-
+from __future__ import division
+from . import views
+from ._builtin import Bot
+import random
+from otree.common import Money, money_range
+from .models import Constants
 
 class PlayerBot(Bot):
 

@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import otree.views
-import otree.views.concrete
-import demo_game.models as models
-from demo_game._builtin import Page
-from otree.common import currency
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
+from .models import Constants
 
 
 def variables_for_all_templates(self):
@@ -41,7 +40,7 @@ class FeedbackOne(Page):
         return {'num_q': 1,
                 'question': "How many understanding questions are there? Please enter an odd negative integer, or a non-negative integer.",
                 'answer': self.player.training_question_1,
-                'correct': self.subsession.training_1_correct,
+                'correct': Constants.training_1_correct,
                 'explanation': "There are 4 understanding questions.",
                 'is_correct': self.player.is_training_question_1_correct(),
                 }
@@ -70,7 +69,7 @@ class FeedbackTwo(Page):
         return {'num_q': 2,
                 'question': "All the following are possible in oTree except one?",
                 'answer': self.player.training_question_2,
-                'correct': self.subsession.training_2_correct,
+                'correct': Constants.training_2_correct,
                 'explanation': "Time travel (opens in pop up window)",
                 'is_correct': self.player.is_training_question_2_correct(),
                 }
@@ -99,7 +98,7 @@ class FeedbackThree(Page):
         return {'num_q': 3,
                 'question': "What operating system is required to use oTree?",
                 'answer': self.player.training_question_3,
-                'correct': self.subsession.training_3_correct,
+                'correct': Constants.training_3_correct,
                 'explanation': "Any of the above operating system.",
                 'is_correct': self.player.is_training_question_3_correct(),
                 }
@@ -128,7 +127,7 @@ class FeedbackFour(Page):
         return {'num_q': 4,
                 'question': "What can be monitored during the experiment via the admin console?",
                 'answer': self.player.training_question_4,
-                'correct': self.subsession.training_4_correct,
+                'correct': Constants.training_4_correct,
                 'explanation': "All of the above.",
                 'is_correct': self.player.is_training_question_4_correct(),
                 }
@@ -157,7 +156,7 @@ class FeedbackFive(Page):
         return {'num_q': 5,
                 'question': "What kind of data is included when you export a CSV from oTree?",
                 'answer': self.player.training_question_5,
-                'correct': self.subsession.training_5_correct,
+                'correct': Constants.training_5_correct,
                 'explanation': "Any participants’ input/choice.",
                 'is_correct': self.player.is_training_question_5_correct(),
                 }
@@ -177,7 +176,7 @@ class Results(Page):
         if self.player.payoff is None:
             self.player.set_payoff()
         return {
-            'payoff': currency(self.player.payoff)
+            'payoff': self.player.payoff
         }
 
     template_name = 'demo_game/Results.html'

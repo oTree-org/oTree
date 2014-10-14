@@ -1,0 +1,19 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+
+{% block title %}
+{% if title %}
+{{ title }}
+{% else %}
+Understanding Question {{ num_q }} of {{ total_q }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<p>{{question}}</p>
+<p>
+{{form}}
+</p>
+<p>{% next_button %}</p>
+{% include instructions %}
+{% endblock %}

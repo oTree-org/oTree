@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import public_goods.views as views
-from public_goods._builtin import Bot
+from . import views
+from ._builtin import Bot
 import random
-
-
+from otree.common import Money, money_range
+from .models import Constants
 class PlayerBot(Bot):
 
     def play(self):
@@ -15,7 +15,7 @@ class PlayerBot(Bot):
 
         self.submit(views.Feedback)
 
-        self.submit(views.Contribute, {"contribution": random.choice(range(0, self.subsession.endowment))})
+        self.submit(views.Contribute, {"contribution": random.choice(range(0, Constants.endowment))})
 
         self.submit(views.Results)
 

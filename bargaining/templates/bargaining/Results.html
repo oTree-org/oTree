@@ -7,19 +7,21 @@
 {% endblock %}
 
 {% block content %}
+<table class=table style="width: auto">
+<tr><th></th><th>Points</th></tr>
+<tr><th>You demanded</th><td>{{request_amount}}</td></tr>
+<tr><th>The other participant demanded</th><td>{{other_request}}</td></tr>
+<tr><th>Sum of your demands</th><td>{{sum}}</td></tr>
+<tr><th>Thus you earn</th><td>{{earn}}</td></tr>
+<tr><th>In addition you get a participation fee of</th><td>10</td></tr>
+<tr><th>So in sum you will get</th><td>{{points}}</td></tr>
+</table>
+<p>
+To complete the study, please answer a short questionnaire that will now follow.
+</p>
 
-    <p>
-        You requested {{ request_amount }}.
-    </p>
+<p>{% next_button %}</p>
 
-    <p>
-        The other player requested {{ other_request }}.
-    </p>
-
-    <p>
-        Your payoff is therefore {{ payoff }}.
-    </p>
-
-    {% next_button %}
+{% include instructions %}
 
 {% endblock %}

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import battle_of_the_sexes.models as models
-from battle_of_the_sexes._builtin import Page, WaitPage
+from . import models
+from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
-
+from .models import Constants
 
 class Decide(Page):
 
@@ -17,11 +17,11 @@ class Decide(Page):
 
     def variables_for_template(self):
         return {'role': self.player.role(),
-                'fbl_husband_amt': self.subsession.football_husband_amount,
-                'fbl_wife_amt': self.subsession.football_wife_amount,
-                'fbl_opr_amt': self.subsession.mismatch_amount,
-                'opr_husband_amt': self.subsession.opera_husband_amount,
-                'opr_wife_amt': self.subsession.opera_wife_amount}
+                'fbl_husband_amt': Constants.football_husband_amount,
+                'fbl_wife_amt': Constants.football_wife_amount,
+                'fbl_opr_amt': Constants.mismatch_amount,
+                'opr_husband_amt': Constants.opera_husband_amount,
+                'opr_wife_amt': Constants.opera_wife_amount}
 
 
 class ResultsWaitPage(WaitPage):

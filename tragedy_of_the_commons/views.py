@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import tragedy_of_the_commons.models as models
-from tragedy_of_the_commons._builtin import Page, WaitPage
+from . import models
+from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
+from .models import Constants
 
 
 class Introduction(Page):
@@ -14,10 +15,10 @@ class Introduction(Page):
 
     def variables_for_template(self):
 
-        return {'common_gain': self.subsession.common_gain,
-                'common_loss': self.subsession.common_loss,
-                'common_cost': self.subsession.individual_gain - self.subsession.defect_costs,
-                'defect_gain': self.subsession.common_gain - self.subsession.defect_costs}
+        return {'common_gain': Constants.common_gain,
+                'common_loss': Constants.common_loss,
+                'common_cost': Constants.individual_gain - Constants.defect_costs,
+                'defect_gain': Constants.common_gain - Constants.defect_costs}
 
 
 class Decision(Page):

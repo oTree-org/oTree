@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
+# <standard imports>
 from __future__ import division
-from django_countries.fields import CountryField
 from otree.db import models
 import otree.models
 from otree import widgets
+from otree.common import Money, money_range
+import random
+# </standard imports>
+from django_countries.fields import CountryField
 
+class Constants:
+    pass
 
 class Subsession(otree.models.BaseSubsession):
 

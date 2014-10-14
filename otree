@@ -14,9 +14,13 @@ project commands:
 """
 
 import argparse
+import importlib
 import os
 import sys
 import textwrap
+
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 
 
 parser = argparse.ArgumentParser()
@@ -42,7 +46,7 @@ def recreate(args):
     syncdb = 'python manage.py syncdb --traceback'
 
     if args.environment == 'local':
-        with open('_otree_experiments/db.sqlite3', 'w') as db:
+        with open('db.sqlite3', 'w') as db:
             db.write('')
         django_command([sys.argv[0], 'syncdb', '--traceback'])
         # then launch from PyCharm
@@ -179,12 +183,6 @@ COMMANDS['help'] = show_help
 
 
 def django_command(argv):
-    import django.conf
-    import _otree_experiments.settings
-
-    if not django.conf.settings.configured:
-        django.conf.settings.configure(**_otree_experiments.settings.settings)
-
     from django.core.management import execute_from_command_line
     execute_from_command_line(argv)
 

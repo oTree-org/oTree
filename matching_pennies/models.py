@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Documentation at https://github.com/oTree-org/otree/wiki"""
+# <standard imports>
 from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
+from otree.common import Money, money_range
+import random
+# </standard imports>
 
 
 doc = """
@@ -13,6 +16,8 @@ beginning and then continue to play against the same opponent for 3 rounds. Thei
 <p>Source code <a href="https://github.com/oTree-org/oTree/tree/master/matching_pennies" target="_blank">here</a>.</p>
 """
 
+class Constants:
+    training_1_correct = 'Player 1 gets 100 points, Player 2 gets 0 points'
 
 class Subsession(otree.models.BaseSubsession):
 
@@ -24,7 +29,7 @@ class Subsession(otree.models.BaseSubsession):
             group.reverse()
         return groups
 
-    training_1_correct = 'Player 1 gets 100 points, Player 2 gets 0 points'
+
 
 
 class Group(otree.models.BaseGroup):
@@ -67,7 +72,7 @@ class Player(otree.models.BasePlayer):
                 'Player 1 gets 0 points, Player 2 gets 100 points']
 
     def is_training_question_1_correct(self):
-        return self.training_question_1 == self.subsession.training_1_correct
+        return self.training_question_1 == Constants.training_1_correct
 
     points_earned = models.PositiveIntegerField(
         default=0,
@@ -86,7 +91,7 @@ class Player(otree.models.BasePlayer):
 
     def other_player(self):
         """Returns the opponent of the current player"""
-        return self.other_players_in_group()[0]
+        return self.get_others_in_group()[0]
 
     def role(self):
         if self.id_in_group == 1:

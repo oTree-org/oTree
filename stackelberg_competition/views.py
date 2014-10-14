@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import stackelberg_competition.models as models
-from stackelberg_competition._builtin import Page, WaitPage
-
-
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
+from .models import Constants
 def variables_for_all_templates(self):
 
-    return {'total_capacity': self.subsession.total_capacity,
-            'max_units_per_player': self.subsession.max_units_per_player(),
+    return {'total_capacity': Constants.total_capacity,
+            'max_units_per_player': Constants.max_units_per_player,
             'total_q': 1}
 
 
@@ -36,7 +36,7 @@ class FeedbackOne(Page):
                 'question': """Suppose firm A first decided to produce 20 units. Then firm B would be informed of firm A's production and decided to produce 30 units.
                                What would be the profit for firm B?""",
                 'answer': self.player.training_question_1,
-                'correct': self.subsession.training_1_correct,
+                'correct': Constants.training_1_correct,
                 'explanation': """Total units produced were 20 + 30 = 50. The unit selling price was 60 – 50 = 10.
                                   The profit for firm B would be the product of the unit selling price and the unit produced by firm B, that is 10 × 30 = 300""",
                 'is_correct': self.player.is_training_question_1_correct()}
@@ -86,7 +86,7 @@ class ResultsWaitPage(WaitPage):
         return "Waiting for the other participant to decide."
 
     def after_all_players_arrive(self):
-        for p in self.group.players:
+        for p in self.group.get_players():
             p.set_points()
 
 
@@ -100,7 +100,7 @@ class Results(Page):
         return {'quantity': self.player.quantity,
                 'other_quantity': self.player.other_player().quantity,
                 'total_quantity': self.player.quantity + self.player.other_player().quantity,
-                'total_capacity': self.subsession.total_capacity,
+                'total_capacity': Constants.total_capacity,
                 'price': self.group.price,
                 'points_earned': self.player.points_earned,
                 'base_points': 50,

@@ -1,35 +1,38 @@
 # -*- coding: utf-8 -*-
+# <standard imports>
 from __future__ import division
-"""Documentation at https://github.com/oTree-org/otree/wiki"""
-
 from otree.db import models
 import otree.models
 from otree import widgets
+from otree.common import Money, money_range
+import random
+# </standard imports>
+
 
 doc = """
 In the asymmetric matrix game, the strategy sets for both players are different.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/matrix_asymmetric" target="_blank">here</a>.
 """
 
+class Constants:
+    rowAcolumnA_row = Money(0.20)
+    rowAcolumnA_column = Money(0.30)
+
+    # Amount row player gets, if row player chooses A and column player chooses B
+    rowAcolumnB_row = Money(0.40)
+    rowAcolumnB_column = Money(0.10)
+
+    rowBcolumnA_row = Money(0.05)
+    rowBcolumnA_column = Money(0.45)
+
+    rowBcolumnB_row = Money(0.15)
+    rowBcolumnB_column = Money(0.25)
+
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'matrix_asymmetric'
 
-    rowAcolumnA_row = models.MoneyField(default=0.20)
-    rowAcolumnA_column = models.MoneyField(default=0.30)
-
-    rowAcolumnB_row = models.MoneyField(
-        default=0.40,
-        doc='''Amount row player gets, if row player chooses A and column player chooses B'''
-    )
-    rowAcolumnB_column = models.MoneyField(default=0.10)
-
-    rowBcolumnA_row = models.MoneyField(default=0.05)
-    rowBcolumnA_column = models.MoneyField(default=0.45)
-
-    rowBcolumnB_row = models.MoneyField(default=0.15)
-    rowBcolumnB_column = models.MoneyField(default=0.25)
 
 
 class Group(otree.models.BaseGroup):
@@ -46,23 +49,23 @@ class Group(otree.models.BaseGroup):
 
         row_matrix = {
             'A': {
-                'A': self.subsession.rowAcolumnA_row,
-                'B': self.subsession.rowAcolumnB_row,
+                'A': Constants.rowAcolumnA_row,
+                'B': Constants.rowAcolumnB_row,
             },
             'B': {
-                'A': self.subsession.rowBcolumnA_row,
-                'B': self.subsession.rowBcolumnB_row,
+                'A': Constants.rowBcolumnA_row,
+                'B': Constants.rowBcolumnB_row,
             }
         }
 
         column_matrix = {
             'A': {
-                'A': self.subsession.rowAcolumnA_column,
-                'B': self.subsession.rowAcolumnB_column,
+                'A': Constants.rowAcolumnA_column,
+                'B': Constants.rowAcolumnB_column,
             },
             'B': {
-                'A': self.subsession.rowBcolumnA_column,
-                'B': self.subsession.rowBcolumnB_column,
+                'A': Constants.rowBcolumnA_column,
+                'B': Constants.rowBcolumnB_column,
             }
         }
 
@@ -79,7 +82,7 @@ class Player(otree.models.BasePlayer):
 
     def other_player(self):
         """Returns other player in group"""
-        return self.other_players_in_group()[0]
+        return self.get_others_in_group()[0]
 
     decision = models.CharField(
         default=None,

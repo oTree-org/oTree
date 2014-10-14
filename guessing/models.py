@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+# <standard imports>
 from __future__ import division
-"""Documentation at https://github.com/oTree-org/otree/wiki"""
-
 from otree.db import models
 import otree.models
+from otree import widgets
+from otree.common import Money, money_range
+import random
+# </standard imports>
+
 
 doc = """
 In this game, players are asked to pick a number within a given range.
@@ -12,6 +16,8 @@ In case of a tie between players, the winner is picked at random.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/guessing" target="_blank">here</a>.
 """
 
+class Constants:
+    winner_payoff = Money(1.00)
 
 class Subsession(otree.models.BaseSubsession):
 
@@ -29,28 +35,24 @@ class Group(otree.models.BaseGroup):
     two_third_guesses = models.FloatField(default=None)
 
     def set_payoffs(self):
-        self.two_third_guesses = (2/3) * sum([p.guess_value for p in self.players]) / len(self.players)
+        self.two_third_guesses = (2/3) * sum([p.guess_value for p in self.get_players()]) / len(self.get_players())
 
         winner_so_far = None
         smallest_difference_so_far = 1000   # arbitrary big number
 
-        for p in self.players:
+        for p in self.get_players():
             difference = abs(p.guess_value - self.two_third_guesses)
             if difference < smallest_difference_so_far:
                 winner_so_far = p
                 smallest_difference_so_far = difference
         winner_so_far.is_winner = True
 
-        for p in self.players:
+        for p in self.get_players():
             if p.is_winner:
-                p.payoff = p.group.winner_payoff
+                p.payoff = Constants.winner_payoff
             else:
                 p.payoff = 0
 
-    winner_payoff = models.MoneyField(
-        default=1.00,
-        doc='Payoff to the winner'
-    )
 
 
 class Player(otree.models.BasePlayer):

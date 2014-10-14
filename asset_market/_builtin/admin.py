@@ -1,7 +1,7 @@
 # This file is auto-generated.
 
 from django.contrib import admin
-import asset_market.models as models
+from .. import models
 import otree.adminlib as adminlib
 
 class PlayerAdmin(adminlib.PlayerAdmin):
