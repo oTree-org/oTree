@@ -19,8 +19,6 @@ class Constants:
     min_allowable_bid = Money(0.0)
     max_allowable_bid = Money(10.0)
 
-
-
     # Error margin for the value estimates shown to the players
     estimate_error_margin = Money(1.00)
 
