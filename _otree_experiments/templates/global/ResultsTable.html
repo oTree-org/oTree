@@ -1,0 +1,16 @@
+{% extends "global/Base.html" %}
+{% load otree_tags %}
+{% block title %}Results{% endblock %}
+{% block content %}
+<table class=table style='width: auto'>
+    {% for row in table %}
+    <tr>
+        {% for cell in row %}
+        <td>{{cell}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+<p>To complete the study, please answer a short questionnaire that will now follow.</p>
+<p>{% next_button %}</p>
+{% endblock %}

@@ -1,9 +1,6 @@
 import os
-import django.conf
-import settings
 
-if not django.conf.settings.configured:
-    django.conf.settings.configure(default_settings=django.conf.global_settings, **settings.settings)
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', '_otree_experiments.settings')
 
 from django.core.wsgi import get_wsgi_application
 

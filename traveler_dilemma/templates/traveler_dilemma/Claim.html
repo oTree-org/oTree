@@ -7,8 +7,10 @@
 {% endblock %}
 
 {% block content %}
-
-    {% formrow form.claim with label="Please make a claim:" %}
+<p>How many points will you claim for your antique?</p>
+    {% formrow form.claim %}
     {% next_button %}
+    
+    {% include instructions %}
 
 {% endblock %}
