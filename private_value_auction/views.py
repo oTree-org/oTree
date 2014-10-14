@@ -22,8 +22,8 @@ class Bid(Page):
             self.player.private_value = self.player.generate_private_value()
 
         return {'private_value': self.player.private_value,
-                'min_bid': Money(self.subsession.min_allowable_bid),
-                'max_bid': Money(self.subsession.max_allowable_bid)}
+                'min_bid': Money(Constants.min_allowable_bid),
+                'max_bid': Money(Constants.max_allowable_bid)}
 
 
 class ResultsWaitPage(WaitPage):

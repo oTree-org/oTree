@@ -14,7 +14,7 @@ class Introduction(Page):
     template_name = 'global/Introduction.html'
 
     def variables_for_template(self):
-        return {'amount_allocated': self.subsession.amount_allocated}
+        return {'amount_allocated': Constants.amount_allocated}
 
 
 class Question1(Page):
@@ -26,7 +26,7 @@ class Question1(Page):
         participant A. In the end, how much would participant A and B have?'''
 
     def participate_condition(self):
-        return self.subsession.round_number == 1
+        return self&subsession&round_number == 1
 
     def variables_for_template(self):
         return dict(num_q=1, question=self.question)
@@ -36,7 +36,7 @@ class Feedback1(Page):
     template_name = 'trust/Feedback.html'
 
     def participate_condition(self):
-        return self.subsession.round_number == 1
+        return self&subsession&round_number == 1
 
     def variables_for_template(self):
         return dict(
@@ -50,7 +50,7 @@ class Question2(Page):
     form_fields = 'feedback',
 
     def participate_condition(self):
-        return self.subsession.round_number == 1
+        return self&subsession&round_number == 1
 
     def variables_for_template(self):
         return dict(
@@ -75,7 +75,7 @@ class Send(Page):
         return self.player.id_in_group == 1
 
     def variables_for_template(self):
-        return {'amount_allocated': self.subsession.amount_allocated}
+        return {'amount_allocated': Constants.amount_allocated}
 
 
 class WaitPage(WaitPage):
@@ -102,7 +102,7 @@ class SendBack(Page):
     def variables_for_template(self):
         tripled_amount = self.group.sent_amount * 3
 
-        return {'amount_allocated': self.subsession.amount_allocated,
+        return {'amount_allocated': Constants.amount_allocated,
                 'sent_amount': self.group.sent_amount,
                 'tripled_amount': tripled_amount,
                 'prompt':
@@ -126,7 +126,7 @@ class Results(Page):
     def variables_for_template(self):
         tripled_amount = self.group.sent_amount * 3
 
-        return {'amount_allocated': self.subsession.amount_allocated,
+        return {'amount_allocated': Constants.amount_allocated,
                 'sent_amount': self.group.sent_amount,
                 'tripled_amount': tripled_amount,
                 'sent_back_amount': self.group.sent_back_amount,

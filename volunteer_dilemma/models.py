@@ -15,20 +15,19 @@ The players who volunteer will, however, incur a given cost.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/volunteer_dilemma" target="_blank">here</a>.
 """
 
+class Constants:
+
+    #"""Payoff for each player if at least one volunteers"""
+    general_benefit = Money(1.00)\
+
+    # """Cost incurred by volunteering player"""
+    volunteer_cost = Money(0.40)
+
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'volunteer_dilemma'
 
-    general_benefit = models.MoneyField(
-        default=1.00,
-        doc="""Payoff for each player if at least one volunteers"""
-    )
-
-    volunteer_cost = models.MoneyField(
-        default=0.40,
-        doc="""Cost incurred by volunteering player"""
-    )
 
 
 class Group(otree.models.BaseGroup):
@@ -41,13 +40,13 @@ class Group(otree.models.BaseGroup):
 
     def set_payoffs(self):
         if any(p.volunteer for p in self.get_players()):
-            baseline_amount = self.subsession.general_benefit
+            baseline_amount = Constants.general_benefit
         else:
             baseline_amount = 0
         for p in self.get_players():
             p.payoff = baseline_amount
             if p.volunteer:
-                p.payoff -= self.subsession.volunteer_cost
+                p.payoff -= Constants.volunteer_cost
 
 
 class Player(otree.models.BasePlayer):

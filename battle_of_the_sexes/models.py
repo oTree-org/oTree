@@ -61,16 +61,16 @@ class Group(otree.models.BaseGroup):
         wife = self.get_player_by_role('wife')
 
         if husband.decision != wife.decision:
-            husband.payoff = self.subsession.mismatch_amount
-            wife.payoff = self.subsession.mismatch_amount
+            husband.payoff = Constants.mismatch_amount
+            wife.payoff = Constants.mismatch_amount
 
         else:
             if husband.decision == 'Football':
-                husband.payoff = self.subsession.football_husband_amount
-                wife.payoff = self.subsession.football_wife_amount
+                husband.payoff = Constants.football_husband_amount
+                wife.payoff = Constants.football_wife_amount
             else:
-                husband.payoff = self.subsession.opera_husband_amount
-                wife.payoff = self.subsession.opera_wife_amount
+                husband.payoff = Constants.opera_husband_amount
+                wife.payoff = Constants.opera_wife_amount
 
 
 class Player(otree.models.BasePlayer):

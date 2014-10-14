@@ -9,6 +9,8 @@ import random
 # </standard imports>
 from django_countries.fields import CountryField
 
+class Constants:
+    pass
 
 class Subsession(otree.models.BaseSubsession):
 

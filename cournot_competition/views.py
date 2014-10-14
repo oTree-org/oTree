@@ -6,8 +6,8 @@ from otree.common import Money, money_range
 from .models import Constants
 def variables_for_all_templates(self):
 
-    return {'total_capacity': self.subsession.total_capacity,
-            'max_units_per_player': self.subsession.max_units_per_player(),
+    return {'total_capacity': Constants.total_capacity,
+            'max_units_per_player': Constants.max_units_per_player,
             'total_q': 1}
 
 
@@ -70,7 +70,7 @@ class Results(Page):
         return {'units': self.player.units,
                 'other_units': self.player.other_player().units,
                 'total_units': self.group.total_units,
-                'total_capacity': self.subsession.total_capacity,
+                'total_capacity': Constants.total_capacity,
                 'price': self.group.price,
                 'points_earned': self.player.points_earned,
                 'base_points': 50,

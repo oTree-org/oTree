@@ -16,27 +16,18 @@ Tragedy of the commons.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/tragedy_of_the_commons" target="_blank">here</a>.
 """
 
+class Constants:
+    common_gain = Money(0.10)
+
+    common_loss = Money(0.00)
+
+    individual_gain = Money(2.00)
+
+    defect_costs = Money(0.20)
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'tragedy_of_the_commons'
-
-    common_gain = models.MoneyField(
-        doc="""If both players """,
-        default=1.00
-    )
-    common_loss = models.MoneyField(
-        doc="""""",
-        default=0.00
-    )
-    individual_gain = models.MoneyField(
-        doc="""""",
-        default=2.00
-    )
-    defect_costs = models.MoneyField(
-        doc="""""",
-        default=0.20
-    )
 
 
 class Group(otree.models.BaseGroup):
@@ -48,16 +39,16 @@ class Group(otree.models.BaseGroup):
     def set_payoffs(self):
         if all([p.decision == 'defect' for p in self.get_players()]):
             for p in self.get_players():
-                p.payoff = self.subsession.common_loss
+                p.payoff = Constants.common_loss
         elif all([p.decision == 'cooperate' for p in self.get_players()]):
             for p in self.get_players():
-                p.payoff = self.subsession.common_gain
+                p.payoff = Constants.common_gain
         else:
             for p in self.get_players():
                 if p.decision == 'defect':
-                    p.payoff = self.subsession.individual_gain - self.subsession.defect_costs
+                    p.payoff = Constants.individual_gain - Constants.defect_costs
                 else:
-                    p.payoff = self.subsession.common_gain - self.subsession.defect_costs
+                    p.payoff = Constants.common_gain - Constants.defect_costs
 
 
 class Player(otree.models.BasePlayer):

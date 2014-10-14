@@ -14,20 +14,23 @@ In this one-period implementation, the order of play is randomly determined.</p>
 <p>Source code <a href="https://github.com/oTree-org/oTree/tree/master/stackelberg_competition" target="_blank">here</a>.</p>
 """
 
-
-class Subsession(otree.models.BaseSubsession):
-
-    name_in_url = 'stackelberg_competition'
-
+class Constants:
     total_capacity = models.PositiveIntegerField(
         default=60,
         doc="""Total production capacity of both players"""
     )
 
-    def max_units_per_player(self):
-        return int(self.total_capacity / 2)
+    max_units_per_player = int(total_capacity/2)
 
     training_1_correct = 300
+
+class Subsession(otree.models.BaseSubsession):
+
+    name_in_url = 'stackelberg_competition'
+
+
+
+
 
 
 class Group(otree.models.BaseGroup):
@@ -66,14 +69,14 @@ class Player(otree.models.BasePlayer):
     )
 
     def quantity_error_message(self, value):
-        if not 0 <= value <= self.subsession.max_units_per_player():
-            return "The value must be an integer between 0 and {}, inclusive.".format(self.subsession.max_units_per_player())
+        if not 0 <= value <= Constants.max_units_per_player:
+            return "The value must be an integer between 0 and {}, inclusive.".format(Constants.max_units_per_player)
 
     def other_player(self):
         return self.get_others_in_group()[0]
 
     def set_points(self):
-        self.group.price = self.subsession.total_capacity - self.quantity - self.other_player().quantity
+        self.group.price = Constants.total_capacity - self.quantity - self.other_player().quantity
         self.points_earned = self.group.price * self.quantity
 
     def set_payoff(self):

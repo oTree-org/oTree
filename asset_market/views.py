@@ -9,7 +9,7 @@ from .models import Constants
 def variables_for_all_templates(self):
     return {
         'total_q': 2,
-        'round_num': self.subsession.round_number,
+        'round_num': self&subsession&round_number,
         'num_of_rounds': self.subsession.number_of_rounds,  # no of periods
         'num_participants': self.group.players_per_group,
     }
@@ -18,7 +18,7 @@ def variables_for_all_templates(self):
 class Introduction(Page):
 
     def participate_condition(self):
-        return self.subsession.round_number == 1
+        return self&subsession&round_number == 1
 
     template_name = 'asset_market/Introduction.html'
 
@@ -26,7 +26,7 @@ class Introduction(Page):
 class Instructions(Page):
 
     def participate_condition(self):
-        return self.subsession.round_number == 1
+        return self&subsession&round_number == 1
 
     template_name = 'asset_market/Instructions.html'
 
@@ -37,7 +37,7 @@ class QuestionOne(Page):
     form_fields = ['understanding_question_1']
 
     def participate_condition(self):
-        return self.subsession.round_number == 1
+        return self&subsession&round_number == 1
 
     template_name = 'asset_market/Question.html'
 
@@ -50,7 +50,7 @@ class QuestionOne(Page):
 class FeedbackOne(Page):
 
     def participate_condition(self):
-        return self.subsession.round_number == 1
+        return self&subsession&round_number == 1
 
     template_name = 'asset_market/Feedback.html'
 
@@ -69,7 +69,7 @@ class QuestionTwo(Page):
     form_fields = ['understanding_question_2']
 
     def participate_condition(self):
-        return self.subsession.round_number == 1
+        return self&subsession&round_number == 1
 
     template_name = 'asset_market/Question.html'
 
@@ -82,7 +82,7 @@ class QuestionTwo(Page):
 class FeedbackTwo(Page):
 
     def participate_condition(self):
-        return self.subsession.round_number == 1
+        return self&subsession&round_number == 1
 
     template_name = 'asset_market/Feedback.html'
 
@@ -194,7 +194,7 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
 
     def participate_condition(self):
-        return self.subsession.round_number == self.subsession.number_of_rounds
+        return self&subsession&round_number == self.subsession.number_of_rounds
 
     template_name = 'asset_market/Results.html'
 

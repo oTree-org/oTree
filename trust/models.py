@@ -17,15 +17,16 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/trust"
 target="_blank">here</a>.
 """
 
+class Constants:
+
+    #Initial amount allocated to each player
+    amount_allocated = 100
+
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'trust'
 
-    amount_allocated = models.PositiveIntegerField(
-        default=100,
-        doc="""Initial amount allocated to each player"""
-    )
 
 
 class Group(otree.models.BaseGroup):
@@ -49,12 +50,12 @@ class Group(otree.models.BaseGroup):
         p1 = self.get_player_by_id(1)
         p2 = self.get_player_by_id(2)
         p1.payoff = p2.payoff = 0
-        p1.points = self.BONUS + self.subsession.amount_allocated\
+        p1.points = self.BONUS + Constants.amount_allocated\
             - self.sent_amount + self.sent_back_amount
         p2.points = self.BONUS + self.sent_amount * 3 - self.sent_back_amount
 
     def sent_amount_error_message(self, value):
-        if not 0 <= value <= self.subsession.amount_allocated:
+        if not 0 <= value <= Constants.amount_allocated:
             return 'Your entry is invalid.'
 
     def sent_back_amount_error_message(self, value):

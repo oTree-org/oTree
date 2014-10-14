@@ -18,7 +18,7 @@ class PlayerBot(Bot):
 
         # request
         self.submit(views.Request, {"request_amount": random.randrange(
-            self.subsession.amount_shared)})
+            Constants.amount_shared)})
 
         # results
         self.submit(views.Results)

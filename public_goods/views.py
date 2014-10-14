@@ -6,7 +6,7 @@ from otree.common import Money, money_range
 from .models import Constants
 
 def variables_for_all_templates(self):
-    return {'endowment': self.subsession.endowment}
+    return {'endowment': Constants.endowment}
 
 
 class Introduction(Page):
@@ -17,7 +17,7 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {'no_of_players': self.group.players_per_group,
-                'efficiency_factor': self.subsession.efficiency_factor}
+                'efficiency_factor': Constants.efficiency_factor}
 
 
 class Question(Page):
@@ -76,7 +76,7 @@ class Results(Page):
         total_contribution = sum([c.contribution for c in self.group.get_players()])
         total_earnings = float(total_contribution) * 1.8
         share_earnings = float(total_earnings) / 3
-        individual_earnings = (self.subsession.endowment - current_player.contribution) + share_earnings
+        individual_earnings = (Constants.endowment - current_player.contribution) + share_earnings
         base_points = 10
         total_points = individual_earnings + base_points
 

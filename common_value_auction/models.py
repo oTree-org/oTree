@@ -83,8 +83,8 @@ class Player(otree.models.BasePlayer):
     )
 
     def bid_amount_error_message(self, value):
-        if not self.subsession.min_allowable_bid <= value <= self.subsession.max_allowable_bid:
-            return 'The amount bidded must be between {} and {}, inclusive.'.format(self.subsession.min_allowable_bid, self.subsession.max_allowable_bid)
+        if not Constants.min_allowable_bid <= value <= Constants.max_allowable_bid:
+            return 'The amount bidded must be between {} and {}, inclusive.'.format(Constants.min_allowable_bid, Constants.max_allowable_bid)
 
     is_winner = models.BooleanField(
         default=False,
@@ -93,7 +93,7 @@ class Player(otree.models.BasePlayer):
 
     def set_payoff(self):
         if self.is_winner:
-            self.payoff = self.subsession.item_value - self.bid_amount
+            self.payoff = Constants.item_value - self.bid_amount
             if self.payoff < 0:
                 self.payoff = 0
         else:

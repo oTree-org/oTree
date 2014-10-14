@@ -13,10 +13,10 @@ class Introduction(Page):
     template_name = 'global/Introduction.html'
 
     def variables_for_template(self):
-        return {'max_amount': self.subsession.max_amount,
-                'min_amount': self.subsession.min_amount,
-                'reward': self.subsession.reward,
-                'penalty': self.subsession.penalty}
+        return {'max_amount': Constants.max_amount,
+                'min_amount': Constants.min_amount,
+                'reward': Constants.reward,
+                'penalty': Constants.penalty}
 
 
 class Question1(Page):
@@ -29,7 +29,7 @@ class Question1(Page):
         the airline?'''
 
     def participate_condition(self):
-        return self.subsession.round_number == 1
+        return self&subsession&round_number == 1
 
     def variables_for_template(self):
         return dict(num_q=1, total_q=1, question=self.question)
@@ -39,7 +39,7 @@ class Feedback1(Page):
     template_name = 'traveler_dilemma/Feedback.html'
 
     def participate_condition(self):
-        return self.subsession.round_number == 1
+        return self&subsession&round_number == 1
 
     def variables_for_template(self):
         return dict(
@@ -71,9 +71,9 @@ class Results(Page):
     def variables_for_template(self):
         other = self.player.other_player().claim
         if self.player.claim < other:
-            reward = self.subsession.reward
+            reward = Constants.reward
         elif self.player.claim > other:
-            reward = -self.subsession.penalty
+            reward = -Constants.penalty
         else:
             reward = 0
         return dict(
@@ -99,7 +99,7 @@ class Question2(Page):
     form_fields = 'feedback',
 
     def participate_condition(self):
-        return self.subsession.round_number == 1
+        return self&subsession&round_number == 1
 
     def variables_for_template(self):
         return dict(

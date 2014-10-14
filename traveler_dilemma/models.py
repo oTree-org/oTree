@@ -14,21 +14,24 @@ The game is framed as a traveler's dilemma and intended for classroom/teaching u
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/traveler_dilemma" target="_blank">here</a>.
 """
 
+class Constants:
+    # Player's reward for the lowest claim"""
+    reward = 2
+
+    # Player's deduction for the higher claim
+    penalty = 2
+
+    # The maximum claim to be requested
+    max_amount = 100
+
+    # The minimum claim to be requested
+    min_amount = 2
+
+
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'traveler_dilemma'
-
-    reward = models.PositiveIntegerField(
-        default=2, doc="""Player's reward for the lowest claim""")
-
-    penalty = models.PositiveIntegerField(
-        default=2, doc="""Player's deduction for the higher claim""")
-
-    max_amount = models.PositiveIntegerField(
-        default=100, doc="""The maximum claim to be requested""")
-    min_amount = models.PositiveIntegerField(
-        default=2, doc="""The minimum claim to be requested""")
 
 
 class Group(otree.models.BaseGroup):
@@ -70,8 +73,8 @@ class Player(otree.models.BasePlayer):
         verbose_name='')
 
     def claim_error_message(self, value):
-        if not self.subsession.min_amount\
-                <= value <= self.subsession.max_amount:
+        if not Constants.min_amount\
+                <= value <= Constants.max_amount:
             return 'Your entry is invalid.'
 
     def other_player(self):
@@ -80,8 +83,8 @@ class Player(otree.models.BasePlayer):
     def set_payoff(self):
         other = self.other_player().claim
         if self.claim < other:
-            self.payoff = self.BONUS + self.claim + self.subsession.reward
+            self.payoff = self.BONUS + self.claim + Constants.reward
         elif self.claim > other:
-            self.payoff = self.BONUS + other - self.subsession.penalty
+            self.payoff = self.BONUS + other - Constants.penalty
         else:
             self.payoff = self.BONUS + self.claim

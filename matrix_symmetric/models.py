@@ -14,18 +14,20 @@ In the symmetric matrix game, the payoffs for playing a particular strategy depe
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/matrix_symmetric" target="_blank">here</a>.
 """
 
+class Constants:
+    self_A_other_A = Money(0.10)
+
+    # How much I make if I choose A and the other player chooses B
+    self_A_other_B = Money(0.00)
+
+    self_B_other_A = Money(0.30)
+    self_B_other_B = Money(0.40)
+
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'matrix_symmetric'
 
-    self_A_other_A = models.MoneyField(default=0.10)
-    self_A_other_B = models.MoneyField(
-        default=0.00,
-        doc='''How much I make if I choose A and the other player chooses B'''
-    )
-    self_B_other_A = models.MoneyField(default=0.30)
-    self_B_other_B = models.MoneyField(default=0.40)
 
 
 class Group(otree.models.BaseGroup):
@@ -61,12 +63,12 @@ class Player(otree.models.BasePlayer):
 
         payoff_matrix = {
             'A': {
-                'A': self.subsession.self_A_other_A,
-                'B': self.subsession.self_A_other_B,
+                'A': Constants.self_A_other_A,
+                'B': Constants.self_A_other_B,
             },
             'B': {
-                'A': self.subsession.self_B_other_A,
-                'B': self.subsession.self_B_other_B,
+                'A': Constants.self_B_other_A,
+                'B': Constants.self_B_other_B,
             }
         }
 

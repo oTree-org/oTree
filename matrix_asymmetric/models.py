@@ -49,23 +49,23 @@ class Group(otree.models.BaseGroup):
 
         row_matrix = {
             'A': {
-                'A': self.subsession.rowAcolumnA_row,
-                'B': self.subsession.rowAcolumnB_row,
+                'A': Constants.rowAcolumnA_row,
+                'B': Constants.rowAcolumnB_row,
             },
             'B': {
-                'A': self.subsession.rowBcolumnA_row,
-                'B': self.subsession.rowBcolumnB_row,
+                'A': Constants.rowBcolumnA_row,
+                'B': Constants.rowBcolumnB_row,
             }
         }
 
         column_matrix = {
             'A': {
-                'A': self.subsession.rowAcolumnA_column,
-                'B': self.subsession.rowAcolumnB_column,
+                'A': Constants.rowAcolumnA_column,
+                'B': Constants.rowAcolumnB_column,
             },
             'B': {
-                'A': self.subsession.rowBcolumnA_column,
-                'B': self.subsession.rowBcolumnB_column,
+                'A': Constants.rowBcolumnA_column,
+                'B': Constants.rowBcolumnB_column,
             }
         }
 

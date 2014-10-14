@@ -15,32 +15,16 @@ This is a 2-player 2-strategy coordination game. The original story was from <a 
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/stag_hunt" target="_blank">here</a>.
 """
 
+class Constants:
+    stag_stag_amount = Money(0.20)
+    stag_hare_amount = Money(0.00)
+    hare_stag_amount = Money(0.10)
+    hare_hare_amount = Money(0.10)
+
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'stag_hunt'
-
-    stag_stag_amount = models.MoneyField(
-        default=0.20,
-        doc="""Payoff if both players choose stag"""
-    )
-
-    stag_hare_amount = models.MoneyField(
-        default=0.00,
-        doc="""Payoff if the player chooses stag but the other hare"""
-    )
-
-    hare_stag_amount = models.MoneyField(
-        default=0.10,
-        doc="""Payoff if the player chooses hare but the other stag"""
-    )
-
-    hare_hare_amount = models.MoneyField(
-        default=0.10,
-        doc="""Payoff if both players choose hare"""
-    )
-
-
 
 
 class Group(otree.models.BaseGroup):
@@ -76,12 +60,12 @@ class Player(otree.models.BasePlayer):
 
         payoff_matrix = {
             'Stag': {
-                'Stag': self.subsession.stag_stag_amount,
-                'Hare': self.subsession.stag_hare_amount,
+                'Stag': Constants.stag_stag_amount,
+                'Hare': Constants.stag_hare_amount,
             },
             'Hare': {
-                'Stag': self.subsession.hare_stag_amount,
-                'Hare': self.subsession.hare_hare_amount,
+                'Stag': Constants.hare_stag_amount,
+                'Hare': Constants.hare_hare_amount,
             }
         }
         self.payoff = payoff_matrix[self.decision][self.other_player().decision]

@@ -13,10 +13,10 @@ class Decision(Page):
     form_fields = ['decision']
 
     def variables_for_template(self):
-        return {'self_A_other_A': self.subsession.self_A_other_A,
-                'self_A_other_B': self.subsession.self_A_other_B,
-                'self_B_other_A': self.subsession.self_B_other_A,
-                'self_B_other_B': self.subsession.self_B_other_B}
+        return {'self_A_other_A': Constants.self_A_other_A,
+                'self_A_other_B': Constants.self_A_other_B,
+                'self_B_other_A': Constants.self_B_other_A,
+                'self_B_other_B': Constants.self_B_other_B}
 
 
 class ResultsWaitPage(WaitPage):

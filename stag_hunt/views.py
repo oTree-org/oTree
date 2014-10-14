@@ -17,10 +17,10 @@ class Decide(Page):
 
     def variables_for_template(self):
         return {'player_index': self.player.id_in_group,
-                'stag_stag': self.subsession.stag_stag_amount,
-                'stag_hare': self.subsession.stag_hare_amount,
-                'hare_stag': self.subsession.hare_stag_amount,
-                'hare_hare': self.subsession.hare_hare_amount}
+                'stag_stag': Constants.stag_stag_amount,
+                'stag_hare': Constants.stag_hare_amount,
+                'hare_stag': Constants.hare_stag_amount,
+                'hare_hare': Constants.hare_hare_amount}
 
 
 class ResultsWaitPage(WaitPage):

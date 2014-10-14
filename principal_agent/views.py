@@ -5,19 +5,20 @@ from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 from .models import Constants
 
+
 def variables_for_all_templates(self):
 
     efforts_returns_costs = []
     for effort in range(1, 10+1):
         efforts_returns_costs.append(
             [effort,
-             self.subsession.return_from_effort(effort),
-             self.subsession.cost_from_effort(effort)]
+             models.return_from_effort(effort),
+             models.cost_from_effort(effort)]
         )
 
-    return {'fixed_payment': self.subsession.max_fixed_payment,
-            'reject_principal_pay': self.subsession.reject_principal_pay,
-            'reject_agent_pay': self.subsession.reject_agent_pay,
+    return {'fixed_payment': Constants.max_fixed_payment,
+            'reject_principal_pay': Constants.reject_principal_pay,
+            'reject_agent_pay': Constants.reject_agent_pay,
             'efforts_returns_costs': efforts_returns_costs}
 
 

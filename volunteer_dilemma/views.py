@@ -13,8 +13,8 @@ class Decision(Page):
     form_fields = ['volunteer']
 
     def variables_for_template(self):
-        return {'general_benefit': self.subsession.general_benefit,
-                'volunteer_cost': self.subsession.volunteer_cost,
+        return {'general_benefit': Constants.general_benefit,
+                'volunteer_cost': Constants.volunteer_cost,
                 'num_other_players': self.group.players_per_group - 1}
 
 

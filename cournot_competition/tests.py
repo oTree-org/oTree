@@ -15,7 +15,7 @@ class PlayerBot(Bot):
         self.submit(views.FeedbackOne)
 
         # units to produce
-        self.submit(views.Decide, {'units': random.choice(range(0, self.subsession.max_units_per_player() + 1))})
+        self.submit(views.Decide, {'units': random.choice(range(0, Constants.max_units_per_player + 1))})
 
         # results
         self.submit(views.Results)

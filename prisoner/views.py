@@ -4,12 +4,13 @@ from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 from .models import Constants
+
 def variables_for_all_templates(self):
 
-    return {'cooperate_amount': self.subsession.cooperate_amount,
-            'cooperate_defect_amount': self.subsession.cooperate_defect_amount,
-            'defect_amount': self.subsession.defect_amount,
-            'defect_cooperate_amount': self.subsession.defect_cooperate_amount,
+    return {'cooperate_amount': Constants.cooperate_amount,
+            'cooperate_defect_amount': Constants.cooperate_defect_amount,
+            'defect_amount': Constants.defect_amount,
+            'defect_cooperate_amount': Constants.defect_cooperate_amount,
             'total_q': 1}
 
 

@@ -10,7 +10,7 @@ class PlayerBot(Bot):
 
     def play(self):
         # compete price
-        self.submit(views.Decide, {'price': random.choice(money_range(self.subsession.marginal_cost, self.subsession.maximum_price, 0.05))})
+        self.submit(views.Decide, {'price': random.choice(money_range(Constants.marginal_cost, Constants.maximum_price, 0.05))})
 
         # results
         self.submit(views.Results)

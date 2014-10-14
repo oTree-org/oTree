@@ -30,7 +30,7 @@ class PlayerBot(Bot):
 
     def play_1(self):
         # P1/A - propose contract
-        fixed_pay = random.choice(money_range(-self.subsession.max_fixed_payment, self.subsession.max_fixed_payment, 0.50))
+        fixed_pay = random.choice(money_range(-Constants.max_fixed_payment, Constants.max_fixed_payment, 0.50))
         return_share = random.choice([x/100.0 for x in range(10, 110, 10)])
 
         time.sleep(sleep_seconds())

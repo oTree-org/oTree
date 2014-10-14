@@ -16,20 +16,15 @@ Bids are private. The player with the highest bid wins the auction, but payoff d
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/private_value_auction" target="_blank">here</a>.
 """
 
+class Constants:
+    min_allowable_bid = Money(0.0)
+    max_allowable_bid = Money(10.0)
+
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'private_value_auction'
 
-    min_allowable_bid = models.MoneyField(
-        default=0.0,
-        doc="""Minimum value of item"""
-    )
-
-    max_allowable_bid = models.MoneyField(
-        default=10.0,
-        doc="""Maximum value of item"""
-    )
 
 
 
@@ -71,7 +66,7 @@ class Player(otree.models.BasePlayer):
     )
 
     def bid_amount_choices(self):
-        return money_range(self.subsession.min_allowable_bid, self.subsession.max_allowable_bid, 0.05)
+        return money_range(Constants.min_allowable_bid, Constants.max_allowable_bid, 0.05)
 
     is_winner = models.BooleanField(
         default=False,
@@ -79,7 +74,7 @@ class Player(otree.models.BasePlayer):
     )
 
     def generate_private_value(self):
-        return round(random.uniform(self.subsession.min_allowable_bid, self.subsession.max_allowable_bid), 1)
+        return round(random.uniform(Constants.min_allowable_bid, Constants.max_allowable_bid), 1)
 
     def set_payoff(self):
         if self.is_winner:

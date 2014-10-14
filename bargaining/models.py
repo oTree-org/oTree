@@ -37,7 +37,7 @@ class Group(otree.models.BaseGroup):
 
     def set_payoffs(self):
         total_requested_amount = sum([p.request_amount for p in self.get_players()])
-        if total_requested_amount <= self.subsession.amount_shared:
+        if total_requested_amount <= Constants.amount_shared:
             for p in self.get_players():
                 p.points = p.request_amount + self.BONUS
         else:
