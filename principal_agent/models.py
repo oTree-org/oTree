@@ -29,6 +29,7 @@ class Constants:
     # """Total return for single unit of agent's work effort"""
     agent_work_effort_base_return = Money(0.7)
 
+    agent_return_share_choices = [[percent/100, '{}%'.format(percent)] for percent in range(10, 100+1, 10)]
 
 def cost_from_effort(effort):
     costs = {1: 0,
@@ -99,12 +100,7 @@ class Group(otree.models.BaseGroup):
         return range(1, 10+1)
 
     def agent_return_share_choices(self):
-        RETURN_SHARE_CHOICES = []
-        for percent in range(10, 100+1, 10):
-            RETURN_SHARE_CHOICES.append([percent/100, '{}%'.format(percent)])
-
-        return RETURN_SHARE_CHOICES
-
+        return Constants.agent_return_share_choices
 
     def set_payoffs(self):
         principal = self.get_player_by_role('principal')

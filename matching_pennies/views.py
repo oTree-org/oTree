@@ -9,7 +9,7 @@ def variables_for_all_templates(self):
 
     return {'total_q': 1,
             'total_rounds': self.subsession.number_of_rounds,
-            'round_number': self&subsession&round_number,
+            'round_number': self.subsession.round_number,
             'role': self.player.role()}
 
 
@@ -18,7 +18,7 @@ class Introduction(Page):
     template_name = 'matching_pennies/Introduction.html'
 
     def participate_condition(self):
-        return self&subsession&round_number == 1
+        return self.subsession.round_number == 1
 
 
 class QuestionOne(Page):
@@ -26,7 +26,7 @@ class QuestionOne(Page):
     template_name = 'matching_pennies/Question.html'
 
     def participate_condition(self):
-        return self&subsession&round_number == 1
+        return self.subsession.round_number == 1
 
     form_model = models.Player
     form_fields = ['training_question_1']
@@ -40,7 +40,7 @@ class FeedbackOne(Page):
     template_name = 'matching_pennies/Feedback.html'
 
     def participate_condition(self):
-        return self&subsession&round_number == 1
+        return self.subsession.round_number == 1
 
     def variables_for_template(self):
         return {'num_q': 1,
@@ -90,7 +90,7 @@ class ResultsSummary(Page):
     template_name = 'matching_pennies/ResultsSummary.html'
 
     def participate_condition(self):
-        return self&subsession&round_number == self.subsession.number_of_rounds
+        return self.subsession.round_number == self.subsession.number_of_rounds
 
     def variables_for_template(self):
         me_in_all_rounds = self.player.me_in_all_rounds()

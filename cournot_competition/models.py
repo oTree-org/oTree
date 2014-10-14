@@ -16,10 +16,11 @@ The unit selling price depends on the total units produced. In this implementati
 
 class Constants:
     training_1_correct = 300
+    players_per_group = 2
 
     # Total production capacity of all players
     total_capacity = 60
-    max_units_per_player = int(total_capacity / Group.players_per_group)
+    max_units_per_player = int(total_capacity / players_per_group)
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -33,7 +34,7 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_group = 2
+    players_per_group = Constants.players_per_group
 
     price = models.PositiveIntegerField(
         default=None,

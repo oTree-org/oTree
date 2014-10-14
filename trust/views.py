@@ -26,7 +26,7 @@ class Question1(Page):
         participant A. In the end, how much would participant A and B have?'''
 
     def participate_condition(self):
-        return self&subsession&round_number == 1
+        return self.subsession.round_number == 1
 
     def variables_for_template(self):
         return dict(num_q=1, question=self.question)
@@ -36,7 +36,7 @@ class Feedback1(Page):
     template_name = 'trust/Feedback.html'
 
     def participate_condition(self):
-        return self&subsession&round_number == 1
+        return self.subsession.round_number == 1
 
     def variables_for_template(self):
         return dict(
@@ -50,7 +50,7 @@ class Question2(Page):
     form_fields = 'feedback',
 
     def participate_condition(self):
-        return self&subsession&round_number == 1
+        return self.subsession.round_number == 1
 
     def variables_for_template(self):
         return dict(

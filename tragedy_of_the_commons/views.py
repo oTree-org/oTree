@@ -5,6 +5,7 @@ from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 from .models import Constants
 
+
 class Introduction(Page):
 
     def participate_condition(self):

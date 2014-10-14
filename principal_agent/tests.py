@@ -5,7 +5,7 @@ from ._builtin import Bot
 import random
 from otree.common import Money, money_range
 import time
-
+from .models import Constants
 
 def sleep_seconds():
     return random.choice(range(5, 30, 1))

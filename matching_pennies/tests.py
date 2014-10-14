@@ -10,7 +10,7 @@ class PlayerBot(Bot):
     def play(self):
 
         rounds = self.subsession.number_of_rounds
-        round = self&subsession&round_number
+        round = self.subsession.round_number
 
         if round == 1:
             # only submitted on round 1

@@ -15,10 +15,9 @@ In this one-period implementation, the order of play is randomly determined.</p>
 """
 
 class Constants:
-    total_capacity = models.PositiveIntegerField(
-        default=60,
-        doc="""Total production capacity of both players"""
-    )
+
+    # Total production capacity of both players
+    total_capacity = 60
 
     max_units_per_player = int(total_capacity/2)
 
@@ -27,10 +26,6 @@ class Constants:
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'stackelberg_competition'
-
-
-
-
 
 
 class Group(otree.models.BaseGroup):

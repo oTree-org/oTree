@@ -16,8 +16,10 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/common_value
 """
 
 class Constants:
-    min_value = Money(0.0)
-    max_value = Money(10.0)
+    min_allowable_bid = Money(0.0)
+    max_allowable_bid = Money(10.0)
+
+
 
     # Error margin for the value estimates shown to the players
     estimate_error_margin = Money(1.00)
@@ -35,7 +37,7 @@ class Subsession(otree.models.BaseSubsession):
         winner.is_winner = True
 
     item_value = models.MoneyField(
-        default=lambda: round(random.uniform(Constants.min_value, Constants.max_value), 1),
+        default=lambda: round(random.uniform(Constants.min_allowable_bid, Constants.max_allowable_bid), 1),
         doc="""Common value of the item to be auctioned, random for treatment"""
     )
 
@@ -46,10 +48,10 @@ class Subsession(otree.models.BaseSubsession):
 
         estimate = round(random.uniform(minimum, maximum), 1)
 
-        if estimate < self.min_allowable_bid:
-            estimate = self.min_allowable_bid
-        if estimate > self.max_allowable_bid:
-            estimate = self.max_allowable_bid
+        if estimate < Constants.min_allowable_bid:
+            estimate = Constants.min_allowable_bid
+        if estimate > Constants.max_allowable_bid:
+            estimate = Constants.max_allowable_bid
 
         return estimate
 
@@ -93,7 +95,7 @@ class Player(otree.models.BasePlayer):
 
     def set_payoff(self):
         if self.is_winner:
-            self.payoff = Constants.item_value - self.bid_amount
+            self.payoff = self.subsession.item_value - self.bid_amount
             if self.payoff < 0:
                 self.payoff = 0
         else:

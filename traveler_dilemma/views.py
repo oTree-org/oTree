@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import traveler_dilemma.models as models
-from traveler_dilemma._builtin import Page, WaitPage
+from . import models
+from ._builtin import Page, WaitPage
+from otree.common import Money, money_range
+from .models import Constants
 
 
 def variables_for_all_templates(self):
@@ -29,7 +31,7 @@ class Question1(Page):
         the airline?'''
 
     def participate_condition(self):
-        return self&subsession&round_number == 1
+        return self.subsession.round_number == 1
 
     def variables_for_template(self):
         return dict(num_q=1, total_q=1, question=self.question)
@@ -39,7 +41,7 @@ class Feedback1(Page):
     template_name = 'traveler_dilemma/Feedback.html'
 
     def participate_condition(self):
-        return self&subsession&round_number == 1
+        return self.subsession.round_number == 1
 
     def variables_for_template(self):
         return dict(
@@ -60,7 +62,7 @@ class ResultsWaitPage(WaitPage):
     scope = models.Group
 
     def after_all_players_arrive(self):
-        for p in self.group.players:
+        for p in self.group.get_players():
             p.set_payoff()
 
 
@@ -99,7 +101,7 @@ class Question2(Page):
     form_fields = 'feedback',
 
     def participate_condition(self):
-        return self&subsession&round_number == 1
+        return self.subsession.round_number == 1
 
     def variables_for_template(self):
         return dict(
