@@ -18,34 +18,23 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/battle_of_th
 
 class Constants:
 
-    football_husband_amount =
-        default=0.30,
-        doc="""Amount rewarded to husband if football is chosen"""
-    )
-    football_wife_amount = models.MoneyField(
-        default=0.20,
-        doc="""Amount rewarded to wife if football is chosen"""
-    )
-    mismatch_amount = models.MoneyField(
-        default=0.00,
-        doc="""Amount rewarded for choosing football and opera for either players"""
-    )
-    opera_husband_amount = models.MoneyField(
-        default=0.20,
-        doc="""Amount rewarded to husband if opera is chosen"""
-    )
-    opera_wife_amount = models.MoneyField(
-        default=0.30,
-        doc="""Amount rewarded to wife if opera is chosen"""
-    )
+    # """Amount rewarded to husband if football is chosen"""
+    football_husband_amount = Money(0.30)
+
+    # Amount rewarded to wife if football is chosen
+    football_wife_amount = Money(0.20)
+
+    # amount rewarded to either if the choices don't match
+    mismatch_amount = Money(0.00)
+
+    opera_husband_amount = Money(0.20)
+
+    opera_wife_amount = Money(0.30)
 
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'battle_of_the_sexes'
-
-
-
 
 
 class Group(otree.models.BaseGroup):

@@ -17,7 +17,7 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/guessing" ta
 """
 
 class Constants:
-    pass
+    winner_payoff = Money(1.00)
 
 class Subsession(otree.models.BaseSubsession):
 
@@ -49,14 +49,10 @@ class Group(otree.models.BaseGroup):
 
         for p in self.get_players():
             if p.is_winner:
-                p.payoff = p.group.winner_payoff
+                p.payoff = Constants.winner_payoff
             else:
                 p.payoff = 0
 
-    winner_payoff = models.MoneyField(
-        default=1.00,
-        doc='Payoff to the winner'
-    )
 
 
 class Player(otree.models.BasePlayer):

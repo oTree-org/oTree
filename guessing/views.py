@@ -11,7 +11,7 @@ class Introduction(Page):
 
     def variables_for_template(self):
         return {'players_count': len(self.player.get_others_in_subsession()),
-                'winner_payoff': self.group.winner_payoff}
+                'winner_payoff': Constants.winner_payoff}
 
 
 class Guess(Page):
