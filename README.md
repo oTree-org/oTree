@@ -9,8 +9,8 @@ http://demo.otree.org/
     git clone git@github.com:oTree-org/oTree.git
     cd oTree
     pip install -r requirements_base.txt
-    python recreate_environment.py
-    python manage.py runserver
+    ./otree recreate
+    ./otree runserver
 
 ## Full documentation
 https://github.com/oTree-org/oTree/wiki
