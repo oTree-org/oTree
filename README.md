@@ -5,9 +5,8 @@ http://www.otree.org/
 http://demo.otree.org/
 
 ## Quick start
+After forking & cloning the repo:
 
-    git clone git@github.com:oTree-org/oTree.git
-    cd oTree
     pip install -r requirements_base.txt
     ./otree recreate
     ./otree runserver
