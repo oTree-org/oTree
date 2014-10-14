@@ -8,8 +8,8 @@
 {% block content %}
 
     <p>
-        The dividend per share for Period 1 is $X. You have N shares thus receive $N*X for dividends in total.
-        Now your positions are the following:
+        The dividend per share for Period {{ round_num }} is {{ dividend }}. You have {{ shares }} shares thus receive {{ dividend_gain }}
+        for dividends in total. Now your positions are the following:
     </p>
 
     <h5 class="text-info">Cash: {{ cash }};  Shares: {{ shares }}</h5>

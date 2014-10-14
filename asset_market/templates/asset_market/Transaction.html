@@ -9,7 +9,8 @@
 
     <p>
     {% if transaction %}
-        You just bought (sold) {{ shares_traded }} shares at the price of {{ price }}. Now, your positions are the following:
+        You just {% if buyer %} bought {% else %} sold {% endif %}  {{ shares_traded }} shares at the price of {{ transaction_price }}.
+        Now, your positions are the following:
     {% else %}
         No transaction took place this period. Your positions are not changed:
     {% endif %}
@@ -19,6 +20,5 @@
     {% next_button %}
 
     {% include 'asset_market/Rules.html' %}
-
 
 {% endblock %}

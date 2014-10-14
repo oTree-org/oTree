@@ -72,6 +72,7 @@ INSTALLED_OTREE_APPS = [
     'stag_hunt',
     'battle_of_the_sexes',
     'survey_sample',
+    'asset_market',
 ]
 
 SECRET_KEY = SECRET_KEY
@@ -85,8 +86,6 @@ otree.settings.augment_settings(globals())
 
 # FIXME: complete the apps below
 DISABLED_APPS = [
-        'asset_market',
         'lemon_market',
         'tragedy_of_the_commons',
-        # lab results: displays lab results in a given session
     ],
