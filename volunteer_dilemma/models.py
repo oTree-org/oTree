@@ -57,7 +57,6 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     volunteer = models.NullBooleanField(
-        default=None,
         doc="""Whether player volunteers""",
         widget=widgets.RadioSelect(),
     )

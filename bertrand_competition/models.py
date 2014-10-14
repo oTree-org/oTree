@@ -35,12 +35,10 @@ class Group(otree.models.BaseGroup):
     players_per_group = 3
 
     num_winners = models.PositiveIntegerField(
-        default=None,
         doc="""How many players offer lowest price"""
     )
 
     winning_price = models.MoneyField(
-        default=None,
         doc="""Lowest price"""
     )
 
@@ -66,7 +64,6 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     price = models.MoneyField(
-        default=None,
         doc="""Price player chooses to sell product for"""
     )
 

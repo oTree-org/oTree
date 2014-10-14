@@ -46,12 +46,10 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     demo_field1 = models.CharField(
-        default=None,
         doc="""field With radiobutton input.""",
         widget=widgets.RadioSelect(),
     )
     demo_field2 = models.CharField(
-        default=None,
         max_length=5,
         doc="""
         field with text input

@@ -85,7 +85,6 @@ class Player(otree.models.BasePlayer):
         return self.get_others_in_group()[0]
 
     decision = models.CharField(
-        default=None,
         doc='either A or B',
         widget=widgets.RadioSelect()
     )

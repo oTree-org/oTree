@@ -15,28 +15,16 @@ Their choices directly determine the payoffs.</p>
 """
 
 class Constants:
-    #     """Points made if player defects and the other cooperates""",
+
+    #  Points made if player defects and the other cooperates""",
     defect_cooperate_amount = 300
 
+    # Points made if both players cooperate
     cooperate_amount = 200
-
-    #models.PositiveIntegerField(
-    #    doc="""Points made if both players cooperate""",
-    #    default=200,
-    #)
-
     cooperate_defect_amount = 0
-
-    #models.PositiveIntegerField(
-    #    doc="""Points made if player cooperates and the other defects""",
-    #    default=0,
-    #)
-
     defect_amount = 100
+    base_points = 50
 
-    #    doc="""Points made if both players defect""",
-    #    default=100,
-    #)
 
     training_1_correct = "Alice gets 300 points, Bob gets 0 points"
 
@@ -81,7 +69,6 @@ class Player(otree.models.BasePlayer):
     )
 
     decision = models.CharField(
-        default=None,
         doc="""This player's decision""",
         widget=widgets.RadioSelect()
     )

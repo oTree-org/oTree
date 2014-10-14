@@ -73,12 +73,10 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     item_value_estimate = models.MoneyField(
-        default=None,
         doc="""Estimate of the common value, may be different for each player"""
     )
 
     bid_amount = models.MoneyField(
-        default=None,
         doc="""Amount bidded by the player"""
     )
 

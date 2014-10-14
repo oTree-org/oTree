@@ -44,7 +44,6 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     decision = models.CharField(
-        default=None,
         doc="""The player's choice""",
         widget=widgets.RadioSelect()
     )
