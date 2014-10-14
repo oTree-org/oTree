@@ -86,10 +86,10 @@ class Player(otree.models.BasePlayer):
 
     # check correct answers
     def is_understanding_question_1_correct(self):
-        return self.understanding_question_1 == self.subsession.understanding_1_correct
+        return self.understanding_question_1 == Constants.understanding_1_correct
 
     def is_understanding_question_2_correct(self):
-        return self.understanding_question_2 == self.subsession.understanding_2_correct
+        return self.understanding_question_2 == Constants.understanding_2_correct
 
 
     def my_field_error_message(self, value):

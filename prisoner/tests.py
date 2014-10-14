@@ -4,7 +4,7 @@ from . import views
 from ._builtin import Bot
 import random
 from otree.common import Money, money_range
-
+from .models import Constants
 
 class PlayerBot(Bot):
 

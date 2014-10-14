@@ -14,22 +14,17 @@ is determined by whether the choices group or not.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/coordination" target="_blank">here</a>.
 """
 
+class Constants:
+    # Payoff for each player if choices group
+    group_amount = Money(1.00)
+
+    # Payoff for each player if choices don't group
+    mismatch_amount = Money(0.00)
+
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'coordination'
-
-    group_amount = models.MoneyField(
-        default=1.00,
-        doc="""Payoff for each player if choices group"""
-    )
-
-    mismatch_amount = models.MoneyField(
-        default=0.00,
-        doc="""Payoff for each player if choices don't group"""
-    )
-
-
 
 
 class Group(otree.models.BaseGroup):
@@ -45,9 +40,9 @@ class Group(otree.models.BaseGroup):
         p2 = self.get_player_by_id(2)
 
         if p1.choice == p2.choice:
-            p1.payoff = p2.payoff = self.subsession.group_amount
+            p1.payoff = p2.payoff = Constants.group_amount
         else:
-            p1.payoff = p2.payoff = self.subsession.mismatch_amount
+            p1.payoff = p2.payoff = Constants.mismatch_amount
 
 
 class Player(otree.models.BasePlayer):

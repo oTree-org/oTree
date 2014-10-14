@@ -3,6 +3,7 @@ from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
+from .models import Constants
 
 def variables_for_all_templates(self):
     return {
@@ -56,7 +57,7 @@ class FeedbackOne(Page):
         return {
             'num_q': 1,
             'answer': self.player.understanding_question_1,
-            'correct': self.subsession.understanding_1_correct,
+            'correct': Constants.understanding_1_correct,
             'is_correct': self.player.is_understanding_question_1_correct(),
         }
 
@@ -86,7 +87,7 @@ class FeedbackTwo(Page):
         return {
             'num_q': 2,
             'answer': self.player.understanding_question_2,
-            'correct': self.subsession.understanding_2_correct,
+            'correct': Constants.understanding_2_correct,
             'is_correct': self.player.is_understanding_question_2_correct(),
         }
 

@@ -17,18 +17,15 @@ The offered amount cannot be rejected.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/dictator" target="_blank">here</a>.
 """
 
+class Constants:
+
+    # Initial amount allocated to the dictator
+    allocated_amount = Money(1.00)
+
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'dictator'
-
-    allocated_amount = models.MoneyField(
-        default=1.00,
-        doc="""Initial amount allocated to the dictator"""
-    )
-
-
-
 
 class Group(otree.models.BaseGroup):
 
@@ -44,13 +41,13 @@ class Group(otree.models.BaseGroup):
     )
 
     def offer_amount_choices(self):
-        return money_range(0, self.subsession.allocated_amount, 0.05)
+        return money_range(0, Constants.allocated_amount, 0.05)
 
     def set_payoffs(self):
         p1 = self.get_player_by_id(1)
         p2 = self.get_player_by_id(2)
 
-        p1.payoff = self.subsession.allocated_amount - self.offer_amount
+        p1.payoff = Constants.allocated_amount - self.offer_amount
         p2.payoff = self.offer_amount
 
 

@@ -16,22 +16,14 @@ If multiple firms offer the same lowest price, business is divided equally among
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/bertrand_competition" target="_blank">here</a>.
 """
 
+class Constants:
+    # Marginal cost of production, effectively the minimum price (exclusive)"""
+    marginal_cost = Money(0.20)
+    maximum_price = Money(1.00)
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'bertrand_competition'
-
-    marginal_cost = models.MoneyField(
-        default=0.20,
-        doc="""Marginal cost of production, effectively the minimum price (exclusive)"""
-    )
-
-    maximum_price = models.MoneyField(
-        default=1.00,
-        doc="""The maximum price"""
-    )
-
-
 
 
 class Group(otree.models.BaseGroup):
@@ -55,7 +47,7 @@ class Group(otree.models.BaseGroup):
     def set_payoffs(self):
         self.winning_price = min([p.price for p in self.get_players()])
         self.num_winners = len([p for p in self.get_players() if p.price == self.winning_price])
-        winner_payoff = (self.winning_price - self.subsession.marginal_cost) / self.num_winners
+        winner_payoff = (self.winning_price - Constants.marginal_cost) / self.num_winners
 
         for p in self.get_players():
             if p.price == self.winning_price:
@@ -79,7 +71,7 @@ class Player(otree.models.BasePlayer):
     )
 
     def price_choices(self):
-        return money_range(self.subsession.marginal_cost, self.subsession.maximum_price, 0.05)
+        return money_range(Constants.marginal_cost, Constants.maximum_price, 0.05)
 
     is_a_winner = models.BooleanField(
         default=False,

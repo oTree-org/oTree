@@ -16,6 +16,8 @@ In case of a tie between players, the winner is picked at random.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/guessing" target="_blank">here</a>.
 """
 
+class Constants:
+    pass
 
 class Subsession(otree.models.BaseSubsession):
 

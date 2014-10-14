@@ -14,20 +14,17 @@ The unit selling price depends on the total units produced. In this implementati
 <p>Source code <a href="https://github.com/oTree-org/oTree/tree/master/cournot_competition" target="_blank">here</a>.</p>
 """
 
+class Constants:
+    training_1_correct = 300
+
+    # Total production capacity of all players
+    total_capacity = 60
+    max_units_per_player = int(total_capacity / Group.players_per_group)
+
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'cournot_competition'
-
-    total_capacity = models.PositiveIntegerField(
-        default=60,
-        doc="""Total production capacity of all players"""
-    )
-
-    def max_units_per_player(self):
-        return int(self.total_capacity / Group.players_per_group)
-
-    training_1_correct = 300
 
 
 class Group(otree.models.BaseGroup):
@@ -50,7 +47,7 @@ class Group(otree.models.BaseGroup):
 
     def set_points(self):
         self.total_units = sum([p.units for p in self.get_players()])
-        self.price = self.subsession.total_capacity - self.total_units
+        self.price = Constants.total_capacity - self.total_units
         for p in self.get_players():
             p.points_earned = self.price * p.units
 
@@ -65,7 +62,7 @@ class Player(otree.models.BasePlayer):
     training_question_1 = models.PositiveIntegerField(null=True, verbose_name='')
 
     def is_training_question_1_correct(self):
-        return self.training_question_1 == self.subsession.training_1_correct
+        return self.training_question_1 == Constants.training_1_correct
 
     points_earned = models.PositiveIntegerField(
         default=None,
@@ -77,8 +74,8 @@ class Player(otree.models.BasePlayer):
     )
 
     def units_error_message(self, value):
-        if not 0 <= value <= self.subsession.max_units_per_player():
-            return "The value must be a whole number between {} and {}, inclusive.".format(0, self.subsession.max_units_per_player())
+        if not 0 <= value <= Constants.max_units_per_player:
+            return "The value must be a whole number between {} and {}, inclusive.".format(0, Constants.max_units_per_player)
 
     def other_player(self):
         return self.get_others_in_group()[0]

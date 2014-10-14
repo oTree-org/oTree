@@ -38,7 +38,7 @@ class Group(otree.models.BaseGroup):
     def set_payoffs(self):
         players = self.get_players()
         total_requested_amount = sum([p.request_amount for p in players])
-        if total_requested_amount <= self.subsession.amount_shared:
+        if total_requested_amount <= Constants.amount_shared:
             for p in players:
                 p.points = p.request_amount + self.BONUS
         else:
@@ -76,7 +76,7 @@ class Player(otree.models.BasePlayer):
         verbose_name='')
 
     def request_amount_error_message(self, value):
-        if not 0 <= value <= self.subsession.amount_shared:
+        if not 0 <= value <= Constants.amount_shared:
             return 'Your entry is invalid.'
 
     def other_player(self):

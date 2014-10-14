@@ -3,7 +3,7 @@ from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
-
+from .models import Constants
 def variables_for_all_templates(self):
 
     return {'cooperate_amount': self.subsession.cooperate_amount,
@@ -37,7 +37,7 @@ class FeedbackOne(Page):
         return {'num_q': 1,
                 'question': 'Suppose Alice chose to defect and Bob chose to cooperate. How many points would Alice and Bob receive, respectively?',
                 'answer': self.player.training_question_1,
-                'correct': self.subsession.training_1_correct,
+                'correct': Constants.training_1_correct,
                 'explanation': "Alice gets 300 points, Bob gets 0 points",
                 'is_correct': self.player.is_training_question_1_correct()}
 

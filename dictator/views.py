@@ -3,13 +3,15 @@ from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
+from .models import Constants
+from .models import Constants
 
 class Introduction(Page):
 
     template_name = 'dictator/Introduction.html'
 
     def variables_for_template(self):
-        return {'allocated_amount': self.subsession.allocated_amount,
+        return {'allocated_amount': Constants.allocated_amount,
                 'player_id': self.player.id_in_group}
 
 

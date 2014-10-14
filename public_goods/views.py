@@ -3,7 +3,7 @@ from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
-
+from .models import Constants
 
 def variables_for_all_templates(self):
     return {'endowment': self.subsession.endowment}

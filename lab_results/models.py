@@ -13,6 +13,8 @@ doc = """
 Page that shows the results of the session.
 """
 
+class Constants:
+    pass
 
 class Subsession(otree.models.BaseSubsession):
 

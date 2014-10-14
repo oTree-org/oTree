@@ -14,25 +14,25 @@ In the asymmetric matrix game, the strategy sets for both players are different.
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/matrix_asymmetric" target="_blank">here</a>.
 """
 
+class Constants:
+    rowAcolumnA_row = Money(0.20)
+    rowAcolumnA_column = Money(0.30)
+
+    # Amount row player gets, if row player chooses A and column player chooses B
+    rowAcolumnB_row = Money(0.40)
+    rowAcolumnB_column = Money(0.10)
+
+    rowBcolumnA_row = Money(0.05)
+    rowBcolumnA_column = Money(0.45)
+
+    rowBcolumnB_row = Money(0.15)
+    rowBcolumnB_column = Money(0.25)
+
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'matrix_asymmetric'
 
-    rowAcolumnA_row = models.MoneyField(default=0.20)
-    rowAcolumnA_column = models.MoneyField(default=0.30)
-
-    rowAcolumnB_row = models.MoneyField(
-        default=0.40,
-        doc='''Amount row player gets, if row player chooses A and column player chooses B'''
-    )
-    rowAcolumnB_column = models.MoneyField(default=0.10)
-
-    rowBcolumnA_row = models.MoneyField(default=0.05)
-    rowBcolumnA_column = models.MoneyField(default=0.45)
-
-    rowBcolumnB_row = models.MoneyField(default=0.15)
-    rowBcolumnB_column = models.MoneyField(default=0.25)
 
 
 class Group(otree.models.BaseGroup):

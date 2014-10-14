@@ -3,7 +3,7 @@ from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
-
+from .models import Constants
 
 class Choice(Page):
 
@@ -16,8 +16,8 @@ class Choice(Page):
     form_fields = ['choice']
 
     def variables_for_template(self):
-        return {'group_amount': self.subsession.group_amount,
-                'mismatch_amount': self.subsession.mismatch_amount}
+        return {'group_amount': Constants.group_amount,
+                'mismatch_amount': Constants.mismatch_amount}
 
 
 class ResultsWaitPage(WaitPage):

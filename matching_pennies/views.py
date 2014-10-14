@@ -3,7 +3,7 @@ from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
-
+from .models import Constants
 
 def variables_for_all_templates(self):
 
@@ -46,7 +46,7 @@ class FeedbackOne(Page):
         return {'num_q': 1,
                 'question': 'Suppose Player 1 picked "Heads" and Player 2 guessed "Tails". Which of the following will be the result of that round?',
                 'answer': self.player.training_question_1,
-                'correct': self.subsession.training_1_correct,
+                'correct': Constants.training_1_correct,
                 'explanation': 'Player 1 gets 100 points, Player 2 gets 0 points',
                 'is_correct': self.player.is_training_question_1_correct()}
 

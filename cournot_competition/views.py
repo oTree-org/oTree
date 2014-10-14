@@ -3,7 +3,7 @@ from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
-
+from .models import Constants
 def variables_for_all_templates(self):
 
     return {'total_capacity': self.subsession.total_capacity,
@@ -35,7 +35,7 @@ class FeedbackOne(Page):
         return {'num_q': 1,
                 'question': """Suppose firm Q produced 20 units and firm P produced 30 units. What would be the profit for firm P?""",
                 'answer': self.player.training_question_1,
-                'correct': self.subsession.training_1_correct,
+                'correct': Constants.training_1_correct,
                 'explanation': """Total units produced were 20 + 30 = 50. The unit selling price was 60 – 50 = 10.
                                   The profit for firm P would be the product of the unit selling price and the unit produced by firm P, that is 10 × 30 = 300""",
                 'is_correct': self.player.is_training_question_1_correct()}

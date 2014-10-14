@@ -67,7 +67,7 @@ class Player(otree.models.BasePlayer):
                 'Alice gets 100 points, Bob gets 100 points']
 
     def is_training_question_1_correct(self):
-        return self.training_question_1 == self.subsession.training_1_correct
+        return self.training_question_1 == Constants.training_1_correct
 
     points_earned = models.PositiveIntegerField(
         default=0,
