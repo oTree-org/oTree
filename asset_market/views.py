@@ -180,11 +180,13 @@ class Results(Page):
             'shares': self.player.shares,
         }
 
+
 class FeedbackQ(Page):
-    template_name = 'asset_market/FeedbackQ.html'
 
     def participate_condition(self):
-        return True
+        return self.subsession.round_number == self.subsession.number_of_rounds
+
+    template_name = 'asset_market/FeedbackQ.html'
 
     form_model = models.Player
     form_fields = ['feedbackq']
