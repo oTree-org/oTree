@@ -40,8 +40,19 @@ def recreate(args):
     syncdb = 'python manage.py syncdb --traceback'
 
     if args.environment == 'local':
-        with open('db.sqlite3', 'w') as db:
-            db.write('')
+        settings_module = os.environ.get('DJANGO_SETTINGS_MODULE', 'settings')
+        try:
+            settings = importlib.import_module(settings_module)
+            db_file_name = settings.DATABASES['default']['NAME']
+        except (ImportError, AttributeError, KeyError):
+            db_file_name = None
+
+        if not db_file_name:
+            db_file_name = 'db.sqlite3'
+
+        if os.path.exists(db_file_name):
+            os.unlink(db_file_name)
+
         django_command([sys.argv[0], 'syncdb', '--traceback'])
         # then launch from PyCharm
     else:
