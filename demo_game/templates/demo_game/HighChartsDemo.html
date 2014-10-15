@@ -1,5 +1,5 @@
 <p>
-    <b>Please enter values in the range of 0-100 and click Load Chart button.</b>
+    <b>Please enter values larger than 0 and click the Load Chart button</b>
     <p></p>
     Player 1 <input type="text" value="" name="value1"/>
     Player 2 <input type="text" value="" name="value2"/>
@@ -54,12 +54,12 @@ $(function () {
             },
             series: [{
                 type: 'pie',
-                name: 'Browser share',
+                name: 'share',
                 data: [
-                    ['Player 1',    val1],
-                    ['Player 2',       val2],
+                    ['Player 1', val1],
+                    ['Player 2', val2],
                     {
-                        name: 'Player 3 (you)',
+                        name: 'Player 3',
                         y: val3,
                         sliced: true,
                         selected: true
