@@ -36,14 +36,8 @@ COMMANDS = {}
 ###########################################################################
 
 
-heroku_apps = {
-    'demo': 'otree-demo',
-    'chen-dev': 'pacific-journey-6479',
-}
-
-
 def recreate(args):
-    syncdb = 'python manage.py syncdb --traceback'
+    syncdb = './otree syncdb --traceback'
 
     if args.environment == 'local':
         settings_module = os.environ.get('DJANGO_SETTINGS_MODULE', 'settings')
@@ -69,8 +63,7 @@ def recreate(args):
                 print 'exit.'
                 return
 
-        reset_db = 'heroku pg:reset DATABASE --confirm {}'.format(
-            heroku_apps[args.environment])
+        reset_db = 'heroku pg:reset DATABASE --confirm {}'.format(args.environment)
         os.system(reset_db)
 
         _commit_and_push(args.environment)
@@ -84,11 +77,11 @@ recreate.parser = argparse.ArgumentParser(description='recreate')
 recreate.parser.add_argument('recreate', nargs=1)
 recreate.parser.add_argument(
     'environment', nargs='?', default='local',
-    choices=['local', 'production'] + list(heroku_apps.keys()),
     help="""
-        Give the environment on which you want to deploy the otree instance.
-        Use 'local' to setup your local project.
-        Use 'production' to deploy to heroku.
+        If omitted, will set up your local project.
+        If specified, will push to the named Heroku instance.
+        The the Heroku app and the git remote must have the same name.
+        e.g., "myherokuapp.herokuapp.com" and "git push myherokuapp master"
     """)
 
 COMMANDS['recreate'] = recreate

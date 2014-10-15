@@ -1,6 +1,6 @@
 dj-database-url==0.2.2
 dj-static==0.0.5
-otree-core==0.2.192
+otree-core==0.2.193
 django-vanilla-views==1.0.2
 django-countries==1.5
 gunicorn==18.0
