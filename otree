@@ -37,7 +37,7 @@ COMMANDS = {}
 
 
 def recreate(args):
-    syncdb = 'python manage.py syncdb --traceback'
+    syncdb = './otree syncdb --traceback'
 
     if args.environment == 'local':
         settings_module = os.environ.get('DJANGO_SETTINGS_MODULE', 'settings')
