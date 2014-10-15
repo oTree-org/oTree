@@ -8,39 +8,13 @@
 
 {% block content %}
 
-    <p>
-        You have been randomly and anonymously paired with another player. Both of you see these same instructions.
-    </p>
-
-    <p>
-        The two of you are a couple, and must privately choose whether to watch football together or go to the opera together.
-        Your payoff depends on how both of you choose.
-    </p>
-
-    <p>
-        In each table cell, the amount to the left is the husband's payoff and the amount to the right is the wife's payoff.
-        You are the <strong>{{ role }}</strong>.
-    </p>
-
-    <table class="table" style="width:450px; margin-top:15px;">
-        <tr>
-            <th></th>
-            <th>Husband: Football</th>
-            <th>Husband: Opera</th>
-        </tr>
-        <tr>
-            <th>Wife: Football</th>
-            <td>{{ fbl_husband_amt }}, {{ fbl_wife_amt }}</td>
-            <td>{{ fbl_opr_amt }}, {{ fbl_opr_amt }}</td>
-        </tr>
-        <tr>
-            <th>Wife: Opera</th>
-            <td>{{ fbl_opr_amt }}, {{ fbl_opr_amt }}</td>
-            <td>{{ opr_husband_amt }}, {{ opr_wife_amt }}</td>
-        </tr>
-    </table>
+<p>
+    You are <strong>{{ role }}</strong>. What will you do for the evening?
+</p>
 
     {% formrow form.decision with label='Please make a choice:' %}
     {% next_button %}
+
+    {% include 'battle_of_the_sexes/Instructions.html' %}
 
 {% endblock %}
