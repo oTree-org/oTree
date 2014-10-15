@@ -31,10 +31,16 @@ class PlayerBot(Bot):
         self.submit(views.FeedbackThree)
 
         self.submit(views.QuestionFour, {
-            'training_question_4': 'Time spent on each page',
+            'training_question_4': 'All of the above',
         })
 
         self.submit(views.FeedbackFour)
+
+        self.submit(views.QuestionFive, {
+            'training_question_5': 'Time spent on each page',
+        })
+
+        self.submit(views.FeedbackFive)
 
         self.submit(views.FormsDemo, {
             'demo_field1': '1',
