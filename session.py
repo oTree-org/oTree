@@ -180,7 +180,9 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
-            subsession_apps=['battle_of_the_sexes', 'lab_results'],
+            subsession_apps=[
+                'battle_of_the_sexes', 'survey_sample', 'lab_results'
+            ],
             doc=""""""
         ),
         SessionType(
@@ -203,6 +205,15 @@ disabled_session_types = [
         participants_per_demo_session=1,
         participants_per_session=1,
         subsession_apps=['quiz'],
+        doc=""""""
+    ),
+    # in progress
+    SessionType(
+        name="Asset Market",
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=2,
+        subsession_apps=['asset_market']*5 + ['lab_results'],
         doc=""""""
     ),
     SessionType(

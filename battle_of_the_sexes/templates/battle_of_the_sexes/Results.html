@@ -8,17 +8,28 @@
 
 {% block content %}
 
-    <p>
-        {% if decision == other_decision %}
-            Both you and your {{ other_role }} chose {{ decision }}.
-        {% else %}
-            You chose {{ decision }}. Your {{ other_role }} chose {{ other_decision }}.
-        {% endif %}
-    </p>
+<p>
+{% if role == "husband" %}
 
-    <p>
-        Your payoff is therefore {{ payoff }}.
-    </p>
+    You chose to go to <strong>{{decision}}</strong> and Wife chose to go to
+    <strong>{{other_decision}}</strong>. As a result, your payoff is
+    <strong>{{payoff}}</strong>. In addition, you received 10 points for
+    participation. Thus, your total payoff is <strong>{{total_payoff}}</strong>.
+
+{% else %}
+
+    You chose to go to <strong>{{decision}}</strong> and Husband chose to
+    go to <strong>{{other_decision}}</strong>. As a result, your payoff
+    is <strong>{{payoff}}</strong>. In addition, you received 10 points
+    for participation. Thus, your total payoff is <strong>{{total_payoff}}</strong>.
+
+{% endif %}
+</p>
+
+<p>
+    To complete the study, please answer a short questionnaire that will now
+    follow.
+</p>
 
     {% next_button %}
 

@@ -14,6 +14,24 @@ doc = """
 This is a 2-player 2-strategy coordination game. The name and story originated from <a href="http://books.google.ch/books?id=uqDDAgAAQBAJ&lpg=PP1&ots=S-DC4LemnS&lr&pg=PP1#v=onepage&q&f=false" target="_blank">Luce and Raiffa (1957)</a>.
 <br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/battle_of_the_sexes" target="_blank">here</a>.
+
+<h3>Recommended Literature</h3>
+<ul>
+    <li>Luce, R. Duncan, and Howard Raiffa. Games and decisions: Introduction and critical survey. Courier Dover Publications, 2012.</li>
+    <li>Rapoport, Anatol. Two-person game theory. Courier Dover Publications, 1999.</li>
+    <li>Cooper, Russell, et al. "Forward induction in the battle-of-the-sexes games."The American Economic Review (1993): 1303-1316.</li>
+    <li>Cooper, Russell, et al. "Communication in the battle of the sexes game: some experimental results." The RAND Journal of Economics (1989): 568-587.</li>
+</ul>
+
+<strong>Wikipedia:</strong> Battle of the Sexes, Coordination Game<br/>
+<strong>Keywords:</strong>
+    <a target="_blank" href="https://duckduckgo.com/?q=Battle+of+the+Sexes+game+theory&t=otree"</a>
+        <span class="badge">Battle of the Sexes</span>
+    </a>,
+    <a target="_blank" href="https://duckduckgo.com/?q=coordination+game+theory&t=otree"</a>
+        <span class="badge badge-info">Coordination</span>
+    </a>
+
 """
 
 class Constants:
@@ -30,6 +48,9 @@ class Constants:
     opera_husband_amount = Money(0.20)
 
     opera_wife_amount = Money(0.30)
+
+    training_1_husband_correct = 0
+    training_1_wife_correct = 0
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -69,10 +90,25 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
+    training_question_1_husband = models.PositiveIntegerField(
+        null=True, verbose_name=''
+    )
+    training_question_1_wife = models.PositiveIntegerField(
+        null=True, verbose_name=''
+    )
+
     decision = models.CharField(
         doc="""Either football or the opera""",
         widget=widgets.RadioSelect()
     )
+
+    def is_training_question_1_husband_correct(self):
+        return (self.training_question_1_husband ==
+                Constants.training_1_husband_correct)
+
+    def is_training_question_1_wife_correct(self):
+        return (self.training_question_1_wife ==
+                Constants.training_1_wife_correct)
 
     def decision_choices(self):
         return ['Football', 'Opera']

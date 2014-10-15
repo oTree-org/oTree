@@ -1,0 +1,18 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+
+{% block title %}
+    Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+    {% if num_q == 1 %}
+        <p>
+            {% formrow form.training_question_1 with label='Can you resume all the instructions in one line?' %}
+        </p>
+    {% endif %}
+
+    {% next_button %}
+
+{% endblock %}

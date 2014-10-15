@@ -1,0 +1,33 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Results for Round {{ round_number }} of {{ total_rounds }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+
+        You were {{role}}. You chose "{{ my_choice }}" and your opponent chose "{{ other_choice }}".
+
+    </p>
+
+    <p>
+        In this round, you win {{ my_points }} points and your opponent wins {{ other_points }} points.
+    </p>
+
+    <p>
+        {% if round_number < total_rounds %}
+            Please click "Next" to proceed to the next round where you will play against the same.
+        {% else %}
+            All rounds are now finished.
+        {% endif %}
+    </p>
+
+    {% next_button %}
+
+    {% include 'rock_paper_scissors/Instructions.html' %}
+
+{% endblock %}
