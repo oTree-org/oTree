@@ -2,35 +2,39 @@
 {% load staticfiles floppyforms otree_tags %}
 
 {% block title %}
-    Submit Order (Period {{ round_num }} of {{ num_of_rounds }})  {{ order_type }}
+    Submit Order (Period {{ round_num }} of {{ num_of_rounds }})
 {% endblock %}
 
 {% block content %}
 
-    <h5 class="text-info">Cash: {{ cash }};  Shares: {{ shares }}</h5>
+    <h5 class="text-info text-center">Cash: {{ cash }};  Shares: {{ shares }}</h5>
 
     <p>
-        You have been randomly assigned a role as <b>{{ role }}</b>, please enter on the number of shares and the {% if buy %}maximum buying price{% else %}
-        minimum selling price{% endif %} you desire. The price you enter must be a <b>non-negative integer.</b>
-    </p>
-    <p>
-        If you do not want to buy or sell shares, click next and proceed.</b>
+        If you want to buy shares, enter on the left the number of shares and the maximum buying price you desire.
+        If you want to sell shares, enter on the right the number of shares and the minimum selling price you desire.
+        The price you enter must be larger than 0. If you do not want to buy or sell shares, leave them empty and proceed.
+        Please note that you may submit <b>at most one order.</b>
     </p>
 
-    {% if buy %}
-        <h5>Buy Order</h5>
-        {% formrow form.bn with label="Number of shares" %}
-        {% formrow form.bp with label="for at most per share" %}
-
-    {% else %}
-        <h5>Sell Order</h5>
-        {% formrow form.sn with label="Number of shares" %}
-        {% formrow form.sp with label="for at least per share" %}
-    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Buy Order</h4>
+            {% formrow form.bn with label="Number of shares" %}
+            {% formrow form.bp with label="for at most per share" %}
+          </div>
+          <div class="col-md-6">
+            <h4>Sell Order</h4>
+            {% formrow form.sn with label="Number of shares" %}
+            {% formrow form.sp with label="for at least per share" %}
+          </div>
+        </div>
+      </div>
+    </div>
 
     {% next_button %}
 
     {% include 'asset_market/Rules.html' %}
-
 
 {% endblock %}

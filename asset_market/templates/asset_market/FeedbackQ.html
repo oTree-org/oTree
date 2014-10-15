@@ -1,0 +1,19 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+
+{% block title %}
+    Questionnaire
+{% endblock %}
+
+{% block content %}
+    <p>
+        <i>Note: In this live sample game in order to save time for you we just put one question.</i>
+    </p>
+
+    <p>
+        {% formrow form.feedbackq%}
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
