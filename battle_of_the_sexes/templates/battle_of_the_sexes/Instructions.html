@@ -9,6 +9,20 @@
         padding-bottom:10px;
         padding-left:4px;
     }
+
+    td, th{
+        text-align: center;
+    }
+
+    .rotate90 {
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        position: absolute;
+        top: 60%;
+    }
 </style>
 
 <div class="well well-lg" style="padding-top:5px; padding-bottom:15px; margin-top:20px;">
@@ -35,29 +49,39 @@
     </p>
 
     <p>
-        In each cell, the amount (in points) to the left is the payoff for Husband and to the right for Wife.
+        <em>In each cell, the amount (in points) to the left is the payoff for Husband and to the right for Wife.</em>
     </p>
 
-    <table class="table">
-        <tr>
-            <th></th>
-            <th>Husband: Football</th>
-            <th>Husband: Opera</th>
-        </tr>
-        <tr>
-            <th>Wife: Football</th>
-            <td>300, 200</td>
-            <td>0, 0</td>
-        </tr>
-        <tr>
-            <th>Wife: Opera</th>
-            <td>0, 0</td>
-            <td>200, 300</td>
-        </tr>
-    </table>
+    <div class="row">
+        <div class="col-md-7 col-md-offset-2">
+            <table class="table table-hover">
+                <tr>
+                    <th colspan="2"></th>
+                    <th colspan="2">Husband</th>
+                </tr>
+                <tr>
+                    <th colspan="2"></th>
+                    <th>Football</th>
+                    <th>Opera</th>
+                </tr>
+                <tr>
+                    <th rowspan="2"><span class="rotate90">Wife</span> </th>
+                    <th>Football</th>
+                    <td>300, 200</td>
+                    <td>0, 0</td>
+                </tr>
+                <tr>
+                    <th>Opera</th>
+                    <td>0, 0</td>
+                    <td>200, 300</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
     <p>
-         The instructions are exactly the same for all participants, and will remain visible for your convenience at the bottom of all pages.
+         The instructions are exactly the same for all participants, and will
+         remain visible for your convenience at the bottom of all pages.
     </p>
 
 </div>
