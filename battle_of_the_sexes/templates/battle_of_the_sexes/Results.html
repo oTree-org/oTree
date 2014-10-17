@@ -13,15 +13,17 @@
 
     You chose to go to <strong>{{decision}}</strong> and Wife chose to go to
     <strong>{{other_decision}}</strong>. As a result, your payoff is
-    <strong>{{payoff}}</strong>. In addition, you received 10 points for
-    participation. Thus, your total payoff is <strong>{{total_payoff}}</strong>.
+    <strong>{{payoff|floatformat:2}}</strong>. In addition, you received 10
+    points for participation. Thus, your total payoff is
+    <strong>{{total_payoff|floatformat:2}}</strong>.
 
 {% else %}
 
-    You chose to go to <strong>{{decision}}</strong> and Husband chose to
-    go to <strong>{{other_decision}}</strong>. As a result, your payoff
-    is <strong>{{payoff}}</strong>. In addition, you received 10 points
-    for participation. Thus, your total payoff is <strong>{{total_payoff}}</strong>.
+    You chose to go to <strong>{{decision}}</strong> and Husband chose to go to
+    <strong>{{other_decision}}</strong>. As a result, your payoff is
+    <strong>{{payoff|floatformat:2}}</strong>. In addition, you received 10
+    points for participation. Thus, your total payoff is
+    <strong>{{total_payoff|floatformat:2}}</strong>.
 
 {% endif %}
 </p>
@@ -32,5 +34,7 @@
 </p>
 
     {% next_button %}
+
+    {% include 'battle_of_the_sexes/Instructions.html' %}
 
 {% endblock %}

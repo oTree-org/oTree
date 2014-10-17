@@ -80,7 +80,7 @@ class ResultsWaitPage(WaitPage):
             p.set_payoff()
 
     def body_text(self):
-        return "Waiting for the other player."
+        return "Waiting for the other participant."
 
 
 class Results(Page):

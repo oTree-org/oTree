@@ -9,7 +9,6 @@ import random
 # </standard imports>
 
 
-
 doc = """
 This is a 2-player 2-strategy coordination game. The name and story originated from <a href="http://books.google.ch/books?id=uqDDAgAAQBAJ&lpg=PP1&ots=S-DC4LemnS&lr&pg=PP1#v=onepage&q&f=false" target="_blank">Luce and Raiffa (1957)</a>.
 <br />

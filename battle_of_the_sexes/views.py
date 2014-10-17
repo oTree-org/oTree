@@ -78,7 +78,7 @@ class ResultsWaitPage(WaitPage):
         self.group.set_payoffs()
 
     def body_text(self):
-        return "Waiting for the other player."
+        return "Waiting for the other participant."
 
 
 class Results(Page):
@@ -89,7 +89,6 @@ class Results(Page):
     template_name = 'battle_of_the_sexes/Results.html'
 
     def variables_for_template(self):
-
         return {'role': self.player.role(),
                 'decision': self.player.decision,
                 'other_decision': self.player.other_player().decision,
