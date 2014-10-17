@@ -105,8 +105,7 @@ commit_and_push.parser.add_argument('commit_and_push', nargs=1)
 commit_and_push.parser.add_argument(
     'environment', nargs=1,
     help="""
-        Give the environment on which you want to push the changes.
-        Use 'production' to deploy to heroku.
+        Give the remote name to which you want to push the changes.
     """)
 
 COMMANDS['commit_and_push'] = commit_and_push
