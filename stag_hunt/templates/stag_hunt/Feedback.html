@@ -1,0 +1,35 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+
+{% block title %}
+    Solution to Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+    {% if is_training_question_1_my_payoff_correct %}
+        <p class="text-success">Your answer {{answer_you}} for yourself was correct.</p>
+    {% else %}
+        <p class="text-danger">Your answer {{answer_you}} for yourself was incorrect</p>
+    {% endif %}
+    {% if is_training_question_1_other_payoff_correct %}
+        <p class="text-success">Your answer {{answer_other}} for the other participant was correct.</p>
+    {% else %}
+        <p class="text-danger">Your answer {{answer_other}} for the other participant was incorrect.</p>
+    {% endif %}
+
+    <p>
+        Suppose that you went for a stag and the other participant went for a
+        hare. What would be your payoffs respectively?
+    </p>
+    <p>
+        <strong>Solution:</strong> Payoffs for you would be
+        <strong>0 points</strong> and for the other participant
+        <strong>100 points</strong>.
+    </p>
+
+    {% next_button %}
+
+    {% include 'stag_hunt/Instructions.html' %}
+
+{% endblock %}

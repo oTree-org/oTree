@@ -23,17 +23,21 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/battle_of_th
     <li>Cooper, Russell, et al. "Communication in the battle of the sexes game: some experimental results." The RAND Journal of Economics (1989): 568-587.</li>
 </ul>
 
-<strong>Wikipedia:</strong>
-    <a href="https://en.wikipedia.org/wiki/Battle_of_the_sexes_%28game_theory%29">Battle of the Sexes</a>,&nbsp
-    <a href="https://en.wikipedia.org/wiki/Coordination_game">Coordination Game</a>
-<br/>
-<strong>Keywords:</strong>
+<p>
+    <strong>Wikipedia:</strong>
+    <a target="_blank" href="https://en.wikipedia.org/wiki/Battle_of_the_sexes_%28game_theory%29">Battle of the Sexes</a>,&nbsp
+    <a target="_blank" href="https://en.wikipedia.org/wiki/Coordination_game">Coordination Game</a>
+</p>
+
+<p>
+    <strong>Keywords:</strong>
     <a target="_blank" href="https://duckduckgo.com/?q=Battle+of+the+Sexes+game+theory&t=otree"</a>
         <span class="badge">Battle of the Sexes</span>
     </a>,
     <a target="_blank" href="https://duckduckgo.com/?q=coordination+game+theory&t=otree"</a>
         <span class="badge badge-info">Coordination</span>
     </a>
+</p>
 
 """
 
