@@ -67,12 +67,12 @@ INSTALLED_OTREE_APPS = [
     'volunteer_dilemma',
     'bertrand_competition',
     'principal_agent',
-    'coordination',
     'stag_hunt',
     'battle_of_the_sexes',
     'survey_sample',
     'asset_market',
 ]
+
 
 SECRET_KEY = SECRET_KEY
 BASE_DIR = BASE_DIR

@@ -104,22 +104,6 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="2 x 2 Matrix Game (Symmetric)",
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['matrix_symmetric', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
-            name="2 x 2 Matrix Game (Asymmetric)",
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['matrix_asymmetric', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
             name="Stackelberg Competition",
             base_pay=10.00,
             participants_per_session=12,
@@ -157,14 +141,6 @@ def session_types():
             participants_per_session=12,
             participants_per_demo_session=2,
             subsession_apps=['principal_agent', 'lab_results'],
-            doc=""""""
-        ),
-        SessionType(
-            name="Coordination Game",
-            base_pay=10.00,
-            participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['coordination', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -219,6 +195,22 @@ disabled_session_types = [
         participants_per_session=2,
         participants_per_demo_session=2,
         subsession_apps=['tragedy_of_the_commons', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name="2 x 2 Matrix Game (Symmetric)",
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=2,
+        subsession_apps=['matrix_symmetric', 'lab_results'],
+        doc=""""""
+    ),
+    SessionType(
+        name="2 x 2 Matrix Game (Asymmetric)",
+        base_pay=10.00,
+        participants_per_session=12,
+        participants_per_demo_session=2,
+        subsession_apps=['matrix_asymmetric', 'lab_results'],
         doc=""""""
     ),
     ]
