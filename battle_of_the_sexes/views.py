@@ -39,9 +39,6 @@ class FeedbackOne(Page):
 
     template_name = 'battle_of_the_sexes/Feedback.html'
 
-    def after_valid_form_submission(self):
-        import ipdb; ipdb.set_trace()
-
     def variables_for_template(self):
         return {
             'num_q': 1,
