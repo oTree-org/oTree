@@ -5,3 +5,5 @@ install:
   - ./otree recreate
 script:
   - ./otree test_all
+env:
+  - DATABASE_URL=postgresql://postgres@localhost/travis_ci_test
