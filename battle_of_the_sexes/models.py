@@ -58,6 +58,8 @@ class Constants:
     training_1_husband_correct = 0
     training_1_wife_correct = 0
 
+    training_1_maximun_offered_points = 300
+
 
 class Subsession(otree.models.BaseSubsession):
 
@@ -108,6 +110,16 @@ class Player(otree.models.BasePlayer):
         doc="""Either football or the opera""",
         widget=widgets.RadioSelect()
     )
+
+    def training_question_1_husband_error_message(self, value):
+        if value > Constants.training_1_maximun_offered_points:
+            msg = 'The payoff cannot be greater than points offered ({})'
+            return msg.format(Constants.training_1_maximun_offered_points)
+
+    def training_question_1_wife_error_message(self, value):
+        if value > Constants.training_1_maximun_offered_points:
+            msg = 'The payoff cannot be greater than points offered ({})'
+            return msg.format(Constants.training_1_maximun_offered_points)
 
     def is_training_question_1_husband_correct(self):
         return (self.training_question_1_husband ==
