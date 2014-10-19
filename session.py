@@ -168,6 +168,14 @@ def session_types():
             subsession_apps=['asset_market']*5 + ['lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name="Lemon Market",
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=3,
+            subsession_apps=['lemon_market']*3 + ['lab_results'],
+            doc=""""""
+        ),
 
         ]
 
@@ -179,14 +187,6 @@ disabled_session_types = [
         participants_per_demo_session=1,
         participants_per_session=1,
         subsession_apps=['quiz'],
-        doc=""""""
-    ),
-    SessionType(
-        name="Lemon Market",
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=1,
-        subsession_apps=['lemon_market', 'lab_results'],
         doc=""""""
     ),
     SessionType(

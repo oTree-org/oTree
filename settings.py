@@ -67,6 +67,7 @@ INSTALLED_OTREE_APPS = [
     'battle_of_the_sexes',
     'survey_sample',
     'asset_market',
+    'lemon_market',
 ]
 
 
