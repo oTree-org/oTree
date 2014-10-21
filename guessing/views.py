@@ -35,6 +35,7 @@ class Results(Page):
                 'two_third_average': round(self.group.two_third_guesses, 4),
                 'players': self.subsession.get_players(),
                 'is_winner': self.player.is_winner,
+                'best_guess': self.group.best_guess,
                 'payoff': self.player.payoff}
 
 

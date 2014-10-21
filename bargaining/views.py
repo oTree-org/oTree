@@ -72,7 +72,7 @@ class Results(Page):
 
     def variables_for_template(self):
         return {
-            'earn': self.player.points - self.group.BONUS,
+            'earn': self.player.points - Constants.bonus,
             'points': self.player.points,
             'request_amount': self.player.request_amount,
             'other_request': self.player.other_player().request_amount,

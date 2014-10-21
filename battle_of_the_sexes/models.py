@@ -28,7 +28,6 @@ class Constants:
     mismatch_amount = Money(0.00)
 
     opera_husband_amount = Money(0.20)
-
     opera_wife_amount = Money(0.30)
 
 

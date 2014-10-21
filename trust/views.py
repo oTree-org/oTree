@@ -100,7 +100,7 @@ class SendBack(Page):
         return self.player.id_in_group == 2
 
     def variables_for_template(self):
-        tripled_amount = self.group.sent_amount * 3
+        tripled_amount = self.group.sent_amount * Constants.multiplication_factor
 
         return {'amount_allocated': Constants.amount_allocated,
                 'sent_amount': self.group.sent_amount,
@@ -124,15 +124,15 @@ class Results(Page):
     template_name = 'trust/Results.html'
 
     def variables_for_template(self):
-        tripled_amount = self.group.sent_amount * 3
+        tripled_amount = self.group.sent_amount * Constants.multiplication_factor
 
         return {'amount_allocated': Constants.amount_allocated,
                 'sent_amount': self.group.sent_amount,
                 'tripled_amount': tripled_amount,
                 'sent_back_amount': self.group.sent_back_amount,
                 'role': self.player.role(),
-                'bonus': self.group.BONUS,
-                'result': self.player.points - self.group.BONUS,
+                'bonus': Constants.bonus,
+                'result': self.player.points - Constants.bonus,
                 'total': self.player.points}
 
 

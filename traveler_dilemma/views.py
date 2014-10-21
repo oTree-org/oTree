@@ -85,12 +85,12 @@ class Results(Page):
                 ('The other traveler claimed',
                  self.player.other_player().claim),
                 ('Amount paid to both',
-                 int(self.player.payoff - self.player.BONUS - reward)),
+                 int(self.player.payoff - Constants.bonus - reward)),
                 ('Your reward/penalty', reward and '%+i' % reward),
                 ('Thus you receive',
-                 int(self.player.payoff - self.player.BONUS)),
+                 int(self.player.payoff - Constants.bonus)),
                 ('In addition you get a participation fee of',
-                 self.player.BONUS),
+                 Constants.bonus),
                 ('So in sum you will get', int(self.player.payoff)),
                 ])
 

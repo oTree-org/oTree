@@ -18,11 +18,8 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/tragedy_of_t
 
 class Constants:
     common_gain = Money(0.10)
-
     common_loss = Money(0.00)
-
     individual_gain = Money(2.00)
-
     defect_costs = Money(0.20)
 
 class Subsession(otree.models.BaseSubsession):
@@ -37,14 +34,15 @@ class Group(otree.models.BaseGroup):
     players_per_group = 2
 
     def set_payoffs(self):
-        if all([p.decision == 'defect' for p in self.get_players()]):
-            for p in self.get_players():
+        players = self.get_players()
+        if all([p.decision == 'defect' for p in players]):
+            for p in players:
                 p.payoff = Constants.common_loss
-        elif all([p.decision == 'cooperate' for p in self.get_players()]):
-            for p in self.get_players():
+        elif all([p.decision == 'cooperate' for p in players]):
+            for p in players:
                 p.payoff = Constants.common_gain
         else:
-            for p in self.get_players():
+            for p in players:
                 if p.decision == 'defect':
                     p.payoff = Constants.individual_gain - Constants.defect_costs
                 else:

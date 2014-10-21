@@ -18,7 +18,7 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/volunteer_di
 class Constants:
 
     #"""Payoff for each player if at least one volunteers"""
-    general_benefit = Money(1.00)\
+    general_benefit = Money(1.00)
 
     # """Cost incurred by volunteering player"""
     volunteer_cost = Money(0.40)

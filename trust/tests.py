@@ -10,8 +10,6 @@ class PlayerBot(Bot):
 
     def play(self):
 
-        # basic assertions
-        assert (Constants.amount_allocated == 100)
         assert (self.group.players_per_group == 2)
 
         # start game

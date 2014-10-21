@@ -18,6 +18,7 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/guessing" ta
 
 class Constants:
     winner_payoff = Money(1.00)
+    guess_max = 100
 
 class Subsession(otree.models.BaseSubsession):
 
@@ -33,25 +34,26 @@ class Group(otree.models.BaseGroup):
     players_per_group = 5
 
     two_third_guesses = models.FloatField()
+    best_guess = models.FloatField()
 
     def set_payoffs(self):
-        self.two_third_guesses = (2/3) * sum([p.guess_value for p in self.get_players()]) / len(self.get_players())
+        players = self.get_players()
+        self.two_third_guesses = (2/3) * sum([p.guess_value for p in players]) / len(players)
 
         winner_so_far = None
-        smallest_difference_so_far = 1000   # arbitrary big number
+        smallest_difference_so_far = Constants.guess_max + 1   # initialize to largest possible difference
 
         for p in self.get_players():
+            p.payoff = 0
+            p.is_winner = False # initialize to false
             difference = abs(p.guess_value - self.two_third_guesses)
             if difference < smallest_difference_so_far:
                 winner_so_far = p
                 smallest_difference_so_far = difference
-        winner_so_far.is_winner = True
-
-        for p in self.get_players():
-            if p.is_winner:
-                p.payoff = Constants.winner_payoff
-            else:
-                p.payoff = 0
+        winner = winner_so_far
+        winner.is_winner = True
+        winner.payoff = Constants.winner_payoff
+        self.best_guess = winner.guess_value
 
 
 
@@ -72,11 +74,11 @@ class Player(otree.models.BasePlayer):
     guess_value = models.PositiveIntegerField(
         default=None,
         doc="""
-        Each player guess: between 0-100
-        """
+        Each player guess: between 0-{}
+        """.format(Constants.guess_max)
     )
 
     def guess_value_choices(self):
-        return range(0, 101)
+        return range(0, Constants.guess_max + 1)
 
 

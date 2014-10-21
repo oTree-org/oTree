@@ -27,6 +27,8 @@ class Constants:
     # The minimum claim to be requested
     min_amount = 2
 
+    bonus = 10
+
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -44,7 +46,7 @@ class Group(otree.models.BaseGroup):
 
 
 class Player(otree.models.BasePlayer):
-    BONUS = 10
+
 
     # <built-in>
     group = models.ForeignKey(Group, null=True)
@@ -83,8 +85,8 @@ class Player(otree.models.BasePlayer):
     def set_payoff(self):
         other = self.other_player().claim
         if self.claim < other:
-            self.payoff = self.BONUS + self.claim + Constants.reward
+            self.payoff = Constants.bonus + self.claim + Constants.reward
         elif self.claim > other:
-            self.payoff = self.BONUS + other - Constants.penalty
+            self.payoff = Constants.bonus + other - Constants.penalty
         else:
-            self.payoff = self.BONUS + self.claim
+            self.payoff = Constants.bonus + self.claim

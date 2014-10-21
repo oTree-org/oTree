@@ -43,11 +43,12 @@ class Group(otree.models.BaseGroup):
     )
 
     def set_payoffs(self):
-        self.winning_price = min([p.price for p in self.get_players()])
-        self.num_winners = len([p for p in self.get_players() if p.price == self.winning_price])
+        players = self.get_players()
+        self.winning_price = min([p.price for p in players])
+        self.num_winners = len([p for p in players if p.price == self.winning_price])
         winner_payoff = (self.winning_price - Constants.marginal_cost) / self.num_winners
 
-        for p in self.get_players():
+        for p in players:
             if p.price == self.winning_price:
                 p.is_a_winner = True
                 p.payoff = winner_payoff
