@@ -147,7 +147,7 @@ def session_types():
             display_name="Bertrand Competition",
             base_pay=10.00,
             participants_per_session=12,
-            participants_per_demo_session=3,
+            participants_per_demo_session=2,
             subsession_apps=['bertrand_competition', 'lab_results'],
             doc=""""""
         ),

@@ -6,7 +6,11 @@
     {% for row in table %}
     <tr>
         {% for cell in row %}
+        {% if forloop.counter0 %}
+        <th>{{cell}}</th>
+        {% else %}
         <td>{{cell}}</td>
+        {% endif %}
         {% endfor %}
     </tr>
     {% endfor %}
