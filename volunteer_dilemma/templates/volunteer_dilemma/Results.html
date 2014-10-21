@@ -1,33 +1,24 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
-{% load i18n %}
+{% load otree_tags %}
 
 {% block title %}
     Results
 {% endblock %}
 
 {% block content %}
-
-    <p>
-        In your group,
-        {% if num_volunteers > 0 %}
-            {{ num_volunteers }} {{ num_volunteers|pluralize:"person,people" }}
-        {% else %}
-            no one
-        {% endif %}
-        {% if volunteer %}
-           decided to volunteer, including you.
-        {% elif num_volunteers > 0 %}
-            decided to volunteer. You decided not to volunteer.
-        {% else %}
-            decided to volunteer.
-        {% endif %}
-    </p>
-
-    <p>
-        Your payoff is therefore {{ payoff }}.
-    </p>
-
-    {% next_button %}
-
+<p>
+{% if volunteer %}
+You volunteered. As a result, your payoff is 100-40=60 points.
+{% elif num_volunteers > 0 %}
+You did not volunteer but some did. As a result, your payoff is 100 points. 
+{% else %}
+You did not volunteer and no one did. As a result, your payoff is 0 points.
+{% endif %}
+In addition, you received 10 points for participation.
+Thus, your total payoff is {{payoff|floatformat}} points.
+</p>
+<p>
+To complete the study, please answer a short questionnaire that will now follow.
+</p>
+{% next_button %}
 {% endblock %}

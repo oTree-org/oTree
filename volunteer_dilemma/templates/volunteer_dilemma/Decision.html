@@ -1,1 +1,14 @@
-{% extends "global/Base.html" %}{% load staticfiles floppyforms otree_tags %}{% load i18n %}{% block title %}    Decision{% endblock %}{% block content %}    <p>        You have been randomly and anonymously paired with {{ num_other_players }} other players.        All of you see these same instructions.        Each of you must privately choose whether you want to <b>volunteer</b> or not.    </p>    <ul>        <li>If no player chooses to volunteer, the payoff for everyone is zero.</li>        <li>            If at least one player chooses to volunteer, each player will receive {{ general_benefit }}.            The volunteering player will, however, incur a cost of {{ volunteer_cost }}.        </li>    </ul>    {% formrow form.volunteer with label='Do you wish to volunteer?' %}    {% next_button %}{% endblock %}
+{% extends "global/Base.html" %}
+{% load floppyforms otree_tags %}
+
+{% block title %}
+Your choice
+{% endblock %}
+
+{% block content %}
+
+    {% formrow form.volunteer with label='Do you wish to volunteer?' %}
+    {% next_button %}
+
+{% endblock %}
+

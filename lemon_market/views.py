@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from django.utils.safestring import mark_safe
 from . import models
 from ._builtin import Page, WaitPage
+from django.utils.safestring import mark_safe
+from utils import FeedbackQ
 
 
 def variables_for_all_templates(self):
@@ -129,18 +130,8 @@ class Results(Page):
         return ctx
 
 
-class FeedbackQ(Page):
-    template_name = 'global/Question.html'
+class FeedbackQ(FeedbackQ, Page):
     form_model = models.Player
-    form_fields = 'feedback',
-
-    def participate_condition(self):
-        return self.subsession.round_number == self.subsession.number_of_rounds
-
-    def variables_for_template(self):
-        return dict(
-            title='Questionnaire',
-            question='How well do you think this sample game was implemented?')
 
 
 class FinalResults(Page):
