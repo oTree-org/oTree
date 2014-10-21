@@ -188,8 +188,17 @@ def session_types():
             subsession_apps=['asset_market']*5 + ['lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name = 'lemon_market',
+            display_name="Lemon Market",
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=3,
+            subsession_apps=['lemon_market']*3 + ['lab_results'],
+            doc=""""""
+        ),
 
-        ]
+    ]
 
 
 def show_on_demo_page(session_type_name):
