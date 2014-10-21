@@ -95,38 +95,15 @@ class FeedbackTwo(Page):
         }
 
 
-class BuyOrder(Page):
-
-    def participate_condition(self):
-        return self.player.role() == 'Buyer'
+class Order(Page):
 
     form_model = models.Player
-    form_fields = ['bp', 'bn']
+    form_fields = ['bp', 'bn', 'sn', 'sp']
 
     template_name = 'asset_market/Order.html'
 
     def variables_for_template(self):
         return {
-            'buy': True if self.player.role() == 'Buyer' else False,
-            'role': self.player.role,
-            'cash': self.player.cash,
-            'shares': self.player.shares,
-        }
-
-
-class SellOrder(Page):
-
-    def participate_condition(self):
-        return self.player.role() == 'Seller'
-
-    form_model = models.Player
-    form_fields = ['sp', 'sn']
-
-    template_name = 'asset_market/Order.html'
-
-    def variables_for_template(self):
-        return {
-            'role': self.player.role(),
             'cash': self.player.cash,
             'shares': self.player.shares,
         }
@@ -153,7 +130,6 @@ class Transaction(Page):
             'transaction': self.group.is_transaction,
             'shares_traded': self.group.shares_traded,
             'transaction_price': self.group.transaction_price,
-            'buyer': True if self.player.role() == 'Buyer' else False,
             'cash': self.player.cash,
             'shares': self.player.shares,
         }
@@ -198,6 +174,23 @@ class Results(Page):
 
     template_name = 'asset_market/Results.html'
 
+    def variables_for_template(self):
+        return {
+            'cash': self.player.cash,
+            'shares': self.player.shares,
+        }
+
+
+class FeedbackQ(Page):
+
+    def participate_condition(self):
+        return self.subsession.round_number == self.subsession.number_of_rounds
+
+    template_name = 'asset_market/FeedbackQ.html'
+
+    form_model = models.Player
+    form_fields = ['feedbackq']
+
 
 def pages():
     return [
@@ -207,12 +200,12 @@ def pages():
         FeedbackOne,
         QuestionTwo,
         FeedbackTwo,
-        BuyOrder,
-        SellOrder,
+        Order,
         TransactionWaitPage,
         Transaction,
         DividendWaitPage,
         Dividend,
         ResultsWaitPage,
-        Results
+        Results,
+        FeedbackQ,
     ]

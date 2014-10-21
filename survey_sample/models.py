@@ -41,6 +41,6 @@ class Player(otree.models.BasePlayer):
     def q_gender_choices(self):
         return ['Female', 'Male', 'Other', 'I prefer not to say']
 
-    q_gender = models.CharField(default=None, verbose_name='Please indicate your gender:', widget=widgets.RadioSelect())
+    q_gender = models.CharField(verbose_name='Please indicate your gender:', widget=widgets.RadioSelect())
 
 

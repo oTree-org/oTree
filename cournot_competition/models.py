@@ -37,12 +37,10 @@ class Group(otree.models.BaseGroup):
     players_per_group = Constants.players_per_group
 
     price = models.PositiveIntegerField(
-        default=None,
         doc="""Unit price: P = T - \sum U_i, where T is total capacity and U_i is the number of units produced by player i"""
     )
 
     total_units = models.PositiveIntegerField(
-        default=None,
         doc="""Total units produced by all players"""
     )
 
@@ -66,7 +64,7 @@ class Player(otree.models.BasePlayer):
         return self.training_question_1 == Constants.training_1_correct
 
     points_earned = models.PositiveIntegerField(
-        default=None,
+        doc="""."""
     )
 
     units = models.PositiveIntegerField(

@@ -41,7 +41,7 @@ class FeedbackOne(Page):
                 'question': "How many understanding questions are there? Please enter an odd negative integer, or a non-negative integer.",
                 'answer': self.player.training_question_1,
                 'correct': Constants.training_1_correct,
-                'explanation': "There are 4 understanding questions.",
+                'explanation': "There are 5 understanding questions.",
                 'is_correct': self.player.is_training_question_1_correct(),
                 }
 

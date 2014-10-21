@@ -58,7 +58,6 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     contribution = models.PositiveIntegerField(
-        default=None,
         doc="""The amount contributed by the player""",
         widget=widgets.TextInput()
     )

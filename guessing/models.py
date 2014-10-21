@@ -32,7 +32,7 @@ class Group(otree.models.BaseGroup):
 
     players_per_group = 5
 
-    two_third_guesses = models.FloatField(default=None)
+    two_third_guesses = models.FloatField()
 
     def set_payoffs(self):
         self.two_third_guesses = (2/3) * sum([p.guess_value for p in self.get_players()]) / len(self.get_players())

@@ -18,7 +18,7 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/demo_game" t
 """
 
 class Constants:
-    training_1_correct = 4
+    training_1_correct = 5
     training_2_correct = "Time travel (opens in pop up window)"
     training_3_correct = "Any of the above"
     training_4_correct = "All of the above"
@@ -46,12 +46,10 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     demo_field1 = models.CharField(
-        default=None,
         doc="""field With radiobutton input.""",
         widget=widgets.RadioSelect(),
     )
     demo_field2 = models.CharField(
-        default=None,
         max_length=5,
         doc="""
         field with text input

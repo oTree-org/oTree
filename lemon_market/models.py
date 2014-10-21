@@ -32,13 +32,11 @@ class Group(otree.models.BaseGroup):
     # </built-in>
 
     bid_amount = models.MoneyField(
-        default=None,
         doc="""
         Amount bidded by the bidder
         """
     )
     random_value = models.MoneyField(
-        default=None,
         doc="""
         Random value for the value of commodity to be auctioned.
         """

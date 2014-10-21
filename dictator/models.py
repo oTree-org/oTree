@@ -36,7 +36,6 @@ class Group(otree.models.BaseGroup):
     players_per_group = 2
 
     offer_amount = models.MoneyField(
-        default=None,
         doc="""Amount offered by the dictator"""
     )
 

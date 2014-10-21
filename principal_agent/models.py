@@ -61,33 +61,27 @@ class Group(otree.models.BaseGroup):
     players_per_group = 2
 
     total_return = models.MoneyField(
-        default=None,
         doc="""Total return from agent's effort = [Return for single unit of agent's work effort] * [Agent's work effort]"""
     )
 
     agent_fixed_pay = models.MoneyField(
-        default=None,
         doc="""Amount offered as fixed pay to agent"""
     )
 
     agent_return_share = models.FloatField(
-        default=None,
         doc="""Agent's share of total return""",
     )
 
     agent_work_effort = models.PositiveIntegerField(
-        default=None,
         doc="""Agent's work effort, [1, 10]""",
     )
 
 
     agent_work_cost = models.MoneyField(
-        default=None,
         doc="""Agent's cost of work effort"""
     )
 
     contract_accepted = models.NullBooleanField(
-        default=None,
         doc="""Whether agent accepts proposal""",
         widget=widgets.RadioSelect(),
     )

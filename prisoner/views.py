@@ -68,7 +68,7 @@ class Results(Page):
     template_name = 'prisoner/Results.html'
 
     def variables_for_template(self):
-        base_points = 50
+
 
         self.player.set_payoff()
 
@@ -76,8 +76,8 @@ class Results(Page):
                 'other_player_decision': self.player.other_player().decision.lower(),
                 'same_choice': self.player.decision == self.player.other_player().decision,
                 'points_earned': self.player.points_earned,
-                'base_points': base_points,
-                'total_plus_base': self.player.points_earned + base_points}
+                'base_points': Constants.base_points,
+                'total_plus_base': self.player.points_earned + Constants.base_points}
 
 
 def pages():

@@ -37,7 +37,6 @@ class Group(otree.models.BaseGroup):
     players_per_group = 2
 
     price = models.PositiveIntegerField(
-        default=None,
         doc="""Unit price: P = T - Q1 - Q2, where T is total capacity and Q_i are the units produced by the players"""
     )
 
@@ -54,9 +53,7 @@ class Player(otree.models.BasePlayer):
     def is_training_question_1_correct(self):
         return self.training_question_1 == Constants.training_1_correct
 
-    points_earned = models.PositiveIntegerField(
-        default=None,
-    )
+    points_earned = models.PositiveIntegerField()
 
     quantity = models.PositiveIntegerField(
         default=None,

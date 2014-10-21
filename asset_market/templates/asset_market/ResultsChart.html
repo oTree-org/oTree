@@ -1,0 +1,43 @@
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<script>
+
+    $(function () {
+    $('#container').highcharts({
+        title: {
+            text: '',
+            x: -20 //center
+        },
+        xAxis: {
+            categories: ['Period 1', 'Period 2', 'Period 3', 'Period 4', 'Period 5']
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        legend: {
+            layout: 'horizontal',
+            verticalAlign: 'top',
+            borderWidth: 0
+        },
+        // FIXME: load the real values
+        series: [{
+            name: 'Transaction Price',
+            data: [7.0, 6.9, 9.5, 14.5, 18.2]
+        }, {
+            name: 'Dividend/Share',
+            data: [1, 8.9, 5.7, 11.3, 17.0]
+        }, {
+            name: 'Shares Traded',
+            data: [3.9, 4.2, 5.7, 8.5, 11.9]
+        }]
+    });
+});
+
+</script>

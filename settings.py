@@ -1,5 +1,6 @@
 import os
 import otree.settings
+import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -17,18 +18,13 @@ else:
     # Change this to something unique (e.g. mash your keyboard), and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
 
-# How to set heroku vars: https://devcenter.heroku.com/articles/config-vars
-if os.environ.get("HEROKU"):
-    import dj_database_url
-    DATABASES = {}
-    DATABASES['default'] = dj_database_url.config()
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
+
+
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(
+    default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+)
+
 
 CREATE_DEFAULT_SUPERUSER = True
 ADMIN_USERNAME = 'admin'
@@ -67,18 +63,18 @@ INSTALLED_OTREE_APPS = [
     'volunteer_dilemma',
     'bertrand_competition',
     'principal_agent',
-    'coordination',
     'stag_hunt',
     'battle_of_the_sexes',
     'survey_sample',
     'asset_market',
 ]
 
-SECRET_KEY = SECRET_KEY
-BASE_DIR = BASE_DIR
+
 WSGI_APPLICATION = 'wsgi.application'
 
 SESSION_MODULE = 'session'
+
+ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
 
 otree.settings.augment_settings(globals())
 

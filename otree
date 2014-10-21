@@ -36,18 +36,23 @@ COMMANDS = {}
 ###########################################################################
 
 
-heroku_apps = {
-    'demo': 'otree-demo',
-    'chen-dev': 'pacific-journey-6479',
-}
-
-
 def recreate(args):
-    syncdb = 'python manage.py syncdb --traceback'
+    syncdb = './otree syncdb --traceback'
 
     if args.environment == 'local':
-        with open('db.sqlite3', 'w') as db:
-            db.write('')
+        settings_module = os.environ.get('DJANGO_SETTINGS_MODULE', 'settings')
+        try:
+            settings = importlib.import_module(settings_module)
+            db_file_name = settings.DATABASES['default']['NAME']
+        except (ImportError, AttributeError, KeyError):
+            db_file_name = None
+
+        if not db_file_name:
+            db_file_name = 'db.sqlite3'
+
+        if os.path.exists(db_file_name):
+            os.unlink(db_file_name)
+
         django_command([sys.argv[0], 'syncdb', '--traceback'])
         # then launch from PyCharm
     else:
@@ -58,8 +63,7 @@ def recreate(args):
                 print 'exit.'
                 return
 
-        reset_db = 'heroku pg:reset DATABASE --confirm {}'.format(
-            heroku_apps[args.environment])
+        reset_db = 'heroku pg:reset DATABASE --confirm {}'.format(args.environment)
         os.system(reset_db)
 
         _commit_and_push(args.environment)
@@ -73,11 +77,11 @@ recreate.parser = argparse.ArgumentParser(description='recreate')
 recreate.parser.add_argument('recreate', nargs=1)
 recreate.parser.add_argument(
     'environment', nargs='?', default='local',
-    choices=['local', 'production'] + list(heroku_apps.keys()),
     help="""
-        Give the environment on which you want to deploy the otree instance.
-        Use 'local' to setup your local project.
-        Use 'production' to deploy to heroku.
+        If omitted, will set up your local project.
+        If specified, will push to the named Heroku instance.
+        The the Heroku app and the git remote must have the same name.
+        e.g., "myherokuapp.herokuapp.com" and "git push myherokuapp master"
     """)
 
 COMMANDS['recreate'] = recreate
@@ -101,8 +105,7 @@ commit_and_push.parser.add_argument('commit_and_push', nargs=1)
 commit_and_push.parser.add_argument(
     'environment', nargs=1,
     help="""
-        Give the environment on which you want to push the changes.
-        Use 'production' to deploy to heroku.
+        Give the remote name to which you want to push the changes.
     """)
 
 COMMANDS['commit_and_push'] = commit_and_push

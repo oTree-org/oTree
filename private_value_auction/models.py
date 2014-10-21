@@ -56,7 +56,6 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     private_value = models.MoneyField(
-        default=None,
         doc="""How much the player values the item, generated randomly"""
     )
 
