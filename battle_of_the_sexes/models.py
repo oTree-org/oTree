@@ -43,17 +43,17 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/battle_of_th
 class Constants:
 
     # """Amount rewarded to husband if football is chosen"""
-    football_husband_amount = Money(0.30)
+    football_husband_amount = Money(300)
 
     # Amount rewarded to wife if football is chosen
-    football_wife_amount = Money(0.20)
+    football_wife_amount = Money(200)
 
     # amount rewarded to either if the choices don't match
     mismatch_amount = Money(0.00)
 
-    opera_husband_amount = Money(0.20)
+    opera_husband_amount = Money(200)
 
-    opera_wife_amount = Money(0.30)
+    opera_wife_amount = Money(300)
 
     training_1_husband_correct = 0
     training_1_wife_correct = 0

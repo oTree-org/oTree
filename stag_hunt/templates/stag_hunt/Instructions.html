@@ -23,13 +23,39 @@
         position: absolute;
         top: 60%;
     }
+
     .instructions {
+        position: relative;
+        text-shadow: 0 1px 0 #fff;
+        line-height: 1.5;
+        margin: 60px auto;
+        background-color: #f5f5dc;
+        background-image: linear-gradient(to bottom, #f5f5dc 0px, #fbfbeb 100%);
         padding-top: 5px;
         padding-bottom: 15px;
         margin-top: 20px;
-        box-shadow: 00px 0px 35px -6px #888888;
-        background-color: #f5f5dc;
-        background-image: linear-gradient(to bottom, #f5f5dc 0px, #fbfbeb 100%);
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+    }
+
+    .instructions:before, .instructions:after {
+        z-index: -1;
+        position: absolute;
+        content: "";
+        bottom: 15px;
+        left: 10px;
+        width: 50%;
+        top: 80%;
+        max-width:300px;
+        background: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+        transform: rotate(-3deg);
+    }
+
+    .instructions:after {
+        transform: rotate(3deg);
+        right: 10px;
+        left: auto;
     }
 
 </style>
