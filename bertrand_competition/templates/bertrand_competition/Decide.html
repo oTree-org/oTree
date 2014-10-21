@@ -8,29 +8,7 @@
 
 {% block content %}
 
-    <p>
-        You have been randomly and anonymously grouped with {{ num_other_players }} players.
-        All of you see these same instructions.
-    </p>
-
-    <p>
-        Each of you represents a firm that produces a given product for a given market.
-        Your task is to decide for how much you want to sell your firm's product. The price must be higher than the marginal cost of production, {{ marginal_cost }},
-        and at most {{ maximum_price }}.
-    </p>
-
-    <p>
-        Players will make their decision privately and at the same time.
-    </p>
-
-    <p>
-        In this market, consumers care only about the price. The firm which offers the lowest price will get all the business.
-        Profits will be the firm's chosen price minus the marginal cost of production.
-        Firms offering higher prices get zero business and zero profit. If two or more firms offer the same lowest price,
-        business is divided equally amongst them.
-    </p>
-
-    {% formrow form.price with label="Choose a price for your firm's product:" %}
+    {% formrow form.price with label="Please enter a number from 0 to 100 as your price" %}
     {% next_button %}
 
 {% endblock %}
