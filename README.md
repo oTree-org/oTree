@@ -13,6 +13,7 @@ and oTree programming is accessible to programmers without advanced experience i
 
 See the live demo [here](http://demo.otree.org/).
 
+This repository contains the games; the oTree core libraries are [here](https://github.com/oTree-org/otree-core).
 
 ## Quick start
 After forking & cloning the repo:
