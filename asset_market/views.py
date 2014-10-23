@@ -151,6 +151,8 @@ class Dividend(Page):
     template_name = 'asset_market/Dividend.html'
 
     def variables_for_template(self):
+        self.player.set_payoff()
+
         return {
             'dividend': self.group.dividend_per_share,
             'dividend_gain': self.group.dividend_per_share * self.player.shares,
@@ -175,6 +177,7 @@ class Results(Page):
     template_name = 'asset_market/Results.html'
 
     def variables_for_template(self):
+
         return {
             'cash': self.player.cash,
             'shares': self.player.shares,

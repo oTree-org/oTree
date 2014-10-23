@@ -13,10 +13,22 @@ from random import randint
 author = 'Dev'
 
 doc = """
-In this asset market, there are 2 participants. Both of you are endowed with $20 cash and 5 shares of stock.
-Shares pay random dividends at the end of each period. There are 5 periods during which you are free to submit buy/sell orders to trade
-shares. At the end of the study, your cash positions count for your payoffs; your shares are redeemed for free.<br>
+<p>
+In this asset market, two players trade shares that give probabilistic dividends. It is based on
+<a href="http://www.tandfonline.com/doi/abs/10.3200/JECE.40.1.027-037">Bostian and Holt (2010).</a><br>
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/asset_market" target="_blank">here</a>.
+</p>
+<h4>Recommended Literature</h4>
+<p>
+Smith, Vernon L., Gerry L. Suchanek, and Arlington W. Williams. "Bubbles, crashes, and endogenous expectations in experimental spot asset markets."Econometrica: Journal of the Econometric Society (1988): 1119-1151.
+Smith, Alec, et al. "Irrational exuberance and neural crash warning signals during endogenous experimental market bubbles." Proceedings of the National Academy of Sciences 111.29 (2014): 10503-10508.
+Palan, Stefan. "A review of bubbles and crashes in experimental asset markets." Journal of Economic Surveys 27.3 (2013): 570-588.
+</p>
+<p>
+Wikipedia: <a href="https://en.wikipedia.org/wiki/Stock_market_bubble">Stock Market Bubbles,</a>
+<a href="https://en.wikipedia.org/wiki/Experimental_economics#Market_games">Market Games</a><br>
+Keywords: Stock Market, Finance, Bubble, Trade,
+</p>
 """
 
 class Constants:
@@ -52,45 +64,55 @@ class Group(otree.models.BaseGroup):
 
     def set_transaction(self):
         for p in self.get_players():
-            if (p.sp != 0 and p.sn != 0) or (p.bp != 0 and p.bn != 0):
-                # FIXME consider the following conditions.
-                '''
-                 -A transaction is only possible when one participant wants to buy and the other to sell.
-                 -Moreover, the submitted maximum buying price (BP) has to be higher than the minimum selling price (SP).
-                 -When this is the case, transaction takes place at the average of these two prices.
-                  That is transaction price (P) = 0.5*(BP+SP).
-                 -The number of shares traded (N) equals the smaller of the two numbers, i.e. N is the minimum of BN and SN.
-                 -If transaction takes place, N shares are removed from the selling party to the buying party; accordingly,
-                 cash equal to the transaction price (P) is added to the selling party and subtracted from the buying party.
-                 -Otherwise, no transaction takes place and the orders submitted, if any, are not revealed to participants.
-                '''
+            if not self.is_transaction:
+                if (p.sp != 0 and p.sn != 0) or (p.bp != 0 and p.bn != 0):
+                    # FIXME consider the following conditions.
+                    '''
+                     -A transaction is only possible when one participant wants to buy and the other to sell.
+                     -Moreover, the submitted maximum buying price (BP) has to be higher than the minimum selling price (SP).
+                     -When this is the case, transaction takes place at the average of these two prices.
+                      That is transaction price (P) = 0.5*(BP+SP).
+                     -The number of shares traded (N) equals the smaller of the two numbers, i.e. N is the minimum of BN and SN.
+                     -If transaction takes place, N shares are removed from the selling party to the buying party; accordingly,
+                     cash equal to the transaction price (P) is added to the selling party and subtracted from the buying party.
+                     -Otherwise, no transaction takes place and the orders submitted, if any, are not revealed to participants.
+                    '''
+                    if p.bp != 0:
+                        # buyer
+                        # set transaction price
+                        self.transaction_price = 0.5*(p.bp+p.other_player().sp)
+                        self.shares_traded = min(p.bn, p.other_player().sn)
 
-                # set transaction price
-                self.transaction_price = 0.5*(p.bp+p.other_player().sp)
-                self.shares_traded = min(p.bn, p.other_player().sn)
+                        # adjust shares and cash
+                        amount = self.transaction_price * self.shares_traded
+                        if amount <= p.cash:
+                            # buyer
+                            p.shares += self.shares_traded
+                            p.cash -= self.transaction_price * self.shares_traded
+                            # seller
+                            p.other_player().shares -= self.shares_traded
+                            p.other_player().cash += self.transaction_price * self.shares_traded
+                            self.is_transaction = True
+                    elif p.sp != 0:
+                        # seller
+                        # set transaction price
+                        self.transaction_price = 0.5*(p.sp+p.other_player().bp)
+                        self.shares_traded = min(p.sn, p.other_player().bn)
 
-                # adjust shares and cash
-                amount = self.transaction_price * self.shares_traded
-                if amount <= p.cash:
-                    # buyer
-                    p.shares += self.shares_traded
-                    p.cash -= self.transaction_price * self.shares_traded
-                    # seller
-                    p.other_player().shares -= self.shares_traded
-                    p.other_player().cash += self.transaction_price * self.shares_traded
-                    self.is_transaction = True
-            else:
-                # no transaction
-                pass
+                        # adjust shares and cash
+                        amount = self.transaction_price * self.shares_traded
+                        if amount <= p.other_player().cash:
+                            # buyer
+                            p.other_player().shares += self.shares_traded
+                            p.other_player().cash -= self.transaction_price * self.shares_traded
+                            # seller
+                            p.shares -= self.shares_traded
+                            p.cash += self.transaction_price * self.shares_traded
+                            self.is_transaction = True
 
     def set_dividend(self):
         for p in self.get_players():
-            # set dividend - a random value 1 or 2
             self.dividend_per_share = randint(1,2)
-
-            # add dividend to current cash position
-            p.cash += (p.shares * self.dividend_per_share)
-
             self.is_dividend = True
 
 
@@ -146,3 +168,6 @@ class Player(otree.models.BasePlayer):
 
     def is_understanding_question_2_correct(self):
         return self.understanding_question_2 == Constants.understanding_2_correct
+
+    def set_payoff(self):
+        self.payoff = 0
