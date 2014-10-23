@@ -1,1 +1,17 @@
-{% extends "global/Base.html" %}{% load staticfiles floppyforms otree_tags %}{% load i18n %}{% block title %}    Production{% endblock %}{% block content %}    {% formrow form.units with label="How many units will you produce?" %}    {% next_button %}    {% include 'cournot_competition/Instructions.html' %}{% endblock %}
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Production
+{% endblock %}
+
+{% block content %}
+
+    {% formrow form.units with label="How many units will you produce (from 0 to 30)?" %}
+
+    {% next_button %}
+
+    {% include 'cournot_competition/Instructions.html' %}
+
+{% endblock %}
