@@ -21,9 +21,7 @@ class Question1(Page):
     template_name = 'global/Question.html'
     form_model = models.Player
     form_fields = 'training_answer_x', 'training_answer_y'
-    question = '''Suppose that participant A sent 20 points to participant B.
-        Having received the tripled amount, participant B sent 50 points to
-        participant A. In the end, how much would participant A and B have?'''
+    question = '''Suppose that participant A sent 20 points to participant B. Having received the tripled amount, participant B sent 50 points to participant A. In the end, how many points would participant A and B have?'''
 
     def participate_condition(self):
         return self.subsession.round_number == 1
