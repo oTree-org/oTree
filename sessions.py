@@ -98,12 +98,12 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='guessing',
-            display_name="Guessing Game",
+            name='beauty',
+            display_name="Beauty Contest",
             base_pay=10.00,
             participants_per_session=50,
             participants_per_demo_session=5,
-            subsession_apps=['guessing', 'lab_results'],
+            subsession_apps=['beauty', 'survey_sample', 'lab_results'],
             doc=""""""
         ),
         SessionType(
