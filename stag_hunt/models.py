@@ -4,7 +4,6 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Money, money_range
 import random
 # </standard imports>
 
@@ -45,10 +44,10 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/stag_hunt" t
 """
 
 class Constants:
-    stag_stag_amount = Money(200)
-    stag_hare_amount = Money(0.00)
-    hare_stag_amount = Money(100)
-    hare_hare_amount = Money(100)
+    stag_stag_amount = 200
+    stag_hare_amount = 0
+    hare_stag_amount = 100
+    hare_hare_amount = 100
 
     training_question_1_my_payoff_correct = 0
     training_question_1_other_payoff_correct = 100

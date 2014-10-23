@@ -4,7 +4,6 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Money, money_range
 import random
 # </standard imports>
 
@@ -43,18 +42,17 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/battle_of_th
 class Constants:
 
     # """Amount rewarded to husband if football is chosen"""
-    football_husband_amount = Money(300)
+    football_husband_amount = 300
 
     # Amount rewarded to wife if football is chosen
-    football_wife_amount = Money(200)
+    football_wife_amount = 200
 
     # amount rewarded to either if the choices don't match
-    mismatch_amount = Money(0.00)
+    mismatch_amount = 0
 
+    opera_husband_amount = 200
 
-    opera_husband_amount = Money(200)
-
-    opera_wife_amount = Money(300)
+    opera_wife_amount = 300
 
     training_1_husband_correct = 0
     training_1_wife_correct = 0
