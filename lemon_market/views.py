@@ -3,6 +3,7 @@ from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from django.utils.safestring import mark_safe
+from random import choice
 from utils import FeedbackQ
 
 
@@ -34,8 +35,8 @@ class Question1(Page):
         <i>Price from Seller 2: 20 points</i>
         The buyer then bought 1 unit from seller 1. Having completed the\
         purchase, the buyer realized that the commodity was of low grade.\
-        What would be the earnings for the sellers and the buyer for this\
-        period?''')
+        What would be the period payoffs for the sellers and the buyer for\
+        this period?''')
 
     def participate_condition(self):
         return self.subsession.round_number == 1
@@ -54,12 +55,13 @@ class Feedback1(Page):
         p = self.player
         return dict(
             answers={
-                'buyer': [p.training_buyer_earnings, -5],
-                'seller 1': [p.training_seller1_earnings, 15],
-                'seller 2': [p.training_seller2_earnings, 0]},
+                'buyer': [p.training_buyer_earnings, 45],
+                'seller 1': [p.training_seller1_earnings, 65],
+                'seller 2': [p.training_seller2_earnings, 50]},
             explanation=mark_safe(Question1.question + '''
             <strong>Solution:</strong> Earnings for the buyer would be\
-            -5 points, for seller 1 15 points, and for seller 2 0 points.'''))
+            <strong>45 points</strong>, for seller 1 <strong>65\
+            points</strong>, and for seller 2 <strong>50 points</strong>.'''))
 
 
 class Production(Page):
@@ -115,19 +117,11 @@ class Results(Page):
 
     def variables_for_template(self):
         buyer = self.group.get_player_by_role('buyer')
-        ctx = dict(
+        return dict(
             subsession=self.subsession, player=self.player,
             payoff=self.player.payoff, buyer=buyer,
             seller=buyer.choice and self.group.get_player_by_id(
                 buyer.choice + 1))
-        if buyer.choice:
-            ctx['seller'] = seller = self.group.get_player_by_id(
-                buyer.choice + 1)
-            if buyer == self.player:
-                ctx['earnings'] = seller.quality - seller.price + 5
-            else:
-                ctx['earnings'] = seller.price - seller.quality
-        return ctx
 
 
 class FeedbackQ(FeedbackQ, Page):
@@ -142,11 +136,18 @@ class FinalResults(Page):
         return self.subsession.round_number == self.subsession.number_of_rounds
 
     def variables_for_template(self):
-        holding = sum([
-            p.payoff for p in self.player.me_in_all_rounds()])
+        while True:
+            final = [p for p in self.player.me_in_all_rounds(
+                ) if p.subsession.final]
+            if final:
+                break
+            final = choice(
+                self.subsession.previous_rounds() + [self.subsession])
+            final.final = True
+            # final.save()
+        final, = final
         return dict(
-            holding=holding,
-            total_payoff=holding + 10,
+            rnd=final, payoff=final.payoff + 10,
             player=self.player, group=self.group,
             rounds=self.subsession.previous_rounds() + [self.subsession])
 

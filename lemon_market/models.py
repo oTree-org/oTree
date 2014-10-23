@@ -4,7 +4,6 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Money
 # </standard imports>
 
 
@@ -20,10 +19,11 @@ href='https://github.com/oTree-org/oTree/tree/master/lemon_market'>here</a>.
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'lemon_market'
+    final = models.BooleanField(default=False)
 
 
 class Group(otree.models.BaseGroup):
-    INITIAL = 100
+    INITIAL = 50
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -55,14 +55,15 @@ class Player(otree.models.BasePlayer):
     # </built-in>
     # training
     training_buyer_earnings = models.IntegerField(
-        verbose_name="Buyer's earning would be")
+        verbose_name="Buyer's period payoff would be")
     training_seller1_earnings = models.IntegerField(
-        verbose_name="Seller 1's earning would be")
+        verbose_name="Seller 1's period payoff would be")
     training_seller2_earnings = models.IntegerField(
-        verbose_name="Seller 2's earning would be")
+        verbose_name="Seller 2's period payoff would be")
     # seller
     price = models.PositiveIntegerField(
-        verbose_name='Please indicate a price you want to sell')
+        verbose_name='Please indicate a price (from 0 to %i) you want to sell'
+        % Group.INITIAL)
     quality = models.PositiveIntegerField(choices=[
         (30, 'High'),
         (20, 'Medium'),
@@ -71,7 +72,8 @@ class Player(otree.models.BasePlayer):
         widget=widgets.RadioSelectHorizontal())
     # buyer
     choice = models.PositiveIntegerField(
-        blank=True, widget=widgets.RadioSelect())  # seller index
+        blank=True, widget=widgets.RadioSelect(),
+        verbose_name='And you will')  # seller index
     feedback = models.PositiveIntegerField(
         choices=(
             (5, 'Very well'),
@@ -81,6 +83,10 @@ class Player(otree.models.BasePlayer):
             (1, 'Very badly')), widget=widgets.RadioSelectHorizontal(),
         verbose_name='')
 
+    def price_error_message(self, value):
+        if not 0 <= value <= Group.INITIAL:
+            return 'Your entry is invalid.'
+
     def choice_choices(self):
         return [(i, 'Buy from seller %i' % i) for i in range(
             1, self.group.players_per_group)] + [(0, 'Buy nothing')]
@@ -89,6 +95,3 @@ class Player(otree.models.BasePlayer):
         if self.id_in_group == 1:
             return 'buyer'
         return 'seller %i' % (self.id_in_group - 1)
-
-    def earnings(self):
-        return self.payoff - self.group.INITIAL

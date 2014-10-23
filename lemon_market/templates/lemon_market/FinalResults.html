@@ -4,7 +4,7 @@
 {% block content %}
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 <p>
-You are {{player.role}}. After 3 periods, your holding is {{holding|floatformat}} points. In addition, you received 10 points for participation. Thus, your total payoff is {{total_payoff}}.
+You are <strong>{{player.role}}</strong>. The <strong>{{rnd.subsession.round_number}}</strong> period was selected for payoffs and your payoff for this period was <strong>{{rnd.payoff|floatformat}}</strong> points. In addition, you received 10 points for participation. Thus, your total payoff is {{payoff|floatformat}}.
 </p>
 <p>
 To complete the study, please answer a short questionnaire that will now follow.

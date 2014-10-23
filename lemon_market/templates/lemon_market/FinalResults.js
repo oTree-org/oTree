@@ -4,7 +4,7 @@ $(function () {
             text: 'Results',
         },
         xAxis: {
-            categories: ['Round 1', 'Round 2', 'Round 3'],
+            categories: ['Period 1', 'Period 2', 'Period 3'],
         },
         yAxis: {
             title: {
@@ -43,7 +43,7 @@ $(function () {
             {% if forloop.counter0 %}
             ,
                 {% endif %}
-            {{round.earnings|floatformat}}
+            {{round.payoff|floatformat}}
                 {% endfor %}
             ]
         }
