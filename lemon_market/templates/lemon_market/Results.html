@@ -1,17 +1,31 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
-{% load i18n %}
+{% load otree_tags %}
 
 {% block title %}
-    Results
+Results (Period {{subsession.round_number}} of {{subsession.number_of_rounds}})
 {% endblock %}
 
 {% block content %}
+You are {{player.role}}. 
+{% if buyer.choice %}
+{% if player.role == 'buyer' %}
+You bought from seller {{buyer.choice}}. The quality grade of your purchase is {{seller.get_quality_display}}. Thus your earning from this period is {{earnings}} points. With your initial 100 points, your current holding is {{player.payoff|floatformat}} points.
+{% else %}
+The buyer purchased a {{seller.get_quality_display}} grade from {{seller.role}} at a price of {{seller.price}} points.
+{% ifequal player seller %}
+Thus your earning from this period is {{earnings}} points.
+{% endifequal %}
+With your initial 100 points, your current holding is {{player.payoff|floatformat}} points.
+{% endif %}
+{% else %}
+{# buyer bought nothing #}
+{% if player.role == 'buyer' %}
+You bought nothing in this period.
+{% else %}
+The buyer bought nothing in this period.
+{% endif %}
+The buyer bought nothing in this period. Thus your earning from this period is 0 points. With your initial 100 points, your current holding is 100 points.
+{% endif %}
 
-    <p>You bidded {{ bid_amount }}.</p>
-    <p>Commodity value was {{ random_value }}.</p>
-    <p>Your payoff is {{ payoff }}.</p>
-
-    {% next_button %}
-
+<p> {% next_button %}</p> 
 {% endblock %}

@@ -21,6 +21,8 @@ class Constants:
 
     #Initial amount allocated to each player
     amount_allocated = 100
+    multiplication_factor = 3
+    bonus = 10
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -30,7 +32,7 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Group(otree.models.BaseGroup):
-    BONUS = 10
+
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -50,16 +52,16 @@ class Group(otree.models.BaseGroup):
         p1 = self.get_player_by_id(1)
         p2 = self.get_player_by_id(2)
         p1.payoff = p2.payoff = 0
-        p1.points = self.BONUS + Constants.amount_allocated\
+        p1.points = Constants.bonus + Constants.amount_allocated\
             - self.sent_amount + self.sent_back_amount
-        p2.points = self.BONUS + self.sent_amount * 3 - self.sent_back_amount
+        p2.points = Constants.bonus + self.sent_amount * Constants.multiplication_factor - self.sent_back_amount
 
     def sent_amount_error_message(self, value):
         if not 0 <= value <= Constants.amount_allocated:
             return 'Your entry is invalid.'
 
     def sent_back_amount_error_message(self, value):
-        if not 0 <= value <= self.sent_amount * 3:
+        if not 0 <= value <= self.sent_amount * Constants.multiplication_factor:
             return 'Your entry is invalid.'
 
 

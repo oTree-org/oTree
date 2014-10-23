@@ -1,0 +1,20 @@
+{% extends "global/Base.html" %}
+{% load otree_tags %}
+
+{% block title %}
+    Final Results
+{% endblock title %}
+
+{% block content %}
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<p>
+You are {{player.role}}. After 3 periods, your holding is {{holding|floatformat}} points. In addition, you received 10 points for participation. Thus, your total payoff is {{total_payoff}}.
+</p>
+<p>
+To complete the study, please answer a short questionnaire that will now follow.
+</p>
+{% next_button %}
+<script>
+{% include "lemon_market/FinalResults.js" %}
+</script>
+{% endblock %}

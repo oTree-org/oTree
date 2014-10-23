@@ -20,12 +20,7 @@
     </p>
 
     <p>
-        The two-thirds average is {{ two_third_average }}. The closest value is
-        {% for p in players %}
-            {% if p.is_winner %}
-                {{ p.guess_value }}.
-            {% endif %}
-        {% endfor %}
+        The two-thirds average is {{ two_third_average }}. The closest value is {{ best_guess }}.
     </p>
 
     <p>

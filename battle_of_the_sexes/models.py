@@ -51,6 +51,7 @@ class Constants:
     # amount rewarded to either if the choices don't match
     mismatch_amount = Money(0.00)
 
+
     opera_husband_amount = Money(200)
 
     opera_wife_amount = Money(300)

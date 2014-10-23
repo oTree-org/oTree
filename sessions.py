@@ -8,7 +8,8 @@ def session_types():
 
     return [
         SessionType(
-            name="Demo Game",
+            name='demo_game',
+            display_name="Demo Game",
             base_pay=0,
             participants_per_demo_session=1,
             participants_per_session=1,
@@ -16,7 +17,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Public Goods",
+            name='public_goods',
+            display_name="Public Goods",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=3,
@@ -24,7 +26,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Prisoner's Dilemma",
+            name='prisoner',
+            display_name="Prisoner's Dilemma",
             base_pay=4.00,
             participants_per_demo_session=2,
             participants_per_session=2,
@@ -32,7 +35,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Cournot Competition",
+            name='cournot_competition',
+            display_name="Cournot Competition",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -40,7 +44,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Trust Game",
+            name='trust',
+            display_name="Trust Game",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -48,7 +53,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Dictator Game",
+            name='dictator',
+            display_name="Dictator Game",
             base_pay=10.00,
             participants_per_session=2,
             participants_per_demo_session=2,
@@ -56,7 +62,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Matching Pennies",
+            name='matching_pennies',
+            display_name="Matching Pennies",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -64,7 +71,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Traveler's Dilemma",
+            name='traveler_dilemma',
+            display_name="Traveler's Dilemma",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -72,7 +80,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Survey",
+            name='survey',
+            display_name="Survey",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=1,
@@ -80,7 +89,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Bargaining Game",
+            name='bargaining',
+            display_name="Bargaining Game",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -88,7 +98,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Guessing Game",
+            name='guessing',
+            display_name="Guessing Game",
             base_pay=10.00,
             participants_per_session=50,
             participants_per_demo_session=5,
@@ -96,7 +107,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Common Value Auction",
+            name='common_value_auction',
+            display_name="Common Value Auction",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -104,7 +116,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Stackelberg Competition",
+            name='stackelberg_competition',
+            display_name="Stackelberg Competition",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -112,7 +125,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Private Value Auction",
+            name='private_value_auction',
+            display_name="Private Value Auction",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -120,7 +134,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Volunteer's Dilemma",
+            name='volunteer_dilemma',
+            display_name="Volunteer's Dilemma",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=3,
@@ -128,15 +143,17 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Bertrand Competition",
+            name='bertrand_competition',
+            display_name="Bertrand Competition",
             base_pay=10.00,
             participants_per_session=12,
-            participants_per_demo_session=3,
+            participants_per_demo_session=2,
             subsession_apps=['bertrand_competition', 'lab_results'],
             doc=""""""
         ),
         SessionType(
-            name="Principal Agent",
+            name='principal_agent',
+            display_name="Principal Agent",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -144,7 +161,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Stag Hunt",
+            name='stag_hunt',
+            display_name="Stag Hunt",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -152,7 +170,8 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name="Battle of the Sexes",
+            name='battle_of_the_sexes',
+            display_name="Battle of the Sexes",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
@@ -163,67 +182,24 @@ def session_types():
         ),
         SessionType(
             # in-progress
-            name="Asset Market",
+            name='asset_market',
+            display_name="Asset Market",
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
             subsession_apps=['asset_market']*5 + ['lab_results'],
             doc=""""""
         ),
+        SessionType(
+            name = 'lemon_market',
+            display_name="Lemon Market",
+            base_pay=10.00,
+            participants_per_session=12,
+            participants_per_demo_session=3,
+            subsession_apps=['lemon_market']*3 + ['lab_results'],
+            doc=""""""
+        ),
 
-        ]
-
-# FIXME: complete the apps below
-disabled_session_types = [
-    SessionType(
-        name="Quiz",
-        base_pay=0,
-        participants_per_demo_session=1,
-        participants_per_session=1,
-        subsession_apps=['quiz'],
-        doc=""""""
-    ),
-    # in progress
-    SessionType(
-        name="Asset Market",
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=2,
-        subsession_apps=['asset_market']*5 + ['lab_results'],
-        doc=""""""
-    ),
-    SessionType(
-        name="Lemon Market",
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=1,
-        subsession_apps=['lemon_market', 'lab_results'],
-        doc=""""""
-    ),
-    SessionType(
-        name="Tragedy of the commons",
-        base_pay=10.00,
-        participants_per_session=2,
-        participants_per_demo_session=2,
-        subsession_apps=['tragedy_of_the_commons', 'lab_results'],
-        doc=""""""
-    ),
-    SessionType(
-        name="2 x 2 Matrix Game (Symmetric)",
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=2,
-        subsession_apps=['matrix_symmetric', 'lab_results'],
-        doc=""""""
-    ),
-    SessionType(
-        name="2 x 2 Matrix Game (Asymmetric)",
-        base_pay=10.00,
-        participants_per_session=12,
-        participants_per_demo_session=2,
-        subsession_apps=['matrix_asymmetric', 'lab_results'],
-        doc=""""""
-    ),
     ]
 
 

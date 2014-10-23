@@ -11,8 +11,6 @@ import random
 doc = """
 This is a one-period public goods game with 3 players. Assignment to groups is random.
 <br />
-The game is preceded by one understanding question (in a real experiment you would often have more).
-<br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/public_goods" target="_blank">here</a>
 
 """
@@ -20,8 +18,8 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/public_goods
 class Constants:
     #"""Amount allocated to each player"""
     endowment = 100
-
     efficiency_factor = 1.8
+    base_points = 10
 
     question_correct = 92
 
@@ -47,7 +45,7 @@ class Group(otree.models.BaseGroup):
         individual_share = contributions * Constants.efficiency_factor / self.players_per_group
         for p in self.get_players():
             p.points = (Constants.endowment - p.contribution) + individual_share
-            p.payoff = p.points / 100
+            p.payoff = p.points / Constants.endowment
 
 
 class Player(otree.models.BasePlayer):
@@ -62,10 +60,14 @@ class Player(otree.models.BasePlayer):
         widget=widgets.TextInput()
     )
 
-    points = models.PositiveIntegerField(null=True)
+    def contribution_error_message(self, value):
+        if not 0 <= value <= Constants.endowment:
+            return 'Your entry is invalid.'
 
-    question = models.PositiveIntegerField(null=True, verbose_name='', widget=widgets.TextInput())
-    feedbackq = models.CharField(null=True, verbose_name='How well do you think this sample game was implemented?', widget=widgets.RadioSelectHorizontal())
+    points = models.PositiveIntegerField()
+
+    question = models.PositiveIntegerField(widget=widgets.TextInput())
+    feedbackq = models.CharField(widget=widgets.RadioSelectHorizontal())
 
     def feedbackq_choices(self):
         return ['Very well', 'Well', 'OK', 'Badly', 'Very badly']
@@ -73,8 +75,5 @@ class Player(otree.models.BasePlayer):
     def question_correct(self):
         return self.question == Constants.question_correct
 
-    def contribution_error_message(self, value):
-        if not 0 <= value <= Constants.endowment:
-            return 'Your entry is invalid.'
 
 

@@ -6,7 +6,9 @@ from otree.common import Money, money_range
 from .models import Constants
 
 def variables_for_all_templates(self):
-    return {'endowment': Constants.endowment}
+    return {'endowment': Constants.endowment,
+            'players_per_group': self.group.players_per_group,
+            'efficiency_factor': Constants.efficiency_factor}
 
 
 class Introduction(Page):
@@ -74,11 +76,10 @@ class Results(Page):
         current_player = self.player
         other_players = self.player.get_others_in_group
         total_contribution = sum([c.contribution for c in self.group.get_players()])
-        total_earnings = float(total_contribution) * 1.8
-        share_earnings = float(total_earnings) / 3
+        total_earnings = total_contribution * Constants.efficiency_factor
+        share_earnings = total_earnings / self.group.players_per_group
         individual_earnings = (Constants.endowment - current_player.contribution) + share_earnings
-        base_points = 10
-        total_points = individual_earnings + base_points
+        total_points = individual_earnings + Constants.base_points
 
         return {
             'current_player': current_player,
@@ -87,7 +88,7 @@ class Results(Page):
             'total_earnings': total_earnings,
             'share_earnings': share_earnings,
             'individual_earnings': individual_earnings,
-            'base_points': base_points,
+            'base_points': Constants.base_points,
             'total_points': total_points
         }
 

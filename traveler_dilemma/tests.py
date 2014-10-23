@@ -9,29 +9,14 @@ class PlayerBot(Bot):
 
     def play(self):
 
-        # basic assertions
-        assert (Constants.max_amount == 100)
-        assert (Constants.min_amount == 2)
-
         # start game
         self.submit(views.Introduction)
         self.submit(views.Question1, dict(
             training_answer_mine=1, training_answer_others=2))
         self.submit(views.Feedback1)
 
-        # player 1: claim
-        if self.player.id_in_group == 1:
-            self.play_p1()
+        self.submit(views.Claim, {"claim": random.randrange(Constants.min_amount, Constants.max_amount)})
 
-        # player 2: claim
-        else:
-            self.play_p2()
 
         self.submit(views.Results)
         self.submit(views.Question2, dict(feedback=3))
-
-    def play_p1(self):
-        self.submit(views.Claim, {"claim": random.randrange(2, 100)})
-
-    def play_p2(self):
-        self.submit(views.Claim, {"claim": random.randrange(2, 100)})

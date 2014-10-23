@@ -67,21 +67,17 @@ INSTALLED_OTREE_APPS = [
     'battle_of_the_sexes',
     'survey_sample',
     'asset_market',
+    'lemon_market',
 ]
 
 
 WSGI_APPLICATION = 'wsgi.application'
 
-SESSION_MODULE = 'session'
+SESSIONS_MODULE = 'sessions'
 
 ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
 
 otree.settings.augment_settings(globals())
 
-# FIXME: complete the apps below
 DISABLED_APPS = [
-
-        'lemon_market',
-        'tragedy_of_the_commons',
-        # lab results: displays lab results in a given session
     ],

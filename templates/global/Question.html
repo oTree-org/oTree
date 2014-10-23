@@ -5,15 +5,19 @@
 {% if title %}
 {{ title }}
 {% else %}
-Understanding Question {{ num_q }} of {{ total_q }}
+Understanding Question {{ num_q|default:1 }} of {{ total_q|default:1 }}
 {% endif %}
 {% endblock %}
 
 {% block content %}
-<p>{{question}}</p>
+{{question|linebreaks}}
+{% for field in form %}
 <p>
-{{form}}
+{{field.label_tag}}<br />
+{{field.errors}}
+{{field}}
 </p>
+{% endfor %}
 <p>{% next_button %}</p>
 {% include instructions %}
 {% endblock %}

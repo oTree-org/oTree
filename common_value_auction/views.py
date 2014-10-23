@@ -26,8 +26,8 @@ class Bid(Page):
 
         return {'item_value_estimate': self.player.item_value_estimate,
                 'error_margin': Constants.estimate_error_margin,
-                'min_bid': Money(Constants.min_allowable_bid),
-                'max_bid': Money(Constants.max_allowable_bid)}
+                'min_bid': Constants.min_allowable_bid,
+                'max_bid': Constants.max_allowable_bid}
 
 
 class ResultsWaitPage(WaitPage):

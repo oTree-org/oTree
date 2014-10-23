@@ -59,11 +59,11 @@ class Player(otree.models.BasePlayer):
     def demo_field1_choices(self):
         return ['0', '1', '2', 'do not know']
 
-    training_question_1 = models.IntegerField(null=True, verbose_name='', widget=widgets.TextInput())
-    training_question_2 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
-    training_question_3 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
-    training_question_4 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
-    training_question_5 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
+    training_question_1 = models.IntegerField(widget=widgets.TextInput())
+    training_question_2 = models.CharField(widget=widgets.RadioSelect())
+    training_question_3 = models.CharField(widget=widgets.RadioSelect())
+    training_question_4 = models.CharField(widget=widgets.RadioSelect())
+    training_question_5 = models.CharField(widget=widgets.RadioSelect())
 
     def training_question_2_choices(self):
         return ['Embed images', 'Dynamic visualizations using HighCharts', 'Time travel (opens in pop up window)', 'Embed video', 'Embed audio']

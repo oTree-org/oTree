@@ -18,6 +18,7 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/bargaining" 
 
 class Constants:
     amount_shared = 100
+    bonus = 10
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -27,7 +28,7 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Group(otree.models.BaseGroup):
-    BONUS = 10
+
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -36,14 +37,15 @@ class Group(otree.models.BaseGroup):
     players_per_group = 2
 
     def set_payoffs(self):
-        total_requested_amount = sum([p.request_amount for p in self.get_players()])
+        players = self.get_players()
+        total_requested_amount = sum([p.request_amount for p in players])
         if total_requested_amount <= Constants.amount_shared:
-            for p in self.get_players():
-                p.points = p.request_amount + self.BONUS
+            for p in players:
+                p.points = p.request_amount + Constants.bonus
         else:
-            for p in self.get_players():
-                p.points = self.BONUS
-        for p in self.get_players():
+            for p in players:
+                p.points = Constants.bonus
+        for p in players:
             p.payoff = 0
 
 

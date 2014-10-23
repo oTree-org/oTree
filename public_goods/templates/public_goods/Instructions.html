@@ -1,13 +1,13 @@
 <div class="box effect7">
     <h4>Instructions</h4>
     <p>
-        In this study, you will be in a randomly formed group of 3 participants. Each participant in the group is given 100 points. The group
+        In this study, you will be in a randomly formed group of {{ players_per_group }} participants. Each participant in the group is given {{ endowment }} points. The group
         has the opportunity to undertake a joint project. Each participant in the group decides how much she or he is going to contribute to
-        the project. Contribution could be any integer from 0 to 100.
+        the project. Contribution could be any integer from 0 to {{ endowment }}.
     </p>
     <p>
-        The earnings from the project are calculated as follows: The contributions of all 3 participants are added up, the total contribution
-        is multiplied by a factor of 1.8, and the resulting amount is the total earnings from the project, which is evenly split among all 3
+        The earnings from the project are calculated as follows: The contributions of all {{ players_per_group }} participants are added up, the total contribution
+        is multiplied by a factor of {{ efficiency_factor }}, and the resulting amount is the total earnings from the project, which is evenly split among all {{ players_per_group }}
         participants. Your payoff equals your earnings from the project, plus the amount you did not contribute.
     </p>
     <p>
