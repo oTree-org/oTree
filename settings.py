@@ -79,10 +79,5 @@ ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
 
 otree.settings.augment_settings(globals())
 
-# FIXME: complete the apps below
 DISABLED_APPS = [
-
-        'lemon_market',
-        'tragedy_of_the_commons',
-        # lab results: displays lab results in a given session
     ],
