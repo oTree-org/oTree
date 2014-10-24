@@ -16,6 +16,10 @@ href='https://github.com/oTree-org/oTree/tree/master/lemon_market'>here</a>.
 """
 
 
+class Constants:
+    INITIAL = 50
+
+
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'lemon_market'
@@ -23,7 +27,6 @@ class Subsession(otree.models.BaseSubsession):
 
 
 class Group(otree.models.BaseGroup):
-    INITIAL = 50
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -34,7 +37,7 @@ class Group(otree.models.BaseGroup):
 
     def set_payoff(self):
         for p in self.get_players():
-            p.payoff = self.INITIAL
+            p.payoff = Constants.INITIAL
         buyer = self.get_player_by_id(1)
         if buyer.choice:
             seller = self.get_player_by_id(buyer.choice + 1)
@@ -42,7 +45,7 @@ class Group(otree.models.BaseGroup):
             seller.payoff += seller.price - seller.quality
 
     def seller(self):
-        choice = self.get_player_by_role('buyer')
+        choice = self.get_player_by_role('buyer').choice
         if choice:
             return self.get_player_by_id(choice + 1)
 
@@ -63,7 +66,7 @@ class Player(otree.models.BasePlayer):
     # seller
     price = models.PositiveIntegerField(
         verbose_name='Please indicate a price (from 0 to %i) you want to sell'
-        % Group.INITIAL)
+        % Constants.INITIAL)
     quality = models.PositiveIntegerField(choices=[
         (30, 'High'),
         (20, 'Medium'),
@@ -84,7 +87,7 @@ class Player(otree.models.BasePlayer):
         verbose_name='')
 
     def price_error_message(self, value):
-        if not 0 <= value <= Group.INITIAL:
+        if not 0 <= value <= Constants.INITIAL:
             return 'Your entry is invalid.'
 
     def choice_choices(self):
