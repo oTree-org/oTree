@@ -10,7 +10,6 @@ from .models import Constants
 class PlayerBot(Bot):
 
     def play(self):
-        # TODO : work in progress
 
         rounds = self.subsession.number_of_rounds
         round = self.subsession.round_number
