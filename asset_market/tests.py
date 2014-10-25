@@ -28,19 +28,20 @@ class PlayerBot(Bot):
         # randomize inputs: between the two players
         ran_num = random.randint(1,2)
         if ran_num == 1:
-            self.submit(views.Order, {'sn': 4, 'sp': 5, 'bn': 0, 'bp': 0})
+            self.submit(views.Order, {'order_type': 'Sell', 'sn': 3, 'sp': 2, 'bn': 0, 'bp': 0})
         else:
-            self.submit(views.Order, {'sn': 0, 'sp': 0, 'bn': 4, 'bp': 6})
+            self.submit(views.Order, {'order_type': 'Buy', 'sn': 0, 'sp': 0, 'bn': 3, 'bp': 4})
 
         self.submit(views.Transaction)
 
         self.submit(views.Dividend)
-        # FIXME: tests failing at this point:
-        # reason: Exception: Response status code: 302 (expected 200)
-        # probable solution: include 302 response in otree-core tests, to cater for games with multiple rounds
-        # and exempted pages in some rounds
 
         # submitted in last round
         if round == rounds:
             self.submit(views.Results)
-            self.submit(views.FeedbackQ, {'feedbackq': 'Well'})
+
+            # randomise feedback
+            choices = ['Very well', 'Well', 'OK', 'Badly', 'Very badly']
+            rand_choice = random.randint(0,4)
+
+            self.submit(views.FeedbackQ, {'feedbackq': choices[rand_choice]})

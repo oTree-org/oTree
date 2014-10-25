@@ -55,7 +55,7 @@ class Group(otree.models.BaseGroup):
     shares_traded = models.PositiveIntegerField(null=True)
 
     # dividend fields
-    dividend_per_share = models.MoneyField(null=True)
+    dividend_per_share = models.MoneyField(default=1)
     is_dividend = models.BooleanField(default=False, doc="""Indicates whether dividend is issued""")
 
     def set_payoffs(self):
@@ -65,55 +65,44 @@ class Group(otree.models.BaseGroup):
     def set_transaction(self):
         for p in self.get_players():
             if not self.is_transaction:
-                if (p.sp != 0 and p.sn != 0) or (p.bp != 0 and p.bn != 0):
-                    # FIXME consider the following conditions.
-                    '''
-                     -A transaction is only possible when one participant wants to buy and the other to sell.
-                     -Moreover, the submitted maximum buying price (BP) has to be higher than the minimum selling price (SP).
-                     -When this is the case, transaction takes place at the average of these two prices.
-                      That is transaction price (P) = 0.5*(BP+SP).
-                     -The number of shares traded (N) equals the smaller of the two numbers, i.e. N is the minimum of BN and SN.
-                     -If transaction takes place, N shares are removed from the selling party to the buying party; accordingly,
-                     cash equal to the transaction price (P) is added to the selling party and subtracted from the buying party.
-                     -Otherwise, no transaction takes place and the orders submitted, if any, are not revealed to participants.
-                    '''
-                    if p.bp != 0:
-                        # buyer
-                        # set transaction price
-                        self.transaction_price = 0.5*(p.bp+p.other_player().sp)
-                        self.shares_traded = min(p.bn, p.other_player().sn)
-
-                        # adjust shares and cash
-                        amount = self.transaction_price * self.shares_traded
-                        if amount <= p.cash:
+                if (p.order_type == 'Buy' and p.other_player().order_type == 'Sell') or (p.order_type == 'Sell' and p.other_player().order_type == 'Buy'):
+                    if (p.sp != 0 and p.sn != 0) or (p.bp != 0 and p.bn != 0):
+                        if p.bp != 0 and p.other_player().sp <= p.bp:
                             # buyer
-                            p.shares += self.shares_traded
-                            p.cash -= self.transaction_price * self.shares_traded
-                            # seller
-                            p.other_player().shares -= self.shares_traded
-                            p.other_player().cash += self.transaction_price * self.shares_traded
-                            self.is_transaction = True
-                    elif p.sp != 0:
-                        # seller
-                        # set transaction price
-                        self.transaction_price = 0.5*(p.sp+p.other_player().bp)
-                        self.shares_traded = min(p.sn, p.other_player().bn)
+                            # set transaction price
+                            self.transaction_price = 0.5*(p.bp+p.other_player().sp)
+                            self.shares_traded = min(p.bn, p.other_player().sn)
 
-                        # adjust shares and cash
-                        amount = self.transaction_price * self.shares_traded
-                        if amount <= p.other_player().cash:
-                            # buyer
-                            p.other_player().shares += self.shares_traded
-                            p.other_player().cash -= self.transaction_price * self.shares_traded
+                            # adjust shares and cash
+                            amount = self.transaction_price * self.shares_traded
+                            if amount <= p.cash:
+                                # buyer
+                                p.shares += self.shares_traded
+                                p.cash -= self.transaction_price * self.shares_traded
+                                # seller
+                                p.other_player().shares -= self.shares_traded
+                                p.other_player().cash += self.transaction_price * self.shares_traded
+                                self.is_transaction = True
+                        elif p.sp != 0 and p.sp <= p.other_player().bp:
                             # seller
-                            p.shares -= self.shares_traded
-                            p.cash += self.transaction_price * self.shares_traded
-                            self.is_transaction = True
+                            # set transaction price
+                            self.transaction_price = 0.5*(p.sp+p.other_player().bp)
+                            self.shares_traded = min(p.sn, p.other_player().bn)
+
+                            # adjust shares and cash
+                            amount = self.transaction_price * self.shares_traded
+                            if amount <= p.other_player().cash:
+                                # buyer
+                                p.other_player().shares += self.shares_traded
+                                p.other_player().cash -= self.transaction_price * self.shares_traded
+                                # seller
+                                p.shares -= self.shares_traded
+                                p.cash += self.transaction_price * self.shares_traded
+                                self.is_transaction = True
 
     def set_dividend(self):
-        for p in self.get_players():
-            self.dividend_per_share = randint(1,2)
-            self.is_dividend = True
+        self.dividend_per_share = randint(1,2)
+        self.is_dividend = True
 
 
 class Player(otree.models.BasePlayer):
@@ -126,11 +115,17 @@ class Player(otree.models.BasePlayer):
     cash = models.MoneyField(default=20)
     shares = models.PositiveIntegerField(default=5)
 
+
     # order fields
     bp = models.MoneyField(default=0.00, doc="""maximum buying price per share""")
     bn = models.PositiveIntegerField(default=0, doc="""number of shares willing to buy""")
     sp = models.MoneyField(default=0.00, doc="""minimum selling price per share""")
     sn = models.PositiveIntegerField(default=0, doc="""number of shares willing to sell.""")
+
+    order_type = models.CharField(max_length=10, doc="""determines whether a player wants to buy or sell""", widget=widgets.RadioSelectHorizontal)
+
+    def order_type_choices(self):
+        return ['Sell', 'Buy', 'None']
 
     def bn_choices(self):
         return range(0, self.shares+1, 1)
