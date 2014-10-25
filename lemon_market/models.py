@@ -8,11 +8,11 @@ from otree import widgets
 
 
 doc = """
-In a lemon market of Akerlof (1970), 2 buyers and 1 seller interact for 3
-periods. The implementation is based on Holt (1999).
+In a lemon market of <a href="http://people.bu.edu/ellisrp/EC387/Papers/1970Akerlof_Lemons_QJE.pdf" target="_blank">Akerlof (1970)</a>, 2 buyers and 1 seller interact for 3
+periods. The implementation is based on <a href="http://people.virginia.edu/~cah2k/lemontr.pdf" target="_blank">Holt (1999)</a>.
 
 Source code <a
-href='https://github.com/oTree-org/oTree/tree/master/lemon_market'>here</a>.
+href="https://github.com/oTree-org/oTree/tree/master/lemon_market" target="_blank">here</a>.
 """
 
 
