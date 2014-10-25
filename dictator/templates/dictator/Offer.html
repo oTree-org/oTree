@@ -1,14 +1,10 @@
-{% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
-{% load i18n %}
+{% extends "global/Question.html" %}
+{% load floppyforms otree_tags %}
 
-{% block title %}
-    Offer
-{% endblock %}
+{% block title %}Your Decision{% endblock %}
 
-{% block content %}
-
-    {% formrow form.offer_amount with label="How much will you offer?" %}
-    {% next_button %}
-
+{% block question %}
+<p>
+You are <strong>Participant 1</strong>. Now please decide how many points you will keep for yourself.
+</p>
 {% endblock %}

@@ -28,8 +28,9 @@ Your answer {{answer.0}} was incorrect.
 </p>
 {% endifequal %}
 {% endif %}
-
+{% block explanation %}
 {{explanation|linebreaks}}
+{% endblock %}
 <p>{% next_button %}</p>
 
 {% include instructions %}

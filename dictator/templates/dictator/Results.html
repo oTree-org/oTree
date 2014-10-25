@@ -3,19 +3,20 @@
 {% load i18n %}
 
 {% block title %}
-    Results
+Results
 {% endblock %}
 
 {% block content %}
-
-    <p>
-        {% if player_id == 1 %}
-            As the dictator, you offered the other player {{ offer_amount }}. Your payoff is therefore {{ payoff }}.
-        {% else %}
-            The dictator offered you {{ offer_amount }}. Your payoff is therefore {{ payoff }}.
-        {% endif %}
-    </p>
-
-    {% next_button %}
-
+<p>
+{% if player_id == 1 %}
+You decided to keep <strong>{{kept}} points</strong> for yourself.
+{% else %}
+Participant 1 decided to keep <strong>{{kept}} points</strong>, so you got <strong>{{offer}} points</strong>.
+{% endif %}
+In addition, you receive 10 points for participation. Thus, your total payoff is <strong>{{payoff|floatformat}} points</strong>.
+</p>
+<p>
+{% next_button %}
+</p>
+{% include instructions %}
 {% endblock %}
