@@ -1,0 +1,51 @@
+{% extends "global/Base.html" %}
+{% load staticfiles floppyforms otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+<p>
+    You picked <strong>{{guess_value}}</strong>. Others picked
+
+    {% if other_guesses_count > 1%}
+        {% for g in other_guesses %}
+            {% if not forloop.last %}
+                {{ g }},
+            {% else %}
+                and {{ g }}.
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% for g in other_guesses %}
+            {{ g }}.
+        {% endfor %}
+    {% endif %}
+
+    The two-third of the average was <strong>{{ two_third_average|floatformat:"-4" }}</strong>
+    and the closest was <strong>{{best_guess}}</strong>.
+
+    {% if tie %}
+        There are {{ winners_count }} participants who picked this number and
+        you {% if is_winner %} were {% else %} were not {% endif %} one of
+        them. As a result, you received <strong>{{ payoff|floatformat:"-2" }}
+        points</strong>.
+    {% else %}
+        As a result, you {% if is_winner %} were {% else %} were not {% endif %}
+        the winner and received <strong>{{ payoff|floatformat:"-2" }}
+        points</strong>.
+    {% endif %}
+
+    In addition, you received 10 points for participation. Thus, your total
+    payoff is <strong>{{ total_payoff|floatformat:"-2" }}</strong> points.
+
+</p>
+
+    {% next_button %}
+
+    {% include "beauty/Instructions.html" %}
+
+{% endblock %}
