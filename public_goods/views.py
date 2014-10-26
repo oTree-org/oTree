@@ -7,7 +7,7 @@ from .models import Constants
 
 def variables_for_all_templates(self):
     return {'endowment': Constants.endowment,
-            'players_per_group': self.group.players_per_group,
+            'players_per_group': Constants.players_per_group,
             'efficiency_factor': Constants.efficiency_factor}
 
 
@@ -18,7 +18,7 @@ class Introduction(Page):
     template_name = 'public_goods/Introduction.html'
 
     def variables_for_template(self):
-        return {'no_of_players': self.group.players_per_group,
+        return {'no_of_players': Constants.players_per_group,
                 'efficiency_factor': Constants.efficiency_factor}
 
 
@@ -77,7 +77,7 @@ class Results(Page):
         other_players = self.player.get_others_in_group
         total_contribution = sum([c.contribution for c in self.group.get_players()])
         total_earnings = total_contribution * Constants.efficiency_factor
-        share_earnings = total_earnings / self.group.players_per_group
+        share_earnings = total_earnings / Constants.players_per_group
         individual_earnings = (Constants.endowment - current_player.contribution) + share_earnings
         total_points = individual_earnings + Constants.base_points
 

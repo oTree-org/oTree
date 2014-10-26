@@ -13,7 +13,7 @@ class PlayerBot(Bot):
 
         # basic assertions
         assert (Constants.allocated_amount == 100)
-        assert (self.group.players_per_group == 2)
+        assert (Constants.players_per_group == 2)
 
         # start game
         self.submit(views.Introduction)

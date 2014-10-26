@@ -8,7 +8,7 @@ from .models import Constants
 def variables_for_all_templates(self):
 
     return {'total_q': 1,
-            'total_rounds': self.subsession.number_of_rounds,
+            'total_rounds': Constants.number_of_rounds,
             'round_number': self.subsession.round_number,
             'role': self.player.role()}
 

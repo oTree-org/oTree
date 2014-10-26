@@ -8,7 +8,7 @@ from .models import Constants
 def variables_for_all_templates(self):
 
     return {'total_q': 1,
-            'total_rounds': self.subsession.number_of_rounds,
+            'total_rounds': Constants.number_of_rounds,
             'round_number': self.subsession.round_number,
             'role': self.player.role()}
 
@@ -90,7 +90,7 @@ class ResultsSummary(Page):
     template_name = 'matching_pennies/ResultsSummary.html'
 
     def participate_condition(self):
-        return self.subsession.round_number == self.subsession.number_of_rounds
+        return self.subsession.round_number == Constants.number_of_rounds
 
     def variables_for_template(self):
         me_in_all_rounds = self.player.me_in_all_rounds()

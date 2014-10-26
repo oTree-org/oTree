@@ -22,6 +22,10 @@ target="_blank">here</a>.
 
 
 class Constants:
+    name_in_url = 'volunteer_dilemma'
+    players_per_group = 3
+    number_of_rounds = 1
+
     bonus = 10
 
     # """Payoff for each player if at least one volunteers"""
@@ -33,7 +37,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'volunteer_dilemma'
+    pass
 
 
 class Group(otree.models.BaseGroup):
@@ -42,7 +46,6 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_group = 3
 
     def set_payoffs(self):
         baseline_amount = Constants.bonus

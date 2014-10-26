@@ -44,6 +44,10 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/stag_hunt" t
 """
 
 class Constants:
+    name_in_url = 'stag_hunt'
+    players_per_group = 2
+    number_of_rounds = 1
+
     stag_stag_amount = 200
     stag_hare_amount = 0
     hare_stag_amount = 100
@@ -56,7 +60,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'stag_hunt'
+    pass
 
 
 class Group(otree.models.BaseGroup):
@@ -64,8 +68,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 2
 
 
 class Player(otree.models.BasePlayer):

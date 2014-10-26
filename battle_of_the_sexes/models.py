@@ -40,6 +40,9 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/battle_of_th
 """
 
 class Constants:
+    name_in_url = 'battle_of_the_sexes'
+    players_per_group = 2
+    number_of_rounds = 1
 
     # """Amount rewarded to husband if football is chosen"""
     football_husband_amount = 300
@@ -62,7 +65,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'battle_of_the_sexes'
+    pass
 
 
 class Group(otree.models.BaseGroup):
@@ -71,7 +74,7 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_group = 2
+
 
     def set_payoffs(self):
         husband = self.get_player_by_role('husband')

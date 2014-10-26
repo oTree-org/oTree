@@ -17,16 +17,17 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/private_valu
 """
 
 class Constants:
+    name_in_url = 'prisoner'
+    players_per_group = 2
+    number_of_rounds = 1
+
     min_allowable_bid = Money(0.0)
     max_allowable_bid = Money(10.0)
 
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'private_value_auction'
-
-
-
+    pass
 
 
 class Group(otree.models.BaseGroup):
@@ -34,8 +35,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 2
 
 
     def highest_bid(self):

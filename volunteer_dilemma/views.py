@@ -61,7 +61,7 @@ class Decision(Page):
     def variables_for_template(self):
         return {'general_benefit': Constants.general_benefit,
                 'volunteer_cost': Constants.volunteer_cost,
-                'num_other_players': self.group.players_per_group - 1}
+                'num_other_players': Constants.players_per_group - 1}
 
 
 class ResultsWaitPage(WaitPage):

@@ -15,6 +15,10 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/traveler_dil
 """
 
 class Constants:
+    name_in_url = 'traveler_dilemma'
+    players_per_group = 2
+    number_of_rounds = 1
+
     # Player's reward for the lowest claim"""
     reward = 2
 
@@ -33,7 +37,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'traveler_dilemma'
+    pass
 
 
 class Group(otree.models.BaseGroup):
@@ -41,8 +45,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 2
 
 
 class Player(otree.models.BasePlayer):

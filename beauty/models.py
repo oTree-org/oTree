@@ -47,6 +47,10 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/beauty" targ
 """
 
 class Constants:
+    players_per_group = 5
+    number_of_rounds = 1
+    name_in_url = 'beauty'
+
     winner_payoff = 100
     guess_max = 100
 
@@ -58,7 +62,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'beauty'
+    pass
 
 
 class Group(otree.models.BaseGroup):
@@ -67,7 +71,7 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_group = 5
+
 
     two_third_guesses = models.FloatField()
     best_guess = models.FloatField()

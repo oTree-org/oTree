@@ -18,6 +18,9 @@ target="_blank">here</a>.
 """
 
 class Constants:
+    name_in_url = 'trust'
+    players_per_group = 2
+    number_of_rounds = 1
 
     #Initial amount allocated to each player
     amount_allocated = 100
@@ -27,7 +30,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'trust'
+    pass
 
 
 
@@ -37,8 +40,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 2
 
     sent_amount = models.PositiveIntegerField(
         doc="""Amount sent by P1""",

@@ -10,7 +10,7 @@ class PlayerBot(Bot):
 
     def play(self):
 
-        assert (self.group.players_per_group == 2)
+        assert (Constants.players_per_group == 2)
 
         # start game
         self.submit(views.Introduction)

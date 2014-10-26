@@ -17,11 +17,13 @@ beginning and then continue to play against the same opponent for 3 rounds. Thei
 """
 
 class Constants:
+    name_in_url = 'matching_pennies'
+    players_per_group = 2
+    number_of_rounds = 3
+
     training_1_correct = 'Player 1 gets 100 points, Player 2 gets 0 points'
 
 class Subsession(otree.models.BaseSubsession):
-
-    name_in_url = 'matching_pennies'
 
     def next_round_groups(self, this_round_groups):
         groups = this_round_groups
@@ -38,7 +40,6 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_group = 2
 
     def set_points(self):
         p1 = self.get_player_by_role('Player 1')

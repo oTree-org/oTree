@@ -16,7 +16,7 @@ class FeedbackQ(object):
     form_fields = 'feedback',
 
     def participate_condition(self):
-        return self.subsession.round_number == self.subsession.number_of_rounds
+        return self.subsession.round_number == self.subsession._Constants.number_of_rounds
 
     def variables_for_template(self):
         return dict(

@@ -15,6 +15,9 @@ In this one-period implementation, the order of play is randomly determined.</p>
 """
 
 class Constants:
+    name_in_url = 'stackelberg_competition'
+    players_per_group = 2
+    number_of_rounds = 1
 
     # Total production capacity of both players
     total_capacity = 60
@@ -25,7 +28,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'stackelberg_competition'
+    pass
 
 
 class Group(otree.models.BaseGroup):
@@ -33,8 +36,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 2
 
     price = models.PositiveIntegerField(
         doc="""Unit price: P = T - Q1 - Q2, where T is total capacity and Q_i are the units produced by the players"""

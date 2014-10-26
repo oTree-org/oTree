@@ -10,8 +10,8 @@ def variables_for_all_templates(self):
     return {
         'total_q': 2,
         'round_num': self.subsession.round_number,
-        'num_of_rounds': self.subsession.number_of_rounds,  # no of periods
-        'num_participants': self.group.players_per_group,
+        'num_of_rounds': Constants.number_of_rounds,  # no of periods
+        'num_participants': Constants.players_per_group,
     }
 
 
@@ -173,7 +173,7 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
 
     def participate_condition(self):
-        return self.subsession.round_number == self.subsession.number_of_rounds
+        return self.subsession.round_number == Constants.number_of_rounds
 
     template_name = 'asset_market/Results.html'
 
@@ -190,7 +190,7 @@ class Results(Page):
 class FeedbackQ(Page):
 
     def participate_condition(self):
-        return self.subsession.round_number == self.subsession.number_of_rounds
+        return self.subsession.round_number == Constants.number_of_rounds
 
     template_name = 'asset_market/FeedbackQ.html'
 

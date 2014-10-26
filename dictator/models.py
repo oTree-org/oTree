@@ -24,6 +24,10 @@ target="_blank">here</a>.
 
 
 class Constants:
+    name_in_url = 'dictator'
+    players_per_group = 2
+    number_of_rounds = 1
+
     bonus = 10
     # Initial amount allocated to the dictator
     allocated_amount = 100
@@ -31,7 +35,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'dictator'
+    pass
 
 
 class Group(otree.models.BaseGroup):
@@ -39,8 +43,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 2
 
     kept = models.PositiveIntegerField(
         doc="""Amount dictator decided to keep for himself""",

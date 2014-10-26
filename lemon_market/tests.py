@@ -4,6 +4,7 @@ from . import views
 from ._builtin import Bot
 import random
 from otree.common import Money, money_range
+from .models import Constants
 
 
 class PlayerBot(Bot):
@@ -20,6 +21,6 @@ class PlayerBot(Bot):
         else:
             self.submit(views.Production, dict(price=23, quality=20))
         self.submit(views.Results)
-        if self.subsession.round_number == self.subsession.number_of_rounds:
+        if self.subsession.round_number == Constants.number_of_rounds:
             self.submit(views.FinalResults)
             self.submit(views.FeedbackQ, dict(feedback=5))

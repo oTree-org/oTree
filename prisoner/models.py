@@ -15,6 +15,9 @@ Their choices directly determine the payoffs.</p>
 """
 
 class Constants:
+    name_in_url = 'prisoner'
+    players_per_group = 2
+    number_of_rounds = 1
 
     #  Points made if player defects and the other cooperates""",
     defect_cooperate_amount = 300
@@ -30,7 +33,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'prisoner'
+    pass
 
 
 
@@ -41,8 +44,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 2
 
 
 class Player(otree.models.BasePlayer):

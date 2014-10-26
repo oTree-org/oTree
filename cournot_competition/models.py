@@ -15,8 +15,11 @@ The unit selling price depends on the total units produced. In this implementati
 """
 
 class Constants:
-    training_1_correct = 300
+    name_in_url = 'cournot_competition'
     players_per_group = 2
+    number_of_rounds = 1
+
+    training_1_correct = 300
 
     # Total production capacity of all players
     total_capacity = 60
@@ -33,8 +36,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = Constants.players_per_group
 
     price = models.PositiveIntegerField(
         doc="""Unit price: P = T - \sum U_i, where T is total capacity and U_i is the number of units produced by player i"""

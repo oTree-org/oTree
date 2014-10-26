@@ -32,13 +32,17 @@ Keywords: Stock Market, Finance, Bubble, Trade,
 """
 
 class Constants:
+    name_in_url = 'asset_market'
+    players_per_group = 2
+    number_of_rounds = 5
+
     understanding_1_correct = 'P=2.5, N=2'
     understanding_2_correct = '$8, $12'
 
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'asset_market'
+    pass
 
 
 
@@ -47,7 +51,7 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_group = 2
+
 
     # transaction fields
     is_transaction = models.BooleanField(default=False, doc="""Indicates whether there is a transaction""")

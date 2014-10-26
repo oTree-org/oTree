@@ -15,6 +15,10 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/matrix_symme
 """
 
 class Constants:
+    name_in_url = 'matrix_symmetric'
+    players_per_group = 2
+    number_of_rounds = 1
+
     self_A_other_A = Money(0.10)
 
     # How much I make if I choose A and the other player chooses B
@@ -26,7 +30,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'matrix_symmetric'
+    pass
 
 
 
@@ -35,8 +39,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 2
 
 
 class Player(otree.models.BasePlayer):

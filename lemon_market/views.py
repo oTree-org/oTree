@@ -4,7 +4,7 @@ from . import models
 from ._builtin import Page, WaitPage
 from random import choice
 from utils import FeedbackQ
-
+from .models import Constants
 
 def variables_for_all_templates(self):
     return {'instructions': 'lemon_market/Instructions.html'}
@@ -61,7 +61,7 @@ class Production(Page):
         return {
             'title': 'Production (Period %i of %i)' % (
                 self.subsession.round_number,
-                self.subsession.number_of_rounds),
+                Constants.number_of_rounds),
             'question': 'You are %s.' % self.player.role()}
 
 
@@ -75,7 +75,7 @@ class Purchase(Page):
 
     def variables_for_template(self):
         return {'group': self.group, 'title': 'Purchase (Period %i of %i)' % (
-            self.subsession.round_number, self.subsession.number_of_rounds)}
+            self.subsession.round_number, Constants.number_of_rounds)}
 
 
 class WaitPage(WaitPage):
@@ -86,7 +86,7 @@ class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
         self.group.set_payoff()
-        if self.subsession.round_number == self.subsession.number_of_rounds:
+        if self.subsession.round_number == Constants.number_of_rounds:
             session = choice(
                 self.subsession.previous_rounds() + [self.subsession])
             session.final = True
@@ -102,6 +102,7 @@ class Results(Page):
         return {
             'subsession': self.subsession, 'player': self.player,
             'payoff': self.player.payoff, 'buyer': buyer,
+            'number_of_rounds': Constants.number_of_rounds,
             'seller': buyer.choice and self.group.get_player_by_id(
                 buyer.choice + 1)}
 
@@ -115,7 +116,7 @@ class FinalResults(Page):
     template_name = 'lemon_market/FinalResults.html'
 
     def participate_condition(self):
-        return self.subsession.round_number == self.subsession.number_of_rounds
+        return self.subsession.round_number == Constants.number_of_rounds
 
     def variables_for_template(self):
         for player in self.player.me_in_all_rounds():

@@ -16,6 +16,10 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/common_value
 """
 
 class Constants:
+    name_in_url = 'common_value_auction'
+    players_per_group = 1
+    number_of_rounds = 1
+
     min_allowable_bid = Money(0.0)
     max_allowable_bid = Money(10.0)
 
@@ -24,7 +28,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'common_value_auction'
+
 
     def highest_bid(self):
         return max([p.bid_amount for p in self.get_players()])
@@ -62,7 +66,7 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_group = 1
+
 
 
 class Player(otree.models.BasePlayer):

@@ -18,6 +18,10 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/demo_game" t
 """
 
 class Constants:
+    players_per_group = 1
+    name_in_url = 'demo_game'
+    number_of_rounds = 1
+
     training_1_correct = 5
     training_2_correct = "Time travel (opens in pop up window)"
     training_3_correct = "Any of the above"
@@ -26,7 +30,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'demo_game'
+    pass
 
 
 class Group(otree.models.BaseGroup):
@@ -34,8 +38,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 1
 
 
 class Player(otree.models.BasePlayer):

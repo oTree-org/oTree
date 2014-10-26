@@ -10,11 +10,13 @@ import random
 from django_countries.fields import CountryField
 
 class Constants:
-    pass
+    name_in_url = 'survey'
+    players_per_group = 1
+    number_of_rounds = 1
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'survey'
+    pass
 
 
 
@@ -23,8 +25,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 1
 
 
 class Player(otree.models.BasePlayer):

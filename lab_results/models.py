@@ -14,11 +14,13 @@ Page that shows the results of the session.
 """
 
 class Constants:
-    pass
+    name_in_url = 'lab_results'
+    players_per_group = 1
+    number_of_rounds = 1
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'lab_results'
+    pass
 
 
 
@@ -27,8 +29,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 1
 
 
 class Player(otree.models.BasePlayer):

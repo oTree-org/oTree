@@ -17,12 +17,15 @@ href="https://github.com/oTree-org/oTree/tree/master/lemon_market" target="_blan
 
 
 class Constants:
+    name_in_url = 'lemon_market'
+    players_per_group = 3
+    number_of_rounds = 3
+
     INITIAL = 50
 
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'lemon_market'
     final = models.BooleanField(default=False)
 
 
@@ -33,7 +36,6 @@ class Group(otree.models.BaseGroup):
     # </built-in>
 
     buyer_choice = models.PositiveIntegerField()
-    players_per_group = 3
 
     def set_payoff(self):
         for p in self.get_players():
@@ -92,7 +94,7 @@ class Player(otree.models.BasePlayer):
 
     def choice_choices(self):
         return [(i, 'Buy from seller %i' % i) for i in range(
-            1, self.group.players_per_group)] + [(0, 'Buy nothing')]
+            1, Constants.players_per_group)] + [(0, 'Buy nothing')]
 
     def role(self):
         if self.id_in_group == 1:

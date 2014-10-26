@@ -17,13 +17,17 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/bargaining" 
 """
 
 class Constants:
+    name_in_url = 'bargaining'
+    players_per_group = 2
+    number_of_rounds = 1
+
     amount_shared = 100
     bonus = 10
 
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'bargaining'
+    pass
 
 
 
@@ -34,7 +38,7 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_group = 2
+
 
     def set_payoffs(self):
         players = self.get_players()

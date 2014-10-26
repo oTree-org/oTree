@@ -16,6 +16,10 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/public_goods
 """
 
 class Constants:
+    name_in_url = 'public_goods'
+    players_per_group = 3
+    number_of_rounds = 1
+
     #"""Amount allocated to each player"""
     endowment = 100
     efficiency_factor = 1.8
@@ -26,7 +30,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'public_goods'
+    pass
 
 
 
@@ -38,11 +42,10 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_group = 3
 
     def set_payoffs(self):
         contributions = sum([p.contribution for p in self.get_players()])
-        individual_share = contributions * Constants.efficiency_factor / self.players_per_group
+        individual_share = contributions * Constants.efficiency_factor / Constants.players_per_group
         for p in self.get_players():
             p.points = (Constants.endowment - p.contribution) + individual_share
             p.payoff = p.points / Constants.endowment

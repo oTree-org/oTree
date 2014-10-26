@@ -26,13 +26,16 @@ target="_blank">here</a>.
 
 
 class Constants:
+    players_per_group = 3
+    name_in_url = 'bertrand_competition'
+    number_of_rounds = 1
     bonus = 10
     maximum_price = 100
 
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'bertrand_competition'
+    pass
 
 
 class Group(otree.models.BaseGroup):
@@ -41,7 +44,6 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    players_per_group = 2
 
     def set_payoffs(self):
         players = self.get_players()

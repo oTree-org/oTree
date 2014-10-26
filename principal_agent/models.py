@@ -18,6 +18,10 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/principal_ag
 
 
 class Constants:
+    name_in_url = 'principal_agent'
+    players_per_group = 2
+    number_of_rounds = 1
+
     max_fixed_payment = Money(7.00)
     #Maxmimum absolute value for agent's fixed pay"""
 
@@ -49,7 +53,7 @@ def return_from_effort(effort):
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'principal_agent'
+    pass
 
 
 class Group(otree.models.BaseGroup):
@@ -57,8 +61,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 2
 
     total_return = models.MoneyField(
         doc="""Total return from agent's effort = [Return for single unit of agent's work effort] * [Agent's work effort]"""

@@ -67,7 +67,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
-            subsession_apps=['matching_pennies']*3 + ['survey_sample', 'lab_results'],
+            subsession_apps=['matching_pennies', 'survey_sample', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -187,7 +187,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
-            subsession_apps=['asset_market']*5 + ['lab_results'],
+            subsession_apps=['asset_market', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -196,7 +196,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=3,
-            subsession_apps=['lemon_market']*3 + ['lab_results'],
+            subsession_apps=['lemon_market', 'lab_results'],
             doc=""""""
         ),
 

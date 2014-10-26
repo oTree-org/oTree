@@ -15,6 +15,10 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/matrix_asymm
 """
 
 class Constants:
+    name_in_url = 'matrix_asymmetric'
+    players_per_group = 2
+    number_of_rounds = 1
+
     rowAcolumnA_row = Money(0.20)
     rowAcolumnA_column = Money(0.30)
 
@@ -31,7 +35,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    name_in_url = 'matrix_asymmetric'
+    pass
 
 
 
@@ -40,8 +44,6 @@ class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
-    players_per_group = 2
 
     def set_payoffs(self):
         row_player = self.get_player_by_role('row')
