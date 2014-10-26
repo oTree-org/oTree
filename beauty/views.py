@@ -5,6 +5,11 @@ from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 from .models import Constants
 
+def variables_for_all_templates(self):
+
+    return {'total_q': 1}
+
+
 class Introduction(Page):
 
     template_name = 'beauty/Introduction.html'

@@ -137,8 +137,10 @@ class Player(otree.models.BasePlayer):
         null=True, verbose_name=''
     )
 
-    def guess_value_choices(self):
-        return range(0, Constants.guess_max + 1)
+    def guess_value_error_message(self, value):
+        if value > Constants.guess_max:
+            msg = 'The value must be between 0 and {}'
+            return msg.format(Constants.guess_max)
 
     def training_question_1_win_pick_error_message(self, value):
         if value > Constants.training_1_maximun_pick:
