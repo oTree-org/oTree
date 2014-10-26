@@ -4,31 +4,60 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Money, money_range
 import random
 # </standard imports>
-
 
 
 doc = """
 This is a 2-player 2-strategy coordination game. The name and story originated from <a href="http://books.google.ch/books?id=uqDDAgAAQBAJ&lpg=PP1&ots=S-DC4LemnS&lr&pg=PP1#v=onepage&q&f=false" target="_blank">Luce and Raiffa (1957)</a>.
 <br />
 Source code <a href="https://github.com/oTree-org/oTree/tree/master/battle_of_the_sexes" target="_blank">here</a>.
+
+<h3>Recommended Literature</h3>
+<ul>
+    <li>Luce, R. Duncan, and Howard Raiffa. Games and decisions: Introduction and critical survey. Courier Dover Publications, 2012.</li>
+    <li>Rapoport, Anatol. Two-person game theory. Courier Dover Publications, 1999.</li>
+    <li>Cooper, Russell, et al. "Forward induction in the battle-of-the-sexes games."The American Economic Review (1993): 1303-1316.</li>
+    <li>Cooper, Russell, et al. "Communication in the battle of the sexes game: some experimental results." The RAND Journal of Economics (1989): 568-587.</li>
+</ul>
+
+<p>
+    <strong>Wikipedia:</strong>
+    <a target="_blank" href="https://en.wikipedia.org/wiki/Battle_of_the_sexes_%28game_theory%29">Battle of the Sexes</a>,&nbsp
+    <a target="_blank" href="https://en.wikipedia.org/wiki/Coordination_game">Coordination Game</a>
+</p>
+
+<p>
+    <strong>Keywords:</strong>
+    <a target="_blank" href="https://duckduckgo.com/?q=Battle+of+the+Sexes+game+theory&t=otree"</a>
+        <span class="badge">Battle of the Sexes</span>
+    </a>,
+    <a target="_blank" href="https://duckduckgo.com/?q=coordination+game+theory&t=otree"</a>
+        <span class="badge badge-info">Coordination</span>
+    </a>
+</p>
+
 """
 
 class Constants:
 
     # """Amount rewarded to husband if football is chosen"""
-    football_husband_amount = Money(0.30)
+    football_husband_amount = 300
 
     # Amount rewarded to wife if football is chosen
-    football_wife_amount = Money(0.20)
+    football_wife_amount = 200
 
     # amount rewarded to either if the choices don't match
-    mismatch_amount = Money(0.00)
+    mismatch_amount = 0
 
-    opera_husband_amount = Money(0.20)
-    opera_wife_amount = Money(0.30)
+    opera_husband_amount = 200
+
+    opera_wife_amount = 300
+
+    training_1_husband_correct = 0
+    training_1_wife_correct = 0
+
+    training_1_maximun_offered_points = 300
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -68,10 +97,35 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
+    training_question_1_husband = models.PositiveIntegerField(
+        null=True, verbose_name=''
+    )
+    training_question_1_wife = models.PositiveIntegerField(
+        null=True, verbose_name=''
+    )
+
     decision = models.CharField(
         doc="""Either football or the opera""",
         widget=widgets.RadioSelect()
     )
+
+    def training_question_1_husband_error_message(self, value):
+        if value > Constants.training_1_maximun_offered_points:
+            msg = 'The payoff cannot be greater than points offered ({})'
+            return msg.format(Constants.training_1_maximun_offered_points)
+
+    def training_question_1_wife_error_message(self, value):
+        if value > Constants.training_1_maximun_offered_points:
+            msg = 'The payoff cannot be greater than points offered ({})'
+            return msg.format(Constants.training_1_maximun_offered_points)
+
+    def is_training_question_1_husband_correct(self):
+        return (self.training_question_1_husband ==
+                Constants.training_1_husband_correct)
+
+    def is_training_question_1_wife_correct(self):
+        return (self.training_question_1_wife ==
+                Constants.training_1_wife_correct)
 
     def decision_choices(self):
         return ['Football', 'Opera']

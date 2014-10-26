@@ -8,7 +8,10 @@
 
 {% block content %}
 
-    {% formrow form.guess_value with label="Pick a number:" %}
+    {% formrow form.guess_value with label="Please pick a number from 0 to 100:" %}
     {% next_button %}
+
+
+    {% include "beauty/Instructions.html" %}
 
 {% endblock %}

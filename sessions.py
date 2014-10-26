@@ -98,12 +98,12 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='guessing',
-            display_name="Guessing Game",
+            name='beauty',
+            display_name="Beauty Contest",
             base_pay=10.00,
             participants_per_session=50,
             participants_per_demo_session=5,
-            subsession_apps=['guessing', 'lab_results'],
+            subsession_apps=['beauty', 'survey_sample', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -166,7 +166,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
-            subsession_apps=['stag_hunt', 'lab_results'],
+            subsession_apps=['stag_hunt', 'survey_sample', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -175,7 +175,9 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
-            subsession_apps=['battle_of_the_sexes', 'lab_results'],
+            subsession_apps=[
+                'battle_of_the_sexes', 'survey_sample', 'lab_results'
+            ],
             doc=""""""
         ),
         SessionType(

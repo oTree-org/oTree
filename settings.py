@@ -54,7 +54,7 @@ INSTALLED_OTREE_APPS = [
     'traveler_dilemma',
     'survey',
     'bargaining',
-    'guessing',
+    'beauty',
     'common_value_auction',
     'matrix_symmetric',
     'matrix_asymmetric',
