@@ -47,7 +47,7 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/beauty" targ
 """
 
 class Constants:
-    winner_payoff = Money(1.00)
+    winner_payoff = 100
     guess_max = 100
 
 class Subsession(otree.models.BaseSubsession):
@@ -65,7 +65,7 @@ class Group(otree.models.BaseGroup):
 
     two_third_guesses = models.FloatField()
     best_guess = models.FloatField()
-    tie = models.BooleanField()
+    tie = models.BooleanField(default=False)
 
     def set_payoffs(self):
         players = self.get_players()
@@ -88,10 +88,16 @@ class Group(otree.models.BaseGroup):
                 tie = True
                 candidates.append(p)
 
+        self.tie = tie
         winners = candidates
+        winners_cnt = len(winners)
         for p in winners:
             p.is_winner=True
-            p.payoff = Constants.winner_payoff
+            p.payoff = (
+                Constants.winner_payoff / winners_cnt
+                if tie else
+                Constants.winner_payoff
+            )
 
         self.best_guess = winners[0].guess_value
 

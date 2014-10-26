@@ -23,17 +23,22 @@ class Results(Page):
     template_name = 'beauty/Results.html'
 
     def variables_for_template(self):
-        other_guesses = [p.guess_value for p in self.player.get_others_in_subsession()]
-
-        return {'guess_value': self.player.guess_value,
-                'other_guesses': other_guesses,
-                'other_guesses_count': len(other_guesses),
-                'two_third_average': round(self.group.two_third_guesses, 4),
+        other_guesses = []
+        winners_cnt = int(self.player.is_winner)
+        for p in self.player.get_others_in_subsession():
+            other_guesses.append(p.guess_value)
+            winners_cnt += int(p.is_winner)
+        return {'guess_value': self.player.guess_value, #
+                'other_guesses': other_guesses, #
+                'other_guesses_count': len(other_guesses), #
+                'two_third_average': round(self.group.two_third_guesses, 4), #
                 'players': self.subsession.get_players(),
-                'is_winner': self.player.is_winner,
-                'best_guess': self.group.best_guess,
-                'tie': self.group.tie,
-                'payoff': self.player.payoff}
+                'is_winner': self.player.is_winner, #
+                'best_guess': self.group.best_guess, #
+                'tie': self.group.tie, #
+                'winners_count': winners_cnt, #
+                'total_payoff': self.player.payoff + 10, #
+                'payoff': self.player.payoff} #
 
 
 class ResultsWaitPage(WaitPage):
