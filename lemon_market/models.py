@@ -4,26 +4,29 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Money
 # </standard imports>
 
 
 doc = """
-In a lemon market of Akerlof (1970), 2 buyers and 1 seller interact for 3
-periods. The implementation is based on Holt (1999).
+In a lemon market of <a href="http://people.bu.edu/ellisrp/EC387/Papers/1970Akerlof_Lemons_QJE.pdf" target="_blank">Akerlof (1970)</a>, 2 buyers and 1 seller interact for 3
+periods. The implementation is based on <a href="http://people.virginia.edu/~cah2k/lemontr.pdf" target="_blank">Holt (1999)</a>.
 
 Source code <a
-href='https://github.com/oTree-org/oTree/tree/master/lemon_market'>here</a>.
+href="https://github.com/oTree-org/oTree/tree/master/lemon_market" target="_blank">here</a>.
 """
+
+
+class Constants:
+    INITIAL = 50
 
 
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'lemon_market'
+    final = models.BooleanField(default=False)
 
 
 class Group(otree.models.BaseGroup):
-    INITIAL = 100
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -34,7 +37,7 @@ class Group(otree.models.BaseGroup):
 
     def set_payoff(self):
         for p in self.get_players():
-            p.payoff = self.INITIAL
+            p.payoff = Constants.INITIAL
         buyer = self.get_player_by_id(1)
         if buyer.choice:
             seller = self.get_player_by_id(buyer.choice + 1)
@@ -42,7 +45,7 @@ class Group(otree.models.BaseGroup):
             seller.payoff += seller.price - seller.quality
 
     def seller(self):
-        choice = self.get_player_by_role('buyer')
+        choice = self.get_player_by_role('buyer').choice
         if choice:
             return self.get_player_by_id(choice + 1)
 
@@ -55,14 +58,15 @@ class Player(otree.models.BasePlayer):
     # </built-in>
     # training
     training_buyer_earnings = models.IntegerField(
-        verbose_name="Buyer's earning would be")
+        verbose_name="Buyer's period payoff would be")
     training_seller1_earnings = models.IntegerField(
-        verbose_name="Seller 1's earning would be")
+        verbose_name="Seller 1's period payoff would be")
     training_seller2_earnings = models.IntegerField(
-        verbose_name="Seller 2's earning would be")
+        verbose_name="Seller 2's period payoff would be")
     # seller
     price = models.PositiveIntegerField(
-        verbose_name='Please indicate a price you want to sell')
+        verbose_name='Please indicate a price (from 0 to %i) you want to sell'
+        % Constants.INITIAL)
     quality = models.PositiveIntegerField(choices=[
         (30, 'High'),
         (20, 'Medium'),
@@ -71,7 +75,8 @@ class Player(otree.models.BasePlayer):
         widget=widgets.RadioSelectHorizontal())
     # buyer
     choice = models.PositiveIntegerField(
-        blank=True, widget=widgets.RadioSelect())  # seller index
+        blank=True, widget=widgets.RadioSelect(),
+        verbose_name='And you will')  # seller index
     feedback = models.PositiveIntegerField(
         choices=(
             (5, 'Very well'),
@@ -81,6 +86,10 @@ class Player(otree.models.BasePlayer):
             (1, 'Very badly')), widget=widgets.RadioSelectHorizontal(),
         verbose_name='')
 
+    def price_error_message(self, value):
+        if not 0 <= value <= Constants.INITIAL:
+            return 'Your entry is invalid.'
+
     def choice_choices(self):
         return [(i, 'Buy from seller %i' % i) for i in range(
             1, self.group.players_per_group)] + [(0, 'Buy nothing')]
@@ -89,6 +98,3 @@ class Player(otree.models.BasePlayer):
         if self.id_in_group == 1:
             return 'buyer'
         return 'seller %i' % (self.id_in_group - 1)
-
-    def earnings(self):
-        return self.payoff - self.group.INITIAL
