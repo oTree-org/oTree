@@ -4,7 +4,7 @@ $(function () {
             text: 'Results',
         },
         xAxis: {
-            categories: ['Round 1', 'Round 2', 'Round 3'],
+            categories: ['Period 1', 'Period 2', 'Period 3'],
         },
         yAxis: {
             title: {
@@ -29,9 +29,9 @@ $(function () {
         {
             name: 'Transaction Price',
             data: [
-            {% for round in rounds %}
+            {% for round in player.me_in_all_rounds %}
             {% if forloop.counter0 %},{% endif %}
-            {{round.seller.price|default:"null"}}
+            {{round.group.seller.price|default:'null'}}
             {% endfor %}
                 ],
         }
@@ -43,7 +43,7 @@ $(function () {
             {% if forloop.counter0 %}
             ,
                 {% endif %}
-            {{round.earnings|floatformat}}
+            {{round.payoff|floatformat}}
                 {% endfor %}
             ]
         }

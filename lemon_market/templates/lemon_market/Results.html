@@ -9,23 +9,18 @@ Results (Period {{subsession.round_number}} of {{subsession.number_of_rounds}})
 You are {{player.role}}. 
 {% if buyer.choice %}
 {% if player.role == 'buyer' %}
-You bought from seller {{buyer.choice}}. The quality grade of your purchase is {{seller.get_quality_display}}. Thus your earning from this period is {{earnings}} points. With your initial 100 points, your current holding is {{player.payoff|floatformat}} points.
+You bought from seller {{buyer.choice}}. The quality grade of your purchase is <strong>{{seller.get_quality_display}}</strong>.
 {% else %}
-The buyer purchased a {{seller.get_quality_display}} grade from {{seller.role}} at a price of {{seller.price}} points.
-{% ifequal player seller %}
-Thus your earning from this period is {{earnings}} points.
-{% endifequal %}
-With your initial 100 points, your current holding is {{player.payoff|floatformat}} points.
+The buyer purchased a <strong>{{seller.get_quality_display}}</strong> grade from <strong>{{seller.role}}</strong> at a price of <strong>{{seller.price}} points</strong>.
 {% endif %}
-{% else %}
 {# buyer bought nothing #}
-{% if player.role == 'buyer' %}
+{% elif player.role == 'buyer' %}
 You bought nothing in this period.
 {% else %}
 The buyer bought nothing in this period.
 {% endif %}
-The buyer bought nothing in this period. Thus your earning from this period is 0 points. With your initial 100 points, your current holding is 100 points.
-{% endif %}
+Thus your period payoff is <strong>{{player.payoff|floatformat}} points</strong>.
 
 <p> {% next_button %}</p> 
+{% include instructions %}
 {% endblock %}

@@ -16,15 +16,24 @@
         Please note that you may submit <b>at most one order.</b>
     </p>
 
+    <!--
+    TODO: Validate the form inputs:
+    1. Only one order at a time
+    2. Total(No of shares * price) should be less or equal to the cash position
+    -->
     <div class="panel panel-default">
       <div class="panel-body">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
+            <h4>Order Type</h4>
+            {% formrow form.order_type with label="Select One" %}
+          </div>
+          <div class="col-md-4">
             <h4>Buy Order</h4>
             {% formrow form.bn with label="Number of shares" %}
             {% formrow form.bp with label="for at most per share" %}
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <h4>Sell Order</h4>
             {% formrow form.sn with label="Number of shares" %}
             {% formrow form.sp with label="for at least per share" %}

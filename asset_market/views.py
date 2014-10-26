@@ -98,7 +98,7 @@ class FeedbackTwo(Page):
 class Order(Page):
 
     form_model = models.Player
-    form_fields = ['bp', 'bn', 'sn', 'sp']
+    form_fields = ['order_type', 'bp', 'bn', 'sn', 'sp']
 
     template_name = 'asset_market/Order.html'
 
@@ -132,6 +132,7 @@ class Transaction(Page):
             'transaction_price': self.group.transaction_price,
             'cash': self.player.cash,
             'shares': self.player.shares,
+            'buy': True if self.player.order_type == 'Buy' else False,
         }
 
 
@@ -156,7 +157,7 @@ class Dividend(Page):
         return {
             'dividend': self.group.dividend_per_share,
             'dividend_gain': self.group.dividend_per_share * self.player.shares,
-            'cash': self.player.cash,
+            'cash': self.player.cash + self.group.dividend_per_share * self.player.shares,
             'shares': self.player.shares,
         }
 
@@ -181,6 +182,8 @@ class Results(Page):
         return {
             'cash': self.player.cash,
             'shares': self.player.shares,
+            'base_pay': self.player.participant.session.base_pay,
+            'total_payoff': self.player.cash + self.player.participant.session.base_pay
         }
 
 
