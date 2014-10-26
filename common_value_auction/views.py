@@ -10,7 +10,7 @@ class Introduction(Page):
     template_name = 'common_value_auction/Introduction.html'
 
     def variables_for_template(self):
-        return {'other_players_count': len(self.subsession.get_players())-1}
+        return {'other_players_count': len(self.group.get_players())-1}
 
 
 class Bid(Page):
@@ -22,7 +22,7 @@ class Bid(Page):
 
     def variables_for_template(self):
         if self.player.item_value_estimate is None:
-            self.player.item_value_estimate = self.subsession.generate_value_estimate()
+            self.player.item_value_estimate = self.group.generate_value_estimate()
 
         return {'item_value_estimate': self.player.item_value_estimate,
                 'error_margin': Constants.estimate_error_margin,
@@ -32,10 +32,10 @@ class Bid(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    scope = models.Subsession
+    scope = models.Group
 
     def after_all_players_arrive(self):
-        self.subsession.set_winner()
+        self.group.set_winner()
 
 
 class Results(Page):
@@ -47,10 +47,10 @@ class Results(Page):
             self.player.set_payoff()
 
         return {'is_winner': self.player.is_winner,
-                'is_greedy': self.subsession.item_value - self.player.bid_amount < 0,
+                'is_greedy': self.group.item_value - self.player.bid_amount < 0,
                 'bid_amount': self.player.bid_amount,
-                'winning_bid': self.subsession.highest_bid(),
-                'item_value': self.subsession.item_value,
+                'winning_bid': self.group.highest_bid(),
+                'item_value': self.group.item_value,
                 'payoff': self.player.payoff}
 
 

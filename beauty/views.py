@@ -67,7 +67,7 @@ class Results(Page):
                 'other_guesses': other_guesses, #
                 'other_guesses_count': len(other_guesses), #
                 'two_third_average': round(self.group.two_third_guesses, 4), #
-                'players': self.subsession.get_players(),
+                'players': self.group.get_players(),
                 'is_winner': self.player.is_winner, #
                 'best_guess': self.group.best_guess, #
                 'tie': self.group.tie, #

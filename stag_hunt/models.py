@@ -59,7 +59,6 @@ class Constants:
 
 
 class Subsession(otree.models.BaseSubsession):
-
     pass
 
 

@@ -52,7 +52,6 @@ class Group(otree.models.BaseGroup):
     # </built-in>
 
 
-
     # transaction fields
     is_transaction = models.BooleanField(default=False, doc="""Indicates whether there is a transaction""")
     transaction_price = models.MoneyField(null=True, doc="""Given by 0.5*(BP+SP)""")

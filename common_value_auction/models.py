@@ -27,8 +27,14 @@ class Constants:
     estimate_error_margin = Money(1.00)
 
 class Subsession(otree.models.BaseSubsession):
+    pass
 
 
+class Group(otree.models.BaseGroup):
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
 
     def highest_bid(self):
         return max([p.bid_amount for p in self.get_players()])
@@ -58,17 +64,6 @@ class Subsession(otree.models.BaseSubsession):
         return estimate
 
 
-
-
-class Group(otree.models.BaseGroup):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
-
-
-
 class Player(otree.models.BasePlayer):
 
     # <built-in>
@@ -95,7 +90,7 @@ class Player(otree.models.BasePlayer):
 
     def set_payoff(self):
         if self.is_winner:
-            self.payoff = self.subsession.item_value - self.bid_amount
+            self.payoff = self.group.item_value - self.bid_amount
             if self.payoff < 0:
                 self.payoff = 0
         else:
