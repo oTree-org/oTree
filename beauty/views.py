@@ -10,6 +10,36 @@ class Introduction(Page):
     template_name = 'beauty/Introduction.html'
 
 
+class QuestionOne(Page):
+
+    template_name = 'beauty/Question.html'
+
+    def participate_condition(self):
+        return self.subsession.round_number == 1
+
+    form_model = models.Player
+    form_fields = ['training_question_1_win_pick',
+                   'training_question_1_my_payoff']
+
+    def variables_for_template(self):
+        return {'num_q': 1}
+
+
+class FeedbackOne(Page):
+
+    template_name = 'beauty/Feedback.html'
+
+    def variables_for_template(self):
+        return {
+            'num_q': 1,
+            'is_answer_win_pick_correct': self.player.is_training_question_1_win_pick_correct(),
+            'is_answer_my_payoff_correct': self.player.is_training_question_1_my_payoff_correct(),
+            'answer_win_pick': self.player.training_question_1_win_pick,
+            'answer_my_payoff': self.player.training_question_1_my_payoff,
+        }
+
+
+
 class Guess(Page):
 
     template_name = 'beauty/Guess.html'
@@ -55,6 +85,8 @@ class ResultsWaitPage(WaitPage):
 def pages():
 
     return [Introduction,
+            QuestionOne,
+            FeedbackOne,
             Guess,
             ResultsWaitPage,
             Results]

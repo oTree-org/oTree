@@ -50,6 +50,12 @@ class Constants:
     winner_payoff = 100
     guess_max = 100
 
+    training_question_1_win_pick_correct = 10
+    training_question_1_my_payoff_correct = 50
+    training_1_maximun_pick = 100
+    training_1_maximun_offered_points = 100
+
+
 class Subsession(otree.models.BaseSubsession):
 
     name_in_url = 'beauty'
@@ -124,7 +130,30 @@ class Player(otree.models.BasePlayer):
         """.format(Constants.guess_max)
     )
 
+    training_question_1_win_pick = models.PositiveIntegerField(
+        null=True, verbose_name=''
+    )
+    training_question_1_my_payoff = models.PositiveIntegerField(
+        null=True, verbose_name=''
+    )
+
     def guess_value_choices(self):
         return range(0, Constants.guess_max + 1)
 
+    def training_question_1_win_pick_error_message(self, value):
+        if value > Constants.training_1_maximun_pick:
+            msg = 'You can\' choice a number higher than 100'
+            return msg.format(Constants.training_1_maximun_offered_points)
 
+    def training_question_1_my_payoff_error_message(self, value):
+        if value > Constants.training_1_maximun_offered_points:
+            msg = 'The payoff cannot be greater than points offered ({})'
+            return msg.format(Constants.training_1_maximun_offered_points)
+
+    def is_training_question_1_win_pick_correct(self):
+        return (self.training_question_1_win_pick ==
+                Constants.training_question_1_win_pick_correct)
+
+    def is_training_question_1_my_payoff_correct(self):
+            return (self.training_question_1_my_payoff ==
+                    Constants.training_question_1_my_payoff_correct)
