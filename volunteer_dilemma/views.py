@@ -44,7 +44,7 @@ class Feedback1(Page):
         return dict(
             answer=[p.training_my_payoff, 60],
             explanation=mark_safe(Question1.question + '''
-            <strong>Solution:</strong> Your payoff would be 60 points.
+            <strong>Solution:</strong> Your payoff would be <strong>60 points</strong>.
             <strong>Explanation:</strong> As at least one (actually 2)\
             participants volunteered, everyone received <strong>100</strong>\
             points. You vonlunteered, so you had to pay <strong>40</strong>\
