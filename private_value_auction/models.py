@@ -17,7 +17,7 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/private_valu
 """
 
 class Constants:
-    name_in_url = 'prisoner'
+    name_in_url = 'private_value_auction'
     players_per_group = 2
     number_of_rounds = 1
 
