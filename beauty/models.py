@@ -148,7 +148,7 @@ class Player(otree.models.BasePlayer):
 
     def training_question_1_win_pick_error_message(self, value):
         if value > Constants.training_1_maximun_pick:
-            msg = 'You can\' choice a number higher than 100'
+            msg = "You can't choice a number higher than 100"
             return msg.format(Constants.training_1_maximun_offered_points)
 
     def training_question_1_my_payoff_error_message(self, value):
