@@ -26,16 +26,15 @@
             verticalAlign: 'top',
             borderWidth: 0
         },
-        // FIXME: load the real values
         series: [{
             name: 'Transaction Price',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2]
+            data: {{ transaction_price }}
         }, {
             name: 'Dividend/Share',
-            data: [1, 8.9, 5.7, 11.3, 17.0]
+            data: {{ dividend_per_share }}
         }, {
             name: 'Shares Traded',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9]
+            data: {{ shares_traded }}
         }]
     });
 });

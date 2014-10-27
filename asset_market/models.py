@@ -45,12 +45,10 @@ class Subsession(otree.models.BaseSubsession):
     pass
 
 
-
 class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-
 
     # transaction fields
     is_transaction = models.BooleanField(default=False, doc="""Indicates whether there is a transaction""")
@@ -60,6 +58,12 @@ class Group(otree.models.BaseGroup):
     # dividend fields
     dividend_per_share = models.MoneyField(default=1)
     is_dividend = models.BooleanField(default=False, doc="""Indicates whether dividend is issued""")
+
+    # method to set cash and shares to balance in previous round
+    def set_assets_to_previous(self):
+        for p in self.get_players():
+            p.cash = p.me_in_previous_rounds()[-1].cash
+            p.shares = p.me_in_previous_rounds()[-1].shares
 
     def set_payoffs(self):
         for p in self.get_players():
@@ -107,6 +111,10 @@ class Group(otree.models.BaseGroup):
         self.dividend_per_share = randint(1,2)
         self.is_dividend = True
 
+        # adjust cash
+        for p in self.get_players():
+            p.cash += p.shares * self.dividend_per_share if p.shares != 0 else p.cash
+
 
 class Player(otree.models.BasePlayer):
     # <built-in>
@@ -118,6 +126,8 @@ class Player(otree.models.BasePlayer):
     cash = models.MoneyField(default=20)
     shares = models.PositiveIntegerField(default=5)
 
+    # default allocated shares for both players; provides a range for buyers; sellers' range is limited by the number of shares they have
+    num_shares = 10
 
     # order fields
     bp = models.MoneyField(default=0.00, doc="""maximum buying price per share""")
@@ -125,16 +135,13 @@ class Player(otree.models.BasePlayer):
     sp = models.MoneyField(default=0.00, doc="""minimum selling price per share""")
     sn = models.PositiveIntegerField(default=0, doc="""number of shares willing to sell.""")
 
-    order_type = models.CharField(max_length=10, doc="""determines whether a player wants to buy or sell""", widget=widgets.RadioSelectHorizontal)
+    order_type = models.CharField(max_length=10, doc="""player: buy or sell?""", widget=widgets.RadioSelectHorizontal)
 
     def order_type_choices(self):
         return ['Sell', 'Buy', 'None']
 
     def bn_choices(self):
-        return range(0, self.shares+1, 1)
-
-    def bn_error_message(self, value):
-        pass
+        return range(0, self.num_shares+1, 1)
 
     def sn_choices(self):
         return range(0, self.shares+1, 1)

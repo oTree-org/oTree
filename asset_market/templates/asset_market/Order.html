@@ -26,21 +26,52 @@
         <div class="row">
           <div class="col-md-4">
             <h4>Order Type</h4>
-            {% formrow form.order_type with label="Select One" %}
+            <!--load the form manually, to allow for addition of jquery functions-->
+            <div class="form-group required">
+                <label class="control-label" for="id_order_type"></label>
+                <div class="controls  field-order_type">
+                    <label class="radio-inline" for="id_order_type_1"><input id="id_order_type_1" value="Sell" name="order_type" required="" type="radio"> Sell</label>
+                    <label class="radio-inline" for="id_order_type_2"><input id="id_order_type_2" value="Buy" name="order_type" required="" type="radio"> Buy</label>
+                    <label class="radio-inline" for="id_order_type_3"><input id="id_order_type_3" value="None" name="order_type" required="" type="radio"> None</label>
+                </div><!--- .controls -->
+                </div>
           </div>
-          <div class="col-md-4">
-            <h4>Buy Order</h4>
-            {% formrow form.bn with label="Number of shares" %}
-            {% formrow form.bp with label="for at most per share" %}
+          <div style="display: none;" id="buyform">
+              <div class="col-md-4">
+                <h4>Buy Order</h4>
+                {% formrow form.bn with label="Number of shares" %}
+                {% formrow form.bp with label="for at most per share" %}
+              </div>
           </div>
-          <div class="col-md-4">
-            <h4>Sell Order</h4>
-            {% formrow form.sn with label="Number of shares" %}
-            {% formrow form.sp with label="for at least per share" %}
+          <div style="display: none;"  id="sellform">
+              <div class="col-md-4">
+                <h4>Sell Order</h4>
+                {% formrow form.sn with label="Number of shares" %}
+                {% formrow form.sp with label="for at least per share" %}
+              </div>
           </div>
+
         </div>
       </div>
     </div>
+
+    <script>
+        // script to show/ hide the order fields, based on order type
+        $(document).ready(function(){
+          $("#id_order_type_1").click(function(){
+            $("#sellform").show();
+            $("#buyform").hide();
+          });
+          $("#id_order_type_2").click(function(){
+            $("#buyform").show();
+            $("#sellform").hide();
+          });
+          $("#id_order_type_3").click(function(){
+            $("#sellform").hide();
+            $("#buyform").hide();
+          });
+        });
+    </script>
 
     {% next_button %}
 
