@@ -27,9 +27,9 @@ class PlayerBot(Bot):
         # randomize inputs: between the two players
         ran_num = random.randint(1,2)
         if ran_num == 1:
-            self.submit(views.Order, {'order_type': 'Sell', 'sn': 3, 'sp': 2, 'bn': 0, 'bp': 0})
+            self.submit(views.Order, {'order_type': 'Sell', 'sn': 1, 'sp': 2, 'bn': 0, 'bp': 0})
         else:
-            self.submit(views.Order, {'order_type': 'Buy', 'sn': 0, 'sp': 0, 'bn': 3, 'bp': 4})
+            self.submit(views.Order, {'order_type': 'Buy', 'sn': 0, 'sp': 0, 'bn': 1, 'bp': 4})
 
         self.submit(views.Transaction)
 
