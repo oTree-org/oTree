@@ -2,13 +2,15 @@
 {% load floppyforms otree_tags %}
 
 {% block title %}
-Your choice
+Your Choice
 {% endblock %}
 
 {% block content %}
 
     {% formrow form.volunteer with label='Do you wish to volunteer?' %}
-    {% next_button %}
+ <p>  {% next_button %}</p> 
+
+    {% include instructions %}
 
 {% endblock %}
 

@@ -60,7 +60,7 @@ class Results(Page):
     def variables_for_template(self):
         other_guesses = []
         winners_cnt = int(self.player.is_winner)
-        for p in self.player.get_others_in_subsession():
+        for p in self.player.get_others_in_group():
             other_guesses.append(p.guess_value)
             winners_cnt += int(p.is_winner)
         return {'guess_value': self.player.guess_value, #

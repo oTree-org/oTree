@@ -3,12 +3,16 @@
 {% load i18n %}
 
 {% block title %}
-    Set price
+    Set Your Price
 {% endblock %}
 
 {% block content %}
 
     {% formrow form.price with label="Please enter a number from 0 to 100 as your price" %}
-    {% next_button %}
+
+
+<p>{% next_button %}</p>
+
+    {% include instructions %}
 
 {% endblock %}
