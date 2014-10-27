@@ -232,12 +232,12 @@ class FeedbackQ(Page):
 
 def pages():
     return [
-        #Introduction,
-        #Instructions,
-        #QuestionOne,
-        #FeedbackOne,
-        #QuestionTwo,
-        #FeedbackTwo,
+        Introduction,
+        Instructions,
+        QuestionOne,
+        FeedbackOne,
+        QuestionTwo,
+        FeedbackTwo,
         OrderWaitPage,
         Order,
         TransactionWaitPage,
