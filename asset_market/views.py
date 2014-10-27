@@ -11,7 +11,7 @@ def variables_for_all_templates(self):
         'total_q': 2,
         'round_num': self.subsession.round_number,
         'num_of_rounds': Constants.number_of_rounds,  # no of periods
-        'num_participants': Constants.players_per_group,
+        'num_participants': self.Constants.players_per_group,
     }
 
 
@@ -95,6 +95,15 @@ class FeedbackTwo(Page):
         }
 
 
+class OrderWaitPage(WaitPage):
+
+    scope = models.Group
+
+    def after_all_players_arrive(self):
+        if self.subsession.round_number != 1:
+            self.group.set_assets_to_previous()
+
+
 class Order(Page):
 
     form_model = models.Player
@@ -156,8 +165,8 @@ class Dividend(Page):
 
         return {
             'dividend': self.group.dividend_per_share,
-            'dividend_gain': self.group.dividend_per_share * self.player.shares,
-            'cash': self.player.cash + self.group.dividend_per_share * self.player.shares,
+            'dividend_gain': self.group.dividend_per_share * self.player.shares if self.player.shares != 0 else 0,
+            'cash': self.player.cash,
             'shares': self.player.shares,
         }
 
@@ -206,6 +215,7 @@ def pages():
         FeedbackOne,
         QuestionTwo,
         FeedbackTwo,
+        OrderWaitPage,
         Order,
         TransactionWaitPage,
         Transaction,
