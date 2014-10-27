@@ -4,6 +4,7 @@ from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 from .models import Constants
+from otree.common import to_safe_json
 
 
 def variables_for_all_templates(self):
@@ -11,7 +12,7 @@ def variables_for_all_templates(self):
         'total_q': 2,
         'round_num': self.subsession.round_number,
         'num_of_rounds': Constants.number_of_rounds,  # no of periods
-        'num_participants': self.Constants.players_per_group,
+        'num_participants': Constants.players_per_group,
     }
 
 
@@ -188,11 +189,33 @@ class Results(Page):
 
     def variables_for_template(self):
 
+        # create chart lists
+        transaction_price = []
+        dividend_per_share = []
+        shares_traded = []
+
+        for p in self.player.me_in_all_rounds():
+            if p.group.transaction_price is None:
+                transaction_price.append(0)
+            else:
+                transaction_price.append(int(p.group.transaction_price))
+            if p.group.dividend_per_share is None:
+                dividend_per_share.append(0)
+            else:
+                dividend_per_share.append(int(p.group.dividend_per_share))
+            if p.group.shares_traded is None:
+                shares_traded.append(0)
+            else:
+                shares_traded.append(p.group.shares_traded)
+
         return {
             'cash': self.player.cash,
             'shares': self.player.shares,
             'base_pay': self.player.participant.session.base_pay,
-            'total_payoff': self.player.cash + self.player.participant.session.base_pay
+            'total_payoff': self.player.cash + self.player.participant.session.base_pay,
+            'transaction_price': to_safe_json(transaction_price),
+            'dividend_per_share': to_safe_json(dividend_per_share),
+            'shares_traded': to_safe_json(shares_traded),
         }
 
 
@@ -209,12 +232,12 @@ class FeedbackQ(Page):
 
 def pages():
     return [
-        Introduction,
-        Instructions,
-        QuestionOne,
-        FeedbackOne,
-        QuestionTwo,
-        FeedbackTwo,
+        #Introduction,
+        #Instructions,
+        #QuestionOne,
+        #FeedbackOne,
+        #QuestionTwo,
+        #FeedbackTwo,
         OrderWaitPage,
         Order,
         TransactionWaitPage,
