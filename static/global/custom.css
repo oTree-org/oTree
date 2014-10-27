@@ -5,6 +5,15 @@
 	margin:20px auto;
     padding: 10px 10px 10px 10px;
 }
+.rotate90 {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    float: left;
+    margin-top: 1em; // TODO: do not hardcode to center align
+}
 
 input {
     margin-bottom: 2em;
