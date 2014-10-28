@@ -4,7 +4,7 @@ from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 from .models import Constants
-from otree.common import to_safe_json
+from otree.common import safe_json
 
 
 def variables_for_all_templates(self):
@@ -213,9 +213,9 @@ class Results(Page):
             'shares': self.player.shares,
             'base_pay': self.player.participant.session.base_pay,
             'total_payoff': self.player.cash + self.player.participant.session.base_pay,
-            'transaction_price': to_safe_json(transaction_price),
-            'dividend_per_share': to_safe_json(dividend_per_share),
-            'shares_traded': to_safe_json(shares_traded),
+            'transaction_price': safe_json(transaction_price),
+            'dividend_per_share': safe_json(dividend_per_share),
+            'shares_traded': safe_json(shares_traded),
         }
 
 
