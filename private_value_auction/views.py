@@ -5,9 +5,45 @@ from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 from .models import Constants
 
+
+def variables_for_all_templates(self):
+
+    return {'total_q': 1,
+            'total_rounds': Constants.number_of_rounds,
+            'round_number': self.subsession.round_number}
+
+
 class Introduction(Page):
 
     template_name = 'private_value_auction/Introduction.html'
+
+
+class QuestionOne(Page):
+
+    template_name = 'private_value_auction/Question.html'
+
+    def participate_condition(self):
+        return self.subsession.round_number == 1
+
+    form_model = models.Player
+    form_fields = ['training_question_1_my_payoff']
+
+    def variables_for_template(self):
+        return {'num_q': 1}
+
+
+class FeedbackOne(Page):
+
+    template_name = 'private_value_auction/Feedback.html'
+
+    def variables_for_template(self):
+        return {
+            'num_q': 1,
+            'is_training_question_1_my_payoff_correct': (
+                self.player.is_training_question_1_my_payoff_correct()
+            ),
+            'answer_you': self.player.training_question_1_my_payoff,
+        }
 
 
 class Bid(Page):
@@ -56,6 +92,8 @@ class Results(Page):
 def pages():
 
     return [Introduction,
+            QuestionOne,
+            FeedbackOne,
             Bid,
             ResultsWaitPage,
             Results]

@@ -54,6 +54,8 @@ class Constants:
     min_allowable_bid = 0
     max_allowable_bid = 100
 
+    training_question_1_my_payoff_limit = 100 * players_per_group
+    training_question_1_my_payoff_correct = 110
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -107,12 +109,33 @@ class Player(otree.models.BasePlayer):
         doc="""Indicates whether the player is the winner"""
     )
 
+    training_question_1_my_payoff = models.PositiveIntegerField(
+        null=True, verbose_name=''
+    )
+
+    def is_training_question_1_my_payoff_correct(self):
+        return (self.training_question_1_my_payoff==
+                Constants.training_question_1_my_payoff_correct)
+
+    def training_question_1_my_payoff_error_message(self, value):
+        is_valid = (
+            Constants.min_allowable_bid
+            <= value <=
+            Constants.training_question_1_my_payoff_limit
+        )
+        if not is_valid:
+            msg = 'The payoff cannot must be in the range [{}, {}]'
+            return msg.format(
+                Constants.min_allowable_bid,
+                Constants.training_question_1_my_payoff_limit
+            )
+
     def bid_amount_error_message(self, value):
         is_valid = (
             Constants.min_allowable_bid <= value <= Constants.max_allowable_bid
         )
         if not is_valid:
-            msg = 'The payoff cannot be greater must be in the range [{}, {}]'
+            msg = 'The payoff must be in the range [{}, {}]'
             return msg.format(
                 Constants.min_allowable_bid, Constants.max_allowable_bid
             )
