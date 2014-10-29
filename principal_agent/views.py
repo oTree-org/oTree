@@ -3,7 +3,7 @@ from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants, cost_from_effort
-from otree.common import to_safe_json
+from otree.common import safe_json
 from utils import FeedbackQ
 
 
@@ -88,8 +88,8 @@ class Accept(Page):
 
     def variables_for_template(self):
         return {'fixed_pay': self.group.agent_fixed_pay,
-                'EFFORT_TO_RETURN': to_safe_json(Constants.EFFORT_TO_RETURN),
-                'EFFORT_TO_COST': to_safe_json(Constants.EFFORT_TO_COST),
+                'EFFORT_TO_RETURN': safe_json(Constants.EFFORT_TO_RETURN),
+                'EFFORT_TO_COST': safe_json(Constants.EFFORT_TO_COST),
                 'return_share': int(self.group.agent_return_share * 100)}
 
 
