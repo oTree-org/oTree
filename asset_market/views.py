@@ -219,17 +219,6 @@ class Results(Page):
         }
 
 
-class FeedbackQ(Page):
-
-    def participate_condition(self):
-        return self.subsession.round_number == Constants.number_of_rounds
-
-    template_name = 'asset_market/FeedbackQ.html'
-
-    form_model = models.Player
-    form_fields = ['feedbackq']
-
-
 def pages():
     return [
         Introduction,
@@ -246,5 +235,4 @@ def pages():
         Dividend,
         ResultsWaitPage,
         Results,
-        FeedbackQ,
     ]

@@ -4,7 +4,6 @@ from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants, cost_from_effort
 from otree.common import safe_json
-from utils import FeedbackQ
 
 
 def variables_for_all_templates(self):
@@ -120,10 +119,6 @@ class Results(Page):
                 'payoff': self.player.payoff}
 
 
-class FeedbackQ(FeedbackQ, Page):
-    form_model = models.Player
-
-
 def pages():
 
     return [Introduction,
@@ -133,5 +128,4 @@ def pages():
             OfferWaitPage,
             Accept,
             ResultsWaitPage,
-            Results,
-            FeedbackQ]
+            Results]

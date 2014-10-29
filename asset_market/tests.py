@@ -39,8 +39,3 @@ class PlayerBot(Bot):
         if round == rounds:
             self.submit(views.Results)
 
-            # randomise feedback
-            choices = ['Very well', 'Well', 'OK', 'Badly', 'Very badly']
-            rand_choice = random.randint(0,4)
-
-            self.submit(views.FeedbackQ, {'feedbackq': choices[rand_choice]})

@@ -79,14 +79,6 @@ class Player(otree.models.BasePlayer):
     choice = models.PositiveIntegerField(
         blank=True, widget=widgets.RadioSelect(),
         verbose_name='And you will')  # seller index
-    feedback = models.PositiveIntegerField(
-        choices=(
-            (5, 'Very well'),
-            (4, 'Well'),
-            (3, 'OK'),
-            (2, 'Badly'),
-            (1, 'Very badly')), widget=widgets.RadioSelectHorizontal(),
-        verbose_name='')
 
     def price_error_message(self, value):
         if not 0 <= value <= Constants.INITIAL:

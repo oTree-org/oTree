@@ -70,10 +70,6 @@ class Player(otree.models.BasePlayer):
     points = models.PositiveIntegerField()
 
     question = models.PositiveIntegerField(widget=widgets.TextInput())
-    feedbackq = models.CharField(widget=widgets.RadioSelectHorizontal())
-
-    def feedbackq_choices(self):
-        return ['Very well', 'Well', 'OK', 'Badly', 'Very badly']
 
     def question_correct(self):
         return self.question == Constants.question_correct

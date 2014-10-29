@@ -4,7 +4,6 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from utils import FEEDBACK_CHOICES
 # </standard imports>
 
 
@@ -72,6 +71,3 @@ class Player(otree.models.BasePlayer):
     training_participant2_payoff = models.PositiveIntegerField(
         verbose_name="Participant 2's payoff would be")
 
-    feedback = models.PositiveIntegerField(
-        verbose_name='How well do you think this sample game was implemented?',
-        choices=FEEDBACK_CHOICES, widget=widgets.RadioSelectHorizontal())

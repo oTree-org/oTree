@@ -19,4 +19,3 @@ class PlayerBot(Bot):
 
 
         self.submit(views.Results)
-        self.submit(views.Question2, dict(feedback=3))

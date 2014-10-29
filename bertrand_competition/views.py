@@ -5,7 +5,7 @@ from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 from .models import Constants
 from django.utils.safestring import mark_safe
-from utils import FeedbackQ
+
 
 
 def variables_for_all_templates(self):
@@ -87,10 +87,6 @@ class Results(Page):
             ])
 
 
-class FeedbackQ(FeedbackQ, Page):
-    form_model = models.Player
-
-
 def pages():
 
     return [Introduction,
@@ -98,5 +94,4 @@ def pages():
             Feedback1,
             Decide,
             ResultsWaitPage,
-            Results,
-            FeedbackQ]
+            Results]

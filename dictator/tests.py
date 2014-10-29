@@ -26,7 +26,6 @@ class PlayerBot(Bot):
             self.play_p1()
 
         self.submit(views.Results)
-        self.submit(views.FeedbackQ, {'feedback': 3})
 
     def play_p1(self):
 

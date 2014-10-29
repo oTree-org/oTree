@@ -49,7 +49,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
-            subsession_apps=['trust', 'lab_results'],
+            subsession_apps=['trust', 'feedback', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -58,7 +58,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=2,
             participants_per_demo_session=2,
-            subsession_apps=['dictator', 'lab_results'],
+            subsession_apps=['dictator', 'feedback', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -76,7 +76,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
-            subsession_apps=['traveler_dilemma', 'lab_results'],
+            subsession_apps=['traveler_dilemma', 'feedback', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -139,7 +139,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=3,
-            subsession_apps=['volunteer_dilemma', 'lab_results'],
+            subsession_apps=['volunteer_dilemma', 'feedback', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -148,7 +148,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
-            subsession_apps=['bertrand_competition', 'lab_results'],
+            subsession_apps=['bertrand_competition', 'feedback', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -157,7 +157,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
-            subsession_apps=['principal_agent', 'lab_results'],
+            subsession_apps=['principal_agent', 'feedback', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -187,7 +187,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=2,
-            subsession_apps=['asset_market', 'lab_results'],
+            subsession_apps=['asset_market', 'feedback', 'lab_results'],
             doc=""""""
         ),
         SessionType(
@@ -196,7 +196,7 @@ def session_types():
             base_pay=10.00,
             participants_per_session=12,
             participants_per_demo_session=3,
-            subsession_apps=['lemon_market', 'lab_results'],
+            subsession_apps=['lemon_market', 'feedback', 'lab_results'],
             doc=""""""
         ),
 

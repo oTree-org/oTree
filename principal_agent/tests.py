@@ -25,7 +25,6 @@ class PlayerBot(Bot):
             assert self.player.payoff == 46 + 30, self.player.payoff
         else:
             assert self.player.payoff == 34 + 30, self.player.payoff
-        self.submit(views.FeedbackQ, {'feedback': 4})
 
     def play_1(self):
         # P1/A - propose contract

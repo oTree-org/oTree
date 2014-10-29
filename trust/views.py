@@ -41,22 +41,6 @@ class Feedback1(Page):
             num_q=1, x=self.player.training_answer_x,
             y=self.player.training_answer_y)
 
-
-class Question2(Page):
-    template_name = 'global/Question.html'
-    form_model = models.Player
-    form_fields = 'feedback',
-
-    def participate_condition(self):
-        return self.subsession.round_number == 1
-
-    def variables_for_template(self):
-        return dict(
-            num_q=1,
-            title='Questionnaire',
-            question='How well do you think this sample game was implemented?')
-
-
 class Send(Page):
 
     """This page is only for P1
@@ -144,5 +128,4 @@ def pages():
             SendBack,
             ResultsWaitPage,
             Results,
-            Question2,
             ]
