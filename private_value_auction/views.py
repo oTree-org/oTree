@@ -33,6 +33,9 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.set_winner()
 
+    def body_text(self):
+        return "Waiting for the other participant."
+
 
 class Results(Page):
 
@@ -43,9 +46,9 @@ class Results(Page):
             self.player.set_payoff()
 
         return {'is_winner': self.player.is_winner,
-                'is_greedy': self.player.private_value - self.player.bid_amount < 0,
                 'bid_amount': self.player.bid_amount,
                 'winning_bid': self.group.highest_bid(),
+                'second_highest_bid': self.group.second_highest_bid(),
                 'private_value': self.player.private_value,
                 'payoff': self.player.payoff}
 
