@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from otree import widgets
-from otree.db import models
 
 FEEDBACK_CHOICES = (
     (5, 'Very well'),
@@ -16,9 +14,15 @@ class FeedbackQ(object):
     form_fields = 'feedback',
 
     def participate_condition(self):
-        return self.subsession.round_number == self.subsession._Constants.number_of_rounds
+        return self.subsession.round_number ==\
+            self.subsession._Constants.number_of_rounds
 
     def variables_for_template(self):
-        return dict(
-            title='Questionnaire',
-            question='How well do you think this sample game was implemented?')
+        ctx = {'title': 'Questionnaire',
+               'note': '''Note: In this live sample game in order to save time
+               for you we just put one question.'''}
+        if not self.player._meta.get_field_by_name(
+                'feedback')[0].verbose_name:
+            ctx['question'] = '''How well do you think this sample game was
+            implemented?'''
+        return ctx
