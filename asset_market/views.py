@@ -4,6 +4,7 @@ from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Money, money_range
 from .models import Constants
+from otree.common import safe_json
 
 
 def variables_for_all_templates(self):
@@ -95,6 +96,15 @@ class FeedbackTwo(Page):
         }
 
 
+class OrderWaitPage(WaitPage):
+
+    scope = models.Group
+
+    def after_all_players_arrive(self):
+        if self.subsession.round_number != 1:
+            self.group.set_assets_to_previous()
+
+
 class Order(Page):
 
     form_model = models.Player
@@ -156,8 +166,8 @@ class Dividend(Page):
 
         return {
             'dividend': self.group.dividend_per_share,
-            'dividend_gain': self.group.dividend_per_share * self.player.shares,
-            'cash': self.player.cash + self.group.dividend_per_share * self.player.shares,
+            'dividend_gain': self.group.dividend_per_share * self.player.shares if self.player.shares != 0 else 0,
+            'cash': self.player.cash,
             'shares': self.player.shares,
         }
 
@@ -179,11 +189,33 @@ class Results(Page):
 
     def variables_for_template(self):
 
+        # create chart lists
+        transaction_price = []
+        dividend_per_share = []
+        shares_traded = []
+
+        for p in self.player.me_in_all_rounds():
+            if p.group.transaction_price is None:
+                transaction_price.append(0)
+            else:
+                transaction_price.append(int(p.group.transaction_price))
+            if p.group.dividend_per_share is None:
+                dividend_per_share.append(0)
+            else:
+                dividend_per_share.append(int(p.group.dividend_per_share))
+            if p.group.shares_traded is None:
+                shares_traded.append(0)
+            else:
+                shares_traded.append(p.group.shares_traded)
+
         return {
             'cash': self.player.cash,
             'shares': self.player.shares,
             'base_pay': self.player.participant.session.base_pay,
-            'total_payoff': self.player.cash + self.player.participant.session.base_pay
+            'total_payoff': self.player.cash + self.player.participant.session.base_pay,
+            'transaction_price': safe_json(transaction_price),
+            'dividend_per_share': safe_json(dividend_per_share),
+            'shares_traded': safe_json(shares_traded),
         }
 
 
@@ -206,6 +238,7 @@ def pages():
         FeedbackOne,
         QuestionTwo,
         FeedbackTwo,
+        OrderWaitPage,
         Order,
         TransactionWaitPage,
         Transaction,
