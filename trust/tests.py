@@ -28,7 +28,6 @@ class PlayerBot(Bot):
 
         # finally, show results
         self.submit(views.Results)
-        self.submit(views.Question2, dict(feedback=4))
 
     def play_p1(self):
         # random send amount

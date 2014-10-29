@@ -162,11 +162,6 @@ class Player(otree.models.BasePlayer):
     understanding_question_1 = models.CharField(max_length=100, null=True, choices=QUESTION_1_CHOICES, verbose_name='', widget=widgets.RadioSelect())
     understanding_question_2 = models.CharField(max_length=100, null=True, choices=QUESTION_2_CHOICES, verbose_name='', widget=widgets.RadioSelect())
 
-    feedbackq = models.CharField(null=True, verbose_name='How well do you think this sample game was implemented?', widget=widgets.RadioSelectHorizontal())
-
-    def feedbackq_choices(self):
-        return ['Very well', 'Well', 'OK', 'Badly', 'Very badly']
-
     # check correct answers
     def is_understanding_question_1_correct(self):
         return self.understanding_question_1 == Constants.understanding_1_correct

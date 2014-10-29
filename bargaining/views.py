@@ -80,19 +80,6 @@ class Results(Page):
         }
 
 
-class Question2(Page):
-    template_name = 'global/Question.html'
-    form_model = models.Player
-    form_fields = 'feedback',
-
-    def participate_condition(self):
-        return self.subsession.round_number == 1
-
-    def variables_for_template(self):
-        return dict(
-            num_q=1,
-            title='Questionnaire',
-            question='How well do you think this sample game was implemented?')
 
 
 def pages():
@@ -103,5 +90,4 @@ def pages():
         Request,
         ResultsWaitPage,
         Results,
-        Question2,
     ]

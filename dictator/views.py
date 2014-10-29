@@ -3,7 +3,6 @@ from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
-from utils import FeedbackQ
 
 
 def variables_for_all_templates(self):
@@ -77,10 +76,6 @@ class Results(Page):
                 'player_id': self.player.id_in_group}
 
 
-class FeedbackQ(FeedbackQ, Page):
-    form_model = models.Player
-
-
 def pages():
 
     return [Introduction,
@@ -88,5 +83,4 @@ def pages():
             Feedback1,
             Offer,
             ResultsWaitPage,
-            Results,
-            FeedbackQ]
+            Results]

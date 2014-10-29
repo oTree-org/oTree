@@ -4,7 +4,6 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from utils import FEEDBACK_CHOICES
 # </standard imports>
 
 doc = """
@@ -71,7 +70,3 @@ class Player(otree.models.BasePlayer):
         doc="""Whether player volunteers""",
         widget=widgets.RadioSelect(),
     )
-
-    feedback = models.PositiveIntegerField(
-        choices=FEEDBACK_CHOICES, widget=widgets.RadioSelectHorizontal(),
-        verbose_name='')

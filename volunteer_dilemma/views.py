@@ -4,7 +4,6 @@ from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
 from django.utils.safestring import mark_safe
-from utils import FeedbackQ
 
 
 def variables_for_all_templates(self):
@@ -83,10 +82,6 @@ class Results(Page):
                     p for p in self.group.get_players() if p.volunteer])}
 
 
-class FeedbackQ(FeedbackQ, Page):
-    form_model = models.Player
-
-
 def pages():
 
     return [Introduction,
@@ -94,5 +89,4 @@ def pages():
             Feedback1,
             Decision,
             ResultsWaitPage,
-            Results,
-            FeedbackQ]
+            Results]

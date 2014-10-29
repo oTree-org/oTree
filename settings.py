@@ -68,6 +68,7 @@ INSTALLED_OTREE_APPS = [
     'survey_sample',
     'asset_market',
     'lemon_market',
+    'feedback',
 ]
 
 

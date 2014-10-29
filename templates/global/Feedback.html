@@ -6,7 +6,7 @@ Solution to Understanding Question {{ num_q|default:1 }} of {{ total_q|default:1
 {% endblock %}
 
 {% block content %}
-{% for question, answer in answers.items %}
+{% for question, answer in answers.items|default:answers %}
 {% ifequal answer.0 answer.1 %}
 <p class="text-success">
 Your answer {{answer.0}} for {{question}} was correct.

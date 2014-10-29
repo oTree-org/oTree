@@ -6,7 +6,6 @@ import otree.models
 from otree import widgets
 from otree.common import Money, money_range
 import random
-from utils import FEEDBACK_CHOICES
 # </standard imports>
 
 
@@ -26,7 +25,7 @@ target="_blank">here</a>.
 
 
 class Constants:
-    players_per_group = 3
+    players_per_group = 2
     name_in_url = 'bertrand_competition'
     number_of_rounds = 1
     bonus = 10
@@ -74,10 +73,6 @@ class Player(otree.models.BasePlayer):
         default=False,
         doc="""Whether this player offered lowest price"""
     )
-
-    feedback = models.PositiveIntegerField(
-        choices=FEEDBACK_CHOICES, widget=widgets.RadioSelectHorizontal(),
-        verbose_name='')
 
     def price_error_message(self, value):
         if not 0 <= value <= Constants.maximum_price:

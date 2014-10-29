@@ -23,4 +23,3 @@ class PlayerBot(Bot):
         self.submit(views.Results)
         if self.subsession.round_number == Constants.number_of_rounds:
             self.submit(views.FinalResults)
-            self.submit(views.FeedbackQ, dict(feedback=5))

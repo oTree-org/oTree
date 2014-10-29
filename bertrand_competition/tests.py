@@ -16,4 +16,3 @@ class PlayerBot(Bot):
         self.submit(views.Feedback1)
         self.submit(views.Decide, dict(price=30))
         self.submit(views.Results)
-        self.submit(views.FeedbackQ, dict(feedback=3))
