@@ -55,7 +55,7 @@ class Constants:
     max_allowable_bid = 100
 
     training_question_1_my_payoff_limit = 100 * players_per_group
-    training_question_1_my_payoff_correct = 110
+    training_question_1_my_payoff_correct = 105
 
 
 class Subsession(otree.models.BaseSubsession):

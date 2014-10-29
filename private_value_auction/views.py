@@ -43,6 +43,7 @@ class FeedbackOne(Page):
                 self.player.is_training_question_1_my_payoff_correct()
             ),
             'answer_you': self.player.training_question_1_my_payoff,
+            'correct_answer': Constants.training_question_1_my_payoff_correct
         }
 
 
