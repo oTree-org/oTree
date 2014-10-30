@@ -41,6 +41,7 @@ class Group(otree.models.BaseGroup):
         for p in self.get_players():
             p.payoff = Constants.INITIAL
         buyer = self.get_player_by_id(1)
+
         if buyer.choice:
             seller = self.get_player_by_id(buyer.choice + 1)
             buyer.payoff += seller.quality + 5 - seller.price

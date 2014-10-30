@@ -30,6 +30,7 @@ class QuestionOne(Page):
         return {'num_q': 1}
 
 
+
 class FeedbackOne(Page):
 
     template_name = 'prisoner/Feedback.html'
@@ -49,6 +50,7 @@ class Decision(Page):
 
     form_model = models.Player
     form_fields = ['decision']
+
 
 
 class ResultsWaitPage(WaitPage):

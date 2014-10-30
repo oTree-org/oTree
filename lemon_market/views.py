@@ -77,11 +77,9 @@ class Purchase(Page):
             self.subsession.round_number, Constants.number_of_rounds)}
 
 
-class WaitPage(WaitPage):
-    scope = models.Group
-
-
 class ResultsWaitPage(WaitPage):
+
+    scope = models.Group
 
     def after_all_players_arrive(self):
         self.group.set_payoff()
