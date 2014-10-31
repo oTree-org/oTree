@@ -92,17 +92,6 @@ class Results(Page):
             'total_points': total_points
         }
 
-class FeedbackQ(Page):
-    template_name = 'public_goods/FeedbackQ.html'
-
-    def participate_condition(self):
-        return True
-
-    form_model = models.Player
-    form_fields = ['feedbackq']
-
-
-
 def pages():
 
     return [Introduction,
@@ -110,5 +99,4 @@ def pages():
             Feedback,
             Contribute,
             ResultsWaitPage,
-            Results,
-            FeedbackQ]
+            Results]

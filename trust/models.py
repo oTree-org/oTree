@@ -77,14 +77,6 @@ class Player(otree.models.BasePlayer):
     training_answer_y = models.PositiveIntegerField(
         null=True, verbose_name='Participant B would have')
     points = models.PositiveIntegerField()
-    feedback = models.PositiveIntegerField(
-        choices=(
-            (5, 'Very well'),
-            (4, 'Well'),
-            (3, 'OK'),
-            (2, 'Badly'),
-            (1, 'Very badly')), widget=widgets.RadioSelectHorizontal(),
-        verbose_name='')
 
     def role(self):
         return {1: 'A', 2: 'B'}[self.id_in_group]

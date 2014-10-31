@@ -11,41 +11,43 @@
     <p>
         {% if accepted %}
             {% if agent %}
-                You accepted the contract.
+            You <strong>accepted</strong> the contract.
             {% else %}
-                Player B accepted your contract.
+            Participant B <strong>accepted</strong> your contract.
             {% endif %}
+            <table class="table table-condensed" style="width:auto">
+                <tr>
+                    <th>Fixed payment</th>
+                    <th>Return share</th>
+                    <th>Effort Level</th>
+                    <th>Effort Cost</th>
+                    <th>Total Return</th>
+                    <th>You Received</th>
+                </tr>
+                <tr>
+                    <td>{{ fixed_pay }}</td>
+                    <td>{{ return_share }}%</td>
+                    <td>{{ effort_level }}</td>
+                    <td>{{ effort_cost }}</td>
+                    <td>{{ return }}</td>
+                    <td>{{ received|floatformat }}</td>
+                </tr>
+            </table>
+    <p>
+    In addition to your initial 30 points, your payoff is <strong>{{payoff|floatformat}} points</strong>.
+    </p>
         {% else %}
             {% if agent %}
-                You rejected the contract.
+            You <strong>rejected</strong> the contract. Thus you received <strong>10 points</strong>. Your payoff equals your initial 30 points plus 10, that is, <strong>{{payoff|floatformat}} points</strong>.
             {% else %}
-                Player B rejected your contract.
+            Participant B <strong>rejected</strong> your contract. Thus you have received nothing. Your payoff equals initial <strong>{{payoff|floatformat}} points</strong>.
             {% endif %}
         {% endif %}
-        The details are given in the table below.
     </p>
 
-    <table class="table table-condensed" style="width:350px; margin-top:20px; margin-bottom:10px">
-        <tr>
-            <th>Fixed payment</th>
-            <th>Return share</th>
-            {% if accepted %}
-                <th>{% if agent %}Your{% else %}B's{% endif %} effort level</th>
-            {% endif %}
-        </tr>
-        <tr>
-            <td>{{ fixed_pay }}</td>
-            <td>{{ return_share }}%</td>
-            {% if accepted %}
-                <td>{{ effort_level }}</td>
-            {% endif %}
-        </tr>
-    </table>
+    <p>To complete the study, please answer a short questionnaire that will now follow.</p>
+    <p>{% next_button %}</p>
 
-    <p>
-        Your payoff is therefore {{ payoff }}.
-    </p>
-
-    {% next_button %}
+    {% include "principal_agent/Rules.html" %}
 
 {% endblock %}

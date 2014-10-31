@@ -3,7 +3,6 @@ from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from random import choice
-from utils import FeedbackQ
 from .models import Constants
 
 def variables_for_all_templates(self):
@@ -107,10 +106,6 @@ class Results(Page):
                 buyer.choice + 1)}
 
 
-class FeedbackQ(FeedbackQ, Page):
-    form_model = models.Player
-
-
 class FinalResults(Page):
 
     template_name = 'lemon_market/FinalResults.html'
@@ -137,5 +132,4 @@ def pages():
         ResultsWaitPage,
         Results,
         FinalResults,
-        FeedbackQ,
     ]

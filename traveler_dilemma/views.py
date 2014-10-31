@@ -25,10 +25,7 @@ class Question1(Page):
     template_name = 'global/Question.html'
     form_model = models.Player
     form_fields = 'training_answer_mine', 'training_answer_others'
-    question = '''Suppose that you claim the antiques are worth 50 points
-        and the other traveler claims they are worth 100 points.
-        What would you and the other traveler receive in compensation from
-        the airline?'''
+    question = '''Suppose that you claim the antiques are worth 50 points and the other traveler claims they are worth 100 points. What would you and the other traveler receive in compensation from the airline?'''
 
     def participate_condition(self):
         return self.subsession.round_number == 1
@@ -95,21 +92,6 @@ class Results(Page):
                 ])
 
 
-class Question2(Page):
-    template_name = 'global/Question.html'
-    form_model = models.Player
-    form_fields = 'feedback',
-
-    def participate_condition(self):
-        return self.subsession.round_number == 1
-
-    def variables_for_template(self):
-        return dict(
-            num_q=1,
-            title='Questionnaire',
-            question='How well do you think this sample game was implemented?')
-
-
 def pages():
 
     return [Introduction,
@@ -117,5 +99,4 @@ def pages():
             Feedback1,
             Claim,
             ResultsWaitPage,
-            Results,
-            Question2]
+            Results]

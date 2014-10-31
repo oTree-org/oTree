@@ -67,14 +67,6 @@ class Player(otree.models.BasePlayer):
         """,
         verbose_name='Please enter a number from 2 to 100'
     )
-    feedback = models.PositiveIntegerField(
-        choices=(
-            (5, 'Very well'),
-            (4, 'Well'),
-            (3, 'OK'),
-            (2, 'Badly'),
-            (1, 'Very badly')), widget=widgets.RadioSelectHorizontal(),
-        verbose_name='')
 
     def claim_error_message(self, value):
         if not Constants.min_amount\

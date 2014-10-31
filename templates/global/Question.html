@@ -18,6 +18,9 @@ Understanding Question {{ num_q|default:1 }} of {{ total_q|default:1 }}
 {% include question_template %}
 {% endif %}
 {% endblock question %}
+{% if note %}
+<p><i>{{note}}</i></p>
+{% endif %}
 {# render <form> #}
 {% for field in form %}
 <p>{% formrow field %}</p>
