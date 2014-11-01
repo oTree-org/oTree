@@ -10,7 +10,7 @@ from otree import widgets
 doc = """
 The principal offers a contract to the agent, who can decide if to reject or
 accept. The agent then chooses an effort level. The implementation is based on
-Gächter and Königstein (2006).
+<a href="http://www.nottingham.ac.uk/cedex/documents/papers/2006-04.pdf" target="_blank">Gächter and Königstein (2006)</a>.
 
 Source code <a
 href="https://github.com/oTree-org/oTree/tree/master/principal_agent"
