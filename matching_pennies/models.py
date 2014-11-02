@@ -25,8 +25,8 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    def next_round_groups(self, this_round_groups):
-        groups = this_round_groups
+    def next_round_groups(self, current_round_groups):
+        groups = current_round_groups
         for group in groups:
             group.reverse()
         return groups
