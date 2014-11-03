@@ -125,12 +125,12 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='private_value_auction',
-            display_name="Private Value Auction",
+            name='vickrey_auction',
+            display_name="Vickrey Auction",
             base_pay=10.00,
             participants_per_session=12,
-            participants_per_demo_session=2,
-            subsession_apps=['private_value_auction', 'lab_results'],
+            participants_per_demo_session=3,
+            subsession_apps=['vickrey_auction', 'survey_sample', 'lab_results'],
             doc=""""""
         ),
         SessionType(
