@@ -19,10 +19,10 @@
     <div id=effort>
     {% formrow form.agent_work_effort with label='Please choose your level of effort' %}
     </div>
+    <p id=calculate></p>
     <p>
     {% next_button %}
     </p>
-    <p id=calculate></p>
     {% include 'principal_agent/Rules.html' %}
     <script>
 $(function() {
