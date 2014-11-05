@@ -50,4 +50,4 @@ $(function () {
             {% endfor %}
             ]
     });
-});
+}); // FIXME: use safe_json instead of forloop

@@ -34,13 +34,13 @@
                 </tr>
             </table>
     <p>
-    In addition to your initial 30 points, your payoff is <strong>{{payoff|floatformat}} points</strong>.
+    In addition to your initial 30 points, your payoff is <strong>{{payoff}}</strong>.
     </p>
         {% else %}
             {% if agent %}
-            You <strong>rejected</strong> the contract. Thus you received <strong>10 points</strong>. Your payoff equals your initial 30 points plus 10, that is, <strong>{{payoff|floatformat}} points</strong>.
+            You <strong>rejected</strong> the contract. Thus you received <strong>10 points</strong>. Your payoff equals your initial 30 points plus 10, that is, <strong>{{payoff}}</strong>.
             {% else %}
-            Participant B <strong>rejected</strong> your contract. Thus you have received nothing. Your payoff equals initial <strong>{{payoff|floatformat}} points</strong>.
+            Participant B <strong>rejected</strong> your contract. Thus you have received nothing. Your payoff equals initial <strong>{{payoff}}</strong>.
             {% endif %}
         {% endif %}
     </p>

@@ -31,16 +31,14 @@
     {% if tie %}
         There are {{ winners_count }} participants who picked this number and
         you {% if is_winner %} were {% else %} were not {% endif %} one of
-        them. As a result, you received <strong>{{ payoff|floatformat:"-2" }}
-        points</strong>.
+        them. As a result, you received <strong>{{ payoff}}</strong>.
     {% else %}
         As a result, you {% if is_winner %} were {% else %} were not {% endif %}
-        the winner and received <strong>{{ payoff|floatformat:"-2" }}
-        points</strong>.
+        the winner and received <strong>{{ payoff}}</strong>.
     {% endif %}
 
     In addition, you received 10 points for participation. Thus, your total
-    payoff is <strong>{{ total_payoff|floatformat:"-2" }}</strong> points.
+    payoff is <strong>{{ total_payoff }}</strong>.
 
 </p>
 

@@ -7,7 +7,7 @@ from .models import Constants
 
 
 def variables_for_all_templates(self):
-    return dict(instructions='traveler_dilemma/Instructions.html')
+    return dict(total_q=1, instructions='traveler_dilemma/Instructions.html')
 
 
 class Introduction(Page):
@@ -34,7 +34,7 @@ class Question1(Page):
         return self.subsession.round_number == 1
 
     def variables_for_template(self):
-        return dict(num_q=1, total_q=1, question=self.question)
+        return dict(num_q=1, question=self.question)
 
 
 class Feedback1(Page):

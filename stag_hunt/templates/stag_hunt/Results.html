@@ -11,9 +11,9 @@
     <p>
         You went for a <strong>{{ decision|lower }}</strong> and the other
         participant went for a <strong>{{ other_decision|lower }}</strong>.
-        As a result, your payoff is <strong>{{ payoff|floatformat:"-2" }}</strong>
-        points. In addition, you received 10 points for participation. Thus, your
-        total payoff is <strong>{{ total_payoff|floatformat:"-2" }}</strong> points.
+        As a result, your payoff is <strong>{{ payoff }}</strong>.
+        In addition, you received 10 points for participation. Thus, your
+        total payoff is <strong>{{ total_payoff }}</strong>.
     </p>
 
     {% next_button %}
