@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Money, money_range
+from otree.common import Currency, currency_range
 import random
 # </standard imports>
 
@@ -21,8 +21,8 @@ class Constants:
     players_per_group = 2
     number_of_rounds = 1
 
-    min_allowable_bid = Money(0.0)
-    max_allowable_bid = Money(10.0)
+    min_allowable_bid = Currency(0.0)
+    max_allowable_bid = Currency(10.0)
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -54,17 +54,17 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    private_value = models.MoneyField(
+    private_value = models.CurrencyField(
         doc="""How much the player values the item, generated randomly"""
     )
 
-    bid_amount = models.MoneyField(
+    bid_amount = models.CurrencyField(
         default=None,
         doc="""Amount bidded by the player"""
     )
 
     def bid_amount_choices(self):
-        return money_range(Constants.min_allowable_bid, Constants.max_allowable_bid, 0.05)
+        return currency_range(Constants.min_allowable_bid, Constants.max_allowable_bid, 0.05)
 
     is_winner = models.BooleanField(
         default=False,

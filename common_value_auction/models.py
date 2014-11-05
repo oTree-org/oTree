@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Money, money_range
+from otree.common import Currency, currency_range
 import random
 # </standard imports>
 
@@ -20,11 +20,11 @@ class Constants:
     players_per_group = 1
     number_of_rounds = 1
 
-    min_allowable_bid = Money(0.0)
-    max_allowable_bid = Money(10.0)
+    min_allowable_bid = Currency(0.0)
+    max_allowable_bid = Currency(10.0)
 
     # Error margin for the value estimates shown to the players
-    estimate_error_margin = Money(1.00)
+    estimate_error_margin = Currency(1.00)
 
 class Subsession(otree.models.BaseSubsession):
     pass
@@ -44,7 +44,7 @@ class Group(otree.models.BaseGroup):
         winner = random.choice(players_with_highest_bid)    # if tie, winner is chosen at random
         winner.is_winner = True
 
-    item_value = models.MoneyField(
+    item_value = models.CurrencyField(
         default=lambda: round(random.uniform(Constants.min_allowable_bid, Constants.max_allowable_bid), 1),
         doc="""Common value of the item to be auctioned, random for treatment"""
     )
@@ -71,11 +71,11 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    item_value_estimate = models.MoneyField(
+    item_value_estimate = models.CurrencyField(
         doc="""Estimate of the common value, may be different for each player"""
     )
 
-    bid_amount = models.MoneyField(
+    bid_amount = models.CurrencyField(
         doc="""Amount bidded by the player"""
     )
 

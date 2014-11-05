@@ -2,7 +2,7 @@
 from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
-from otree.common import Money, money_range, safe_json
+from otree.common import Currency, currency_range, safe_json
 from .models import Constants
 
 class Feedback(Page):

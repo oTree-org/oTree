@@ -3,7 +3,7 @@ from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 from otree.db import models
 import otree.models
-from otree.common import money_range
+from otree.common import currency_range
 from otree import widgets
 
 doc = """

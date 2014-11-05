@@ -2,7 +2,7 @@
 from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
-from otree.common import Money, money_range
+from otree.common import Currency, currency_range
 from .models import Constants
 
 class Introduction(Page):
@@ -22,8 +22,8 @@ class Bid(Page):
             self.player.private_value = self.player.generate_private_value()
 
         return {'private_value': self.player.private_value,
-                'min_bid': Money(Constants.min_allowable_bid),
-                'max_bid': Money(Constants.max_allowable_bid)}
+                'min_bid': Currency(Constants.min_allowable_bid),
+                'max_bid': Currency(Constants.max_allowable_bid)}
 
 
 class ResultsWaitPage(WaitPage):

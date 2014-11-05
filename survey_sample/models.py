@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Money, money_range
+from otree.common import Currency, currency_range
 import random
 # </standard imports>
 from django_countries.fields import CountryField

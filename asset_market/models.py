@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Money, money_range
+from otree.common import Currency, currency_range
 import random
 # </standard imports>
 from random import randint
@@ -52,11 +52,11 @@ class Group(otree.models.BaseGroup):
 
     # transaction fields
     is_transaction = models.BooleanField(default=False, doc="""Indicates whether there is a transaction""")
-    transaction_price = models.MoneyField(null=True, doc="""Given by 0.5*(BP+SP)""")
+    transaction_price = models.CurrencyField(doc="""Given by 0.5*(BP+SP)""")
     shares_traded = models.PositiveIntegerField(null=True)
 
     # dividend fields
-    dividend_per_share = models.MoneyField(default=1)
+    dividend_per_share = models.CurrencyField(default=1)
     is_dividend = models.BooleanField(default=False, doc="""Indicates whether dividend is issued""")
 
     # method to set cash and shares to balance in previous round
@@ -123,16 +123,16 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     # initial shares and cash
-    cash = models.MoneyField(default=20)
+    cash = models.CurrencyField(default=20)
     shares = models.PositiveIntegerField(default=5)
 
     # default allocated shares for both players; provides a range for buyers; sellers' range is limited by the number of shares they have
     num_shares = 10
 
     # order fields
-    bp = models.MoneyField(default=0.00, doc="""maximum buying price per share""")
+    bp = models.CurrencyField(default=0.00, doc="""maximum buying price per share""")
     bn = models.PositiveIntegerField(default=0, doc="""number of shares willing to buy""")
-    sp = models.MoneyField(default=0.00, doc="""minimum selling price per share""")
+    sp = models.CurrencyField(default=0.00, doc="""minimum selling price per share""")
     sn = models.PositiveIntegerField(default=0, doc="""number of shares willing to sell.""")
 
     order_type = models.CharField(max_length=10, doc="""player: buy or sell?""", widget=widgets.RadioSelectHorizontal)
@@ -147,10 +147,10 @@ class Player(otree.models.BasePlayer):
         return range(0, self.shares+1, 1)
 
     def bp_choices(self):
-        return money_range(0, self.cash, 0.5)
+        return currency_range(0, self.cash, 0.5)
 
     def sp_choices(self):
-        return money_range(0, self.cash, 0.5)
+        return currency_range(0, self.cash, 0.5)
 
     def other_player(self):
         """Returns other player in group. Only valid for 2-player groups."""

@@ -3,7 +3,7 @@ from .. import models
 import otree.views
 import otree.forms
 import otree.test
-from otree.common import Money, money_range
+from otree.common import Currency, currency_range
 
 class Page(otree.views.Page):
     z_models = models
