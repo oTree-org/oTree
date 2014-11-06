@@ -11,7 +11,7 @@ You are {{player.role}}.
 {% if player.role == 'buyer' %}
 You bought from seller {{buyer.choice}}. The quality grade of your purchase is <strong>{{seller.get_quality_display}}</strong>.
 {% else %}
-The buyer purchased a <strong>{{seller.get_quality_display}}</strong> grade from <strong>{{seller.role}}</strong> at a price of <strong>{{seller.price}} points</strong>.
+The buyer purchased a <strong>{{seller.get_quality_display}}</strong> grade from <strong>{{seller.role}}</strong> at a price of <strong>{{seller.price}}</strong>.
 {% endif %}
 {# buyer bought nothing #}
 {% elif player.role == 'buyer' %}

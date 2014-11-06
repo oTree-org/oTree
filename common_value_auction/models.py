@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
 
@@ -20,11 +20,11 @@ class Constants:
     players_per_group = 1
     number_of_rounds = 1
 
-    min_allowable_bid = Currency(0.0)
-    max_allowable_bid = Currency(10.0)
+    min_allowable_bid = c(0.0)
+    max_allowable_bid = c(10.0)
 
     # Error margin for the value estimates shown to the players
-    estimate_error_margin = Currency(1.00)
+    estimate_error_margin = c(1.00)
 
 class Subsession(otree.models.BaseSubsession):
     pass

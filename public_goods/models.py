@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
 
@@ -21,19 +21,16 @@ class Constants:
     number_of_rounds = 1
 
     #"""Amount allocated to each player"""
-    endowment = 100
+    endowment = c(100)
     efficiency_factor = 1.8
-    base_points = 10
+    base_points = c(10)
 
-    question_correct = 92
+    question_correct = c(92)
 
 
 class Subsession(otree.models.BaseSubsession):
 
     pass
-
-
-
 
 
 class Group(otree.models.BaseGroup):
@@ -47,8 +44,8 @@ class Group(otree.models.BaseGroup):
         contributions = sum([p.contribution for p in self.get_players()])
         individual_share = contributions * Constants.efficiency_factor / Constants.players_per_group
         for p in self.get_players():
-            p.points = (Constants.endowment - p.contribution) + individual_share
-            p.payoff = p.points / Constants.endowment
+            p.payoff = (Constants.endowment - p.contribution) + individual_share
+            p.payoff = p.payoff / Constants.endowment
 
 
 class Player(otree.models.BasePlayer):
@@ -58,18 +55,15 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    contribution = models.PositiveIntegerField(
+    contribution = models.CurrencyField(
         doc="""The amount contributed by the player""",
-        widget=widgets.TextInput()
     )
 
     def contribution_error_message(self, value):
         if not 0 <= value <= Constants.endowment:
             return 'Your entry is invalid.'
 
-    points = models.PositiveIntegerField()
-
-    question = models.PositiveIntegerField(widget=widgets.TextInput())
+    question = models.CurrencyField()
 
     def question_correct(self):
         return self.question == Constants.question_correct

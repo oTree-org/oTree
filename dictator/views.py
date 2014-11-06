@@ -54,7 +54,7 @@ class Offer(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    scope = models.Group
+
 
     def after_all_players_arrive(self):
         self.group.set_payoffs()

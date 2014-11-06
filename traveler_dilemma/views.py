@@ -2,7 +2,7 @@
 from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 from .models import Constants
 
 
@@ -25,10 +25,7 @@ class Question1(Page):
     template_name = 'global/Question.html'
     form_model = models.Player
     form_fields = 'training_answer_mine', 'training_answer_others'
-    question = '''Suppose that you claim the antiques are worth 50 points
-        and the other traveler claims they are worth 100 points.
-        What would you and the other traveler receive in compensation from
-        the airline?'''
+    question = '''Suppose that you claim the antiques are worth 50 points and the other traveler claims they are worth 100 points. What would you and the other traveler receive in compensation from the airline?'''
 
     def participate_condition(self):
         return self.subsession.round_number == 1
@@ -59,7 +56,7 @@ class Claim(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    scope = models.Group
+
 
     def after_all_players_arrive(self):
         for p in self.group.get_players():

@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
 
@@ -41,18 +41,18 @@ class Group(otree.models.BaseGroup):
     # </built-in>
 
 
-    def set_points(self):
+    def set_payoffs(self):
         p1 = self.get_player_by_role('Player 1')
         p2 = self.get_player_by_role('Player 2')
 
         if p2.penny_side == p1.penny_side:
-            p2.points_earned = 100
-            p1.points_earned = 0
+            p2.payoff = 100
+            p1.payoff = 0
             p2.is_winner = True
             p1.is_winner = False
         else:
-            p2.points_earned = 0
-            p1.points_earned = 100
+            p2.payoff = 0
+            p1.payoff = 100
             p2.is_winner = False
             p1.is_winner = True
 
@@ -75,11 +75,6 @@ class Player(otree.models.BasePlayer):
     def is_training_question_1_correct(self):
         return self.training_question_1 == Constants.training_1_correct
 
-    points_earned = models.PositiveIntegerField(
-        default=0,
-        doc="""Points earned"""
-    )
-
     penny_side = models.CharField(
         choices=['Heads', 'Tails'],
         doc="""Heads or tails""",
@@ -100,5 +95,3 @@ class Player(otree.models.BasePlayer):
         if self.id_in_group == 2:
             return 'Player 2'
 
-    def set_payoff(self):
-        self.payoff = 0

@@ -6,7 +6,7 @@
 <strong>Below are the listed prices from the sellers:</strong><br />
 {% for player in group.get_players %}
 {% if 'seller' in player.role %}
-<i>Price from {{player.role|capfirst}}: {{player.price}} points</i><br />
+<i>Price from {{player.role|capfirst}}: {{player.price}}</i><br />
 {% endif %}
 {% endfor %}
 </p>

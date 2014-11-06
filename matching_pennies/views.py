@@ -2,7 +2,7 @@
 from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 from .models import Constants
 
 def variables_for_all_templates(self):
@@ -61,10 +61,10 @@ class Choice(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    scope = models.Group
+
 
     def after_all_players_arrive(self):
-        self.group.set_points()
+        self.group.set_payoffs()
 
     def body_text(self):
         return "Waiting for your opponent."
@@ -75,12 +75,11 @@ class Results(Page):
     template_name = 'matching_pennies/Results.html'
 
     def variables_for_template(self):
-        self.player.set_payoff()
 
         return {'my_choice': self.player.penny_side,
                 'other_choice': self.player.other_player().penny_side,
-                'my_points': self.player.points_earned,
-                'other_points': self.player.other_player().points_earned,
+                'my_points': self.player.payoff,
+                'other_points': self.player.other_player().payoff,
                 'my_payoff': self.player.payoff,
                 'other_payoff': self.player.other_player().payoff}
 
@@ -94,15 +93,15 @@ class ResultsSummary(Page):
 
     def variables_for_template(self):
         me_in_all_rounds = self.player.me_in_all_rounds()
-        total_points_earned = sum([p.points_earned for p in me_in_all_rounds])
+        total_payoff = sum([p.payoff for p in me_in_all_rounds])
         base_points = 50
 
         return {'me_in_all_rounds': me_in_all_rounds,
-                'points_earned': self.player.points_earned,
+                'payoff': self.player.payoff,
                 'is_winner': self.player.is_winner,
-                'total_points_earned': total_points_earned,
+                'total_payoff': total_payoff,
                 'base_points': base_points,
-                'total_plus_base': total_points_earned + base_points}
+                'total_plus_base': total_payoff + base_points}
 
 
 def pages():

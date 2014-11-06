@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
 from random import randint
@@ -38,11 +38,14 @@ class Constants:
 
     understanding_1_correct = 'P=2.5, N=2'
     understanding_2_correct = '$8, $12'
+    endowment = c(20)
 
 
 class Subsession(otree.models.BaseSubsession):
 
-    pass
+    def initialize(self):
+        for p in self.get_players():
+            p.payoff = Constants.endowment
 
 
 class Group(otree.models.BaseGroup):
@@ -59,15 +62,11 @@ class Group(otree.models.BaseGroup):
     dividend_per_share = models.CurrencyField(default=1)
     is_dividend = models.BooleanField(default=False, doc="""Indicates whether dividend is issued""")
 
-    # method to set cash and shares to balance in previous round
+    # method to set payoff and shares to balance in previous round
     def set_assets_to_previous(self):
         for p in self.get_players():
-            p.cash = p.me_in_previous_rounds()[-1].cash
+            p.payoff = p.me_in_previous_rounds()[-1].payoff
             p.shares = p.me_in_previous_rounds()[-1].shares
-
-    def set_payoffs(self):
-        for p in self.get_players():
-            p.payoff = 0
 
     def set_transaction(self):
         for p in self.get_players():
@@ -80,15 +79,15 @@ class Group(otree.models.BaseGroup):
                             self.transaction_price = 0.5*(p.bp+p.other_player().sp)
                             self.shares_traded = min(p.bn, p.other_player().sn)
 
-                            # adjust shares and cash
+                            # adjust shares and payoff
                             amount = self.transaction_price * self.shares_traded
-                            if amount <= p.cash:
+                            if amount <= p.payoff:
                                 # buyer
                                 p.shares += self.shares_traded
-                                p.cash -= self.transaction_price * self.shares_traded
+                                p.payoff -= self.transaction_price * self.shares_traded
                                 # seller
                                 p.other_player().shares -= self.shares_traded
-                                p.other_player().cash += self.transaction_price * self.shares_traded
+                                p.other_player().payoff += self.transaction_price * self.shares_traded
                                 self.is_transaction = True
                         elif p.sp != 0 and p.sp <= p.other_player().bp:
                             # seller
@@ -96,24 +95,24 @@ class Group(otree.models.BaseGroup):
                             self.transaction_price = 0.5*(p.sp+p.other_player().bp)
                             self.shares_traded = min(p.sn, p.other_player().bn)
 
-                            # adjust shares and cash
+                            # adjust shares and payoff
                             amount = self.transaction_price * self.shares_traded
-                            if amount <= p.other_player().cash:
+                            if amount <= p.other_player().payoff:
                                 # buyer
                                 p.other_player().shares += self.shares_traded
-                                p.other_player().cash -= self.transaction_price * self.shares_traded
+                                p.other_player().payoff -= self.transaction_price * self.shares_traded
                                 # seller
                                 p.shares -= self.shares_traded
-                                p.cash += self.transaction_price * self.shares_traded
+                                p.payoff += self.transaction_price * self.shares_traded
                                 self.is_transaction = True
 
     def set_dividend(self):
         self.dividend_per_share = randint(1,2)
         self.is_dividend = True
 
-        # adjust cash
+        # adjust payoff
         for p in self.get_players():
-            p.cash += p.shares * self.dividend_per_share if p.shares != 0 else p.cash
+            p.payoff += p.shares * self.dividend_per_share if p.shares != 0 else p.payoff
 
 
 class Player(otree.models.BasePlayer):
@@ -122,8 +121,7 @@ class Player(otree.models.BasePlayer):
     group = models.ForeignKey(Group, null = True)
     # </built-in>
 
-    # initial shares and cash
-    cash = models.CurrencyField(default=20)
+    # initial shares and payoff
     shares = models.PositiveIntegerField(default=5)
 
     # default allocated shares for both players; provides a range for buyers; sellers' range is limited by the number of shares they have
@@ -147,10 +145,10 @@ class Player(otree.models.BasePlayer):
         return range(0, self.shares+1, 1)
 
     def bp_choices(self):
-        return currency_range(0, self.cash, 0.5)
+        return currency_range(0, self.payoff, 0.5)
 
     def sp_choices(self):
-        return currency_range(0, self.cash, 0.5)
+        return currency_range(0, self.payoff, 0.5)
 
     def other_player(self):
         """Returns other player in group. Only valid for 2-player groups."""
@@ -169,5 +167,3 @@ class Player(otree.models.BasePlayer):
     def is_understanding_question_2_correct(self):
         return self.understanding_question_2 == Constants.understanding_2_correct
 
-    def set_payoff(self):
-        self.payoff = 0

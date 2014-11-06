@@ -2,7 +2,7 @@
 from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 from .models import Constants
 def variables_for_all_templates(self):
 
@@ -55,7 +55,7 @@ class ChoiceOne(Page):
 
 class ChoiceTwoWaitPage(WaitPage):
 
-    scope = models.Group
+
 
     def body_text(self):
         if self.player.id_in_group == 1:
@@ -80,14 +80,14 @@ class ChoiceTwo(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    scope = models.Group
+
 
     def body_text(self):
         return "Waiting for the other participant to decide."
 
     def after_all_players_arrive(self):
         for p in self.group.get_players():
-            p.set_points()
+            p.set_payoff()
 
 
 class Results(Page):
@@ -102,9 +102,9 @@ class Results(Page):
                 'total_quantity': self.player.quantity + self.player.other_player().quantity,
                 'total_capacity': Constants.total_capacity,
                 'price': self.group.price,
-                'points_earned': self.player.points_earned,
-                'base_points': 50,
-                'total_plus_base': self.player.points_earned + 50}
+                'payoff': self.player.payoff,
+                'base_points': Constants.base_pay,
+                'total_plus_base': self.player.payoff + Constants.base_pay}
 
 
 def pages():

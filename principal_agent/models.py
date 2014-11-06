@@ -4,6 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
+from otree.common import Currency as c, currency_range
 # </standard imports>
 
 
@@ -39,14 +40,14 @@ class Constants:
     players_per_group = 2
     number_of_rounds = 1
 
-    bonus = 30
-    min_fixed_payment = -30
-    max_fixed_payment = 30
+    bonus = c(30)
+    min_fixed_payment = c(-30)
+    max_fixed_payment = c(30)
 
     # """Amount principal gets if contract is rejected"""
-    reject_principal_pay = 0
+    reject_principal_pay = c(0)
 
-    reject_agent_pay = 10
+    reject_agent_pay = c(10)
 
     agent_return_share_choices = [
         [percent / 100, '{}%'.format(percent)]
@@ -78,11 +79,11 @@ class Constants:
 
 
 def cost_from_effort(effort):
-    return Constants.EFFORT_TO_COST[effort]
+    return c(Constants.EFFORT_TO_COST[effort])
 
 
 def return_from_effort(effort):
-    return Constants.EFFORT_TO_RETURN[effort]
+    return c(Constants.EFFORT_TO_RETURN[effort])
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -96,12 +97,12 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    total_return = models.PositiveIntegerField(
+    total_return = models.CurrencyField(
         doc="""Total return from agent's effort = [Return for single unit of
             agent's work effort] * [Agent's work effort]"""
     )
 
-    agent_fixed_pay = models.PositiveIntegerField(
+    agent_fixed_pay = models.CurrencyField(
         doc="""Amount offered as fixed pay to agent""",
         verbose_name='Fixed Payment (from %i to %i)' % (
             Constants.min_fixed_payment, Constants.max_fixed_payment)
@@ -118,7 +119,7 @@ class Group(otree.models.BaseGroup):
         widget=widgets.RadioSelectHorizontal(),
     )
 
-    agent_work_cost = models.PositiveIntegerField(
+    agent_work_cost = models.CurrencyField(
         doc="""Agent's cost of work effort"""
     )
 
@@ -167,9 +168,9 @@ class Player(otree.models.BasePlayer):
     group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-    training_my_payoff = models.PositiveIntegerField(
+    training_my_payoff = models.CurrencyField(
         verbose_name='I would receive')
-    training_other_payoff = models.PositiveIntegerField(
+    training_other_payoff = models.CurrencyField(
         verbose_name='Participant B would receive')
 
     def role(self):

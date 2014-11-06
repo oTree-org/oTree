@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
 
@@ -20,13 +20,13 @@ class Constants:
     number_of_rounds = 1
 
     #  Points made if player defects and the other cooperates""",
-    defect_cooperate_amount = 300
+    defect_cooperate_amount = c(300)
 
     # Points made if both players cooperate
-    cooperate_amount = 200
-    cooperate_defect_amount = 0
-    defect_amount = 100
-    base_points = 50
+    cooperate_amount = c(200)
+    cooperate_defect_amount = c(0)
+    defect_amount = c(100)
+    base_points = c(50)
 
 
     training_1_correct = "Alice gets 300 points, Bob gets 0 points"
@@ -64,11 +64,6 @@ class Player(otree.models.BasePlayer):
     def is_training_question_1_correct(self):
         return self.training_question_1 == Constants.training_1_correct
 
-    points_earned = models.PositiveIntegerField(
-        default=0,
-        doc="""Points earned"""
-    )
-
     decision = models.CharField(
         doc="""This player's decision""",
         widget=widgets.RadioSelect()
@@ -80,15 +75,12 @@ class Player(otree.models.BasePlayer):
     def other_player(self):
         return self.get_others_in_group()[0]
 
-    def set_points(self):
+    def set_payoff(self):
         points_matrix = {'Cooperate': {'Cooperate': Constants.cooperate_amount,
                                        'Defect': Constants.cooperate_defect_amount},
                          'Defect':   {'Cooperate': Constants.defect_cooperate_amount,
                                       'Defect': Constants.defect_amount}}
 
-        self.points_earned = (points_matrix[self.decision]
+        self.payoff = (points_matrix[self.decision]
                                            [self.other_player().decision])
-
-    def set_payoff(self):
-        self.payoff = 0
 

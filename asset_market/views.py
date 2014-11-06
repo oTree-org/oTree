@@ -2,7 +2,7 @@
 from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 from .models import Constants
 from otree.common import safe_json
 
@@ -98,8 +98,6 @@ class FeedbackTwo(Page):
 
 class OrderWaitPage(WaitPage):
 
-    scope = models.Group
-
     def after_all_players_arrive(self):
         if self.subsession.round_number != 1:
             self.group.set_assets_to_previous()
@@ -114,14 +112,12 @@ class Order(Page):
 
     def variables_for_template(self):
         return {
-            'cash': self.player.cash,
+            'payoff': self.player.payoff,
             'shares': self.player.shares,
         }
 
 
 class TransactionWaitPage(WaitPage):
-
-    scope = models.Group
 
     def after_all_players_arrive(self):
         if not self.group.is_transaction:
@@ -140,14 +136,13 @@ class Transaction(Page):
             'transaction': self.group.is_transaction,
             'shares_traded': self.group.shares_traded,
             'transaction_price': self.group.transaction_price,
-            'cash': self.player.cash,
+            'payoff': self.player.payoff,
             'shares': self.player.shares,
             'buy': True if self.player.order_type == 'Buy' else False,
         }
 
 
 class DividendWaitPage(WaitPage):
-    scope = models.Group
 
     def after_all_players_arrive(self):
         if not self.group.is_dividend:
@@ -162,22 +157,17 @@ class Dividend(Page):
     template_name = 'asset_market/Dividend.html'
 
     def variables_for_template(self):
-        self.player.set_payoff()
 
         return {
             'dividend': self.group.dividend_per_share,
             'dividend_gain': self.group.dividend_per_share * self.player.shares if self.player.shares != 0 else 0,
-            'cash': self.player.cash,
+            'payoff': self.player.payoff,
             'shares': self.player.shares,
         }
 
 
 class ResultsWaitPage(WaitPage):
-
-    scope = models.Group
-
-    def after_all_players_arrive(self):
-        self.group.set_payoffs()
+    pass
 
 
 class Results(Page):
@@ -209,10 +199,10 @@ class Results(Page):
                 shares_traded.append(p.group.shares_traded)
 
         return {
-            'cash': self.player.cash,
+            'payoff': self.player.payoff,
             'shares': self.player.shares,
             'base_pay': self.player.participant.session.base_pay,
-            'total_payoff': self.player.cash + self.player.participant.session.base_pay,
+            'total_payoff': self.player.payoff + self.player.participant.session.base_pay,
             'transaction_price': safe_json(transaction_price),
             'dividend_per_share': safe_json(dividend_per_share),
             'shares_traded': safe_json(shares_traded),

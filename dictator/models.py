@@ -4,6 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
+from otree.common import Currency as c, currency_range
 # </standard imports>
 
 
@@ -27,9 +28,9 @@ class Constants:
     players_per_group = 2
     number_of_rounds = 1
 
-    bonus = 10
+    bonus = c(10)
     # Initial amount allocated to the dictator
-    allocated_amount = 100
+    allocated_amount = c(100)
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -43,7 +44,7 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    kept = models.PositiveIntegerField(
+    kept = models.CurrencyField(
         doc="""Amount dictator decided to keep for himself""",
         verbose_name='I will keep (from 0 to %i)' % Constants.allocated_amount
     )
@@ -66,8 +67,8 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_participant1_payoff = models.PositiveIntegerField(
+    training_participant1_payoff = models.CurrencyField(
         verbose_name="Participant 1's payoff would be")
-    training_participant2_payoff = models.PositiveIntegerField(
+    training_participant2_payoff = models.CurrencyField(
         verbose_name="Participant 2's payoff would be")
 

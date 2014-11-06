@@ -22,17 +22,17 @@
             <tr>
                 <td>{{ p.subsession.round_number }}</td>
                 <td>You were {{ p.role }} and {% if p.is_winner %} won {% else %} lost {% endif %}</td>
-                <td>{{ p.points_earned }}</td>
+                <td>{{ p.payoff }}</td>
             </tr>
         {% endfor %}
     </table>
 
     <p>
-        You earned {{ total_points_earned }} points. In addition to that, you get a participation fee of {{ base_points }} points.
+        You earned {{ total_payoff }}. In addition to that, you get a participation fee of {{ base_points }}.
     </p>
 
     <p>
-        In total, you receive {{ total_plus_base }} points.
+        In total, you receive {{ total_plus_base }}.
     </p>
 
     <p>

@@ -2,7 +2,7 @@
 from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 from .models import Constants
 
 def variables_for_all_templates(self):
@@ -53,6 +53,16 @@ class Guess(Page):
     form_fields = ['guess_value']
 
 
+class ResultsWaitPage(WaitPage):
+
+    def after_all_players_arrive(self):
+        self.group.set_payoffs()
+
+    def body_text(self):
+        return "Waiting for the other participants."
+
+
+
 class Results(Page):
 
     template_name = 'beauty/Results.html'
@@ -74,17 +84,6 @@ class Results(Page):
                 'winners_count': winners_cnt, #
                 'total_payoff': self.player.payoff + 10, #
                 'payoff': self.player.payoff} #
-
-
-class ResultsWaitPage(WaitPage):
-
-    scope = models.Group
-
-    def after_all_players_arrive(self):
-        self.group.set_payoffs()
-
-    def body_text(self):
-        return "Waiting for the other participants."
 
 
 def pages():

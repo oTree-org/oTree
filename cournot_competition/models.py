@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
 
@@ -21,6 +21,7 @@ class Constants:
 
     training_1_correct = 300
 
+    base_points = 50
     # Total production capacity of all players
     total_capacity = 60
     max_units_per_player = int(total_capacity / players_per_group)
@@ -37,7 +38,7 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    price = models.PositiveIntegerField(
+    price = models.CurrencyField(
         doc="""Unit price: P = T - \sum U_i, where T is total capacity and U_i is the number of units produced by player i"""
     )
 
@@ -45,11 +46,11 @@ class Group(otree.models.BaseGroup):
         doc="""Total units produced by all players"""
     )
 
-    def set_points(self):
+    def set_payoffs(self):
         self.total_units = sum([p.units for p in self.get_players()])
         self.price = Constants.total_capacity - self.total_units
         for p in self.get_players():
-            p.points_earned = self.price * p.units
+            p.payoff = self.price * p.units
 
 
 class Player(otree.models.BasePlayer):
@@ -59,14 +60,10 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_question_1 = models.PositiveIntegerField(null=True, verbose_name='')
+    training_question_1 = models.CurrencyField()
 
     def is_training_question_1_correct(self):
         return self.training_question_1 == Constants.training_1_correct
-
-    points_earned = models.PositiveIntegerField(
-        doc="""."""
-    )
 
     units = models.PositiveIntegerField(
         default=None,
@@ -80,6 +77,4 @@ class Player(otree.models.BasePlayer):
     def other_player(self):
         return self.get_others_in_group()[0]
 
-    def set_payoff(self):
-        self.payoff = 0
 

@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
 
@@ -58,10 +58,13 @@ class Player(otree.models.BasePlayer):
         """
     )
 
+    def set_payoff(self):
+        self.payoff = c(0)
+
     def demo_field1_choices(self):
         return ['0', '1', '2', 'do not know']
 
-    training_question_1 = models.IntegerField(widget=widgets.TextInput())
+    training_question_1 = models.IntegerField()
     training_question_2 = models.CharField(widget=widgets.RadioSelect())
     training_question_3 = models.CharField(widget=widgets.RadioSelect())
     training_question_4 = models.CharField(widget=widgets.RadioSelect())
@@ -100,7 +103,5 @@ class Player(otree.models.BasePlayer):
     def is_training_question_5_correct(self):
         return self.training_question_5 == Constants.training_5_correct
 
-    def set_payoff(self):
-        self.payoff = 0
 
 

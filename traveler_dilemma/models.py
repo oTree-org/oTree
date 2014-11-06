@@ -3,7 +3,7 @@ from __future__ import division
 """Documentation at https://github.com/oTree-org/otree/wiki"""
 from otree.db import models
 import otree.models
-from otree.common import currency_range
+from otree.common import Currency as c, currency_range
 from otree import widgets
 
 doc = """
@@ -20,18 +20,18 @@ class Constants:
     number_of_rounds = 1
 
     # Player's reward for the lowest claim"""
-    reward = 2
+    reward = c(2)
 
     # Player's deduction for the higher claim
-    penalty = 2
+    penalty = c(2)
 
     # The maximum claim to be requested
-    max_amount = 100
+    max_amount = c(100)
 
     # The minimum claim to be requested
-    min_amount = 2
+    min_amount = c(2)
 
-    bonus = 10
+    bonus = c(10)
 
 
 
@@ -55,13 +55,13 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_answer_mine = models.PositiveIntegerField(
+    training_answer_mine = models.CurrencyField(
         null=True, verbose_name='My compensation would be')
-    training_answer_others = models.PositiveIntegerField(
+    training_answer_others = models.CurrencyField(
         null=True, verbose_name="The other traveler's compensation would be")
 
     # claim by player
-    claim = models.PositiveIntegerField(
+    claim = models.CurrencyField(
         doc="""
         Each player's claim
         """,
@@ -69,8 +69,7 @@ class Player(otree.models.BasePlayer):
     )
 
     def claim_error_message(self, value):
-        if not Constants.min_amount\
-                <= value <= Constants.max_amount:
+        if not Constants.min_amount <= value <= Constants.max_amount:
             return 'Your entry is invalid.'
 
     def other_player(self):

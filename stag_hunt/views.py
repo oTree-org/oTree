@@ -2,7 +2,7 @@
 from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 from .models import Constants
 
 
@@ -73,7 +73,7 @@ class Decide(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    scope = models.Group
+
 
     def after_all_players_arrive(self):
         for p in self.group.get_players():
@@ -95,7 +95,7 @@ class Results(Page):
         return {'payoff': self.player.payoff,
                 'decision': self.player.decision,
                 'other_decision': self.player.other_player().decision,
-                'total_payoff': self.player.payoff + 10}
+                'total_payoff': self.player.payoff + Constants.base_pay}
 
 
 def pages():

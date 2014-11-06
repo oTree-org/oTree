@@ -4,6 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
+from otree.common import Currency as c, currency_range
 # </standard imports>
 
 doc = """
@@ -25,13 +26,13 @@ class Constants:
     players_per_group = 3
     number_of_rounds = 1
 
-    bonus = 10
+    bonus = c(10)
 
     # """Payoff for each player if at least one volunteers"""
-    general_benefit = 100
+    general_benefit = c(100)
 
     # """Cost incurred by volunteering player"""
-    volunteer_cost = 40
+    volunteer_cost = c(40)
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -63,7 +64,7 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_my_payoff = models.PositiveIntegerField(
+    training_my_payoff = models.CurrencyField(
         verbose_name='My payoff would be')
 
     volunteer = models.NullBooleanField(

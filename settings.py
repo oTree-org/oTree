@@ -60,7 +60,7 @@ INSTALLED_OTREE_APPS = [
     'matrix_symmetric',
     'matrix_asymmetric',
     'stackelberg_competition',
-    'private_value_auction',
+    'vickrey_auction',
     'volunteer_dilemma',
     'bertrand_competition',
     'principal_agent',

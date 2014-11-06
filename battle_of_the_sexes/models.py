@@ -5,6 +5,7 @@ from otree.db import models
 import otree.models
 from otree import widgets
 import random
+from otree.common import Currency as c, currency_range
 # </standard imports>
 
 
@@ -45,22 +46,19 @@ class Constants:
     number_of_rounds = 1
 
     # """Amount rewarded to husband if football is chosen"""
-    football_husband_amount = 300
+    football_husband_amount = opera_wife_amount = c(300)
 
     # Amount rewarded to wife if football is chosen
-    football_wife_amount = 200
+    football_wife_amount = opera_husband_amount = c(200)
 
     # amount rewarded to either if the choices don't match
-    mismatch_amount = 0
+    mismatch_amount = c(0)
 
-    opera_husband_amount = 200
 
-    opera_wife_amount = 300
+    training_1_husband_correct = c(0)
+    training_1_wife_correct = c(0)
 
-    training_1_husband_correct = 0
-    training_1_wife_correct = 0
-
-    training_1_maximun_offered_points = 300
+    training_1_maximun_offered_points = c(300)
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -100,12 +98,9 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_question_1_husband = models.PositiveIntegerField(
-        null=True, verbose_name=''
-    )
-    training_question_1_wife = models.PositiveIntegerField(
-        null=True, verbose_name=''
-    )
+    training_question_1_husband = models.CurrencyField()
+
+    training_question_1_wife = models.CurrencyField()
 
     decision = models.CharField(
         doc="""Either football or the opera""",

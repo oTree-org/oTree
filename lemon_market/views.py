@@ -67,7 +67,7 @@ class Production(Page):
 class Purchase(Page):
     template_name = 'lemon_market/Purchase.html'
     form_model = models.Player
-    form_fields = ('choice',)
+    form_fields = ['choice']
 
     def participate_condition(self):
         return self.player.role() == 'buyer'
@@ -76,10 +76,11 @@ class Purchase(Page):
         return {'group': self.group, 'title': 'Purchase (Period %i of %i)' % (
             self.subsession.round_number, Constants.number_of_rounds)}
 
+class SimpleWaitPage(WaitPage):
+    pass
 
 class ResultsWaitPage(WaitPage):
 
-    scope = models.Group
 
     def after_all_players_arrive(self):
         self.group.set_payoff()
@@ -125,7 +126,7 @@ def pages():
         Question1,
         Feedback1,
         Production,
-        WaitPage,
+        SimpleWaitPage,
         Purchase,
         ResultsWaitPage,
         Results,

@@ -5,6 +5,7 @@ from otree.db import models
 import otree.models
 from otree import widgets
 import random
+from otree.common import Currency as c, currency_range
 # </standard imports>
 
 
@@ -48,14 +49,17 @@ class Constants:
     players_per_group = 2
     number_of_rounds = 1
 
-    stag_stag_amount = 200
-    stag_hare_amount = 0
-    hare_stag_amount = 100
-    hare_hare_amount = 100
+    base_pay = c(10)
 
-    training_question_1_my_payoff_correct = 0
-    training_question_1_other_payoff_correct = 100
-    training_1_maximun_offered_points = 200
+    stag_stag_amount = c(200)
+    stag_hare_amount = c(0)
+    hare_stag_amount = c(100)
+    hare_hare_amount = c(100)
+
+
+    training_question_1_my_payoff_correct = c(0)
+    training_question_1_other_payoff_correct = c(100)
+    training_1_maximun_offered_points = c(200)
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -76,12 +80,9 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_question_1_my_payoff = models.PositiveIntegerField(
-        null=True, verbose_name=''
-    )
-    training_question_1_other_payoff = models.PositiveIntegerField(
-        null=True, verbose_name=''
-    )
+    training_question_1_my_payoff = models.CurrencyField()
+
+    training_question_1_other_payoff = models.CurrencyField()
 
     decision = models.CharField(
         doc="""The player's choice""",

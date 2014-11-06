@@ -46,7 +46,7 @@ class Feedback1(Page):
             <strong>Solution:</strong> Your payoff would be <strong>60 points</strong>.
             <strong>Explanation:</strong> As at least one (actually 2)\
             participants volunteered, everyone received <strong>100</strong>\
-            points. You vonlunteered, so you had to pay <strong>40</strong>\
+            points. You volunteered, so you had to pay <strong>40</strong>\
             points. Together you had <strong>100-40=60</strong> points.'''))
 
 
@@ -64,8 +64,6 @@ class Decision(Page):
 
 
 class ResultsWaitPage(WaitPage):
-
-    scope = models.Group
 
     def after_all_players_arrive(self):
         self.group.set_payoffs()

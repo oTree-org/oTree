@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
 
@@ -51,13 +51,13 @@ class Constants:
     number_of_rounds = 1
     name_in_url = 'beauty'
 
-    winner_payoff = 100
-    guess_max = 100
+    winner_payoff = c(100)
+    guess_max = c(100)
 
-    training_question_1_win_pick_correct = 10
-    training_question_1_my_payoff_correct = 50
-    training_1_maximun_pick = 100
-    training_1_maximun_offered_points = 100
+    training_question_1_win_pick_correct = c(10)
+    training_question_1_my_payoff_correct = c(50)
+    training_1_maximun_pick = c(100)
+    training_1_maximun_offered_points = c(100)
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -134,12 +134,9 @@ class Player(otree.models.BasePlayer):
         """.format(Constants.guess_max)
     )
 
-    training_question_1_win_pick = models.PositiveIntegerField(
-        null=True, verbose_name=''
-    )
-    training_question_1_my_payoff = models.PositiveIntegerField(
-        null=True, verbose_name=''
-    )
+    training_question_1_win_pick = models.PositiveIntegerField()
+
+    training_question_1_my_payoff = models.CurrencyField()
 
     def guess_value_error_message(self, value):
         if value > Constants.guess_max:

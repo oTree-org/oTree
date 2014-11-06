@@ -101,7 +101,7 @@ def session_types():
             name='beauty',
             display_name="Beauty Contest",
             base_pay=10.00,
-            num_bots=50,
+            num_bots=10,
             num_demo_participants=5,
             subsession_apps=['beauty', 'survey_sample', 'lab_results'],
             doc=""""""
@@ -125,12 +125,12 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            name='private_value_auction',
-            display_name="Private Value Auction",
+            name='vickrey_auction',
+            display_name="Vickrey Auction",
             base_pay=10.00,
             num_bots=12,
-            num_demo_participants=2,
-            subsession_apps=['private_value_auction', 'lab_results'],
+            num_demo_participants=3,
+            subsession_apps=['vickrey_auction', 'lab_results'],
             doc=""""""
         ),
         SessionType(

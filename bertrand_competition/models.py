@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
 
@@ -28,8 +28,8 @@ class Constants:
     players_per_group = 2
     name_in_url = 'bertrand_competition'
     number_of_rounds = 1
-    bonus = 10
-    maximum_price = 100
+    bonus = c(10)
+    maximum_price = c(100)
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -62,10 +62,10 @@ class Player(otree.models.BasePlayer):
     group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-    training_my_profit = models.PositiveIntegerField(
+    training_my_profit = models.CurrencyField(
         verbose_name='My profit would be')
 
-    price = models.PositiveIntegerField(
+    price = models.CurrencyField(
         doc="""Price player chooses to sell product for"""
     )
 

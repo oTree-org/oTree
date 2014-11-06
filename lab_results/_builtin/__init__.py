@@ -1,7 +1,7 @@
 from .. import models
 import otree.views
 import otree.test
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import otree.forms
 
 class Page(otree.views.Page):

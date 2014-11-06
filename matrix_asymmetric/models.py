@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
 
@@ -19,18 +19,18 @@ class Constants:
     players_per_group = 2
     number_of_rounds = 1
 
-    rowAcolumnA_row = Currency(0.20)
-    rowAcolumnA_column = Currency(0.30)
+    rowAcolumnA_row = c(0.20)
+    rowAcolumnA_column = c(0.30)
 
     # Amount row player gets, if row player chooses A and column player chooses B
-    rowAcolumnB_row = Currency(0.40)
-    rowAcolumnB_column = Currency(0.10)
+    rowAcolumnB_row = c(0.40)
+    rowAcolumnB_column = c(0.10)
 
-    rowBcolumnA_row = Currency(0.05)
-    rowBcolumnA_column = Currency(0.45)
+    rowBcolumnA_row = c(0.05)
+    rowBcolumnA_column = c(0.45)
 
-    rowBcolumnB_row = Currency(0.15)
-    rowBcolumnB_column = Currency(0.25)
+    rowBcolumnB_row = c(0.15)
+    rowBcolumnB_column = c(0.25)
 
 
 class Subsession(otree.models.BaseSubsession):

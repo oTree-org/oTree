@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
 
@@ -23,9 +23,9 @@ class Constants:
     number_of_rounds = 1
 
     #Initial amount allocated to each player
-    amount_allocated = 100
+    amount_allocated = c(100)
     multiplication_factor = 3
-    bonus = 10
+    bonus = c(10)
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -41,21 +41,20 @@ class Group(otree.models.BaseGroup):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    sent_amount = models.PositiveIntegerField(
+    sent_amount = models.CurrencyField(
         doc="""Amount sent by P1""",
     )
 
-    sent_back_amount = models.PositiveIntegerField(
+    sent_back_amount = models.CurrencyField(
         doc="""Amount sent back by P2""",
     )
 
     def set_payoffs(self):
         p1 = self.get_player_by_id(1)
         p2 = self.get_player_by_id(2)
-        p1.payoff = p2.payoff = 0
-        p1.points = Constants.bonus + Constants.amount_allocated\
+        p1.payoff = Constants.bonus + Constants.amount_allocated\
             - self.sent_amount + self.sent_back_amount
-        p2.points = Constants.bonus + self.sent_amount * Constants.multiplication_factor - self.sent_back_amount
+        p2.payoff = Constants.bonus + self.sent_amount * Constants.multiplication_factor - self.sent_back_amount
 
     def sent_amount_error_message(self, value):
         if not 0 <= value <= Constants.amount_allocated:
@@ -72,11 +71,10 @@ class Player(otree.models.BasePlayer):
     group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-    training_answer_x = models.PositiveIntegerField(
+    training_answer_x = models.CurrencyField(
         null=True, verbose_name='Participant A would have')
-    training_answer_y = models.PositiveIntegerField(
+    training_answer_y = models.CurrencyField(
         null=True, verbose_name='Participant B would have')
-    points = models.PositiveIntegerField()
 
     def role(self):
         return {1: 'A', 2: 'B'}[self.id_in_group]

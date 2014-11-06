@@ -66,13 +66,13 @@ class Offer(Page):
 
 class OfferWaitPage(WaitPage):
 
-    scope = models.Group
+
 
     def body_text(self):
         if self.player.role() == 'agent':
-            return "Waiting for Player A to propose a contract."
+            return "You are Participant B. Waiting for Participant A to propose a contract."
         else:
-            return "Waiting for Player B."
+            return "Waiting for Participant B."
 
 
 class Accept(Page):
@@ -93,11 +93,11 @@ class Accept(Page):
 
 
 class ResultsWaitPage(WaitPage):
-    scope = models.Group
+
 
     def body_text(self):
         if self.player.role() == 'principal':
-            return "Waiting for Player B to respond."
+            return "Waiting for Participant B to respond."
 
     def after_all_players_arrive(self):
         self.group.set_payoffs()

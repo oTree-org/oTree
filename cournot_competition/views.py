@@ -2,7 +2,7 @@
 from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 from .models import Constants
 def variables_for_all_templates(self):
 
@@ -51,13 +51,13 @@ class Decide(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    scope = models.Group
+
 
     def body_text(self):
         return "Waiting for the other participant to decide."
 
     def after_all_players_arrive(self):
-        self.group.set_points()
+        self.group.set_payoffs()
 
 
 class Results(Page):
@@ -65,16 +65,15 @@ class Results(Page):
     template_name = 'cournot_competition/Results.html'
 
     def variables_for_template(self):
-        self.player.set_payoff()
 
         return {'units': self.player.units,
                 'other_units': self.player.other_player().units,
                 'total_units': self.group.total_units,
                 'total_capacity': Constants.total_capacity,
                 'price': self.group.price,
-                'points_earned': self.player.points_earned,
-                'base_points': 50,
-                'total_plus_base': self.player.points_earned + 50}
+                'payoff': self.player.payoff,
+                'base_points': Constants.base_points,
+                'total_plus_base': self.player.payoff + Constants.base_points}
 
 
 def pages():

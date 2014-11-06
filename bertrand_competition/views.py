@@ -2,7 +2,7 @@
 from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 from .models import Constants
 from django.utils.safestring import mark_safe
 
@@ -62,8 +62,6 @@ class Decide(Page):
 
 class ResultsWaitPage(WaitPage):
 
-    scope = models.Group
-
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
@@ -81,9 +79,9 @@ class Results(Page):
                     p.price for p in self.group.get_players())),
                 ('Was your product sold?',
                     'Yes' if self.player.is_a_winner else 'No'),
-                ('Your profit', int(self.player.payoff - 10)),
-                ('In addition you get a participation fee of', 10),
-                ('So in sum you will get', int(self.player.payoff)),
+                ('Your profit', self.player.payoff - Constants.bonus),
+                ('In addition you get a participation fee of', Constants.bonus),
+                ('So in sum you will get', self.player.payoff),
             ])
 
 

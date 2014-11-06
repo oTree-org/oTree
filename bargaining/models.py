@@ -4,7 +4,7 @@ from __future__ import division
 from otree.db import models
 import otree.models
 from otree import widgets
-from otree.common import Currency, currency_range
+from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
 
@@ -22,7 +22,7 @@ class Constants:
     number_of_rounds = 1
 
     amount_shared = 100
-    bonus = 10
+    bonus = c(10)
 
 
 class Subsession(otree.models.BaseSubsession):
@@ -45,12 +45,10 @@ class Group(otree.models.BaseGroup):
         total_requested_amount = sum([p.request_amount for p in players])
         if total_requested_amount <= Constants.amount_shared:
             for p in players:
-                p.points = p.request_amount + Constants.bonus
+                p.payoff = p.request_amount + Constants.bonus
         else:
             for p in players:
-                p.points = Constants.bonus
-        for p in players:
-            p.payoff = 0
+                p.payoff = Constants.bonus
 
 
 class Player(otree.models.BasePlayer):
@@ -60,17 +58,16 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    request_amount = models.PositiveIntegerField(
+    request_amount = models.CurrencyField(
         doc="""
         Amount requested by this player.
         """,
         verbose_name='Please enter a number from 0 to 100'
     )
-    training_amount_mine = models.PositiveIntegerField(
+    training_amount_mine = models.CurrencyField(
         verbose_name='You would get')
-    training_amount_other = models.PositiveIntegerField(
+    training_amount_other = models.CurrencyField(
         verbose_name='The other participant would get')
-    points = models.PositiveIntegerField()
 
     def request_amount_error_message(self, value):
         if not 0 <= value <= Constants.amount_shared:
