@@ -1,0 +1,96 @@
+{% load i18n %}
+
+<style type="text/css">
+    ul {
+        list-style-type:circle;
+        padding-left:20px;
+    }
+    h3.panel-sub-heading {
+        padding-bottom:10px;
+        padding-left:4px;
+    }
+
+    td, th{
+        text-align: center;
+    }
+
+    .rotate90 {
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        position: absolute;
+        top: 60%;
+    }
+
+    .instructions {
+        position: relative;
+        text-shadow: 0 1px 0 #fff;
+        line-height: 1.5;
+        margin: 60px auto;
+        background-color: #f5f5dc;
+        background-image: linear-gradient(to bottom, #f5f5dc 0px, #fbfbeb 100%);
+        padding-top: 5px;
+        padding-bottom: 15px;
+        margin-top: 20px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+    }
+
+    .instructions:before, .instructions:after {
+        z-index: -1;
+        position: absolute;
+        content: "";
+        bottom: 15px;
+        left: 10px;
+        width: 50%;
+        top: 80%;
+        max-width:300px;
+        background: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+        transform: rotate(-3deg);
+    }
+
+    .instructions:after {
+        transform: rotate(3deg);
+        right: 10px;
+        left: auto;
+    }
+</style>
+
+<div class="instructions well well-lg" style="">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+
+    <p>
+        You have been randomly and anomalously matched with another 2
+        participants in an auction. Each of you is given 100 points to start.
+    </p>
+    <p>
+        Before bidding, you will learn the value of the object to you. The
+        value of the object differs from participant to participant and is
+        randomly and independently drawn from 0 to 100 for each participant.
+    </p>
+    <p>
+        At auction, you will privately submit one bid for the object. A bid
+        can be anything from 0 to 100 points. The participant with the highest
+        bid wins the object and pays the second highest bid. A random device
+        will select the winner in the event of a tie bid and the winner will
+        pay the highest bid other than her or his own bid.
+    </p>
+    <p>
+        The payoff of the winner is calculated as (in points)<br/>
+        <strong>
+            Winner’s payoff = 100 + Private value of the object to the winner - Second highest bid
+        </strong><br/>
+        The payoffs for others are the initial 100 points.
+    </p>
+    <p>
+        The instructions are exactly the same for all participants and will
+        remain visible for your convenience on the bottom of all pages.
+    </p>
+
+</div>
