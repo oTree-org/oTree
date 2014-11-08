@@ -15,7 +15,7 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         # player: bid
-        self.submit(views.Bid, {"bid_amount": round(random.uniform(Constants.min_allowable_bid, Constants.max_allowable_bid), 1)})
+        self.submit(views.Bid, {"bid_amount": random.choice(currency_range(Constants.min_allowable_bid, Constants.max_allowable_bid, 1))})
 
         # results
         self.submit(views.Results)

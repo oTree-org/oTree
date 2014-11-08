@@ -32,7 +32,7 @@ class Instructions(Page):
     template_name = 'asset_market/Instructions.html'
 
 
-class QuestionOne(Page):
+class Question1(Page):
 
     form_model = models.Player
     form_fields = ['understanding_question_1']
@@ -48,7 +48,7 @@ class QuestionOne(Page):
         }
 
 
-class FeedbackOne(Page):
+class Feedback1(Page):
 
     def participate_condition(self):
         return self.subsession.round_number == 1
@@ -64,7 +64,7 @@ class FeedbackOne(Page):
         }
 
 
-class QuestionTwo(Page):
+class Question2(Page):
 
     form_model = models.Player
     form_fields = ['understanding_question_2']
@@ -80,7 +80,7 @@ class QuestionTwo(Page):
         }
 
 
-class FeedbackTwo(Page):
+class Feedback2(Page):
 
     def participate_condition(self):
         return self.subsession.round_number == 1
@@ -99,7 +99,7 @@ class FeedbackTwo(Page):
 class OrderWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
-        if self.subsession.round_number != 1:
+        if self.subsession.round_number > 1:
             self.group.set_assets_to_previous()
 
 
@@ -112,7 +112,7 @@ class Order(Page):
 
     def variables_for_template(self):
         return {
-            'payoff': self.player.payoff,
+            'cash': self.player.cash,
             'shares': self.player.shares,
         }
 
@@ -120,8 +120,7 @@ class Order(Page):
 class TransactionWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
-        if not self.group.is_transaction:
-            self.group.set_transaction()
+        self.group.trade()
 
 
 class Transaction(Page):
@@ -133,10 +132,9 @@ class Transaction(Page):
 
     def variables_for_template(self):
         return {
-            'transaction': self.group.is_transaction,
             'shares_traded': self.group.shares_traded,
-            'transaction_price': self.group.transaction_price,
-            'payoff': self.player.payoff,
+            'transaction_price': self.group.transaction_price or 0,
+            'cash': self.player.cash,
             'shares': self.player.shares,
             'buy': True if self.player.order_type == 'Buy' else False,
         }
@@ -145,8 +143,7 @@ class Transaction(Page):
 class DividendWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
-        if not self.group.is_dividend:
-            self.group.set_dividend()
+        self.group.set_dividend()
 
 
 class Dividend(Page):
@@ -161,13 +158,16 @@ class Dividend(Page):
         return {
             'dividend': self.group.dividend_per_share,
             'dividend_gain': self.group.dividend_per_share * self.player.shares if self.player.shares != 0 else 0,
-            'payoff': self.player.payoff,
+            'cash': self.player.cash,
             'shares': self.player.shares,
         }
 
 
 class ResultsWaitPage(WaitPage):
-    pass
+
+    def after_all_players_arrive(self):
+        for p in self.group.get_players():
+            p.set_payoff()
 
 
 class Results(Page):
@@ -180,32 +180,23 @@ class Results(Page):
     def variables_for_template(self):
 
         # create chart lists
-        transaction_price = []
-        dividend_per_share = []
-        shares_traded = []
+        transaction_price_list = []
+        dividend_per_share_list = []
+        shares_traded_list = []
 
         for p in self.player.me_in_all_rounds():
-            if p.group.transaction_price is None:
-                transaction_price.append(0)
-            else:
-                transaction_price.append(int(p.group.transaction_price))
-            if p.group.dividend_per_share is None:
-                dividend_per_share.append(0)
-            else:
-                dividend_per_share.append(int(p.group.dividend_per_share))
-            if p.group.shares_traded is None:
-                shares_traded.append(0)
-            else:
-                shares_traded.append(p.group.shares_traded)
+            transaction_price_list.append(int(p.group.transaction_price or 0))
+            dividend_per_share_list.append(int(p.group.dividend_per_share))
+            shares_traded_list.append(p.group.shares_traded)
 
         return {
-            'payoff': self.player.payoff,
+            'cash': self.player.cash,
             'shares': self.player.shares,
             'base_pay': self.player.participant.session.base_pay,
             'total_payoff': self.player.payoff + self.player.participant.session.base_pay,
-            'transaction_price': safe_json(transaction_price),
-            'dividend_per_share': safe_json(dividend_per_share),
-            'shares_traded': safe_json(shares_traded),
+            'transaction_price_list': safe_json(transaction_price_list),
+            'dividend_per_share_list': safe_json(dividend_per_share_list),
+            'shares_traded_list': safe_json(shares_traded_list),
         }
 
 
@@ -213,10 +204,10 @@ def pages():
     return [
         Introduction,
         Instructions,
-        QuestionOne,
-        FeedbackOne,
-        QuestionTwo,
-        FeedbackTwo,
+        Question1,
+        Feedback1,
+        Question2,
+        Feedback2,
         OrderWaitPage,
         Order,
         TransactionWaitPage,

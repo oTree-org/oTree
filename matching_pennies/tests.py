@@ -17,8 +17,8 @@ class PlayerBot(Bot):
         if round == 1:
             # only submitted on round 1
             self.submit(views.Introduction)
-            self.submit(views.QuestionOne, {'training_question_1': 'Player 1 gets 0 points, Player 2 gets 0 points'})
-            self.submit(views.FeedbackOne)
+            self.submit(views.Question1, {'training_question_1': 'Player 1 gets 0 points, Player 2 gets 0 points'})
+            self.submit(views.Feedback1)
 
         # repeated for the no. of rounds
         self.submit(views.Choice, {"penny_side": random.choice(['Heads', 'Tails'])})

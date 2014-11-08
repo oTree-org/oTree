@@ -15,7 +15,7 @@ class Introduction(Page):
     template_name = 'beauty/Introduction.html'
 
 
-class QuestionOne(Page):
+class Question1(Page):
 
     template_name = 'beauty/Question.html'
 
@@ -30,7 +30,7 @@ class QuestionOne(Page):
         return {'num_q': 1}
 
 
-class FeedbackOne(Page):
+class Feedback1(Page):
 
     template_name = 'beauty/Feedback.html'
 
@@ -82,15 +82,15 @@ class Results(Page):
                 'best_guess': self.group.best_guess, #
                 'tie': self.group.tie, #
                 'winners_count': winners_cnt, #
-                'total_payoff': self.player.payoff + 10, #
+                'total_payoff': self.player.payoff + Constants.base_pay, #
                 'payoff': self.player.payoff} #
 
 
 def pages():
 
     return [Introduction,
-            QuestionOne,
-            FeedbackOne,
+            Question1,
+            Feedback1,
             Guess,
             ResultsWaitPage,
             Results]

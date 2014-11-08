@@ -20,7 +20,9 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    pass
+    def initialize(self):
+        for p in self.get_players():
+            p.payoff = 0
 
 
 
@@ -38,7 +40,5 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    def set_payoff(self):
-        self.payoff = 0
 
 

@@ -32,7 +32,7 @@ AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
-CURRENCY_CODE = 'EUR'
+PAYMENT_CURRENCY_CODE = 'EUR'
 USE_POINTS = True
 
 # e.g. en-gb, de-de, it-it, fr-fr. see: https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -81,5 +81,3 @@ ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
 
 otree.settings.augment_settings(globals())
 
-DISABLED_APPS = [
-    ],

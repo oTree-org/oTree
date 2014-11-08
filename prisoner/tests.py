@@ -12,9 +12,9 @@ class PlayerBot(Bot):
 
         self.submit(views.Introduction)
 
-        self.submit(views.QuestionOne, {'training_question_1': 'Alice gets 300 points, Bob gets 0 points'})
+        self.submit(views.Question1, {'training_question_1': 'Alice gets 300 points, Bob gets 0 points'})
 
-        self.submit(views.FeedbackOne)
+        self.submit(views.Feedback1)
 
         self.submit(views.Decision, {"decision": random.choice(['Cooperate', 'Defect'])})
 

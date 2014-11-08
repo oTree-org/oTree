@@ -11,8 +11,8 @@ class PlayerBot(Bot):
     def play(self):
 
         self.submit(views.Introduction)
-        self.submit(views.QuestionOne, {'training_question_1': 200})
-        self.submit(views.FeedbackOne)
+        self.submit(views.Question1, {'training_question_1': 200})
+        self.submit(views.Feedback1)
 
         # units to produce
         self.submit(views.Decide, {'units': random.choice(range(0, Constants.max_units_per_player + 1))})

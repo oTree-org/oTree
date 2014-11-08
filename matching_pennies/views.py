@@ -21,7 +21,7 @@ class Introduction(Page):
         return self.subsession.round_number == 1
 
 
-class QuestionOne(Page):
+class Question1(Page):
 
     template_name = 'matching_pennies/Question.html'
 
@@ -35,7 +35,7 @@ class QuestionOne(Page):
         return {'num_q': 1}
 
 
-class FeedbackOne(Page):
+class Feedback1(Page):
 
     template_name = 'matching_pennies/Feedback.html'
 
@@ -107,8 +107,8 @@ class ResultsSummary(Page):
 def pages():
 
     return [Introduction,
-            QuestionOne,
-            FeedbackOne,
+            Question1,
+            Feedback1,
             Choice,
             ResultsWaitPage,
             Results,

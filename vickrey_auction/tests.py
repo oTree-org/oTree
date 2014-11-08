@@ -12,12 +12,12 @@ class PlayerBot(Bot):
 
         self.submit(views.Introduction)
 
-        self.submit(views.QuestionOne, {
+        self.submit(views.Question1, {
             "training_question_1_my_payoff": random.randint(
                 Constants.min_allowable_bid, Constants.max_allowable_bid
             )
         })
-        self.submit(views.FeedbackOne)
+        self.submit(views.Feedback1)
 
         self.submit(views.Bid, {
             "bid_amount": random.randint(

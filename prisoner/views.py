@@ -19,7 +19,7 @@ class Introduction(Page):
     template_name = 'prisoner/Introduction.html'
 
 
-class QuestionOne(Page):
+class Question1(Page):
 
     template_name = 'prisoner/Question.html'
 
@@ -31,7 +31,7 @@ class QuestionOne(Page):
 
 
 
-class FeedbackOne(Page):
+class Feedback1(Page):
 
     template_name = 'prisoner/Feedback.html'
 
@@ -85,8 +85,8 @@ class Results(Page):
 def pages():
 
     return [Introduction,
-            QuestionOne,
-            FeedbackOne,
+            Question1,
+            Feedback1,
             Decision,
             ResultsWaitPage,
             Results]

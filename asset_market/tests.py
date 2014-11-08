@@ -5,13 +5,13 @@ from ._builtin import Bot
 import random
 from otree.common import Currency as c, currency_range
 from .models import Constants
-
+import time
 
 class PlayerBot(Bot):
 
     def play(self):
 
-        rounds = Constants.number_of_rounds
+
         round = self.subsession.round_number
 
         if round == 1:
@@ -19,10 +19,10 @@ class PlayerBot(Bot):
 
             self.submit(views.Introduction)
             self.submit(views.Instructions)
-            self.submit(views.QuestionOne, {'understanding_question_1': 'P=2.5, N=2'})
-            self.submit(views.FeedbackOne)
-            self.submit(views.QuestionTwo, {'understanding_question_2': '$8, $12'})
-            self.submit(views.FeedbackTwo)
+            self.submit(views.Question1, {'understanding_question_1': 'P=2.5, N=2'})
+            self.submit(views.Feedback1)
+            self.submit(views.Question2, {'understanding_question_2': '$8, $12'})
+            self.submit(views.Feedback2)
 
         # randomize inputs: between the two players
         ran_num = random.randint(1,2)
@@ -32,10 +32,10 @@ class PlayerBot(Bot):
             self.submit(views.Order, {'order_type': 'Buy', 'sn': 0, 'sp': 0, 'bn': 1, 'bp': 4})
 
         self.submit(views.Transaction)
-
         self.submit(views.Dividend)
 
+
         # submitted in last round
-        if round == rounds:
+        if round == Constants.number_of_rounds:
             self.submit(views.Results)
 

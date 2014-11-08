@@ -34,18 +34,20 @@ Keywords: Stock Market, Finance, Bubble, Trade,
 class Constants:
     name_in_url = 'asset_market'
     players_per_group = 2
-    number_of_rounds = 5
+    number_of_rounds = 2
 
     understanding_1_correct = 'P=2.5, N=2'
     understanding_2_correct = '$8, $12'
     endowment = c(20)
+    num_shares = 10
 
 
 class Subsession(otree.models.BaseSubsession):
 
     def initialize(self):
-        for p in self.get_players():
-            p.payoff = Constants.endowment
+        if self.round_number == 1:
+            for p in self.get_players():
+                p.cash = Constants.endowment
 
 
 class Group(otree.models.BaseGroup):
@@ -54,65 +56,54 @@ class Group(otree.models.BaseGroup):
     # </built-in>
 
     # transaction fields
-    is_transaction = models.BooleanField(default=False, doc="""Indicates whether there is a transaction""")
     transaction_price = models.CurrencyField(doc="""Given by 0.5*(BP+SP)""")
-    shares_traded = models.PositiveIntegerField(null=True)
+    shares_traded = models.PositiveIntegerField(default=0)
 
     # dividend fields
-    dividend_per_share = models.CurrencyField(default=1)
+    dividend_per_share = models.CurrencyField()
     is_dividend = models.BooleanField(default=False, doc="""Indicates whether dividend is issued""")
 
-    # method to set payoff and shares to balance in previous round
+    # method to set cash and shares to balance in previous round
     def set_assets_to_previous(self):
         for p in self.get_players():
-            p.payoff = p.me_in_previous_rounds()[-1].payoff
+            p.cash = p.me_in_previous_rounds()[-1].cash
             p.shares = p.me_in_previous_rounds()[-1].shares
 
-    def set_transaction(self):
-        for p in self.get_players():
-            if not self.is_transaction:
-                if (p.order_type == 'Buy' and p.other_player().order_type == 'Sell') or (p.order_type == 'Sell' and p.other_player().order_type == 'Buy'):
-                    if (p.sp != 0 and p.sn != 0) or (p.bp != 0 and p.bn != 0):
-                        if p.bp != 0 and p.other_player().sp <= p.bp:
-                            # buyer
-                            # set transaction price
-                            self.transaction_price = 0.5*(p.bp+p.other_player().sp)
-                            self.shares_traded = min(p.bn, p.other_player().sn)
+    def trade(self):
+        buyers = [p for p in self.get_players() if p.order_type == 'Buy']
+        sellers = [p for p in self.get_players() if p.order_type == 'Sell']
+        # both lists must have exactly 1 element
+        if not (buyers and sellers):
+            return
+        buyer = buyers[0]
+        seller = sellers[0]
+        if seller.sp >= buyer.bp or (buyer.bn * buyer.bp == 0) or (seller.sn * seller.sp == 0):
+            return
 
-                            # adjust shares and payoff
-                            amount = self.transaction_price * self.shares_traded
-                            if amount <= p.payoff:
-                                # buyer
-                                p.shares += self.shares_traded
-                                p.payoff -= self.transaction_price * self.shares_traded
-                                # seller
-                                p.other_player().shares -= self.shares_traded
-                                p.other_player().payoff += self.transaction_price * self.shares_traded
-                                self.is_transaction = True
-                        elif p.sp != 0 and p.sp <= p.other_player().bp:
-                            # seller
-                            # set transaction price
-                            self.transaction_price = 0.5*(p.sp+p.other_player().bp)
-                            self.shares_traded = min(p.sn, p.other_player().bn)
+        # average of buy & sell price
+        self.transaction_price = 0.5*(buyer.bp+seller.sp)
+        self.shares_traded = min(buyer.bn, seller.sn)
 
-                            # adjust shares and payoff
-                            amount = self.transaction_price * self.shares_traded
-                            if amount <= p.other_player().payoff:
-                                # buyer
-                                p.other_player().shares += self.shares_traded
-                                p.other_player().payoff -= self.transaction_price * self.shares_traded
-                                # seller
-                                p.shares -= self.shares_traded
-                                p.payoff += self.transaction_price * self.shares_traded
-                                self.is_transaction = True
+        # adjust shares and cash
+        amount = self.transaction_price * self.shares_traded
+        if amount > buyer.cash:
+            return
+
+        buyer.shares += self.shares_traded
+        buyer.cash -= amount
+
+        seller.shares -= self.shares_traded
+        seller.cash += amount
+
+
 
     def set_dividend(self):
         self.dividend_per_share = randint(1,2)
         self.is_dividend = True
 
-        # adjust payoff
+        # adjust cash
         for p in self.get_players():
-            p.payoff += p.shares * self.dividend_per_share if p.shares != 0 else p.payoff
+            p.cash += p.shares * self.dividend_per_share if p.shares != 0 else p.cash
 
 
 class Player(otree.models.BasePlayer):
@@ -124,8 +115,10 @@ class Player(otree.models.BasePlayer):
     # initial shares and payoff
     shares = models.PositiveIntegerField(default=5)
 
+    cash = models.CurrencyField()
+
     # default allocated shares for both players; provides a range for buyers; sellers' range is limited by the number of shares they have
-    num_shares = 10
+
 
     # order fields
     bp = models.CurrencyField(default=0.00, doc="""maximum buying price per share""")
@@ -133,22 +126,22 @@ class Player(otree.models.BasePlayer):
     sp = models.CurrencyField(default=0.00, doc="""minimum selling price per share""")
     sn = models.PositiveIntegerField(default=0, doc="""number of shares willing to sell.""")
 
-    order_type = models.CharField(max_length=10, doc="""player: buy or sell?""", widget=widgets.RadioSelectHorizontal)
+    order_type = models.CharField(doc="""player: buy or sell?""", widget=widgets.RadioSelectHorizontal)
 
     def order_type_choices(self):
         return ['Sell', 'Buy', 'None']
 
     def bn_choices(self):
-        return range(0, self.num_shares+1, 1)
+        return range(0, Constants.num_shares+1, 1)
 
     def sn_choices(self):
         return range(0, self.shares+1, 1)
 
     def bp_choices(self):
-        return currency_range(0, self.payoff, 0.5)
+        return currency_range(0, self.cash, 0.5)
 
     def sp_choices(self):
-        return currency_range(0, self.payoff, 0.5)
+        return currency_range(0, self.cash, 0.5)
 
     def other_player(self):
         """Returns other player in group. Only valid for 2-player groups."""
@@ -157,8 +150,8 @@ class Player(otree.models.BasePlayer):
     QUESTION_1_CHOICES = ['P=3, N=2','P=2, N=3','P=2.5, N=3','P=2.5, N=2','No transaction will take place',]
     QUESTION_2_CHOICES = ['$8, $12', '$12, $8', '$8, $8', '$12, $12', '$10, $10']
 
-    understanding_question_1 = models.CharField(max_length=100, null=True, choices=QUESTION_1_CHOICES, verbose_name='', widget=widgets.RadioSelect())
-    understanding_question_2 = models.CharField(max_length=100, null=True, choices=QUESTION_2_CHOICES, verbose_name='', widget=widgets.RadioSelect())
+    understanding_question_1 = models.CharField(choices=QUESTION_1_CHOICES, widget=widgets.RadioSelect())
+    understanding_question_2 = models.CharField(choices=QUESTION_2_CHOICES, widget=widgets.RadioSelect())
 
     # check correct answers
     def is_understanding_question_1_correct(self):
@@ -166,4 +159,13 @@ class Player(otree.models.BasePlayer):
 
     def is_understanding_question_2_correct(self):
         return self.understanding_question_2 == Constants.understanding_2_correct
+
+
+    def set_payoff(self):
+        self.payoff = 0
+        if self.subsession.round_number == Constants.number_of_rounds:
+            self.payoff = self.cash
+        else:
+            self.payoff = 0
+        print 'payoff: {} (participant: {})'.format(self.payoff, self.participant.code)
 

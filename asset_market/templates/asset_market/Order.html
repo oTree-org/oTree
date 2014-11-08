@@ -7,7 +7,7 @@
 
 {% block content %}
 
-    <h5 class="text-info text-center">Cash: {{ payoff }};  Shares: {{ shares }}</h5>
+    <h5 class="text-info text-center">Cash: {{ cash }};  Shares: {{ shares }}</h5>
 
     <p>
         If you want to buy shares, enter on the left the number of shares and the maximum buying price you desire.
@@ -19,7 +19,7 @@
     <!--
     TODO: Validate the form inputs:
     1. Only one order at a time
-    2. Total(No of shares * price) should be less or equal to the payoff position
+    2. Total(No of shares * price) should be less or equal to the cash position
     -->
     <div class="panel panel-default">
       <div class="panel-body">

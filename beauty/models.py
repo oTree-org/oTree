@@ -52,11 +52,12 @@ class Constants:
     name_in_url = 'beauty'
 
     winner_payoff = c(100)
-    guess_max = c(100)
+    guess_max = 100
+    base_pay = c(10)
 
-    training_question_1_win_pick_correct = c(10)
+    training_question_1_win_pick_correct = 10
     training_question_1_my_payoff_correct = c(50)
-    training_1_maximun_pick = c(100)
+    training_1_maximun_pick = 100
     training_1_maximun_offered_points = c(100)
 
 

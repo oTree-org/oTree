@@ -12,11 +12,11 @@ class PlayerBot(Bot):
     def play(self):
 
         self.submit(views.Introduction)
-        self.submit(views.QuestionOne, {
+        self.submit(views.Question1, {
             "training_question_1_husband": random.randint(0, 100),
             "training_question_1_wife": random.randint(0, 100),
         })
-        self.submit(views.FeedbackOne)
+        self.submit(views.Feedback1)
 
         self.submit(views.Decide, {
             "decision": random.choice(['Football', 'Opera'])

@@ -16,7 +16,7 @@ class Introduction(Page):
     template_name = 'stackelberg_competition/Introduction.html'
 
 
-class QuestionOne(Page):
+class Question1(Page):
 
     template_name = 'stackelberg_competition/Question.html'
 
@@ -27,7 +27,7 @@ class QuestionOne(Page):
         return {'num_q': 1}
 
 
-class FeedbackOne(Page):
+class Feedback1(Page):
 
     template_name = 'stackelberg_competition/Feedback.html'
 
@@ -110,8 +110,8 @@ class Results(Page):
 def pages():
 
     return [Introduction,
-            QuestionOne,
-            FeedbackOne,
+            Question1,
+            Feedback1,
             ChoiceOne,
             ChoiceTwoWaitPage,
             ChoiceTwo,

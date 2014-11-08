@@ -74,7 +74,7 @@ def session_types():
             name='traveler_dilemma',
             display_name="Traveler's Dilemma",
             base_pay=10.00,
-            num_bots=12,
+            num_bots=2,
             num_demo_participants=2,
             subsession_apps=['traveler_dilemma', 'feedback', 'lab_results'],
             doc=""""""
@@ -181,11 +181,10 @@ def session_types():
             doc=""""""
         ),
         SessionType(
-            # in-progress
             name='asset_market',
             display_name="Asset Market",
             base_pay=10.00,
-            num_bots=12,
+            num_bots=2,
             num_demo_participants=2,
             subsession_apps=['asset_market', 'feedback', 'lab_results'],
             doc=""""""

@@ -9,7 +9,6 @@ class RedemptionCode(Page):
     template_name = 'lab_results/LabResults.html'
 
     def variables_for_template(self):
-        self.player.set_payoff()
         participant = self.player.participant
         return {'base_pay': participant.session.base_pay,
                 'payoff_from_subsessions': participant.payoff_from_subsessions(),

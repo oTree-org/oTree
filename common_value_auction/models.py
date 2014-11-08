@@ -20,11 +20,11 @@ class Constants:
     players_per_group = 1
     number_of_rounds = 1
 
-    min_allowable_bid = c(0.0)
-    max_allowable_bid = c(10.0)
+    min_allowable_bid = c(0)
+    max_allowable_bid = c(10)
 
     # Error margin for the value estimates shown to the players
-    estimate_error_margin = c(1.00)
+    estimate_error_margin = 1
 
 class Subsession(otree.models.BaseSubsession):
     pass

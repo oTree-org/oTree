@@ -17,7 +17,7 @@ class Introduction(Page):
     template_name = 'demo_game/Introduction.html'
 
 
-class QuestionOne(Page):
+class Question1(Page):
     template_name = 'demo_game/Question.html'
 
     def participate_condition(self):
@@ -30,7 +30,7 @@ class QuestionOne(Page):
         return {'num_q': 1}
 
 
-class FeedbackOne(Page):
+class Feedback1(Page):
     template_name = 'demo_game/Feedback.html'
 
     def participate_condition(self):
@@ -46,7 +46,7 @@ class FeedbackOne(Page):
                 }
 
 
-class QuestionTwo(Page):
+class Question2(Page):
     template_name = 'demo_game/Question.html'
 
     def participate_condition(self):
@@ -59,7 +59,7 @@ class QuestionTwo(Page):
         return {'num_q': 2}
 
 
-class FeedbackTwo(Page):
+class Feedback2(Page):
     template_name = 'demo_game/Feedback.html'
 
     def participate_condition(self):
@@ -75,7 +75,7 @@ class FeedbackTwo(Page):
                 }
 
 
-class QuestionThree(Page):
+class Question3(Page):
     template_name = 'demo_game/Question.html'
 
     def participate_condition(self):
@@ -88,7 +88,7 @@ class QuestionThree(Page):
         return {'num_q': 3}
 
 
-class FeedbackThree(Page):
+class Feedback3(Page):
     template_name = 'demo_game/Feedback.html'
 
     def participate_condition(self):
@@ -104,7 +104,7 @@ class FeedbackThree(Page):
                 }
 
 
-class QuestionFour(Page):
+class Question4(Page):
     template_name = 'demo_game/Question.html'
 
     def participate_condition(self):
@@ -117,7 +117,7 @@ class QuestionFour(Page):
         return {'num_q': 4}
 
 
-class FeedbackFour(Page):
+class Feedback4(Page):
     template_name = 'demo_game/Feedback.html'
 
     def participate_condition(self):
@@ -133,7 +133,7 @@ class FeedbackFour(Page):
                 }
 
 
-class QuestionFive(Page):
+class Question5(Page):
     template_name = 'demo_game/Question.html'
 
     def participate_condition(self):
@@ -146,7 +146,7 @@ class QuestionFive(Page):
         return {'num_q': 5}
 
 
-class FeedbackFive(Page):
+class Feedback5(Page):
     template_name = 'demo_game/Feedback.html'
 
     def participate_condition(self):
@@ -190,16 +190,16 @@ class Finish(Page):
 def pages():
     return [
         Introduction,
-        QuestionOne,
-        FeedbackOne,
-        QuestionTwo,
-        FeedbackTwo,
-        QuestionThree,
-        FeedbackThree,
-        QuestionFour,
-        FeedbackFour,
-        QuestionFive,
-        FeedbackFive,
+        Question1,
+        Feedback1,
+        Question2,
+        Feedback2,
+        Question3,
+        Feedback3,
+        Question4,
+        Feedback4,
+        Question5,
+        Feedback5,
         FormsDemo,
         Results,
         Finish,
