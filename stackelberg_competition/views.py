@@ -103,8 +103,8 @@ class Results(Page):
                 'total_capacity': Constants.total_capacity,
                 'price': self.group.price,
                 'payoff': self.player.payoff,
-                'base_points': Constants.base_pay,
-                'total_plus_base': self.player.payoff + Constants.base_pay}
+                'base_points': Constants.fixed_pay,
+                'total_plus_base': self.player.payoff + Constants.fixed_pay}
 
 
 def pages():

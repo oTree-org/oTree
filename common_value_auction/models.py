@@ -79,9 +79,8 @@ class Player(otree.models.BasePlayer):
         doc="""Amount bidded by the player"""
     )
 
-    def bid_amount_error_message(self, value):
-        if not Constants.min_allowable_bid <= value <= Constants.max_allowable_bid:
-            return 'The amount bidded must be between {} and {}, inclusive.'.format(Constants.min_allowable_bid, Constants.max_allowable_bid)
+    def bid_amount_bounds(self):
+        return [Constants.min_allowable_bid, Constants.max_allowable_bid]
 
     is_winner = models.BooleanField(
         default=False,

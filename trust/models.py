@@ -56,13 +56,11 @@ class Group(otree.models.BaseGroup):
             - self.sent_amount + self.sent_back_amount
         p2.payoff = Constants.bonus + self.sent_amount * Constants.multiplication_factor - self.sent_back_amount
 
-    def sent_amount_error_message(self, value):
-        if not 0 <= value <= Constants.amount_allocated:
-            return 'Your entry is invalid.'
+    def sent_amount_bounds(self):
+        return [0, Constants.amount_allocated]
 
-    def sent_back_amount_error_message(self, value):
-        if not 0 <= value <= self.sent_amount * Constants.multiplication_factor:
-            return 'Your entry is invalid.'
+    def sent_back_amount_bounds(self):
+        return [0, self.sent_amount * Constants.multiplication_factor]
 
 
 class Player(otree.models.BasePlayer):
@@ -71,10 +69,8 @@ class Player(otree.models.BasePlayer):
     group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
-    training_answer_x = models.CurrencyField(
-        null=True, verbose_name='Participant A would have')
-    training_answer_y = models.CurrencyField(
-        null=True, verbose_name='Participant B would have')
+    training_answer_x = models.CurrencyField(verbose_name='Participant A would have')
+    training_answer_y = models.CurrencyField(verbose_name='Participant B would have')
 
     def role(self):
         return {1: 'A', 2: 'B'}[self.id_in_group]

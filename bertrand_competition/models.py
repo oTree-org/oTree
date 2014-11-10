@@ -74,9 +74,8 @@ class Player(otree.models.BasePlayer):
         doc="""Whether this player offered lowest price"""
     )
 
-    def price_error_message(self, value):
-        if not 0 <= value <= Constants.maximum_price:
-            return 'Your entry is invalid.'
+    def price_bounds(self):
+        return [0, Constants.maximum_price]
 
     def is_sole_winner(self):
         return self.is_a_winner and self.group.num_winners == 1

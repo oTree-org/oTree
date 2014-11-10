@@ -95,7 +95,7 @@ class Results(Page):
         return {'payoff': self.player.payoff,
                 'decision': self.player.decision,
                 'other_decision': self.player.other_player().decision,
-                'total_payoff': self.player.payoff + Constants.base_pay}
+                'total_payoff': self.player.payoff + Constants.fixed_pay}
 
 
 def pages():

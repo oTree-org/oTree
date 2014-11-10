@@ -49,7 +49,7 @@ class Constants:
     players_per_group = 2
     number_of_rounds = 1
 
-    base_pay = c(10)
+    fixed_pay = c(10)
 
     stag_stag_amount = c(200)
     stag_hare_amount = c(0)
@@ -97,12 +97,12 @@ class Player(otree.models.BasePlayer):
         return (self.training_question_1_other_payoff==
                 Constants.training_question_1_other_payoff_correct)
 
-    def training_question_1_my_payoff_error_message(self, value):
+    def training_question_1_my_payoff_bounds(self):
         if value > Constants.training_1_maximun_offered_points:
             msg = 'The payoff cannot be greater than points offered ({})'
             return msg.format(Constants.training_1_maximun_offered_points)
 
-    def training_question_1_other_payoff_error_message(self, value):
+    def training_question_1_other_payoff_bounds(self):
         if value > Constants.training_1_maximun_offered_points:
             msg = 'The payoff cannot be greater than points offered ({})'
             return msg.format(Constants.training_1_maximun_offered_points)

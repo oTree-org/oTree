@@ -59,9 +59,8 @@ class Player(otree.models.BasePlayer):
         doc="""The amount contributed by the player""",
     )
 
-    def contribution_error_message(self, value):
-        if not 0 <= value <= Constants.endowment:
-            return 'Your entry is invalid.'
+    def contribution_bounds(self):
+        return [0, Constants.endowment]
 
     question = models.CurrencyField()
 

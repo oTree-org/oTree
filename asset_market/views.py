@@ -192,8 +192,8 @@ class Results(Page):
         return {
             'cash': self.player.cash,
             'shares': self.player.shares,
-            'base_pay': self.player.participant.session.base_pay,
-            'total_payoff': self.player.payoff + self.player.participant.session.base_pay,
+            'fixed_pay': self.player.participant.session.fixed_pay,
+            'total_payoff': self.player.payoff + self.player.participant.session.fixed_pay,
             'transaction_price_list': safe_json(transaction_price_list),
             'dividend_per_share_list': safe_json(dividend_per_share_list),
             'shares_traded_list': safe_json(shares_traded_list),

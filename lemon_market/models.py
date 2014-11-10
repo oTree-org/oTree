@@ -82,9 +82,9 @@ class Player(otree.models.BasePlayer):
         blank=True, widget=widgets.RadioSelect(),
         verbose_name='And you will')  # seller index
 
-    def price_error_message(self, value):
-        if not 0 <= value <= Constants.INITIAL:
-            return 'Your entry is invalid.'
+    def price_bounds(self):
+        return [0, Constants.INITIAL]
+
 
     def choice_choices(self):
         return [(i, 'Buy from seller %i' % i) for i in range(

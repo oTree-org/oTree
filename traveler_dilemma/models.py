@@ -55,10 +55,8 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_answer_mine = models.CurrencyField(
-        null=True, verbose_name='My compensation would be')
-    training_answer_others = models.CurrencyField(
-        null=True, verbose_name="The other traveler's compensation would be")
+    training_answer_mine = models.CurrencyField(verbose_name='My compensation would be')
+    training_answer_others = models.CurrencyField(verbose_name="The other traveler's compensation would be")
 
     # claim by player
     claim = models.CurrencyField(
@@ -68,9 +66,8 @@ class Player(otree.models.BasePlayer):
         verbose_name='Please enter a number from 2 to 100'
     )
 
-    def claim_error_message(self, value):
-        if not Constants.min_amount <= value <= Constants.max_amount:
-            return 'Your entry is invalid.'
+    def claim_bounds(self):
+        return [Constants.min_amount, Constants.max_amount]
 
     def other_player(self):
         return self.get_others_in_group()[0]

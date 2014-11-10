@@ -64,7 +64,7 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_question_1 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
+    training_question_1 = models.CharField(max_length=100, widget=widgets.RadioSelect())
 
     def training_question_1_choices(self):
         return ['Player 1 gets 0 points, Player 2 gets 0 points',

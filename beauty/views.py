@@ -82,7 +82,7 @@ class Results(Page):
                 'best_guess': self.group.best_guess, #
                 'tie': self.group.tie, #
                 'winners_count': winners_cnt, #
-                'total_payoff': self.player.payoff + Constants.base_pay, #
+                'total_payoff': self.player.payoff + Constants.fixed_pay, #
                 'payoff': self.player.payoff} #
 
 

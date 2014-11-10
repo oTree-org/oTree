@@ -50,7 +50,7 @@ class Constants:
     players_per_group = 3
     number_of_rounds = 1
 
-    base_payoff = c(100)
+    fixed_payoff = c(100)
     min_allowable_bid = c(0)
     max_allowable_bid = c(100)
 
@@ -109,36 +109,17 @@ class Player(otree.models.BasePlayer):
         doc="""Indicates whether the player is the winner"""
     )
 
-    training_question_1_my_payoff = models.CurrencyField(
-        null=True, verbose_name=''
-    )
+    training_question_1_my_payoff = models.CurrencyField()
 
     def is_training_question_1_my_payoff_correct(self):
         return (self.training_question_1_my_payoff==
                 Constants.training_question_1_my_payoff_correct)
 
-    def training_question_1_my_payoff_error_message(self, value):
-        is_valid = (
-            Constants.min_allowable_bid
-            <= value <=
-            Constants.training_question_1_my_payoff_limit
-        )
-        if not is_valid:
-            msg = 'The payoff cannot must be in the range [{}, {}]'
-            return msg.format(
-                Constants.min_allowable_bid,
-                Constants.training_question_1_my_payoff_limit
-            )
+    def training_question_1_my_payoff_bounds(self):
+        return [Constants.min_allowable_bid, Constants.max_allowable_bid]
 
-    def bid_amount_error_message(self, value):
-        is_valid = (
-            Constants.min_allowable_bid <= value <= Constants.max_allowable_bid
-        )
-        if not is_valid:
-            msg = 'The payoff must be in the range [{}, {}]'
-            return msg.format(
-                Constants.min_allowable_bid, Constants.max_allowable_bid
-            )
+    def bid_amount_bounds(self):
+        return [Constants.min_allowable_bid, Constants.max_allowable_bid]
 
     def generate_private_value(self):
         return random.randint(
@@ -146,7 +127,7 @@ class Player(otree.models.BasePlayer):
         )
 
     def set_payoff(self):
-        self.payoff = Constants.base_payoff
+        self.payoff = Constants.fixed_payoff
         if self.is_winner:
             self.payoff += (
                 self.private_value - self.group.second_highest_bid()

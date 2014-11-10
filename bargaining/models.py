@@ -69,9 +69,8 @@ class Player(otree.models.BasePlayer):
     training_amount_other = models.CurrencyField(
         verbose_name='The other participant would get')
 
-    def request_amount_error_message(self, value):
-        if not 0 <= value <= Constants.amount_shared:
-            return 'Your entry is invalid.'
+    def request_amount_bounds(self):
+        return [0, Constants.amount_shared]
 
     def other_player(self):
         """Returns the opponent of the current player"""

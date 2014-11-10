@@ -49,9 +49,8 @@ class Group(otree.models.BaseGroup):
         verbose_name='I will keep (from 0 to %i)' % Constants.allocated_amount
     )
 
-    def kept_error_message(self, value):
-        if not 0 <= value <= Constants.allocated_amount:
-            return 'Your entry is invalid.'
+    def kept_bounds(self):
+        return [0, Constants.allocated_amount]
 
     def set_payoffs(self):
         p1 = self.get_player_by_id(1)

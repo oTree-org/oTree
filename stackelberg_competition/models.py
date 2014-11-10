@@ -24,7 +24,7 @@ class Constants:
 
     max_units_per_player = int(total_capacity/2)
 
-    base_pay = c(50)
+    fixed_pay = c(50)
     training_1_correct = c(300)
 
 class Subsession(otree.models.BaseSubsession):
@@ -60,9 +60,8 @@ class Player(otree.models.BasePlayer):
         doc="""Quantity of units to produce"""
     )
 
-    def quantity_error_message(self, value):
-        if not 0 <= value <= Constants.max_units_per_player:
-            return "The value must be an integer between 0 and {}, inclusive.".format(Constants.max_units_per_player)
+    def quantity_bounds(self):
+        return [0, Constants.max_units_per_player]
 
     def other_player(self):
         return self.get_others_in_group()[0]

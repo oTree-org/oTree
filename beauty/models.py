@@ -53,7 +53,7 @@ class Constants:
 
     winner_payoff = c(100)
     guess_max = 100
-    base_pay = c(10)
+    fixed_pay = c(10)
 
     training_question_1_win_pick_correct = 10
     training_question_1_my_payoff_correct = c(50)
@@ -139,20 +139,14 @@ class Player(otree.models.BasePlayer):
 
     training_question_1_my_payoff = models.CurrencyField()
 
-    def guess_value_error_message(self, value):
-        if value > Constants.guess_max:
-            msg = 'The value must be between 0 and {}'
-            return msg.format(Constants.guess_max)
+    def guess_value_bounds(self):
+        return [0, Constants.guess_max]
 
-    def training_question_1_win_pick_error_message(self, value):
-        if value > Constants.training_1_maximun_pick:
-            msg = "You can't choice a number higher than 100"
-            return msg.format(Constants.training_1_maximun_offered_points)
+    def training_question_1_win_pick_bounds(self):
+        return [0, Constants.training_1_maximun_pick]
 
-    def training_question_1_my_payoff_error_message(self, value):
-        if value > Constants.training_1_maximun_offered_points:
-            msg = 'The payoff cannot be greater than points offered ({})'
-            return msg.format(Constants.training_1_maximun_offered_points)
+    def training_question_1_my_payoff_bounds(self):
+        return [0, Constants.training_1_maximun_offered_points]
 
     def is_training_question_1_win_pick_correct(self):
         return (self.training_question_1_win_pick ==

@@ -20,7 +20,7 @@ class Introduction(Page):
 class Question1(Page):
     template_name = 'global/Question.html'
     form_model = models.Player
-    form_fields = 'training_answer_x', 'training_answer_y'
+    form_fields = ['training_answer_x', 'training_answer_y']
     question = '''Suppose that participant A sent 20 points to participant B. Having received the tripled amount, participant B sent 50 points to participant A. In the end, how many points would participant A and B have?'''
 
     def participate_condition(self):
@@ -58,14 +58,6 @@ class Send(Page):
 
     def variables_for_template(self):
         return {'amount_allocated': Constants.amount_allocated}
-
-
-class WaitPage(WaitPage):
-
-
-
-    def body_text(self):
-        return 'Waiting for other participant to decide.'
 
 
 class SendBack(Page):
@@ -120,12 +112,13 @@ class Results(Page):
 
 def pages():
 
-    return [Introduction,
-            Question1,
-            Feedback1,
-            Send,
-            WaitPage,
-            SendBack,
-            ResultsWaitPage,
-            Results,
-            ]
+    return [
+        Introduction,
+        Question1,
+        Feedback1,
+        Send,
+        WaitPage,
+        SendBack,
+        ResultsWaitPage,
+        Results,
+    ]

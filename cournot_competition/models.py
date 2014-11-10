@@ -70,9 +70,8 @@ class Player(otree.models.BasePlayer):
         doc="""Quantity of units to produce"""
     )
 
-    def units_error_message(self, value):
-        if not 0 <= value <= Constants.max_units_per_player:
-            return "The value must be a whole number between {} and {}, inclusive.".format(0, Constants.max_units_per_player)
+    def units_bounds(self):
+        return [0, Constants.max_units_per_player]
 
     def other_player(self):
         return self.get_others_in_group()[0]

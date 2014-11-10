@@ -18,6 +18,7 @@ class Introduction(Page):
 
     template_name = 'prisoner/Introduction.html'
 
+    timeout_seconds = 10
 
 class Question1(Page):
 
@@ -29,7 +30,7 @@ class Question1(Page):
     def variables_for_template(self):
         return {'num_q': 1}
 
-
+    timeout_seconds = 10
 
 class Feedback1(Page):
 
@@ -84,9 +85,11 @@ class Results(Page):
 
 def pages():
 
-    return [Introduction,
-            Question1,
-            Feedback1,
-            Decision,
-            ResultsWaitPage,
-            Results]
+    return [
+        Introduction,
+        Question1,
+        Feedback1,
+        Decision,
+        ResultsWaitPage,
+        Results
+    ]

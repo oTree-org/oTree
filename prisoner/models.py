@@ -28,15 +28,19 @@ class Constants:
     defect_amount = c(100)
     base_points = c(50)
 
+    training_1_choices = [
+        'Alice gets 300 points, Bob gets 0 points',
+        'Alice gets 200 points, Bob gets 200 points',
+        'Alice gets 0 points, Bob gets 300 points',
+        'Alice gets 100 points, Bob gets 100 points'
+    ]
 
-    training_1_correct = "Alice gets 300 points, Bob gets 0 points"
+
+    training_1_correct = training_1_choices[0]
 
 class Subsession(otree.models.BaseSubsession):
 
     pass
-
-
-
 
 
 class Group(otree.models.BaseGroup):
@@ -53,13 +57,13 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_question_1 = models.CharField(max_length=100, null=True, verbose_name='', widget=widgets.RadioSelect())
+    training_question_1 = models.CharField(
+        widget=widgets.RadioSelect(),
+        timeout_default=Constants.training_1_choices[1]
+    )
 
     def training_question_1_choices(self):
-        return ['Alice gets 300 points, Bob gets 0 points',
-                'Alice gets 200 points, Bob gets 200 points',
-                'Alice gets 0 points, Bob gets 300 points',
-                'Alice gets 100 points, Bob gets 100 points']
+        return Constants.training_1_choices
 
     def is_training_question_1_correct(self):
         return self.training_question_1 == Constants.training_1_correct
