@@ -98,14 +98,10 @@ class Player(otree.models.BasePlayer):
                 Constants.training_question_1_other_payoff_correct)
 
     def training_question_1_my_payoff_bounds(self):
-        if value > Constants.training_1_maximun_offered_points:
-            msg = 'The payoff cannot be greater than points offered ({})'
-            return msg.format(Constants.training_1_maximun_offered_points)
+        return [0, Constants.training_1_maximun_offered_points]
 
     def training_question_1_other_payoff_bounds(self):
-        if value > Constants.training_1_maximun_offered_points:
-            msg = 'The payoff cannot be greater than points offered ({})'
-            return msg.format(Constants.training_1_maximun_offered_points)
+        return [0, Constants.training_1_maximun_offered_points]
 
     def decision_choices(self):
         return ['Stag', 'Hare']

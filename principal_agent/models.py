@@ -133,9 +133,7 @@ class Group(otree.models.BaseGroup):
     )
 
     def agent_fixed_pay_bounds(self):
-        if not Constants.min_fixed_payment <= value <=\
-                Constants.max_fixed_payment:
-            return 'Your entry is invalid.'
+        return [Constants.min_fixed_payment, Constants.max_fixed_payment]
 
     def agent_work_effort_choices(self):
         return range(1, 10+1)
