@@ -52,8 +52,7 @@ class Group(otree.models.BaseGroup):
     def set_payoffs(self):
         p1 = self.get_player_by_id(1)
         p2 = self.get_player_by_id(2)
-        p1.payoff = Constants.bonus + Constants.amount_allocated\
-            - self.sent_amount + self.sent_back_amount
+        p1.payoff = Constants.bonus + Constants.amount_allocated - self.sent_amount + self.sent_back_amount
         p2.payoff = Constants.bonus + self.sent_amount * Constants.multiplication_factor - self.sent_back_amount
 
     def sent_amount_bounds(self):

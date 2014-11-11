@@ -59,7 +59,7 @@ class Player(otree.models.BasePlayer):
 
     training_question_1 = models.CharField(
         widget=widgets.RadioSelect(),
-        timeout_default=Constants.training_1_choices[1]
+        #timeout_default=Constants.training_1_choices[1]
     )
 
     def training_question_1_choices(self):
