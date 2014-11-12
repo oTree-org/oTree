@@ -120,6 +120,7 @@ def session_types():
             display_name="Stackelberg Competition",
             fixed_pay=10.00,
             num_bots=12,
+            money_per_point=0.01,
             num_demo_participants=2,
             subsession_apps=['stackelberg_competition', 'survey_sample', 'lab_results'],
             doc=""""""
