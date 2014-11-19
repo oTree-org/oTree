@@ -1,8 +1,6 @@
 # Don't change anything in this file.
 from .. import models
 import otree.views
-import otree.forms
-import otree.forms
 import otree.test
 from otree.common import Currency as c, currency_range
 
@@ -23,12 +21,6 @@ class WaitPage(otree.views.WaitPage):
         self.subsession = models.Subsession()
         self.group = models.Group()
 
-class Form(otree.forms.Form):
-
-    def z_autocomplete(self):
-        self.subsession = models.Subsession()
-        self.group = models.Group()
-        self.player = models.Player()
 
 class Bot(otree.test.Bot):
 
