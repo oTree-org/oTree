@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from . import models
-from ._builtin import Page, WaitPage
+
 from otree.common import Currency as c, currency_range
+
+from ._builtin import Page, WaitPage
+from . import models
 from .models import Constants
+
 
 def variables_for_all_templates(self):
     return dict(instructions='trust/Instructions.html', total_q=1)
@@ -21,7 +24,12 @@ class Question1(Page):
     template_name = 'global/Question.html'
     form_model = models.Player
     form_fields = ['training_answer_x', 'training_answer_y']
-    question = '''Suppose that participant A sent 20 points to participant B. Having received the tripled amount, participant B sent 50 points to participant A. In the end, how many points would participant A and B have?'''
+    question = (
+        'Suppose that participant A sent 20 points to participant B. '
+        'Having received the tripled amount, participant B sent 50 points to '
+        'participant A. In the end, how many points would participant A and B '
+        'have?'
+    )
 
     def participate_condition(self):
         return self.subsession.round_number == 1
@@ -40,6 +48,7 @@ class Feedback1(Page):
         return dict(
             num_q=1, x=self.player.training_answer_x,
             y=self.player.training_answer_y)
+
 
 class Send(Page):
 
@@ -85,8 +94,6 @@ class SendBack(Page):
 
 class ResultsWaitPage(WaitPage):
 
-
-
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
@@ -111,7 +118,6 @@ class Results(Page):
 
 
 def pages():
-
     return [
         Introduction,
         Question1,

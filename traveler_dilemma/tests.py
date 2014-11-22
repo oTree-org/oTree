@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+
+import random
+
+from otree.common import Currency as c, currency_range
+
 from . import views
 from ._builtin import Bot
-import random
-from otree.common import Currency as c, currency_range
 from .models import Constants
+
+
 class PlayerBot(Bot):
 
     def play(self):
@@ -15,7 +20,10 @@ class PlayerBot(Bot):
             training_answer_mine=1, training_answer_others=2))
         self.submit(views.Feedback1)
 
-        self.submit(views.Claim, {"claim": random.randrange(Constants.min_amount, Constants.max_amount)})
-
+        claim = random.randrange(Constants.min_amount, Constants.max_amount)
+        self.submit(views.Claim, {"claim": claim})
 
         self.submit(views.Results)
+
+    def validate_play(self):
+        pass

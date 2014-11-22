@@ -40,7 +40,9 @@ def session_types():
             fixed_pay=10.00,
             num_bots=12,
             num_demo_participants=2,
-            subsession_apps=['cournot_competition', 'survey_sample', 'lab_results'],
+            subsession_apps=[
+                'cournot_competition', 'survey_sample', 'lab_results'
+            ],
             doc=""""""
         ),
         SessionType(
@@ -67,7 +69,9 @@ def session_types():
             fixed_pay=10.00,
             num_bots=12,
             num_demo_participants=2,
-            subsession_apps=['matching_pennies', 'survey_sample', 'lab_results'],
+            subsession_apps=[
+                'matching_pennies', 'survey_sample', 'lab_results'
+            ],
             doc=""""""
         ),
         SessionType(
