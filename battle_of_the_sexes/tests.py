@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+
+import random
+
+from otree.common import Currency as c, currency_range
+
 from . import views
 from ._builtin import Bot
-import random
-from otree.common import Currency as c, currency_range
 from .models import Constants
 
 
@@ -18,9 +21,12 @@ class PlayerBot(Bot):
         })
         self.submit(views.Feedback1)
 
-        self.submit(views.Decide, {
-            "decision": random.choice(['Football', 'Opera'])
-        })
+        self.submit(
+            views.Decide, {"decision": random.choice(['Football', 'Opera'])}
+        )
 
         # results
         self.submit(views.Results)
+
+    def validate_play(self):
+        pass

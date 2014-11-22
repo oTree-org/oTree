@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from . import views
-from ._builtin import Bot
+
 import random
 from otree.common import Currency as c, currency_range
+
+from . import views
+from ._builtin import Bot
 from .models import Constants
 
 
@@ -23,3 +25,6 @@ class PlayerBot(Bot):
         self.submit(views.Results)
         if self.subsession.round_number == Constants.number_of_rounds:
             self.submit(views.FinalResults)
+
+    def validate_play(self):
+        pass
