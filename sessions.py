@@ -8,11 +8,11 @@ class SessionType(otree.session.SessionType):
     # defaults that can be overridden by an individual SessionType below
     money_per_point = 1.00
     demo_enabled = True
-    fixed_pay=10.00
-    num_bots=12
-    doc=""
-    assign_to_groups_on_the_fly=False
-    show_on_demo_page=True
+    fixed_pay = 10.00
+    num_bots = 12
+    doc = ""
+    assign_to_groups_on_the_fly = False
+    show_on_demo_page = True
 
 
 def session_types():

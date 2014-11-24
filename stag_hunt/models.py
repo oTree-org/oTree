@@ -16,8 +16,8 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/stag_hunt" t
 
 <h3>Recommended Literature</h3>
 <ul>
-    <li>Skyrms, Brian. "The stag hunt." Proceedings and Addresses of the American Philosophical Association. American Philosophical Association, 2001.</li>
-    <li>Battalio, Raymond, Larry Samuelson, and John Van Huyck. "Optimization incentives and coordination failure in laboratory stag hunt games."Econometrica 69.3 (2001): 749-764.</li>
+    <li></li>
+    <li></li>
 </ul>
 
 <p>
@@ -32,17 +32,44 @@ Source code <a href="https://github.com/oTree-org/oTree/tree/master/stag_hunt" t
         <span class="badge">Stag Hunt</span>
     </a>,
     <a target="_blank" href="https://duckduckgo.com/?q=coordination+game+theory&t=otree"</a>
-        <span class="badge badge-info">Coordination</span>
+        <span class="badge badge-info"></span>
     </a>,
     <a target="_blank" href="https://duckduckgo.com/?q=cooperation+game+theory&t=otree"</a>
-        <span class="badge badge-info">Cooperation</span>
+        <span class="badge badge-info"></span>
     </a>,
         <a target="_blank" href="https://duckduckgo.com/?q=social+contract+game+theory&t=otree"</a>
-        <span class="badge badge-info">Social Contract</span>
+        <span class="badge badge-info"></span>
     </a>
 </p>
 
 """
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/stag_hunt"
+
+recomended_lirerature = (
+    (
+        'Skyrms, Brian. "The stag hunt." Proceedings and Addresses of the '
+        'American Philosophical Association. American Philosophical '
+        'Association, 2001.'
+    ),
+    (
+        'Battalio, Raymond, Larry Samuelson, and John Van Huyck. '
+        '"Optimization incentives and coordination failure in laboratory stag '
+        'hunt games."Econometrica 69.3 (2001): 749-764.'
+    )
+)
+
+
+links = {
+    "Wikipedia": {
+        "Stag Hunt": "https://en.wikipedia.org/wiki/Stag_hunt",
+        "Coordination Game": "https://en.wikipedia.org/wiki/Coordination_game"
+    }
+}
+
+keywords = ("Stag Hunt", "Coordination", "Cooperation", "Social Contract")
+
+
 
 class Constants:
     name_in_url = 'stag_hunt'
