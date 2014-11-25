@@ -1,8 +1,12 @@
 import os
-import otree.settings
+
 import dj_database_url
 
+import otree.settings
+
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 if os.environ.get('OTREE_PRODUCTION'):
     DEBUG = False
@@ -15,15 +19,16 @@ if os.environ.get('IS_OTREE_DOT_ORG'):
 else:
     ADMIN_PASSWORD = 'otree'
     # don't share this with anybody.
-    # Change this to something unique (e.g. mash your keyboard), and then delete this comment.
-    SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
+    # Change this to something unique (e.g. mash your keyboard),
+    # and then delete this comment.
+    SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
 
 
-
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(
-    default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-)
+DATABASES = {
+    'default': dj_database_url.config(
+        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+    )
+}
 
 
 CREATE_DEFAULT_SUPERUSER = True
@@ -31,12 +36,16 @@ ADMIN_USERNAME = 'admin'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
+
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
 PAYMENT_CURRENCY_CODE = 'EUR'
 USE_POINTS = True
 
-# e.g. en-gb, de-de, it-it, fr-fr. see: https://docs.djangoproject.com/en/1.6/topics/i18n/
+
+# e.g. en-gb, de-de, it-it, fr-fr.
+# see: https://docs.djangoproject.com/en/1.6/topics/i18n/
 LANGUAGE_CODE = 'en-us'
+
 
 INSTALLED_APPS = [
     'otree',
@@ -75,9 +84,11 @@ INSTALLED_OTREE_APPS = [
 
 WSGI_APPLICATION = 'wsgi.application'
 
+
 SESSIONS_MODULE = 'sessions'
+
 
 ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
 
-otree.settings.augment_settings(globals())
 
+otree.settings.augment_settings(globals())

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+
 import otree.session
-import os
+
 
 class SessionType(otree.session.SessionType):
 
@@ -99,7 +100,9 @@ def session_types():
             display_name="Stackelberg Competition",
             money_per_point=0.01,
             num_demo_participants=2,
-            subsession_apps=['stackelberg_competition', 'survey_sample', 'lab_results'],
+            subsession_apps=[
+                'stackelberg_competition', 'survey_sample', 'lab_results'
+            ],
         ),
         SessionType(
             name='vickrey_auction',
@@ -117,7 +120,9 @@ def session_types():
             name='bertrand_competition',
             display_name="Bertrand Competition",
             num_demo_participants=2,
-            subsession_apps=['bertrand_competition', 'feedback', 'lab_results'],
+            subsession_apps=[
+                'bertrand_competition', 'feedback', 'lab_results'
+            ],
         ),
         SessionType(
             name='principal_agent',
@@ -146,7 +151,7 @@ def session_types():
             subsession_apps=['asset_market', 'feedback', 'lab_results'],
         ),
         SessionType(
-            name = 'lemon_market',
+            name='lemon_market',
             display_name="Lemon Market",
             num_demo_participants=3,
             subsession_apps=['lemon_market', 'feedback', 'lab_results'],
@@ -157,11 +162,20 @@ def session_types():
 
 demo_page_intro_text = """
 <ul>
-    <li><a href="https://github.com/oTree-org/otree" target="_blank">Source code</a> for the below games.</li>
-    <li><a href="http://www.otree.org/" target="_blank">oTree homepage</a>.</li>
+    <li>
+        <a href="https://github.com/oTree-org/otree" target="_blank">
+            Source code
+        </a> for the below games.
+    </li>
+    <li>
+        <a href="http://www.otree.org/" target="_blank">
+            oTree homepage
+        </a>.
+    </li>
 </ul>
 <p>
-Below are various games implemented with oTree. These games are all open source,
-and you can modify them as you wish to create your own variations. Click one to learn more and play.
+    Below are various games implemented with oTree. These games are all open
+    source, and you can modify them as you wish to create your own variations.
+    Click one to learn more and play.
 </p>
 """
