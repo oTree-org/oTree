@@ -42,7 +42,6 @@ links = {
 keywords = ("Stag Hunt", "Coordination", "Cooperation", "Social Contract")
 
 
-
 class Constants:
     name_in_url = 'stag_hunt'
     players_per_group = 2
