@@ -10,43 +10,15 @@ from otree.common import Currency as c, currency_range
 
 
 doc = """
-This is a 2-player 2-strategy coordination game. The original story was from <a href="https://en.wikipedia.org/wiki/Jean-Jacques_Rousseau" target="_blank">Jean-Jacques Rousseau</a>.
-<br />
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/stag_hunt" target="_blank">here</a>.
-
-<h3>Recommended Literature</h3>
-<ul>
-    <li></li>
-    <li></li>
-</ul>
-
-<p>
-    <strong>Wikipedia:</strong>
-    <a target="_blank" href="https://en.wikipedia.org/wiki/Stag_hunt">Stag Hunt</a>,&nbsp
-    <a target="_blank" href="https://en.wikipedia.org/wiki/Coordination_game">Coordination Game</a>
-</p>
-
-<p>
-    <strong>Keywords:</strong>
-    <a target="_blank" href="https://duckduckgo.com/?q=Stag+Hunt+game+theory&t=otree"</a>
-        <span class="badge">Stag Hunt</span>
-    </a>,
-    <a target="_blank" href="https://duckduckgo.com/?q=coordination+game+theory&t=otree"</a>
-        <span class="badge badge-info"></span>
-    </a>,
-    <a target="_blank" href="https://duckduckgo.com/?q=cooperation+game+theory&t=otree"</a>
-        <span class="badge badge-info"></span>
-    </a>,
-        <a target="_blank" href="https://duckduckgo.com/?q=social+contract+game+theory&t=otree"</a>
-        <span class="badge badge-info"></span>
-    </a>
-</p>
-
+This is a 2-player 2-strategy coordination game. The original story was from
+<a href="https://en.wikipedia.org/wiki/Jean-Jacques_Rousseau" target="_blank">
+    Jean-Jacques Rousseau
+</a>.
 """
 
 source_code = "https://github.com/oTree-org/oTree/tree/master/stag_hunt"
 
-recomended_lirerature = (
+bibliography = (
     (
         'Skyrms, Brian. "The stag hunt." Proceedings and Addresses of the '
         'American Philosophical Association. American Philosophical '
