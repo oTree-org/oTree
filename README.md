@@ -25,5 +25,5 @@ After forking & cloning the repo:
 ## Documentation
 https://github.com/oTree-org/oTree/wiki
 
-## Contact email
+## Contact
 chris@otree.org
