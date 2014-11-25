@@ -22,8 +22,8 @@ After forking & cloning the repo:
     ./otree recreate
     ./otree runserver
 
-## Full documentation
+## Documentation
 https://github.com/oTree-org/oTree/wiki
 
-## Contact email
+## Contact
 chris@otree.org
