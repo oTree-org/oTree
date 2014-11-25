@@ -16,7 +16,9 @@ This is a 2-player 2-strategy coordination game. The original story was from
 </a>.
 """
 
+
 source_code = "https://github.com/oTree-org/oTree/tree/master/stag_hunt"
+
 
 bibliography = (
     (
@@ -38,6 +40,7 @@ links = {
         "Coordination Game": "https://en.wikipedia.org/wiki/Coordination_game"
     }
 }
+
 
 keywords = ("Stag Hunt", "Coordination", "Cooperation", "Social Contract")
 
