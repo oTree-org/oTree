@@ -1,44 +1,62 @@
 # -*- coding: utf-8 -*-
 # <standard imports>
 from __future__ import division
-from otree.db import models
-import otree.models
-from otree import widgets
+
 import random
+
+import otree.models
+from otree.db import models
+from otree import widgets
 from otree.common import Currency as c, currency_range
 # </standard imports>
 
 
 doc = """
-This is a 2-player 2-strategy coordination game. The name and story originated from <a href="http://books.google.ch/books?id=uqDDAgAAQBAJ&lpg=PP1&ots=S-DC4LemnS&lr&pg=PP1#v=onepage&q&f=false" target="_blank">Luce and Raiffa (1957)</a>.
-<br />
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/battle_of_the_sexes" target="_blank">here</a>.
-
-<h3>Recommended Literature</h3>
-<ul>
-    <li>Luce, R. Duncan, and Howard Raiffa. Games and decisions: Introduction and critical survey. Courier Dover Publications, 2012.</li>
-    <li>Rapoport, Anatol. Two-person game theory. Courier Dover Publications, 1999.</li>
-    <li>Cooper, Russell, et al. "Forward induction in the battle-of-the-sexes games."The American Economic Review (1993): 1303-1316.</li>
-    <li>Cooper, Russell, et al. "Communication in the battle of the sexes game: some experimental results." The RAND Journal of Economics (1989): 568-587.</li>
-</ul>
-
-<p>
-    <strong>Wikipedia:</strong>
-    <a target="_blank" href="https://en.wikipedia.org/wiki/Battle_of_the_sexes_%28game_theory%29">Battle of the Sexes</a>,&nbsp
-    <a target="_blank" href="https://en.wikipedia.org/wiki/Coordination_game">Coordination Game</a>
-</p>
-
-<p>
-    <strong>Keywords:</strong>
-    <a target="_blank" href="https://duckduckgo.com/?q=Battle+of+the+Sexes+game+theory&t=otree"</a>
-        <span class="badge">Battle of the Sexes</span>
-    </a>,
-    <a target="_blank" href="https://duckduckgo.com/?q=coordination+game+theory&t=otree"</a>
-        <span class="badge badge-info">Coordination</span>
-    </a>
-</p>
+This is a 2-player 2-strategy coordination game. The name and story originated
+from
+<a href="http://books.google.ch/books?id=uqDDAgAAQBAJ&lpg=PP1&ots=S-DC4LemnS&lr&pg=PP1#v=onepage&q&f=false" target="_blank">
+    Luce and Raiffa (1957)
+</a>.
 
 """
+
+source_code = (
+    "https://github.com/oTree-org/oTree/tree/master/battle_of_the_sexes"
+)
+
+bibliography = (
+    (
+        'Luce, R. Duncan, and Howard Raiffa. Games and decisions: '
+        'Introduction and critical survey. Courier Dover Publications, 2012.'
+    ),
+    (
+        'Rapoport, Anatol. Two-person game theory. Courier Dover '
+        'Publications, 1999.'
+    ),
+    (
+        'Cooper, Russell, et al. "Forward induction in the '
+        'battle-of-the-sexes games."The American Economic Review (1993): '
+        '1303-1316.'
+    ),
+    (
+        'Cooper, Russell, et al. "Communication in the battle of the sexes '
+        'game: some experimental results." The RAND Journal of Economics '
+        '(1989): 568-587.'
+    )
+)
+
+
+links = {
+    "Wikipedia": {
+        "Battle of the Sexes":
+            "https://en.wikipedia.org/wiki/Battle_of_the_sexes_%28game_theory%29",
+        "Coordination Game": "https://en.wikipedia.org/wiki/Coordination_game"
+    }
+}
+
+
+keywords = ("Battle of the Sexes", "Coordination")
+
 
 class Constants:
     name_in_url = 'battle_of_the_sexes'
