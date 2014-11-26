@@ -30,8 +30,6 @@ class Constants:
     keep_give_amounts = [(offer, endowment - offer) for offer in offer_choices]
 
 class Subsession(otree.models.BaseSubsession):
-    pass
-
 
     def initialize(self):
         # randomize to treatments
