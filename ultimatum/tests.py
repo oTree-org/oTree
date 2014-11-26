@@ -13,7 +13,15 @@ from . import views
 class PlayerBot(Bot):
 
     def play(self):
-        pass
+        self.submit(views.Introduction)
+        if self.player.id_in_group == 1:
+            self.submit(views.Offer, {'amount_offered': c(10)})
+        else:
+            if self.group.strategy:
+                self.submit(views.AcceptStrategy, {'response_{}'.format(int(offer)): True for offer in Constants.offer_choices})
+            else:
+                self.submit(views.Accept, {'offer_accepted': True})
+        self.submit(views.Results)
 
     def validate_play(self):
         pass
