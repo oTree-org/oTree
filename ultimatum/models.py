@@ -20,54 +20,68 @@ class Constants:
     name_in_url = 'ultimatum'
     players_per_group = 2
     number_of_rounds = 1
+
     endowment = c(100)
+    payoff_if_rejected = c(0)
+    offer_increment = c(10)
+
+    offer_choices = currency_range(0, endowment, offer_increment)
+
+    keep_give_amounts = [(offer, endowment - offer) for offer in offer_choices]
 
 class Subsession(otree.models.BaseSubsession):
     pass
 
 
     def initialize(self):
+        # randomize to treatments
         for g in self.get_groups():
             g.strategy = random.choice([True, False])
-
-    def is_valid_amount(self, amount):
-        return amount in self.offer_choices()
 
 
 class Group(otree.models.BaseGroup):
 
     subsession = models.ForeignKey(Subsession)
 
+    strategy = models.NullBooleanField(
+        doc="""Whether this group uses strategy method"""
+    )
 
     amount_offered = models.CurrencyField()
+
+    def amount_offered_choices(self):
+        return Constants.offer_choices
 
     offer_accepted = models.NullBooleanField(
         doc="if offered amount is accepted (direct response method)"
     )
 
-    offer_1 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    offer_2 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    offer_3 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    offer_4 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    offer_5 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    offer_6 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    offer_7 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    offer_8 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    offer_9 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    offer_10 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    offer_11 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
 
-    def get_all_offer_fields(self):
-        return [self.offer_1, self.offer_2, self.offer_3, self.offer_4, self.offer_5, self.offer_6, self.offer_7, self.offer_8, self.offer_9, self.offer_10, self.offer_11]
+    response_0 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
+    response_10 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
+    response_20 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
+    response_30 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
+    response_40 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
+    response_50 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
+    response_60 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
+    response_70 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
+    response_80 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
+    response_90 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
+    response_100 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
+
 
     def set_payoffs(self):
         p1, p2 = self.get_players()
+
+        if self.strategy:
+            self.offer_accepted = getattr(self, 'response_{}'.format(int(self.amount_offered)))
+
         if self.offer_accepted:
             p1.payoff = Constants.endowment - self.amount_offered
             p2.payoff = self.amount_offered
         else:
-            p1.payoff = 0
-            p2.payoff = 0
+            p1.payoff = Constants.payoff_if_rejected
+            p2.payoff = Constants.payoff_if_rejected
 
 
 class Player(otree.models.BasePlayer):

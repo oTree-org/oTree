@@ -52,6 +52,12 @@ def session_types():
             subsession_apps=['trust', 'feedback', 'lab_results'],
         ),
         SessionType(
+            name='ultimatum',
+            display_name="Ultimatum",
+            num_demo_participants=2,
+            subsession_apps=['ultimatum', 'feedback', 'lab_results'],
+        ),
+        SessionType(
             name='dictator',
             display_name="Dictator Game",
             num_demo_participants=2,
@@ -156,6 +162,8 @@ def session_types():
             num_demo_participants=3,
             subsession_apps=['lemon_market', 'feedback', 'lab_results'],
         ),
+
+
 
     ]
 

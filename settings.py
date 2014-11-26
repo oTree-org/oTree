@@ -79,6 +79,7 @@ INSTALLED_OTREE_APPS = [
     'asset_market',
     'lemon_market',
     'feedback',
+    'ultimatum',
 ]
 
 
