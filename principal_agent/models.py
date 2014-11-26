@@ -11,28 +11,44 @@ from otree.common import Currency as c, currency_range
 doc = """
 The principal offers a contract to the agent, who can decide if to reject or
 accept. The agent then chooses an effort level. The implementation is based on
-<a href="http://www.nottingham.ac.uk/cedex/documents/papers/2006-04.pdf" target="_blank">Gächter and Königstein (2006)</a>.
-
-Source code <a
-href="https://github.com/oTree-org/oTree/tree/master/principal_agent"
-target="_blank">here</a>.
+<a href="http://www.nottingham.ac.uk/cedex/documents/papers/2006-04.pdf" target="_blank">
+    Gächter and Königstein (2006)
+</a>.
 """
 
-# Gächter, Simon, and Manfred Königstein. "Design a Contract: A Simple
-# Principal-Agent Problem as a Classroom Experiment." The Journal of Economic
-# Education 40.2 (2009): 173-187.
+source_code = "https://github.com/oTree-org/oTree/tree/master/principal_agent"
 
-# Fehr, Ernst, Georg Kirchsteiger, and Arno Riedl. "Does fairness prevent
-# market clearing? An experimental investigation." The Quarterly Journal of
-# Economics(1993): 437-459.
 
-# Charness, Gary, Guillaume R. Frechette, and John H. Kagel. "How robust is
-# laboratory gift exchange?." Experimental Economics 7.2
+bibliography = (
+    (
+        'Gächter, Simon, and Manfred Königstein. "Design a Contract: A Simple '
+        'Principal-Agent Problem as a Classroom Experiment." The Journal of '
+        'Economic Education 40.2 (2009): 173-187.'
+    ),
+    (
+        'Fehr, Ernst, Georg Kirchsteiger, and Arno Riedl. "Does fairness '
+        'prevent market clearing? An experimental investigation." The '
+        'Quarterly Journal of Economics(1993): 437-459.'
+    ),
+    (
+        'Charness, Gary, Guillaume R. Frechette, and John H. Kagel. "How '
+        'robust is laboratory gift exchange?." Experimental Economics 7.2'
+    )
+)
 
-# http://en.wikipedia.org/wiki/Principal%E2%80%93agent_problem
 
-# Keywords: Principal-Agent Problem, Gift Exchange, Labor Market, Contract
-# Design
+links = {
+    "Wikipedia": {
+        "Principal-agent Problem":
+            "http://en.wikipedia.org/wiki/Principal%E2%80%93agent_problem"
+    }
+}
+
+
+keywords = (
+    "Principal-Agent Problem", "Gift Exchange",
+    "Labor Market", "Contract Design"
+)
 
 
 class Constants:

@@ -9,10 +9,27 @@ import random
 # </standard imports>
 
 doc = """
-<p>This is a one-shot "Prisoner's Dilemma". Two players are asked separately whether they want to cooperate or defect.
-Their choices directly determine the payoffs.</p>
-<p>Source code <a href="https://github.com/oTree-org/oTree/tree/master/prisoner" target="_blank">here</a>.</p>
+This is a one-shot "Prisoner's Dilemma". Two players are asked separately
+whether they want to cooperate or defect. Their choices directly determine the
+payoffs.
 """
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/prisoner"
+
+
+bibliography = ()
+
+
+links = {
+    "Wikipedia": {
+        "Prisoner's Dilemma":
+            "https://en.wikipedia.org/wiki/Prisoner%27s_dilemma"
+    }
+}
+
+
+keywords = ("Prisoner's Dilemma",)
+
 
 class Constants:
     name_in_url = 'prisoner'

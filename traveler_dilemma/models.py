@@ -1,18 +1,40 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-"""Documentation at https://github.com/oTree-org/otree/wiki"""
+
+"""Documentation at https://github.com/oTree-org/otree/wiki
+
+"""
+
 from otree.db import models
 import otree.models
 from otree.common import Currency as c, currency_range
 from otree import widgets
 
 doc = """
-Kaushik Basu's famous traveler's dilemma (<a href="http://www.jstor.org/stable/2117865" target="_blank">AER 1994</a>). 
-It is a 2-player game. 
-The game is framed as a traveler's dilemma and intended for classroom/teaching use.
-<br />
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/traveler_dilemma" target="_blank">here</a>.
+Kaushik Basu's famous traveler's dilemma (
+<a href="http://www.jstor.org/stable/2117865" target="_blank">
+    AER 1994
+</a>).
+It is a 2-player game. The game is framed as a traveler's dilemma and intended
+for classroom/teaching use.
 """
+
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/traveler_dilemma"
+
+
+bibliography = ()
+
+
+links = {
+    "Wikipedia": {
+        "Traveler's Dilemma":
+            "https://en.wikipedia.org/wiki/Traveler%27s_dilemma"
+    }
+}
+
+
+keywords = ("Traveler's Dilemma",)
 
 class Constants:
     name_in_url = 'traveler_dilemma'

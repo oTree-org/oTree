@@ -13,6 +13,19 @@ doc = """
 Page that shows the results of the session.
 """
 
+
+source_code = ""
+
+
+bibliography = ()
+
+
+links = {}
+
+
+keywords = ()
+
+
 class Constants:
     name_in_url = 'lab_results'
     players_per_group = 1
