@@ -7,12 +7,15 @@ from otree import widgets
 from otree.common import Currency as c, currency_range
 import random
 # </standard imports>
+
 from django_countries.fields import CountryField
+
 
 class Constants:
     name_in_url = 'survey'
     players_per_group = 1
     number_of_rounds = 1
+
 
 class Subsession(otree.models.BaseSubsession):
 

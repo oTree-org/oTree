@@ -9,10 +9,27 @@ import random
 # </standard imports>
 
 doc = """
-<p>In Cournot competition, firms simultaneously decide the units of products to manufacture.
-The unit selling price depends on the total units produced. In this implementation, there are 2 firms competing for 1 period.</p>
-<p>Source code <a href="https://github.com/oTree-org/oTree/tree/master/cournot_competition" target="_blank">here</a>.</p>
+In Cournot competition, firms simultaneously decide the units of products to
+manufacture. The unit selling price depends on the total units produced. In
+this implementation, there are 2 firms competing for 1 period.
 """
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/cournot_competition"
+
+
+bibliography = ()
+
+
+links = {
+    "Wikipedia": {
+        "Cournot Competition":
+            "https://en.wikipedia.org/wiki/Cournot_competition"
+        }
+}
+
+
+keywords = ("Cournot Competition",)
+
 
 class Constants:
     name_in_url = 'cournot_competition'

@@ -13,23 +13,48 @@ from random import randint
 author = 'Dev'
 
 doc = """
-<p>
+
 In this asset market, two players trade shares that give probabilistic dividends. It is based on
-<a href="http://www.tandfonline.com/doi/abs/10.3200/JECE.40.1.027-037">Bostian and Holt (2010).</a><br>
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/asset_market" target="_blank">here</a>.
-</p>
-<h4>Recommended Literature</h4>
-<p>
-Smith, Vernon L., Gerry L. Suchanek, and Arlington W. Williams. "Bubbles, crashes, and endogenous expectations in experimental spot asset markets."Econometrica: Journal of the Econometric Society (1988): 1119-1151.
-Smith, Alec, et al. "Irrational exuberance and neural crash warning signals during endogenous experimental market bubbles." Proceedings of the National Academy of Sciences 111.29 (2014): 10503-10508.
-Palan, Stefan. "A review of bubbles and crashes in experimental asset markets." Journal of Economic Surveys 27.3 (2013): 570-588.
-</p>
-<p>
-Wikipedia: <a href="https://en.wikipedia.org/wiki/Stock_market_bubble">Stock Market Bubbles,</a>
-<a href="https://en.wikipedia.org/wiki/Experimental_economics#Market_games">Market Games</a><br>
-Keywords: Stock Market, Finance, Bubble, Trade,
-</p>
+<a href="http://www.tandfonline.com/doi/abs/10.3200/JECE.40.1.027-037">
+    Bostian and Holt (2010).
+</a>
+
 """
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/asset_market"
+
+
+bibliography = (
+    (
+        'Smith, Vernon L., Gerry L. Suchanek, and Arlington W. Williams. '
+        '"Bubbles, crashes, and endogenous expectations in experimental spot '
+        'asset markets."Econometrica: Journal of the Econometric Society '
+        '(1988): 1119-1151.'
+    ),
+    (
+        'Smith, Alec, et al. "Irrational exuberance and neural crash warning '
+        'signals during endogenous experimental market bubbles." Proceedings '
+        'of the National Academy of Sciences 111.29 (2014): 10503-10508.'
+    ),
+    (
+        'Palan, Stefan. "A review of bubbles and crashes in experimental '
+        'asset markets." Journal of Economic Surveys 27.3 (2013): 570-588.'
+    )
+)
+
+
+links = {
+    "Wikipedia": {
+        "Stock Market Bubbles":
+            "https://en.wikipedia.org/wiki/Stock_market_bubble",
+        "Market Games":
+            "https://en.wikipedia.org/wiki/Experimental_economics#Market_games"
+    }
+}
+
+
+keywords = ("Stock Market", "Finance", "Bubble", "Trade")
+
 
 class Constants:
     name_in_url = 'asset_market'

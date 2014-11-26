@@ -11,16 +11,33 @@ from otree.common import Currency as c, currency_range
 doc = """
 One player decides how to divide a certain amount between himself and the other
 player.
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/dictator"
-target="_blank">here</a>.
 """
-# Kahneman, Daniel, Jack L. Knetsch, and Richard H. Thaler. "Fairness and the
-# assumptions of economics." Journal of business (1986): S285-S300.
-# Hoffman, Elizabeth, Kevin McCabe, and Vernon L. Smith. "Social distance and
-# other-regarding behavior in dictator games." The American Economic
-# Review(1996): 653-660.
-# https://en.wikipedia.org/wiki/Dictator_game
-# Keywords: Dictator Game, Fairness, Homo Economicus
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/dictator"
+
+
+bibliography = (
+    (
+        'Kahneman, Daniel, Jack L. Knetsch, and Richard H. Thaler. "Fairness '
+        'and the assumptions of economics." Journal of business (1986): '
+        'S285-S300.'
+    ),
+    (
+        'Hoffman, Elizabeth, Kevin McCabe, and Vernon L. Smith. "Social '
+        'distance and other-regarding behavior in dictator games." The '
+        'American Economic Review(1996): 653-660.'
+    )
+)
+
+
+links = {
+    "Wikipedia": {
+        "Dictator Game": "https://en.wikipedia.org/wiki/Dictator_game"
+    }
+}
+
+
+keywords = ("Dictator Game", "Fairness", "Homo Economicus")
 
 
 class Constants:

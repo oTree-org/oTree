@@ -9,11 +9,27 @@ import random
 # </standard imports>
 
 doc = """
-This is a one-period public goods game with 3 players. Assignment to groups is random.
-<br />
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/public_goods" target="_blank">here</a>
+This is a one-period public goods game with 3 players. Assignment to groups is
+random.
 
 """
+
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/public_goods"
+
+
+bibliography = ()
+
+
+links = {
+    "Wikipedia": {
+        "Public Goods Game": "https://en.wikipedia.org/wiki/Public_goods_game"
+    }
+}
+
+
+keywords = ("Public Goods",)
+
 
 class Constants:
     name_in_url = 'public_goods'

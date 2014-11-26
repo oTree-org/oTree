@@ -10,41 +10,42 @@ import random
 
 
 doc = """
-5 players guess what 2/3 of the average of their guesses will be; the one with the closest guess wins.
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/beauty" target="_blank">here</a>.
-
-<h3>Recommended Literature</h3>
-<ul>
-    <li>Nagel, Rosemarie. "Unraveling in guessing games: An experimental study."The American Economic Review (1995): 1313-1326.</li>
-    <li>Bosch-Domenech, Antoni, et al. "One, two,(three), infinity,...: Newspaper and lab beauty-contest experiments." American Economic Review (2002): 1687-1701.</li>
-</ul>
-
-<p>
-    <strong>Wikipedia:</strong>
-    <a target="_blank" href="http://en.wikipedia.org/wiki/Keynesian_beauty_contest">Beauty Contest</a>,&nbsp
-    <a target="_blank" href="http://en.wikipedia.org/wiki/Guess_2/3_of_the_average">Guess 2/3 of the Average</a>
-</p>
-
-<p>
-    <strong>Keywords:</strong>
-    <a target="_blank" href="https://duckduckgo.com/?q=Beauty+Contest+game+theory&t=otree"</a>
-        <span class="badge">Beauty Contest</span>
-    </a>,
-    <a target="_blank" href="https://duckduckgo.com/?q=Guessing+game+theory&t=otree"</a>
-        <span class="badge badge-info">Guessing Game</span>
-    </a>
-    <a target="_blank" href="https://duckduckgo.com/?q=paradox+game+theory&t=otree"</a>
-        <span class="badge badge-info">Paradox</span>
-    </a>
-    <a target="_blank" href="https://duckduckgo.com/?q=Common+knowledge+game+theory&t=otree"</a>
-        <span class="badge badge-info">Common Knowledge</span>
-    </a>
-    <a target="_blank" href="https://duckduckgo.com/?q=Rationality+game+theory&t=otree"</a>
-        <span class="badge badge-info">Rationality</span>
-    </a>
-</p>
-
+5 players guess what 2/3 of the average of their guesses will be; the one with
+the closest guess wins.
 """
+
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/beauty"
+
+
+bibliography = (
+    (
+        'Nagel, Rosemarie. "Unraveling in guessing games: An experimental '
+        'study."The American Economic Review (1995): 1313-1326.'
+    ),
+    (
+        'Bosch-Domenech, Antoni, et al. "One, two,(three), infinity,...: '
+        'Newspaper and lab beauty-contest experiments." American Economic '
+        'Review (2002): 1687-1701.'
+    )
+)
+
+
+links = {
+    "Wikipedia": {
+        "Beauty Contest":
+            "http://en.wikipedia.org/wiki/Keynesian_beauty_contest",
+        "Guess 2/3 of the Average":
+            "http://en.wikipedia.org/wiki/Guess_2/3_of_the_average"
+    }
+}
+
+
+keywords = (
+    "Beauty Contest", "Guessing Game", "Paradox",
+    "Common Knowledge", "Rationality"
+)
+
 
 class Constants:
     players_per_group = 5

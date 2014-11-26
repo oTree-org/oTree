@@ -10,15 +10,28 @@ from otree.common import Currency as c, currency_range
 doc = """
 Each player decides if to free ride or to volunteer from which all will
 benefit.
-
-Source code <a
-href="https://github.com/oTree-org/oTree/tree/master/volunteer_dilemma"
-target="_blank">here</a>.
 """
-# Recommended Literature
-# Diekmann, Andreas.
-# "Volunteer's dilemma." Journal of Conflict Resolution(1985):
-# http://en.wikipedia.org/wiki/Volunteer%27s_dilemma
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/volunteer_dilemma"
+
+
+bibliography = (
+    (
+        "Diekmann, A. (1985). Volunteer's dilemma. Journal of Conflict "
+        "Resolution, 605-610."
+    ),
+)
+
+
+links = {
+    "Wikipedia": {
+        "Volunteer's Dilemma":
+            "http://en.wikipedia.org/wiki/Volunteer%27s_dilemma"
+    }
+}
+
+
+keywords = ("Volunteer's Dilemma",)
 
 
 class Constants:

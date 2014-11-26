@@ -9,11 +9,27 @@ import random
 # </standard imports>
 
 doc = """
-In a common value auction game, players simultaneously bid on the item being auctioned.
-Prior to bidding, they are given an estimate of the actual value of the item. This actual value is revealed after the bidding.
-Bids are private. The player with the highest bid wins the auction, but payoff depends on the bid amount and the actual value.
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/common_value_auction" target="_blank">here</a>.
+In a common value auction game, players simultaneously bid on the item being
+auctioned.<br/>
+Prior to bidding, they are given an estimate of the actual value of the item.
+This actual value is revealed after the bidding.<br/>
+Bids are private. The player with the highest bid wins the auction, but
+payoff depends on the bid amount and the actual value.<br/>
 """
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/common_value_auction"
+
+bibliography = ()
+
+links = {
+    "Wikipedia": {
+        "Common Value Auction":
+            "http://en.wikipedia.org/wiki/Common_value_auction"
+    }
+}
+
+keywords = ("Common Value Auction",)
+
 
 class Constants:
     name_in_url = 'common_value_auction'

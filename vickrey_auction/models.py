@@ -10,40 +10,38 @@ import random
 
 
 doc = """
-In this Vickrey auction, 3 players bid for an object with private values. Each player can only submit one
-bid.
-<br/>
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/vickrey_auction" target="_blank">here</a>.
-
-<h3>Recommended Literature</h3>
-<ul>
-    <li>Vickrey, William. "Counterspeculation, auctions, and competitive sealed tenders." The Journal of finance 16.1 (1961): 8-37.</li>
-</ul>
-
-<p>
-    <strong>Wikipedia:</strong>
-    <a target="_blank" href="http://en.wikipedia.org/wiki/Vickrey_auction">Vickrey Auction</a>,&nbsp
-    <a target="_blank" href="http://en.wikipedia.org/wiki/Generalized_second-price_auction">Generalized Second-Price Auction</a>
-    <a target="_blank" href="http://en.wikipedia.org/wiki/Auction">Auction</a>
-</p>
-
-<p>
-    <strong>Keywords:</strong>
-    <a target="_blank" href="https://duckduckgo.com/?q=Auction+game+theory&t=otree"</a>
-        <span class="badge">Auction</span>
-    </a>,
-    <a target="_blank" href="https://duckduckgo.com/?q=Second-Price+Auction+game+theory&t=otree"</a>
-        <span class="badge">Second-Price Auction</span>
-    </a>,
-    <a target="_blank" href="https://duckduckgo.com/?q=Vickrey+Auction+game+theory&t=otree"</a>
-        <span class="badge"> Vickrey Auction</span>
-    </a>,
-    <a target="_blank" href="https://duckduckgo.com/?q=Sealed-Bid+Auction+game+theory&t=otree"</a>
-        <span class="badge">Sealed-Bid Auction</span>
-    </a>
-</p>
+In this Vickrey auction, 3 players bid for an object with private values. Each
+player can only submit one bid.
 
 """
+
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/vickrey_auction"
+
+
+bibliography = (
+    (
+        'Vickrey, William. "Counterspeculation, auctions, and competitive '
+        'sealed tenders." The Journal of finance 16.1 (1961): 8-37'
+    ),
+)
+
+
+links = {
+    "Wikipedia": {
+        "Vickrey Auction": "http://en.wikipedia.org/wiki/Vickrey_auction",
+        "Generalized Second-Price Auction":
+            "http://en.wikipedia.org/wiki/Generalized_second-price_auction",
+        "Auction": "http://en.wikipedia.org/wiki/Auction",
+    }
+}
+
+
+keywords = (
+    "Auction", "Second-Price Auction",
+    "Vickrey Auction", "Sealed-Bid Auction"
+)
+
 
 class Constants:
     name_in_url = 'vickrey_auction'
@@ -134,6 +132,3 @@ class Player(otree.models.BasePlayer):
             )
             if self.payoff < 0:
                 self.payoff = 0
-
-
-

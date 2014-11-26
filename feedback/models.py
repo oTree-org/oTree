@@ -14,6 +14,18 @@ doc = """
 Ask the user for their feedback on how well this game was implemented
 """
 
+source_code = ""
+
+
+bibliography = ()
+
+
+links = {}
+
+
+keywords = ()
+
+
 class Constants:
     name_in_url = 'feedback'
     players_per_group = 1

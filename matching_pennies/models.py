@@ -10,11 +10,29 @@ import random
 
 
 doc = """
-<p>This is the familiar playground game "Matching Pennies". In this implementation, players are randomly grouped in the
-beginning and then continue to play against the same opponent for 3 rounds. Their roles alters between rounds.</p>
-<p>The game is preceded by one understanding question (in a real experiment, you would often have more of these).</p>
-<p>Source code <a href="https://github.com/oTree-org/oTree/tree/master/matching_pennies" target="_blank">here</a>.</p>
+This is the familiar playground game "Matching Pennies". In this
+implementation, players are randomly grouped in the beginning and then continue
+to play against the same opponent for 3 rounds. Their roles alters between
+rounds.<br/>
+The game is preceded by one understanding question (in a real experiment, you
+would often have more of these).
 """
+
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/matching_pennies"
+
+
+bibliography = ()
+
+
+links = {
+    "Wikipedia": {
+        "Matching Pennies": "https://en.wikipedia.org/wiki/Matching_pennies"
+    }
+}
+
+
+keywords = ("Matching Pennies",)
 
 class Constants:
     name_in_url = 'matching_pennies'
