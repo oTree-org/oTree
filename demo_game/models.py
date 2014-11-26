@@ -10,12 +10,22 @@ import random
 
 
 doc = """
-<p>
 A simple 1-player game demonstrating some of oTree’s basic capabilities,
 as well as its interaction with some plugins.
-</p>
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/demo_game" target="_blank">here</a>.
 """
+
+source_code = "https://github.com/oTree-org/oTree/tree/master/demo_game"
+
+
+bibliography = ()
+
+
+links = {}
+
+
+keywords = ()
+
+
 
 class Constants:
     players_per_group = 1

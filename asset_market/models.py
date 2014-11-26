@@ -53,7 +53,7 @@ links = {
 }
 
 
-keywords = ("sStock Market", "Finance", "Bubble", "Trade")
+keywords = ("Stock Market", "Finance", "Bubble", "Trade")
 
 
 class Constants:

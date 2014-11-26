@@ -1,20 +1,23 @@
 # -*- coding: utf-8 -*-
 # <standard imports>
 from __future__ import division
+
+import random
+
 from otree.db import models
 import otree.models
 from otree import widgets
 from otree.common import Currency as c, currency_range
-import random
 # </standard imports>
 
 doc = """
-This bargaining game involves 2 players. Each demands for a portion of some available amount. 
-If the sum of demands is no larger than the available amount, both players get demanded portions. 
-Otherwise, both get nothing.
-<br />
-Source code <a href="https://github.com/oTree-org/oTree/tree/master/bargaining" target="_blank">here</a>.
+This bargaining game involves 2 players. Each demands for a portion of some
+available amount. If the sum of demands is no larger than the available
+amount, both players get demanded portions. Otherwise, both get nothing.
 """
+
+source_code ="https://github.com/oTree-org/oTree/tree/master/bargaining"
+
 
 class Constants:
     name_in_url = 'bargaining'
