@@ -48,6 +48,7 @@ class Accept(Page):
 
 
 
+
 class AcceptStrategy(Page):
 
     template_name = 'ultimatum/AcceptStrategy.html'
