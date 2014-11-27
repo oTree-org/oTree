@@ -27,19 +27,14 @@ COMMANDS = {}
 def resetdb(args):
     setup_db = './otree migrate --traceback'
 
-    # heroku
-    if args.environment == 'production':
-        confirmed = raw_input('Enter "y" if you are sure you want to reset the production database.').lower() == 'y'
-        if not confirmed:
-            print 'exit.'
-            return
+    environment = args.environment[0]
 
-    reset_db = 'heroku pg:reset DATABASE --confirm {}'.format(args.environment)
+    reset_db = 'heroku pg:reset DATABASE --confirm {}'.format(environment)
     os.system(reset_db)
 
     heroku_run_command = 'heroku run {} --remote {}'
 
-    heroku_setup_db = heroku_run_command.format(setup_db, args.environment)
+    heroku_setup_db = heroku_run_command.format(setup_db, environment)
     os.system(heroku_setup_db)
 
 resetdb.parser = argparse.ArgumentParser(description='resetdb')
