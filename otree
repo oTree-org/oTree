@@ -12,6 +12,7 @@ next to this ``./otree`` script to support more tools.
 
 import os
 import platform
+import subprocess
 import sys
 
 
@@ -38,6 +39,12 @@ if __name__ == "__main__":
                     url="https://raw.githubusercontent.com/oTree-org/oTree/master/manage.py",
                     directory=scriptdir))
             sys.exit(1)
-        sys.argv[0] = 'manage.py'
+        args = [sys.executable] + [managepy] + sys.argv[1:]
+        process = subprocess.Popen(args,
+                                   stdin=sys.stdin,
+                                   stdout=sys.stdout,
+                                   stderr=sys.stderr)
+        return_code = process.wait()
+        sys.exit(return_code)
 
     execute_from_command_line(sys.argv)
