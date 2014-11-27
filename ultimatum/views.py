@@ -46,6 +46,11 @@ class Accept(Page):
     def participate_condition(self):
         return self.player.id_in_group == 2 and not self.group.strategy
 
+    def variables_for_template(self):
+
+        return {
+            'amount_offered': self.group.amount_offered,
+        }
 
 
 

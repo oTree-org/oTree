@@ -1,0 +1,120 @@
+#!/usr/bin/env python
+"""
+This script shall help in deploying otree to a heroku instance.
+Type './otree-heroku help' to get a list of all available commands.
+"""
+
+import argparse
+import os
+import sys
+import textwrap
+
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
+
+
+parser = argparse.ArgumentParser()
+
+
+COMMANDS = {}
+
+
+###########################################################################
+#                                resetdb                                  #
+###########################################################################
+
+
+def resetdb(args):
+    setup_db = './otree migrate --traceback'
+
+    # heroku
+    if args.environment == 'production':
+        confirmed = raw_input('Enter "y" if you are sure you want to reset the production database.').lower() == 'y'
+        if not confirmed:
+            print 'exit.'
+            return
+
+    reset_db = 'heroku pg:reset DATABASE --confirm {}'.format(args.environment)
+    os.system(reset_db)
+
+    heroku_run_command = 'heroku run {} --remote {}'
+
+    heroku_setup_db = heroku_run_command.format(setup_db, args.environment)
+    os.system(heroku_setup_db)
+
+resetdb.parser = argparse.ArgumentParser(description='resetdb')
+resetdb.parser.add_argument('resetdb', nargs=1)
+resetdb.parser.add_argument(
+    'environment', nargs=1,
+    help="""
+        Will push to the named Heroku instance.
+        The Heroku app and the git remote must have the same name.
+        e.g., "myherokuapp.herokuapp.com" and "git push myherokuapp master"
+    """)
+
+COMMANDS['resetdb'] = resetdb
+
+
+###########################################################################
+#                                  help                                   #
+###########################################################################
+
+
+def show_help(args):
+    if args.subcommand in COMMANDS:
+        # If there was a argument given after 'help', then show the help
+        # message for this command.
+        if args.subcommand in COMMANDS:
+            command = COMMANDS[args.subcommand]
+            print(command.parser.format_help())
+            return
+
+    MESSAGE = """\
+        Usage: {script_name} subcommand [options] [args]
+
+        Call this script with a command name as first argument to execute this
+        command. The deployment commands assist you in deploying your oTree
+        instance to heroku.
+
+        Type '{script_name} help <subcommand>' for help on a specific subcommand.
+
+        Available subcommands:
+
+        {deployment_commands}
+    """
+    MESSAGE = textwrap.dedent(MESSAGE)
+
+    deployment_commands = sorted(COMMANDS.keys())
+    deployment_commands = [(' ' * 4) + command for command in deployment_commands]
+    deployment_commands = '\n'.join(deployment_commands)
+
+    print(MESSAGE.format(
+        deployment_commands=deployment_commands,
+        script_name=os.path.basename(sys.argv[0])))
+
+
+show_help.parser = argparse.ArgumentParser(description='help')
+show_help.parser.add_argument('help', nargs=1)
+show_help.parser.add_argument('subcommand', nargs='?')
+
+COMMANDS['help'] = show_help
+
+
+###########################################################################
+#                                  main                                   #
+###########################################################################
+
+
+parser.add_argument('subcommand', nargs=1, choices=COMMANDS.keys())
+
+
+def main(arguments):
+    args, unknown_args = parser.parse_known_args(arguments)
+    command_name = args.subcommand[0]
+    command = COMMANDS[command_name]
+    command_args = command.parser.parse_args(arguments)
+    command(command_args)
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
