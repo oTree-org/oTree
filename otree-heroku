@@ -25,8 +25,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('subcommand', nargs=1)
-
 
 COMMANDS = {}
 
@@ -73,7 +71,7 @@ COMMANDS['resetdb'] = resetdb
 
 
 def show_help(args):
-    if args.subcommand:
+    if args.subcommand in COMMANDS:
         # If there was a argument given after 'help', then show the help
         # message for this command.
         if args.subcommand in COMMANDS:
@@ -81,39 +79,18 @@ def show_help(args):
             print(command.parser.format_help())
             return
 
-        # If the command is not part of the otree script, then it might be a
-        # django command. So display the help for the django command.
-        else:
-            django_command([sys.argv[0], 'help', args.subcommand])
-            return
-
     MESSAGE = """\
         Usage: {script_name} subcommand [options] [args]
 
         Call this script with a command name as first argument to execute this
-        command. There are two main command types available:
-
-
-        ========== DEPLOYMENT COMMANDS ==========
-
-        The deployment commands assist you in deploying your oTree instance to
-        heroku.
-
-
-        {script_help}
+        command. The deployment commands assist you in deploying your oTree
+        instance to heroku.
 
         Type '{script_name} help <subcommand>' for help on a specific subcommand.
 
         Available subcommands:
 
         {deployment_commands}
-
-
-        ========== PROJECT COMMANDS ==========
-
-        Project commands are executed on your local oTree installation and
-        provide you with development helpers.
-
     """
     MESSAGE = textwrap.dedent(MESSAGE)
 
@@ -123,10 +100,7 @@ def show_help(args):
 
     print(MESSAGE.format(
         deployment_commands=deployment_commands,
-        script_name=os.path.basename(sys.argv[0]),
-        script_help=parser.format_help()))
-
-    django_command([sys.argv[0], 'help'])
+        script_name=os.path.basename(sys.argv[0])))
 
 
 show_help.parser = argparse.ArgumentParser(description='help')
@@ -137,34 +111,19 @@ COMMANDS['help'] = show_help
 
 
 ###########################################################################
-#                             django commands                             #
-###########################################################################
-
-
-def django_command(argv):
-    from django.core.management import execute_from_command_line
-    execute_from_command_line(argv)
-
-
-###########################################################################
 #                                  main                                   #
 ###########################################################################
 
 
+parser.add_argument('subcommand', nargs=1, choices=COMMANDS.keys())
+
+
 def main(arguments):
     args, unknown_args = parser.parse_known_args(arguments)
-    if args.subcommand:
-        command_name = args.subcommand[0]
-        # First try to find the command name in the custom made commands.
-        if command_name in COMMANDS:
-            command = COMMANDS[command_name]
-            command_args = command.parser.parse_args(arguments)
-            command(command_args)
-            return
-        # If there is no custom command, then run everything as if this
-        # was the project's manage.py script.
-        else:
-            django_command(sys.argv)
+    command_name = args.subcommand[0]
+    command = COMMANDS[command_name]
+    command_args = command.parser.parse_args(arguments)
+    command(command_args)
 
 
 if __name__ == "__main__":
