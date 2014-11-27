@@ -68,30 +68,6 @@ COMMANDS['resetdb'] = resetdb
 
 
 ###########################################################################
-#                             commit and push                             #
-###########################################################################
-
-
-def _commit_and_push(environment):
-    os.system('git commit -am "."')
-    os.system('git push {} master'.format(environment))
-
-
-def commit_and_push(args):
-    _commit_and_push(args.environment[0])
-
-commit_and_push.parser = argparse.ArgumentParser(description='commit_and_push')
-commit_and_push.parser.add_argument('commit_and_push', nargs=1)
-commit_and_push.parser.add_argument(
-    'environment', nargs=1,
-    help="""
-        Give the remote name to which you want to push the changes.
-    """)
-
-COMMANDS['commit_and_push'] = commit_and_push
-
-
-###########################################################################
 #                                  help                                   #
 ###########################################################################
 
