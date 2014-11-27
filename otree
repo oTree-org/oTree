@@ -26,7 +26,8 @@ if __name__ == "__main__":
     # on '.py'. That's why we require a manage.py file to be around.
     # See https://github.com/celery/billiard/issues/129 for more details.
     if platform.system() == 'Windows':
-        scriptdir = os.path.relpath(os.path.dirname(__file__))
+
+        scriptdir = os.path.dirname(os.path.abspath(__file__))
         managepy = os.path.join(scriptdir, 'manage.py')
         if not os.path.exists(managepy):
             sys.stderr.write(
