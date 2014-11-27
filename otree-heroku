@@ -1,20 +1,10 @@
 #!/usr/bin/env python
 """
-This script can call django management commands and self defined commands
-(see COMMANDS).
-
-Type './otree help' to get a list of all available commands.
-The help message you will see then is splitted into the two sections:
-
-deployment commands:
-    These commands are the custom commands defined in the COMMANDS dictionary.
-
-project commands:
-    Those are the django management command, like runserver, migrate, etc.
+This script shall help in deploying otree to a heroku instance.
+Type './otree-heroku help' to get a list of all available commands.
 """
 
 import argparse
-import importlib
 import os
 import sys
 import textwrap
