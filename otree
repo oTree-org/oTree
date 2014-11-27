@@ -24,6 +24,7 @@ if __name__ == "__main__":
     # Workaround for windows. Celery (more precicely the billard library) will
     # complain if the script you are using to initialize celery does not end
     # on '.py'. That's why we require a manage.py file to be around.
+    # See https://github.com/celery/billiard/issues/129 for more details.
     if platform.system() == 'Windows':
         scriptdir = os.path.relpath(os.path.dirname(__file__))
         managepy = os.path.join(scriptdir, 'manage.py')
