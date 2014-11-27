@@ -32,59 +32,39 @@ COMMANDS = {}
 
 
 ###########################################################################
-#                                recreate                                 #
+#                                resetdb                                  #
 ###########################################################################
 
 
-def recreate(args):
-    syncdb = './otree syncdb --traceback'
+def resetdb(args):
+    setup_db = './otree migrate --traceback'
 
-    if args.environment == 'local':
-        settings_module = os.environ.get('DJANGO_SETTINGS_MODULE', 'settings')
-        try:
-            settings = importlib.import_module(settings_module)
-            db_file_name = settings.DATABASES['default']['NAME']
-        except (ImportError, AttributeError, KeyError):
-            db_file_name = None
+    # heroku
+    if args.environment == 'production':
+        confirmed = raw_input('Enter "y" if you are sure you want to reset the production database.').lower() == 'y'
+        if not confirmed:
+            print 'exit.'
+            return
 
-        if not db_file_name:
-            db_file_name = 'db.sqlite3'
+    reset_db = 'heroku pg:reset DATABASE --confirm {}'.format(args.environment)
+    os.system(reset_db)
 
-        if os.path.exists(db_file_name):
-            os.unlink(db_file_name)
+    heroku_run_command = 'heroku run {} --remote {}'
 
-        django_command([sys.argv[0], 'syncdb', '--traceback'])
-        # then launch from PyCharm
-    else:
-        # heroku
-        if args.environment == 'production':
-            confirmed = raw_input('Enter "y" if you are sure you want to reset the production database.').lower() == 'y'
-            if not confirmed:
-                print 'exit.'
-                return
+    heroku_setup_db = heroku_run_command.format(setup_db, args.environment)
+    os.system(heroku_setup_db)
 
-        reset_db = 'heroku pg:reset DATABASE --confirm {}'.format(args.environment)
-        os.system(reset_db)
-
-        _commit_and_push(args.environment)
-
-        heroku_run_command = 'heroku run {} --remote {}'
-
-        syncdb = heroku_run_command.format(syncdb, args.environment)
-        os.system(syncdb)
-
-recreate.parser = argparse.ArgumentParser(description='recreate')
-recreate.parser.add_argument('recreate', nargs=1)
-recreate.parser.add_argument(
-    'environment', nargs='?', default='local',
+resetdb.parser = argparse.ArgumentParser(description='resetdb')
+resetdb.parser.add_argument('resetdb', nargs=1)
+resetdb.parser.add_argument(
+    'environment', nargs=1,
     help="""
-        If omitted, will set up your local project.
-        If specified, will push to the named Heroku instance.
-        The the Heroku app and the git remote must have the same name.
+        Will push to the named Heroku instance.
+        The Heroku app and the git remote must have the same name.
         e.g., "myherokuapp.herokuapp.com" and "git push myherokuapp master"
     """)
 
-COMMANDS['recreate'] = recreate
+COMMANDS['resetdb'] = resetdb
 
 
 ###########################################################################
