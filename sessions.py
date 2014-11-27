@@ -93,6 +93,7 @@ def session_types():
             name='beauty',
             display_name="Beauty Contest",
             num_demo_participants=5,
+            num_bots=5,
             subsession_apps=['beauty', 'survey_sample', 'lab_results'],
         ),
         SessionType(
