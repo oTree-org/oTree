@@ -16,9 +16,6 @@ class Introduction(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
-        return {'payoff': self.player.payoff}
-
 
 class Question1(Page):
     template_name = 'global/Question.html'

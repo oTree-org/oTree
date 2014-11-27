@@ -100,5 +100,4 @@ SESSIONS_MODULE = 'sessions'
 
 ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
 
-
 otree.settings.augment_settings(globals())
