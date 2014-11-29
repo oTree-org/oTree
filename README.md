@@ -19,7 +19,7 @@ This repository contains the games; the oTree core libraries are [here](https://
 After forking & cloning the repo:
 
     pip install -r requirements_base.txt
-    ./otree recreate
+    ./otree resetdb
     ./otree runserver
 
 ## Documentation
