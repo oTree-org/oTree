@@ -21,7 +21,7 @@ else:
     # don't share this with anybody.
     # Change this to something unique (e.g. mash your keyboard),
     # and then delete this comment.
-    SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
+    SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzz'
 
 
 DATABASES = {
