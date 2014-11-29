@@ -33,6 +33,7 @@ DATABASES = {
 
 CREATE_DEFAULT_SUPERUSER = True
 ADMIN_USERNAME = 'admin'
+ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
@@ -95,10 +96,9 @@ SEO = ()
 WSGI_APPLICATION = 'wsgi.application'
 
 
-SESSIONS_MODULE = 'sessions'
 
 TEMPLATE_STRING_IF_INVALID = '???'
 
-ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
+
 
 otree.settings.augment_settings(globals())
