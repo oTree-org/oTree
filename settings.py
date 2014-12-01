@@ -97,8 +97,6 @@ WSGI_APPLICATION = 'wsgi.application'
 
 SESSIONS_MODULE = 'sessions'
 
-TEMPLATE_STRING_IF_INVALID = '???'
-
 ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
 
 otree.settings.augment_settings(globals())
