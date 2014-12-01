@@ -30,12 +30,6 @@ class Bot(otree.test.Bot):
         self.player = models.Player()
 
 
-class InitializePlayer(otree.views.InitializePlayer):
-    z_models = models
-
-
-class InitializeExperimenter(otree.views.InitializeExperimenter):
-    z_models = models
 
 class BaseGroup(otree.models.BaseGroup):
 
