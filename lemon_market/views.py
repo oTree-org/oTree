@@ -83,7 +83,7 @@ class ResultsWaitPage(WaitPage):
         self.group.set_payoff()
         if self.subsession.round_number == Constants.number_of_rounds:
             session = choice(
-                self.subsession.previous_rounds() + [self.subsession])
+                self.subsession.in_previous_rounds() + [self.subsession])
             session.final = True
             session.save()
 
@@ -110,7 +110,7 @@ class FinalResults(Page):
         return self.subsession.round_number == Constants.number_of_rounds
 
     def variables_for_template(self):
-        for player in self.player.me_in_all_rounds():
+        for player in self.player.in_all_rounds():
             if player.subsession.final:
                 break
         return {'player': player, 'payoff': player.payoff + 10,

@@ -48,8 +48,8 @@ class Player(otree.models.BasePlayer):
         return range(13, 125)
 
     q_country = CountryField(verbose_name='What is your country of citizenship?')
-    q_age = models.PositiveIntegerField(verbose_name='What is your age?', default=None)
-    q_gender = models.CharField(default=None, verbose_name='What is your gender?', widget=widgets.RadioSelect())
+    q_age = models.PositiveIntegerField(verbose_name='What is your age?', initial=None)
+    q_gender = models.CharField(initial=None, verbose_name='What is your gender?', widget=widgets.RadioSelect())
 
     crt_bat_float = models.DecimalField(max_digits=6, decimal_places=2)
     crt_bat = models.PositiveIntegerField()

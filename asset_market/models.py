@@ -82,17 +82,17 @@ class Group(otree.models.BaseGroup):
 
     # transaction fields
     transaction_price = models.CurrencyField(doc="""Given by 0.5*(BP+SP)""")
-    shares_traded = models.PositiveIntegerField(default=0)
+    shares_traded = models.PositiveIntegerField(initial=0)
 
     # dividend fields
     dividend_per_share = models.CurrencyField()
-    is_dividend = models.BooleanField(default=False, doc="""Indicates whether dividend is issued""")
+    is_dividend = models.BooleanField(initial=False, doc="""Indicates whether dividend is issued""")
 
     # method to set cash and shares to balance in previous round
     def set_assets_to_previous(self):
         for p in self.get_players():
-            p.cash = p.me_in_previous_rounds()[-1].cash
-            p.shares = p.me_in_previous_rounds()[-1].shares
+            p.cash = p.in_previous_rounds()[-1].cash
+            p.shares = p.in_previous_rounds()[-1].shares
 
     def trade(self):
         buyers = [p for p in self.get_players() if p.order_type == 'Buy']
@@ -138,7 +138,7 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     # initial shares and payoff
-    shares = models.PositiveIntegerField(default=5)
+    shares = models.PositiveIntegerField(initial=5)
 
     cash = models.CurrencyField()
 
@@ -146,10 +146,10 @@ class Player(otree.models.BasePlayer):
 
 
     # order fields
-    bp = models.CurrencyField(default=0.00, doc="""maximum buying price per share""")
-    bn = models.PositiveIntegerField(default=0, doc="""number of shares willing to buy""")
-    sp = models.CurrencyField(default=0.00, doc="""minimum selling price per share""")
-    sn = models.PositiveIntegerField(default=0, doc="""number of shares willing to sell.""")
+    bp = models.CurrencyField(initial=0.00, doc="""maximum buying price per share""")
+    bn = models.PositiveIntegerField(initial=0, doc="""number of shares willing to buy""")
+    sp = models.CurrencyField(initial=0.00, doc="""minimum selling price per share""")
+    sn = models.PositiveIntegerField(initial=0, doc="""number of shares willing to sell.""")
 
     order_type = models.CharField(doc="""player: buy or sell?""", widget=widgets.RadioSelectHorizontal)
 
@@ -192,5 +192,4 @@ class Player(otree.models.BasePlayer):
             self.payoff = self.cash
         else:
             self.payoff = 0
-        print 'payoff: {} (participant: {})'.format(self.payoff, self.participant.code)
 

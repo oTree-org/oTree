@@ -61,7 +61,7 @@ class Group(otree.models.BaseGroup):
         winner.is_winner = True
 
     item_value = models.CurrencyField(
-        default=lambda: round(random.uniform(Constants.min_allowable_bid, Constants.max_allowable_bid), 1),
+        initial=lambda: round(random.uniform(Constants.min_allowable_bid, Constants.max_allowable_bid), 1),
         doc="""Common value of the item to be auctioned, random for treatment"""
     )
 
@@ -99,7 +99,7 @@ class Player(otree.models.BasePlayer):
         return [Constants.min_allowable_bid, Constants.max_allowable_bid]
 
     is_winner = models.BooleanField(
-        default=False,
+        initial=False,
         doc="""Indicates whether the player is the winner"""
     )
 

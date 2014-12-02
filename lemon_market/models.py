@@ -49,7 +49,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    final = models.BooleanField(default=False)
+    final = models.BooleanField(initial=False)
 
 
 class Group(otree.models.BaseGroup):

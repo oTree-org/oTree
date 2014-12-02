@@ -29,7 +29,7 @@ $(function () {
         {
             name: 'Transaction Price',
             data: [
-            {% for round in player.me_in_all_rounds %}
+            {% for round in player.in_all_rounds %}
             {% if forloop.counter0 %},{% endif %}
             {{round.group.seller.price|default:'null'}}
             {% endfor %}
@@ -39,7 +39,7 @@ $(function () {
         ,{
             name: 'Earnings for {{player.role|capfirst}}',
             data: [
-            {% for round in player.me_in_all_rounds %}
+            {% for round in player.in_all_rounds %}
             {% if forloop.counter0 %}
             ,
                 {% endif %}

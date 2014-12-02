@@ -84,7 +84,7 @@ class Player(otree.models.BasePlayer):
     )
 
     is_a_winner = models.BooleanField(
-        default=False,
+        initial=False,
         doc="""Whether this player offered lowest price"""
     )
 
