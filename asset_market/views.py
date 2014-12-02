@@ -184,7 +184,7 @@ class Results(Page):
         dividend_per_share_list = []
         shares_traded_list = []
 
-        for p in self.player.me_in_all_rounds():
+        for p in self.player.in_all_rounds():
             transaction_price_list.append(int(p.group.transaction_price or 0))
             dividend_per_share_list.append(int(p.group.dividend_per_share))
             shares_traded_list.append(p.group.shares_traded)

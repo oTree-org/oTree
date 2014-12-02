@@ -91,8 +91,8 @@ class Group(otree.models.BaseGroup):
     # method to set cash and shares to balance in previous round
     def set_assets_to_previous(self):
         for p in self.get_players():
-            p.cash = p.me_in_previous_rounds()[-1].cash
-            p.shares = p.me_in_previous_rounds()[-1].shares
+            p.cash = p.in_previous_rounds()[-1].cash
+            p.shares = p.in_previous_rounds()[-1].shares
 
     def trade(self):
         buyers = [p for p in self.get_players() if p.order_type == 'Buy']

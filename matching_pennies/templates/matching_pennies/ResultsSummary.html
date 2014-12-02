@@ -18,7 +18,7 @@
             <th>Player and outcome</th>
             <th>Points</th>
         </tr>
-        {% for p in me_in_all_rounds %}
+        {% for p in player_in_all_rounds %}
             <tr>
                 <td>{{ p.subsession.round_number }}</td>
                 <td>You were {{ p.role }} and {% if p.is_winner %} won {% else %} lost {% endif %}</td>
