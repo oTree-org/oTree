@@ -42,7 +42,6 @@ def session_types():
             display_name="Cournot Competition",
             num_demo_participants=2,
             subsession_apps=[
-                'feedback', # debug purposes only; remove this
                 'cournot_competition', 'survey_sample', 'lab_results'
             ],
         ),

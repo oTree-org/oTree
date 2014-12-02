@@ -192,5 +192,4 @@ class Player(otree.models.BasePlayer):
             self.payoff = self.cash
         else:
             self.payoff = 0
-        print 'payoff: {} (participant: {})'.format(self.payoff, self.participant.code)
 
