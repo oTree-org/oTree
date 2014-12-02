@@ -77,7 +77,7 @@ class Group(otree.models.BaseGroup):
 
     two_third_guesses = models.FloatField()
     best_guess = models.FloatField()
-    tie = models.BooleanField(default=False)
+    tie = models.BooleanField(initial=False)
 
     def set_payoffs(self):
         players = self.get_players()
@@ -123,14 +123,14 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     is_winner = models.BooleanField(
-        default=False,
+        initial=False,
         doc="""
         True if player had the winning guess
         """
     )
 
     guess_value = models.PositiveIntegerField(
-        default=None,
+        initial=None,
         doc="""
         Each player guess: between 0-{}
         """.format(Constants.guess_max)

@@ -103,7 +103,7 @@ class Player(otree.models.BasePlayer):
     )
 
     is_winner = models.BooleanField(
-        default=False,
+        initial=False,
         doc="""Indicates whether the player is the winner"""
     )
 

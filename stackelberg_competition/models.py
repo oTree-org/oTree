@@ -74,7 +74,7 @@ class Player(otree.models.BasePlayer):
         return self.training_question_1 == Constants.training_1_correct
 
     quantity = models.PositiveIntegerField(
-        default=None,
+        initial=None,
         doc="""Quantity of units to produce"""
     )
 
