@@ -7,7 +7,7 @@ from .models import Constants
 
 
 def variables_for_all_templates(self):
-    return dict(total_q=1, instructions='traveler_dilemma/Instructions.html')
+    return {'total_q': 1, 'instructions': 'traveler_dilemma/Instructions.html'}
 
 
 class Introduction(Page):
@@ -24,14 +24,14 @@ class Introduction(Page):
 class Question1(Page):
     template_name = 'global/Question.html'
     form_model = models.Player
-    form_fields = 'training_answer_mine', 'training_answer_others'
+    form_fields = ['training_answer_mine', 'training_answer_others']
     question = '''Suppose that you claim the antiques are worth 50 points and the other traveler claims they are worth 100 points. What would you and the other traveler receive in compensation from the airline?'''
 
     def participate_condition(self):
         return self.subsession.round_number == 1
 
     def variables_for_template(self):
-        return dict(num_q=1, question=self.question)
+        return {'num_q': 1, 'question': self.question}
 
 
 class Feedback1(Page):
@@ -41,9 +41,9 @@ class Feedback1(Page):
         return self.subsession.round_number == 1
 
     def variables_for_template(self):
-        return dict(
-            num_q=1, mine=self.player.training_answer_mine,
-            others=self.player.training_answer_others)
+        return {
+            'num_q': 1, 'mine': self.player.training_answer_mine,
+            'others': self.player.training_answer_others}
 
 
 class Claim(Page):
@@ -75,8 +75,8 @@ class Results(Page):
             reward = -Constants.penalty
         else:
             reward = 0
-        return dict(
-            table=[
+        return {
+            'table': [
                 ('', 'Points'),
                 ('You claimed', self.player.claim),
                 ('The other traveler claimed',
@@ -89,7 +89,7 @@ class Results(Page):
                 ('In addition you get a participation fee of',
                  Constants.bonus),
                 ('So in sum you will get', int(self.player.payoff)),
-                ])
+                ]}
 
 
 def pages():

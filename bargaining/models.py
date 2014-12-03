@@ -64,8 +64,7 @@ class Player(otree.models.BasePlayer):
     request_amount = models.CurrencyField(
         doc="""
         Amount requested by this player.
-        """,
-        verbose_name='Please enter a number from 0 to 100'
+        """
     )
     training_amount_mine = models.CurrencyField(
         verbose_name='You would get')

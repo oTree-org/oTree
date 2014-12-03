@@ -9,7 +9,7 @@ from .models import Constants
 
 
 def variables_for_all_templates(self):
-    return dict(instructions='trust/Instructions.html', total_q=1)
+    return {'instructions': 'trust/Instructions.html', 'total_q': 1}
 
 
 class Introduction(Page):
@@ -35,7 +35,7 @@ class Question1(Page):
         return self.subsession.round_number == 1
 
     def variables_for_template(self):
-        return dict(num_q=1, question=self.question)
+        return {'num_q': 1, 'question': self.question}
 
 
 class Feedback1(Page):
@@ -45,9 +45,11 @@ class Feedback1(Page):
         return self.subsession.round_number == 1
 
     def variables_for_template(self):
-        return dict(
-            num_q=1, x=self.player.training_answer_x,
-            y=self.player.training_answer_y)
+        return {
+            'num_q': 1, 'x': self.player.training_answer_x,
+            'y': self.player.training_answer_y
+        }
+
 
 
 class Send(Page):

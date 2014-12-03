@@ -14,9 +14,9 @@ class PlayerBot(Bot):
 
     def play(self):
         self.submit(views.Introduction)
-        self.submit(views.Question1, dict(training_my_payoff=60))
+        self.submit(views.Question1, {'training_my_payoff': c(60)})
         self.submit(views.Feedback1)
-        self.submit(views.Decision, dict(volunteer=True))
+        self.submit(views.Decision, {'volunteer': True})
         self.submit(views.Results)
 
     def validate_play(self):

@@ -82,10 +82,9 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.set_payoff()
         if self.subsession.round_number == Constants.number_of_rounds:
-            session = choice(
-                self.subsession.in_previous_rounds() + [self.subsession])
-            session.final = True
-            session.save()
+            final_subsession = choice(self.subsession.in_all_rounds())
+            final_subsession.final = True
+            final_subsession.save()
 
 
 class Results(Page):

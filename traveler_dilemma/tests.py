@@ -16,8 +16,8 @@ class PlayerBot(Bot):
 
         # start game
         self.submit(views.Introduction)
-        self.submit(views.Question1, dict(
-            training_answer_mine=1, training_answer_others=2))
+        self.submit(views.Question1, {
+            'training_answer_mine': 1, 'training_answer_others':2})
         self.submit(views.Feedback1)
 
         claim = random.randrange(Constants.min_amount, Constants.max_amount)
