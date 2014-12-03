@@ -48,7 +48,7 @@ class Feedback1(Page):
 class Production(Page):
     template_name = 'global/Question.html'
     form_model = models.Player
-    form_fields = ('quality', 'price')
+    form_fields = ['quality', 'price']
 
     def participate_condition(self):
         return self.player.role().startswith('seller')

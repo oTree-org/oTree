@@ -88,7 +88,7 @@ class Results(Page):
                  int(self.player.payoff - Constants.bonus)),
                 ('In addition you get a participation fee of',
                  Constants.bonus),
-                ('So in sum you will get', int(self.player.payoff)),
+                ('So in sum you will get', self.player.payoff),
                 ]}
 
 
