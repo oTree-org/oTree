@@ -47,7 +47,7 @@ class Summary(Page):
     template_name = 'real_effort/Summary.html'
 
     def variables_for_template(self):
-
+        self.player.set_payoff()
         return {
                 'distance_1' : self.player.distance_1,
                 'transcription_entered_1' : len(self.player.transcription_1),

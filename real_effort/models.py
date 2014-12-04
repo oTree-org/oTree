@@ -110,5 +110,4 @@ class Player(otree.models.BasePlayer):
             self.distance_2 = levenshtein(Constants.reference_texts[1], text_user)
 
     def set_payoff(self):
-
         self.payoff = 0
