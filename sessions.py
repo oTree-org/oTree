@@ -163,9 +163,14 @@ def session_types():
             num_demo_participants=3,
             subsession_apps=['lemon_market', 'feedback', 'lab_results'],
         ),
-
-
-
+        SessionType(
+            name='real_effort',
+            display_name="Real-effort transcription task",
+            num_demo_participants=1,
+            subsession_apps=[
+                'real_effort',
+            ],
+        ),
     ]
 
 
