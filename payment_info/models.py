@@ -10,7 +10,8 @@ import random
 
 
 doc = """
-Page that shows the results of the session.
+This application provides a webpage instructing participants how to get paid.
+Examples are given for the lab and Amazon Mechanical Turk (AMT).
 """
 
 
@@ -27,7 +28,7 @@ keywords = ()
 
 
 class Constants:
-    name_in_url = 'lab_results'
+    name_in_url = 'payment_info'
     players_per_group = 1
     number_of_rounds = 1
 

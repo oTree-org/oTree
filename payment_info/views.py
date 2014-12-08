@@ -6,7 +6,7 @@ from otree.common import Currency as c, currency_range
 from .models import Constants
 class RedemptionCode(Page):
 
-    template_name = 'lab_results/LabResults.html'
+    template_name = 'payment_info/PaymentInfo.html'
 
     def variables_for_template(self):
         participant = self.player.participant

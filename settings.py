@@ -56,7 +56,7 @@ INSTALLED_APPS = [
 INSTALLED_OTREE_APPS = [
     'demo_game',
     'trust',
-    'lab_results',
+    'payment_info',
     'public_goods',
     'prisoner',
     'cournot_competition',
