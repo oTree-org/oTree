@@ -91,6 +91,7 @@ class Player(otree.models.BasePlayer):
         verbose_name="Seller 2's period payoff would be")
     # seller
     price = models.CurrencyField(
+        bounds=[0, Constants.INITIAL],
         verbose_name='Please indicate a price (from 0 to %i) you want to sell'
         % Constants.INITIAL)
     quality = models.CurrencyField(choices=[
@@ -103,10 +104,6 @@ class Player(otree.models.BasePlayer):
     choice = models.CurrencyField(
         blank=True, widget=widgets.RadioSelect(),
         verbose_name='And you will')  # seller index
-
-    def price_bounds(self):
-        return [0, Constants.INITIAL]
-
 
     def choice_choices(self):
         return [(i, 'Buy from seller %i' % i) for i in range(

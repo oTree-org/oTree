@@ -55,6 +55,7 @@ class Group(otree.models.BaseGroup):
     # </built-in>
 
     sent_amount = models.CurrencyField(
+        bounds=[0, Constants.amount_allocated],
         doc="""Amount sent by P1""",
     )
 
@@ -67,9 +68,6 @@ class Group(otree.models.BaseGroup):
         p2 = self.get_player_by_id(2)
         p1.payoff = Constants.bonus + Constants.amount_allocated - self.sent_amount + self.sent_back_amount
         p2.payoff = Constants.bonus + self.sent_amount * Constants.multiplication_factor - self.sent_back_amount
-
-    def sent_amount_bounds(self):
-        return [0, Constants.amount_allocated]
 
     def sent_back_amount_bounds(self):
         return [0, self.sent_amount * Constants.multiplication_factor]

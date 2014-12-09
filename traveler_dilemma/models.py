@@ -82,14 +82,12 @@ class Player(otree.models.BasePlayer):
 
     # claim by player
     claim = models.CurrencyField(
+        bounds=[Constants.min_amount, Constants.max_amount],
         doc="""
         Each player's claim
         """,
         verbose_name='Please enter a number from 2 to 100'
     )
-
-    def claim_bounds(self):
-        return [Constants.min_amount, Constants.max_amount]
 
     def other_player(self):
         return self.get_others_in_group()[0]

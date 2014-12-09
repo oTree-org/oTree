@@ -81,9 +81,9 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_question_1_my_payoff = models.CurrencyField()
+    training_question_1_my_payoff = models.CurrencyField(bounds=[0, Constants.training_1_maximun_offered_points])
 
-    training_question_1_other_payoff = models.CurrencyField()
+    training_question_1_other_payoff = models.CurrencyField(bounds=[0, Constants.training_1_maximun_offered_points])
 
     decision = models.CharField(
         doc="""The player's choice""",
@@ -97,12 +97,6 @@ class Player(otree.models.BasePlayer):
     def is_training_question_1_other_payoff_correct(self):
         return (self.training_question_1_other_payoff==
                 Constants.training_question_1_other_payoff_correct)
-
-    def training_question_1_my_payoff_bounds(self):
-        return [0, Constants.training_1_maximun_offered_points]
-
-    def training_question_1_other_payoff_bounds(self):
-        return [0, Constants.training_1_maximun_offered_points]
 
     def decision_choices(self):
         return ['Stag', 'Hare']

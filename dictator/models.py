@@ -63,11 +63,9 @@ class Group(otree.models.BaseGroup):
 
     kept = models.CurrencyField(
         doc="""Amount dictator decided to keep for himself""",
+        bounds=[0, Constants.allocated_amount],
         verbose_name='I will keep (from 0 to %i)' % Constants.allocated_amount
     )
-
-    def kept_bounds(self):
-        return [0, Constants.allocated_amount]
 
     def set_payoffs(self):
         p1 = self.get_player_by_id(1)
