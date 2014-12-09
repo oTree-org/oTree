@@ -116,20 +116,14 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_question_1_husband = models.CurrencyField()
+    training_question_1_husband = models.CurrencyField(bounds=[0, Constants.training_1_maximum_offered_points])
 
-    training_question_1_wife = models.CurrencyField()
+    training_question_1_wife = models.CurrencyField(bounds=[0, Constants.training_1_maximum_offered_points])
 
     decision = models.CharField(
         doc="""Either football or the opera""",
         widget=widgets.RadioSelect()
     )
-
-    def training_question_1_husband_bounds(self):
-        return [0, Constants.training_1_maximum_offered_points]
-
-    def training_question_1_wife_bounds(self):
-        return [0, Constants.training_1_maximum_offered_points]
 
     def is_training_question_1_husband_correct(self):
         return (self.training_question_1_husband ==

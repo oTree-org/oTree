@@ -80,6 +80,7 @@ class Player(otree.models.BasePlayer):
         verbose_name='My profit would be')
 
     price = models.CurrencyField(
+        bounds=[0, Constants.maximum_price],
         doc="""Price player chooses to sell product for"""
     )
 
@@ -87,9 +88,6 @@ class Player(otree.models.BasePlayer):
         initial=False,
         doc="""Whether this player offered lowest price"""
     )
-
-    def price_bounds(self):
-        return [0, Constants.maximum_price]
 
     def is_sole_winner(self):
         return self.is_a_winner and self.group.num_winners == 1

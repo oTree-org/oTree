@@ -72,11 +72,9 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     contribution = models.CurrencyField(
+        bounds=[0, Constants.endowment],
         doc="""The amount contributed by the player""",
     )
-
-    def contribution_bounds(self):
-        return [0, Constants.endowment]
 
     question = models.CurrencyField()
 

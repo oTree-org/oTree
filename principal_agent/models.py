@@ -120,6 +120,7 @@ class Group(otree.models.BaseGroup):
 
     agent_fixed_pay = models.CurrencyField(
         doc="""Amount offered as fixed pay to agent""",
+        bounds=[Constants.min_fixed_payment, Constants.max_fixed_payment],
         verbose_name='Fixed Payment (from %i to %i)' % (
             Constants.min_fixed_payment, Constants.max_fixed_payment)
     )
@@ -147,9 +148,6 @@ class Group(otree.models.BaseGroup):
             (False, 'Reject'),
             )
     )
-
-    def agent_fixed_pay_bounds(self):
-        return [Constants.min_fixed_payment, Constants.max_fixed_payment]
 
     def agent_work_effort_choices(self):
         return range(1, 10+1)

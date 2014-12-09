@@ -75,11 +75,9 @@ class Player(otree.models.BasePlayer):
 
     quantity = models.PositiveIntegerField(
         initial=None,
+        bounds=[0, Constants.max_units_per_player],
         doc="""Quantity of units to produce"""
     )
-
-    def quantity_bounds(self):
-        return [0, Constants.max_units_per_player]
 
     def other_player(self):
         return self.get_others_in_group()[0]
