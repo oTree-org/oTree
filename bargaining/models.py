@@ -24,7 +24,7 @@ class Constants:
     players_per_group = 2
     number_of_rounds = 1
 
-    amount_shared = 100
+    amount_shared = c(100)
     bonus = c(10)
 
 
@@ -64,15 +64,13 @@ class Player(otree.models.BasePlayer):
     request_amount = models.CurrencyField(
         doc="""
         Amount requested by this player.
-        """
+        """,
+        bounds=[0, Constants.amount_shared]
     )
     training_amount_mine = models.CurrencyField(
         verbose_name='You would get')
     training_amount_other = models.CurrencyField(
         verbose_name='The other participant would get')
-
-    def request_amount_bounds(self):
-        return [0, Constants.amount_shared]
 
     def other_player(self):
         """Returns the opponent of the current player"""
