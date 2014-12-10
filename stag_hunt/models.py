@@ -86,6 +86,7 @@ class Player(otree.models.BasePlayer):
     training_question_1_other_payoff = models.CurrencyField(bounds=[0, Constants.training_1_maximun_offered_points])
 
     decision = models.CharField(
+        choices=['Stag', 'Hare'],
         doc="""The player's choice""",
         widget=widgets.RadioSelect()
     )
@@ -97,9 +98,6 @@ class Player(otree.models.BasePlayer):
     def is_training_question_1_other_payoff_correct(self):
         return (self.training_question_1_other_payoff==
                 Constants.training_question_1_other_payoff_correct)
-
-    def decision_choices(self):
-        return ['Stag', 'Hare']
 
     def other_player(self):
         """Returns other player in group"""

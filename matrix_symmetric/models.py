@@ -65,12 +65,10 @@ class Player(otree.models.BasePlayer):
         return self.get_others_in_group()[0]
 
     decision = models.CharField(
+        choices=['A', 'B'],
         doc='either A or B',
         widget=widgets.RadioSelect(),
     )
-
-    def decision_choices(self):
-        return ['A', 'B']
 
     def set_payoff(self):
 

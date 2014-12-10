@@ -121,6 +121,7 @@ class Player(otree.models.BasePlayer):
     training_question_1_wife = models.CurrencyField(bounds=[0, Constants.training_1_maximum_offered_points])
 
     decision = models.CharField(
+        choices=['Football', 'Opera'],
         doc="""Either football or the opera""",
         widget=widgets.RadioSelect()
     )
@@ -132,9 +133,6 @@ class Player(otree.models.BasePlayer):
     def is_training_question_1_wife_correct(self):
         return (self.training_question_1_wife ==
                 Constants.training_1_wife_correct)
-
-    def decision_choices(self):
-        return ['Football', 'Opera']
 
     def other_player(self):
         """Returns other player in group"""

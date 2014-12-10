@@ -40,9 +40,8 @@ class Player(otree.models.BasePlayer):
         """Calculate payoff, which is zero for the survey"""
         self.payoff = 0
 
-    def q_gender_choices(self):
-        return ['Female', 'Male', 'Other', 'I prefer not to say']
-
-    q_gender = models.CharField(verbose_name='Please indicate your gender:', widget=widgets.RadioSelect())
+    q_gender = models.CharField(verbose_name='Please indicate your gender:',
+                                choices=['Female', 'Male', 'Other', 'I prefer not to say'],
+                                widget=widgets.RadioSelect())
 
 

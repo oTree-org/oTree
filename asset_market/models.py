@@ -147,17 +147,15 @@ class Player(otree.models.BasePlayer):
 
     # order fields
     bp = models.CurrencyField(initial=0.00, doc="""maximum buying price per share""")
-    bn = models.PositiveIntegerField(initial=0, doc="""number of shares willing to buy""")
+    bn = models.PositiveIntegerField(initial=0,
+                                     choices=range(0, Constants.num_shares+1, 1),
+                                     doc="""number of shares willing to buy""")
     sp = models.CurrencyField(initial=0.00, doc="""minimum selling price per share""")
     sn = models.PositiveIntegerField(initial=0, doc="""number of shares willing to sell.""")
 
-    order_type = models.CharField(doc="""player: buy or sell?""", widget=widgets.RadioSelectHorizontal)
-
-    def order_type_choices(self):
-        return ['Sell', 'Buy', 'None']
-
-    def bn_choices(self):
-        return range(0, Constants.num_shares+1, 1)
+    order_type = models.CharField(choices=['Sell', 'Buy', 'None'],
+                                  doc="""player: buy or sell?""",
+                                  widget=widgets.RadioSelectHorizontal)
 
     def sn_choices(self):
         return range(0, self.shares+1, 1)

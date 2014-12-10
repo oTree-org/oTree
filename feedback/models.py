@@ -33,23 +33,24 @@ class Constants:
 
     feedback_choices = ['Very well', 'Well', 'OK', 'Badly', 'Very badly']
 
+
 class Subsession(otree.models.BaseSubsession):
     pass
+
 
 class Group(otree.models.BaseGroup):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
+
 class Player(otree.models.BasePlayer):
     # <built-in>
     subsession = models.ForeignKey(Subsession)
-    group = models.ForeignKey(Group, null = True)
+    group = models.ForeignKey(Group, null=True)
     # </built-in>
 
     feedback = models.CharField(
+        choices=Constants.feedback_choices,
         widget=widgets.RadioSelectHorizontal(),
     )
-
-    def feedback_choices(self):
-        return Constants.feedback_choices
