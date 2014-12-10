@@ -20,9 +20,9 @@ class Introduction(Page):
 class Question1(Page):
     template_name = 'global/Question.html'
     form_model = models.Player
-    form_fields = (
+    form_fields = [
         'training_buyer_earnings', 'training_seller1_earnings',
-        'training_seller2_earnings')
+        'training_seller2_earnings']
 
     def participate_condition(self):
         return self.subsession.round_number == 1
@@ -49,6 +49,8 @@ class Production(Page):
     template_name = 'global/Question.html'
     form_model = models.Player
     form_fields = ['quality', 'price']
+
+    auto_submit_values = {'price': Constants.INITIAL, 'quality': 20}
 
     def participate_condition(self):
         return self.player.role().startswith('seller')

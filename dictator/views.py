@@ -18,8 +18,8 @@ class Introduction(Page):
 class Question1(Page):
     template_name = 'global/Question.html'
     form_model = models.Player
-    form_fields = (
-        'training_participant1_payoff', 'training_participant2_payoff')
+    form_fields = [
+        'training_participant1_payoff', 'training_participant2_payoff']
 
     def participate_condition(self):
         return self.subsession.round_number == 1

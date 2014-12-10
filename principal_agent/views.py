@@ -31,7 +31,7 @@ class Introduction(Page):
 class Question1(Page):
     template_name = 'global/Question.html'
     form_model = models.Player
-    form_fields = ('training_my_payoff', 'training_other_payoff')
+    form_fields = ['training_my_payoff', 'training_other_payoff']
 
     def participate_condition(self):
         return self.subsession.round_number == 1
@@ -111,6 +111,7 @@ class Results(Page):
         return {'accepted': self.group.contract_accepted,
                 'agent': self.player.role() == 'agent',
                 'fixed_pay': self.group.agent_fixed_pay,
+                'fixed_pay_int': int(self.group.agent_fixed_pay),
                 'return_share': int(self.group.agent_return_share * 100),
                 'effort_level': self.group.agent_work_effort,
                 'effort_cost': cost_from_effort(self.group.agent_work_effort),
