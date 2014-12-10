@@ -82,24 +82,30 @@ class Player(otree.models.BasePlayer):
     group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)
     # </built-in>
+
     # training
     training_buyer_earnings = models.IntegerField(
         verbose_name="Buyer's period payoff would be")
+
     training_seller1_earnings = models.IntegerField(
         verbose_name="Seller 1's period payoff would be")
+
     training_seller2_earnings = models.IntegerField(
         verbose_name="Seller 2's period payoff would be")
+
     # seller
     price = models.CurrencyField(
         bounds=[0, Constants.INITIAL],
         verbose_name='Please indicate a price (from 0 to %i) you want to sell'
         % Constants.INITIAL)
+
     quality = models.CurrencyField(choices=[
         (30, 'High'),
         (20, 'Medium'),
         (10, 'Low')],
         verbose_name='Please select a quality grade you want to produce',
         widget=widgets.RadioSelectHorizontal())
+
     # buyer
     choice = models.CurrencyField(
         blank=True, widget=widgets.RadioSelect(),
