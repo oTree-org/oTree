@@ -108,12 +108,11 @@ class Player(otree.models.BasePlayer):
 
     # buyer
     choice = models.CurrencyField(
-        blank=True, widget=widgets.RadioSelect(),
+        choices=[(i, 'Buy from seller %i' % i) for i in
+                 range(1, Constants.players_per_group)] + [(0, 'Buy nothing')],
+        blank=True,
+        widget=widgets.RadioSelect(),
         verbose_name='And you will')  # seller index
-
-    def choice_choices(self):
-        return [(i, 'Buy from seller %i' % i) for i in range(
-            1, Constants.players_per_group)] + [(0, 'Buy nothing')]
 
     def role(self):
         if self.id_in_group == 1:

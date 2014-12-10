@@ -41,15 +41,14 @@ class Player(otree.models.BasePlayer):
         """Calculate payoff, which is zero for the survey"""
         self.payoff = 0
 
-    def q_gender_choices(self):
-        return ['Male', 'Female']
-
-    def q_age_choices(self):
-        return range(13, 125)
-
     q_country = CountryField(verbose_name='What is your country of citizenship?')
-    q_age = models.PositiveIntegerField(verbose_name='What is your age?', initial=None)
-    q_gender = models.CharField(initial=None, verbose_name='What is your gender?', widget=widgets.RadioSelect())
+    q_age = models.PositiveIntegerField(verbose_name='What is your age?',
+                                        choices=range(13, 125),
+                                        initial=None)
+    q_gender = models.CharField(initial=None,
+                                choices=['Male', 'Female'],
+                                verbose_name='What is your gender?',
+                                widget=widgets.RadioSelect())
 
     crt_bat_float = models.DecimalField(max_digits=6, decimal_places=2)
     crt_bat = models.PositiveIntegerField()

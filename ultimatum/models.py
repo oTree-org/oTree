@@ -45,10 +45,7 @@ class Group(otree.models.BaseGroup):
         doc="""Whether this group uses strategy method"""
     )
 
-    amount_offered = models.CurrencyField()
-
-    def amount_offered_choices(self):
-        return Constants.offer_choices
+    amount_offered = models.CurrencyField(choices=Constants.offer_choices)
 
     offer_accepted = models.NullBooleanField(
         doc="if offered amount is accepted (direct response method)"

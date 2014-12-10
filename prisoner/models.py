@@ -75,23 +75,19 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     training_question_1 = models.CharField(
+        choices=Constants.training_1_choices,
         widget=widgets.RadioSelect(),
         #timeout_default=Constants.training_1_choices[1]
     )
-
-    def training_question_1_choices(self):
-        return Constants.training_1_choices
 
     def is_training_question_1_correct(self):
         return self.training_question_1 == Constants.training_1_correct
 
     decision = models.CharField(
+        choices=['Cooperate', 'Defect'],
         doc="""This player's decision""",
         widget=widgets.RadioSelect()
     )
-
-    def decision_choices(self):
-        return ['Cooperate', 'Defect']
 
     def other_player(self):
         return self.get_others_in_group()[0]

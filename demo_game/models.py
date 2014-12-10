@@ -58,6 +58,7 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     demo_field1 = models.CharField(
+        choices=['0', '1', '2', 'do not know'],
         doc="""field With radiobutton input.""",
         widget=widgets.RadioSelect(),
     )
@@ -71,26 +72,32 @@ class Player(otree.models.BasePlayer):
     def set_payoff(self):
         self.payoff = c(0)
 
-    def demo_field1_choices(self):
-        return ['0', '1', '2', 'do not know']
-
     training_question_1 = models.IntegerField()
-    training_question_2 = models.CharField(widget=widgets.RadioSelect())
-    training_question_3 = models.CharField(widget=widgets.RadioSelect())
-    training_question_4 = models.CharField(widget=widgets.RadioSelect())
-    training_question_5 = models.CharField(widget=widgets.RadioSelect())
+    training_question_2 = models.CharField(widget=widgets.RadioSelect(),
+                                           choices=['Embed images',
+                                                    'Dynamic visualizations using HighCharts',
+                                                    'Time travel (opens in pop up window)',
+                                                    'Embed video',
+                                                    'Embed audio'])
 
-    def training_question_2_choices(self):
-        return ['Embed images', 'Dynamic visualizations using HighCharts', 'Time travel (opens in pop up window)', 'Embed video', 'Embed audio']
-
-    def training_question_3_choices(self):
-        return ['Windows', 'Mac OS X', 'iOS', 'Android', 'Any of the above']
-
-    def training_question_4_choices(self):
-        return ["Calculation of payoff", "Progress of players through pages", "Values submitted by the players", "Whether players have visited the game", "All of the above"]
-
-    def training_question_5_choices(self):
-        return ["Any participants' input/choice", "Time spent on each page", "Invalid attempts from participants", "Answers to understanding questions", "Questionnaire input"]
+    training_question_3 = models.CharField(widget=widgets.RadioSelect(),
+                                           choices=['Windows',
+                                                    'Mac OS X',
+                                                    'iOS',
+                                                    'Android',
+                                                    'Any of the above'])
+    training_question_4 = models.CharField(widget=widgets.RadioSelect(),
+                                           choices=["Calculation of payoff",
+                                                    "Progress of players through pages",
+                                                    "Values submitted by the players",
+                                                    "Whether players have visited the game",
+                                                    "All of the above"])
+    training_question_5 = models.CharField(widget=widgets.RadioSelect(),
+                                           choices=["Any participants' input/choice",
+                                                    "Time spent on each page",
+                                                    "Invalid attempts from participants",
+                                                    "Answers to understanding questions",
+                                                    "Questionnaire input"])
 
 
     def training_question_1_error_message(self, value):
