@@ -6,7 +6,9 @@ from otree.common import Currency as c, currency_range
 from .models import Constants
 
 def variables_for_all_templates(self):
-    return {'total_q':1, 'instructions':'bargaining/Instructions.html'}
+    return {'total_q':1,
+            'instructions':'bargaining/Instructions.html',
+            'amount_shared': Constants.amount_shared}
 
 
 class Introduction(Page):
