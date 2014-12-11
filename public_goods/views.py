@@ -51,12 +51,12 @@ class Contribute(Page):
     form_model = models.Player
     form_fields = ['contribution']
 
+    auto_submit_values = {'contribution': c(Constants.endowment/2)}
+
     template_name = 'public_goods/Contribute.html'
 
 
 class ResultsWaitPage(WaitPage):
-
-
 
     def after_all_players_arrive(self):
         self.group.set_payoffs()
@@ -72,24 +72,16 @@ class Results(Page):
     template_name = 'public_goods/Results.html'
 
     def variables_for_template(self):
-        # calculations here
-        current_player = self.player
-        other_players = self.player.get_others_in_group
-        total_contribution = sum([c.contribution for c in self.group.get_players()])
-        total_earnings = total_contribution * Constants.efficiency_factor
-        share_earnings = total_earnings / Constants.players_per_group
-        individual_earnings = (Constants.endowment - current_player.contribution) + share_earnings
-        total_points = individual_earnings + Constants.base_points
 
         return {
-            'current_player': current_player,
-            'other_players': other_players,
-            'total_contribution': total_contribution,
-            'total_earnings': total_earnings,
-            'share_earnings': share_earnings,
-            'individual_earnings': individual_earnings,
+            'current_player': self.player,
+            'other_players': self.player.get_others_in_group(),
+            'total_contribution': self.group.total_contribution,
+            'total_earnings': self.group.total_contribution * Constants.efficiency_factor,
+            'individual_share': self.group.individual_share,
+            'individual_earnings': self.player.payoff - Constants.base_points,
             'base_points': Constants.base_points,
-            'total_points': total_points
+            'total_points': self.player.payoff
         }
 
 def pages():
