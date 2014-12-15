@@ -43,7 +43,7 @@ class Constants:
     name_in_url = 'lemon_market'
     players_per_group = 3
     number_of_rounds = 3
-
+    participation_fee = 10
     INITIAL = c(50)
 
 
@@ -107,7 +107,7 @@ class Player(otree.models.BasePlayer):
         widget=widgets.RadioSelectHorizontal())
 
     # buyer
-    choice = models.CurrencyField(
+    choice = models.PositiveSmallIntegerField(
         choices=[(i, 'Buy from seller %i' % i) for i in
                  range(1, Constants.players_per_group)] + [(0, 'Buy nothing')],
         blank=True,

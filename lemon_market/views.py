@@ -4,6 +4,7 @@ from . import models
 from ._builtin import Page, WaitPage
 from random import choice
 from .models import Constants
+from otree.common import safe_json
 
 def variables_for_all_templates(self):
     return {'instructions': 'lemon_market/Instructions.html'}
@@ -114,8 +115,31 @@ class FinalResults(Page):
         for player in self.player.in_all_rounds():
             if player.subsession.final:
                 break
-        return {'player': player, 'payoff': player.payoff + 10,
-                'group': self.group}
+        data = {'player': player,
+                'payoff': player.payoff + Constants.participation_fee,
+                'participation_fee': Constants.participation_fee}
+        # 
+        # Filling the data for graph
+        #
+        # transaction price for each round (None if no transaction happened)
+        transaction_price = []
+        for round in self.player.in_all_rounds():
+            if round.group.seller():
+                transaction_price.append(round.group.seller().price)
+            else:
+                transaction_price.append(None)
+        data['series'] = list()
+        data['series'].append({'name': 'Transaction Price',
+                               'data': transaction_price})
+        # payoffs for both buyer and sellers in each round
+        for player in self.group.get_players():
+            payoffs = []
+            for round in player.in_all_rounds():
+                payoffs.append(round.payoff)
+            data['series'].append({'name': 'Earnings for %s' % player.role().capitalize(),
+                                   'data': payoffs})
+        data['series'] = safe_json(data['series'])
+        return data
 
 
 def pages():

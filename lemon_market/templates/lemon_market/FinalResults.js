@@ -25,29 +25,6 @@ $(function () {
             verticalAlign: 'middle',
             borderWidth: 0
         },
-        series: [
-        {
-            name: 'Transaction Price',
-            data: [
-            {% for round in player.in_all_rounds %}
-            {% if forloop.counter0 %},{% endif %}
-            {{round.group.seller.price|default:'null'}}
-            {% endfor %}
-                ],
-        }
-        {% for player in group.get_players %}
-        ,{
-            name: 'Earnings for {{player.role|capfirst}}',
-            data: [
-            {% for round in player.in_all_rounds %}
-            {% if forloop.counter0 %}
-            ,
-                {% endif %}
-            {{round.payoff|floatformat}}
-                {% endfor %}
-            ]
-        }
-            {% endfor %}
-            ]
+        series: {{ series }}
     });
-}); // FIXME: use safe_json instead of forloop
+});
