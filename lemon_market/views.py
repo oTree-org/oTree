@@ -41,7 +41,7 @@ class Feedback1(Page):
         p = self.player
         return {'answers': {
                 'buyer': [p.training_buyer_earnings, 45],
-                'seller 1': [p.training_seller1_earnings, 65],
+                'seller 1': [p.training_seller1_earnings, 60],
                 'seller 2': [p.training_seller2_earnings, 50]}}
 
 
