@@ -14,6 +14,11 @@ class SessionType(otree.session.SessionType):
     doc = ""
     assign_to_groups_on_the_fly = False
     show_on_demo_page = True
+    vars = {}
+
+    def __init__(self, **kwargs):
+        self.punish = kwargs.pop('punish', None)
+        super(SessionType, self).__init__(**kwargs)
 
 
 def session_types():
@@ -36,6 +41,14 @@ def session_types():
             display_name="Prisoner's Dilemma",
             num_demo_participants=2,
             subsession_apps=['prisoner', 'survey_sample', 'payment_info'],
+            vars={'some_param': True},
+        ),
+        SessionType(
+            name='prisoner_alt_treatment',
+            display_name="Prisoner's Dilemma",
+            num_demo_participants=2,
+            subsession_apps=['prisoner', 'survey_sample', 'payment_info'],
+            vars={'some_param': False}
         ),
         SessionType(
             name='cournot_competition',

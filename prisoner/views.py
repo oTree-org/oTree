@@ -11,7 +11,9 @@ def variables_for_all_templates(self):
             'cooperate_defect_amount': Constants.cooperate_defect_amount,
             'defect_amount': Constants.defect_amount,
             'defect_cooperate_amount': Constants.defect_cooperate_amount,
-            'total_q': 1}
+            'total_q': 1,
+            'session_type_param': self.subsession.session.session_type.vars['some_param'],
+        }
 
 
 class Introduction(Page):
@@ -19,6 +21,7 @@ class Introduction(Page):
     template_name = 'prisoner/Introduction.html'
 
     timeout_seconds = 100
+
 
 class Question1(Page):
 
