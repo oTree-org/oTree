@@ -37,14 +37,6 @@ def session_types():
             display_name="Prisoner's Dilemma",
             num_demo_participants=2,
             subsession_apps=['prisoner', 'survey_sample', 'payment_info'],
-            vars={'some_param': True},
-        ),
-        SessionType(
-            name='prisoner_alt_treatment',
-            display_name="Prisoner's Dilemma",
-            num_demo_participants=2,
-            subsession_apps=['prisoner', 'survey_sample', 'payment_info'],
-            vars={'some_param': False}
         ),
         SessionType(
             name='cournot_competition',
@@ -66,6 +58,21 @@ def session_types():
             num_demo_participants=2,
             subsession_apps=['ultimatum', 'feedback', 'payment_info'],
         ),
+        SessionType(
+            name='ultimatum_strategy',
+            display_name="Ultimatum (strategy method treatment)",
+            num_demo_participants=2,
+            subsession_apps=['ultimatum', 'feedback', 'payment_info'],
+            vars={'strategy': True},
+        ),
+        SessionType(
+            name='ultimatum_non_strategy',
+            display_name="Ultimatum (direct response treatment)",
+            num_demo_participants=2,
+            subsession_apps=['ultimatum', 'feedback', 'payment_info'],
+            vars={'strategy': False},
+        ),
+
         SessionType(
             name='dictator',
             display_name="Dictator Game",
