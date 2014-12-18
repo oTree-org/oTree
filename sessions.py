@@ -16,10 +16,6 @@ class SessionType(otree.session.SessionType):
     show_on_demo_page = True
     vars = {}
 
-    def __init__(self, **kwargs):
-        self.punish = kwargs.pop('punish', None)
-        super(SessionType, self).__init__(**kwargs)
-
 
 def session_types():
 
