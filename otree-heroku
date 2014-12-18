@@ -27,24 +27,24 @@ COMMANDS = {}
 def resetdb(args):
     setup_db = './otree migrate --traceback'
 
-    environment = args.environment[0]
+    app = args.app[0]
 
-    reset_db = 'heroku pg:reset DATABASE --confirm {}'.format(environment)
+    reset_db = 'heroku pg:reset DATABASE --confirm {}'.format(app)
     os.system(reset_db)
 
-    heroku_run_command = 'heroku run {} --remote {}'
+    heroku_run_command = 'heroku run {} --app {}'
 
-    heroku_setup_db = heroku_run_command.format(setup_db, environment)
+    heroku_setup_db = heroku_run_command.format(setup_db, app)
     os.system(heroku_setup_db)
 
 resetdb.parser = argparse.ArgumentParser(description='resetdb')
 resetdb.parser.add_argument('resetdb', nargs=1)
 resetdb.parser.add_argument(
-    'environment', nargs=1,
+    'app', nargs=1,
     help="""
-        Will push to the named Heroku instance.
-        The Heroku app and the git remote must have the same name.
-        e.g., "myherokuapp.herokuapp.com" and "git push myherokuapp master"
+        Will reset the DB on the named Heroku app.
+        For example, if your URL is myapp.herokuapp.com, you would do:
+        Example: ./otree-heroku resetdb myapp
     """)
 
 COMMANDS['resetdb'] = resetdb
