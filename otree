@@ -5,48 +5,17 @@ project.  We have this script simply there in order to have a nicer name for it.
 ``./otree runserver`` is just a lot cooler than ``python manage.py runserver``.
 
 However this has one drawback. There are commands (namely celery) that won't
-work if the command is not run from ``manage.py``.Also other tools like PyCharm
+work if the command is not run from ``manage.py``. Also other tools like PyCharm
 sometimes expect to have a ``manage.py`` around. So we keep the ``manage.py``
 next to this ``./otree`` script to support more tools.
 """
 
 import os
-import platform
-import subprocess
 import sys
 
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 
-    from django.core.management import execute_from_command_line
-
-    # Workaround for windows. Celery (more precicely the billard library) will
-    # complain if the script you are using to initialize celery does not end
-    # on '.py'. That's why we require a manage.py file to be around.
-    # See https://github.com/celery/billiard/issues/129 for more details.
-    if platform.system() == 'Windows':
-
-        scriptdir = os.path.dirname(os.path.abspath(__file__))
-        managepy = os.path.join(scriptdir, 'manage.py')
-        if not os.path.exists(managepy):
-            sys.stderr.write(
-                "It seems that you do not have a file called 'manage.py' next "
-                "to the ./otree script you just called. This is a requirement "
-                "when using otree on windows.")
-            sys.stderr.write("\n\n")
-            sys.stderr.write(
-                "Please download the file {url} and save it as 'manage.py' in "
-                "the directory {directory}".format(
-                    url="https://raw.githubusercontent.com/oTree-org/oTree/master/manage.py",
-                    directory=scriptdir))
-            sys.exit(1)
-        args = [sys.executable] + [managepy] + sys.argv[1:]
-        process = subprocess.Popen(args,
-                                   stdin=sys.stdin,
-                                   stdout=sys.stdout,
-                                   stderr=sys.stderr)
-        return_code = process.wait()
-        sys.exit(return_code)
-
-    execute_from_command_line(sys.argv)
+    from otree.management.cli import execute_from_command_line
+    execute_from_command_line(sys.argv, script_file=__file__)
