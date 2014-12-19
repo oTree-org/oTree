@@ -24,25 +24,25 @@ def session_types():
             name='demo_game',
             display_name="Demo Game",
             num_demo_participants=1,
-            subsession_apps=['demo_game'],
+            app_sequence=['demo_game'],
         ),
         SessionType(
             name='public_goods',
             display_name="Public Goods",
             num_demo_participants=3,
-            subsession_apps=['public_goods', 'payment_info'],
+            app_sequence=['public_goods', 'payment_info'],
         ),
         SessionType(
             name='prisoner',
             display_name="Prisoner's Dilemma",
             num_demo_participants=2,
-            subsession_apps=['prisoner', 'feedback', 'survey_sample', 'payment_info'],
+            app_sequence=['prisoner', 'feedback', 'survey_sample', 'payment_info'],
         ),
         SessionType(
             name='cournot_competition',
             display_name="Cournot Competition",
             num_demo_participants=2,
-            subsession_apps=[
+            app_sequence=[
                 'cournot_competition', 'survey_sample', 'payment_info'
             ],
         ),
@@ -50,26 +50,26 @@ def session_types():
             name='trust',
             display_name="Trust Game",
             num_demo_participants=2,
-            subsession_apps=['trust', 'feedback', 'payment_info'],
+            app_sequence=['trust', 'feedback', 'payment_info'],
         ),
         SessionType(
             name='ultimatum',
             display_name="Ultimatum",
             num_demo_participants=2,
-            subsession_apps=['ultimatum', 'feedback', 'payment_info'],
+            app_sequence=['ultimatum', 'feedback', 'payment_info'],
         ),
         SessionType(
             name='ultimatum_strategy',
             display_name="Ultimatum (strategy method treatment)",
             num_demo_participants=2,
-            subsession_apps=['ultimatum', 'feedback', 'payment_info'],
+            app_sequence=['ultimatum', 'feedback', 'payment_info'],
             vars={'strategy': True},
         ),
         SessionType(
             name='ultimatum_non_strategy',
             display_name="Ultimatum (direct response treatment)",
             num_demo_participants=2,
-            subsession_apps=['ultimatum', 'feedback', 'payment_info'],
+            app_sequence=['ultimatum', 'feedback', 'payment_info'],
             vars={'strategy': False},
         ),
 
@@ -77,13 +77,13 @@ def session_types():
             name='dictator',
             display_name="Dictator Game",
             num_demo_participants=2,
-            subsession_apps=['dictator', 'feedback', 'payment_info'],
+            app_sequence=['dictator', 'feedback', 'payment_info'],
         ),
         SessionType(
             name='matching_pennies',
             display_name="Matching Pennies",
             num_demo_participants=2,
-            subsession_apps=[
+            app_sequence=[
                 'matching_pennies', 'survey_sample', 'payment_info'
             ],
         ),
@@ -91,39 +91,39 @@ def session_types():
             name='traveler_dilemma',
             display_name="Traveler's Dilemma",
             num_demo_participants=2,
-            subsession_apps=['traveler_dilemma', 'feedback', 'payment_info'],
+            app_sequence=['traveler_dilemma', 'feedback', 'payment_info'],
         ),
         SessionType(
             name='survey',
             display_name="Survey",
             num_demo_participants=1,
-            subsession_apps=['survey'],
+            app_sequence=['survey'],
         ),
         SessionType(
             name='bargaining',
             display_name="Bargaining Game",
             num_demo_participants=2,
-            subsession_apps=['bargaining', 'payment_info'],
+            app_sequence=['bargaining', 'payment_info'],
         ),
         SessionType(
             name='beauty',
             display_name="Beauty Contest",
             num_demo_participants=5,
             num_bots=5,
-            subsession_apps=['beauty', 'survey_sample', 'payment_info'],
+            app_sequence=['beauty', 'survey_sample', 'payment_info'],
         ),
         SessionType(
             name='common_value_auction',
             display_name="Common Value Auction",
             num_demo_participants=3,
-            subsession_apps=['common_value_auction', 'payment_info'],
+            app_sequence=['common_value_auction', 'payment_info'],
         ),
         SessionType(
             name='stackelberg_competition',
             display_name="Stackelberg Competition",
             money_per_point=0.01,
             num_demo_participants=2,
-            subsession_apps=[
+            app_sequence=[
                 'stackelberg_competition', 'survey_sample', 'payment_info'
             ],
         ),
@@ -131,19 +131,19 @@ def session_types():
             name='vickrey_auction',
             display_name="Vickrey Auction",
             num_demo_participants=3,
-            subsession_apps=['vickrey_auction', 'payment_info'],
+            app_sequence=['vickrey_auction', 'payment_info'],
         ),
         SessionType(
             name='volunteer_dilemma',
             display_name="Volunteer's Dilemma",
             num_demo_participants=3,
-            subsession_apps=['volunteer_dilemma', 'feedback', 'payment_info'],
+            app_sequence=['volunteer_dilemma', 'feedback', 'payment_info'],
         ),
         SessionType(
             name='bertrand_competition',
             display_name="Bertrand Competition",
             num_demo_participants=2,
-            subsession_apps=[
+            app_sequence=[
                 'bertrand_competition', 'feedback', 'payment_info'
             ],
         ),
@@ -151,19 +151,19 @@ def session_types():
             name='principal_agent',
             display_name="Principal Agent",
             num_demo_participants=2,
-            subsession_apps=['principal_agent', 'feedback', 'payment_info'],
+            app_sequence=['principal_agent', 'feedback', 'payment_info'],
         ),
         SessionType(
             name='stag_hunt',
             display_name="Stag Hunt",
             num_demo_participants=2,
-            subsession_apps=['stag_hunt', 'survey_sample', 'payment_info'],
+            app_sequence=['stag_hunt', 'survey_sample', 'payment_info'],
         ),
         SessionType(
             name='battle_of_the_sexes',
             display_name="Battle of the Sexes",
             num_demo_participants=2,
-            subsession_apps=[
+            app_sequence=[
                 'battle_of_the_sexes', 'survey_sample', 'payment_info'
             ],
         ),
@@ -171,19 +171,19 @@ def session_types():
             name='asset_market',
             display_name="Asset Market",
             num_demo_participants=2,
-            subsession_apps=['asset_market', 'feedback', 'payment_info'],
+            app_sequence=['asset_market', 'feedback', 'payment_info'],
         ),
         SessionType(
             name='lemon_market',
             display_name="Lemon Market",
             num_demo_participants=3,
-            subsession_apps=['lemon_market', 'feedback', 'payment_info'],
+            app_sequence=['lemon_market', 'feedback', 'payment_info'],
         ),
         SessionType(
             name='real_effort',
             display_name="Real-effort transcription task",
             num_demo_participants=1,
-            subsession_apps=[
+            app_sequence=[
                 'real_effort',
             ],
         ),
