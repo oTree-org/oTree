@@ -43,14 +43,12 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    def next_round_groups(self, current_round_groups):
-        groups = current_round_groups
-        for group in groups:
-            group.reverse()
-        return groups
-
-
-
+    def initialize(self):
+        if self.round_number > 1:
+            for group in self.get_groups():
+                players = group.get_players()
+                players.reverse()
+                group.set_players(players)
 
 class Group(otree.models.BaseGroup):
 

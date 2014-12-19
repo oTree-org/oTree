@@ -12,7 +12,7 @@ from django_countries.fields import CountryField
 
 class Constants:
     name_in_url = 'survey_sample'
-    players_per_group = 1
+    players_per_group = None
     number_of_rounds = 1
 
 

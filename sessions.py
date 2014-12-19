@@ -12,7 +12,7 @@ class SessionType(otree.session.SessionType):
     fixed_pay = 10.00
     num_bots = 12
     doc = ""
-    assign_to_groups_on_the_fly = False
+    group_by_arrival_time = False
     show_on_demo_page = True
     vars = {}
 
@@ -36,7 +36,7 @@ def session_types():
             name='prisoner',
             display_name="Prisoner's Dilemma",
             num_demo_participants=2,
-            subsession_apps=['prisoner', 'survey_sample', 'payment_info'],
+            subsession_apps=['feedback', 'prisoner', 'survey_sample', 'payment_info'],
         ),
         SessionType(
             name='cournot_competition',
@@ -130,7 +130,7 @@ def session_types():
         SessionType(
             name='vickrey_auction',
             display_name="Vickrey Auction",
-            num_demo_participants=3,
+            num_demo_participants=5,
             subsession_apps=['vickrey_auction', 'payment_info'],
         ),
         SessionType(

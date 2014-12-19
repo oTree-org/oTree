@@ -61,8 +61,6 @@ class Choice(Page):
 
 class ResultsWaitPage(WaitPage):
 
-
-
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
@@ -75,7 +73,6 @@ class Results(Page):
     template_name = 'matching_pennies/Results.html'
 
     def variables_for_template(self):
-
         return {'my_choice': self.player.penny_side,
                 'other_choice': self.player.other_player().penny_side,
                 'my_points': self.player.payoff,

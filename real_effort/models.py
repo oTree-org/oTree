@@ -17,7 +17,7 @@ This is a task that requires real effort from participants. Subjects are shown t
 class Constants:
 
     name_in_url = 'real_effort'
-    players_per_group = 1
+    players_per_group = None
     number_of_rounds = 1
 
     # error in case participant is not allowed to make any errors

@@ -28,7 +28,7 @@ keywords = ()
 
 
 class Constants:
-    players_per_group = 1
+    players_per_group = None
     name_in_url = 'demo_game'
     number_of_rounds = 1
 
