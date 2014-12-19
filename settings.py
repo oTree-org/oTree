@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'otree',
 ]
 
-if os.environ.has_key('SENTRY_DSN'):
+if 'SENTRY_DSN' in os.environ:
     INSTALLED_APPS += [
         'raven.contrib.django.raven_compat',
     ]
