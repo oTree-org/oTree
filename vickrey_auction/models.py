@@ -45,26 +45,19 @@ keywords = (
 
 class Constants:
     name_in_url = 'vickrey_auction'
-    players_per_group = None
+    players_per_group = 3
     number_of_rounds = 1
 
     fixed_payoff = c(100)
     min_allowable_bid = c(0)
     max_allowable_bid = c(100)
 
-    training_question_1_my_payoff_limit = c(100) * 3 #players_per_group #FIXME change this back
+    training_question_1_my_payoff_limit = c(100) * players_per_group
     training_question_1_my_payoff_correct = c(105)
 
 
 class Subsession(otree.models.BaseSubsession):
-
-    def initialize(self):
-        if self.round_number == 1:
-            players = self.get_players()
-            g1 = players[:2]
-            g2 = players[2:]
-            self.set_groups([g1, g2])
-
+    pass
 
 class Group(otree.models.BaseGroup):
 
