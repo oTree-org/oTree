@@ -22,6 +22,8 @@ class Introduction(Page):
 
     template_name = 'ultimatum/Introduction.html'
 
+    timeout_seconds = 10
+
 
 class Offer(Page):
 
@@ -32,6 +34,8 @@ class Offer(Page):
 
     def participate_condition(self):
         return self.player.id_in_group == 1
+
+    timeout_seconds = 10
 
 class WaitForProposer(WaitPage):
     pass
@@ -52,6 +56,7 @@ class Accept(Page):
             'amount_offered': self.group.amount_offered,
         }
 
+    timeout_seconds = 10
 
 
 class AcceptStrategy(Page):

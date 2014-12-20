@@ -7,12 +7,12 @@ import otree.session
 class SessionType(otree.session.SessionType):
 
     # defaults that can be overridden by an individual SessionType below
-    money_per_point = 1.00
+    money_per_point = 0.01
     demo_enabled = True
     fixed_pay = 10.00
     num_bots = 12
     doc = ""
-    group_by_arrival_time = False
+    group_by_arrival_time = True
     show_on_demo_page = True
     vars = {}
 
