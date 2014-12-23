@@ -34,7 +34,7 @@ keywords = ("Common Value Auction",)
 class Constants:
     name_in_url = 'common_value_auction'
     players_per_group = None
-    number_of_rounds = 1
+    num_rounds = 1
 
     min_allowable_bid = c(0)
     max_allowable_bid = c(10)

@@ -11,7 +11,7 @@ class PlayerBot(Bot):
 
     def play(self):
 
-        rounds = Constants.number_of_rounds
+        rounds = Constants.num_rounds
         round = self.subsession.round_number
 
         if round == 1:

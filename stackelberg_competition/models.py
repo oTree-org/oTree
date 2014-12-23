@@ -35,7 +35,7 @@ keywords = ("Stackelberg Competition",)
 class Constants:
     name_in_url = 'stackelberg_competition'
     players_per_group = 2
-    number_of_rounds = 1
+    num_rounds = 1
 
     # Total production capacity of both players
     total_capacity = 60

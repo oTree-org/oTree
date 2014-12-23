@@ -42,7 +42,7 @@ keywords = ("Lemon Market",)
 class Constants:
     name_in_url = 'lemon_market'
     players_per_group = 3
-    number_of_rounds = 3
+    num_rounds = 3
     participation_fee = c(10)
     INITIAL = c(50)
 

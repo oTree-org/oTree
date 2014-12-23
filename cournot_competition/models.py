@@ -34,7 +34,7 @@ keywords = ("Cournot Competition",)
 class Constants:
     name_in_url = 'cournot_competition'
     players_per_group = 2
-    number_of_rounds = 1
+    num_rounds = 1
 
     training_1_correct = 300
 

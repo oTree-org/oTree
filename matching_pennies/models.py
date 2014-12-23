@@ -37,7 +37,7 @@ keywords = ("Matching Pennies",)
 class Constants:
     name_in_url = 'matching_pennies'
     players_per_group = 2
-    number_of_rounds = 3
+    num_rounds = 3
 
     training_1_correct = 'Player 1 gets 100 points, Player 2 gets 0 points'
 

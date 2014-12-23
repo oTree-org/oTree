@@ -37,7 +37,7 @@ keywords = ("Volunteer's Dilemma",)
 class Constants:
     name_in_url = 'volunteer_dilemma'
     players_per_group = 3
-    number_of_rounds = 1
+    num_rounds = 1
 
     bonus = c(10)
 

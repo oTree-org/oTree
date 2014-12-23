@@ -43,7 +43,7 @@ keywords = ("Dictator Game", "Fairness", "Homo Economicus")
 class Constants:
     name_in_url = 'dictator'
     players_per_group = 2
-    number_of_rounds = 1
+    num_rounds = 1
 
     bonus = c(10)
     # Initial amount allocated to the dictator

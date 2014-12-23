@@ -60,7 +60,7 @@ class Production(Page):
         return {
             'title': 'Production (Period %i of %i)' % (
                 self.subsession.round_number,
-                Constants.number_of_rounds),
+                Constants.num_rounds),
             'question': 'You are %s.' % self.player.role()}
 
 
@@ -74,7 +74,7 @@ class Purchase(Page):
 
     def vars_for_template(self):
         return {'group': self.group, 'title': 'Purchase (Period %i of %i)' % (
-            self.subsession.round_number, Constants.number_of_rounds)}
+            self.subsession.round_number, Constants.num_rounds)}
 
 class SimpleWaitPage(WaitPage):
     pass
@@ -84,7 +84,7 @@ class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
         self.group.set_payoff()
-        if self.subsession.round_number == Constants.number_of_rounds:
+        if self.subsession.round_number == Constants.num_rounds:
             final_subsession = choice(self.subsession.in_all_rounds())
             final_subsession.final = True
             final_subsession.save()
@@ -99,7 +99,7 @@ class Results(Page):
         return {
             'subsession': self.subsession, 'player': self.player,
             'payoff': self.player.payoff, 'buyer': buyer,
-            'number_of_rounds': Constants.number_of_rounds,
+            'num_rounds': Constants.num_rounds,
             'seller': buyer.choice and self.group.get_player_by_id(
                 buyer.choice + 1)}
 
@@ -109,7 +109,7 @@ class FinalResults(Page):
     template_name = 'lemon_market/FinalResults.html'
 
     def participate_condition(self):
-        return self.subsession.round_number == Constants.number_of_rounds
+        return self.subsession.round_number == Constants.num_rounds
 
     def vars_for_template(self):
         for player in self.player.in_all_rounds():

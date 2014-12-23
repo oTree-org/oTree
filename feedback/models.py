@@ -29,7 +29,7 @@ keywords = ()
 class Constants:
     name_in_url = 'feedback'
     players_per_group = None
-    number_of_rounds = 1
+    num_rounds = 1
 
     feedback_choices = ['Very well', 'Well', 'OK', 'Badly', 'Very badly']
 

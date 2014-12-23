@@ -34,7 +34,7 @@ keywords = ("Prisoner's Dilemma",)
 class Constants:
     name_in_url = 'prisoner'
     players_per_group = 2
-    number_of_rounds = 1
+    num_rounds = 1
 
     #  Points made if player defects and the other cooperates""",
     defect_cooperate_amount = c(300)

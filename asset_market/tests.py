@@ -46,7 +46,7 @@ class PlayerBot(Bot):
         self.submit(views.Dividend)
 
         # submitted in last round
-        if roundn == Constants.number_of_rounds:
+        if roundn == Constants.num_rounds:
             self.submit(views.Results)
 
     def validate_play(self):

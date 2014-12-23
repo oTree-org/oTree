@@ -59,7 +59,7 @@ keywords = ("Stock Market", "Finance", "Bubble", "Trade")
 class Constants:
     name_in_url = 'asset_market'
     players_per_group = 2
-    number_of_rounds = 2
+    num_rounds = 2
 
     understanding_1_correct = 'P=2.5, N=2'
     understanding_2_correct = '$8, $12'
@@ -186,7 +186,7 @@ class Player(otree.models.BasePlayer):
 
     def set_payoff(self):
         self.payoff = 0
-        if self.subsession.round_number == Constants.number_of_rounds:
+        if self.subsession.round_number == Constants.num_rounds:
             self.payoff = self.cash
         else:
             self.payoff = 0

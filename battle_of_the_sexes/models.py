@@ -61,7 +61,7 @@ keywords = ("Battle of the Sexes", "Coordination")
 class Constants:
     name_in_url = 'battle_of_the_sexes'
     players_per_group = 2
-    number_of_rounds = 1
+    num_rounds = 1
 
     # """Amount rewarded to husband if football is chosen"""
     football_husband_amount = opera_wife_amount = c(300)

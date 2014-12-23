@@ -39,7 +39,7 @@ keywords = ("Traveler's Dilemma",)
 class Constants:
     name_in_url = 'traveler_dilemma'
     players_per_group = 2
-    number_of_rounds = 1
+    num_rounds = 1
 
     # Player's reward for the lowest claim"""
     reward = c(2)

@@ -30,7 +30,7 @@ keywords = ()
 class Constants:
     name_in_url = 'payment_info'
     players_per_group = None
-    number_of_rounds = 1
+    num_rounds = 1
 
 class Subsession(otree.models.BaseSubsession):
 

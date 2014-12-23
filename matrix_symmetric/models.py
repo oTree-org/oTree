@@ -29,7 +29,7 @@ keywords = ()
 class Constants:
     name_in_url = 'matrix_symmetric'
     players_per_group = 2
-    number_of_rounds = 1
+    num_rounds = 1
 
     self_A_other_A = c(0.10)
 

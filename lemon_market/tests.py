@@ -29,7 +29,7 @@ class PlayerBot(Bot):
         else:
             self.submit(views.Production, {'price': 23, 'quality': 20})
         self.submit(views.Results)
-        if self.subsession.round_number == Constants.number_of_rounds:
+        if self.subsession.round_number == Constants.num_rounds:
             self.submit(views.FinalResults)
 
     def validate_play(self):

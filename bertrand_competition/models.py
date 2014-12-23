@@ -41,7 +41,7 @@ keywords = ("Bertrand Competition",)
 class Constants:
     players_per_group = 2
     name_in_url = 'bertrand_competition'
-    number_of_rounds = 1
+    num_rounds = 1
     bonus = c(10)
     maximum_price = c(100)
 

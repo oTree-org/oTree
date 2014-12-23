@@ -19,7 +19,7 @@ class Constants:
 
     name_in_url = 'ultimatum'
     players_per_group = 2
-    number_of_rounds = 1
+    num_rounds = 1
 
     endowment = c(100)
     payoff_if_rejected = c(0)

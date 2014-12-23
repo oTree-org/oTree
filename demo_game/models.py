@@ -30,7 +30,7 @@ keywords = ()
 class Constants:
     players_per_group = None
     name_in_url = 'demo_game'
-    number_of_rounds = 1
+    num_rounds = 1
 
     training_1_correct = 5
     training_2_correct = "Time travel (opens in pop up window)"

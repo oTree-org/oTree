@@ -48,7 +48,7 @@ keywords = ("Stag Hunt", "Coordination", "Cooperation", "Social Contract")
 class Constants:
     name_in_url = 'stag_hunt'
     players_per_group = 2
-    number_of_rounds = 1
+    num_rounds = 1
 
     fixed_pay = c(10)
 

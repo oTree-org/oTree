@@ -22,7 +22,7 @@ source_code ="https://github.com/oTree-org/oTree/tree/master/bargaining"
 class Constants:
     name_in_url = 'bargaining'
     players_per_group = 2
-    number_of_rounds = 1
+    num_rounds = 1
 
     amount_shared = c(100)
     bonus = c(10)

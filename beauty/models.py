@@ -49,7 +49,7 @@ keywords = (
 
 class Constants:
     players_per_group = 5
-    number_of_rounds = 1
+    num_rounds = 1
     name_in_url = 'beauty'
 
     winner_payoff = c(100)

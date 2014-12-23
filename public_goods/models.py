@@ -34,7 +34,7 @@ keywords = ("Public Goods",)
 class Constants:
     name_in_url = 'public_goods'
     players_per_group = 3
-    number_of_rounds = 1
+    num_rounds = 1
 
     #"""Amount allocated to each player"""
     endowment = c(100)

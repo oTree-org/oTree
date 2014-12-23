@@ -46,7 +46,7 @@ keywords = (
 class Constants:
     name_in_url = 'vickrey_auction'
     players_per_group = 3
-    number_of_rounds = 1
+    num_rounds = 1
 
     fixed_payoff = c(100)
     min_allowable_bid = c(0)

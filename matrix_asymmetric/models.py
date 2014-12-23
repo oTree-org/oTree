@@ -29,7 +29,7 @@ keywords = ()
 class Constants:
     name_in_url = 'matrix_asymmetric'
     players_per_group = 2
-    number_of_rounds = 1
+    num_rounds = 1
 
     rowAcolumnA_row = c(0.20)
     rowAcolumnA_column = c(0.30)

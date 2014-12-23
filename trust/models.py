@@ -33,7 +33,7 @@ keywords = ("Trust Game",)
 class Constants:
     name_in_url = 'trust'
     players_per_group = 2
-    number_of_rounds = 1
+    num_rounds = 1
 
     #Initial amount allocated to each player
     amount_allocated = c(100)
