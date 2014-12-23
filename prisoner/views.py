@@ -5,7 +5,7 @@ from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
 from .models import Constants
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
 
     return {'cooperate_amount': Constants.cooperate_amount,
             'cooperate_defect_amount': Constants.cooperate_defect_amount,
@@ -29,7 +29,7 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['training_question_1']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1}
 
     timeout_seconds = 100
@@ -38,7 +38,7 @@ class Feedback1(Page):
 
     template_name = 'prisoner/Feedback.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1,
                 'question': 'Suppose Alice chose to defect and Bob chose to cooperate. How many points would Alice and Bob receive, respectively?',
                 'answer': self.player.training_question_1,
@@ -72,7 +72,7 @@ class Results(Page):
 
     template_name = 'prisoner/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
 
 
         self.player.set_payoff()

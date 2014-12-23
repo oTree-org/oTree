@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 
 
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
     return {'instructions': 'bertrand_competition/Instructions.html'}
 
 
@@ -30,7 +30,7 @@ class Question1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'question': self.question}
 
 
@@ -40,7 +40,7 @@ class Feedback1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         p = self.player
         return {
             'answer': [p.training_my_profit, 40],
@@ -71,7 +71,7 @@ class Results(Page):
 
     template_name = 'global/ResultsTable.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {
             'table': [
                 ('', 'Points'),

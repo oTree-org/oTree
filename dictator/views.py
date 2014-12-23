@@ -5,7 +5,7 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
     return {'instructions': 'dictator/Instructions.html',
             'constants': Constants}
 
@@ -24,7 +24,7 @@ class Question1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'question_template': 'dictator/Question.html'}
 
 
@@ -34,7 +34,7 @@ class Feedback1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         p = self.player
         return {'answers': {
                 'participant 1': [p.training_participant1_payoff, 88],
@@ -69,7 +69,7 @@ class Results(Page):
 
     template_name = 'dictator/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'payoff': self.player.payoff,
                 'offer': Constants.allocated_amount - self.group.kept,
                 'kept': self.group.kept,

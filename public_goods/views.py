@@ -5,7 +5,7 @@ from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
 from .models import Constants
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
     return {'endowment': Constants.endowment,
             'players_per_group': Constants.players_per_group,
             'efficiency_factor': Constants.efficiency_factor}
@@ -17,7 +17,7 @@ class Introduction(Page):
 
     template_name = 'public_goods/Introduction.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'no_of_players': Constants.players_per_group,
                 'efficiency_factor': Constants.efficiency_factor}
 
@@ -38,7 +38,7 @@ class Feedback(Page):
     def participate_condition(self):
         return True
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'answer': self.player.question,
                 'is_correct': self.player.question_correct(),
                 }
@@ -71,7 +71,7 @@ class Results(Page):
 
     template_name = 'public_goods/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
 
         return {
             'current_player': self.player,

@@ -5,7 +5,7 @@ from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
 from .models import Constants
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
 
     return {'total_q': 1,
             'total_rounds': Constants.number_of_rounds,
@@ -31,7 +31,7 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['training_question_1_husband','training_question_1_wife']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1}
 
 
@@ -39,7 +39,7 @@ class Feedback1(Page):
 
     template_name = 'battle_of_the_sexes/Feedback.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {
             'num_q': 1,
 
@@ -61,7 +61,7 @@ class Decide(Page):
     form_model = models.Player
     form_fields = ['decision']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'role': self.player.role(),
                 'fbl_husband_amt': Constants.football_husband_amount,
                 'fbl_wife_amt': Constants.football_wife_amount,
@@ -86,7 +86,7 @@ class Results(Page):
 
     template_name = 'battle_of_the_sexes/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'role': self.player.role(),
                 'decision': self.player.decision,
                 'other_decision': self.player.other_player().decision,

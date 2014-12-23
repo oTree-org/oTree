@@ -6,7 +6,7 @@ from .models import Constants, cost_from_effort
 from otree.common import safe_json
 
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
 
     efforts_returns_costs = []
     for effort in range(1, 10 + 1):
@@ -36,7 +36,7 @@ class Question1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'question_template': 'principal_agent/Question.html'}
 
 
@@ -46,7 +46,7 @@ class Feedback1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         p = self.player
         return {'answers': [
                 ('yourself', [p.training_my_payoff, 46]),
@@ -85,7 +85,7 @@ class Accept(Page):
     form_model = models.Group
     form_fields = ['contract_accepted', 'agent_work_effort']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'fixed_pay': self.group.agent_fixed_pay,
                 'EFFORT_TO_RETURN': safe_json(Constants.EFFORT_TO_RETURN),
                 'EFFORT_TO_COST': safe_json(Constants.EFFORT_TO_COST),
@@ -107,7 +107,7 @@ class Results(Page):
 
     template_name = 'principal_agent/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'accepted': self.group.contract_accepted,
                 'agent': self.player.role() == 'agent',
                 'fixed_pay': self.group.agent_fixed_pay,

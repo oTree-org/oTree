@@ -7,7 +7,7 @@ from .models import Constants
 from django.conf import settings
 
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
 
     return {'paragraph_count': Constants.paragraph_count}
 
@@ -19,7 +19,7 @@ class Transcription1(Page):
     form_model = models.Player
     form_fields = ['transcription_1']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'number': 1,
                 'magic_link': settings.DEBUG and Constants.show_transcription_1,
                 'transcription': Constants.reference_texts[0],
@@ -34,7 +34,7 @@ class Transcription2(Page):
     form_model = models.Player
     form_fields = ['transcription_2']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'number': 2,
                 'magic_link': settings.DEBUG and Constants.show_transcription_2,
                 'transcription': Constants.reference_texts[1],
@@ -46,7 +46,7 @@ class Summary(Page):
 
     template_name = 'real_effort/Summary.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         self.player.set_payoff()
         return {
                 'distance_1' : self.player.distance_1,

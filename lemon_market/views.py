@@ -6,7 +6,7 @@ from random import choice
 from .models import Constants
 from otree.common import safe_json
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
     return {'instructions': 'lemon_market/Instructions.html'}
 
 
@@ -28,7 +28,7 @@ class Question1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'question_template': 'lemon_market/Question.html'}
 
 
@@ -38,7 +38,7 @@ class Feedback1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         p = self.player
         return {'answers': {
                 'buyer': [p.training_buyer_earnings, 45],
@@ -56,7 +56,7 @@ class Production(Page):
     def participate_condition(self):
         return self.player.role().startswith('seller')
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {
             'title': 'Production (Period %i of %i)' % (
                 self.subsession.round_number,
@@ -72,7 +72,7 @@ class Purchase(Page):
     def participate_condition(self):
         return self.player.role() == 'buyer'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'group': self.group, 'title': 'Purchase (Period %i of %i)' % (
             self.subsession.round_number, Constants.number_of_rounds)}
 
@@ -94,7 +94,7 @@ class Results(Page):
 
     template_name = 'lemon_market/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         buyer = self.group.get_player_by_role('buyer')
         return {
             'subsession': self.subsession, 'player': self.player,
@@ -111,7 +111,7 @@ class FinalResults(Page):
     def participate_condition(self):
         return self.subsession.round_number == Constants.number_of_rounds
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         for player in self.player.in_all_rounds():
             if player.subsession.final:
                 break

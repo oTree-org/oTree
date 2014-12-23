@@ -6,7 +6,7 @@ from otree.common import Currency as c, currency_range
 from .models import Constants
 
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
 
     return {'total_q': 1,
             'total_rounds': Constants.number_of_rounds,
@@ -28,7 +28,7 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['training_question_1_my_payoff']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1}
 
 
@@ -36,7 +36,7 @@ class Feedback1(Page):
 
     template_name = 'vickrey_auction/Feedback.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {
             'num_q': 1,
             'is_training_question_1_my_payoff_correct': (
@@ -54,7 +54,7 @@ class Bid(Page):
     form_model = models.Player
     form_fields = ['bid_amount']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         if self.player.private_value is None:
             self.player.private_value = self.player.generate_private_value()
 
@@ -78,7 +78,7 @@ class Results(Page):
 
     template_name = 'vickrey_auction/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         if self.player.payoff is None:
             self.player.set_payoff()
 

@@ -6,7 +6,7 @@ from otree.common import Currency as c, currency_range
 from .models import Constants
 
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
 
     return {'total_q': 1,
             'total_rounds': Constants.number_of_rounds,
@@ -33,7 +33,7 @@ class Question1(Page):
         'training_question_1_my_payoff','training_question_1_other_payoff'
     ]
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1}
 
 
@@ -41,7 +41,7 @@ class Feedback1(Page):
 
     template_name = 'stag_hunt/Feedback.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {
             'num_q': 1,
 
@@ -63,7 +63,7 @@ class Decide(Page):
     form_model = models.Player
     form_fields = ['decision']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'player_index': self.player.id_in_group,
                 'stag_stag': Constants.stag_stag_amount,
                 'stag_hare': Constants.stag_hare_amount,
@@ -90,7 +90,7 @@ class Results(Page):
 
     template_name = 'stag_hunt/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
 
         return {'payoff': self.player.payoff,
                 'decision': self.player.decision,

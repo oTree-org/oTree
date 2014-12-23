@@ -4,7 +4,7 @@ from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
 from .models import Constants
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
 
     return {'total_capacity': Constants.total_capacity,
             'max_units_per_player': Constants.max_units_per_player,
@@ -23,7 +23,7 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['training_question_1']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1}
 
 
@@ -31,7 +31,7 @@ class Feedback1(Page):
 
     template_name = 'cournot_competition/Feedback.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1,
                 'question': """Suppose firm Q produced 20 units and firm P produced 30 units. What would be the profit for firm P?""",
                 'answer': self.player.training_question_1,
@@ -64,7 +64,7 @@ class Results(Page):
 
     template_name = 'cournot_competition/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
 
         return {'units': self.player.units,
                 'other_units': self.player.other_player().units,

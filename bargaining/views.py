@@ -5,7 +5,7 @@ from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
 from .models import Constants
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
     return {'total_q':1,
             'instructions':'bargaining/Instructions.html',
             'amount_shared': Constants.amount_shared}
@@ -15,7 +15,7 @@ class Introduction(Page):
 
     template_name = 'global/Introduction.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {
             'amount_shared': Constants.amount_shared,
         }
@@ -29,7 +29,7 @@ class Question1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1, 'question': '''Suppose that you demanded 55 points and the other participant demanded 80 points.
             What would you and the other participant get respectively?'''}
 
@@ -40,7 +40,7 @@ class Feedback1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {
             'num_q': 1,
             'mine':self.player.training_amount_mine,
@@ -55,7 +55,7 @@ class Request(Page):
     form_model = models.Player
     form_fields = ['request_amount']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {
             'amount_shared': Constants.amount_shared,
         }
@@ -71,7 +71,7 @@ class Results(Page):
 
     template_name = 'bargaining/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {
             'earn': self.player.payoff - Constants.bonus,
             'points': self.player.payoff,

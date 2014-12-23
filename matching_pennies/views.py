@@ -5,7 +5,7 @@ from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
 from .models import Constants
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
 
     return {'total_q': 1,
             'total_rounds': Constants.number_of_rounds,
@@ -31,7 +31,7 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['training_question_1']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1}
 
 
@@ -42,7 +42,7 @@ class Feedback1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1,
                 'question': 'Suppose Player 1 picked "Heads" and Player 2 guessed "Tails". Which of the following will be the result of that round?',
                 'answer': self.player.training_question_1,
@@ -72,7 +72,7 @@ class Results(Page):
 
     template_name = 'matching_pennies/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'my_choice': self.player.penny_side,
                 'other_choice': self.player.other_player().penny_side,
                 'my_points': self.player.payoff,
@@ -88,7 +88,7 @@ class ResultsSummary(Page):
     def participate_condition(self):
         return self.subsession.round_number == Constants.number_of_rounds
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         player_in_all_rounds = self.player.in_all_rounds()
         total_payoff = sum([p.payoff for p in player_in_all_rounds])
         base_points = 50

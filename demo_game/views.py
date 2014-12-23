@@ -6,7 +6,7 @@ from otree.common import Currency as c, currency_range
 from .models import Constants
 
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
     return {
         'total_q': 5,  # total number of questions to help participants understand study
     }
@@ -26,7 +26,7 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['training_question_1']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1}
 
 
@@ -36,7 +36,7 @@ class Feedback1(Page):
     def participate_condition(self):
         return True
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1,
                 'question': "How many understanding questions are there? Please enter an odd negative integer, or a non-negative integer.",
                 'answer': self.player.training_question_1,
@@ -55,7 +55,7 @@ class Question2(Page):
     form_model = models.Player
     form_fields = ['training_question_2']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 2}
 
 
@@ -65,7 +65,7 @@ class Feedback2(Page):
     def participate_condition(self):
         return True
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 2,
                 'question': "All the following are possible in oTree except one?",
                 'answer': self.player.training_question_2,
@@ -84,7 +84,7 @@ class Question3(Page):
     form_model = models.Player
     form_fields = ['training_question_3']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 3}
 
 
@@ -94,7 +94,7 @@ class Feedback3(Page):
     def participate_condition(self):
         return True
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 3,
                 'question': "What operating system is required to use oTree?",
                 'answer': self.player.training_question_3,
@@ -113,7 +113,7 @@ class Question4(Page):
     form_model = models.Player
     form_fields = ['training_question_4']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 4}
 
 
@@ -123,7 +123,7 @@ class Feedback4(Page):
     def participate_condition(self):
         return True
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 4,
                 'question': "What can be monitored during the experiment via the admin console?",
                 'answer': self.player.training_question_4,
@@ -142,7 +142,7 @@ class Question5(Page):
     form_model = models.Player
     form_fields = ['training_question_5']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 5}
 
 
@@ -152,7 +152,7 @@ class Feedback5(Page):
     def participate_condition(self):
         return True
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 5,
                 'question': "What kind of data is included when you export a CSV from oTree?",
                 'answer': self.player.training_question_5,
@@ -172,7 +172,7 @@ class FormsDemo(Page):
 
 class Results(Page):
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         if self.player.payoff is None:
             self.player.set_payoff()
         return {

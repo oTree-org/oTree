@@ -8,7 +8,7 @@ from . import models
 from .models import Constants
 
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
     return {'instructions': 'trust/Instructions.html', 'total_q': 1}
 
 
@@ -16,7 +16,7 @@ class Introduction(Page):
 
     template_name = 'global/Introduction.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'amount_allocated': Constants.amount_allocated}
 
 
@@ -34,7 +34,7 @@ class Question1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1, 'question': self.question}
 
 
@@ -44,7 +44,7 @@ class Feedback1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {
             'num_q': 1, 'x': self.player.training_answer_x,
             'y': self.player.training_answer_y
@@ -67,7 +67,7 @@ class Send(Page):
     def participate_condition(self):
         return self.player.id_in_group == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'amount_allocated': Constants.amount_allocated}
 
 
@@ -84,7 +84,7 @@ class SendBack(Page):
     def participate_condition(self):
         return self.player.id_in_group == 2
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         tripled_amount = self.group.sent_amount * Constants.multiplication_factor
 
         return {'amount_allocated': Constants.amount_allocated,
@@ -107,7 +107,7 @@ class Results(Page):
 
     template_name = 'trust/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         tripled_amount = self.group.sent_amount * Constants.multiplication_factor
 
         return {'amount_allocated': Constants.amount_allocated,

@@ -5,7 +5,7 @@ from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
 from .models import Constants
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
 
     return {'total_q': 1}
 
@@ -26,7 +26,7 @@ class Question1(Page):
     form_fields = ['training_question_1_win_pick',
                    'training_question_1_my_payoff']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1}
 
 
@@ -34,7 +34,7 @@ class Feedback1(Page):
 
     template_name = 'beauty/Feedback.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {
             'num_q': 1,
             'is_answer_win_pick_correct': self.player.is_training_question_1_win_pick_correct(),
@@ -67,7 +67,7 @@ class Results(Page):
 
     template_name = 'beauty/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         other_guesses = []
         winners_cnt = int(self.player.is_winner)
         for p in self.player.get_others_in_group():

@@ -12,7 +12,7 @@ class Decision(Page):
     form_model = models.Player
     form_fields = ['decision']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'player_id': self.player.id_in_group,
                 'rowAcolumnA_row': Constants.rowAcolumnA_row,
                 'rowAcolumnA_column': Constants.rowAcolumnA_column,
@@ -36,7 +36,7 @@ class Results(Page):
 
     template_name = 'matrix_asymmetric/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'payoff': self.player.payoff,
                 'my_choice': self.player.decision,
                 'other_choice': self.player.other_player().decision,

@@ -4,7 +4,7 @@ from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
 from .models import Constants
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
 
     return {'total_capacity': Constants.total_capacity,
             'max_units_per_player': Constants.max_units_per_player,
@@ -23,7 +23,7 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['training_question_1']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1}
 
 
@@ -31,7 +31,7 @@ class Feedback1(Page):
 
     template_name = 'stackelberg_competition/Feedback.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1,
                 'question': """Suppose firm A first decided to produce 20 units. Then firm B would be informed of firm A's production and decided to produce 30 units.
                                What would be the profit for firm B?""",
@@ -74,7 +74,7 @@ class ChoiceTwo(Page):
     form_model = models.Player
     form_fields = ['quantity']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'other_quantity': self.player.other_player().quantity}
 
 
@@ -94,7 +94,7 @@ class Results(Page):
 
     template_name = 'stackelberg_competition/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         self.player.set_payoff()
 
         return {'quantity': self.player.quantity,

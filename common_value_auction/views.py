@@ -9,7 +9,7 @@ class Introduction(Page):
 
     template_name = 'common_value_auction/Introduction.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'other_players_count': len(self.group.get_players())-1}
 
 
@@ -20,7 +20,7 @@ class Bid(Page):
     form_model = models.Player
     form_fields = ['bid_amount']
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         if self.player.item_value_estimate is None:
             self.player.item_value_estimate = self.group.generate_value_estimate()
 
@@ -40,7 +40,7 @@ class Results(Page):
 
     template_name = 'common_value_auction/Results.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         if self.player.payoff is None:
             self.player.set_payoff()
 

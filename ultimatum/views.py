@@ -7,7 +7,7 @@ from ._builtin import Page, WaitPage
 from . import models
 from .models import Constants
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
     return {
         'endowment': Constants.endowment,
         'reject_payoff': Constants.payoff_if_rejected,
@@ -50,7 +50,7 @@ class Accept(Page):
     def participate_condition(self):
         return self.player.id_in_group == 2 and not self.group.strategy
 
-    def variables_for_template(self):
+    def vars_for_template(self):
 
         return {
             'amount_offered': self.group.amount_offered,
@@ -81,7 +81,7 @@ class Results(Page):
     template_name = 'ultimatum/Results.html'
 
 
-    def variables_for_template(self):
+    def vars_for_template(self):
 
         return {
             'player_index': self.player.id_in_group,

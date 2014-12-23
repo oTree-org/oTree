@@ -6,7 +6,7 @@ from otree.common import Currency as c, currency_range
 from .models import Constants
 
 
-def variables_for_all_templates(self):
+def vars_for_all_templates(self):
     return {'total_q': 1, 'instructions': 'traveler_dilemma/Instructions.html'}
 
 
@@ -14,7 +14,7 @@ class Introduction(Page):
 
     template_name = 'global/Introduction.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'max_amount': Constants.max_amount,
                 'min_amount': Constants.min_amount,
                 'reward': Constants.reward,
@@ -30,7 +30,7 @@ class Question1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {'num_q': 1, 'question': self.question}
 
 
@@ -40,7 +40,7 @@ class Feedback1(Page):
     def participate_condition(self):
         return self.subsession.round_number == 1
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         return {
             'num_q': 1, 'mine': self.player.training_answer_mine,
             'others': self.player.training_answer_others}
@@ -67,7 +67,7 @@ class Results(Page):
 
     template_name = 'global/ResultsTable.html'
 
-    def variables_for_template(self):
+    def vars_for_template(self):
         other = self.player.other_player().claim
         if self.player.claim < other:
             reward = Constants.reward
