@@ -9,7 +9,7 @@ from .models import Constants
 
 class PlayerBot(Bot):
 
-    def play(self):
+    def play_round(self):
 
         rounds = Constants.num_rounds
         round = self.subsession.round_number

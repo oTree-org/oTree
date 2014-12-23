@@ -12,7 +12,7 @@ from .models import Constants
 
 class PlayerBot(Bot):
 
-    def play(self):
+    def play_round(self):
         self.submit(views.Survey, {'q_gender': 'Male'})
 
     def validate_play(self):

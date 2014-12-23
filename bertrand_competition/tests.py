@@ -12,7 +12,7 @@ from .models import Constants
 
 class PlayerBot(Bot):
 
-    def play(self):
+    def play_round(self):
         # compete price
         self.submit(views.Introduction)
         self.submit(views.Question1, {'training_my_profit': c(1)})

@@ -9,7 +9,7 @@ from .models import Constants
 
 class PlayerBot(Bot):
 
-    def play(self):
+    def play_round(self):
         self.submit(views.Transcription1, {'transcription_1': Constants.reference_texts[0]})
         self.submit(views.Transcription2, {'transcription_2': Constants.reference_texts[1]})
 

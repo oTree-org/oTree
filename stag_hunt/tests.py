@@ -12,7 +12,7 @@ from .models import Constants
 
 class PlayerBot(Bot):
 
-    def play(self):
+    def play_round(self):
         self.submit(views.Introduction)
         self.submit(views.Question1, {
             "training_question_1_my_payoff": random.randint(0, 100),

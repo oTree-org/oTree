@@ -12,7 +12,7 @@ from . import views
 
 class PlayerBot(Bot):
 
-    def play(self):
+    def play_round(self):
         self.submit(views.Introduction)
         if self.player.id_in_group == 1:
             self.submit(views.Offer, {'amount_offered': c(10)})

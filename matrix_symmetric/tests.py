@@ -8,7 +8,7 @@ from .models import Constants
 
 class PlayerBot(Bot):
 
-    def play(self):
+    def play_round(self):
 
         # random decision
         choice = random.choice(['A', 'B'])

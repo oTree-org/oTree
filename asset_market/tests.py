@@ -13,7 +13,7 @@ from .models import Constants
 
 class PlayerBot(Bot):
 
-    def play(self):
+    def play_round(self):
 
         roundn = self.subsession.round_number
 

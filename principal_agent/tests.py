@@ -7,7 +7,7 @@ from ._builtin import Bot
 
 class PlayerBot(Bot):
 
-    def play(self):
+    def play_round(self):
         # intro
         self.submit(views.Introduction)
         self.submit(

@@ -11,7 +11,7 @@ from .models import Constants
 
 class PlayerBot(Bot):
 
-    def play(self):
+    def play_round(self):
         if self.subsession.round_number == 1:
             self.submit(views.Introduction)
             self.submit(

@@ -12,7 +12,7 @@ from . import views
 
 class PlayerBot(Bot):
 
-    def play(self):
+    def play_round(self):
         self.submit(views.Introduction)
         self.submit(views.Question, {"question": 92})
         self.submit(views.Feedback)
