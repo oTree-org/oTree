@@ -27,3 +27,5 @@ https://github.com/oTree-org/oTree/wiki
 
 ## Contact
 chris@otree.org
+
+Please email me if you find any bugs or issues in oTree.
