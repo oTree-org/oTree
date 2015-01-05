@@ -26,6 +26,6 @@ After forking & cloning the repo:
 https://github.com/oTree-org/oTree/wiki
 
 ## Contact
-chris@otree.org
+chris@otree.org (email or Skype)
 
-Please email me if you find any bugs or issues in oTree.
+Please contact me if you find any bugs or issues in oTree.
