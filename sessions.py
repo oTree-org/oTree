@@ -33,6 +33,12 @@ def session_types():
             app_sequence=['public_goods', 'payment_info'],
         ),
         SessionType(
+            name='principal_agent',
+            display_name="Principal Agent",
+            num_demo_participants=2,
+            app_sequence=['principal_agent', 'feedback', 'payment_info'],
+        ),
+        SessionType(
             name='prisoner',
             display_name="Prisoner's Dilemma",
             num_demo_participants=2,
@@ -148,12 +154,6 @@ def session_types():
             ],
         ),
         SessionType(
-            name='principal_agent',
-            display_name="Principal Agent",
-            num_demo_participants=2,
-            app_sequence=['principal_agent', 'feedback', 'payment_info'],
-        ),
-        SessionType(
             name='stag_hunt',
             display_name="Stag Hunt",
             num_demo_participants=2,
@@ -172,12 +172,6 @@ def session_types():
             display_name="Asset Market",
             num_demo_participants=2,
             app_sequence=['asset_market', 'feedback', 'payment_info'],
-        ),
-        SessionType(
-            name='lemon_market',
-            display_name="Lemon Market",
-            num_demo_participants=3,
-            app_sequence=['lemon_market', 'feedback', 'payment_info'],
         ),
         SessionType(
             name='real_effort',
