@@ -6,7 +6,7 @@ import otree.session
 
 class SessionType(otree.session.SessionType):
 
-    # defaults that can be overridden by an individual SessionType below
+    # defaults that can be overridden by an individual SessionType below.
     money_per_point = 0.01
     demo_enabled = True
     fixed_pay = 10.00
