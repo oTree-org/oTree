@@ -61,6 +61,7 @@ def levenshtein(a, b):
 
     return current[n]
 
+
 def text_is_close_enough(text_user, text_reference, max_error_rate):
     error_threshold = len(text_reference) * max_error_rate
     distance = levenshtein(text_user, text_reference)
@@ -90,24 +91,6 @@ class Player(otree.models.BasePlayer):
     transcription_2 = models.TextField(validators=[MaxLengthValidator(Constants.transcription_max_length)])
     distance_1 = models.PositiveIntegerField()
     distance_2 = models.PositiveIntegerField()
-
-    def transcription_1_error_message(self, text_user):
-        if not text_is_close_enough(text_user, Constants.reference_texts[0], Constants.error_rate_transcription_1):
-            if Constants.error_rate_transcription_1 == 0.0:
-                return Constants.transcription_error_0
-            else:
-                return Constants.transcription_error_positive
-        else:
-            self.distance_1 = levenshtein(Constants.reference_texts[0], text_user)
-
-    def transcription_2_error_message(self, text_user):
-        if not text_is_close_enough(text_user, Constants.reference_texts[1], Constants.error_rate_transcription_2):
-            if Constants.error_rate_transcription_2 == 0.0:
-                return Constants.transcription_error_0
-            else:
-                return Constants.transcription_error_positive
-        else:
-            self.distance_2 = levenshtein(Constants.reference_texts[1], text_user)
 
     def set_payoff(self):
         self.payoff = 0
