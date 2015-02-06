@@ -211,12 +211,12 @@ class Results(Page):
 
 def pages():
     return [
-        Introduction,
-        Instructions,
-        Question1,
-        Feedback1,
-        Question2,
-        Feedback2,
+        #~ Introduction,
+        #~ Instructions,
+        #~ Question1,
+        #~ Feedback1,
+        #~ Question2,
+        #~ Feedback2,
         OrderWaitPage,
         Order,
         TransactionWaitPage,

@@ -26,9 +26,6 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['training_question_1']
 
-    def vars_for_template(self):
-        return {'num_q': 1}
-
 
 class Feedback1(Page):
     template_name = 'demo_game/Feedback.html'
