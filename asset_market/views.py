@@ -110,6 +110,15 @@ class Order(Page):
 
     template_name = 'asset_market/Order.html'
 
+    def sn_choices(self):
+        return range(0, self.player.shares + 1, 1)
+
+    def bp_choices(self):
+        return currency_range(0, self.player.cash, 0.5)
+
+    def sp_choices(self):
+        return currency_range(0, self.player.cash, 0.5)
+
     def vars_for_template(self):
         return {
             'cash': self.player.cash,

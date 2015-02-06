@@ -159,15 +159,6 @@ class Player(otree.models.BasePlayer):
                                   doc="""player: buy or sell?""",
                                   widget=widgets.RadioSelectHorizontal)
 
-    def sn_choices(self):
-        return range(0, self.shares+1, 1)
-
-    def bp_choices(self):
-        return currency_range(0, self.cash, 0.5)
-
-    def sp_choices(self):
-        return currency_range(0, self.cash, 0.5)
-
     def other_player(self):
         """Returns other player in group. Only valid for 2-player groups."""
         return self.get_others_in_group()[0]
