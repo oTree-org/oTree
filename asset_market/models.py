@@ -120,15 +120,17 @@ class Group(otree.models.BaseGroup):
         seller.shares -= self.shares_traded
         seller.cash += amount
 
-
-
     def set_dividend(self):
         self.dividend_per_share = randint(1,2)
         self.is_dividend = True
 
         # adjust cash
         for p in self.get_players():
-            p.cash += p.shares * self.dividend_per_share if p.shares != 0 else p.cash
+            p.cash += (
+                p.shares * self.dividend_per_share
+                if p.shares != 0 else
+                p.cash
+            )
 
 
 class Player(otree.models.BasePlayer):
@@ -156,15 +158,6 @@ class Player(otree.models.BasePlayer):
     order_type = models.CharField(choices=['Sell', 'Buy', 'None'],
                                   doc="""player: buy or sell?""",
                                   widget=widgets.RadioSelectHorizontal)
-
-    def sn_choices(self):
-        return range(0, self.shares+1, 1)
-
-    def bp_choices(self):
-        return currency_range(0, self.cash, 0.5)
-
-    def sp_choices(self):
-        return currency_range(0, self.cash, 0.5)
 
     def other_player(self):
         """Returns other player in group. Only valid for 2-player groups."""
