@@ -75,8 +75,6 @@ class Summary(Page):
                 'transcription_length_2' : len(Constants.reference_texts[1]),
         }
 
-def pages():
-
-    return [Transcription1,
+pages = [Transcription1,
             Transcription2,
             Summary]

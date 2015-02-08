@@ -101,9 +101,7 @@ class ResultsSummary(Page):
                 'total_plus_base': total_payoff + base_points}
 
 
-def pages():
-
-    return [Introduction,
+pages = [Introduction,
             Question1,
             Feedback1,
             Choice,

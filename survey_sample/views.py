@@ -17,6 +17,4 @@ class Survey(Page):
         return None
 
 
-def pages():
-
-    return [Survey]
+pages = [Survey]

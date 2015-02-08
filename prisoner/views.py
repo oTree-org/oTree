@@ -85,9 +85,7 @@ class Results(Page):
                 'total_plus_base': self.player.payoff + Constants.base_points}
 
 
-def pages():
-
-    return [
+pages = [
         Introduction,
         Question1,
         Feedback1,

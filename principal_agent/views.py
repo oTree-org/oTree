@@ -120,9 +120,7 @@ class Results(Page):
                 'payoff': self.player.payoff}
 
 
-def pages():
-
-    return [Introduction,
+pages = [Introduction,
             Question1,
             Feedback1,
             Offer,

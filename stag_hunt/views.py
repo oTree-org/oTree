@@ -98,9 +98,7 @@ class Results(Page):
                 'total_payoff': self.player.payoff + Constants.fixed_pay}
 
 
-def pages():
-
-    return [Introduction,
+pages = [Introduction,
             Question1,
             Feedback1,
             Decide,

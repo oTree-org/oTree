@@ -16,6 +16,4 @@ class RedemptionCode(Page):
                 'redemption_code': participant.label or participant.code,}
 
 
-def pages():
-
-    return [RedemptionCode]
+pages = [RedemptionCode]

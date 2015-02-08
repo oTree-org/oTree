@@ -86,9 +86,7 @@ class Results(Page):
                     p for p in self.group.get_players() if p.volunteer])}
 
 
-def pages():
-
-    return [Introduction,
+pages = [Introduction,
             Question1,
             Feedback1,
             Decision,

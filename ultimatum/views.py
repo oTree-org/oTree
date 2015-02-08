@@ -91,9 +91,7 @@ class Results(Page):
         }
 
 
-def pages():
-
-    return [Introduction,
+pages = [Introduction,
             Offer,
             WaitForProposer,
             Accept,

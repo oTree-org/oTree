@@ -34,8 +34,8 @@ class Subsession(otree.models.BaseSubsession):
     def initialize(self):
         # randomize to treatments
         for g in self.get_groups():
-            if 'strategy' in self.session.session_type.vars:
-                g.strategy = self.session.session_type.vars['strategy']
+            if 'treatment' in self.session.session_type:
+                g.strategy = self.session.session_type['treatment'] == 'strategy'
             else:
                 g.strategy = random.choice([True, False])
 
