@@ -41,11 +41,7 @@ class Feedback1(Page):
     def vars_for_template(self):
         return {'num_q': 1,
                 'question': 'Suppose Alice chose to defect and Bob chose to cooperate. How many points would Alice and Bob receive, respectively?',
-                'answer': self.player.training_question_1,
-                'correct': Constants.training_1_correct,
-                'explanation': "Alice gets 300 points, Bob gets 0 points",
-                'is_correct': self.player.is_training_question_1_correct()}
-
+                }
 
 class Decision(Page):
 

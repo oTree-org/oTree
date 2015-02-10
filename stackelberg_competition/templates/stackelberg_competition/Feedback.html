@@ -12,10 +12,10 @@
     </p>
 
     <p>
-        You answered: {{ answer }}
+        You answered: {{ player.training_question_1 }}
     </p>
 
-    {% if is_correct %}
+    {% if player.is_training_question_1_correct %}
         <p class="text-success">Your answer is correct.</p>
     {% else %}
         <p class="text-danger">Your answer is incorrect. {{ explanation }}.</p>

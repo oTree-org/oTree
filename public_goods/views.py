@@ -38,10 +38,6 @@ class Feedback(Page):
     def participate_condition(self):
         return True
 
-    def vars_for_template(self):
-        return {'answer': self.player.question,
-                'is_correct': self.player.question_correct(),
-                }
 
 
 class Contribute(Page):
