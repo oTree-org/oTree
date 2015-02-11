@@ -37,6 +37,6 @@ class End(Page):
         return None
 
 
-pages = [Demographics,
+page_sequence = [Demographics,
             CognitiveReflectionTest,
             End]

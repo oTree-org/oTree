@@ -47,7 +47,7 @@ class Feedback1(Page):
 
 class ChoiceOne(Page):
 
-    def participate_condition(self):
+    def participate(self):
         return self.player.id_in_group == 1
 
     template_name = 'stackelberg_competition/ChoiceOne.html'
@@ -69,7 +69,7 @@ class ChoiceTwoWaitPage(WaitPage):
 
 class ChoiceTwo(Page):
 
-    def participate_condition(self):
+    def participate(self):
         return self.player.id_in_group == 2
 
     template_name = 'stackelberg_competition/ChoiceTwo.html'
@@ -107,7 +107,7 @@ class Results(Page):
                 }
 
 
-pages = [Introduction,
+page_sequence = [Introduction,
             Question1,
             Feedback1,
             ChoiceOne,

@@ -16,7 +16,7 @@ class Introduction(Page):
 
     template_name = 'global/Introduction.html'
 
-    def participate_condition(self):
+    def participate(self):
         return self.subsession.round_number == 1
 
 
@@ -28,7 +28,7 @@ class Question1(Page):
     question = '''Suppose you and another participant volunteered while
                 the other participant did not. What would be your payoff?'''
 
-    def participate_condition(self):
+    def participate(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -40,7 +40,7 @@ class Question1(Page):
 class Feedback1(Page):
     template_name = 'global/Feedback.html'
 
-    def participate_condition(self):
+    def participate(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -86,7 +86,7 @@ class Results(Page):
                     p for p in self.group.get_players() if p.volunteer])}
 
 
-pages = [Introduction,
+page_sequence = [Introduction,
             Question1,
             Feedback1,
             Decision,

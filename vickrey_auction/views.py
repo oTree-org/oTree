@@ -22,7 +22,7 @@ class Question1(Page):
 
     template_name = 'vickrey_auction/Question.html'
 
-    def participate_condition(self):
+    def participate(self):
         return self.subsession.round_number == 1
 
     form_model = models.Player
@@ -38,12 +38,8 @@ class Feedback1(Page):
 
     def vars_for_template(self):
         return {
-            'num_q': 1,
-            'is_training_question_1_my_payoff_correct': (
-                self.player.is_training_question_1_my_payoff_correct()
-            ),
-            'answer_you': self.player.training_question_1_my_payoff,
-            'correct_answer': Constants.training_question_1_my_payoff_correct
+            'num_q': 1
+
         }
 
 
@@ -58,7 +54,7 @@ class Bid(Page):
         if self.player.private_value is None:
             self.player.private_value = self.player.generate_private_value()
 
-        return {'private_value': self.player.private_value,
+        return {
                 'min_bid': c(Constants.min_allowable_bid),
                 'max_bid': c(Constants.max_allowable_bid)}
 
@@ -82,15 +78,9 @@ class Results(Page):
         if self.player.payoff is None:
             self.player.set_payoff()
 
-        return {'is_winner': self.player.is_winner,
-                'bid_amount': self.player.bid_amount,
-                'winning_bid': self.group.highest_bid(),
-                'second_highest_bid': self.group.second_highest_bid(),
-                'private_value': self.player.private_value,
-                'payoff': self.player.payoff}
 
 
-pages = [Introduction,
+page_sequence = [Introduction,
             Question1,
             Feedback1,
             Bid,

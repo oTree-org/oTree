@@ -52,7 +52,7 @@ class Results(Page):
                 'payoff': self.player.payoff}
 
 
-pages = [Introduction,
+page_sequence = [Introduction,
             Bid,
             ResultsWaitPage,
             Results]

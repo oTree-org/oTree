@@ -76,7 +76,7 @@ class Results(Page):
                 'total_plus_base': self.player.payoff + Constants.base_points}
 
 
-pages = [Introduction,
+page_sequence = [Introduction,
             Question1,
             Feedback1,
             Decide,

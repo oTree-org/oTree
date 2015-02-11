@@ -27,7 +27,7 @@ class Introduction(Page):
 class Question(Page):
     template_name = 'public_goods/Question.html'
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     form_model = models.Player
@@ -37,7 +37,7 @@ class Question(Page):
 class Feedback(Page):
     template_name = 'public_goods/Feedback.html'
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
 
@@ -82,7 +82,7 @@ class Results(Page):
           #  'total_points': self.player.payoff
         }
 
-pages = [Introduction,
+page_sequence = [Introduction,
             Question,
             Feedback,
             Contribute,
