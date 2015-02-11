@@ -8,6 +8,9 @@
 
 {% block content %}
 
+
+
+
     <p>
         Please transcribe (that is copy) the text below into the input field. Be exact and make
         sure to get all characters and spaces correct.
@@ -40,7 +43,7 @@
     {% endif %}
 
     {% next_button %}
-    {% if debug %}
+    {% if settings.DEBUG %}
     <div class="box effect7">
         <h4>Explanation for researchers (shown in debug mode only)</h4>
         <p>

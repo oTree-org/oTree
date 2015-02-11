@@ -17,4 +17,4 @@ class Survey(Page):
         return None
 
 
-pages = [Survey]
+page_sequence = [Survey]

@@ -64,7 +64,6 @@ SESSION_TYPE_DEFAULTS = {
     'num_bots': 12,
     'doc': "",
     'group_by_arrival_time': False,
-    'show_on_demo_page': True,
 }
 
 SESSION_TYPES = [
@@ -232,7 +231,7 @@ SESSION_TYPES = [
 ]
 
 
-demo_page_intro_text = """
+DEMO_PAGE_INTRO_TEXT = """
 <ul>
     <li>
         <a href="https://github.com/oTree-org/otree" target="_blank">

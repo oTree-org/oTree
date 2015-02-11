@@ -7,15 +7,17 @@
 
 {% block content %}
 
-    {% if is_training_question_1_my_payoff_correct %}
-        <p class="text-success">Your answer {{answer_you}} for yourself was correct.</p>
+
+
+    {% if player.is_training_question_1_my_payoff_correct %}
+        <p class="text-success">Your answer {{player.training_question_1_my_payoff}} for yourself was correct.</p>
     {% else %}
-        <p class="text-danger">Your answer {{answer_you}} for yourself was incorrect</p>
+        <p class="text-danger">Your answer {{player.training_question_1_my_payoff}} for yourself was incorrect</p>
     {% endif %}
-    {% if is_training_question_1_other_payoff_correct %}
-        <p class="text-success">Your answer {{answer_other}} for the other participant was correct.</p>
+    {% if player.is_training_question_1_other_payoff_correct %}
+        <p class="text-success">Your answer {{player.training_question_1_other_payoff}} for the other participant was correct.</p>
     {% else %}
-        <p class="text-danger">Your answer {{answer_other}} for the other participant was incorrect.</p>
+        <p class="text-danger">Your answer {{player.training_question_1_other_payoff}} for the other participant was incorrect.</p>
     {% endif %}
 
     <p>

@@ -17,7 +17,7 @@ class Introduction(Page):
 
     template_name = 'stag_hunt/Introduction.html'
 
-    def participate_condition(self):
+    def participate(self):
         return self.subsession.round_number == 1
 
 
@@ -25,7 +25,7 @@ class Question1(Page):
 
     template_name = 'stag_hunt/Question.html'
 
-    def participate_condition(self):
+    def participate(self):
         return self.subsession.round_number == 1
 
     form_model = models.Player
@@ -45,17 +45,17 @@ class Feedback1(Page):
         return {
             'num_q': 1,
 
-            'is_training_question_1_my_payoff_correct': self.player.is_training_question_1_my_payoff_correct(),
-            'answer_you': self.player.training_question_1_my_payoff,
-
-            'is_training_question_1_other_payoff_correct': self.player.is_training_question_1_other_payoff_correct(),
-            'answer_other': self.player.training_question_1_other_payoff,
+            # 'is_training_question_1_my_payoff_correct': self.player.is_training_question_1_my_payoff_correct(),
+            # 'answer_you': self.player.training_question_1_my_payoff,
+            #
+            # 'is_training_question_1_other_payoff_correct': self.player.is_training_question_1_other_payoff_correct(),
+            # 'answer_other': self.player.training_question_1_other_payoff,
         }
 
 
 class Decide(Page):
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     template_name = 'stag_hunt/Decide.html'
@@ -85,20 +85,18 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     template_name = 'stag_hunt/Results.html'
 
     def vars_for_template(self):
 
-        return {'payoff': self.player.payoff,
-                'decision': self.player.decision,
-                'other_decision': self.player.other_player().decision,
-                'total_payoff': self.player.payoff + Constants.fixed_pay}
+        return {
+             'total_payoff': self.player.payoff + Constants.fixed_pay}
 
 
-pages = [Introduction,
+page_sequence = [Introduction,
             Question1,
             Feedback1,
             Decide,

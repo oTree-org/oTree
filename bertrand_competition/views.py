@@ -16,7 +16,7 @@ class Introduction(Page):
 
     template_name = 'global/Introduction.html'
 
-    def participate_condition(self):
+    def participate(self):
         return self.subsession.round_number == 1
 
 
@@ -27,7 +27,7 @@ class Question1(Page):
     question = '''Suppose that you set your price at 40 points and the other\
         firm at 50 points. What would be your profit?'''
 
-    def participate_condition(self):
+    def participate(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -37,7 +37,7 @@ class Question1(Page):
 class Feedback1(Page):
     template_name = 'global/Feedback.html'
 
-    def participate_condition(self):
+    def participate(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -87,7 +87,7 @@ class Results(Page):
         }
 
 
-pages = [Introduction,
+page_sequence = [Introduction,
             Question1,
             Feedback1,
             Decide,

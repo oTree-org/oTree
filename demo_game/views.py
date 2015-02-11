@@ -20,7 +20,7 @@ class Introduction(Page):
 class Question1(Page):
     template_name = 'demo_game/Question.html'
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     form_model = models.Player
@@ -30,7 +30,7 @@ class Question1(Page):
 class Feedback1(Page):
     template_name = 'demo_game/Feedback.html'
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     def vars_for_template(self):
@@ -46,7 +46,7 @@ class Feedback1(Page):
 class Question2(Page):
     template_name = 'demo_game/Question.html'
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     form_model = models.Player
@@ -59,7 +59,7 @@ class Question2(Page):
 class Feedback2(Page):
     template_name = 'demo_game/Feedback.html'
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     def vars_for_template(self):
@@ -75,7 +75,7 @@ class Feedback2(Page):
 class Question3(Page):
     template_name = 'demo_game/Question.html'
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     form_model = models.Player
@@ -88,7 +88,7 @@ class Question3(Page):
 class Feedback3(Page):
     template_name = 'demo_game/Feedback.html'
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     def vars_for_template(self):
@@ -104,7 +104,7 @@ class Feedback3(Page):
 class Question4(Page):
     template_name = 'demo_game/Question.html'
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     form_model = models.Player
@@ -117,7 +117,7 @@ class Question4(Page):
 class Feedback4(Page):
     template_name = 'demo_game/Feedback.html'
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     def vars_for_template(self):
@@ -133,7 +133,7 @@ class Feedback4(Page):
 class Question5(Page):
     template_name = 'demo_game/Question.html'
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     form_model = models.Player
@@ -146,7 +146,7 @@ class Question5(Page):
 class Feedback5(Page):
     template_name = 'demo_game/Feedback.html'
 
-    def participate_condition(self):
+    def participate(self):
         return True
 
     def vars_for_template(self):
@@ -184,8 +184,7 @@ class Finish(Page):
     template_name = 'demo_game/Finish.html'
 
 
-def pages():
-    return [
+page_sequence=[
         Introduction,
         Question1,
         Feedback1,

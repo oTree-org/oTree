@@ -19,7 +19,7 @@ class Question1(Page):
 
     template_name = 'beauty/Question.html'
 
-    def participate_condition(self):
+    def participate(self):
         return self.subsession.round_number == 1
 
     form_model = models.Player
@@ -86,7 +86,7 @@ class Results(Page):
                 'payoff': self.player.payoff} #
 
 
-pages = [Introduction,
+page_sequence = [Introduction,
             Question1,
             Feedback1,
             Guess,

@@ -7,10 +7,12 @@
 
 {% block content %}
 
-    {% if is_training_question_1_my_payoff_correct %}
-        <p class="text-success">Your answer {{answer_you}} was correct.</p>
+
+
+    {% if player.is_training_question_1_my_payoff_correct %}
+        <p class="text-success">Your answer {{player.training_question_1_my_payoff}} was correct.</p>
     {% else %}
-        <p class="text-danger">Your answer {{answer_you}} was incorrect</p>
+        <p class="text-danger">Your answer {{player.training_question_1_my_payoff}} was incorrect</p>
     {% endif %}
 
 
@@ -20,7 +22,7 @@
         What would be your payoff?
     </p>
     <p>
-        <strong>Solution: {{correct_answer}}.</strong>
+        <strong>Solution: {{Constants.training_question_1_my_payoff_correct}}.</strong>
     </p>
     <p>
         <strong>Explanation:</strong> You bid 60 which was the highest among

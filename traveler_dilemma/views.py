@@ -27,7 +27,7 @@ class Question1(Page):
     form_fields = ['training_answer_mine', 'training_answer_others']
     question = '''Suppose that you claim the antiques are worth 50 points and the other traveler claims they are worth 100 points. What would you and the other traveler receive in compensation from the airline?'''
 
-    def participate_condition(self):
+    def participate(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -37,13 +37,12 @@ class Question1(Page):
 class Feedback1(Page):
     template_name = 'traveler_dilemma/Feedback.html'
 
-    def participate_condition(self):
+    def participate(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
         return {
-            'num_q': 1, 'mine': self.player.training_answer_mine,
-            'others': self.player.training_answer_others}
+            'num_q': 1}
 
 
 class Claim(Page):
@@ -92,7 +91,7 @@ class Results(Page):
                 ]}
 
 
-pages = [Introduction,
+page_sequence = [Introduction,
             Question1,
             Feedback1,
             Claim,

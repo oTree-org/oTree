@@ -79,7 +79,7 @@ class Results(Page):
 
 
 
-pages = [
+page_sequence = [
         Introduction,
         Question1,
         Feedback1,

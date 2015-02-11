@@ -50,7 +50,6 @@ class Transcription2(Page):
         return {'number': 2,
                 'magic_link': settings.DEBUG and Constants.show_transcription_2,
                 'transcription': Constants.reference_texts[1],
-                'debug': settings.DEBUG,
                 'error_rate_percent': int(100 * Constants.error_rate_transcription_2)}
 
     def transcription_2_error_message(self, text_user):
@@ -78,6 +77,6 @@ class Summary(Page):
                 'transcription_length_2' : len(Constants.reference_texts[1]),
         }
 
-pages = [Transcription1,
+page_sequence = [Transcription1,
             Transcription2,
             Summary]

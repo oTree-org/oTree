@@ -5,23 +5,24 @@
 Solution to Understanding Question {{ num_q }} of {{ total_q }}
 {% endblock %}
 
+
 {% block content %}
 {% ifequal mine 52 %}
 <p class="text-success">
-Your answer {{mine}} for your compensation was correct.
+Your answer {{player.training_answer_mine}} for your compensation was correct.
 </p>
 {% else %}
 <p class="text-danger">
-Your answer {{mine}} for your compensation was incorrect.
+Your answer {{player.training_answer_mine}} for your compensation was incorrect.
 </p>
 {% endifequal %}
 {% ifequal others 48 %}
 <p class="text-success">
-Your answer {{others}} for the other traveler's compensation was correct.
+Your answer {{player.training_answer_others}} for the other traveler's compensation was correct.
 </p>
 {% else %}
 <p class="text-danger">
-Your answer {{others}} for the other traveler's compensation was incorrect.
+Your answer {{player.training_answer_others}} for the other traveler's compensation was incorrect.
 </p>
 {% endifequal %}
 <p>

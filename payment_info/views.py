@@ -16,4 +16,4 @@ class RedemptionCode(Page):
                 'redemption_code': participant.label or participant.code,}
 
 
-pages = [RedemptionCode]
+page_sequence = [RedemptionCode]
