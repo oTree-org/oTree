@@ -5,9 +5,10 @@
     Results
 {% endblock %}
 
+
 {% block content %}
 <p>
-{% if volunteer %}
+{% if player.volunteer %}
 You volunteered. As a result, your payoff is <strong>100-40=60 points</strong>.
 {% elif num_volunteers > 0 %}
 You did not volunteer but some did. As a result, your payoff is <strong>100 points</strong>. 
@@ -15,7 +16,7 @@ You did not volunteer but some did. As a result, your payoff is <strong>100 poin
 You did not volunteer and no one did. As a result, your payoff is <strong>0 points</strong>.
 {% endif %}
 In addition, you received 10 points for participation.
-Thus, your total payoff is <strong>{{payoff}}</strong>.
+Thus, your total payoff is <strong>{{player.payoff}}</strong>.
 </p>
 <p>
 To complete the study, please answer a short questionnaire that will now follow.

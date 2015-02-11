@@ -66,7 +66,7 @@ class Decision(Page):
     def vars_for_template(self):
         return {'general_benefit': Constants.general_benefit,
                 'volunteer_cost': Constants.volunteer_cost,
-                'num_other_players': Constants.players_per_group - 1}
+                'num_other_players': Constants.num_other_players}
 
 
 class ResultsWaitPage(WaitPage):
@@ -80,8 +80,7 @@ class Results(Page):
     template_name = 'volunteer_dilemma/Results.html'
 
     def vars_for_template(self):
-        return {'volunteer': self.player.volunteer,
-                'payoff': self.player.payoff,
+        return {
                 'num_volunteers': len([
                     p for p in self.group.get_players() if p.volunteer])}
 
