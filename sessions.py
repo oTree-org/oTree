@@ -17,6 +17,7 @@ class SessionType(otree.session.SessionType):
     vars = {}
 
 
+
 def session_types():
 
     return [

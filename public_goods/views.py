@@ -6,9 +6,11 @@ from otree.common import Currency as c, currency_range
 from .models import Constants
 
 def vars_for_all_templates(self):
-    return {'endowment': Constants.endowment,
+    return {
+            'endowment': Constants.endowment,
             'players_per_group': Constants.players_per_group,
-            'efficiency_factor': Constants.efficiency_factor}
+            'efficiency_factor': Constants.efficiency_factor
+            }
 
 
 class Introduction(Page):
@@ -70,14 +72,14 @@ class Results(Page):
     def vars_for_template(self):
 
         return {
-            'current_player': self.player,
-            'other_players': self.player.get_others_in_group(),
-            'total_contribution': self.group.total_contribution,
+           # 'current_player': self.player,
+           # 'other_players': self.player.get_others_in_group(),
+           # 'total_contribution': self.group.total_contribution,
             'total_earnings': self.group.total_contribution * Constants.efficiency_factor,
-            'individual_share': self.group.individual_share,
+          #  'individual_share': self.group.individual_share,
             'individual_earnings': self.player.payoff - Constants.base_points,
-            'base_points': Constants.base_points,
-            'total_points': self.player.payoff
+          #  'base_points': Constants.base_points,
+          #  'total_points': self.player.payoff
         }
 
 def pages():

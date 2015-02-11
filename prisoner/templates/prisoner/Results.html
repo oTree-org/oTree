@@ -8,6 +8,8 @@
 
 {% block content %}
 
+
+
     <p>
         {% if same_choice %}
             Both of you chose to {{ my_decision }}.
@@ -19,12 +21,12 @@
     <table class="table" style="width:400px; margin-top:20px; margin-bottom:10px">
         <tr>
             <td>As a result, you earned</td>
-            <td>{{ payoff }}</td>
+            <td>{{ player.payoff }}</td>
 
         </tr>
         <tr>
             <td>In addition, you get a participation fee of</td>
-            <td>{{ base_points }}</td>
+            <td>{{ Constants.base_points }}</td>
         </tr>
         <tr>
             <td>In total, you receive</td>
