@@ -26,7 +26,7 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['training_amount_mine', 'training_amount_other']
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -37,7 +37,7 @@ class Question1(Page):
 class Feedback1(Page):
     template_name = 'bargaining/Feedback.html'
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):

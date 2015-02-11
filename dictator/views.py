@@ -21,7 +21,7 @@ class Question1(Page):
     form_fields = [
         'training_participant1_payoff', 'training_participant2_payoff']
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -31,7 +31,7 @@ class Question1(Page):
 class Feedback1(Page):
     template_name = 'dictator/Feedback.html'
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -48,7 +48,7 @@ class Offer(Page):
     form_model = models.Group
     form_fields = ['kept']
 
-    def participate(self):
+    def participate_condition(self):
         return self.player.id_in_group == 1
 
 
