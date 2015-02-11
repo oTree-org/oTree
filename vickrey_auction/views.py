@@ -8,9 +8,10 @@ from .models import Constants
 
 def vars_for_all_templates(self):
 
-    return {'total_q': 1,
-            'total_rounds': Constants.num_rounds,
-            'round_number': self.subsession.round_number}
+    return {'total_q': 1
+            # 'total_rounds': Constants.num_rounds,
+            # 'round_number': self.subsession.round_number
+            }
 
 
 class Introduction(Page):

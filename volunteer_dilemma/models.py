@@ -38,7 +38,7 @@ class Constants:
     name_in_url = 'volunteer_dilemma'
     players_per_group = 3
     num_rounds = 1
-
+    num_other_players = players_per_group - 1
     bonus = c(10)
 
     # """Payoff for each player if at least one volunteers"""
