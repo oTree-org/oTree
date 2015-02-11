@@ -17,7 +17,7 @@ class Introduction(Page):
 
     template_name = 'stag_hunt/Introduction.html'
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
 
@@ -25,7 +25,7 @@ class Question1(Page):
 
     template_name = 'stag_hunt/Question.html'
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
     form_model = models.Player
@@ -55,7 +55,7 @@ class Feedback1(Page):
 
 class Decide(Page):
 
-    def participate(self):
+    def participate_condition(self):
         return True
 
     template_name = 'stag_hunt/Decide.html'
@@ -85,7 +85,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    def participate(self):
+    def participate_condition(self):
         return True
 
     template_name = 'stag_hunt/Results.html'

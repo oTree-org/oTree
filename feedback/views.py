@@ -10,7 +10,7 @@ class Feedback(Page):
     form_model = models.Player
     form_fields = ['feedback']
 
-    def participate(self):
+    def participate_condition(self):
         return True
 
     template_name = 'feedback/Feedback.html'
