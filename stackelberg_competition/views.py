@@ -4,11 +4,13 @@ from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
 from .models import Constants
+
+
 def vars_for_all_templates(self):
 
-    return {'total_capacity': Constants.total_capacity,
-            'max_units_per_player': Constants.max_units_per_player,
-            'total_q': 1}
+    return {
+            'total_q': 1
+            }
 
 
 class Introduction(Page):
@@ -35,11 +37,12 @@ class Feedback1(Page):
         return {'num_q': 1,
                 'question': """Suppose firm A first decided to produce 20 units. Then firm B would be informed of firm A's production and decided to produce 30 units.
                                What would be the profit for firm B?""",
-                'answer': self.player.training_question_1,
-                'correct': Constants.training_1_correct,
+              #  'answer': self.player.training_question_1,
+               # 'correct': Constants.training_1_correct,
                 'explanation': """Total units produced were 20 + 30 = 50. The unit selling price was 60 – 50 = 10.
                                   The profit for firm B would be the product of the unit selling price and the unit produced by firm B, that is 10 × 30 = 300""",
-                'is_correct': self.player.is_training_question_1_correct()}
+              #  'is_correct': self.player.is_training_question_1_correct()
+              }
 
 
 class ChoiceOne(Page):
@@ -74,9 +77,9 @@ class ChoiceTwo(Page):
     form_model = models.Player
     form_fields = ['quantity']
 
-    def vars_for_template(self):
-        return {'other_quantity': self.player.other_player().quantity}
-
+    # def vars_for_template(self):
+    #     return {'other_quantity': self.player.other_player().quantity}
+    #
 
 class ResultsWaitPage(WaitPage):
 
@@ -97,14 +100,11 @@ class Results(Page):
     def vars_for_template(self):
         self.player.set_payoff()
 
-        return {'quantity': self.player.quantity,
-                'other_quantity': self.player.other_player().quantity,
+        return {
                 'total_quantity': self.player.quantity + self.player.other_player().quantity,
-                'total_capacity': Constants.total_capacity,
-                'price': self.group.price,
-                'payoff': self.player.payoff,
-                'base_points': Constants.fixed_pay,
-                'total_plus_base': self.player.payoff + Constants.fixed_pay}
+                'total_plus_base': self.player.payoff + Constants.fixed_pay
+
+                }
 
 
 pages = [Introduction,
