@@ -7,11 +7,8 @@ from .models import Constants
 
 def vars_for_all_templates(self):
 
-    return {'cooperate_amount': Constants.cooperate_amount,
-            'cooperate_defect_amount': Constants.cooperate_defect_amount,
-            'defect_amount': Constants.defect_amount,
-            'defect_cooperate_amount': Constants.defect_cooperate_amount,
-            'total_q': 1,
+    return {
+             'total_q': 1,
         }
 
 
@@ -41,11 +38,7 @@ class Feedback1(Page):
     def vars_for_template(self):
         return {'num_q': 1,
                 'question': 'Suppose Alice chose to defect and Bob chose to cooperate. How many points would Alice and Bob receive, respectively?',
-                'answer': self.player.training_question_1,
-                'correct': Constants.training_1_correct,
-                'explanation': "Alice gets 300 points, Bob gets 0 points",
-                'is_correct': self.player.is_training_question_1_correct()}
-
+                }
 
 class Decision(Page):
 
@@ -77,12 +70,13 @@ class Results(Page):
 
         self.player.set_payoff()
 
-        return {'my_decision': self.player.decision.lower(),
-                'other_player_decision': self.player.other_player().decision.lower(),
-                'same_choice': self.player.decision == self.player.other_player().decision,
-                'payoff': self.player.payoff,
-                'base_points': Constants.base_points,
-                'total_plus_base': self.player.payoff + Constants.base_points}
+        return {
+            'my_decision': self.player.decision.lower(),
+            'other_player_decision': self.player.other_player().decision.lower(),
+            'same_choice': self.player.decision == self.player.other_player().decision,
+            'total_plus_base': self.player.payoff + Constants.base_points
+        }
+
 
 
 pages = [
