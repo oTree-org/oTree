@@ -9,7 +9,7 @@
 {% block content %}
 
     <p>
-        The other firm produced {{ other_quantity }} units. How many units will you produce?
+        The other firm produced {{  player.other_player.quantity }} units. How many units will you produce?
     </p>
 
     {% formrow form.quantity with label='Number of units:' %}
