@@ -20,18 +20,20 @@
     <table class="table" style="width:400px">
         <tr>
             <td>Payoff from experiment</td>
-            <td>{{ payoff_from_subsessions }}</td>
+            <td>{{ participant.payoff_from_subsessions }}</td>
         </tr>
         <tr>
             <td>Participation fee</td>
-            <td>{{ fixed_pay }}</td>
+            <td>{{ participant.session.fixed_pay }}</td>
         </tr>
         <tr>
             <th>Total</th>
-            <th>{{ total_pay }}</th>
+            <th>{{ participant.total_pay }}</th>
         </tr>
     </table>
     -->
+
+
 
     <p>
         <em>Note: As this is a sample game, the points you earned will not be converted to a monetary value as would normally be the case.</em>

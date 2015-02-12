@@ -42,7 +42,8 @@ class Constants:
     # Total production capacity of all players
     total_capacity = 60
     max_units_per_player = int(total_capacity / players_per_group)
-
+    feedback1_question = """Suppose firm Q produced 20 units and firm P produced 30 units. What would be the profit for firm P?"""
+    feedback1_explanation=  """Total units produced were 20 + 30 = 50. The unit selling price was 60 – 50 = 10. The profit for firm P would be the product of the unit selling price and the unit produced by firm P, that is 10 × 30 = 300"""
 
 class Subsession(otree.models.BaseSubsession):
 

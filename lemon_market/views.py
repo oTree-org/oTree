@@ -72,9 +72,11 @@ class Purchase(Page):
     def participate_condition(self):
         return self.player.role() == 'buyer'
 
+
     def vars_for_template(self):
-        return {'group': self.group, 'title': 'Purchase (Period %i of %i)' % (
-            self.subsession.round_number, Constants.num_rounds)}
+        return {
+            'title': 'Purchase (Period %i of %i)' % (self.subsession.round_number, Constants.num_rounds)
+            }
 
 class SimpleWaitPage(WaitPage):
     pass
@@ -96,12 +98,12 @@ class Results(Page):
 
     def vars_for_template(self):
         buyer = self.group.get_player_by_role('buyer')
+
         return {
-            'subsession': self.subsession, 'player': self.player,
-            'payoff': self.player.payoff, 'buyer': buyer,
-            'num_rounds': Constants.num_rounds,
+
             'seller': buyer.choice and self.group.get_player_by_id(
-                buyer.choice + 1)}
+                buyer.choice + 1)
+                }
 
 
 class FinalResults(Page):

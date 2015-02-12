@@ -8,17 +8,17 @@
 {% block content %}
 
     <p>
-        The question was: {{ question }}
+        The question was: {{ Constants.feedback_question1 }}
     </p>
 
     <p>
-        You answered: {{ answer }}
+        You answered: {{ player.training_question_1 }}
     </p>
 
-    {% if is_correct %}
+    {% if player.is_training_question_1_correct %}
         <p class="text-success">Your answer is correct.</p>
     {% else %}
-        <p class="text-danger">Your answer is incorrect. {{ explanation }}.</p>
+        <p class="text-danger">Your answer is incorrect. {{ Constants.feedback1_explanation }}.</p>
     {% endif %}
 
     {% next_button %}

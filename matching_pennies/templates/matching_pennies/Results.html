@@ -10,14 +10,14 @@
 
     <p>
         {% if role == 'Player 1' %}
-            You were Player 1. You chose "{{ my_choice }}", Player 2 guessed "{{ other_choice }}".
+            You were Player 1. You chose "{{ player.penny_side }}", Player 2 guessed "{{ player.other_player.penny_side }}".
         {% else %}
-            You were Player 2. You guessed "{{ my_choice }}", Player 1 chose "{{ other_choice }}".
+            You were Player 2. You guessed "{{  player.penny_side }}", Player 1 chose "{{ player.other_player.penny_side }}".
         {% endif%}
     </p>
 
     <p>
-        In this round, you win {{ my_points }} and your opponent wins {{ other_points }}.
+        In this round, you win {{ player.payoff }} and your opponent wins {{ player.other_player.payoff }}.
     </p>
 
     <p>

@@ -33,12 +33,12 @@ class Feedback1(Page):
 
     def vars_for_template(self):
         return {'num_q': 1,
-                'question': """Suppose firm Q produced 20 units and firm P produced 30 units. What would be the profit for firm P?""",
-                'answer': self.player.training_question_1,
-                'correct': Constants.training_1_correct,
-                'explanation': """Total units produced were 20 + 30 = 50. The unit selling price was 60 – 50 = 10.
-                                  The profit for firm P would be the product of the unit selling price and the unit produced by firm P, that is 10 × 30 = 300""",
-                'is_correct': self.player.is_training_question_1_correct()}
+
+                # 'answer': self.player.training_question_1,
+                # 'correct': Constants.training_1_correct,
+                #
+                # 'is_correct': self.player.is_training_question_1_correct()
+                }
 
 
 class Decide(Page):
@@ -63,17 +63,19 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
 
     template_name = 'cournot_competition/Results.html'
-
-    def vars_for_template(self):
-
-        return {'units': self.player.units,
-                'other_units': self.player.other_player().units,
-                'total_units': self.group.total_units,
-                'total_capacity': Constants.total_capacity,
-                'price': self.group.price,
-                'payoff': self.player.payoff,
-                'base_points': Constants.base_points,
-                'total_plus_base': self.player.payoff + Constants.base_points}
+    def total_plus_base(self):
+        return self.player.payoff + Constants.base_points
+    #
+    # def vars_for_template(self):
+    #
+    #     return {'units': self.player.units,
+    #             'other_units': self.player.other_player().units,
+    #             'total_units': self.group.total_units,
+    #             'total_capacity': Constants.total_capacity,
+    #             'price': self.group.price,
+    #             'payoff': self.player.payoff,
+    #             'base_points': Constants.base_points,
+    #             'total_plus_base': self.player.payoff + Constants.base_points}
 
 
 page_sequence = [Introduction,

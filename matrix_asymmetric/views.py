@@ -12,16 +12,16 @@ class Decision(Page):
     form_model = models.Player
     form_fields = ['decision']
 
-    def vars_for_template(self):
-        return {'player_id': self.player.id_in_group,
-                'rowAcolumnA_row': Constants.rowAcolumnA_row,
-                'rowAcolumnA_column': Constants.rowAcolumnA_column,
-                'rowAcolumnB_row': Constants.rowAcolumnB_row,
-                'rowAcolumnB_column': Constants.rowAcolumnB_column,
-                'rowBcolumnA_row': Constants.rowBcolumnA_row,
-                'rowBcolumnA_column': Constants.rowBcolumnA_column,
-                'rowBcolumnB_row': Constants.rowBcolumnB_row,
-                'rowBcolumnB_column': Constants.rowBcolumnB_column}
+    # def vars_for_template(self):
+    #     return {'player_id': self.player.id_in_group,
+    #             'rowAcolumnA_row': Constants.rowAcolumnA_row,
+    #             'rowAcolumnA_column': Constants.rowAcolumnA_column,
+    #             'rowAcolumnB_row': Constants.rowAcolumnB_row,
+    #             'rowAcolumnB_column': Constants.rowAcolumnB_column,
+    #             'rowBcolumnA_row': Constants.rowBcolumnA_row,
+    #             'rowBcolumnA_column': Constants.rowBcolumnA_column,
+    #             'rowBcolumnB_row': Constants.rowBcolumnB_row,
+    #             'rowBcolumnB_column': Constants.rowBcolumnB_column}
 
 
 class ResultsWaitPage(WaitPage):
@@ -35,12 +35,16 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
 
     template_name = 'matrix_asymmetric/Results.html'
+    def same_choice(self):
+        self.player.decision == self.player.other_player().decision
 
-    def vars_for_template(self):
-        return {'payoff': self.player.payoff,
-                'my_choice': self.player.decision,
-                'other_choice': self.player.other_player().decision,
-                'same_choice': self.player.decision == self.player.other_player().decision}
+    # def vars_for_template(self):
+    #     return {
+    #             'payoff': self.player.payoff,
+    #             'my_choice': self.player.decision,
+    #             'other_choice': self.player.other_player().decision,
+    #
+    #             }
 
 
 page_sequence = [Decision,

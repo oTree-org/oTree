@@ -31,7 +31,8 @@ class Constants:
     players_per_group = None
     name_in_url = 'demo_game'
     num_rounds = 1
-
+    explanation_5 = "Any participants’ input/choice."
+    question_5 = "What kind of data is included when you export a CSV from oTree?"
     training_1_correct = 5
     training_2_correct = "Time travel (opens in pop up window)"
     training_3_correct = "Any of the above"

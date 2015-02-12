@@ -68,12 +68,14 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
 
     template_name = 'dictator/Results.html'
+    def offer(self):
+        return Constants.allocated_amount - self.group.kept
 
-    def vars_for_template(self):
-        return {'payoff': self.player.payoff,
-                'offer': Constants.allocated_amount - self.group.kept,
-                'kept': self.group.kept,
-                'player_id': self.player.id_in_group}
+    # def vars_for_template(self):
+    #     return {'payoff': self.player.payoff,
+    #             'offer': Constants.allocated_amount - self.group.kept,
+    #             'kept': self.group.kept,
+    #             'player_id': self.player.id_in_group}
 
 
 page_sequence = [Introduction,

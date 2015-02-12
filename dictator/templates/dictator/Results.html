@@ -8,12 +8,13 @@ Results
 
 {% block content %}
 <p>
-{% if player_id == 1 %}
-You decided to keep <strong>{{kept}}</strong> for yourself.
+
+{% if player.id_in_group == 1 %}
+You decided to keep <strong>{{group.kept}}</strong> for yourself.
 {% else %}
-Participant 1 decided to keep <strong>{{kept}}</strong>, so you got <strong>{{offer}}</strong>.
+Participant 1 decided to keep <strong>{{group.kept}}</strong>, so you got <strong>{{offer}}</strong>.
 {% endif %}
-In addition, you receive 10 points for participation. Thus, your total payoff is <strong>{{payoff}}</strong>.
+In addition, you receive 10 points for participation. Thus, your total payoff is <strong>{{player.payoff}}</strong>.
 </p>
 <p>
 {% next_button %}

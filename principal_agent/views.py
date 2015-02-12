@@ -78,18 +78,12 @@ class OfferWaitPage(WaitPage):
 class Accept(Page):
 
     template_name = 'principal_agent/Accept.html'
-
     def participate_condition(self):
-        return self.player.role() == 'agent'
-
+        return self.player.role()=='agent'
     form_model = models.Group
     form_fields = ['contract_accepted', 'agent_work_effort']
 
-    def vars_for_template(self):
-        return {'fixed_pay': self.group.agent_fixed_pay,
-                'EFFORT_TO_RETURN': safe_json(Constants.EFFORT_TO_RETURN),
-                'EFFORT_TO_COST': safe_json(Constants.EFFORT_TO_COST),
-                'return_share': int(self.group.agent_return_share * 100)}
+
 
 
 class ResultsWaitPage(WaitPage):
@@ -107,17 +101,13 @@ class Results(Page):
 
     template_name = 'principal_agent/Results.html'
 
+    def participate_condition(self):
+        return self.player.role()=='agent'
     def vars_for_template(self):
-        return {'accepted': self.group.contract_accepted,
-                'agent': self.player.role() == 'agent',
-                'fixed_pay': self.group.agent_fixed_pay,
-                'fixed_pay_int': int(self.group.agent_fixed_pay),
-                'return_share': int(self.group.agent_return_share * 100),
-                'effort_level': self.group.agent_work_effort,
-                'effort_cost': cost_from_effort(self.group.agent_work_effort),
-                'return': self.group.total_return,
+        return {
+                 'fixed_pay_int': int(self.group.agent_fixed_pay),
                 'received': self.player.payoff - Constants.bonus,
-                'payoff': self.player.payoff}
+                }
 
 
 page_sequence = [Introduction,

@@ -122,11 +122,12 @@ class Feedback4(Page):
 
     def vars_for_template(self):
         return {'num_q': 4,
-                'question': "What can be monitored during the experiment via the admin console?",
+       'question': "What can be monitored during the experiment via the admin console?",
                 'answer': self.player.training_question_4,
                 'correct': Constants.training_4_correct,
                 'explanation': "All of the above.",
                 'is_correct': self.player.is_training_question_4_correct(),
+
                 }
 
 
@@ -149,6 +150,7 @@ class Feedback5(Page):
     def participate_condition(self):
         return True
 
+
     def vars_for_template(self):
         return {'num_q': 5,
                 'question': "What kind of data is included when you export a CSV from oTree?",
@@ -156,6 +158,7 @@ class Feedback5(Page):
                 'correct': Constants.training_5_correct,
                 'explanation': "Any participants’ input/choice.",
                 'is_correct': self.player.is_training_question_5_correct(),
+
                 }
 
 
@@ -172,9 +175,10 @@ class Results(Page):
     def vars_for_template(self):
         if self.player.payoff is None:
             self.player.set_payoff()
-        return {
-            'payoff': self.player.payoff
-        }
+
+        # return {
+        #     'payoff': self.player.payoff
+        # }
 
     template_name = 'demo_game/Results.html'
 

@@ -10,10 +10,7 @@ class RedemptionCode(Page):
 
     def vars_for_template(self):
         participant = self.player.participant
-        return {'fixed_pay': participant.session.fixed_pay,
-                'payoff_from_subsessions': participant.payoff_from_subsessions(),
-                'total_pay': participant.total_pay(),
-                'redemption_code': participant.label or participant.code,}
+        return { 'redemption_code': participant.label or participant.code,}
 
 
 page_sequence = [RedemptionCode]

@@ -2,6 +2,7 @@
 {% load staticfiles floppyforms otree_tags %}
 {% load i18n %}
 
+
 {% block title %}
     Results
 {% endblock %}
@@ -9,8 +10,8 @@
 {% block content %}
 
     <p>
-        {% if accepted %}
-            {% if agent %}
+        {% if group.contract_accepted %}
+            {% if participate_condition %}
             You <strong>accepted</strong> the contract.
             {% else %}
             Participant B <strong>accepted</strong> your contract.
@@ -25,22 +26,22 @@
                     <th>You Received</th>
                 </tr>
                 <tr>
-                    <td>{{ fixed_pay }}</td>
-                    <td>{{ return_share }}%</td>
-                    <td>{{ effort_level }}</td>
+                    <td>{{ group.agent_fixed_pay }}</td>
+                    <td>{{ group.return_share_as_percentage }}%</td>
+                    <td>{{ group.agent_work_effort }}</td>
                     <td>{{ effort_cost }}</td>
-                    <td>{{ return }}</td>
+                    <td>{{ group.total_return }}</td>
                     <td>{{ received|floatformat }}</td>
                 </tr>
             </table>
     <p>
-    In addition to your initial 30 points, your payoff is <strong>{{payoff}}</strong>.
+    In addition to your initial 30 points, your payoff is <strong>{{player.payoff}}</strong>.
     </p>
         {% else %}
-            {% if agent %}
-            You <strong>rejected</strong> the contract. Thus you received <strong>10 points</strong>. Your payoff equals your initial 30 points plus 10, that is, <strong>{{payoff}}</strong>.
+            {% if participate_condition %}
+            You <strong>rejected</strong> the contract. Thus you received <strong>10 points</strong>. Your payoff equals your initial 30 points plus 10, that is, <strong>{{player.payoff}}</strong>.
             {% else %}
-            Participant B <strong>rejected</strong> your contract. Thus you have received nothing. Your payoff equals initial <strong>{{payoff}}</strong>.
+            Participant B <strong>rejected</strong> your contract. Thus you have received nothing. Your payoff equals initial <strong>{{player.payoff}}</strong>.
             {% endif %}
         {% endif %}
     </p>

@@ -9,22 +9,12 @@ from .models import Constants
 
 #todo: replace global vars
 
-# def vars_for_all_templates(self):
-#     return {
-#         # 'endowment': Constants.endowment,
-#         # 'reject_payoff': Constants.payoff_if_rejected,
-#         # 'strategy': self.group.strategy,
-#         # 'keep_give_amounts': Constants.keep_give_amounts,
-#         #'offer_choices_count': Constants.offer_choices_count,
-#
-#     }
-
 
 class Introduction(Page):
 
     template_name = 'ultimatum/Introduction.html'
 
-    timeout_seconds = 10
+    timeout_seconds = 60
 
 
 class Offer(Page):
@@ -37,7 +27,7 @@ class Offer(Page):
     def participate_condition(self):
         return self.player.id_in_group == 1
 
-    timeout_seconds = 10
+    timeout_seconds = 60
 
 class WaitForProposer(WaitPage):
     pass
@@ -53,7 +43,7 @@ class Accept(Page):
         return self.player.id_in_group == 2 and not self.group.strategy
 
 
-    timeout_seconds = 10
+    timeout_seconds = 60
 
 
 class AcceptStrategy(Page):

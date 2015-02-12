@@ -44,11 +44,12 @@ class Feedback1(Page):
 
     def vars_for_template(self):
         return {'num_q': 1,
-                'question': 'Suppose Player 1 picked "Heads" and Player 2 guessed "Tails". Which of the following will be the result of that round?',
-                'answer': self.player.training_question_1,
-                'correct': Constants.training_1_correct,
-                'explanation': 'Player 1 gets 100 points, Player 2 gets 0 points',
-                'is_correct': self.player.is_training_question_1_correct()}
+               # 'question': 'Suppose Player 1 picked "Heads" and Player 2 guessed "Tails". Which of the following will be the result of that round?',
+               #  'answer': self.player.training_question_1,
+               #  'correct': Constants.training_1_correct,
+              #  'explanation': 'Player 1 gets 100 points, Player 2 gets 0 points',
+              #  'is_correct': self.player.is_training_question_1_correct()
+        }
 
 
 class Choice(Page):
@@ -72,13 +73,13 @@ class Results(Page):
 
     template_name = 'matching_pennies/Results.html'
 
-    def vars_for_template(self):
-        return {'my_choice': self.player.penny_side,
-                'other_choice': self.player.other_player().penny_side,
-                'my_points': self.player.payoff,
-                'other_points': self.player.other_player().payoff,
-                'my_payoff': self.player.payoff,
-                'other_payoff': self.player.other_player().payoff}
+    # def vars_for_template(self):
+    #     return {'my_choice': self.player.penny_side,
+    #             'other_choice': self.player.other_player().penny_side,
+    #             'my_points': self.player.payoff,
+    #             'other_points': self.player.other_player().payoff,
+    #             'my_payoff': self.player.payoff,
+    #             'other_payoff': self.player.other_player().payoff}
 
 
 class ResultsSummary(Page):
@@ -91,14 +92,11 @@ class ResultsSummary(Page):
     def vars_for_template(self):
         player_in_all_rounds = self.player.in_all_rounds()
         total_payoff = sum([p.payoff for p in player_in_all_rounds])
-        base_points = 50
+
 
         return {'player_in_all_rounds': player_in_all_rounds,
-                'payoff': self.player.payoff,
-                'is_winner': self.player.is_winner,
                 'total_payoff': total_payoff,
-                'base_points': base_points,
-                'total_plus_base': total_payoff + base_points}
+                'total_plus_base': total_payoff + Constants.base_points}
 
 
 page_sequence = [Introduction,

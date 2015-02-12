@@ -8,13 +8,17 @@
 
 {% block content %}
 
+
+
+
+
     <p>
-        The value of the item is estimated to be {{ item_value_estimate }}.
-        This estimate may deviate from the actual value by at most {{ error_margin }}.
+        The value of the item is estimated to be {{ player.item_value_estimate }}.
+        This estimate may deviate from the actual value by at most {{ Constants.estimate_error_margin }}.
     </p>
 
     <p>
-        Please make your bid now. The amount can be between {{ min_bid }} and {{ max_bid }}, inclusive.
+        Please make your bid now. The amount can be between {{ Constants.min_allowable_bid }} and {{ Constants.max_allowable_bid }}, inclusive.
     </p>
 
     {% formrow form.bid_amount with label="Bid amount" %}

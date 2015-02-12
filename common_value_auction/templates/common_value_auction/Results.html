@@ -9,11 +9,11 @@
 {% block content %}
 
     <p>
-        {% if is_winner %}
+        {% if player.is_winner %}
             You won the auction!
             {% if is_greedy %}
                 However, your bid amount was higher than the actual value of the item. Your payoff is therefore zero.
-            {% elif payoff == 0 %}
+            {% elif player.payoff == 0 %}
                 Your payoff, however, is zero.
             {% endif %}
         {% else %}
@@ -31,10 +31,10 @@
         </tr>
 
     <tr>
-        <td>{{ bid_amount }}</td>
-        <td>{{ winning_bid }}</td>
-        <td>{{ item_value }}</td>
-        <td>{{ payoff }}</td>
+        <td>{{ player.bid_amount }}</td>
+        <td>{{ group.highest_bid }}</td>
+        <td>{{ group.item_value }}</td>
+        <td>{{ player.payoff }}</td>
     </tr>
 
     </table>

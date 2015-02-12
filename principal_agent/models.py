@@ -5,6 +5,7 @@ from otree.db import models
 import otree.models
 from otree import widgets
 from otree.common import Currency as c, currency_range
+import utils
 # </standard imports>
 
 
@@ -69,6 +70,7 @@ class Constants:
         [percent / 100, '{}%'.format(percent)]
         for percent in range(10, 100 + 1, 10)]
 
+    question_template = 'principal_agent/Question.html'
     EFFORT_TO_RETURN = {
         1: 14,
         2: 28,
@@ -169,6 +171,10 @@ class Group(otree.models.BaseGroup):
         principal.payoff += Constants.bonus
         agent.payoff += Constants.bonus
 
+    def return_share_as_percentage(self):
+        return utils.float_as_percentage(self.agent_return_share)
+
+
 
 class Player(otree.models.BasePlayer):
 
@@ -186,3 +192,5 @@ class Player(otree.models.BasePlayer):
             return 'principal'
         if self.id_in_group == 2:
             return 'agent'
+    def participate_condition(self):
+        return self.role() == 'agent'
