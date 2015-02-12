@@ -17,7 +17,7 @@ class Introduction(Page):
 
     template_name = 'battle_of_the_sexes/Introduction.html'
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
 
@@ -25,7 +25,7 @@ class Question1(Page):
 
     template_name = 'battle_of_the_sexes/Question.html'
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
     form_model = models.Player
@@ -53,7 +53,7 @@ class Feedback1(Page):
 
 class Decide(Page):
 
-    def participate(self):
+    def participate_condition(self):
         return True
 
     template_name = 'battle_of_the_sexes/Decide.html'
@@ -81,7 +81,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    def participate(self):
+    def participate_condition(self):
         return True
 
     template_name = 'battle_of_the_sexes/Results.html'

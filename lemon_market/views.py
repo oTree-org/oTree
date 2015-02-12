@@ -14,7 +14,7 @@ class Introduction(Page):
 
     template_name = 'global/Introduction.html'
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
 
@@ -25,7 +25,7 @@ class Question1(Page):
         'training_buyer_earnings', 'training_seller1_earnings',
         'training_seller2_earnings']
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -35,7 +35,7 @@ class Question1(Page):
 class Feedback1(Page):
     template_name = 'lemon_market/Feedback.html'
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -53,7 +53,7 @@ class Production(Page):
 
     auto_submit_values = {'price': Constants.INITIAL, 'quality': 20}
 
-    def participate(self):
+    def participate_condition(self):
         return self.player.role().startswith('seller')
 
     def vars_for_template(self):
@@ -69,7 +69,7 @@ class Purchase(Page):
     form_model = models.Player
     form_fields = ['choice']
 
-    def participate(self):
+    def participate_condition(self):
         return self.player.role() == 'buyer'
 
     def vars_for_template(self):
@@ -108,7 +108,7 @@ class FinalResults(Page):
 
     template_name = 'lemon_market/FinalResults.html'
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == Constants.num_rounds
 
     def vars_for_template(self):

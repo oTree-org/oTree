@@ -33,7 +33,7 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['training_my_payoff', 'training_other_payoff']
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -43,7 +43,7 @@ class Question1(Page):
 class Feedback1(Page):
     template_name = 'principal_agent/Feedback.html'
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -55,7 +55,7 @@ class Feedback1(Page):
 
 class Offer(Page):
 
-    def participate(self):
+    def participate_condition(self):
         return self.player.role() == 'principal'
 
     template_name = 'principal_agent/Offer.html'
@@ -79,7 +79,7 @@ class Accept(Page):
 
     template_name = 'principal_agent/Accept.html'
 
-    def participate(self):
+    def participate_condition(self):
         return self.player.role() == 'agent'
 
     form_model = models.Group

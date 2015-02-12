@@ -23,7 +23,7 @@ class Question1(Page):
 
     template_name = 'vickrey_auction/Question.html'
 
-    def participate(self):
+    def participate_condition(self):
         return self.subsession.round_number == 1
 
     form_model = models.Player
