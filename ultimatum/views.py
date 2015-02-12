@@ -7,15 +7,17 @@ from ._builtin import Page, WaitPage
 from . import models
 from .models import Constants
 
-def vars_for_all_templates(self):
-    return {
-        'endowment': Constants.endowment,
-        'reject_payoff': Constants.payoff_if_rejected,
-        'strategy': self.group.strategy,
-        'keep_give_amounts': Constants.keep_give_amounts,
-        'offer_choices_count': len(Constants.offer_choices),
+#todo: replace global vars
 
-    }
+# def vars_for_all_templates(self):
+#     return {
+#         # 'endowment': Constants.endowment,
+#         # 'reject_payoff': Constants.payoff_if_rejected,
+#         # 'strategy': self.group.strategy,
+#         # 'keep_give_amounts': Constants.keep_give_amounts,
+#         #'offer_choices_count': Constants.offer_choices_count,
+#
+#     }
 
 
 class Introduction(Page):
@@ -50,11 +52,6 @@ class Accept(Page):
     def participate_condition(self):
         return self.player.id_in_group == 2 and not self.group.strategy
 
-    def vars_for_template(self):
-
-        return {
-            'amount_offered': self.group.amount_offered,
-        }
 
     timeout_seconds = 10
 
@@ -81,19 +78,9 @@ class Results(Page):
     template_name = 'ultimatum/Results.html'
 
 
-    def vars_for_template(self):
-
-        return {
-            'player_index': self.player.id_in_group,
-            'amount_offered': self.group.amount_offered,
-            'offer_accepted': self.group.offer_accepted,
-            'payoff': self.player.payoff,
-        }
 
 
-def pages():
-
-    return [Introduction,
+page_sequence = [Introduction,
             Offer,
             WaitForProposer,
             Accept,

@@ -5,23 +5,24 @@
 Solution to Understanding Question {{ num_q }} of {{ total_q }}
 {% endblock %}
 
+
 {% block content %}
 {% ifequal x 130 %}
 <p class="text-success">
-Your answer {{x}} for participant A was correct.
+Your answer {{player.training_answer_x}} for participant A was correct.
 </p>
 {% else %}
 <p class="text-danger">
-Your answer {{x}} for participant A was incorrect.
+Your answer {{player.training_answer_x}} for participant A was incorrect.
 </p>
 {% endifequal %}
 {% ifequal y 10 %}
 <p class="text-success">
-Your answer {{y}} for participant B was correct.
+Your answer {{player.training_answer_y}} for participant B was correct.
 </p>
 {% else %}
 <p class="text-danger">
-Your answer {{y}} for participant B was incorrect.
+Your answer {{player.training_answer_y}} for participant B was incorrect.
 </p>
 {% endifequal %}
 <p>

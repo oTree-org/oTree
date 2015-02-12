@@ -42,8 +42,7 @@ class Feedback1(Page):
 
     def vars_for_template(self):
         return {
-            'num_q': 1, 'mine': self.player.training_answer_mine,
-            'others': self.player.training_answer_others}
+            'num_q': 1}
 
 
 class Claim(Page):
@@ -92,9 +91,7 @@ class Results(Page):
                 ]}
 
 
-def pages():
-
-    return [Introduction,
+page_sequence = [Introduction,
             Question1,
             Feedback1,
             Claim,

@@ -94,9 +94,7 @@ class Results(Page):
                 'total_payoff': self.player.payoff + 10}
 
 
-def pages():
-
-    return [Introduction,
+page_sequence = [Introduction,
             Question1,
             Feedback1,
             Decide,

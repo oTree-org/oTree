@@ -8,10 +8,11 @@
 
 {% block content %}
 
+
     <p>
-        You went for a <strong>{{ decision|lower }}</strong> and the other
-        participant went for a <strong>{{ other_decision|lower }}</strong>.
-        As a result, your payoff is <strong>{{ payoff }}</strong>.
+        You went for a <strong>{{ player.decision|lower }}</strong> and the other
+        participant went for a <strong>{{ player.other_player.decision|lower }}</strong>.
+        As a result, your payoff is <strong>{{ player.payoff }}</strong>.
         In addition, you received 10 points for participation. Thus, your
         total payoff is <strong>{{ total_payoff }}</strong>.
     </p>

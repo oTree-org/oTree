@@ -52,9 +52,7 @@ class Results(Page):
                 'payoff': self.player.payoff}
 
 
-def pages():
-
-    return [Introduction,
+page_sequence = [Introduction,
             Bid,
             ResultsWaitPage,
             Results]

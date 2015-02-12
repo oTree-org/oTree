@@ -79,9 +79,7 @@ class Results(Page):
 
 
 
-def pages():
-
-    return [
+page_sequence = [
         Introduction,
         Question1,
         Feedback1,

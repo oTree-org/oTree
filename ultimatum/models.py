@@ -26,7 +26,7 @@ class Constants:
     offer_increment = c(10)
 
     offer_choices = currency_range(0, endowment, offer_increment)
-
+    offer_choices_count = len(offer_choices)
     keep_give_amounts = [(offer, endowment - offer) for offer in offer_choices]
 
 class Subsession(otree.models.BaseSubsession):
@@ -34,8 +34,8 @@ class Subsession(otree.models.BaseSubsession):
     def initialize(self):
         # randomize to treatments
         for g in self.get_groups():
-            if 'strategy' in self.session.session_type.vars:
-                g.strategy = self.session.session_type.vars['strategy']
+            if 'treatment' in self.session.session_type:
+                g.strategy = self.session.session_type['treatment'] == 'strategy'
             else:
                 g.strategy = random.choice([True, False])
 

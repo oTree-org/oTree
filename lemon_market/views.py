@@ -142,8 +142,7 @@ class FinalResults(Page):
         return data
 
 
-def pages():
-    return [
+page_sequence = [
         Introduction,
         Question1,
         Feedback1,

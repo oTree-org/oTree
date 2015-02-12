@@ -18,5 +18,5 @@ class Feedback(Page):
     def after_next_button(self):
         self.player.payoff = 0
 
-def pages():
-    return [Feedback]
+page_sequence= [
+     Feedback]

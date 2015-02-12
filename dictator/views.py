@@ -76,9 +76,7 @@ class Results(Page):
                 'player_id': self.player.id_in_group}
 
 
-def pages():
-
-    return [Introduction,
+page_sequence = [Introduction,
             Question1,
             Feedback1,
             Offer,

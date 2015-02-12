@@ -37,8 +37,6 @@ class End(Page):
         return None
 
 
-def pages():
-
-    return [Demographics,
+page_sequence = [Demographics,
             CognitiveReflectionTest,
             End]

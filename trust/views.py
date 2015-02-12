@@ -46,8 +46,7 @@ class Feedback1(Page):
 
     def vars_for_template(self):
         return {
-            'num_q': 1, 'x': self.player.training_answer_x,
-            'y': self.player.training_answer_y
+            'num_q': 1,
         }
 
 
@@ -67,8 +66,6 @@ class Send(Page):
     def participate_condition(self):
         return self.player.id_in_group == 1
 
-    def vars_for_template(self):
-        return {'amount_allocated': Constants.amount_allocated}
 
 
 class SendBack(Page):
@@ -88,7 +85,6 @@ class SendBack(Page):
         tripled_amount = self.group.sent_amount * Constants.multiplication_factor
 
         return {'amount_allocated': Constants.amount_allocated,
-                'sent_amount': self.group.sent_amount,
                 'tripled_amount': tripled_amount,
                 'prompt':
                 'Please enter a number from 0 to %s:' % tripled_amount}
@@ -111,17 +107,11 @@ class Results(Page):
         tripled_amount = self.group.sent_amount * Constants.multiplication_factor
 
         return {'amount_allocated': Constants.amount_allocated,
-                'sent_amount': self.group.sent_amount,
-                'tripled_amount': tripled_amount,
-                'sent_back_amount': self.group.sent_back_amount,
-                'role': self.player.role(),
-                'bonus': Constants.bonus,
                 'result': self.player.payoff - Constants.bonus,
-                'total': self.player.payoff}
+                }
 
 
-def pages():
-    return [
+page_sequence =  [
         Introduction,
         Question1,
         Feedback1,

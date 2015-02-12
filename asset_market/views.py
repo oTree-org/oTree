@@ -209,8 +209,7 @@ class Results(Page):
         }
 
 
-def pages():
-    return [
+page_sequence=[
         #~ Introduction,
         #~ Instructions,
         #~ Question1,

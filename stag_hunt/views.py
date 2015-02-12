@@ -45,11 +45,11 @@ class Feedback1(Page):
         return {
             'num_q': 1,
 
-            'is_training_question_1_my_payoff_correct': self.player.is_training_question_1_my_payoff_correct(),
-            'answer_you': self.player.training_question_1_my_payoff,
-
-            'is_training_question_1_other_payoff_correct': self.player.is_training_question_1_other_payoff_correct(),
-            'answer_other': self.player.training_question_1_other_payoff,
+            # 'is_training_question_1_my_payoff_correct': self.player.is_training_question_1_my_payoff_correct(),
+            # 'answer_you': self.player.training_question_1_my_payoff,
+            #
+            # 'is_training_question_1_other_payoff_correct': self.player.is_training_question_1_other_payoff_correct(),
+            # 'answer_other': self.player.training_question_1_other_payoff,
         }
 
 
@@ -92,15 +92,11 @@ class Results(Page):
 
     def vars_for_template(self):
 
-        return {'payoff': self.player.payoff,
-                'decision': self.player.decision,
-                'other_decision': self.player.other_player().decision,
-                'total_payoff': self.player.payoff + Constants.fixed_pay}
+        return {
+             'total_payoff': self.player.payoff + Constants.fixed_pay}
 
 
-def pages():
-
-    return [Introduction,
+page_sequence = [Introduction,
             Question1,
             Feedback1,
             Decide,

@@ -43,8 +43,6 @@ class Results(Page):
                 'same_choice': self.player.decision == self.player.other_player().decision}
 
 
-def pages():
-
-    return [Decision,
+page_sequence = [Decision,
             ResultsWaitPage,
             Results]

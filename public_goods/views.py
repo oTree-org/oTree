@@ -82,9 +82,7 @@ class Results(Page):
           #  'total_points': self.player.payoff
         }
 
-def pages():
-
-    return [Introduction,
+page_sequence = [Introduction,
             Question,
             Feedback,
             Contribute,

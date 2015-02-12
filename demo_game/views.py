@@ -184,8 +184,7 @@ class Finish(Page):
     template_name = 'demo_game/Finish.html'
 
 
-def pages():
-    return [
+page_sequence=[
         Introduction,
         Question1,
         Feedback1,
