@@ -75,12 +75,12 @@ _TODO:_
 
 ### Installer
 
-You can download installer at our official [web-site](www.otree.org/download/)
+You can download the installer [here](http://www.otree.org/download/)
 
 
 ### Manual setup
 
-An alternative to using the installer  is to do commandline manual setup.
+An alternative to using the installer is to do a command-line manual setup.
 
 Install Git:
 * On Windows, install [msysgit](http://msysgit.github.io/) (during installation, select the option to add git to your path)
