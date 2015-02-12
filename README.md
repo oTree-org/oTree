@@ -22,13 +22,7 @@ After forking & cloning the repo:
     ./otree resetdb
     ./otree runserver
 
-## Documentation
-https://github.com/oTree-org/oTree/wiki
 
-## Contact
-chris@otree.org (you can also add me on Skype by searching this email address; please mention oTree in your contact request)
-
-Please contact me if you find any bugs or issues in oTree.
 
 ## Prerequisites
 
@@ -1076,3 +1070,9 @@ _Example 1:_
 
 _Example 2:_
 ![](http://i.imgur.com/BtG8ZHX.png)
+
+
+## Contact
+chris@otree.org (you can also add me on Skype by searching this email address; please mention oTree in your contact request)
+
+Please contact me if you find any bugs or issues in oTree.
