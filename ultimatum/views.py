@@ -34,7 +34,7 @@ class Offer(Page):
     form_model = models.Group
     form_fields = ['amount_offered']
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.player.id_in_group == 1
 
     timeout_seconds = 10
@@ -49,7 +49,7 @@ class Accept(Page):
     form_model = models.Group
     form_fields = ['offer_accepted']
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.player.id_in_group == 2 and not self.group.strategy
 
 
@@ -63,7 +63,7 @@ class AcceptStrategy(Page):
     form_model = models.Group
     form_fields = ['response_{}'.format(int(i)) for i in Constants.offer_choices]
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.player.id_in_group == 2 and self.group.strategy
 
 

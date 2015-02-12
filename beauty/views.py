@@ -19,7 +19,7 @@ class Question1(Page):
 
     template_name = 'beauty/Question.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     form_model = models.Player

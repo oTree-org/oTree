@@ -31,7 +31,7 @@ class Question1(Page):
         'have?'
     )
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -41,7 +41,7 @@ class Question1(Page):
 class Feedback1(Page):
     template_name = 'trust/Feedback.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -63,7 +63,7 @@ class Send(Page):
     form_model = models.Group
     form_fields = ['sent_amount']
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.player.id_in_group == 1
 
 
@@ -78,7 +78,7 @@ class SendBack(Page):
     form_model = models.Group
     form_fields = ['sent_back_amount']
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.player.id_in_group == 2
 
     def vars_for_template(self):

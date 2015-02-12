@@ -17,7 +17,7 @@ class Introduction(Page):
 
     template_name = 'matching_pennies/Introduction.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
 
@@ -25,7 +25,7 @@ class Question1(Page):
 
     template_name = 'matching_pennies/Question.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     form_model = models.Player
@@ -39,7 +39,7 @@ class Feedback1(Page):
 
     template_name = 'matching_pennies/Feedback.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -85,7 +85,7 @@ class ResultsSummary(Page):
 
     template_name = 'matching_pennies/ResultsSummary.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == Constants.num_rounds
 
     def vars_for_template(self):

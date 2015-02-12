@@ -154,7 +154,7 @@ Each subsession is created by an oTree app. The above session would require 3 di
 * Ultimatum game
 * Questionnaire
 
-You can define your session's properties in `sessions.py`. Here are the parameters for the above example:
+You can define your session's properties in `settings.py`. Here are the parameters for the above example:
 
     SessionType(
         name='my_session',
@@ -235,7 +235,7 @@ Go to ``settings.py`` and append your app's name (as a string) to ``INSTALLED_OT
         'myappname',
     ]
 
-Then go to `sessions.py` and create an entry for your app that looks like the other entries (more on how to customize that later).
+Then go to `settings.py` and create an entry for your app that looks like the other entries (more on how to customize that later).
 
 ## Models
 
@@ -610,7 +610,7 @@ Then, in the view code, you can access the participant's color with `self.player
 
 ## Choosing which treatment to play
 
-In the above example, players got randomized to treatments. This is useful in a live experiment, but when you are testing your game, it is often useful to choose explicitly which treatment to play. Let's say you are developing the game from the above example and want to show your colleagues both treatments (red and blue). You can create 2 session types in sessions.py that have all the same arguments to `SessionType`, except the `vars` argument:
+In the above example, players got randomized to treatments. This is useful in a live experiment, but when you are testing your game, it is often useful to choose explicitly which treatment to play. Let's say you are developing the game from the above example and want to show your colleagues both treatments (red and blue). You can create 2 session types in settings.py that have all the same arguments to `SessionType`, except the `vars` argument:
 
 ```
 def session_types():
@@ -673,7 +673,7 @@ either through `player.participant.session.vars` or `player.subsession.session.v
 
 This is a dictionary just like `participant.vars`.
 
-Also, you can pass a dictionary called `vars` to a `SessionType` in `sessions.py`. For example, you could use this
+Also, you can pass a dictionary called `vars` to a `SessionType` in `settings.py`. For example, you could use this
 if you want 2 session types on the demo page that both play through the same app but have some parameter that is different
 (e.g. each `SessionType` represents a different treatment group). You can access the `SessionType` from your app's code
 with `subsession.session.session_type` or `player.participant.session.session_type`.
@@ -697,7 +697,7 @@ This command will create your app in one command. It does the following:
 
 After running this script, open your PyCharm window and select "Run > Debug". Your app should be set to "Django server". When you launch it, a browser window will open to the demo page, where you can test your game. Click on a session name and you will get a start link for the experimenter, as well as the links for all the participants. You can open all the start links in different tabs and simulate playing as multiple participants simultaneously.
 
-You can send the demo page link to your colleagues or publish it to a public audience. You can modify the `show_on_demo_page` attribute for your session in `sessions.py` to control whether a given session is listed on the demo page. If you don't want a demo page at all, make this function return `False`.
+You can send the demo page link to your colleagues or publish it to a public audience. You can modify the `show_on_demo_page` attribute for your session in `settings.py` to control whether a given session is listed on the demo page. If you don't want a demo page at all, make this function return `False`.
 
 ### Debugging
 Once you start playing your app, you will sometimes get a yellow Django error page with lots of details. To troubleshoot this, look at the error message and "Exception location" fields. If the exception location is somewhere outside of your app's code (like if it points to an installed module like Django or oTree), look through the "Traceback" section to see if it passes through your code. Once you have found a reference to a line of code in your app, go to that line of code and see if the error message can help you pinpoint an error in your code. Googling the error name or message will often take you to pages that explain the meaning of the error and how to fix it.
@@ -718,13 +718,13 @@ This automated test system saves the programmer the time and frustration of havi
 ### Launching tests
 oTree tests entire sessions, rather that individual apps in isolation. This is to make sure the entire session runs, just as participants will play it in the lab.
 
-Let's say you want to test the session named `ultimatum_game` in `sessions.py`. To test, run the following command from your project's root directory:
+Let's say you want to test the session named `ultimatum_game` in `settings.py`. To test, run the following command from your project's root directory:
 
     ./otree test ultimatum_game
 
-This command will test the session, with the number of participants specified in `sessions.py`. For example, `num_bots` is 30, then when you run the tests, 30 bots will be instantiated and will play concurrently.
+This command will test the session, with the number of participants specified in `settings.py`. For example, `num_bots` is 30, then when you run the tests, 30 bots will be instantiated and will play concurrently.
 
-To run tests for all sessions in `sessions.py`, run:
+To run tests for all sessions in `settings.py`, run:
 
     ./otree test
 
@@ -791,7 +791,7 @@ Note: instead of using Python's built-in `range` function, you should use oTree'
 ### Points
 Sometimes it is preferable for players to play games not for real money but for points or "experimental currency units", which are converted to real money at the end of the session. You can set `USE_POINTS = True` in `settings.py`, and then in-game currency amounts will be expressed in points rather than real money.
 
-For example, `c(10)` is displayed as `10 points`. You can specify the conversion rate to real money in `sessions.py` by providing a `money_per_point` argument to the `SessionType`. For example, if you pay the user 2 cents per point, you would set `money_per_point = 0.02`.
+For example, `c(10)` is displayed as `10 points`. You can specify the conversion rate to real money in `settings.py` by providing a `money_per_point` argument to the `SessionType`. For example, if you pay the user 2 cents per point, you would set `money_per_point = 0.02`.
 
 You can convert a point amount to money using the `to_money()` method,
 which takes as an argument the current subsession
@@ -947,7 +947,7 @@ Examples of code that could confuse a newcomer:
 * Don't delete unused imports in the <standard imports> section; a user should always be able to rely on those being there.
 
 ### Don't repeat yourself
-* If a certain page is being repeated in multiple apps, it may be better suited as a separate app that gets added to `app_sequence` for each session in `sessions.py`. Examples: surveys and feedback pages.
+* If a certain page is being repeated in multiple apps, it may be better suited as a separate app that gets added to `app_sequence` for each session in `settings.py`. Examples: surveys and feedback pages.
 * You should obey to Django's "Don't repeat yourself" principle: "Every distinct concept and/or piece of data should live in one, and only one, place. Redundancy is bad."
  * Numeric constants, even simple ones like 0.5 or 3, should go in the `Constants` class
 
