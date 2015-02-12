@@ -21,31 +21,15 @@ chris@otree.org (you can also add me on Skype by searching this email address; p
 
 Please contact me if you find any bugs or issues in oTree or this documentation. oTree is under heavy development, therefore documentation might contain discrepancies with actual API.
 
-
-
 ## Quick start
-After forking & cloning the repo:
 
     pip install -r requirements_base.txt
     ./otree resetdb
     ./otree runserver
 
+### Prerequisites
 
-
-## Prerequisites
-
-This page is written for people who may not have Python development experience, and covers the basics of the command line, Python, pip, and an IDE. If you know about these tools, you can skip this page.
-
-## Basic understanding of command line
-
-You need a basic understanding of your operating system's command prompt (Terminal on Mac, or PowerShell on Windows), like ``ls``, ``cd``, ``mv``, and ``sudo``.
-
-## Python installation
-You will write your oTree apps in [Python](http://www.python.org/).
-
-### Installation
-
-#### Python interpreter
+### Python interpreter
 
 Install [Python 2.7](https://www.python.org/download/releases/2.7.7/).
 
@@ -53,9 +37,7 @@ On Windows, select the option to add Python to your PATH while installing.
 
 On Mac/Unix, it is very likely that Python is already installed. Open the Terminal and write ``python`` and hit Enter. If you get something like `-bash: python: command not found` you will have to install it yourself.
 
-
-
-## PyCharm
+### PyCharm
 
 To ease the learning curve of oTree, we strongly recommend using [PyCharm Professional](http://www.jetbrains.com/pycharm/), even though there are many other good editors for Python code. This is because:
 
