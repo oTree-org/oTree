@@ -15,6 +15,14 @@ See the live demo [here](http://demo.otree.org/).
 
 This repository contains the games; the oTree core libraries are [here](https://github.com/oTree-org/otree-core).
 
+
+## Contact
+chris@otree.org (you can also add me on Skype by searching this email address; please mention oTree in your contact request)
+
+Please contact me if you find any bugs or issues in oTree or this documentation. oTree is under heavy development, therefore documentation might contain discrepancies with actual API.
+
+
+
 ## Quick start
 After forking & cloning the repo:
 
@@ -39,27 +47,12 @@ You will write your oTree apps in [Python](http://www.python.org/).
 
 #### Python interpreter
 
-Install [Python](http://www.python.org/) version 2.7 (not 3.X).
+Install [Python 2.7](https://www.python.org/download/releases/2.7.7/).
 
 On Windows, select the option to add Python to your PATH while installing.
 
 On Mac/Unix, it is very likely that Python is already installed. Open the Terminal and write ``python`` and hit Enter. If you get something like `-bash: python: command not found` you will have to install it yourself.
 
-#### Pip
-
-You will need a program called Pip in order to install packages.
-
-Then, download [get-pip.py](https://raw.github.com/pypa/pip/master/contrib/get-pip.py).
-
-On Windows, right-click the Windows PowerShell app icon, then click "Run as administrator" and run this command:
-
-`python get-pip.py`
-
-On Mac/Unix, run:
-
-`sudo python get-pip.py`
-
-You will be asked to enter the admin password.
 
 
 ## PyCharm
@@ -80,44 +73,54 @@ _TODO:_
 
 ## Setup
 
-## Choose a location for your oTree work
+### Installer
 
-Choose where on your computer you want to store your oTree work.
-It can be anywhere, like a folder in "My Documents" or "Documents".
+You can download installer at our official [web-site](www.otree.org/download/)
 
-## Fork our repository
 
-Create a GitHub account if you don't have one.
+### Manual setup
+
+An alternative to using the installer  is to do commandline manual setup.
 
 Install Git:
 * On Windows, install [msysgit](http://msysgit.github.io/) (during installation, select the option to add git to your path)
 * [TODO: Mac]
 
-Go to https://github.com/oTree-org/otree, and in the top-right corner of the page, click Fork.
+#### Pip
 
-## Clone the repository
+You will need a program called Pip in order to install packages.
 
-Right now, you have a fork of the oTree repository on GitHub, but you don't have the files in that repository on your computer. Let's create a clone of your fork locally on your computer.
+Then, download [get-pip.py](https://raw.github.com/pypa/pip/master/contrib/get-pip.py).
 
-1. On GitHub, navigate to your fork of the oTree repository.
-2. In the right sidebar of your fork's repository page, copy the clone URL for your fork.
-3. Open Terminal (for Mac and Linux users) or the command line (for Windows users).
-4. Go to the folder on your PC where you want to work on oTree (the next command will create an `oTree` folder here)
-4. Enter `git clone https://github.com/YOUR-USERNAME/oTree.git` 
-5. Enter `git remote add upstream https://github.com/oTree-org/oTree.git`
+On Windows, right-click the Windows PowerShell app icon, then click "Run as administrator" and run this command:
 
-## Install dependencies
+`python get-pip.py`
+
+On Mac/Unix, run:
+
+`sudo python get-pip.py`
+
+You will be asked to enter the admin password.
+
+
+#### Clone the repository
+
+1. Open Terminal (for Mac and Linux users) or the command line (for Windows users).
+2. On GitHub, navigate to your folder on your computer where you want your oTree repository to reside.
+3. Enter `git clone https://github.com/oTree-org/oTree.git`
+
+#### Install dependencies
 Change into the `oTree` directory (the one containing `requirements_base.txt`), and run the following command:
 
 `pip install -r requirements_base.txt`
 
-## Create the database
+#### Create the database
 
 Run the following command (which creates the database):
 
 `./otree resetdb`
 	
-## Test that it worked
+#### Test that it worked
 
 Run the command `./otree runserver`.
 You should see the following output on the command line::
@@ -133,7 +136,7 @@ You should see the following output on the command line::
 Now that the server's running, visit `http://127.0.0.1:8000/` with your Web
 browser.
 
-##Sessions
+## Sessions
 
 In oTree, the term "session" refers to an event where a group of people spend time taking part in oTree experiments.
 
@@ -156,11 +159,11 @@ Each subsession is created by an oTree app. The above session would require 3 di
 
 You can define your session's properties in `settings.py`. Here are the parameters for the above example:
 
-    SessionType(
-        name='my_session',
-        fixed_pay=1000,
-        app_sequence=['trust', 'ultimatum', 'questionnaire'],
-    )        
+         {
+        'name':'my_session',
+        'fixed_pay':1000,
+        'app_sequence':['trust', 'ultimatum', 'questionnaire'],
+         }
 
 ## Players vs. participants
 
@@ -226,21 +229,12 @@ When the project opens, on the left-hand site you should see a directory tree th
             views.py
 
 
-
-## Install your new app
-          
-Go to ``settings.py`` and append your app's name (as a string) to ``INSTALLED_OTREE_APPS``, like this::
-    
-    INSTALLED_OTREE_APPS = [
-        'myappname',
-    ]
-
-Then go to `settings.py` and create an entry for your app that looks like the other entries (more on how to customize that later).
+Then go to `settings.py` and create an entry for your app in SESSION_TYPES that looks like the other entries (more on how to customize that later).
 
 ## Models
 
 The purpose of running an experiment is to record data:
-* what treatments are in your experiment, what games were played in those treatments,
+* what treatments are in your expefriment, what games were played in those treatments,
 * what the results were,
 * what actions the players took, etc.
 
@@ -369,10 +363,10 @@ Each page that your players see is defined by a `Page` class in `views.py`. (You
 
 For example, if your experiment involves showing the player a sequence of 5 pages, your `views.py` should contain 5 page classes.
 
-At the bottom of your `views.py`, you must have a `pages()` function that specifies the order in which players are routed through your pages. For example:
+At the bottom of your `views.py`, you must have a `page_sequence` variable that specifies the order in which players are routed through your pages. For example:
 
-    def pages():
-        return [Start, Offer, Accept, Results]
+     page_sequence=[
+        Start, Offer, Accept, Results]
 
 This function should list all pages that anybody will see. You can filter individual pages from being seen.
 
@@ -421,6 +415,8 @@ be auto-submitted.
 
 
 ### `def vars_for_template(self)`
+
+oTree automatically passes Group, Player and Subsession objects to the template, so you can access them in the following format: `{{Constants.payoff_if_rejected}}`
 
 Get any variables that will be passed to the HTML template. Add them to the dictionary as key-value pairs.
 
@@ -610,31 +606,33 @@ Then, in the view code, you can access the participant's color with `self.player
 
 ## Choosing which treatment to play
 
-In the above example, players got randomized to treatments. This is useful in a live experiment, but when you are testing your game, it is often useful to choose explicitly which treatment to play. Let's say you are developing the game from the above example and want to show your colleagues both treatments (red and blue). You can create 2 session types in settings.py that have all the same arguments to `SessionType`, except the `vars` argument:
+In the above example, players got randomized to treatments. This is useful in a live experiment, but when you are testing your game, it is often useful to choose explicitly which treatment to play. Let's say you are developing the game from the above example and want to show your colleagues both treatments (red and blue). You can create 2 session types in settings.py that have the same keys to session type dictionary , except the `treatment` key:
 
 ```
-def session_types():
-    return [
-        SessionType(
-            name='my_game_blue',
+SESSION_TYPES =  
+      [
+        {
+            'name':'my_game_blue',
             # other arguments...
-            vars={'color': 'blue'},
-        ),
-        SessionType(
-            name='my_game_red',
+
+            'treatment':'blue',
+
+        },
+        {
+           'name':'my_game_red',
             # other arguments...
-            vars={'color': 'red'},
-        ),
-    ]
+            'treatment':'red',
+        },
+     ]
 ```
 
 Then in the `initialize` method, you can check which of the 2 session types it is:
 
     def initialize(self):
         for p in self.get_players():
-            if 'color' in self.session.session_type.vars:
+            if 'treatment' in self.session.session_type:
                 # demo mode
-                p.color = self.session.session_type.vars['color']
+                p.color = self.session.session_type['treatment']
             else:
                 # live experiment mode
                 p.color = random.choice(['blue', 'red'])
@@ -672,12 +670,6 @@ For session-wide globals, you can use `session.vars`,
 either through `player.participant.session.vars` or `player.subsession.session.vars` (both are equivalent).
 
 This is a dictionary just like `participant.vars`.
-
-Also, you can pass a dictionary called `vars` to a `SessionType` in `settings.py`. For example, you could use this
-if you want 2 session types on the demo page that both play through the same app but have some parameter that is different
-(e.g. each `SessionType` represents a different treatment group). You can access the `SessionType` from your app's code
-with `subsession.session.session_type` or `player.participant.session.session_type`.
-
 
 ## Trying your app
 
@@ -791,7 +783,7 @@ Note: instead of using Python's built-in `range` function, you should use oTree'
 ### Points
 Sometimes it is preferable for players to play games not for real money but for points or "experimental currency units", which are converted to real money at the end of the session. You can set `USE_POINTS = True` in `settings.py`, and then in-game currency amounts will be expressed in points rather than real money.
 
-For example, `c(10)` is displayed as `10 points`. You can specify the conversion rate to real money in `settings.py` by providing a `money_per_point` argument to the `SessionType`. For example, if you pay the user 2 cents per point, you would set `money_per_point = 0.02`.
+For example, `c(10)` is displayed as `10 points`. You can specify the conversion rate to real money in `settings.py` by providing a `money_per_point` key in the session type dictionary. For example, if you pay the user 2 cents per point, you would set `money_per_point = 0.02`.
 
 You can convert a point amount to money using the `to_money()` method,
 which takes as an argument the current subsession
@@ -928,7 +920,7 @@ While your session is ongoing, you can monitor the live progress in the admin in
 
 Experiments can be launched to participants playing over the internet, in a similar way to how experiments are launched the lab. Login to the admin, create a session, then distribute the links to participants via email or a website.
 
-In a lab, you usually can start all participants at the same time, but this is often not possible online, because some participants might click your link hours after other participants. If your game requires players to play in groups, you may want to set the `group_by_arrival_time` argument on the `SessionType` to `True`. This will group players in the order in which they arrive to your site, rather than randomly, so that players who arrive around the same time play with each other.
+In a lab, you usually can start all participants at the same time, but this is often not possible online, because some participants might click your link hours after other participants. If your game requires players to play in groups, you may want to set the `group_by_arrival_time` key in  session type dictionary to `True`. This will group players in the order in which they arrive to your site, rather than randomly, so that players who arrive around the same time play with each other.
 
 ## For Django Devs
 
@@ -1071,8 +1063,3 @@ _Example 1:_
 _Example 2:_
 ![](http://i.imgur.com/BtG8ZHX.png)
 
-
-## Contact
-chris@otree.org (you can also add me on Skype by searching this email address; please mention oTree in your contact request)
-
-Please contact me if you find any bugs or issues in oTree.
