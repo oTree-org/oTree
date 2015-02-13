@@ -413,13 +413,13 @@ Note that this method will be re-executed each time the player refreshes the pag
     if self.player.payoff is None:
         self.player.payoff = randint(0,100)
 
-### `def participate_condition(self)`
+### `def is_displayed(self)`
 
 Should return True if the page should be shown, and False if the page should be skipped. Default behavior is to show the page.
 
 For example, if you only want a page to be shown to P2 in each group:
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.player.id_in_group == 2
     
 ### `def after_next_button(self)`
