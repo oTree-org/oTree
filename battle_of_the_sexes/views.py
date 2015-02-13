@@ -7,10 +7,12 @@ from .models import Constants
 
 def vars_for_all_templates(self):
 
-    return {'total_q': 1,
+    return {
+            'total_q': 1,
             'total_rounds': Constants.num_rounds,
             'round_number': self.subsession.round_number,
-            'role': self.player.role()}
+            'role': self.player.role()
+           }
 
 
 class Introduction(Page):
@@ -42,8 +44,7 @@ class Feedback1(Page):
     def vars_for_template(self):
         return {
             'num_q': 1,
-
-        }
+               }
 
 
 class Decide(Page):

@@ -31,13 +31,13 @@ class Constants:
     players_per_group = 2
     num_rounds = 1
 
-    self_A_other_A = c(0.10)
+    self_A_other_A = 0.10
 
     # How much I make if I choose A and the other player chooses B
-    self_A_other_B = c(0.00)
+    self_A_other_B = 0.00
 
-    self_B_other_A = c(0.30)
-    self_B_other_B = c(0.40)
+    self_B_other_A = 0.30
+    self_B_other_B = 0.40
 
 
 class Subsession(otree.models.BaseSubsession):

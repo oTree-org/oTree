@@ -139,9 +139,10 @@ class Transaction(Page):
     def buy(self):
         return True if self.player.order_type == 'Buy' else False
 
-    def transaction_price(self):
-        return self.group.transaction_price or 0
-
+    def vars_for_template(self):
+        return {
+            'transaction_price':group.transaction_price or 0
+        }
 
 class DividendWaitPage(WaitPage):
 
