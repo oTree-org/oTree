@@ -43,8 +43,7 @@ class Feedback1(Page):
     def vars_for_template(self):
         return {
             'num_q': 1,
-            'mine':self.player.training_amount_mine,
-            'other': self.player.training_amount_other
+
         }
 
 
@@ -71,14 +70,13 @@ class Results(Page):
 
     template_name = 'bargaining/Results.html'
 
+
+
     def vars_for_template(self):
         return {
-            'earn': self.player.payoff - Constants.bonus,
-            'points': self.player.payoff,
-            'request_amount': self.player.request_amount,
-            'other_request': self.player.other_player().request_amount,
-            'sum': self.player.request_amount + self.player.other_player(
-                ).request_amount
+                'sum':self.player.request_amount + self.player.other_player().request_amount,
+                'earn':self.player.payoff - Constants.bonus
+
         }
 
 

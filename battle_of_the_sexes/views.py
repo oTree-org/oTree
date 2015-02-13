@@ -43,11 +43,6 @@ class Feedback1(Page):
         return {
             'num_q': 1,
 
-            'is_answer_husband_correct': self.player.is_training_question_1_husband_correct(),
-            'answer_husband': self.player.training_question_1_husband,
-
-            'is_answer_wife_correct': self.player.is_training_question_1_wife_correct(),
-            'answer_wife': self.player.training_question_1_wife
         }
 
 
@@ -62,7 +57,7 @@ class Decide(Page):
     form_fields = ['decision']
 
     def vars_for_template(self):
-        return {'role': self.player.role(),
+        return {#'role': self.player.role(),
                 'fbl_husband_amt': Constants.football_husband_amount,
                 'fbl_wife_amt': Constants.football_wife_amount,
                 'fbl_opr_amt': Constants.mismatch_amount,
@@ -86,12 +81,9 @@ class Results(Page):
 
     template_name = 'battle_of_the_sexes/Results.html'
 
-    def vars_for_template(self):
-        return {'role': self.player.role(),
-                'decision': self.player.decision,
-                'other_decision': self.player.other_player().decision,
-                'payoff': self.player.payoff,
-                'total_payoff': self.player.payoff + 10}
+    def total_payoff(self):
+        return self.player.payoff + Constants.fixed_pay
+
 
 
 page_sequence = [Introduction,

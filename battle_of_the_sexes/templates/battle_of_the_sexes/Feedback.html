@@ -7,15 +7,16 @@
 
 {% block content %}
 
-    {% if is_answer_husband_correct %}
-        <p class="text-success">Your answer {{answer_husband}} for Husband was correct.</p>
+
+    {% if player.is_training_question_1_husband_correct %}
+        <p class="text-success">Your answer {{player.training_question_1_husband}} for Husband was correct.</p>
     {% else %}
-        <p class="text-danger">Your answer {{answer_husband}} for Husband was incorrect.</p>
+        <p class="text-danger">Your answer {{player.training_question_1_husband}} for Husband was incorrect.</p>
     {% endif %}
     {% if is_answer_wife_correct %}
-        <p class="text-success">Your answer {{answer_wife}} for wife was correct.</p>
+        <p class="text-success">Your answer {{player.training_question_1_wife}} for wife was correct.</p>
     {% else %}
-        <p class="text-danger">Your answer {{answer_wife}} for wife was incorrect.</p>
+        <p class="text-danger">Your answer {{player.training_question_1_wife}} for wife was incorrect.</p>
     {% endif %}
 
     <p>

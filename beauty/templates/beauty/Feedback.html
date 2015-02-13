@@ -7,26 +7,28 @@
 
 {% block content %}
 
-    {% if is_answer_win_pick_correct %}
+
+
+    {% if player.is_training_question_1_win_pick_correct %}
         <p class="text-success">
-            Your answer <strong>'The winner(s) picked: {{answer_win_pick}}'</strong>
+            Your answer <strong>'The winner(s) picked: {{player.training_question_1_win_pick}}'</strong>
             was correct.
         </p>
     {% else %}
         <p class="text-danger">
-            Your answer <strong>'The winner(s) picked: {{answer_win_pick}}'</strong>
+            Your answer <strong>'The winner(s) picked: {{player.training_question_1_win_pick}}'</strong>
             was incorrect.
         </p>
     {% endif %}
 
-    {% if is_answer_my_payoff_correct %}
+    {% if player.is_training_question_1_my_payoff_correct %}
         <p class="text-success">
-            Your answer <strong>'My payoff would be: {{answer_my_payoff}}'</strong>
+            Your answer <strong>'My payoff would be: {{player.training_question_1_my_payoff}}'</strong>
             was correct.
         </p>
     {% else %}
         <p class="text-danger">
-            Your answer <strong>'My payoff would be: {{answer_my_payoff}}'</strong>
+            Your answer <strong>'My payoff would be: {{player.training_question_1_my_payoff}}'</strong>
             was incorrect.
         </p>
     {% endif %}

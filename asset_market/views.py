@@ -87,6 +87,8 @@ class Feedback2(Page):
 
     template_name = 'asset_market/Feedback.html'
 
+
+
     def vars_for_template(self):
         return {
             'num_q': 2,
@@ -119,11 +121,6 @@ class Order(Page):
     def sp_choices(self):
         return currency_range(0, self.player.cash, 0.5)
 
-    def vars_for_template(self):
-        return {
-            'cash': self.player.cash,
-            'shares': self.player.shares,
-        }
 
 
 class TransactionWaitPage(WaitPage):
@@ -139,14 +136,11 @@ class Transaction(Page):
 
     template_name = 'asset_market/Transaction.html'
 
-    def vars_for_template(self):
-        return {
-            'shares_traded': self.group.shares_traded,
-            'transaction_price': self.group.transaction_price or 0,
-            'cash': self.player.cash,
-            'shares': self.player.shares,
-            'buy': True if self.player.order_type == 'Buy' else False,
-        }
+    def buy(self):
+        return True if self.player.order_type == 'Buy' else False
+
+    def transaction_price(self):
+        return self.group.transaction_price or 0
 
 
 class DividendWaitPage(WaitPage):
@@ -161,15 +155,8 @@ class Dividend(Page):
         return True
 
     template_name = 'asset_market/Dividend.html'
-
-    def vars_for_template(self):
-
-        return {
-            'dividend': self.group.dividend_per_share,
-            'dividend_gain': self.group.dividend_per_share * self.player.shares if self.player.shares != 0 else 0,
-            'cash': self.player.cash,
-            'shares': self.player.shares,
-        }
+    def divident_gain(self):
+        return self.group.dividend_per_share * self.player.shares if self.player.shares != 0 else 0
 
 
 class ResultsWaitPage(WaitPage):
@@ -186,6 +173,9 @@ class Results(Page):
 
     template_name = 'asset_market/Results.html'
 
+    def total_payoff(self):
+        return self.player.payoff + self.player.participant.session.fixed_pay
+
     def vars_for_template(self):
 
         # create chart lists
@@ -199,10 +189,7 @@ class Results(Page):
             shares_traded_list.append(p.group.shares_traded)
 
         return {
-            'cash': self.player.cash,
-            'shares': self.player.shares,
-            'fixed_pay': self.player.participant.session.fixed_pay,
-            'total_payoff': self.player.payoff + self.player.participant.session.fixed_pay,
+
             'transaction_price_list': safe_json(transaction_price_list),
             'dividend_per_share_list': safe_json(dividend_per_share_list),
             'shares_traded_list': safe_json(shares_traded_list),
@@ -210,12 +197,12 @@ class Results(Page):
 
 
 page_sequence=[
-        #~ Introduction,
-        #~ Instructions,
-        #~ Question1,
-        #~ Feedback1,
-        #~ Question2,
-        #~ Feedback2,
+         Introduction,
+         Instructions,
+         Question1,
+         Feedback1,
+         Question2,
+         Feedback2,
         OrderWaitPage,
         Order,
         TransactionWaitPage,

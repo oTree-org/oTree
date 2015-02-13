@@ -77,7 +77,7 @@ class Constants:
     training_1_wife_correct = c(0)
 
     training_1_maximum_offered_points = c(300)
-
+    fixed_pay = 10
 
 class Subsession(otree.models.BaseSubsession):
 

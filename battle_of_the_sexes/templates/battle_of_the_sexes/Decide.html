@@ -8,8 +8,9 @@
 
 {% block content %}
 
+
 <p>
-    You are <strong>{{ role }}</strong>. What will you do for the evening?
+    You are <strong>{{ player.role }}</strong>. What will you do for the evening?
 </p>
 
     {% formrow form.decision with label='Please make a choice:' %}
