@@ -18,7 +18,7 @@ class PlayerBot(Bot):
         roundn = self.subsession.round_number
 
         if roundn == 1:
-            # only submitted in round 1
+            #only submitted in round 1
 
             self.submit(views.Introduction)
             self.submit(views.Instructions)

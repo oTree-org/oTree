@@ -37,10 +37,7 @@ class Feedback1(Page):
     def vars_for_template(self):
         return {
             'num_q': 1,
-            'is_answer_win_pick_correct': self.player.is_training_question_1_win_pick_correct(),
-            'is_answer_my_payoff_correct': self.player.is_training_question_1_my_payoff_correct(),
-            'answer_win_pick': self.player.training_question_1_win_pick,
-            'answer_my_payoff': self.player.training_question_1_my_payoff,
+
         }
 
 
@@ -66,6 +63,9 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
 
     template_name = 'beauty/Results.html'
+    def total_payoff(self):
+        return self.player.payoff + Constants.fixed_pay
+
 
     def vars_for_template(self):
         other_guesses = []
@@ -73,17 +73,15 @@ class Results(Page):
         for p in self.player.get_others_in_group():
             other_guesses.append(p.guess_value)
             winners_cnt += int(p.is_winner)
-        return {'guess_value': self.player.guess_value, #
+
+        return { #
                 'other_guesses': other_guesses, #
                 'other_guesses_count': len(other_guesses), #
                 'two_third_average': round(self.group.two_third_guesses, 4), #
-                'players': self.group.get_players(),
-                'is_winner': self.player.is_winner, #
-                'best_guess': self.group.best_guess, #
-                'tie': self.group.tie, #
-                'winners_count': winners_cnt, #
-                'total_payoff': self.player.payoff + Constants.fixed_pay, #
-                'payoff': self.player.payoff} #
+                'winners_cnt': winners_cnt,
+
+
+                 } #
 
 
 page_sequence = [Introduction,

@@ -28,6 +28,7 @@ class PlayerBot(Bot):
                 {'contract_accepted': True, 'agent_work_effort': 10}
             )
         # results
+
         self.submit(views.Results)
 
     def validate_play(self):

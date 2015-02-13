@@ -6,22 +6,22 @@ Solution to Understanding Question {{ num_q }} of {{ total_q }}
 {% endblock %}
 
 {% block content %}
-{% ifequal mine 0 %}
+{% ifequal player.training_amount_mine 0 %}
 <p class="text-success">
-Your answer {{mine}} for yourself was correct.
+Your answer {{player.training_amount_mine}} for yourself was correct.
 </p>
 {% else %}
 <p class="text-danger">
-Your answer {{mine}} for yourself was incorrect.
+Your answer {{player.training_amount_mine}} for yourself was incorrect.
 </p>
 {% endifequal %}
-{% ifequal other 0 %}
+{% ifequal player.training_amount_other 0 %}
 <p class="text-success">
-Your answer {{other}} for the other participant was correct.
+Your answer {{player.training_amount_other}} for the other participant was correct.
 </p>
 {% else %}
 <p class="text-danger">
-Your answer {{other}} for the other participant was incorrect.
+Your answer {{player.training_amount_other}} for the other participant was incorrect.
 </p>
 {% endifequal %}
 <p>
