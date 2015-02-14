@@ -6,10 +6,10 @@ http://www.otree.org/
 
 ## About
 
-oTree is a Django-based framework that makes it easy to implement multiplayer decision strategy games.  
+oTree is a Django-based framework for implementing multiplayer decision strategy games. 
 Many of the details of writing a web application are abstracted away, 
-meaning that the code is focused on the logic of the game,
-and oTree programming is accessible to programmers without advanced experience in web app development.
+meaning that the code is focused on the logic of the game.
+oTree programming is accessible to programmers without advanced experience in web app development.
 
 See the live demo [here](http://demo.otree.org/).
 
@@ -149,7 +149,7 @@ You can define your session's properties in `settings.py`. Here are the paramete
 
 ## Players vs. participants
 
-The terms "player" and "participant" mean similar things but are slightly different.
+In oTree, the terms "player" and "participant" have distinct meanings.
 
 A participant is a person who takes part in a session. The participant object contains properties such as the participant's name, how much they made in the session, and what their progress is in the session.
 
@@ -211,7 +211,7 @@ When the project opens, on the left-hand site you should see a directory tree th
             views.py
 
 
-Then go to `settings.py` and create an entry for your app in SESSION_TYPES that looks like the other entries (more on how to customize that later).
+Then go to `settings.py` and create an entry for your app in SESSION_TYPES that looks like the other entries.
 
 ## Models
 
@@ -307,7 +307,7 @@ oTree automatically validates all input submitted by the user.
 For example, if you have a form containing a `PositiveIntegerField`,
 oTree will not let the user submit values that are not positive integers, like `-1`, `1.5`, or `hello`.
 
-Additionally, you can define one of the below methods.
+Additionally, you can define one of the below methods in your `Page` class in `views.py`.
 
 #### `def {field_name}_bounds(self)`
 
@@ -502,11 +502,11 @@ And follow the [instructions here] (https://docs.djangoproject.com/en/dev/howto/
 
 ### Bootstrap
 
-oTree comes with [Bootstrap] (http://getbootstrap.com/), a very popular library for customizing a website's user interface.
+oTree comes with [Bootstrap] (http://getbootstrap.com/), a popular library for customizing a website's user interface.
 
 You can use it if you want a [custom style] (http://getbootstrap.com/css/), or a [specific component] (http://getbootstrap.com/components/) like a table, alert, progress bar, label, etc. You can even make your page dynamic with elements like [popovers] (http://getbootstrap.com/javascript/#popovers), [modals] (http://getbootstrap.com/javascript/#modals), and [collapsible text] (http://getbootstrap.com/javascript/#collapse).
 
-Bootstrap is very easy to use and well documented. Usually you just need to add a ``class=`` attribute to your HTML element, and Bootstrap will take care of the rest.
+To use Bootstrap, usually you add a ``class=`` attributes to your HTML element.
 
 For example, the following HTML will create a "Success" alert:
 
@@ -527,7 +527,7 @@ Example:
 
 ### jQuery
 
-oTree comes pre-loaded with [jQuery](http://jquery.com/), a JavaScript library that lets you make your pages dynamic. Just include a script with the standard `$` variable.
+oTree comes pre-loaded with [jQuery](http://jquery.com/), a JavaScript library that lets you make your pages dynamic. You can include a script and reference the standard `$` variable.
 
 ### LaTeX
 
@@ -535,11 +535,9 @@ oTree comes pre-loaded with [jQuery](http://jquery.com/), a JavaScript library t
 oTree comes pre-loaded with [KaTeX](http://khan.github.io/KaTeX/); you can insert LaTeX equations like this: `<span class="latex">1 + i = (1 + r)(1 + \pi)</span>`
 
 ##Smartphones and tablets
-Since oTree uses Bootstrap for its user interface, your oTree app should work on all major browsers (Chrome/Internet Explorer/Firefox/Safari). When participants visit on a smartphone or tablet (e.g. iOS/Android/etc.), they should see an appropriately scaled down "mobile friendly" version of the site. This will generally not require any effort on your part since Bootstrap does it automatically, but if you plan to deploy your app to participants on mobile devices, you should test it out on a mobile device during development, since some HTML code doesn't look good on mobile devices.
+Since oTree uses Bootstrap for its user interface, your oTree app should work on all major browsers (Chrome/Internet Explorer/Firefox/Safari). When participants visit on a smartphone or tablet (e.g. iOS/Android/etc.), they should see an appropriately scaled down "mobile friendly" version of the site. This will generally not require much effort on your part since Bootstrap does it automatically, but if you plan to deploy your app to participants on mobile devices, you should test it out on a mobile device during development, since some HTML code doesn't look good on mobile devices.
 
 ## Groups
-
-
 
 ### Grouping and randomization
 
@@ -687,7 +685,7 @@ Automated tests are an essential part of building a oTree app. You can easily pr
 
 Tests with dozens of bots complete with in seconds, and afterward automated tests can be run to verify correctness of the app (e.g. to ensure that payoffs are being calculated correctly).
 
-This automated test system saves the programmer the time and frustration of having to re-test the application every time something is changed.
+This automated test system saves the programmer the effort of having to re-test the application every time something is changed.
 
 ### Launching tests
 oTree tests entire sessions, rather that individual apps in isolation. This is to make sure the entire session runs, just as participants will play it in the lab.
