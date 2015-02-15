@@ -80,7 +80,7 @@ class Player(otree.models.BasePlayer):
     training_my_payoff = models.CurrencyField(
         verbose_name='My payoff would be')
 
-    volunteer = models.NullBooleanField(
+    volunteer = models.BooleanField(
         doc="""Whether player volunteers""",
         widget=widgets.RadioSelect(),
     )
