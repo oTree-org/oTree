@@ -142,7 +142,7 @@ class Group(otree.models.BaseGroup):
         doc="""Agent's cost of work effort"""
     )
 
-    contract_accepted = models.NullBooleanField(
+    contract_accepted = models.BooleanField(
         doc="""Whether agent accepts proposal""",
         widget=widgets.RadioSelect(),
         choices=(

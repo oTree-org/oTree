@@ -44,28 +44,28 @@ class Group(otree.models.BaseGroup):
 
     subsession = models.ForeignKey(Subsession)
 
-    strategy = models.NullBooleanField(
+    strategy = models.BooleanField(
         doc="""Whether this group uses strategy method"""
     )
 
     amount_offered = models.CurrencyField(choices=Constants.offer_choices)
 
-    offer_accepted = models.NullBooleanField(
+    offer_accepted = models.BooleanField(
         doc="if offered amount is accepted (direct response method)"
     )
 
 
-    response_0 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    response_10 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    response_20 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    response_30 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    response_40 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    response_50 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    response_60 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    response_70 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    response_80 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    response_90 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
-    response_100 = models.NullBooleanField(widget=widgets.RadioSelectHorizontal())
+    response_0 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
+    response_10 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
+    response_20 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
+    response_30 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
+    response_40 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
+    response_50 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
+    response_60 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
+    response_70 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
+    response_80 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
+    response_90 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
+    response_100 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
 
 
     def set_payoffs(self):

@@ -96,7 +96,7 @@ class Player(otree.models.BasePlayer):
         widget=widgets.RadioSelect()
     )
 
-    is_winner = models.NullBooleanField(
+    is_winner = models.BooleanField(
         doc="""Whether player won the round"""
     )
 
