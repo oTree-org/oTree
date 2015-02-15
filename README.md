@@ -634,7 +634,7 @@ Player objects have methods `in_previous_rounds()` and `in_all_rounds()` that re
 
         cumulative_payoff = sum([p.payoff for p in self.player.in_all_rounds()])
 
-Similarly, subsession objects have methods `previous_rounds()` and `all_rounds()` that work the same way.
+Similarly, subsession objects have methods `in_previous_rounds()` and `in_all_rounds()` that work the same way.
 
 ## Accessing data from previous subsessions in different apps
 
