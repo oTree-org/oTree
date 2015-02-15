@@ -18,18 +18,14 @@ def vars_for_all_templates(self):
 
 class Introduction(Page):
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
-
-    template_name = 'asset_market/Introduction.html'
 
 
 class Instructions(Page):
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
-
-    template_name = 'asset_market/Instructions.html'
 
 
 class Question1(Page):
@@ -37,10 +33,10 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['understanding_question_1']
 
-    def participate_condition(self):
-        return self.subsession.round_number == 1
-
     template_name = 'asset_market/Question.html'
+
+    def is_displayed(self):
+        return self.subsession.round_number == 1
 
     def vars_for_template(self):
         return {
@@ -50,7 +46,7 @@ class Question1(Page):
 
 class Feedback1(Page):
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     template_name = 'asset_market/Feedback.html'
@@ -69,7 +65,7 @@ class Question2(Page):
     form_model = models.Player
     form_fields = ['understanding_question_2']
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     template_name = 'asset_market/Question.html'
@@ -82,7 +78,7 @@ class Question2(Page):
 
 class Feedback2(Page):
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     template_name = 'asset_market/Feedback.html'
@@ -110,8 +106,6 @@ class Order(Page):
     form_model = models.Player
     form_fields = ['order_type', 'bp', 'bn', 'sn', 'sp']
 
-    template_name = 'asset_market/Order.html'
-
     def sn_choices(self):
         return range(0, self.player.shares + 1, 1)
 
@@ -131,17 +125,12 @@ class TransactionWaitPage(WaitPage):
 
 class Transaction(Page):
 
-    def participate_condition(self):
+    def is_displayed(self):
         return True
-
-    template_name = 'asset_market/Transaction.html'
-
-    def buy(self):
-        return True if self.player.order_type == 'Buy' else False
 
     def vars_for_template(self):
         return {
-            'transaction_price':group.transaction_price or 0
+            'transaction_price': self.group.transaction_price or 0
         }
 
 class DividendWaitPage(WaitPage):
@@ -152,12 +141,15 @@ class DividendWaitPage(WaitPage):
 
 class Dividend(Page):
 
-    def participate_condition(self):
+    def is_displayed(self):
         return True
 
     template_name = 'asset_market/Dividend.html'
-    def divident_gain(self):
-        return self.group.dividend_per_share * self.player.shares if self.player.shares != 0 else 0
+
+    def vars_for_template(self):
+        return {
+            'dividend_gain': self.group.dividend_per_share * self.player.shares if self.player.shares != 0 else 0
+        }
 
 
 class ResultsWaitPage(WaitPage):
@@ -169,10 +161,8 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == Constants.num_rounds
-
-    template_name = 'asset_market/Results.html'
 
     def total_payoff(self):
         return self.player.payoff + self.player.participant.session.fixed_pay

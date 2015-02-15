@@ -14,8 +14,6 @@ def vars_for_all_templates(self):
 
 class Introduction(Page):
 
-    template_name = 'prisoner/Introduction.html'
-
     timeout_seconds = 100
 
 
@@ -42,8 +40,6 @@ class Feedback1(Page):
 
 class Decision(Page):
 
-    template_name = 'prisoner/Decision.html'
-
     form_model = models.Player
     form_fields = ['decision']
 
@@ -62,8 +58,6 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
-
-    template_name = 'prisoner/Results.html'
 
     def vars_for_template(self):
 

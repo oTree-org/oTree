@@ -33,7 +33,7 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['training_my_payoff', 'training_other_payoff']
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -43,7 +43,7 @@ class Question1(Page):
 class Feedback1(Page):
     template_name = 'principal_agent/Feedback.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -55,10 +55,8 @@ class Feedback1(Page):
 
 class Offer(Page):
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.player.role() == 'principal'
-
-    template_name = 'principal_agent/Offer.html'
 
     form_model = models.Group
     form_fields = ['agent_fixed_pay', 'agent_return_share']
@@ -77,13 +75,17 @@ class OfferWaitPage(WaitPage):
 
 class Accept(Page):
 
-    template_name = 'principal_agent/Accept.html'
-    def participate_condition(self):
-        return self.player.role()=='agent'
+    def is_displayed(self):
+        return self.player.role() == 'agent'
+
     form_model = models.Group
     form_fields = ['contract_accepted', 'agent_work_effort']
 
-
+    def vars_for_template(self):
+        return {
+            'EFFORT_TO_RETURN': safe_json(Constants.EFFORT_TO_RETURN),
+            'EFFORT_TO_COST': safe_json(Constants.EFFORT_TO_COST),
+        }
 
 
 class ResultsWaitPage(WaitPage):
@@ -99,15 +101,11 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    template_name = 'principal_agent/Results.html'
-
-    def participate_condition(self):
-        return self.player.role()=='agent'
     def vars_for_template(self):
         return {
-                 'fixed_pay_int': int(self.group.agent_fixed_pay),
-                'received': self.player.payoff - Constants.bonus,
-                }
+            'fixed_pay_int': int(self.group.agent_fixed_pay),
+            'received': self.player.payoff - Constants.bonus,
+        }
 
 
 page_sequence = [Introduction,

@@ -17,9 +17,7 @@ def vars_for_all_templates(self):
 
 class Introduction(Page):
 
-    template_name = 'battle_of_the_sexes/Introduction.html'
-
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
 
@@ -27,7 +25,7 @@ class Question1(Page):
 
     template_name = 'battle_of_the_sexes/Question.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     form_model = models.Player
@@ -49,10 +47,8 @@ class Feedback1(Page):
 
 class Decide(Page):
 
-    def participate_condition(self):
+    def is_displayed(self):
         return True
-
-    template_name = 'battle_of_the_sexes/Decide.html'
 
     form_model = models.Player
     form_fields = ['decision']
@@ -77,13 +73,13 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    def participate_condition(self):
+    def is_displayed(self):
         return True
 
-    template_name = 'battle_of_the_sexes/Results.html'
-
-    def total_payoff(self):
-        return self.player.payoff + Constants.fixed_pay
+    def vars_for_template(self):
+        return {
+            'total_payoff': self.player.payoff + Constants.fixed_pay
+        }
 
 
 

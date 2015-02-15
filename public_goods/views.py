@@ -17,7 +17,7 @@ class Introduction(Page):
 
     """Description of the game: How to play and returns expected"""
 
-    template_name = 'public_goods/Introduction.html'
+    #template_name = 'public_goods/Introduction.html'
 
     def vars_for_template(self):
         return {'no_of_players': Constants.players_per_group,
@@ -25,9 +25,9 @@ class Introduction(Page):
 
 
 class Question(Page):
-    template_name = 'public_goods/Question.html'
+    #template_name = 'public_goods/Question.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return True
 
     form_model = models.Player
@@ -35,9 +35,7 @@ class Question(Page):
 
 
 class Feedback(Page):
-    template_name = 'public_goods/Feedback.html'
-
-    def participate_condition(self):
+    def is_displayed(self):
         return True
 
 
@@ -50,8 +48,6 @@ class Contribute(Page):
     form_fields = ['contribution']
 
     auto_submit_values = {'contribution': c(Constants.endowment/2)}
-
-    template_name = 'public_goods/Contribute.html'
 
 
 class ResultsWaitPage(WaitPage):
@@ -66,8 +62,6 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
 
     """Players payoff: How much each has earned"""
-
-    template_name = 'public_goods/Results.html'
 
     def vars_for_template(self):
 

@@ -215,12 +215,6 @@ SESSION_TYPES = [
         ],
     },
     {
-        'name': 'asset_market',
-        'display_name': "Asset Market",
-        'num_demo_participants': 2,
-        'app_sequence': ['asset_market', 'feedback', 'payment_info'],
-    },
-    {
         'name': 'real_effort',
         'display_name': "Real-effort transcription task",
         'num_demo_participants':  1,

@@ -45,7 +45,7 @@ $(function() {
                     return;
                 }
                 //  [B's Return Share in %] × [Total Return] + [B's Fixed Payment] – [B's Effort Cost] 
-                payoff = {{return_share}} * {{Constants.EFFORT_TO_COST}}[effort] / 100 + {{fixed_pay_int}} - {{Constants.EFFORT_TO_COST}}[effort];
+                payoff = {{return_share}} * {{EFFORT_TO_COST}}[effort] / 100 + {{fixed_pay_int}} - {{EFFORT_TO_COST}}[effort];
             } else {
                 effort = 'to reject';
                 payoff = 10;

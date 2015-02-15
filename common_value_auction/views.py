@@ -14,8 +14,6 @@ class Introduction(Page):
 
 class Bid(Page):
 
-    template_name = 'common_value_auction/Bid.html'
-
     form_model = models.Player
     form_fields = ['bid_amount']
 
@@ -34,16 +32,12 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    template_name = 'common_value_auction/Results.html'
-
-
-    def is_greedy(self):
-        self.group.item_value - self.player.bid_amount < 0
-
-
     def vars_for_template(self):
-     if self.player.payoff is None:
+        if self.player.payoff is None:
             self.player.set_payoff()
+        return {
+            'is_greedy': self.group.item_value - self.player.bid_amount < 0
+        }
 
 
 

@@ -31,18 +31,18 @@ class Constants:
     players_per_group = 2
     num_rounds = 1
 
-    rowAcolumnA_row = 0.20
-    rowAcolumnA_column = 0.30
+    rowAcolumnA_row = c(20)
+    rowAcolumnA_column = c(30)
 
     # Amount row player gets, if row player chooses A and column player chooses B
-    rowAcolumnB_row = 0.40
-    rowAcolumnB_column = 0.10
+    rowAcolumnB_row = c(40)
+    rowAcolumnB_column = c(10)
 
-    rowBcolumnA_row = 0.05
-    rowBcolumnA_column = 0.45
+    rowBcolumnA_row = c(5)
+    rowBcolumnA_column = c(45)
 
-    rowBcolumnB_row = 0.15
-    rowBcolumnB_column = 0.25
+    rowBcolumnB_row = c(15)
+    rowBcolumnB_column = c(25)
 
 
 class Subsession(otree.models.BaseSubsession):

@@ -16,14 +16,12 @@ def vars_for_all_templates(self):
 
 class Introduction(Page):
 
-    template_name = 'vickrey_auction/Introduction.html'
-
 
 class Question1(Page):
 
     template_name = 'vickrey_auction/Question.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     form_model = models.Player
@@ -45,8 +43,6 @@ class Feedback1(Page):
 
 
 class Bid(Page):
-
-    template_name = 'vickrey_auction/Bid.html'
 
     form_model = models.Player
     form_fields = ['bid_amount']
@@ -72,8 +68,6 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
-
-    template_name = 'vickrey_auction/Results.html'
 
     def vars_for_template(self):
         if self.player.payoff is None:

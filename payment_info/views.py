@@ -10,7 +10,10 @@ class RedemptionCode(Page):
 
     def vars_for_template(self):
         participant = self.player.participant
-        return { 'redemption_code': participant.label or participant.code,}
+        return {
+            'redemption_code': participant.label or participant.code,
+            'participant': participant,
+        }
 
 
 page_sequence = [RedemptionCode]

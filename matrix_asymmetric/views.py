@@ -7,8 +7,6 @@ from .models import Constants
 
 class Decision(Page):
 
-    template_name = 'matrix_asymmetric/Decision.html'
-
     form_model = models.Player
     form_fields = ['decision']
 

@@ -7,8 +7,6 @@ from .models import Constants
 
 class Survey(Page):
 
-    template_name = 'survey_sample/Survey.html'
-
     form_model = models.Player
     form_fields = ['q_gender']
 

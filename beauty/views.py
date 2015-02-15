@@ -19,7 +19,7 @@ class Question1(Page):
 
     template_name = 'beauty/Question.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     form_model = models.Player
@@ -43,8 +43,6 @@ class Feedback1(Page):
 
 
 class Guess(Page):
-
-    template_name = 'beauty/Guess.html'
 
     form_model = models.Player
     form_fields = ['guess_value']

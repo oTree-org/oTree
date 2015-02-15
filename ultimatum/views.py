@@ -12,19 +12,15 @@ from .models import Constants
 
 class Introduction(Page):
 
-    template_name = 'ultimatum/Introduction.html'
-
     timeout_seconds = 60
 
 
 class Offer(Page):
 
-    template_name = 'ultimatum/Offer.html'
-
     form_model = models.Group
     form_fields = ['amount_offered']
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.player.id_in_group == 1
 
     timeout_seconds = 60
@@ -34,12 +30,10 @@ class WaitForProposer(WaitPage):
 
 class Accept(Page):
 
-    template_name = 'ultimatum/Accept.html'
-
     form_model = models.Group
     form_fields = ['offer_accepted']
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.player.id_in_group == 2 and not self.group.strategy
 
 
@@ -48,12 +42,10 @@ class Accept(Page):
 
 class AcceptStrategy(Page):
 
-    template_name = 'ultimatum/AcceptStrategy.html'
-
     form_model = models.Group
     form_fields = ['response_{}'.format(int(i)) for i in Constants.offer_choices]
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.player.id_in_group == 2 and self.group.strategy
 
 
@@ -64,8 +56,7 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
-
-    template_name = 'ultimatum/Results.html'
+    pass
 
 
 

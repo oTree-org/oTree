@@ -26,7 +26,7 @@ class Question1(Page):
     form_model = models.Player
     form_fields = ['training_amount_mine', 'training_amount_other']
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -35,9 +35,7 @@ class Question1(Page):
 
 
 class Feedback1(Page):
-    template_name = 'bargaining/Feedback.html'
-
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -48,8 +46,6 @@ class Feedback1(Page):
 
 
 class Request(Page):
-
-    template_name = 'bargaining/Request.html'
 
     form_model = models.Player
     form_fields = ['request_amount']
@@ -67,8 +63,6 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
-
-    template_name = 'bargaining/Results.html'
 
 
 

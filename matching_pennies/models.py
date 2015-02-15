@@ -38,7 +38,7 @@ class Constants:
     name_in_url = 'matching_pennies'
     players_per_group = 2
     num_rounds = 3
-    base_points = 50
+    base_points = c(50)
     training_1_correct = 'Player 1 gets 100 points, Player 2 gets 0 points'
     feedback1_explanation = 'Player 1 gets 100 points, Player 2 gets 0 points'
     feedback1_question = 'Suppose Player 1 picked "Heads" and Player 2 guessed "Tails". Which of the following will be the result of that round?',
@@ -98,7 +98,7 @@ class Player(otree.models.BasePlayer):
         widget=widgets.RadioSelect()
     )
 
-    is_winner = models.NullBooleanField(
+    is_winner = models.BooleanField(
         doc="""Whether player won the round"""
     )
 

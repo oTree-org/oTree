@@ -15,9 +15,7 @@ def vars_for_all_templates(self):
 
 class Introduction(Page):
 
-    template_name = 'matching_pennies/Introduction.html'
-
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
 
@@ -25,7 +23,7 @@ class Question1(Page):
 
     template_name = 'matching_pennies/Question.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     form_model = models.Player
@@ -39,7 +37,7 @@ class Feedback1(Page):
 
     template_name = 'matching_pennies/Feedback.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -53,8 +51,6 @@ class Feedback1(Page):
 
 
 class Choice(Page):
-
-    template_name = 'matching_pennies/Choice.html'
 
     form_model = models.Player
     form_fields = ['penny_side']
@@ -71,8 +67,6 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    template_name = 'matching_pennies/Results.html'
-
     # def vars_for_template(self):
     #     return {'my_choice': self.player.penny_side,
     #             'other_choice': self.player.other_player().penny_side,
@@ -84,9 +78,7 @@ class Results(Page):
 
 class ResultsSummary(Page):
 
-    template_name = 'matching_pennies/ResultsSummary.html'
-
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == Constants.num_rounds
 
     def vars_for_template(self):

@@ -21,7 +21,7 @@ class Question1(Page):
     form_fields = [
         'training_participant1_payoff', 'training_participant2_payoff']
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -31,7 +31,7 @@ class Question1(Page):
 class Feedback1(Page):
     template_name = 'dictator/Feedback.html'
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.subsession.round_number == 1
 
     def vars_for_template(self):
@@ -43,12 +43,10 @@ class Feedback1(Page):
 
 class Offer(Page):
 
-    template_name = 'dictator/Offer.html'
-
     form_model = models.Group
     form_fields = ['kept']
 
-    def participate_condition(self):
+    def is_displayed(self):
         return self.player.id_in_group == 1
 
 
@@ -71,11 +69,10 @@ class Results(Page):
     def offer(self):
         return Constants.allocated_amount - self.group.kept
 
-    # def vars_for_template(self):
-    #     return {'payoff': self.player.payoff,
-    #             'offer': Constants.allocated_amount - self.group.kept,
-    #             'kept': self.group.kept,
-    #             'player_id': self.player.id_in_group}
+    def vars_for_template(self):
+        return {
+            'offer': Constants.allocated_amount - self.group.kept,
+        }
 
 
 page_sequence = [Introduction,

@@ -10,10 +10,8 @@ class Feedback(Page):
     form_model = models.Player
     form_fields = ['feedback']
 
-    def participate_condition(self):
+    def is_displayed(self):
         return True
-
-    template_name = 'feedback/Feedback.html'
 
     def after_next_button(self):
         self.player.payoff = 0

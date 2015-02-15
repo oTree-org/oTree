@@ -64,8 +64,6 @@ class Transcription2(Page):
 
 class Summary(Page):
 
-    template_name = 'real_effort/Summary.html'
-
     def vars_for_template(self):
         self.player.set_payoff()
         return {

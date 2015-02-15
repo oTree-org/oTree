@@ -144,7 +144,7 @@ class Group(otree.models.BaseGroup):
         doc="""Agent's cost of work effort"""
     )
 
-    contract_accepted = models.NullBooleanField(
+    contract_accepted = models.BooleanField(
         doc="""Whether agent accepts proposal""",
         widget=widgets.RadioSelect(),
         choices=(
@@ -192,5 +192,4 @@ class Player(otree.models.BasePlayer):
             return 'principal'
         if self.id_in_group == 2:
             return 'agent'
-    def participate_condition(self):
-        return self.role() == 'agent'
+

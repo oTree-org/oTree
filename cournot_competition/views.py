@@ -32,26 +32,16 @@ class Feedback1(Page):
     template_name = 'cournot_competition/Feedback.html'
 
     def vars_for_template(self):
-        return {'num_q': 1,
-
-                # 'answer': self.player.training_question_1,
-                # 'correct': Constants.training_1_correct,
-                #
-                # 'is_correct': self.player.is_training_question_1_correct()
-                }
+        return {'num_q': 1}
 
 
 class Decide(Page):
-
-    template_name = 'cournot_competition/Decide.html'
 
     form_model = models.Player
     form_fields = ['units']
 
 
 class ResultsWaitPage(WaitPage):
-
-
 
     def body_text(self):
         return "Waiting for the other participant to decide."
@@ -63,19 +53,9 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
 
     template_name = 'cournot_competition/Results.html'
-    def total_plus_base(self):
-        return self.player.payoff + Constants.base_points
-    #
-    # def vars_for_template(self):
-    #
-    #     return {'units': self.player.units,
-    #             'other_units': self.player.other_player().units,
-    #             'total_units': self.group.total_units,
-    #             'total_capacity': Constants.total_capacity,
-    #             'price': self.group.price,
-    #             'payoff': self.player.payoff,
-    #             'base_points': Constants.base_points,
-    #             'total_plus_base': self.player.payoff + Constants.base_points}
+
+    def vars_for_template(self):
+        return {'total_plus_base': self.player.payoff + Constants.base_points}
 
 
 page_sequence = [Introduction,
