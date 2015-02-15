@@ -245,7 +245,7 @@ Here is what the model might look like for the above "Group" table::
     class Group(otree.models.BaseGroup):
         ...
         amount_offered = models.CurrencyField()
-        offer_accepted = models.NullBooleanField()
+        offer_accepted = models.BooleanField()
     
 This class will be placed in your app's `models.py` file.
 
