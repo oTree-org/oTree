@@ -122,6 +122,10 @@ or import any 3rd-party modules.
 
 Then go to `settings.py` and create an entry for your app in `SESSION_TYPES` that looks like the other entries.
 
+## models.py
+
+This is where you store your data models.
+
 ### Model hierarchy
 
 Every oTree app needs the following 3 models:
@@ -161,6 +165,16 @@ Here is how to define the above table structure:
 
 oTree stores your data in standard database tables (SQL), which you can later export to CSV for analysis in Stata, R, Matlab, Excel, etc.
 
+### Constants
+
+The `Constants` class is the recommended place to put your app's parameters and other constants (i.e. things that do not vary from player to player)
+
+Here are the required constants:
+
+* `name_in_url` is an attribute that defines the name this app has in the URLs, which players may see.
+* `players_per_group` (described elsewhere in the documentation)
+* `num_rounds` (described elsewhere in the documentation)
+
 ## views.py
 
 Each page that your players see is defined by a `Page` class in `views.py`. (You can think of "views" as a synonym for "pages".)
@@ -174,15 +188,15 @@ At the bottom of your `views.py`, you must have a `page_sequence` variable that 
 
 Each `Page` class has methods and attributes that define things like:
 * the condition for displaying or skipping the page (`is_displayed`)
-* what HTML template to display (`template_name`, though this can be omitted if the template has the same name as the Page class)
+* what HTML template to display (`template_name`, t
 * what dynamic variables to pass to the template (`vars_for_template`)
 * what form fields to include on the page for the user to input (`form_model` and `form_fields`)
 
-### `def vars_for_template(self)`
+#### `def vars_for_template(self)`
 
 oTree automatically passes group, player, subsession, and Constants objects to the template, so you can access them from your template in the following format: `{{Constants.payoff_if_rejected}}`. If you need to pass any additional variables to the template, you can define a method `vars_for_template` that returns these variables in a dictionary.
 
-### `def is_displayed(self)`
+#### `def is_displayed(self)`
 
 Should return True if the page should be shown, and False if the page should be skipped. Default behavior is to show the page.
 
@@ -191,9 +205,48 @@ For example, if you only want a page to be shown to P2 in each group:
     def is_displayed(self):
         return self.player.id_in_group == 2
 
+#### `template_name`
+
+The name of the HTML template to display. This can be omitted if the template has the same name as the Page class.
+
+Example:
+
+    # This will look inside your app under the 'templates' directory, 
+    # to '/app_name/MyView.html'
+    template_name = 'app_name/MyView.html'
+    
+#### `timeout_seconds`
+
+Set to an integer that specifies how many seconds the user has to complete the page. After the time runs out, the page
+  auto-submits.
+
+Example: `timeout_seconds = 20`
+
+#### `auto_submit_values`
+
+Lets you specify what values should be auto-submitted if `timeout_seconds` is exceeded, or if the experimenter
+moves the participant forward. If this is omitted, then oTree will default to `0` for numeric fields, `False` for boolean
+fields, and the empty string for text/character fields.
+
+This should be a dictionary where the keys are the elements of `form_fields`, and the values are the values that should
+be auto-submitted.
+  
+### `def after_next_button(self)`
+
+After the player clicks the "Next" button, oTree makes sure that any form fields validate (and re-displays to the player with errors otherwise).
+
+Here you can put anything additional that should happen after form validation. If you don't need anything to be done, it's OK to leave this method blank, or to leave it out entirely.
+
+## `def vars_for_all_templates(self)`
+
+This is not a method on the Page class, but rather a top-level function in views.py. It is useful when you need certain variables to be passed to multiple pages in your app.
+Instead of repeating the same values in each `vars_for_template`, you can define it in this function.
+
 # Templates
 
 Your app's ``templates/`` directory will contain the templates for the HTML that gets displayed to the player.
+
+
 
 oTree uses Django's [template system] (https://docs.djangoproject.com/en/dev/topics/templates/).
 
@@ -313,17 +366,39 @@ If you would like a specially formatted value displayed to the user that is diff
             ('SR', 'Senior'), 
     ])
 
-    def year_in_school_choices(self):
-        return [
-            ('FR', 'Freshman'),
-            ('SO', 'Sophomore'),
-            ('JR', 'Junior'),
-            ('SR', 'Senior'),
-    ]
-    
 If a field is optional, you can do:
 
     offer = models.PositiveIntegerField(blank=True)
+
+### Dynamic validation
+
+If you need a form's choices or validation logic to depend on some dynamic calculation, then you can instead define one of the below methods in your `Page` class in `views.py`.
+
+* `def {field_name}_choices(self)`
+
+Example:
+
+    def offer_choices(self):
+        return currency_range(0, self.player.endowment)
+
+* `def {field_name}_min(self)`
+
+The dynamic alternative to `min_value`.
+
+* `def {field_name}_max(self)`
+
+The dynamic alternative to `max_value`.
+
+* `def {field_name}_error_message(self, value)`
+
+This is the most flexible method for validating a field.
+
+For example, let's say your form has an integer field called `odd_negative`, which must be odd and negative: You would enforce this as follows:
+
+    def odd_negative_error_message(self, value):
+        if not (value < 0 and value % 2):
+            return 'Must be odd and negative'
+
 
 # Object model and `self`
 
@@ -501,6 +576,9 @@ Note: instead of using Python's built-in `range` function, you should use oTree'
 ```
 [Money($0.00), Money($0.02), Money($0.04), Money($0.06), Money($0.08), Money($0.10)]
 ```
+## Assigning payoffs
+
+Each player has a `payoff` field, which is a `CurrencyField`. If your player makes money, you should store it in this field. At the end of the experiment, a participant's total profit is calculated by adding the fixed base pay to the `payoff` that participant earned as a player in each subsession.
 
 ## Points (i.e. "experimental currency")
 
@@ -829,6 +907,10 @@ You can download your raw data in text format (CSV) so that you can view and ana
 
 You can also download a documentation file for each app, which explains the meaning of the different variable names. It is auto-generated from your source code. Whatever you specify in a model field's `doc=` argument will show up here.
 
+## Autogenerated documentation
+
+Each model field you define can also have a `doc=` argument. Any string you add here will be included in the autogenerated documentation file, which can be downloaded through the data export page in the admin.
+
 ## Debug Info
 
 Any application can be run so that that debug information is displayed on the bottom of all screens. The debug information consists of the ID in group, the group, the player, the participant label, and the session code. The session code and participant label are two randomly generated alphanumeric codes uniquely identifying the session and participant. The ID in group identies the role of the player (e.g., in a principal-agent game, principals
@@ -926,6 +1008,5 @@ On heroku add generated values to your environment variables:
 
     heroku config:set AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID --app=YOUR_APP_NAME
     heroku config:set AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY --app=YOUR_APP_NAME
-
 
 
