@@ -16,3 +16,6 @@ class PlayerBot(Bot):
 
         #  results
         self.submit(views.Results)
+
+    def validate_play(self):
+        pass

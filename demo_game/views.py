@@ -13,7 +13,7 @@ def vars_for_all_templates(self):
 
 
 class Introduction(Page):
-
+    pass
 
 class Question1(Page):
     template_name = 'demo_game/Question.html'
@@ -178,6 +178,7 @@ class Results(Page):
 
 
 class Finish(Page):
+    pass
 
 
 page_sequence=[

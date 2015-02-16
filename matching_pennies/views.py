@@ -64,14 +64,7 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
-
-    # def vars_for_template(self):
-    #     return {'my_choice': self.player.penny_side,
-    #             'other_choice': self.player.other_player().penny_side,
-    #             'my_points': self.player.payoff,
-    #             'other_points': self.player.other_player().payoff,
-    #             'my_payoff': self.player.payoff,
-    #             'other_payoff': self.player.other_player().payoff}
+    pass
 
 
 class ResultsSummary(Page):

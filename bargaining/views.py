@@ -34,7 +34,7 @@ class Question1(Page):
             What would you and the other participant get respectively?'''}
 
 
-class Feedback1(Page):
+class Feedback(Page):
     def is_displayed(self):
         return self.subsession.round_number == 1
 
@@ -79,7 +79,7 @@ class Results(Page):
 page_sequence=[
         Introduction,
         Question1,
-        Feedback1,
+        Feedback,
         Request,
         ResultsWaitPage,
         Results,

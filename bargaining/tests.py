@@ -20,7 +20,7 @@ class PlayerBot(Bot):
             views.Question1,
             {"training_amount_mine": 1, "training_amount_other": 2}
         )
-        self.submit(views.Feedback1)
+        self.submit(views.Feedback)
 
         # request
         amount = random.randrange(Constants.amount_shared)
