@@ -829,36 +829,6 @@ You can download your raw data in text format (CSV) so that you can view and ana
 
 You can also download a documentation file for each app, which explains the meaning of the different variable names. It is auto-generated from your source code. Whatever you specify in a model field's `doc=` argument will show up here.
 
-# Amazon Mechanical Turk
-
-## Overview
-oTree provides integration with <strong><a href="https://www.mturk.com/mturk/welcome" target="_blank">Amazon Mechanical Turk (AMT)</a></strong>. oTree authenticates users visiting from the AMT service, and then sends payments to the correct AMT account. Researchers, however, must have an employer account with AMT, which currently requires a U.S. address and bank account.
-## Session for AMT
-Login to oTree admin panel and create new session:
-
-![Create session](http://i.imgur.com/oXr33PU.png)
-
-Set the session open and copy html snippet to your AMT HIT page:
-
-![HTML snippet](http://i.imgur.com/gxoz3hh.png)
-
-## AWS credentials
-To make payments to participants you need to generate
-`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
-[here](https://console.aws.amazon.com/iam/home?#security_credential):
-
-![AWS key](http://i.imgur.com/dNhkOiA.png)
-
-On heroku add generated values to your environment variables:
-
-    heroku config:set AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID --app=YOUR_APP_NAME
-    heroku config:set AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY --app=YOUR_APP_NAME
-
-## Payment
-
-    heroku run "./otree mturk_pay SESSION_ID" --app=YOUR_APP_NAME
-    
-
 ## Debug Info
 
 Any application can be run so that that debug information is displayed on the bottom of all screens. The debug information consists of the ID in group, the group, the player, the participant label, and the session code. The session code and participant label are two randomly generated alphanumeric codes uniquely identifying the session and participant. The ID in group identies the role of the player (e.g., in a principal-agent game, principals
@@ -936,4 +906,26 @@ We generally recommend using PostgreSQL as your production database. You can cre
 Then, you should set the following environment variable, so that it can be read by `dj_database_url`:
 
 `DATABASE_URL=postgres://postgres@localhost/django_db`
+
+
+# Amazon Mechanical Turk
+
+## Overview
+oTree provides integration with <strong><a href="https://www.mturk.com/mturk/welcome" target="_blank">Amazon Mechanical Turk (AMT)</a></strong>. oTree authenticates users visiting from the AMT service, and then sends payments to the correct AMT account. Researchers, however, must have an employer account with AMT, which currently requires a U.S. address and bank account.
+
+Note: AMT support is currently under construction. Instructions online to deploy your app to AMT will be added later.
+
+## AWS credentials
+To make payments to participants you need to generate
+`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
+[here](https://console.aws.amazon.com/iam/home?#security_credential):
+
+![AWS key](http://i.imgur.com/dNhkOiA.png)
+
+On heroku add generated values to your environment variables:
+
+    heroku config:set AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID --app=YOUR_APP_NAME
+    heroku config:set AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY --app=YOUR_APP_NAME
+
+
 
