@@ -144,8 +144,6 @@ class Dividend(Page):
     def is_displayed(self):
         return True
 
-    template_name = 'asset_market/Dividend.html'
-
     def vars_for_template(self):
         return {
             'dividend_gain': self.group.dividend_per_share * self.player.shares if self.player.shares != 0 else 0

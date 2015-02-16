@@ -19,7 +19,7 @@ class Introduction(Page):
         return self.subsession.round_number == 1
 
 
-class Question1(Page):
+class Question(Page):
 
     template_name = 'stag_hunt/Question.html'
 
@@ -35,19 +35,11 @@ class Question1(Page):
         return {'num_q': 1}
 
 
-class Feedback1(Page):
-
-    template_name = 'stag_hunt/Feedback.html'
+class Feedback(Page):
 
     def vars_for_template(self):
         return {
             'num_q': 1,
-
-            # 'is_training_question_1_my_payoff_correct': self.player.is_training_question_1_my_payoff_correct(),
-            # 'answer_you': self.player.training_question_1_my_payoff,
-            #
-            # 'is_training_question_1_other_payoff_correct': self.player.is_training_question_1_other_payoff_correct(),
-            # 'answer_other': self.player.training_question_1_other_payoff,
         }
 
 
@@ -69,8 +61,6 @@ class Decide(Page):
 
 class ResultsWaitPage(WaitPage):
 
-
-
     def after_all_players_arrive(self):
         for p in self.group.get_players():
             p.set_payoff()
@@ -91,8 +81,8 @@ class Results(Page):
 
 
 page_sequence = [Introduction,
-            Question1,
-            Feedback1,
+            Question,
+            Feedback,
             Decide,
             ResultsWaitPage,
             Results]

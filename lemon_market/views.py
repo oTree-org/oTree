@@ -65,7 +65,7 @@ class Production(Page):
 
 
 class Purchase(Page):
-    template_name = 'lemon_market/Purchase.html'
+
     form_model = models.Player
     form_fields = ['choice']
 

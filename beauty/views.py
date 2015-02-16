@@ -12,7 +12,7 @@ def vars_for_all_templates(self):
 
 class Introduction(Page):
 
-    template_name = 'beauty/Introduction.html'
+    pass
 
 
 class Question1(Page):
@@ -60,7 +60,6 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    template_name = 'beauty/Results.html'
     def total_payoff(self):
         return self.player.payoff + Constants.fixed_pay
 

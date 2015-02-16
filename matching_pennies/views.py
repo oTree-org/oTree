@@ -19,9 +19,7 @@ class Introduction(Page):
         return self.subsession.round_number == 1
 
 
-class Question1(Page):
-
-    template_name = 'matching_pennies/Question.html'
+class Question(Page):
 
     def is_displayed(self):
         return self.subsession.round_number == 1
@@ -92,7 +90,7 @@ class ResultsSummary(Page):
 
 
 page_sequence = [Introduction,
-            Question1,
+            Question,
             Feedback1,
             Choice,
             ResultsWaitPage,

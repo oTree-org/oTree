@@ -14,7 +14,7 @@ class PlayerBot(Bot):
             views.Question1,
             {'training_my_payoff': 1, 'training_other_payoff': 2}
         )
-        self.submit(views.Feedback1)
+        self.submit(views.Feedback)
 
         if self.player.id_in_group == 1:
             # P1/A - propose contract

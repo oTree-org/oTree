@@ -17,7 +17,7 @@ class PlayerBot(Bot):
         self.submit(views.Introduction)
 
         self.submit(
-            views.Question1,
+            views.Question,
             {'training_question_1': 'Alice gets 300 points, Bob gets 0 points'}
         )
 

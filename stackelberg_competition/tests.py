@@ -16,8 +16,8 @@ class PlayerBot(Bot):
 
         self.submit(views.Introduction)
 
-        self.submit(views.Question1, {'training_question_1': 20})
-        self.submit(views.Feedback1)
+        self.submit(views.Question, {'training_question_1': 20})
+        self.submit(views.Feedback)
 
         # player one
         if self.player.id_in_group == 1:

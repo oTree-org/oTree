@@ -34,8 +34,7 @@ class Question1(Page):
         return {'num_q': 1, 'question': self.question}
 
 
-class Feedback1(Page):
-    template_name = 'traveler_dilemma/Feedback.html'
+class Feedback(Page):
 
     def is_displayed(self):
         return self.subsession.round_number == 1
@@ -91,7 +90,7 @@ class Results(Page):
 
 page_sequence = [Introduction,
             Question1,
-            Feedback1,
+            Feedback,
             Claim,
             ResultsWaitPage,
             Results]

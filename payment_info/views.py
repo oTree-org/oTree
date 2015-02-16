@@ -4,9 +4,7 @@ from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
 from .models import Constants
-class RedemptionCode(Page):
-
-    template_name = 'payment_info/PaymentInfo.html'
+class PaymentInfo(Page):
 
     def vars_for_template(self):
         participant = self.player.participant
@@ -16,4 +14,4 @@ class RedemptionCode(Page):
         }
 
 
-page_sequence = [RedemptionCode]
+page_sequence = [PaymentInfo]

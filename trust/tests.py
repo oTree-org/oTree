@@ -19,7 +19,7 @@ class PlayerBot(Bot):
         self.submit(
             views.Question1, {"training_answer_x": 1, "training_answer_y": 2}
         )
-        self.submit(views.Feedback1)
+        self.submit(views.Feedback)
 
         # if p1, play send page
         if self.player.id_in_group == 1:

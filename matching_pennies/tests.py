@@ -18,7 +18,7 @@ class PlayerBot(Bot):
             # only submitted on round 1
             self.submit(views.Introduction)
             value = 'Player 1 gets 0 points, Player 2 gets 0 points'
-            self.submit(views.Question1, {'training_question_1': value})
+            self.submit(views.Question, {'training_question_1': value})
             self.submit(views.Feedback1)
 
         # repeated for the no. of rounds

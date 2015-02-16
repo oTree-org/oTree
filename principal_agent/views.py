@@ -40,8 +40,7 @@ class Question1(Page):
         return {'question_template': 'principal_agent/Question.html'}
 
 
-class Feedback1(Page):
-    template_name = 'principal_agent/Feedback.html'
+class Feedback(Page):
 
     def is_displayed(self):
         return self.subsession.round_number == 1
@@ -110,7 +109,7 @@ class Results(Page):
 
 page_sequence = [Introduction,
             Question1,
-            Feedback1,
+            Feedback,
             Offer,
             OfferWaitPage,
             Accept,

@@ -65,7 +65,6 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    template_name = 'dictator/Results.html'
     def offer(self):
         return Constants.allocated_amount - self.group.kept
 

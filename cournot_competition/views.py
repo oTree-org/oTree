@@ -52,8 +52,6 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    template_name = 'cournot_competition/Results.html'
-
     def vars_for_template(self):
         return {'total_plus_base': self.player.payoff + Constants.base_points}
 

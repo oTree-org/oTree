@@ -23,8 +23,6 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    template_name = 'matrix_symmetric/Results.html'
-
     def vars_for_template(self):
         return {
             'same_choice': self.player.decision == self.player.other_player().decision

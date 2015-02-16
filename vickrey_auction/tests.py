@@ -19,7 +19,7 @@ class PlayerBot(Bot):
         payoff = random.randint(
             Constants.min_allowable_bid, Constants.max_allowable_bid
         )
-        self.submit(views.Question1, {"training_question_1_my_payoff": payoff})
+        self.submit(views.Question, {"training_question_1_my_payoff": payoff})
         self.submit(views.Feedback1)
 
         payoff = random.randint(

@@ -14,11 +14,9 @@ def vars_for_all_templates(self):
 
 
 class Introduction(Page):
+    pass
 
-
-class Question1(Page):
-
-    template_name = 'stackelberg_competition/Question.html'
+class Question(Page):
 
     form_model = models.Player
     form_fields = ['training_question_1']
@@ -27,9 +25,7 @@ class Question1(Page):
         return {'num_q': 1}
 
 
-class Feedback1(Page):
-
-    template_name = 'stackelberg_competition/Feedback.html'
+class Feedback(Page):
 
     def vars_for_template(self):
         return {'num_q': 1,
@@ -70,8 +66,6 @@ class ChoiceTwo(Page):
     def is_displayed(self):
         return self.player.id_in_group == 2
 
-    template_name = 'stackelberg_competition/ChoiceTwo.html'
-
     form_model = models.Player
     form_fields = ['quantity']
 
@@ -106,8 +100,8 @@ class Results(Page):
 
 
 page_sequence = [Introduction,
-            Question1,
-            Feedback1,
+            Question,
+            Feedback,
             ChoiceOne,
             ChoiceTwoWaitPage,
             ChoiceTwo,

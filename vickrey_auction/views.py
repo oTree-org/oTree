@@ -15,11 +15,9 @@ def vars_for_all_templates(self):
 
 
 class Introduction(Page):
+    pass
 
-
-class Question1(Page):
-
-    template_name = 'vickrey_auction/Question.html'
+class Question(Page):
 
     def is_displayed(self):
         return self.subsession.round_number == 1
@@ -76,7 +74,7 @@ class Results(Page):
 
 
 page_sequence = [Introduction,
-            Question1,
+            Question,
             Feedback1,
             Bid,
             ResultsWaitPage,

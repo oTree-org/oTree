@@ -17,9 +17,7 @@ class Introduction(Page):
     timeout_seconds = 100
 
 
-class Question1(Page):
-
-    template_name = 'prisoner/Question.html'
+class Question(Page):
 
     form_model = models.Player
     form_fields = ['training_question_1']
@@ -75,7 +73,7 @@ class Results(Page):
 
 page_sequence = [
         Introduction,
-        Question1,
+        Question,
         Feedback1,
         Decision,
         ResultsWaitPage,

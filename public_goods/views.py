@@ -17,8 +17,6 @@ class Introduction(Page):
 
     """Description of the game: How to play and returns expected"""
 
-    #template_name = 'public_goods/Introduction.html'
-
     def vars_for_template(self):
         return {'no_of_players': Constants.players_per_group,
                 'efficiency_factor': Constants.efficiency_factor}
