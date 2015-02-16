@@ -1,4 +1,4 @@
-# Introduction
+# oTree
 
 ## Live demo
 http://demo.otree.org/
@@ -19,6 +19,10 @@ This repository contains the games; the oTree core libraries are [here](https://
 chris@otree.org (you can also add me on Skype by searching this email address; please mention oTree in your contact request)
 
 Please contact me if you find any bugs or issues in oTree or this documentation. oTree is under heavy development, therefore documentation might contain discrepancies with actual API.
+
+## Mailing list
+Sign up to be notified about updates to oTree [here](https://docs.google.com/forms/d/1jD4tocuX07DFYN2jDY2tcNXpkOCSqLhSOMboOgaVGtw/viewform)
+
 
 # Setup
 
