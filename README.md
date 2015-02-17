@@ -113,8 +113,7 @@ In oTree, an app is a folder containing Python and HTML code. When you create yo
 
 ## Creating an app
 
-At your command line, go inside your project directory (the directory containing the file `otree`),
-and run a command like this:
+From the oTree launcher, click the "Terminal" button. (If the button is disabled, make sure you have stopped the server.) When the console window appears, type this:
 
     ./otree startapp your_app_name
 
@@ -703,20 +702,11 @@ This is a dictionary just like `participant.vars`.
 You can launch your app on your local development machine to test it, and then when you are satisfied, you can deploy it to a server.
 
 ### Testing locally
-You will be testing your app frequently during development, so that you can see how the app looks and feels and discover bugs during development.
+You will be testing your app frequently during development, so that you can see how the app looks and feels and discover bugs during development. To test your app, run the server in the oTree launcher. You may need to reset the database first.
 
-To help with launching your app, there is a script in your project's root directory called `otree`. You can run it as follows:
+Click on a session name and you will get a start link for the experimenter, as well as the links for all the participants. You can open all the start links in different tabs and simulate playing as multiple participants simultaneously.
 
-    ./otree resetdb
-
-This command will create your app in one command. It does the following:
-
-* Delete your database (so be careful not to run this script unless you are OK with losing everything currently in the database)
-* Set up a new blank database according to the schema in your app's `models.py` files
-
-After running this script, open your PyCharm window and select "Run > Debug". Your app should be set to "Django server". When you launch it, a browser window will open to the demo page, where you can test your game. Click on a session name and you will get a start link for the experimenter, as well as the links for all the participants. You can open all the start links in different tabs and simulate playing as multiple participants simultaneously.
-
-You can send the demo page link to your colleagues or publish it to a public audience. You can modify the `show_on_demo_page` attribute for your session in `settings.py` to control whether a given session is listed on the demo page. If you don't want a demo page at all, make this function return `False`.
+You can send the demo page link to your colleagues or publish it to a public audience.
 
 ### Debugging
 Once you start playing your app, you will sometimes get a yellow Django error page with lots of details. To troubleshoot this, look at the error message and "Exception location" fields. If the exception location is somewhere outside of your app's code (like if it points to an installed module like Django or oTree), look through the "Traceback" section to see if it passes through your code. Once you have found a reference to a line of code in your app, go to that line of code and see if the error message can help you pinpoint an error in your code. Googling the error name or message will often take you to pages that explain the meaning of the error and how to fix it.
@@ -737,7 +727,7 @@ This automated test system saves the programmer the effort of having to re-test 
 ### Launching tests
 oTree tests entire sessions, rather that individual apps in isolation. This is to make sure the entire session runs, just as participants will play it in the lab.
 
-Let's say you want to test the session named `ultimatum_game` in `settings.py`. To test, run the following command from your project's root directory:
+Let's say you want to test the session named `ultimatum` in `settings.py`. To test, click the "Terminal" button in the oTree launcher run the following command from your project's root directory:
 
     ./otree test ultimatum_game
 
