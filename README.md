@@ -403,6 +403,13 @@ For example, let's say your form has an integer field called `odd_negative`, whi
         if not (value < 0 and value % 2):
             return 'Must be odd and negative'
 
+### Validating multiple fields together
+
+Let's say you have 3 integer fields in your form whose names are `int1`, `int2`, and `int3`, and the values submitted must sum to 100. You would define the `error_message` method in your Page class:
+
+    def error_message(self, values):
+        if values["int1"] + values["int2"] + values["int3"] != 100:
+            return 'The numbers must add up to 100'
 
 # Object model and `self`
 
@@ -1012,5 +1019,3 @@ On heroku add generated values to your environment variables:
 
     heroku config:set AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID --app=YOUR_APP_NAME
     heroku config:set AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY --app=YOUR_APP_NAME
-
-
