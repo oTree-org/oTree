@@ -1,3 +1,5 @@
+# oTree
+
 ## Live demo
 http://demo.otree.org/
 
@@ -11,100 +13,39 @@ Many of the details of writing a web application are abstracted away,
 meaning that the code is focused on the logic of the game.
 oTree programming is accessible to programmers without advanced experience in web app development.
 
-See the live demo [here](http://demo.otree.org/).
-
 This repository contains the games; the oTree core libraries are [here](https://github.com/oTree-org/otree-core).
-
 
 ## Contact
 chris@otree.org (you can also add me on Skype by searching this email address; please mention oTree in your contact request)
 
 Please contact me if you find any bugs or issues in oTree or this documentation. oTree is under heavy development, therefore documentation might contain discrepancies with actual API.
 
-## Quick start
+## Mailing list
+Sign up to be notified about updates to oTree [here](https://docs.google.com/forms/d/1jD4tocuX07DFYN2jDY2tcNXpkOCSqLhSOMboOgaVGtw/viewform)
+
+
+# Setup
+
+## Install Python
+
+oTree requires [Python 2.7](https://www.python.org/download/releases/2.7.7/).
+
+On Windows, select the option to add Python to your PATH while installing.
+
+On Mac/Unix, it is very likely that Python is already installed. Open the Terminal and write ``python`` and hit Enter. If you get something like `-bash: python: command not found` you will have to install it yourself.
+
+## oTree Launcher
+
+You can download the oTree launcher executable [here](http://www.otree.org/download/). Unzip it to your desktop or another easy-to-access location.
+
+## Alternative manual setup
+
+As an alternative to the launcher, you can clone this repo and then run these commands:
 
     pip install -r requirements_base.txt
     ./otree resetdb
     ./otree runserver
 
-### Prerequisites
-
-### Python interpreter
-
-Install [Python 2.7](https://www.python.org/download/releases/2.7.7/).
-
-On Windows, select the option to add Python to your PATH while installing.
-
-On Mac/Unix, it is very likely that Python is already installed. Open the Terminal and write ``python`` and hit Enter. If you get something like `-bash: python: command not found` you will have to install it yourself.
-
-### PyCharm
-
-To ease the learning curve of oTree, we strongly recommend using [PyCharm Professional](http://www.jetbrains.com/pycharm/), even though there are many other good editors for Python code. This is because:
-
-* PyCharm has features that make oTree/Django development easier
-* oTree has special integration with PyCharm's code completion functionality
-* This documentation gives instructions assuming you are using PyCharm
-* oTree has been thoroughly tested with PyCharm
-
-If you are a student, teacher, or professor, PyCharm Professional is [free](https://www.jetbrains.com/student/). Note: we recommend PyCharm Professional rather than PyCharm Community Edition.
-
-
-_TODO:_
-* runserver & debug
-
-
-## Setup
-
-### Installer
-
-You can download the installer [here](http://www.otree.org/download/)
-
-
-### Manual setup
-
-An alternative to using the installer is to do a command-line manual setup.
-
-Install Git:
-* On Windows, install [msysgit](http://msysgit.github.io/) (during installation, select the option to add git to your path)
-* [TODO: Mac]
-
-#### Pip
-
-You will need a program called Pip in order to install packages.
-
-Then, download [get-pip.py](https://raw.github.com/pypa/pip/master/contrib/get-pip.py).
-
-On Windows, right-click the Windows PowerShell app icon, then click "Run as administrator" and run this command:
-
-`python get-pip.py`
-
-On Mac/Unix, run:
-
-`sudo python get-pip.py`
-
-You will be asked to enter the admin password.
-
-
-#### Clone the repository
-
-1. Open Terminal (for Mac and Linux users) or the command line (for Windows users).
-2. On GitHub, navigate to your folder on your computer where you want your oTree repository to reside.
-3. Enter `git clone https://github.com/oTree-org/oTree.git`
-
-#### Install dependencies
-Change into the `oTree` directory (the one containing `requirements_base.txt`), and run the following command:
-
-`pip install -r requirements_base.txt`
-
-#### Create the database
-
-Run the following command (which creates the database):
-
-`./otree resetdb`
-	
-#### Test that it worked
-
-Run the command `./otree runserver`.
 You should see the following output on the command line::
 
     Validating models...
@@ -116,15 +57,26 @@ You should see the following output on the command line::
     Quit the server with CONTROL-C.
 
 Now that the server's running, visit `http://127.0.0.1:8000/` with your Web
-browser.
+browser. 
 
-## Sessions
+## PyCharm
 
-In oTree, the term "session" refers to an event where a group of people spend time taking part in oTree experiments.
+To ease the learning curve of oTree, we strongly recommend using [PyCharm Professional](http://www.jetbrains.com/pycharm/), even though there are many other good editors for Python code. This is because:
 
-An example of a session would be: 
+* PyCharm has features that make oTree/Django development easier
+* oTree has special integration with PyCharm's code completion functionality
+* This documentation gives instructions assuming you are using PyCharm
+* oTree has been thoroughly tested with PyCharm
 
-> On Tuesday at 3PM, 30 people will come to the lab for 1 hour, during which time they will play a trust game, followed by 2 ultimatum games, followed by a questionnaire. Participants get paid EUR 10.00 for showing up, plus bonus amounts for participating.
+If you are a student, teacher, or professor, PyCharm Professional is [free](https://www.jetbrains.com/student/). Note: we recommend PyCharm Professional rather than PyCharm Community Edition.
+
+# Conceptual overview
+
+## Sessions and subsessions
+
+In oTree, the top-level concept is a "Session". This term refers to an event where a group of people spend time taking part in oTree experiments. An example of a session would be: 
+
+"On Tuesday at 3PM, 30 people will come to the lab for 1 hour, during which time they will play a trust game, followed by 2 rounds of an ultimatum game, followed by a questionnaire. Participants get paid EUR 10.00 for showing up, plus their payoffs they earn playing the games."
 
 A session can be broken down into what oTree calls "subsessions". These are interchangeable units or modules that come one after another. Each subsession has a sequence of one or more pages the player must interact with. The session in the above example had 4 subsessions:
 
@@ -133,94 +85,61 @@ A session can be broken down into what oTree calls "subsessions". These are inte
 * Ultimatum game 2
 * Questionnaire
 
-Each subsession is created by an oTree app. The above session would require 3 distinct apps to be coded:
+Each subsession is defined in an oTree app. The above session would require 3 distinct apps to be coded:
 
 * Trust game
 * Ultimatum game
 * Questionnaire
 
-You can define your session's properties in `settings.py`. Here are the parameters for the above example:
+You can define your session's properties in `SESSION_TYPES` in `settings.py`. Here are the parameters for the above example:
 
          {
         'name':'my_session',
-        'fixed_pay':1000,
+        'fixed_pay':10.00,
         'app_sequence':['trust', 'ultimatum', 'questionnaire'],
          }
 
-## Players vs. participants
+## Participants and players
 
-In oTree, the terms "player" and "participant" have distinct meanings.
+In oTree, the terms "player" and "participant" have distinct meanings. The distinction between a participant and a player is the same as the distinction between a session and a subsession.
 
-A participant is a person who takes part in a session. The participant object contains properties such as the participant's name, how much they made in the session, and what their progress is in the session.
+A participant is a person who takes part in a session. The participant data model contains properties such as the participant's name, how much they made in the session, and what their progress is in the session.
 
 A player is an instance of a participant in one particular subsession. A participant can be player 1 in the first subsession, player 5 in the next subsession, and so on.
 
-Each player has an attribute called participant that refers to the participant. In the above example, here is how this participant would be modeled in oTree:
+# Apps
 
-* participant
-    * label: "John Smith"
-    * time_started: "3 PM"
-    * players:
-        * player in trust subsession
-            * bonus: $0.50
-        * player in ultimatum subsession 1
-            * bonus: $0.65
-        * player in ultimatum subsession 2
-            * bonus: $0.80
-        * player in questionnaire subsession
-            * bonus: $0.00
-    * total bonuses for participant: ($0.50 + $0.65 + $0.80 + $0.00) = $1.95
+In oTree, an app is a folder containing Python and HTML code. When you create your oTree project, it comes pre-loaded with various apps such as `public_goods` and `dictator`. A session is basically a sequence of apps that are played one after the other.
 
-## Apps
+## Creating an app
 
-This page describes how to write a oTree app.
-
-## Creating the app
-
-First, choose a name for your app that is descriptive and short,
-since you will be typing it and using it frequently. See existing games in the library for examples.
-
-At your command line, go inside your project directory (the directory containing the file `otree`),
-and run this command, where `your_app_name` is the name you have chosen for your app:
+From the oTree launcher, click the "Terminal" button. (If the button is disabled, make sure you have stopped the server.) When the console window appears, type this:
 
     ./otree startapp your_app_name
 
-This will create a new app based on a oTree template, with most of the structure already set up for you.
+This will create a new app folder based on a oTree template, with most of the structure already set up for you.
 
 Think of this as a skeleton to which you can add as much as you want.
 You can add your own classes, functions, methods, and attributes,
 or import any 3rd-party modules.
 
-## Open your project for editing
+Then go to `settings.py` and create an entry for your app in `SESSION_TYPES` that looks like the other entries.
 
+## models.py
 
-Launch PyCharm, and select "Open Directory".
-Navigate to your oTree directory (the directory containing the file `otree`) and click OK.
-When the project opens, on the left-hand site you should see a directory tree that expands to the following::
+This is where you store your data models.
 
-    otree_experiments/
-        <your_app_name>
-            static/
-            templates/
-            _builtin/
-                __init__.py
-                admin.py                
-            __init__.py
-            models.py
-            tests.py
-            views.py
+### Model hierarchy
 
+Every oTree app needs the following 3 models:
 
-Then go to `settings.py` and create an entry for your app in SESSION_TYPES that looks like the other entries.
+* Player
+* Group
+* Subsession
 
-## Models
+A player is part of a group, which is part of a subsession.
 
-The purpose of running an experiment is to record data:
-* what treatments are in your expefriment, what games were played in those treatments,
-* what the results were,
-* what actions the players took, etc.
-
-oTree stores your data in standard database tables (SQL), which you can later export to CSV for analysis in Stata, R, Matlab, Excel, etc.
+### Models and database tables
 
 For example, let's say you are programming an ultimatum game, where in each two-person group, one player makes a monetary offer (say, 0-100 cents), and another player either rejects or accepts the offer. When you analyze your data, you will want your "Group" table to look something like this:
 
@@ -238,182 +157,49 @@ For example, let's say you are programming an ultimatum game, where in each two-
     | 5        | 60             | TRUE           |
     +----------+----------------+----------------+ 
 
-In order to end up with this table schema, you need to define a Django model, which is a Python class that defines a database table. You define what fields (columns) are in the table, what their data types are, and so on. When you run your experiment, the SQL tables will get automatically generated, and each time users visit, new rows will get added to the tables.
+You need to define a Python class that defines the structure of this database table. You define what fields (columns) are in the table, what their data types are, and so on. When you run your experiment, the SQL tables will get automatically generated, and each time users visit, new rows will get added to the tables.
 
-Here is what the model might look like for the above "Group" table::
+Here is how to define the above table structure:
 
     class Group(otree.models.BaseGroup):
         ...
         amount_offered = models.CurrencyField()
         offer_accepted = models.BooleanField()
-    
-This class will be placed in your app's `models.py` file.
 
-Every oTree app needs the following 3 models:
-
-* Player
-* Group
-* Subsession
-
-They are related to each other as follows:
-
-A player is part of a group, which is part of a subsession.
-
-### Technical details
-Each model has pointers to the parent models. A player object has attributes called `group` and `subsession`; a group object has a `subsession`.
-
-Each model also has pointers to its child models. A `subsession` has methods called `get_players()`, and `get_groups()`. For example, entering `.get_players()` on a subsession will return a list of player contained in that subsession. Likewise, a group has a `get_players()` method.
-
-Each model field you define can also have a `doc=` argument. Any string you add here will be included in the autogenerated documentation file, which can be downloaded through the data export page in the admin.
+oTree stores your data in standard database tables (SQL), which you can later export to CSV for analysis in Stata, R, Matlab, Excel, etc.
 
 ### Constants
-`Constants` is a place to put your app's parameters and other constants.
 
-These constants are required:
-* `players_per_group` should be set to the number of players in a group of this game type. For example, in a 2-player game like an ultimatum game or prisoner's dilemma, you would set this to 2. If your app does not involve dividing the players into multiple groups, then set it to `None`. e.g. it is a single-player game or an auction where everybody in the subsession interacts together as 1 group. In this case, `self.group.get_players()` will return everybody in the subsession.
-* `num_rounds` is the number of rounds this game should be played
+The `Constants` class is the recommended place to put your app's parameters and other constants (i.e. things that do not vary from player to player)
+
+Here are the required constants:
+
 * `name_in_url` is an attribute that defines the name this app has in the URLs, which players may see.
+* `players_per_group` (described elsewhere in the documentation)
+* `num_rounds` (described elsewhere in the documentation)
 
-
-### Player
-
-A player represents a person who participates in the subsession. The player object will store the results of that player's actions.
-
-#### Implementation
-
-The `payoff` field stores the monetary payoff the player gets paid for the current subsession (meaning `self.payoff = 1.20` sets the payoff to $1.20 (or, depending on your currency code, €1.20, etc.). You should set the payoff at some point in the subsession, usually on a wait page before the results page, when the player has fully completed their task. A good practice is to have a method on the group called `set_payoffs()` and call this method in the last wait page.
-
-The field `id_in_group` is an index starting from 1. This is useful in multiplayer games where players have different roles, so that you can determine if the player is player 1, player 2, or so on.
-
-The methods `get_others_in_group()` and `get_others_in_subsession()` returns a list of the other players in the group and subsession, respectively.
-
-### Group
-
-Groups represent multiplayer games, where there is some interaction between players. Example of a group: "an ultimatum game between players Alice and Bob, where Alice gave offered to give $0.50".
-
-On your group model you can define fields to store the results of a particular group (e.g. what the score was).
-
-Groups have a method called `get_player_by_id()`. The argument to this method is an integer; this function retrieves the player in the group whose `id_in_group` is that integer. So to get player 1 in a group, you would do `p1 = self.group.get_player_by_id()`.
-
-There is also a similar method `get_player_by_role()`. The argument to this method is a string that looks up the player by their role value. (If you use this method, you must define the `role` method on the player model, which should return a string that depends on `id_in_group`.)
-
-### Subsession
-
-Your subsession model can define any fields that are common to all players in the subsession.
-
-### Validation
-
-oTree automatically validates all input submitted by the user.
-For example, if you have a form containing a `PositiveIntegerField`,
-oTree will not let the user submit values that are not positive integers, like `-1`, `1.5`, or `hello`.
-
-Additionally, you can define one of the below methods in your `Page` class in `views.py`.
-
-#### `def {field_name}_bounds(self)`
-
-If you want to constrain the allowable answers for a field to a numeric range, you can define this method,
-which should return a list with 2 elements, specifying the lower and upper bounds,  e.g. `return [24, 48]`
-
-#### `def {field_name}_choices(self)`
-
-If this method is defined, the default form widget will be a select box with these choices instead of the standard text field. This should return a list of values. If you would like a specially formatted value displayed to the user, you can return a list consisting itself of tuples of exactly two items (e.g. [(A, B), (A, B) ...]) to use as choices for this field. The first element in each tuple is the actual value to be set on the model, and the second element is the human-readable name. For example:
-
-    def year_in_school_choices(self):
-        return [
-            ('FR', 'Freshman'),
-            ('SO', 'Sophomore'),
-            ('JR', 'Junior'),
-            ('SR', 'Senior'),
-    ]
-
-
-#### `def {field_name}_error_message(self, value)`
-
-
-Additionally, You can define a method called `[your field name]_error_message` that does additional validation of any form field.
-
-For example, let's say your form has a field called `amount_returned`, which cannot be greater than the group's `amount_offered`. You would enforce this as follows:
-
-    def amount_returned_error_message(self, value):
-        if value > self.group.amount_offered:
-            return 'Amount returned cannot be greater than amount offered'
-            
-            
-## Views
+## views.py
 
 Each page that your players see is defined by a `Page` class in `views.py`. (You can think of "views" as a synonym for "pages".)
 
-For example, if your experiment involves showing the player a sequence of 5 pages, your `views.py` should contain 5 page classes.
+For example, if 1 round of your game involves showing the player a sequence of 5 pages, your `views.py` should contain 5 page classes.
 
 At the bottom of your `views.py`, you must have a `page_sequence` variable that specifies the order in which players are routed through your pages. For example:
 
      page_sequence=[
         Start, Offer, Accept, Results]
 
-This function should list all pages that anybody will see. You can filter individual pages from being seen.
+Each `Page` class has methods and attributes that define things like:
+* the condition for displaying or skipping the page (`is_displayed`)
+* what HTML template to display (`template_name`, t
+* what dynamic variables to pass to the template (`vars_for_template`)
+* what form fields to include on the page for the user to input (`form_model` and `form_fields`)
 
-The player must submit a valid form before they get routed to the next page. If the form they submit is invalid (e.g. missing or incorrect values), it will be re-displayed to them along with the list of errors they need to correct.
+#### `def vars_for_template(self)`
 
-Here is what the code of a page should define (along with what attribute/method defines it):
+oTree automatically passes group, player, subsession, and Constants objects to the template, so you can access them from your template in the following format: `{{Constants.payoff_if_rejected}}`. If you need to pass any additional variables to the template, you can define a method `vars_for_template` that returns these variables in a dictionary.
 
-## Page
-
-### `player, group, subsession`
-These attributes are provided automatically. For example, inside a method definition, you can access the current player with `self.player`, just as you can in `models.py` or `forms.py`.
-
-### `template_name`
-
-The name of the HTML template to display.
-
-Example:
-
-    # This will look inside your app under the 'templates' directory, 
-    # to '/app_name/MyView.html'
-    template_name = 'app_name/MyView.html'
-    
-### `form_models`
-
-The model that this form modifies. It will most commonly be `models.Player` or `models.Group`.
-
-### `form_fields`
-
-A list of the field names from the model specified in `form_model` to include in the form.
-
-### `timeout_seconds`
-
-Set to an integer that specifies how many seconds the user has to complete the page. After the time runs out, the page
-  auto-submits.
-
-Example: `timeout_seconds = 20`
-
-### `auto_submit_values`
-
-Lets you specify what values should be auto-submitted if `timeout_seconds` is exceeded, or if the experimenter
-moves the participant forward. If this is omitted, then oTree will default to `0` for numeric fields, `False` for boolean
-fields, and the empty string for text/character fields.
-
-This should be a dictionary where the keys are the elements of `form_fields`, and the values are the values that should
-be auto-submitted.
-
-
-### `def vars_for_template(self)`
-
-oTree automatically passes Group, Player and Subsession objects to the template, so you can access them in the following format: `{{Constants.payoff_if_rejected}}`
-
-Get any variables that will be passed to the HTML template. Add them to the dictionary as key-value pairs.
-
-Example:
-
-    def vars_for_template(self):
-        return {'max_amount_offered': self.subsession.max_amount_offered,
-                'reject_payoff': Constants.payoff_if_rejected}
-
-Note that this method will be re-executed each time the player refreshes the page reloads the page (or submits an invalid form, which triggers a page reload). Make sure this doesn't cause undesired behavior. For example, if your code generates a payoff for the player based on a random number generator, the player could exploit this by refreshing the page until they get the payoff they want. To prevent issues like this, you can check if this variable has already been set, like this:
-
-    if self.player.payoff is None:
-        self.player.payoff = randint(0,100)
-
-### `def is_displayed(self)`
+#### `def is_displayed(self)`
 
 Should return True if the page should be shown, and False if the page should be skipped. Default behavior is to show the page.
 
@@ -421,7 +207,33 @@ For example, if you only want a page to be shown to P2 in each group:
 
     def is_displayed(self):
         return self.player.id_in_group == 2
+
+#### `template_name`
+
+The name of the HTML template to display. This can be omitted if the template has the same name as the Page class.
+
+Example:
+
+    # This will look inside your app under the 'templates' directory, 
+    # to '/app_name/MyView.html'
+    template_name = 'app_name/MyView.html'
     
+#### `timeout_seconds`
+
+Set to an integer that specifies how many seconds the user has to complete the page. After the time runs out, the page
+  auto-submits.
+
+Example: `timeout_seconds = 20`
+
+#### `auto_submit_values`
+
+Lets you specify what values should be auto-submitted if `timeout_seconds` is exceeded, or if the experimenter
+moves the participant forward. If this is omitted, then oTree will default to `0` for numeric fields, `False` for boolean
+fields, and the empty string for text/character fields.
+
+This should be a dictionary where the keys are the elements of `form_fields`, and the values are the values that should
+be auto-submitted.
+  
 ### `def after_next_button(self)`
 
 After the player clicks the "Next" button, oTree makes sure that any form fields validate (and re-displays to the player with errors otherwise).
@@ -430,47 +242,27 @@ Here you can put anything additional that should happen after form validation. I
 
 ## `def vars_for_all_templates(self)`
 
-This function is useful when you need certain variables to be passed to multiple pages in your app.
-Instead of repeating the same values in each `vars_for_template`, you can define it in this function at the top of your views.py.
+This is not a method on the Page class, but rather a top-level function in views.py. It is useful when you need certain variables to be passed to multiple pages in your app.
+Instead of repeating the same values in each `vars_for_template`, you can define it in this function.
 
-## Wait pages
+# Templates
 
-Wait pages are created by subclassing from `WaitPage`.
+Your app's ``templates/`` directory will contain the templates for the HTML that gets displayed to the player.
 
-If you have a wait page in your sequence of pages, then oTree waits until all players in the group have arrived at that point in the sequence, and then all players are allowed to proceed.
 
-If your subsession has multiple groups playing simultaneously, and you would like a wait page that waits for all groups (i.e. all players in the subsession), you can set the attribute `wait_for_all_groups = True` on the wait page.
-
-Wait pages can define the following methods:
-
-### `def after_all_players_arrive(self)`
-
-This code will be executed once all players have arrived at the wait page. For example, this method can determine the winner of an auction and set each player's payoff.
-
-### `def title_text(self)`
-
-The text in the title of the wait page.
-
-### `def body_text(self)`
-
-The text in the body of the wait page.
-
-##Templates 
-
-Your ``templates/`` directory will contain the templates for the HTML that gets displayed to the player.
 
 oTree uses Django's [template system] (https://docs.djangoproject.com/en/dev/topics/templates/).
 
 ### Template blocks
 
-Instead of having to write all your HTML from scratch, for example::
+Instead of writing the full HTML of your page, for example::
 
     <!DOCTYPE html>
     <html lang="en">
         <head>
         <!-- and so on... -->
     
-You just have to define 2 blocks:
+You define 2 blocks:
 
     {% block title %}
         Title goes here
@@ -484,23 +276,22 @@ You just have to define 2 blocks:
         {% next_button %}
     {% endblock %}
 
-You may want to define your own base template rather than using oTree's built-in base template.
-This is useful when you want to customize the appearance or functionality (e.g. by adding custom CSS or JavaScript), or customize the structure of HTML headings. This is easily done. Just edit the file `templates/global/Base.html`.
+You may want to customize the appearance or functionality of all pages in your app (e.g. by adding custom CSS or JavaScript). To do this, edit the file `templates/global/Base.html`.
 
-### Static files
+### Images, videos, CSS, JavaScript
 
-You will likely want to include images, CSS, or even JavaScript in your pages.
-
-To do that, put the following line in your template below the ``extends`` block:
+To include images, CSS, or even JavaScript in your pages, put the following line in your template below the ``extends`` block:
 
     {% extends "Base.html" %}
     {% load staticfiles %}
 
 And follow the [instructions here] (https://docs.djangoproject.com/en/dev/howto/static-files/).
 
-## Additional tools
+### Plugins 
 
-### Bootstrap
+oTree comes pre-loaded with the following plugins and libraries.
+
+#### Bootstrap
 
 oTree comes with [Bootstrap] (http://getbootstrap.com/), a popular library for customizing a website's user interface.
 
@@ -512,7 +303,7 @@ For example, the following HTML will create a "Success" alert:
 
     <div class="alert alert-success">Great job!</div>
 
-### HighCharts
+#### HighCharts
 
 oTree comes pre-loaded with [HighCharts](http://www.highcharts.com/demo). You can find examples in the library of how to use it.
 
@@ -525,25 +316,253 @@ Example:
     '[0, 1, 2, 3, 4, null]'
 
 
-### jQuery
+#### jQuery
 
 oTree comes pre-loaded with [jQuery](http://jquery.com/), a JavaScript library that lets you make your pages dynamic. You can include a script and reference the standard `$` variable.
 
-### LaTeX
-
+#### LaTeX
 
 oTree comes pre-loaded with [KaTeX](http://khan.github.io/KaTeX/); you can insert LaTeX equations like this: `<span class="latex">1 + i = (1 + r)(1 + \pi)</span>`
 
-##Smartphones and tablets
+### oTree on mobile devices 
+
 Since oTree uses Bootstrap for its user interface, your oTree app should work on all major browsers (Chrome/Internet Explorer/Firefox/Safari). When participants visit on a smartphone or tablet (e.g. iOS/Android/etc.), they should see an appropriately scaled down "mobile friendly" version of the site. This will generally not require much effort on your part since Bootstrap does it automatically, but if you plan to deploy your app to participants on mobile devices, you should test it out on a mobile device during development, since some HTML code doesn't look good on mobile devices.
 
-## Groups
+# Forms
 
-### Grouping and randomization
+Each page in oTree can contain a form, which the player should fill out and submit by clicking the "Next" button. To create a form, first you should go to models.py and define fields on your Player or Group. Then, in your Page class, you can define `form_models` to specify he model that this form modifies (either `models.Player` or `models.Group`), and `form_fields`, which is list of the fields from that model.
 
-For the first round, the players are randomly split into groups of `Constants.players_per_group`. In subsequent rounds, By default, the groups chosen are kept the same for subsequent round. If you would like to change this, you can define the grouping logic in `Subsession.initialize`.
+When the user submits the form, the submitted data is automatically saved back to the field in your model.
 
-A group has a method `set_players` that takes as an argument a list of the players to assign to that group, in order. For example, if you want players to be reassigned to the same groups but to have roles randomly shuffled around within their groups (e.g. so player 1 will either become player 2 or remain player 1), you would do this:
+## Forms in templates
+
+oTree forms are rendered using the Django Floppy Forms library. You should include form fields by using a `{% formrow %}` element. You generally do not need to write raw HTML for forms (e.g. `<input type="text" id="...">`).
+
+## User Input Validation
+
+The player must submit a valid form before they get routed to the next page. If the form they submit is invalid (e.g. missing or incorrect values), it will be re-displayed to them along with the list of errors they need to correct.
+
+_Example 1:_
+![](http://i.imgur.com/Sz34h7d.png)
+
+_Example 2:_
+![](http://i.imgur.com/BtG8ZHX.png)
+
+oTree automatically validates all input submitted by the user.
+For example, if you have a form containing a `PositiveIntegerField`,
+oTree will not let the user submit values that are not positive integers, like `-1`, `1.5`, or `hello`.
+
+Additionally, you can customize validation by passing extra arguments to your model field definition. For example, if you want to require a number to be between 12 and 24, you can specify it like this:
+
+    offer = models.PositiveIntegerField(min_value=12, max_value=24)
+
+If you specify a `choices` argument, the default form widget will be a select box with these choices instead of the standard text field.
+
+    year_in_school = models.CharField(choices=['Freshman', 'Sophomore', 'Junior', 'Senior'])
+
+If you would like a specially formatted value displayed to the user that is different from the values stored internally, you can return a list consisting itself of tuples of two items (e.g. [(A, B), (A, B) ...]) to use as choices for this field. The first element in each tuple is the actual value to be set on the model, and the second element is the human-readable name. For example:
+
+    year_in_school = models.CharField(choices=[
+            ('FR', 'Freshman'),
+            ('SO', 'Sophomore'),
+            ('JR', 'Junior'),
+            ('SR', 'Senior'), 
+    ])
+
+If a field is optional, you can do:
+
+    offer = models.PositiveIntegerField(blank=True)
+
+### Dynamic validation
+
+If you need a form's choices or validation logic to depend on some dynamic calculation, then you can instead define one of the below methods in your `Page` class in `views.py`.
+
+* `def {field_name}_choices(self)`
+
+Example:
+
+    def offer_choices(self):
+        return currency_range(0, self.player.endowment)
+
+* `def {field_name}_min(self)`
+
+The dynamic alternative to `min_value`.
+
+* `def {field_name}_max(self)`
+
+The dynamic alternative to `max_value`.
+
+* `def {field_name}_error_message(self, value)`
+
+This is the most flexible method for validating a field.
+
+For example, let's say your form has an integer field called `odd_negative`, which must be odd and negative: You would enforce this as follows:
+
+    def odd_negative_error_message(self, value):
+        if not (value < 0 and value % 2):
+            return 'Must be odd and negative'
+
+### Validating multiple fields together
+
+Let's say you have 3 integer fields in your form whose names are `int1`, `int2`, and `int3`, and the values submitted must sum to 100. You would define the `error_message` method in your Page class:
+
+    def error_message(self, values):
+        if values["int1"] + values["int2"] + values["int3"] != 100:
+            return 'The numbers must add up to 100'
+
+# Object model and `self`
+
+In oTree code, you will see the variable `self` all throughout the code. `self` is the way you refer to the current object in Python. It is therefore important to understand that the meaning of `self` is totally different depending on where you are in your code. For example, if you are inside a Page class, `self.player.payoff` refers to the current player object, but if you are inside the Player class in models.py, `self.player.payoff` is invalid because `self` is the player; you instead need to do `self.payoff`.
+
+oTree's different objects are all connected; 
+here is an example of how to traverse these connections using the "dot" operator.
+
+```
+class Session(...) # this class is defined in oTree-core
+    def example(self):
+
+        # current session object
+        self
+
+        # parent objects
+        self.session_type
+
+        # child objects
+        self.get_subsessions()
+        self.get_participants()
+
+class Participant(...) # this class is defined in oTree-core
+    def example(self):
+
+        # current participant object
+        self
+
+        # parent objects
+        self.session
+
+        # child objects
+        self.get_players()
+
+# in your models.py
+class Subsession(otree.models.Subsession):
+    def example(self):
+
+        # current subsession object
+        self
+
+        # parent objects
+        self.session
+
+        # child objects
+        self.get_groups()
+        self.get_players()
+
+        # accessing previous Subsession objects
+        self.in_previous_rounds()
+        self.in_all_rounds()
+
+class Group(otree.models.Group):
+    def example(self):
+
+        # current group object
+        self
+
+        # parent objects
+        self.session
+        self.subsession
+
+        # child objects
+        self.get_players()
+
+class Player(otree.models.Player):
+
+    def my_custom_method(self):
+        pass
+
+    def example(self):
+
+        # current player object
+        self
+
+        # method you defined on the current object
+        self.my_custom_method()
+
+        # parent objects
+        self.session
+        self.subsession
+        self.group
+        self.participant
+
+        self.session.session_type
+
+        # accessing previous player objects
+        self.in_previous_rounds()
+        self.in_all_rounds() # equivalent to self.in_previous_rounds() + [self]
+
+# in your views.py
+class MyPage(Page):
+    def example(self):
+
+        # current page object
+        self
+
+        # parent objects
+        self.session
+        self.subsession
+        self.group
+        self.player
+
+        # example of chaining lookups
+        self.player.participant
+        self.session.session_type
+
+```
+
+You can follow pointers in a transitive manner. For example, if you are in the Page class, you can access the participant as `self.player.participant`. If you are in the Player class, you can access the session type as `self.session.session_type`.
+
+# Groups and multiplayer games
+
+In oTree, you can define multiplayer interactive games through the use of groups
+
+To do this, go to your app's models.py and set `Constants.players_per_group`. For example, in a 2-player game like an ultimatum game or prisoner's dilemma, you would set this to 2. If your app does not involve dividing the players into multiple groups, then set it to `None`. e.g. it is a single-player game or a game where everybody in the subsession interacts together as 1 group. In this case, `self.group.get_players()` will return everybody in the subsession. If you need your groups to have uneven sizes (for example, 2 vs 3), you can do this: `players_per_group=[2,3]`; in this case, if you have a session with 15 players, the group sizes would be [2,3,2,3,2,3]
+
+Each player has a numeric field `id_in_group`. This is useful in multiplayer games where players have different roles, so that you can determine if the player is player 1, player 2, or so on.
+
+Groups have the following methods:
+
+ * `get_players()`: returns a list of the players in the group.
+*  `get_player_by_id(n)`: Retrieves the player in the group with a specific `id_in_group`.
+*  `get_player_by_role(r)`. The argument to this method is a string that looks up the player by their role value. (If you use this method, you must define the `role` method on the player model, which should return a string that depends on `id_in_group`.)
+
+Player objects have methods `get_others_in_group()` and `get_others_in_subsession()` that return a list of the other players in the group and subsession, respectively.
+
+## Wait pages
+
+Wait pages are necessary when one or more players need to wait for another player to take some action before they can proceed. For example, in an ultimatum game, player 2 cannot accept or reject before they have seen player 1's offer.
+
+Wait pages are defined in views.py. If you have a wait page in your sequence of pages, then oTree waits until all players in the group have arrived at that point in the sequence, and then all players are allowed to proceed.
+
+If your subsession has multiple groups playing simultaneously, and you would like a wait page that waits for all groups (i.e. all players in the subsession), you can set the attribute `wait_for_all_groups = True` on the wait page.
+
+Wait pages can define the following methods:
+
+* `def after_all_players_arrive(self)`
+
+This code will be executed once all players have arrived at the wait page. For example, this method can determine the winner of an auction and set each player's payoff.
+
+* `def title_text(self)`
+
+The text in the title of the wait page.
+
+* `def body_text(self)`
+
+The text in the body of the wait page
+
+## Group re-matching between rounds
+
+For the first round, the players are split into groups of `Constants.players_per_group`. This matching is random, unless you have set `group_by_arrival_time` set in your session type in settings.py, in which case players are grouped in the order they start the first round.
+
+In subsequent rounds, by default, the groups chosen are kept the same. If you would like to change this, you can define the grouping logic in `Subsession.initialize`. For example, if you want players to be reassigned to the same groups but to have roles randomly shuffled around within their groups (e.g. so player 1 will either become player 2 or remain player 1), you would do this:
 
     def initialize(self):
         if self.round_number > 1:
@@ -552,21 +571,45 @@ A group has a method `set_players` that takes as an argument a list of the playe
                 players.reverse()
                 group.set_players(players)
 
-The subsession has a method `set_groups` that takes as an argument a list of lists, with each sublist representing a group. You can use this if your groups have uneven size. For example, if you have a session with 7 participants and want to split into a group of 2 and another group of the remaining 7, you could set `players_per_group = None` and instead do this:
+A group has a method `set_players` that takes as an argument a list of the players to assign to that group, in order. Alternatively, a subsession has a method `set_groups` that takes as an argument a list of lists, with each sublist representing a group. You can use this to rearrange groups between rounds, but note that the `initialize` method is run when the session is created, before players begin playing. Therefore you cannot use this method to shuffle players depending on the results of previous rounds (there is a separate technique for doing this which will be added to the documentation in the future).
 
-    def initialize(self):
-        if self.round_number == 1:
-            players = self.get_players()
-            g1 = players[:2]
-            g2 = players[2:]
-            self.set_groups([g1, g2])
+# Money and Points 
 
-[TODO: oTree should implement the most common grouping algorithms like stranger, perfect stranger, etc.]
+In many experiments, participants play for currency: either virtual points, or real money. oTree supports both scenarios. Participants can be awarded a fixed base pay (i.e. participation fee). In addition, in each subsession, they can be awarded an additional payoff.
 
+You can specify the payment currency in `settings.py`, by setting `PAYMENT_CURRENCY_CODE` to "USD", "EUR", "GBP", and so on. This means that all currency amounts the participants see will be automatically formatted in that currency, and at the end of the session when you print out the payments page, amounts will be displayed in that currency.
 
-## Treatments
+In oTree apps, currency values have their own data type. You can define a currency value with the `c()` function, e.g. `c(10)` or `c(0)`. Correspondingly, there is a special model field for currency values: `CurrencyField`. For example, each player has a `payoff` field, which is a `CurrencyField`. Currency values work just like numbers (you can do mathematical operations like addition, multiplication, etc), but when you pass them to an HTML template, they are automatically formatted as currency. For example, if you set `player.payoff = c(1.20)`, and then pass it to a template, it will be formatted as `$1.20` or `1,20 €`, etc., depending on your `PAYMENT_CURRENCY_CODE` and `LANGUAGE_CODE` settings.
 
-If you want to assign participants to different treatment groups, you can put this code in the subsession's `initialize` method. For example, if you want some participants to have a blue background to their screen and some to have a red background, you would randomize as follows:
+Note: instead of using Python's built-in `range` function, you should use oTree's `currency_range` with currency values. For example, `currency_range(c(0), c(0.10), c(0.02))` returns something like:
+
+```
+[Money($0.00), Money($0.02), Money($0.04), Money($0.06), Money($0.08), Money($0.10)]
+```
+## Assigning payoffs
+
+Each player has a `payoff` field, which is a `CurrencyField`. If your player makes money, you should store it in this field. At the end of the experiment, a participant's total profit is calculated by adding the fixed base pay to the `payoff` that participant earned as a player in each subsession.
+
+## Points (i.e. "experimental currency")
+
+Sometimes it is preferable for players to play games for points or "experimental currency units", which are converted to real money at the end of the session. You can set `USE_POINTS = True` in `settings.py`, and then in-game currency amounts will be expressed in points rather than real money.
+
+For example, `c(10)` is displayed as `10 points`. You can specify the conversion rate to real money in `settings.py` by providing a `money_per_point` key in the session type dictionary. For example, if you pay the user 2 cents per point, you would set `money_per_point = 0.02`.
+
+You can convert a point amount to money using the `to_money()` method,
+which takes as an argument the current session
+(this is necessary because different sessions can have different conversion rates).
+
+Let's say `money_per_point = 0.02`
+
+```
+c(10) # evaluates to Currency(10 points)
+c(10).to_money(self.session) # evaluates to $0.20
+```
+
+# Treatments
+
+If you want to assign participants to different treatment groups, you can put the code in the subsession's `initialize` method. For example, if you want some participants to have a blue background to their screen and some to have a red background, you would randomize as follows:
 
     def initialize(self):
         # randomize to treatments
@@ -619,12 +662,15 @@ Then in the `initialize` method, you can check which of the 2 session types it i
 
 Then, when someone visits your demo page, they will see the "red" and "blue" treatment, and choose to play one or the other. Of course, you can also have a third treatment that omits the `vars` argument and therefore randomizes participants to blue or red.
 
+# Rounds
 
-## Rounds
+In oTree, "rounds" and "subsessions" are almost synonymous. The difference is that "rounds" refers to a sequence of subsessions that are in the same app. So, a session that consists of a prisoner's dilemma iterated 3 times, followed by an exit questionnaire, has 4 subsessions, which consists of 3 rounds of the prisoner's dilemma, and 1 round of the questionnaire.
 
-### Round numbers
+## Round numbers
 
-Subsession objects have attributes `round_number`, which contains the current round number, starting from 1.
+You can specify how many rounds a game should be played in models.py, in `Comstants.num_rounds`.
+
+Subsession objects have an attribute `round_number`, which contains the current round number, starting from 1.
 
 ## Accessing data from previous rounds
 
@@ -651,25 +697,16 @@ either through `player.participant.session.vars` or `player.subsession.session.v
 
 This is a dictionary just like `participant.vars`.
 
-## Trying your app
+# Trying your app
 
 You can launch your app on your local development machine to test it, and then when you are satisfied, you can deploy it to a server.
 
 ### Testing locally
-You will be testing your app frequently during development, so that you can see how the app looks and feels and discover bugs during development.
+You will be testing your app frequently during development, so that you can see how the app looks and feels and discover bugs during development. To test your app, run the server in the oTree launcher. You may need to reset the database first.
 
-To help with launching your app, there is a script in your project's root directory called `otree`. You can run it as follows:
+Click on a session name and you will get a start link for the experimenter, as well as the links for all the participants. You can open all the start links in different tabs and simulate playing as multiple participants simultaneously.
 
-    ./otree resetdb
-
-This command will create your app in one command. It does the following:
-
-* Delete your database (so be careful not to run this script unless you are OK with losing everything currently in the database)
-* Set up a new blank database according to the schema in your app's `models.py` files
-
-After running this script, open your PyCharm window and select "Run > Debug". Your app should be set to "Django server". When you launch it, a browser window will open to the demo page, where you can test your game. Click on a session name and you will get a start link for the experimenter, as well as the links for all the participants. You can open all the start links in different tabs and simulate playing as multiple participants simultaneously.
-
-You can send the demo page link to your colleagues or publish it to a public audience. You can modify the `show_on_demo_page` attribute for your session in `settings.py` to control whether a given session is listed on the demo page. If you don't want a demo page at all, make this function return `False`.
+You can send the demo page link to your colleagues or publish it to a public audience.
 
 ### Debugging
 Once you start playing your app, you will sometimes get a yellow Django error page with lots of details. To troubleshoot this, look at the error message and "Exception location" fields. If the exception location is somewhere outside of your app's code (like if it points to an installed module like Django or oTree), look through the "Traceback" section to see if it passes through your code. Once you have found a reference to a line of code in your app, go to that line of code and see if the error message can help you pinpoint an error in your code. Googling the error name or message will often take you to pages that explain the meaning of the error and how to fix it.
@@ -679,7 +716,7 @@ PyCharm has an excellent debugger that you should be using continuously. You can
 
 More on the PyCharm debugger [here](http://www.jetbrains.com/pycharm/webhelp/debugging.html).
 
-## Test Bots
+# Test Bots
 
 Automated tests are an essential part of building a oTree app. You can easily program a bot that simulates multiple players simultaneously playing your app.
 
@@ -690,7 +727,7 @@ This automated test system saves the programmer the effort of having to re-test 
 ### Launching tests
 oTree tests entire sessions, rather that individual apps in isolation. This is to make sure the entire session runs, just as participants will play it in the lab.
 
-Let's say you want to test the session named `ultimatum_game` in `settings.py`. To test, run the following command from your project's root directory:
+Let's say you want to test the session named `ultimatum` in `settings.py`. To test, click the "Terminal" button in the oTree launcher run the following command from your project's root directory:
 
     ./otree test ultimatum_game
 
@@ -746,105 +783,14 @@ Bots can either be programmed to simulate playing the game according to an ordin
 
 If your app has [[Experimenter Pages]], you can also implement the `play` method on the `ExperimenterBot`.
 
-## Money and Points 
-
-In a typical lab experiment, participants are paid money at the end. Their payoffs may depend on how they played the games.
-
-You can specify the payment currency in `settings.py`, by setting `PAYMENT_CURRENCY_CODE` to "USD", "EUR", "GBP", and so on. This means that all currency amounts the participants see will be automatically formatted in that currency, and at the end of the session when you print out the payments page, amounts will be displayed in that currency.
-
-In oTree apps, currency values have their own data type. You can define a currency value with the `c()` function, e.g. `c(10)` or `c(0)`. Correspondingly, there is a special model field for currency values: `CurrencyField`. For example, each player has a `payoff` field, which is a `CurrencyField`. Currency values work just like numbers (you can do mathematical operations like addition, multiplication, etc), but when you pass them to an HTML template, they are automatically formatted as currency. For example, if you set `player.payoff = c(1.20)`, and then pass it to a template, it will be formatted as `$1.20` or `1,20 €`, etc., depending on your `PAYMENT_CURRENCY_CODE` and `LANGUAGE_CODE` settings.
-
-Note: instead of using Python's built-in `range` function, you should use oTree's `currency_range` with currency values. For example, `currency_range(c(0), c(0.10), c(0.02))` returns something like:
-
-```
-[Money($0.00), Money($0.02), Money($0.04), Money($0.06), Money($0.08), Money($0.10)]
-```
-
-### Points
-Sometimes it is preferable for players to play games not for real money but for points or "experimental currency units", which are converted to real money at the end of the session. You can set `USE_POINTS = True` in `settings.py`, and then in-game currency amounts will be expressed in points rather than real money.
-
-For example, `c(10)` is displayed as `10 points`. You can specify the conversion rate to real money in `settings.py` by providing a `money_per_point` key in the session type dictionary. For example, if you pay the user 2 cents per point, you would set `money_per_point = 0.02`.
-
-You can convert a point amount to money using the `to_money()` method,
-which takes as an argument the current subsession
-(this is necessary because subsessions in different apps can have different conversion rates).
-
-Let's say `money_per_point = 0.02`
-
-```
-c(10) # evaluates to Currency(10 points)
-c(10).to_money(self.subsession) # evaluates to $0.20
-```
-
-## Admin
+# Admin
 
 oTree comes with an admin interface, so that experimenters can manage sessions, monitor the progress of live sessions, and export data after sessions.
 
-Open your browser to the root url of your web application. If you're developing locally, this will be http://127.0.0.1:8000/. This will give you a login screen. Log in with the admin username and password specified in `settings.py`.
+Open your browser to the root url of your web application. If you're developing locally, this will be http://127.0.0.1:8000/.
 
 
-## Heroku
-
-TODO: add content about
-
-* add-ons (Sentry, PG backups)
-
-### To create new remote:
-```
-heroku login  # if not yet
-heroku create
-git push heroku master
-```
-
-### To add an existing remote:
-
-`heroku git:remote -a ancient-coast-2653
-
-### Testing on Heroku
-
-To recreate and push to Heroku, run this command:
-
-```
-git push myherokuapp master
-./otree-heroku resetdb myherokuapp
-```
-
-Where `myherokuapp` is the name of your Heroku app `myherokuapp.herokuapp.com`
-
-If it's a production website, you should set the environment variable `OTREE_PRODUCTION`, with:
-
-`heroku config:set OTREE_PRODUCTION=1 --app myherokuapp`
-
-
-## Server Setup
-
-oTree can be deployed on your own server, or using a cloud service like Heroku. 
-
-If you are not experienced with web server administration, Heroku may be a much simpler option for you, because Heroku automatically handles much of the configuration. Instructions on how to deploy oTree to Heroku are [[here|Heroku]].
-
-Nevertheless, in various situations it will be preferable to run oTree on your own server. Reasons may include:
-
-* You do not want your server to be accessed from the internet
-* You will be launching your experiment in a setting where internet access is unavailable
-* You want full control over how your server is configured
-
-oTree runs on top of Django, so oTree setup is the same as Django setup. Django runs on a wide variety of servers, except getting it to run on Windows may require extra work. 
-
-The most typical setup will be a Linux server with Apache. The instructions for this setup are [here](https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/modwsgi/).
-
-If you have been developing your project on your local PC, you should push your oTree folder to your webserver, e.g. with Git. Then, you should make sure your webserver has Python installed (possibly in a `virtualenv`), and do `pip install -r requirements.txt` to install all the dependencies. When you are ready to launch the experiment, you should set `OTREE_PRODUCTION` to `1`, to turn off `DEBUG` mode.
-
-## Database setup
-
-We generally recommend using PostgreSQL as your production database. You can create your database with a command like this:
-
-`psql -c 'create database django_db;' -U postgres`
-
-Then, you should set the following environment variable, so that it can be read by `dj_database_url`:
-
-`DATABASE_URL=postgres://postgres@localhost/django_db`
-
-## Lab Experiments 
+# Lab Experiments 
 
 ### Creating sessions
 
@@ -896,36 +842,14 @@ Outside of oTree, you can create a script that adds a unique `participant_label`
 ### Monitor sessions
 While your session is ongoing, you can monitor the live progress in the admin interface. The admin tables update live, highlighting changes as they occur. The most useful table to monitor is "Session participants", which gives you a summary of all the participants' progress. You can also click the "participants" table of each app to see the details of all the data being entered in your subsessions.
 
-## Online experiments
+# Online experiments
 
 Experiments can be launched to participants playing over the internet, in a similar way to how experiments are launched the lab. Login to the admin, create a session, then distribute the links to participants via email or a website.
 
 In a lab, you usually can start all participants at the same time, but this is often not possible online, because some participants might click your link hours after other participants. If your game requires players to play in groups, you may want to set the `group_by_arrival_time` key in  session type dictionary to `True`. This will group players in the order in which they arrive to your site, rather than randomly, so that players who arrive around the same time play with each other.
 
-## For Django Devs
+# oTree programming For Django Devs
 
-## Guidelines for developers contributing to oTree's library of games
-
-### Keep it simple
-The purpose of the oTree sample games library is to show examples so that new users can understand how to do things in oTree. They will then copy-paste these code snippets when they create their own apps. So, we want a consistent coding style in the oTree library, especially because many users will be novice Python programmers. In general we should avoid complex code and algorithms. We should also try to avoid code that relies on less commonly used Python/Django features or "tricks"/hacks. Even if it works nicely in a particular context, these risk causing confusion when someone copies them without really understanding.
-
-Examples of code that could confuse a newcomer:
-* Using `a[::-1]` to reverse a list (not obvious what this is doing, and hard to Google
-* Decorators like `@property` or `@staticmethod`
-* Using class inheritance within your app (e.g. subclassing one view from another, other than subclassing oTree's built-in views)
-* Use lists instead of tuples, because when a tuple only has 1 element you have to remember the (comma,)
-
-### Consistency
-* Don't delete unused imports in the <standard imports> section; a user should always be able to rely on those being there.
-
-### Don't repeat yourself
-* If a certain page is being repeated in multiple apps, it may be better suited as a separate app that gets added to `app_sequence` for each session in `settings.py`. Examples: surveys and feedback pages.
-* You should obey to Django's "Don't repeat yourself" principle: "Every distinct concept and/or piece of data should live in one, and only one, place. Redundancy is bad."
- * Numeric constants, even simple ones like 0.5 or 3, should go in the `Constants` class
-
-### Separate logic from presentation
-* User-facing strings should be defined in the template wherever possible. This is to keep a separation between logic and UI, which makes it easier for a non-programmer to modify a string, since they only have to look at the HTML. Also, in the template, strings are displayed in context, whereas if they are defined in Python code, they are usually out of context.
-* Try not to put much logic in templates. It makes it hard for a non-programmer to understand and edit the template, and anyways logic in templates is often more verbose and harder to debug.
 
 ## Intro to oTree for Django developers
 
@@ -984,35 +908,9 @@ You can download your raw data in text format (CSV) so that you can view and ana
 
 You can also download a documentation file for each app, which explains the meaning of the different variable names. It is auto-generated from your source code. Whatever you specify in a model field's `doc=` argument will show up here.
 
-## AMT Integration
+## Autogenerated documentation
 
-## Overview
-oTree provides integration with <strong><a href="https://www.mturk.com/mturk/welcome" target="_blank">Amazon Mechanical Turk (AMT)</a></strong>. oTree authenticates users visiting from the AMT service, and then sends payments to the correct AMT account. Researchers, however, must have an employer account with AMT, which currently requires a U.S. address and bank account.
-## Session for AMT
-Login to oTree admin panel and create new session:
-
-![Create session](http://i.imgur.com/oXr33PU.png)
-
-Set the session open and copy html snippet to your AMT HIT page:
-
-![HTML snippet](http://i.imgur.com/gxoz3hh.png)
-
-## AWS credentials
-To make payments to participants you need to generate
-`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
-[here](https://console.aws.amazon.com/iam/home?#security_credential):
-
-![AWS key](http://i.imgur.com/dNhkOiA.png)
-
-On heroku add generated values to your environment variables:
-
-    heroku config:set AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID --app=YOUR_APP_NAME
-    heroku config:set AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY --app=YOUR_APP_NAME
-
-## Payment
-
-    heroku run "./otree mturk_pay SESSION_ID" --app=YOUR_APP_NAME
-    
+Each model field you define can also have a `doc=` argument. Any string you add here will be included in the autogenerated documentation file, which can be downloaded through the data export page in the admin.
 
 ## Debug Info
 
@@ -1032,14 +930,82 @@ The progress monitor allows the researcher to monitor the progress of an experim
 
 The session interface is an optional feature convenient in some experiments. In many experimental settings, in addition to monitoring, **an experimenter needs to receive instructions or provide input for the experiment**. The session interface can instruct an experimenter on what to do next and show text to be read aloud. The session interface can also request input from the experimenter at a specic point in the session. For example, in an Ellsberg experiment, the experimenter might roll an opaque urn prior to the session; the session interface will remind the experimenter to show the urn to the participants, tell the experimenter when all participants have selected their bets, and instruct her to draw a ball from the urn. It will then ask the drawn color, so that oTree can calculate participants' payoffs.
 
+# Deploying to a server
 
-## User Input Validation
+oTree can be deployed on your own server, or using a cloud service like Heroku. 
 
-If a participant does not fill out a required form or submits an invalid value, the form is automatically re-displayed, highlighting and explaining the user's error. The experimenter can specify what answers are valid; in the case of a numeric input field, the experimenter could also specify valid numbers/ranges. Validation is only intended for cases where the experimenter wants to prevent the participant from proceeding without making an answer satisfying some specified criteria.
+If you are not experienced with web server administration, Heroku may be a much simpler option for you, because Heroku automatically handles much of the configuration. Instructions on how to deploy oTree to Heroku are [[here|Heroku]].
 
-_Example 1:_
-![](http://i.imgur.com/Sz34h7d.png)
+Nevertheless, in various situations it will be preferable to run oTree on your own server. Reasons may include:
 
-_Example 2:_
-![](http://i.imgur.com/BtG8ZHX.png)
+* You do not want your server to be accessed from the internet
+* You will be launching your experiment in a setting where internet access is unavailable
+* You want full control over how your server is configured
 
+oTree runs on top of Django, so oTree setup is the same as Django setup. Django runs on a wide variety of servers, except getting it to run on Windows may require extra work. 
+
+The most typical setup will be a Linux server with Apache. The instructions for this setup are [here](https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/modwsgi/).
+
+If you have been developing your project on your local PC, you should push your oTree folder to your webserver, e.g. with Git. Then, you should make sure your webserver has Python installed (possibly in a `virtualenv`), and do `pip install -r requirements.txt` to install all the dependencies. When you are ready to launch the experiment, you should set `OTREE_PRODUCTION` to `1`, to turn off `DEBUG` mode.
+
+## Heroku
+
+TODO: add content about
+
+* add-ons (Sentry, PG backups)
+
+### To create new remote:
+```
+heroku login  # if not yet
+heroku create
+git push heroku master
+```
+
+### To add an existing remote:
+
+`heroku git:remote -a ancient-coast-2653
+
+### Testing on Heroku
+
+To recreate and push to Heroku, run this command:
+
+```
+git push myherokuapp master
+./otree-heroku resetdb myherokuapp
+```
+
+Where `myherokuapp` is the name of your Heroku app `myherokuapp.herokuapp.com`
+
+If it's a production website, you should set the environment variable `OTREE_PRODUCTION`, with:
+
+`heroku config:set OTREE_PRODUCTION=1 --app myherokuapp`
+
+## Database setup
+
+We generally recommend using PostgreSQL as your production database. You can create your database with a command like this:
+
+`psql -c 'create database django_db;' -U postgres`
+
+Then, you should set the following environment variable, so that it can be read by `dj_database_url`:
+
+`DATABASE_URL=postgres://postgres@localhost/django_db`
+
+
+# Amazon Mechanical Turk
+
+## Overview
+oTree provides integration with <strong><a href="https://www.mturk.com/mturk/welcome" target="_blank">Amazon Mechanical Turk (AMT)</a></strong>. oTree authenticates users visiting from the AMT service, and then sends payments to the correct AMT account. Researchers, however, must have an employer account with AMT, which currently requires a U.S. address and bank account.
+
+Note: AMT support is currently under construction. Instructions online to deploy your app to AMT will be added later.
+
+## AWS credentials
+To make payments to participants you need to generate
+`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
+[here](https://console.aws.amazon.com/iam/home?#security_credential):
+
+![AWS key](http://i.imgur.com/dNhkOiA.png)
+
+On heroku add generated values to your environment variables:
+
+    heroku config:set AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID --app=YOUR_APP_NAME
+    heroku config:set AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY --app=YOUR_APP_NAME
