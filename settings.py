@@ -33,10 +33,14 @@ DATABASES = {
 
 CREATE_DEFAULT_SUPERUSER = True
 ADMIN_USERNAME = 'admin'
+AUTH_LEVEL = os.environ.get('OTREE_AUTH_LEVEL')
 ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
+
+# settting for intergration with AWS Mturk
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AUTH_LEVEL = os.environ.get('OTREE_AUTH_LEVEL')
+MTURK_HOST = 'mechanicalturk.amazonaws.com'
+MTURK_SANDBOX_HOST = 'mechanicalturk.sandbox.amazonaws.com'
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
 PAYMENT_CURRENCY_CODE = 'EUR'
@@ -60,10 +64,18 @@ if 'SENTRY_DSN' in os.environ:
 SESSION_TYPE_DEFAULTS = {
     'money_per_point': 0.01,
     'demo_enabled': True,
-    'fixed_pay': 10.00,
+    'fixed_pay': 10.00, # this is payment currency (not points)
     'num_bots': 12,
     'doc': "",
     'group_by_arrival_time': False,
+    'mturk_hit_settings': {
+        'keywords': ['easy', 'bonus', 'choice', 'study'],
+        'title': 'Title for your experiment',
+        'description': 'Description for your experiment',
+        'frame_height': 500,
+        'landing_page_template': 'global/mturk_landing.html',
+    },
+    'mturk_sandbox': True,
 }
 
 SESSION_TYPES = [
