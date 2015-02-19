@@ -75,7 +75,6 @@ SESSION_TYPE_DEFAULTS = {
         'frame_height': 500,
         'landing_page_template': 'global/mturk_landing.html',
     },
-    'mturk_sandbox': True,
 }
 
 SESSION_TYPES = [
