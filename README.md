@@ -34,7 +34,7 @@ On Windows, select the option to add Python to your PATH while installing.
 
 On Mac/Unix, it is very likely that Python is already installed. Open the Terminal and write ``python`` and hit Enter. If you get something like `-bash: python: command not found` you will have to install it yourself.
 
-## oTree Launcher
+## oTree Launcherf
 
 You can download the oTree launcher executable [here](http://www.otree.org/download/). Unzip it to your desktop or another easy-to-access location.
 
@@ -271,7 +271,7 @@ You define 2 blocks:
     {% block content %}
         Body HTML goes here.
 
-        {% formrow form.contribution with label="What is your contribution?" %}
+        {% formfield player.contribution with label="What is your contribution?" %}
 
         {% next_button %}
     {% endblock %}
@@ -336,7 +336,7 @@ When the user submits the form, the submitted data is automatically saved back t
 
 ## Forms in templates
 
-oTree forms are rendered using the Django Floppy Forms library. You should include form fields by using a `{% formrow %}` element. You generally do not need to write raw HTML for forms (e.g. `<input type="text" id="...">`).
+oTree forms are rendered using the Django Floppy Forms library. You should include form fields by using a `{% formfield %}` element. You generally do not need to write raw HTML for forms (e.g. `<input type="text" id="...">`).
 
 ## User Input Validation
 
@@ -856,7 +856,7 @@ In a lab, you usually can start all participants at the same time, but this is o
 ### Differences between oTree and Django
 
 #### Models
-* Field labels should go in the template formrow, rather than the model field's `verbose_name`.
+* Field labels should go in the template formfield, rather than the model field's `verbose_name`.
 * `null=True` and `default=None` are not necessary in your model field declarations; in oTree fields are null by default.
 * On `CharField`s, `max_length` is not required.
 
