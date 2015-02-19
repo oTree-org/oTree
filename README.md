@@ -234,7 +234,7 @@ fields, and the empty string for text/character fields.
 This should be a dictionary where the keys are the elements of `form_fields`, and the values are the values that should
 be auto-submitted.
   
-### `def after_next_button(self)`
+### `def before_next_page(self)`
 
 After the player clicks the "Next" button, oTree makes sure that any form fields validate (and re-displays to the player with errors otherwise).
 

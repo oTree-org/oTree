@@ -13,7 +13,7 @@ class Feedback(Page):
     def is_displayed(self):
         return True
 
-    def after_next_button(self):
+    def before_next_page(self):
         self.player.payoff = 0
 
 page_sequence= [
