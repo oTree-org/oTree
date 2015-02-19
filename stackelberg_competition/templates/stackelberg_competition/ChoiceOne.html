@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -12,7 +12,7 @@
         You are to decide first. How many units will you produce?
     </p>
 
-    {% formrow form.quantity with label='Number of units:' %}
+    {% formfield player.quantity with label='Number of units:' %}
 
     {% next_button %}
 

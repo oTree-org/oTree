@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 
 {% block title %}
     Understanding Question {{ num_q }} of {{ total_q }}
@@ -9,7 +9,7 @@
 
     {% if num_q == 1 %}
         <p>
-            {% formrow form.training_question_1 with label='Suppose Alice chose to defect and Bob chose to cooperate. How many points would Alice and Bob receive, respectively?' %}
+            {% formfield player.training_question_1 with label='Suppose Alice chose to defect and Bob chose to cooperate. How many points would Alice and Bob receive, respectively?' %}
         </p>
     {% endif %}
 

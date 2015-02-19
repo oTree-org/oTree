@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -12,7 +12,7 @@
         You accepted the contract. Please choose your effort level.
     </p>
 
-    {% formrow form.agent_work_effort with label='Effort level' %}
+    {% formfield player.agent_work_effort with label='Effort level' %}
     {% next_button %}
 
     {% include 'principal_agent/Rules.html' %}

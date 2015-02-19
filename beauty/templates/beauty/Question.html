@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 
 {% block title %}
     Understanding Question {{ num_q }} of {{ total_q }}
@@ -14,10 +14,10 @@
             Which number did the winner(s) pick and what would be your payoff?
         </p>
         <p>
-            {% formrow form.training_question_1_win_pick with label='The winner(s) picked:' %}
+            {% formfield player.training_question_1_win_pick with label='The winner(s) picked:' %}
         </p>
         <p>
-            {% formrow form.training_question_1_my_payoff with label='My payoff would be:' %}
+            {% formfield player.training_question_1_my_payoff with label='My payoff would be:' %}
         </p>
     {% endif %}
 

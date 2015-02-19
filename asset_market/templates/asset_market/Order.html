@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 
 {% block title %}
     Submit Order (Period {{ round_num }} of {{ num_of_rounds }})
@@ -39,15 +39,15 @@
           <div style="display: none;" id="buyform">
               <div class="col-md-4">
                 <h4>Buy Order</h4>
-                {% formrow form.bn with label="Number of shares" %}
-                {% formrow form.bp with label="for at most per share" %}
+                {% formfield player.bn with label="Number of shares" %}
+                {% formfield player.bp with label="for at most per share" %}
               </div>
           </div>
           <div style="display: none;"  id="sellform">
               <div class="col-md-4">
                 <h4>Sell Order</h4>
-                {% formrow form.sn with label="Number of shares" %}
-                {% formrow form.sp with label="for at least per share" %}
+                {% formfield player.sn with label="Number of shares" %}
+                {% formfield player.sp with label="for at least per share" %}
               </div>
           </div>
 

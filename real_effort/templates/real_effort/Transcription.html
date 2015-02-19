@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -21,11 +21,11 @@
     </div>
 
     {% if number == 1 %}
-        {% formrow form.transcription_1 with label="" %}
+        {% formfield player.transcription_1 with label="" %}
     {% elif number == 2 %}
-        {% formrow form.transcription_2 with label="" %}
+        {% formfield player.transcription_2 with label="" %}
     {% elif number == 3 %}
-        {% formrow form.transcription_3 with label="" %}
+        {% formfield player.transcription_3 with label="" %}
     {% endif %}
 
     {% if magic_link %}

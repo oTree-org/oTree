@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 
 {% block title %}
     Forms for Participant Input
@@ -17,7 +17,7 @@
     </p>
 
     <p>
-        {% formrow form.demo_field1 with label="I am a radio button. How many answers can you select here?" %}
+        {% formfield player.demo_field1 with label="I am a radio button. How many answers can you select here?" %}
     </p>
 
     <p>
@@ -27,7 +27,7 @@
     </p>
 
     <p>
-        {% formrow form.demo_field2 with label="I am a text input field. Please enter no more than 5 letters or numbers. What is the name of this software platform?" %}
+        {% formfield player.demo_field2 with label="I am a text input field. Please enter no more than 5 letters or numbers. What is the name of this software platform?" %}
     </p>
 
     <p>

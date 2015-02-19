@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -13,7 +13,7 @@
     You are <strong>{{ player.role }}</strong>. What will you do for the evening?
 </p>
 
-    {% formrow form.decision with label='Please make a choice:' %}
+    {% formfield player.decision with label='Please make a choice:' %}
     {% next_button %}
 
     {% include 'battle_of_the_sexes/Instructions.html' %}
