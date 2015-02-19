@@ -31,7 +31,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    def initialize(self):
+    def before_session_starts(self):
         # randomize to treatments
         for g in self.get_groups():
             if 'treatment' in self.session.session_type:
