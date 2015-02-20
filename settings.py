@@ -234,39 +234,15 @@ SESSION_TYPES = [
             'real_effort',
         ],
     },
-
-    {
-        'name': 'matrix_symmetric',
-        'display_name': "Symmetric Matrix Game DEMO",
-        'num_demo_participants':  2,
-        'app_sequence': [
-            'matrix_symmetric', 'payment_info'
-        ],
-    },
-    {
-        'name': 'matrix_asymmetric',
-        'display_name': "Asymmetric Matrix Game DEMO",
-        'num_demo_participants':  2,
-        'app_sequence': [
-            'matrix_asymmetric','payment_info'
-        ],
-    },
     {
         'name': 'lemon_market',
-        'display_name': "Lemon Market Game DEMO",
+        'display_name': "Lemon Market Game",
         'num_demo_participants':  3,
         'app_sequence': [
             'lemon_market','payment_info'
         ],
     },
-    {
-        'name': 'cournot_competition',
-        'display_name': "Cournot competititon DEMO",
-        'num_demo_participants':  2,
-        'app_sequence': [
-            'cournot_competition','payment_info'
-        ]
-    }
+
 ]
 
 
