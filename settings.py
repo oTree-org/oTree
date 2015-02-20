@@ -34,7 +34,7 @@ DATABASES = {
 CREATE_DEFAULT_SUPERUSER = True
 ADMIN_USERNAME = 'admin'
 AUTH_LEVEL = os.environ.get('OTREE_AUTH_LEVEL')
-ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
+ACCESS_CODE_FOR_DEFAULT_SESSION = 'idd1610'
 
 # settting for intergration with AWS Mturk
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
