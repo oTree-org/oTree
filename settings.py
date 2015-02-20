@@ -300,5 +300,6 @@ SEO = ()
 
 
 WSGI_APPLICATION = 'wsgi.application'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 otree.settings.augment_settings(globals())

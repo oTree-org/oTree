@@ -2,4 +2,5 @@ dj-database-url==0.2.2
 gunicorn==18.0
 static==1.0.2
 boto==2.36.0
+django-sslify>=0.2.0
 git+git://github.com/oTree-org/otree-core.git@mturk
