@@ -73,7 +73,7 @@ SESSION_TYPE_DEFAULTS = {
         'title': 'Title for your experiment',
         'description': 'Description for your experiment',
         'frame_height': 500,
-        'landing_page_template': 'global/mturk_landing.html',
+        'landing_page_template': 'global/MTurkLanding.html',
     },
 }
 
