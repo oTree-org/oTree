@@ -354,7 +354,7 @@ oTree will not let the user submit values that are not positive integers, like `
 
 Additionally, you can customize validation by passing extra arguments to your model field definition. For example, if you want to require a number to be between 12 and 24, you can specify it like this:
 
-    offer = models.PositiveIntegerField(min_value=12, max_value=24)
+    offer = models.PositiveIntegerField(min=12, max=24)
 
 If you specify a `choices` argument, the default form widget will be a select box with these choices instead of the standard text field.
 
@@ -386,11 +386,11 @@ Example:
 
 * `def {field_name}_min(self)`
 
-The dynamic alternative to `min_value`.
+The dynamic alternative to `min`.
 
 * `def {field_name}_max(self)`
 
-The dynamic alternative to `max_value`.
+The dynamic alternative to `max`.
 
 * `def {field_name}_error_message(self, value)`
 
