@@ -80,7 +80,7 @@ class Player(otree.models.BasePlayer):
         verbose_name='My profit would be')
 
     price = models.CurrencyField(
-        bounds=[0, Constants.maximum_price],
+        min = 0, max = Constants.maximum_price,
         doc="""Price player chooses to sell product for"""
     )
 

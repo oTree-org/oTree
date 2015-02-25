@@ -98,7 +98,7 @@ class Player(otree.models.BasePlayer):
 
     bid_amount = models.CurrencyField(
         null=True,
-        bounds=[Constants.min_allowable_bid, Constants.max_allowable_bid],
+        min=Constants.min_allowable_bid, max=Constants.max_allowable_bid,
         doc="Amount bidded by the player"
     )
 
@@ -107,7 +107,7 @@ class Player(otree.models.BasePlayer):
         doc="""Indicates whether the player is the winner"""
     )
 
-    training_question_1_my_payoff = models.CurrencyField(bounds=[Constants.min_allowable_bid, Constants.max_allowable_bid])
+    training_question_1_my_payoff = models.CurrencyField(min=Constants.min_allowable_bid, max=Constants.max_allowable_bid)
 
     def is_training_question_1_my_payoff_correct(self):
         return (self.training_question_1_my_payoff==
