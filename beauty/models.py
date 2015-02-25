@@ -131,7 +131,7 @@ class Player(otree.models.BasePlayer):
 
     guess_value = models.PositiveIntegerField(
         initial=None,
-        min=0, max=Constants.guess_max,
+        bounds=[0, Constants.guess_max],
         doc="""
         Each player guess: between 0-{}
         """.format(Constants.guess_max)

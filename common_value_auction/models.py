@@ -95,7 +95,7 @@ class Player(otree.models.BasePlayer):
     )
 
     bid_amount = models.CurrencyField(
-        min=Constants.min_allowable_bid, max=Constants.max_allowable_bid,
+        bounds=[Constants.min_allowable_bid, Constants.max_allowable_bid],
         doc="""Amount bidded by the player"""
     )
 

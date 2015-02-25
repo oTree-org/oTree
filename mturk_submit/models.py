@@ -89,7 +89,7 @@ class Player(otree.models.BasePlayer):
 
     # example field
     my_field = models.CurrencyField(
-        min=c(0), max=c(10),
+        bounds=[c(0), c(10)],
         doc="""
         Description of this field, for documentation
         """

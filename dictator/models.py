@@ -63,7 +63,7 @@ class Group(otree.models.BaseGroup):
 
     kept = models.CurrencyField(
         doc="""Amount dictator decided to keep for himself""",
-        min = 0, max = Constants.allocated_amount,
+        bounds=[0, Constants.allocated_amount],
         verbose_name='I will keep (from 0 to %i)' % Constants.allocated_amount
     )
 
