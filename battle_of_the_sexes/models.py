@@ -116,9 +116,9 @@ class Player(otree.models.BasePlayer):
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    training_question_1_husband = models.CurrencyField(bounds=[0, Constants.training_1_maximum_offered_points])
+    training_question_1_husband = models.CurrencyField(min=0, max=Constants.training_1_maximum_offered_points)
 
-    training_question_1_wife = models.CurrencyField(bounds=[0, Constants.training_1_maximum_offered_points])
+    training_question_1_wife = models.CurrencyField(min=0, max=Constants.training_1_maximum_offered_points)
 
     decision = models.CharField(
         choices=['Football', 'Opera'],
