@@ -65,7 +65,7 @@ class Player(otree.models.BasePlayer):
         doc="""
         Amount requested by this player.
         """,
-        bounds=[0, Constants.amount_shared]
+        min=0, max=Constants.amount_shared
     )
     training_amount_mine = models.CurrencyField(
         verbose_name='You would get')
