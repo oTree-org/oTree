@@ -1,4 +1,4 @@
 dj-database-url==0.2.2
 gunicorn==18.0
 static==1.0.2
-git+git://github.com/oTree-org/otree-core.git@72de8c1
+git+git://github.com/oTree-org/otree-core.git@72de8c1a3aba0ba211560afccb7efcd00c7149be
