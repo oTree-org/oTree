@@ -75,7 +75,7 @@ class Player(otree.models.BasePlayer):
 
     quantity = models.PositiveIntegerField(
         initial=None,
-        bounds=[0, Constants.max_units_per_player],
+        min=0, max=Constants.max_units_per_player,
         doc="""Quantity of units to produce"""
     )
 

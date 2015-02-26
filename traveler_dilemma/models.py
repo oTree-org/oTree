@@ -82,7 +82,7 @@ class Player(otree.models.BasePlayer):
 
     # claim by player
     claim = models.CurrencyField(
-        bounds=[Constants.min_amount, Constants.max_amount],
+        min=Constants.min_amount, max=Constants.max_amount,
         doc="""
         Each player's claim
         """,
