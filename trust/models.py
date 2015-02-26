@@ -55,12 +55,7 @@ class Group(otree.models.BaseGroup):
     # </built-in>
 
     sent_amount = models.CurrencyField(
-<<<<<<< HEAD
-        min=0,
-        max=Constants.amount_allocated,
-=======
         min=0, max=Constants.amount_allocated,
->>>>>>> 1abb3f4e20bb5802950401ed3157b1f79f97b55d
         doc="""Amount sent by P1""",
     )
 
