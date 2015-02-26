@@ -131,15 +131,15 @@ class Player(otree.models.BasePlayer):
 
     guess_value = models.PositiveIntegerField(
         initial=None,
-        bounds=[0, Constants.guess_max],
+        min=0, max=Constants.guess_max,
         doc="""
         Each player guess: between 0-{}
         """.format(Constants.guess_max)
     )
 
-    training_question_1_win_pick = models.PositiveIntegerField(bounds=[0, Constants.training_1_maximun_pick])
+    training_question_1_win_pick = models.PositiveIntegerField(min=0, max=Constants.training_1_maximun_pick)
 
-    training_question_1_my_payoff = models.CurrencyField(bounds=[0, Constants.training_1_maximun_offered_points])
+    training_question_1_my_payoff = models.CurrencyField(min=0, max=Constants.training_1_maximun_offered_points)
 
     def is_training_question_1_win_pick_correct(self):
         return (self.training_question_1_win_pick ==

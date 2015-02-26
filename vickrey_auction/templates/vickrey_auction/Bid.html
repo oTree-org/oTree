@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -12,7 +12,7 @@
         Your value to the object is <strong>{{ player.private_value }}</strong>.
     </p>
 
-    {% formrow form.bid_amount with label='Please submit a bid for the object (from 0 to 100):' %}
+    {% formfield player.bid_amount with label='Please submit a bid for the object (from 0 to 100):' %}
     {% next_button %}
 
     {% include 'vickrey_auction/Instructions.html' %}

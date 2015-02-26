@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 
 {% block title %}
     Understanding Question {{ num_q }} of {{ total_q }}
@@ -14,10 +14,10 @@
             respectively?
         </p>
         <p>
-            {% formrow form.training_question_1_husband with label='Payoff for Husband would be:' %}
+            {% formfield player.training_question_1_husband with label='Payoff for Husband would be:' %}
         </p>
         <p>
-            {% formrow form.training_question_1_wife with label='Payoff for Wife would be:' %}
+            {% formfield player.training_question_1_wife with label='Payoff for Wife would be:' %}
         </p>
     {% endif %}
 

@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -11,7 +11,7 @@
 You are Participant B. Participant A sent you {{group.sent_amount}} and you received {{tripled_amount}}. Now you have {{tripled_amount}}. How many points will you send to participant A?
 </p>
 
-    {% formrow form.sent_back_amount with label=prompt %}
+    {% formfield group.sent_back_amount with label=prompt %}
     <p>{% next_button %}</p>
     {% include instructions %}
 

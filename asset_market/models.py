@@ -69,7 +69,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    def initialize(self):
+    def before_session_starts(self):
         if self.round_number == 1:
             for p in self.get_players():
                 p.cash = Constants.endowment

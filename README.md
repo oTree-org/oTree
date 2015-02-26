@@ -34,7 +34,7 @@ On Windows, select the option to add Python to your PATH while installing.
 
 On Mac/Unix, it is very likely that Python is already installed. Open the Terminal and write ``python`` and hit Enter. If you get something like `-bash: python: command not found` you will have to install it yourself.
 
-## oTree Launcher
+## oTree Launcherf
 
 You can download the oTree launcher executable [here](http://www.otree.org/download/). Unzip it to your desktop or another easy-to-access location.
 
@@ -234,7 +234,7 @@ fields, and the empty string for text/character fields.
 This should be a dictionary where the keys are the elements of `form_fields`, and the values are the values that should
 be auto-submitted.
   
-### `def after_next_button(self)`
+### `def before_next_page(self)`
 
 After the player clicks the "Next" button, oTree makes sure that any form fields validate (and re-displays to the player with errors otherwise).
 
@@ -271,7 +271,7 @@ You define 2 blocks:
     {% block content %}
         Body HTML goes here.
 
-        {% formrow form.contribution with label="What is your contribution?" %}
+        {% formfield player.contribution with label="What is your contribution?" %}
 
         {% next_button %}
     {% endblock %}
@@ -336,7 +336,7 @@ When the user submits the form, the submitted data is automatically saved back t
 
 ## Forms in templates
 
-oTree forms are rendered using the Django Floppy Forms library. You should include form fields by using a `{% formrow %}` element. You generally do not need to write raw HTML for forms (e.g. `<input type="text" id="...">`).
+oTree forms are rendered using the Django Floppy Forms library. You should include form fields by using a `{% formfield %}` element. You generally do not need to write raw HTML for forms (e.g. `<input type="text" id="...">`).
 
 ## User Input Validation
 
@@ -354,7 +354,7 @@ oTree will not let the user submit values that are not positive integers, like `
 
 Additionally, you can customize validation by passing extra arguments to your model field definition. For example, if you want to require a number to be between 12 and 24, you can specify it like this:
 
-    offer = models.PositiveIntegerField(min_value=12, max_value=24)
+    offer = models.PositiveIntegerField(min=12, max=24)
 
 If you specify a `choices` argument, the default form widget will be a select box with these choices instead of the standard text field.
 
@@ -386,11 +386,11 @@ Example:
 
 * `def {field_name}_min(self)`
 
-The dynamic alternative to `min_value`.
+The dynamic alternative to `min`.
 
 * `def {field_name}_max(self)`
 
-The dynamic alternative to `max_value`.
+The dynamic alternative to `max`.
 
 * `def {field_name}_error_message(self, value)`
 
@@ -562,16 +562,16 @@ The text in the body of the wait page
 
 For the first round, the players are split into groups of `Constants.players_per_group`. This matching is random, unless you have set `group_by_arrival_time` set in your session type in settings.py, in which case players are grouped in the order they start the first round.
 
-In subsequent rounds, by default, the groups chosen are kept the same. If you would like to change this, you can define the grouping logic in `Subsession.initialize`. For example, if you want players to be reassigned to the same groups but to have roles randomly shuffled around within their groups (e.g. so player 1 will either become player 2 or remain player 1), you would do this:
+In subsequent rounds, by default, the groups chosen are kept the same. If you would like to change this, you can define the grouping logic in `Subsession.before_session_starts`. For example, if you want players to be reassigned to the same groups but to have roles randomly shuffled around within their groups (e.g. so player 1 will either become player 2 or remain player 1), you would do this:
 
-    def initialize(self):
+    def before_session_starts(self):
         if self.round_number > 1:
             for group in self.get_groups():
                 players = group.get_players()
                 players.reverse()
                 group.set_players(players)
 
-A group has a method `set_players` that takes as an argument a list of the players to assign to that group, in order. Alternatively, a subsession has a method `set_groups` that takes as an argument a list of lists, with each sublist representing a group. You can use this to rearrange groups between rounds, but note that the `initialize` method is run when the session is created, before players begin playing. Therefore you cannot use this method to shuffle players depending on the results of previous rounds (there is a separate technique for doing this which will be added to the documentation in the future).
+A group has a method `set_players` that takes as an argument a list of the players to assign to that group, in order. Alternatively, a subsession has a method `set_groups` that takes as an argument a list of lists, with each sublist representing a group. You can use this to rearrange groups between rounds, but note that the `before_session_starts` method is run when the session is created, before players begin playing. Therefore you cannot use this method to shuffle players depending on the results of previous rounds (there is a separate technique for doing this which will be added to the documentation in the future).
 
 # Money and Points 
 
@@ -609,9 +609,9 @@ c(10).to_money(self.session) # evaluates to $0.20
 
 # Treatments
 
-If you want to assign participants to different treatment groups, you can put the code in the subsession's `initialize` method. For example, if you want some participants to have a blue background to their screen and some to have a red background, you would randomize as follows:
+If you want to assign participants to different treatment groups, you can put the code in the subsession's `before_session_starts` method. For example, if you want some participants to have a blue background to their screen and some to have a red background, you would randomize as follows:
 
-    def initialize(self):
+    def before_session_starts(self):
         # randomize to treatments
         for player in self.get_players():
             player.color = random.choice(['blue', 'red'])
@@ -620,7 +620,7 @@ If you want to assign participants to different treatment groups, you can put th
 
 If your game has multiple rounds, note that the above code gets executed for each round. So if you want to ensure that participants are assigned to the same treatment group each round, you should set the property at the participant level, which persists across subsessions, and only set it in the first round:
 
-    def initialize(self):
+    def before_session_starts(self):
         if self.round_number == 1:
             for p in self.get_players():
                 p.participant.vars['color'] = random.choice(['blue', 'red'])
@@ -649,9 +649,9 @@ SESSION_TYPES =
      ]
 ```
 
-Then in the `initialize` method, you can check which of the 2 session types it is:
+Then in the `before_session_starts` method, you can check which of the 2 session types it is:
 
-    def initialize(self):
+    def before_session_starts(self):
         for p in self.get_players():
             if 'treatment' in self.session.session_type:
                 # demo mode
@@ -856,7 +856,7 @@ In a lab, you usually can start all participants at the same time, but this is o
 ### Differences between oTree and Django
 
 #### Models
-* Field labels should go in the template formrow, rather than the model field's `verbose_name`.
+* Field labels should go in the template formfield, rather than the model field's `verbose_name`.
 * `null=True` and `default=None` are not necessary in your model field declarations; in oTree fields are null by default.
 * On `CharField`s, `max_length` is not required.
 

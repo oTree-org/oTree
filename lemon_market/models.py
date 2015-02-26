@@ -95,7 +95,7 @@ class Player(otree.models.BasePlayer):
 
     # seller
     price = models.CurrencyField(
-        bounds=[0, Constants.INITIAL],
+        min=0, max=Constants.INITIAL,
         verbose_name='Please indicate a price (from 0 to %i) you want to sell'
         % Constants.INITIAL)
 

@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load floppyforms otree_tags %}
+{% load otree_tags %}
 
 {% block title %}
 {% if title %}
@@ -23,7 +23,7 @@ Understanding Question {{ num_q|default:1 }} of {{ total_q|default:1 }}
 {% endif %}
 {# render <form> #}
 {% for field in form %}
-<p>{% formrow field %}</p>
+<p>{% formfield field %}</p>
 {% endfor %}
 
 <p>{% next_button %}</p>

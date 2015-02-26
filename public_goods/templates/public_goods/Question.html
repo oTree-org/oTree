@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 
 {% block title %}
     Understanding Question 1 of 1
@@ -11,7 +11,7 @@
         What would be the payoff of the participant who contributed 80 points?
     </p>
 
-    {% formrow form.question with label="His payoff would be" %}
+    {% formfield player.question with label="His payoff would be" %}
 
     {% next_button %}
 

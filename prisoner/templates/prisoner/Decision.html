@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -8,7 +8,7 @@
 
 {% block content %}
 
-    {% formrow form.decision with label="I will" %}
+    {% formfield player.decision with label="I will" %}
 
     {% next_button %}
 

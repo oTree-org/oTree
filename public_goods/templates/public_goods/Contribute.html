@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -8,7 +8,7 @@
 
 {% block content %}
 
-    {% formrow form.contribution with label="How much will you contribute to the project (from 0 to 100)?" %}
+    {% formfield player.contribution with label="How much will you contribute to the project (from 0 to 100)?" %}
 
     {% next_button %}
 

@@ -45,7 +45,7 @@ class Constants:
 
 class Subsession(otree.models.BaseSubsession):
 
-    def initialize(self):
+    def before_session_starts(self):
         if self.round_number > 1:
             for group in self.get_groups():
                 players = group.get_players()

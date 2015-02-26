@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -8,7 +8,7 @@
 
 {% block content %}
 <p>How many points will you claim for your antique?</p>
-    {% formrow form.claim %}
+    {% formfield player.claim %}
     {% next_button %}
     
     {% include instructions %}

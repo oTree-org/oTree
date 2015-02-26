@@ -34,7 +34,7 @@ DATABASES = {
 CREATE_DEFAULT_SUPERUSER = True
 ADMIN_USERNAME = 'admin'
 AUTH_LEVEL = os.environ.get('OTREE_AUTH_LEVEL')
-ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
+ACCESS_CODE_FOR_DEFAULT_SESSION = 'idd1610'
 
 # settting for intergration with AWS Mturk
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
@@ -233,39 +233,15 @@ SESSION_TYPES = [
             'real_effort',
         ],
     },
-
-    {
-        'name': 'matrix_symmetric',
-        'display_name': "Symmetric Matrix Game DEMO",
-        'num_demo_participants':  2,
-        'app_sequence': [
-            'matrix_symmetric', 'payment_info'
-        ],
-    },
-    {
-        'name': 'matrix_asymmetric',
-        'display_name': "Asymmetric Matrix Game DEMO",
-        'num_demo_participants':  2,
-        'app_sequence': [
-            'matrix_asymmetric','payment_info'
-        ],
-    },
     {
         'name': 'lemon_market',
-        'display_name': "Lemon Market Game DEMO",
+        'display_name': "Lemon Market Game",
         'num_demo_participants':  3,
         'app_sequence': [
             'lemon_market','payment_info'
         ],
     },
-    {
-        'name': 'cournot_competition',
-        'display_name': "Cournot competititon DEMO",
-        'num_demo_participants':  2,
-        'app_sequence': [
-            'cournot_competition','payment_info'
-        ]
-    }
+
 ]
 
 

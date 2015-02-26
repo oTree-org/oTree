@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load floppyforms otree_tags %}
+{% load otree_tags %}
 
 {% block title %}
 Your Choice
@@ -7,7 +7,7 @@ Your Choice
 
 {% block content %}
 
-    {% formrow form.volunteer with label='Do you wish to volunteer?' %}
+    {% formfield player.volunteer with label='Do you wish to volunteer?' %}
  <p>  {% next_button %}</p> 
 
     {% include instructions %}

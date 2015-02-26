@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 
 {% block title %}
     Understanding Question {{ num_q }} of {{ total_q }}
@@ -9,7 +9,7 @@
 
     {% if num_q == 1 %}
         <p>
-            {% formrow form.training_question_1 with label="Suppose firm Q produced 20 units and firm P produced 30 units. What would be the profit for firm P?" %}
+            {% formfield player.training_question_1 with label="Suppose firm Q produced 20 units and firm P produced 30 units. What would be the profit for firm P?" %}
         </p>
     {% endif %}
 

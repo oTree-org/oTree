@@ -1,5 +1,5 @@
 {% extends "global/Base.html" %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 {% load i18n %}
 
 {% block title %}
@@ -17,9 +17,9 @@
         <tr><td>{{ group.agent_fixed_pay }}</td><td>{{ group.return_share_as_percentage }}%</td></tr>
     </table>
 
-    {% formrow form.contract_accepted with label='Will you accept or reject the above contract?' %}
+    {% formfield group.contract_accepted with label='Will you accept or reject the above contract?' %}
     <div id=effort>
-    {% formrow form.agent_work_effort with label='Please choose your level of effort' %}
+    {% formfield group.agent_work_effort with label='Please choose your level of effort' %}
     </div>
     <p id=calculate></p>
     <p>

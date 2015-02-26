@@ -1,6 +1,6 @@
 {% extends "global/Base.html" %}
 {% load i18n %}
-{% load staticfiles floppyforms otree_tags %}
+{% load staticfiles otree_tags %}
 
 {% block title %}
     Questionnaire
@@ -12,7 +12,7 @@
         <em>Note: As this is a sample game, only one question is displayed.</em>
     </p>
 
-    {% formrow form.q_gender %}
+    {% formfield player.q_gender %}
 
     {% next_button %}
 
