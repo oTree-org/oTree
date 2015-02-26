@@ -241,6 +241,14 @@ SESSION_TYPES = [
             'lemon_market','payment_info'
         ],
     },
+    {
+        'name': 'mturk',
+        'display_name': "mturk",
+        'num_demo_participants':  1,
+        'app_sequence': [
+            'mturk_submit',
+        ],
+    },
 
 ]
 
