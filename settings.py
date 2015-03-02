@@ -43,7 +43,7 @@ MTURK_HOST = 'mechanicalturk.amazonaws.com'
 MTURK_SANDBOX_HOST = 'mechanicalturk.sandbox.amazonaws.com'
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
-PAYMENT_CURRENCY_CODE = 'EUR'
+PAYMENT_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
 

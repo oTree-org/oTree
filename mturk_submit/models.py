@@ -74,7 +74,7 @@ class Group(otree.models.BaseGroup):
 
     def set_payoffs(self):
         for p in self.get_players():
-            p.payoff = 0 # change to whatever the payoff should be
+            p.payoff = 3 # change to whatever the payoff should be
 
 
 class Player(otree.models.BasePlayer):
