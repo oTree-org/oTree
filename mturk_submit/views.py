@@ -9,7 +9,8 @@ from .models import Constants
 
 
 class Submit(Page):
-    pass
+    def before_next_page(self):
+        self.player.payoff=5
 
 page_sequence =[
         Submit
