@@ -594,17 +594,17 @@ Each player has a `payoff` field, which is a `CurrencyField`. If your player mak
 
 Sometimes it is preferable for players to play games for points or "experimental currency units", which are converted to real money at the end of the session. You can set `USE_POINTS = True` in `settings.py`, and then in-game currency amounts will be expressed in points rather than real money.
 
-For example, `c(10)` is displayed as `10 points`. You can specify the conversion rate to real money in `settings.py` by providing a `money_per_point` key in the session type dictionary. For example, if you pay the user 2 cents per point, you would set `money_per_point = 0.02`.
+For example, `c(10)` is displayed as `10 points`. You can specify the conversion rate to real money in `settings.py` by providing a `real_world_currency_per_point` key in the session type dictionary. For example, if you pay the user 2 cents per point, you would set `real_world_currency_per_point = 0.02`.
 
-You can convert a point amount to money using the `to_money()` method,
+You can convert a point amount to money using the `to_real_world_currency()` method,
 which takes as an argument the current session
 (this is necessary because different sessions can have different conversion rates).
 
-Let's say `money_per_point = 0.02`
+Let's say `real_world_currency_per_point = 0.02`
 
 ```
 c(10) # evaluates to Currency(10 points)
-c(10).to_money(self.session) # evaluates to $0.20
+c(10).to_real_world_currency(self.session) # evaluates to $0.20
 ```
 
 # Treatments

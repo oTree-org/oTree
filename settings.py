@@ -3,6 +3,7 @@ import os
 import dj_database_url
 
 import otree.settings
+from otree.common import RealWorldCurrency
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -62,9 +63,9 @@ if 'SENTRY_DSN' in os.environ:
     ]
 
 SESSION_TYPE_DEFAULTS = {
-    'money_per_point': 0.01,
+    'real_world_currency_per_point': 0.01,
     'demo_enabled': True,
-    'fixed_pay': 10.00, # this is payment currency (not points)
+    'fixed_pay': RealWorldCurrency(10.00),
     'num_bots': 12,
     'doc': "",
     'group_by_arrival_time': False,
@@ -186,7 +187,7 @@ SESSION_TYPES = [
     {
         'name': 'stackelberg_competition',
         'display_name': "Stackelberg Competition",
-        'money_per_point': 0.01,
+        'real_world_currency_per_point': 0.01,
         'num_demo_participants': 2,
         'app_sequence': [
             'stackelberg_competition', 'survey_sample', 'payment_info'
