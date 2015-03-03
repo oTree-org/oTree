@@ -15,7 +15,7 @@ class PlayerBot(Bot):
 
     def play_round(self):
         self.submit(views.MyPage, {'my_field': c(1)})
-        self.submit(views.Results)
+        self.submit(views.Submit)
 
     def validate_play(self):
         pass

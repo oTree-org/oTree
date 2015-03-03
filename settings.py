@@ -3,6 +3,7 @@ import os
 import dj_database_url
 
 import otree.settings
+#from otree.common import RealWorldCurrency
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -43,7 +44,7 @@ MTURK_HOST = 'mechanicalturk.amazonaws.com'
 MTURK_SANDBOX_HOST = 'mechanicalturk.sandbox.amazonaws.com'
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
-PAYMENT_CURRENCY_CODE = 'EUR'
+PAYMENT_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
 
@@ -62,9 +63,9 @@ if 'SENTRY_DSN' in os.environ:
     ]
 
 SESSION_TYPE_DEFAULTS = {
-    'money_per_point': 0.01,
+    'real_world_currency_per_point': 0.01,
     'demo_enabled': True,
-    'fixed_pay': 10.00, # this is payment currency (not points)
+    'fixed_pay': 10.00,
     'num_bots': 12,
     'doc': "",
     'group_by_arrival_time': False,
@@ -73,9 +74,8 @@ SESSION_TYPE_DEFAULTS = {
         'title': 'Title for your experiment',
         'description': 'Description for your experiment',
         'frame_height': 500,
-        'landing_page_template': 'global/mturk_landing.html',
+        'landing_page_template': 'global/MTurkLanding.html',
     },
-    'mturk_sandbox': True,
 }
 
 SESSION_TYPES = [
@@ -187,7 +187,7 @@ SESSION_TYPES = [
     {
         'name': 'stackelberg_competition',
         'display_name': "Stackelberg Competition",
-        'money_per_point': 0.01,
+        'real_world_currency_per_point': 0.01,
         'num_demo_participants': 2,
         'app_sequence': [
             'stackelberg_competition', 'survey_sample', 'payment_info'
@@ -243,6 +243,14 @@ SESSION_TYPES = [
             'lemon_market','payment_info'
         ],
     },
+    {
+        'name': 'mturk',
+        'display_name': "mturk",
+        'num_demo_participants':  1,
+        'app_sequence': [
+            'mturk_submit',
+        ],
+    },
 
 ]
 
@@ -278,5 +286,6 @@ SEO = ()
 
 
 WSGI_APPLICATION = 'wsgi.application'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 otree.settings.augment_settings(globals())

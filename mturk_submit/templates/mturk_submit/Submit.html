@@ -1,0 +1,17 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Page title
+{% endblock %}
+
+{% block content %}
+
+<!--
+This is a sample page for MTurk External Submit
+-->
+Please click the button below to submit the HIT:
+    {% next_button %}
+{% endblock %}
+
