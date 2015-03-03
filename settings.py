@@ -74,9 +74,8 @@ SESSION_TYPE_DEFAULTS = {
         'title': 'Title for your experiment',
         'description': 'Description for your experiment',
         'frame_height': 500,
-        'landing_page_template': 'global/mturk_landing.html',
+        'landing_page_template': 'global/MTurkLanding.html',
     },
-    'mturk_sandbox': True,
 }
 
 SESSION_TYPES = [
@@ -243,6 +242,14 @@ SESSION_TYPES = [
             'lemon_market','payment_info'
         ],
     },
+    {
+        'name': 'mturk',
+        'display_name': "mturk",
+        'num_demo_participants':  1,
+        'app_sequence': [
+            'mturk_submit',
+        ],
+    },
 
 ]
 
@@ -278,5 +285,6 @@ SEO = ()
 
 
 WSGI_APPLICATION = 'wsgi.application'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 otree.settings.augment_settings(globals())

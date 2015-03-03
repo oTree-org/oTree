@@ -57,7 +57,7 @@ keywords = ("Game Theory", "Nash Equilibrium", "Economics")
 
 class Constants:
     name_in_url = 'mturk_submit'
-    players_per_group = 2
+    players_per_group = None
     num_rounds = 1
 
     # define more constants here
