@@ -3,7 +3,7 @@ import os
 import dj_database_url
 
 import otree.settings
-from otree.common import RealWorldCurrency
+#from otree.common import RealWorldCurrency
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -44,7 +44,7 @@ MTURK_HOST = 'mechanicalturk.amazonaws.com'
 MTURK_SANDBOX_HOST = 'mechanicalturk.sandbox.amazonaws.com'
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
-PAYMENT_CURRENCY_CODE = 'EUR'
+PAYMENT_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
 
@@ -65,7 +65,7 @@ if 'SENTRY_DSN' in os.environ:
 SESSION_TYPE_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
     'demo_enabled': True,
-    'fixed_pay': RealWorldCurrency(10.00),
+    'fixed_pay': 10.00,
     'num_bots': 12,
     'doc': "",
     'group_by_arrival_time': False,
