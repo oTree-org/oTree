@@ -692,8 +692,7 @@ Then in a future subsession, you would retrieve this value like this:
 
 ## Global variables
 
-For session-wide globals, you can use `session.vars`,
-either through `player.participant.session.vars` or `player.subsession.session.vars` (both are equivalent).
+For session-wide globals, you can use `self.session.vars.
 
 This is a dictionary just like `participant.vars`.
 
