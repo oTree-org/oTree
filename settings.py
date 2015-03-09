@@ -75,6 +75,12 @@ SESSION_TYPE_DEFAULTS = {
         'description': 'Description for your experiment',
         'frame_height': 500,
         'landing_page_template': 'global/MTurkLanding.html',
+        # from here on are qualifications requirements for workers
+        # see description for requirements:
+        # http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_QualificationRequirementDataStructureArticle.html
+        'location': 'US',
+        'number_hits_approved': 1,          # "greater or equal" should be integer >= 1
+        'percent_assignments_approved': 50, # "greater or equal" should be integer in [1;100]
     },
 }
 
