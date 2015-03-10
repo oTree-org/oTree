@@ -1,6 +1,9 @@
 import os
 
 import dj_database_url
+from boto.mturk.qualification import (LocaleRequirement,
+                                      PercentAssignmentsApprovedRequirement,
+                                      NumberHitsApprovedRequirement)
 
 import otree.settings
 #from otree.common import RealWorldCurrency
@@ -62,6 +65,18 @@ if 'SENTRY_DSN' in os.environ:
         'raven.contrib.django.raven_compat',
     ]
 
+# from here on are qualifications requirements for workers
+# see description for requirements on Amazon Mechanical Turk website:
+# http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_QualificationRequirementDataStructureArticle.html
+# and also in docs for boto:
+# https://boto.readthedocs.org/en/latest/ref/mturk.html?highlight=mturk#module-boto.mturk.qualification
+
+MTURK_WORKER_REQUIREMENTS = [
+    LocaleRequirement("EqualTo", "US"),
+    PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
+    NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5)
+]
+
 SESSION_TYPE_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
     'demo_enabled': True,
@@ -75,12 +90,6 @@ SESSION_TYPE_DEFAULTS = {
         'description': 'Description for your experiment',
         'frame_height': 500,
         'landing_page_template': 'global/MTurkLanding.html',
-        # from here on are qualifications requirements for workers
-        # see description for requirements:
-        # http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_QualificationRequirementDataStructureArticle.html
-        'location': 'US',
-        'number_hits_approved': 1,          # "greater or equal" should be integer >= 1
-        'percent_assignments_approved': 50, # "greater or equal" should be integer in [1;100]
     },
 }
 
