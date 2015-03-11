@@ -90,6 +90,8 @@ SESSION_TYPE_DEFAULTS = {
         'description': 'Description for your experiment',
         'frame_height': 500,
         'landing_page_template': 'global/MTurkLanding.html',
+        'time_alloted_minutes': 60,
+        'expiration_days': 7,
     },
 }
 
@@ -97,14 +99,14 @@ SESSION_TYPES = [
     {
         'name': 'demo_game',
         'display_name': "Demo Game",
-        'num_demo_participants':  1,
+        'num_demo_participants': 1,
         'num_bots': 1,
         'app_sequence': ['demo_game'],
     },
     {
         'name': 'public_goods',
         'display_name': "Public Goods",
-        'num_demo_participants':  3,
+        'num_demo_participants': 3,
         'app_sequence': ['public_goods', 'payment_info'],
     },
     {
@@ -245,7 +247,7 @@ SESSION_TYPES = [
     {
         'name': 'real_effort',
         'display_name': "Real-effort transcription task",
-        'num_demo_participants':  1,
+        'num_demo_participants': 1,
         'app_sequence': [
             'real_effort',
         ],
@@ -253,9 +255,9 @@ SESSION_TYPES = [
     {
         'name': 'lemon_market',
         'display_name': "Lemon Market Game",
-        'num_demo_participants':  3,
+        'num_demo_participants': 3,
         'app_sequence': [
-            'lemon_market','payment_info'
+            'lemon_market', 'payment_info'
         ],
     },
 ]
