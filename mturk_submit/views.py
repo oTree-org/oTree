@@ -9,7 +9,7 @@ from .models import Constants
 
 
 class Submit(Page):
-    
+
     def before_next_page(self):
         self.player.payoff = 5
 

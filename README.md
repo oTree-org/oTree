@@ -34,7 +34,7 @@ On Windows, select the option to add Python to your PATH while installing.
 
 On Mac/Unix, it is very likely that Python is already installed. Open the Terminal and write ``python`` and hit Enter. If you get something like `-bash: python: command not found` you will have to install it yourself.
 
-## oTree Launcherf
+## oTree Launcher
 
 You can download the oTree launcher executable [here](http://www.otree.org/download/). Unzip it to your desktop or another easy-to-access location.
 
@@ -336,7 +336,7 @@ When the user submits the form, the submitted data is automatically saved back t
 
 ## Forms in templates
 
-oTree forms are rendered using the Django Floppy Forms library. You should include form fields by using a `{% formfield %}` element. You generally do not need to write raw HTML for forms (e.g. `<input type="text" id="...">`).
+You should include form fields by using a `{% formfield %}` element. You generally do not need to write raw HTML for forms (e.g. `<input type="text" id="...">`).
 
 ## User Input Validation
 
@@ -531,8 +531,8 @@ Each player has a numeric field `id_in_group`. This is useful in multiplayer gam
 Groups have the following methods:
 
  * `get_players()`: returns a list of the players in the group.
-*  `get_player_by_id(n)`: Retrieves the player in the group with a specific `id_in_group`.
-*  `get_player_by_role(r)`. The argument to this method is a string that looks up the player by their role value. (If you use this method, you must define the `role` method on the player model, which should return a string that depends on `id_in_group`.)
+ * `get_player_by_id(n)`: Retrieves the player in the group with a specific `id_in_group`.
+ * `get_player_by_role(r)`. The argument to this method is a string that looks up the player by their role value. (If you use this method, you must define the `role` method on the player model, which should return a string that depends on `id_in_group`.)
 
 Player objects have methods `get_others_in_group()` and `get_others_in_subsession()` that return a list of the other players in the group and subsession, respectively.
 

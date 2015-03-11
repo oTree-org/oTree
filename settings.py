@@ -9,20 +9,20 @@ import otree.settings
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-if os.environ.get('OTREE_PRODUCTION'):
-    DEBUG = False
-else:
+if os.environ.get('OTREE_PRODUCTION') in {None, '', '0'}:
     DEBUG = True
-
-if os.environ.get('IS_OTREE_DOT_ORG'):
-    ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
-    SECRET_KEY = os.environ['OTREE_SECRET_KEY']
 else:
+    DEBUG = False
+
+if os.environ.get('IS_OTREE_DOT_ORG') in {None, '', '0'}:
     ADMIN_PASSWORD = 'otree'
     # don't share this with anybody.
     # Change this to something unique (e.g. mash your keyboard),
     # and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzz'
+else:
+    ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
+    SECRET_KEY = os.environ['OTREE_SECRET_KEY']
 
 
 DATABASES = {
@@ -64,7 +64,6 @@ if 'SENTRY_DSN' in os.environ:
 
 SESSION_TYPE_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
-    'demo_enabled': True,
     'fixed_pay': 10.00,
     'num_bots': 12,
     'doc': "",
@@ -233,6 +232,14 @@ SESSION_TYPES = [
         'num_demo_participants':  1,
         'app_sequence': [
             'real_effort',
+        ],
+    },
+    {
+        'name': 'lemon_market',
+        'display_name': "Lemon Market Game",
+        'num_demo_participants':  3,
+        'app_sequence': [
+            'lemon_market','payment_info'
         ],
     },
     {
