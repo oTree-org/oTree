@@ -1,6 +1,9 @@
 import os
 
 import dj_database_url
+from boto.mturk.qualification import (LocaleRequirement,
+                                      PercentAssignmentsApprovedRequirement,
+                                      NumberHitsApprovedRequirement)
 
 import otree.settings
 #from otree.common import RealWorldCurrency
@@ -61,6 +64,18 @@ if 'SENTRY_DSN' in os.environ:
     INSTALLED_APPS += [
         'raven.contrib.django.raven_compat',
     ]
+
+# from here on are qualifications requirements for workers
+# see description for requirements on Amazon Mechanical Turk website:
+# http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_QualificationRequirementDataStructureArticle.html
+# and also in docs for boto:
+# https://boto.readthedocs.org/en/latest/ref/mturk.html?highlight=mturk#module-boto.mturk.qualification
+
+MTURK_WORKER_REQUIREMENTS = [
+    LocaleRequirement("EqualTo", "US"),
+    PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
+    NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5)
+]
 
 SESSION_TYPE_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
