@@ -90,8 +90,8 @@ SESSION_TYPE_DEFAULTS = {
         'description': 'Description for your experiment',
         'frame_height': 500,
         'landing_page_template': 'global/MTurkLanding.html',
-        'time_alloted_minutes': 60,
-        'expiration_days': 7,
+        'time_allotted_minutes': 60,
+        'expiration_hours': 168,
     },
 }
 
