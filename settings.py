@@ -257,14 +257,6 @@ SESSION_TYPES = [
             'lemon_market','payment_info'
         ],
     },
-    {
-        'name': 'lemon_market',
-        'display_name': "Lemon Market Game",
-        'num_demo_participants':  3,
-        'app_sequence': [
-            'lemon_market','payment_info'
-        ],
-    },
 ]
 
 
