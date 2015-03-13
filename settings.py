@@ -65,6 +65,39 @@ if 'SENTRY_DSN' in os.environ:
         'raven.contrib.django.raven_compat',
     ]
 
+DEMO_PAGE_INTRO_TEXT = """
+<ul>
+    <li>
+        <a href="https://github.com/oTree-org/otree" target="_blank">
+            Source code
+        </a> for the below games.
+    </li>
+    <li>
+        <a href="http://www.otree.org/" target="_blank">
+            oTree homepage
+        </a>.
+    </li>
+</ul>
+<p>
+    Below are various games implemented with oTree. These games are all open
+    source, and you can modify them as you wish to create your own variations.
+    Click one to learn more and play.
+</p>
+"""
+
+
+PAGE_FOOTER = 'Powered By <a href="http://otree.org" target="_blank">oTree</a>'
+
+# list of extra string to positioning you experiments on search engines
+# Also if you want to add a particular set of SEO words to a particular page
+# add to template context "page_seo" variable.
+# See: http://en.wikipedia.org/wiki/Search_engine_optimization
+SEO = ()
+
+
+WSGI_APPLICATION = 'wsgi.application'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # from here on are qualifications requirements for workers
 # see description for requirements on Amazon Mechanical Turk website:
 # http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_QualificationRequirementDataStructureArticle.html
@@ -261,38 +294,5 @@ SESSION_TYPES = [
     },
 ]
 
-
-DEMO_PAGE_INTRO_TEXT = """
-<ul>
-    <li>
-        <a href="https://github.com/oTree-org/otree" target="_blank">
-            Source code
-        </a> for the below games.
-    </li>
-    <li>
-        <a href="http://www.otree.org/" target="_blank">
-            oTree homepage
-        </a>.
-    </li>
-</ul>
-<p>
-    Below are various games implemented with oTree. These games are all open
-    source, and you can modify them as you wish to create your own variations.
-    Click one to learn more and play.
-</p>
-"""
-
-
-PAGE_FOOTER = 'Powered By <a href="http://otree.org" target="_blank">oTree</a>'
-
-# list of extra string to positioning you experiments on search engines
-# Also if you want to add a particular set of SEO words to a particular page
-# add to template context "page_seo" variable.
-# See: http://en.wikipedia.org/wiki/Search_engine_optimization
-SEO = ()
-
-
-WSGI_APPLICATION = 'wsgi.application'
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 otree.settings.augment_settings(globals())
