@@ -1,4 +1,4 @@
 dj-database-url==0.2.2
 gunicorn==18.0
 static==1.0.2
-otree-core==0.2.276
+otree-core==0.2.277
