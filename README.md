@@ -26,17 +26,10 @@ Sign up to be notified about updates to oTree [here](https://docs.google.com/for
 
 # Setup
 
-## Install Python
-
-oTree requires [Python 2.7](https://www.python.org/download/releases/2.7.7/).
-
-On Windows, select the option to add Python to your PATH while installing.
-
-On Mac/Unix, it is very likely that Python is already installed. Open the Terminal and write ``python`` and hit Enter. If you get something like `-bash: python: command not found` you will have to install it yourself.
-
 ## oTree Launcher
 
-You can download the oTree launcher executable [here](http://www.otree.org/download/). Unzip it to your desktop or another easy-to-access location.
+You can download the oTree launcher executable [here](http://www.otree.org/download/).
+Just follow the instructions on that page.
 
 ## Alternative manual setup
 
@@ -786,7 +779,8 @@ If your app has [[Experimenter Pages]], you can also implement the `play` method
 
 oTree comes with an admin interface, so that experimenters can manage sessions, monitor the progress of live sessions, and export data after sessions.
 
-Open your browser to the root url of your web application. If you're developing locally, this will be http://127.0.0.1:8000/.
+Open your browser to the root url of your web application. If you're developing locally,
+this will be http://127.0.0.1:8000/.
 
 
 # Lab Experiments 
@@ -839,7 +833,7 @@ And change it to:
 Outside of oTree, you can create a script that adds a unique `participant_label` to each start link as indicated above. Then, when the link is opened, the oTree server will register that participant label for that participant.
 
 ### Monitor sessions
-While your session is ongoing, you can monitor the live progress in the admin interface. The admin tables update live, highlighting changes as they occur. The most useful table to monitor is "Session participants", which gives you a summary of all the participants' progress. You can also click the "participants" table of each app to see the details of all the data being entered in your subsessions.
+While your session is ongoing, you can monitor the live progress in the admin interface.
 
 # Online experiments
 
@@ -920,14 +914,15 @@ might have the ID in group 1, while agents have 2).
 
 ##Progress-Monitor 
 
-The progress monitor allows the researcher to monitor the progress of an experiment. It features a display that can be **filtered** and **sorted**, for example by computer name or group. The experimenter can see the progress of all participants, including their current action and taken decisions. Updates are shown as they happen **in real time** and cells that change are highlighted in yellow. Because the progress monitor is web-based, **multiple collaborators can simultaneously open it on several devices on premises or at remote locations**. 
+The progress monitor allows the researcher to monitor the progress of an experiment.
+The experimenter can see the progress of all participants, including their current action and taken decisions.
+Updates are shown as they happen **in real time** and cells that change are highlighted in yellow.
+Because the progress monitor is web-based, **multiple collaborators can simultaneously open it on several devices
+on premises or at remote locations**.
 
 ![](http://i.imgur.com/0nYKnDp.png)
 
 
-## Session Interface  
-
-The session interface is an optional feature convenient in some experiments. In many experimental settings, in addition to monitoring, **an experimenter needs to receive instructions or provide input for the experiment**. The session interface can instruct an experimenter on what to do next and show text to be read aloud. The session interface can also request input from the experimenter at a specic point in the session. For example, in an Ellsberg experiment, the experimenter might roll an opaque urn prior to the session; the session interface will remind the experimenter to show the urn to the participants, tell the experimenter when all participants have selected their bets, and instruct her to draw a ball from the urn. It will then ask the drawn color, so that oTree can calculate participants' payoffs.
 
 # Deploying to a server
 

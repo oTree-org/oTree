@@ -47,8 +47,8 @@ MTURK_HOST = 'mechanicalturk.amazonaws.com'
 MTURK_SANDBOX_HOST = 'mechanicalturk.sandbox.amazonaws.com'
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
-PAYMENT_CURRENCY_CODE = 'USD'
-USE_POINTS = True
+REAL_WORLD_CURRENCY_CODE = 'EUR'
+USE_POINTS = False
 
 
 # e.g. en-gb, de-de, it-it, fr-fr.
@@ -140,6 +140,12 @@ SESSION_TYPES = [
         'display_name': "Public Goods",
         'num_demo_participants': 3,
         'app_sequence': ['public_goods', 'payment_info'],
+    },
+    {
+        'name': 'public_goods_demo',
+        'display_name': "Public Goods DEMO",
+        'num_demo_participants': 3,
+        'app_sequence': ['public_goods_demo'],
     },
     {
         'name': 'principal_agent',
