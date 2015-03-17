@@ -193,6 +193,13 @@ SESSION_TYPES = [
         'app_sequence': ['ultimatum', 'feedback', 'payment_info'],
         'treatment': 'direct_response',
     },
+    {
+        'name': 'ultimatum_demo',
+        'display_name': "Ultimatum DEMO",
+        'num_demo_participants': 2,
+        'app_sequence': ['ultimatum_demo'],
+
+    },
 
     {
         'name': 'dictator',

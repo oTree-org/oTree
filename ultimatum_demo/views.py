@@ -5,14 +5,10 @@ from otree.common import Currency as c, currency_range
 
 from ._builtin import Page, WaitPage
 from . import models
-from .models import Constants
+
 
 #todo: replace global vars
 
-
-class Introduction(Page):
-
-    timeout_seconds = 60
 
 
 class Offer(Page):
@@ -23,7 +19,7 @@ class Offer(Page):
     def is_displayed(self):
         return self.player.id_in_group == 1
 
-    timeout_seconds = 60
+    timeout_seconds = 180
 
 class WaitForProposer(WaitPage):
     pass
@@ -34,19 +30,13 @@ class Accept(Page):
     form_fields = ['offer_accepted']
 
     def is_displayed(self):
-        return self.player.id_in_group == 2 and not self.group.strategy
+        return self.player.id_in_group == 2
 
 
-    timeout_seconds = 60
+    timeout_seconds = 180
 
 
-class AcceptStrategy(Page):
 
-    form_model = models.Group
-    form_fields = ['response_{}'.format(int(i)) for i in Constants.offer_choices]
-
-    def is_displayed(self):
-        return self.player.id_in_group == 2 and self.group.strategy
 
 
 class ResultsWaitPage(WaitPage):
@@ -61,11 +51,10 @@ class Results(Page):
 
 
 
-page_sequence = [Introduction,
+page_sequence = [
             Offer,
             WaitForProposer,
             Accept,
-            AcceptStrategy,
             ResultsWaitPage,
             Results]
 
