@@ -26,17 +26,10 @@ Sign up to be notified about updates to oTree [here](https://docs.google.com/for
 
 # Setup
 
-## Install Python
+## oTree Launcher
 
-oTree requires [Python 2.7](https://www.python.org/download/releases/2.7.7/).
-
-On Windows, select the option to add Python to your PATH while installing.
-
-On Mac/Unix, it is very likely that Python is already installed. Open the Terminal and write ``python`` and hit Enter. If you get something like `-bash: python: command not found` you will have to install it yourself.
-
-## oTree Launcherf
-
-You can download the oTree launcher executable [here](http://www.otree.org/download/). Unzip it to your desktop or another easy-to-access location.
+You can download the oTree launcher executable [here](http://www.otree.org/download/).
+Just follow the instructions on that page.
 
 ## Alternative manual setup
 
@@ -336,7 +329,7 @@ When the user submits the form, the submitted data is automatically saved back t
 
 ## Forms in templates
 
-oTree forms are rendered using the Django Floppy Forms library. You should include form fields by using a `{% formfield %}` element. You generally do not need to write raw HTML for forms (e.g. `<input type="text" id="...">`).
+You should include form fields by using a `{% formfield %}` element. You generally do not need to write raw HTML for forms (e.g. `<input type="text" id="...">`).
 
 ## User Input Validation
 
@@ -354,7 +347,7 @@ oTree will not let the user submit values that are not positive integers, like `
 
 Additionally, you can customize validation by passing extra arguments to your model field definition. For example, if you want to require a number to be between 12 and 24, you can specify it like this:
 
-    offer = models.PositiveIntegerField(min_value=12, max_value=24)
+    offer = models.PositiveIntegerField(min=12, max=24)
 
 If you specify a `choices` argument, the default form widget will be a select box with these choices instead of the standard text field.
 
@@ -386,11 +379,11 @@ Example:
 
 * `def {field_name}_min(self)`
 
-The dynamic alternative to `min_value`.
+The dynamic alternative to `min`.
 
 * `def {field_name}_max(self)`
 
-The dynamic alternative to `max_value`.
+The dynamic alternative to `max`.
 
 * `def {field_name}_error_message(self, value)`
 
@@ -531,8 +524,8 @@ Each player has a numeric field `id_in_group`. This is useful in multiplayer gam
 Groups have the following methods:
 
  * `get_players()`: returns a list of the players in the group.
-*  `get_player_by_id(n)`: Retrieves the player in the group with a specific `id_in_group`.
-*  `get_player_by_role(r)`. The argument to this method is a string that looks up the player by their role value. (If you use this method, you must define the `role` method on the player model, which should return a string that depends on `id_in_group`.)
+ * `get_player_by_id(n)`: Retrieves the player in the group with a specific `id_in_group`.
+ * `get_player_by_role(r)`. The argument to this method is a string that looks up the player by their role value. (If you use this method, you must define the `role` method on the player model, which should return a string that depends on `id_in_group`.)
 
 Player objects have methods `get_others_in_group()` and `get_others_in_subsession()` that return a list of the other players in the group and subsession, respectively.
 
@@ -594,17 +587,17 @@ Each player has a `payoff` field, which is a `CurrencyField`. If your player mak
 
 Sometimes it is preferable for players to play games for points or "experimental currency units", which are converted to real money at the end of the session. You can set `USE_POINTS = True` in `settings.py`, and then in-game currency amounts will be expressed in points rather than real money.
 
-For example, `c(10)` is displayed as `10 points`. You can specify the conversion rate to real money in `settings.py` by providing a `money_per_point` key in the session type dictionary. For example, if you pay the user 2 cents per point, you would set `money_per_point = 0.02`.
+For example, `c(10)` is displayed as `10 points`. You can specify the conversion rate to real money in `settings.py` by providing a `real_world_currency_per_point` key in the session type dictionary. For example, if you pay the user 2 cents per point, you would set `real_world_currency_per_point = 0.02`.
 
-You can convert a point amount to money using the `to_money()` method,
+You can convert a point amount to money using the `to_real_world_currency()` method,
 which takes as an argument the current session
 (this is necessary because different sessions can have different conversion rates).
 
-Let's say `money_per_point = 0.02`
+Let's say `real_world_currency_per_point = 0.02`
 
 ```
 c(10) # evaluates to Currency(10 points)
-c(10).to_money(self.session) # evaluates to $0.20
+c(10).to_real_world_currency(self.session) # evaluates to $0.20
 ```
 
 # Treatments
@@ -692,8 +685,7 @@ Then in a future subsession, you would retrieve this value like this:
 
 ## Global variables
 
-For session-wide globals, you can use `session.vars`,
-either through `player.participant.session.vars` or `player.subsession.session.vars` (both are equivalent).
+For session-wide globals, you can use `self.session.vars.
 
 This is a dictionary just like `participant.vars`.
 
@@ -787,7 +779,8 @@ If your app has [[Experimenter Pages]], you can also implement the `play` method
 
 oTree comes with an admin interface, so that experimenters can manage sessions, monitor the progress of live sessions, and export data after sessions.
 
-Open your browser to the root url of your web application. If you're developing locally, this will be http://127.0.0.1:8000/.
+Open your browser to the root url of your web application. If you're developing locally,
+this will be http://127.0.0.1:8000/.
 
 
 # Lab Experiments 
@@ -840,7 +833,7 @@ And change it to:
 Outside of oTree, you can create a script that adds a unique `participant_label` to each start link as indicated above. Then, when the link is opened, the oTree server will register that participant label for that participant.
 
 ### Monitor sessions
-While your session is ongoing, you can monitor the live progress in the admin interface. The admin tables update live, highlighting changes as they occur. The most useful table to monitor is "Session participants", which gives you a summary of all the participants' progress. You can also click the "participants" table of each app to see the details of all the data being entered in your subsessions.
+While your session is ongoing, you can monitor the live progress in the admin interface.
 
 # Online experiments
 
@@ -921,14 +914,15 @@ might have the ID in group 1, while agents have 2).
 
 ##Progress-Monitor 
 
-The progress monitor allows the researcher to monitor the progress of an experiment. It features a display that can be **filtered** and **sorted**, for example by computer name or group. The experimenter can see the progress of all participants, including their current action and taken decisions. Updates are shown as they happen **in real time** and cells that change are highlighted in yellow. Because the progress monitor is web-based, **multiple collaborators can simultaneously open it on several devices on premises or at remote locations**. 
+The progress monitor allows the researcher to monitor the progress of an experiment.
+The experimenter can see the progress of all participants, including their current action and taken decisions.
+Updates are shown as they happen **in real time** and cells that change are highlighted in yellow.
+Because the progress monitor is web-based, **multiple collaborators can simultaneously open it on several devices
+on premises or at remote locations**.
 
 ![](http://i.imgur.com/0nYKnDp.png)
 
 
-## Session Interface  
-
-The session interface is an optional feature convenient in some experiments. In many experimental settings, in addition to monitoring, **an experimenter needs to receive instructions or provide input for the experiment**. The session interface can instruct an experimenter on what to do next and show text to be read aloud. The session interface can also request input from the experimenter at a specic point in the session. For example, in an Ellsberg experiment, the experimenter might roll an opaque urn prior to the session; the session interface will remind the experimenter to show the urn to the participants, tell the experimenter when all participants have selected their bets, and instruct her to draw a ball from the urn. It will then ask the drawn color, so that oTree can calculate participants' payoffs.
 
 # Deploying to a server
 

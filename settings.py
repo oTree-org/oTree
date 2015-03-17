@@ -1,27 +1,31 @@
 import os
 
 import dj_database_url
+from boto.mturk.qualification import (LocaleRequirement,
+                                      PercentAssignmentsApprovedRequirement,
+                                      NumberHitsApprovedRequirement)
 
 import otree.settings
+#from otree.common import RealWorldCurrency
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-if os.environ.get('OTREE_PRODUCTION'):
-    DEBUG = False
-else:
+if os.environ.get('OTREE_PRODUCTION') in {None, '', '0'}:
     DEBUG = True
-
-if os.environ.get('IS_OTREE_DOT_ORG'):
-    ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
-    SECRET_KEY = os.environ['OTREE_SECRET_KEY']
 else:
+    DEBUG = False
+
+if os.environ.get('IS_OTREE_DOT_ORG') in {None, '', '0'}:
     ADMIN_PASSWORD = 'otree'
     # don't share this with anybody.
     # Change this to something unique (e.g. mash your keyboard),
     # and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzz'
+else:
+    ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
+    SECRET_KEY = os.environ['OTREE_SECRET_KEY']
 
 
 DATABASES = {
@@ -34,7 +38,7 @@ DATABASES = {
 CREATE_DEFAULT_SUPERUSER = True
 ADMIN_USERNAME = 'admin'
 AUTH_LEVEL = os.environ.get('OTREE_AUTH_LEVEL')
-ACCESS_CODE_FOR_OPEN_SESSION = 'idd1610'
+ACCESS_CODE_FOR_DEFAULT_SESSION = 'idd1610'
 
 # settting for intergration with AWS Mturk
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
@@ -43,8 +47,8 @@ MTURK_HOST = 'mechanicalturk.amazonaws.com'
 MTURK_SANDBOX_HOST = 'mechanicalturk.sandbox.amazonaws.com'
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
-PAYMENT_CURRENCY_CODE = 'EUR'
-USE_POINTS = True
+REAL_WORLD_CURRENCY_CODE = 'EUR'
+USE_POINTS = False
 
 
 # e.g. en-gb, de-de, it-it, fr-fr.
@@ -61,10 +65,54 @@ if 'SENTRY_DSN' in os.environ:
         'raven.contrib.django.raven_compat',
     ]
 
+DEMO_PAGE_INTRO_TEXT = """
+<ul>
+    <li>
+        <a href="https://github.com/oTree-org/otree" target="_blank">
+            Source code
+        </a> for the below games.
+    </li>
+    <li>
+        <a href="http://www.otree.org/" target="_blank">
+            oTree homepage
+        </a>.
+    </li>
+</ul>
+<p>
+    Below are various games implemented with oTree. These games are all open
+    source, and you can modify them as you wish to create your own variations.
+    Click one to learn more and play.
+</p>
+"""
+
+
+PAGE_FOOTER = 'Powered By <a href="http://otree.org" target="_blank">oTree</a>'
+
+# list of extra string to positioning you experiments on search engines
+# Also if you want to add a particular set of SEO words to a particular page
+# add to template context "page_seo" variable.
+# See: http://en.wikipedia.org/wiki/Search_engine_optimization
+SEO = ()
+
+
+WSGI_APPLICATION = 'wsgi.application'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# from here on are qualifications requirements for workers
+# see description for requirements on Amazon Mechanical Turk website:
+# http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_QualificationRequirementDataStructureArticle.html
+# and also in docs for boto:
+# https://boto.readthedocs.org/en/latest/ref/mturk.html?highlight=mturk#module-boto.mturk.qualification
+
+MTURK_WORKER_REQUIREMENTS = [
+    LocaleRequirement("EqualTo", "US"),
+    PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
+    NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5)
+]
+
 SESSION_TYPE_DEFAULTS = {
-    'money_per_point': 0.01,
-    'demo_enabled': True,
-    'fixed_pay': 10.00, # this is payment currency (not points)
+    'real_world_currency_per_point': 0.01,
+    'fixed_pay': 10.00,
     'num_bots': 12,
     'doc': "",
     'group_by_arrival_time': False,
@@ -73,23 +121,31 @@ SESSION_TYPE_DEFAULTS = {
         'title': 'Title for your experiment',
         'description': 'Description for your experiment',
         'frame_height': 500,
-        'landing_page_template': 'global/mturk_landing.html',
+        'landing_page_template': 'global/MTurkLanding.html',
+        'minutes_allotted_per_assignment': 60,
+        'expiration_hours': 7*24, # 7 days
     },
-    'mturk_sandbox': True,
 }
 
 SESSION_TYPES = [
     {
         'name': 'demo_game',
         'display_name': "Demo Game",
-        'num_demo_participants':  1,
+        'num_demo_participants': 1,
+        'num_bots': 1,
         'app_sequence': ['demo_game'],
     },
     {
         'name': 'public_goods',
         'display_name': "Public Goods",
-        'num_demo_participants':  3,
+        'num_demo_participants': 3,
         'app_sequence': ['public_goods', 'payment_info'],
+    },
+    {
+        'name': 'public_goods_demo',
+        'display_name': "Public Goods DEMO",
+        'num_demo_participants': 3,
+        'app_sequence': ['public_goods_demo'],
     },
     {
         'name': 'principal_agent',
@@ -186,7 +242,7 @@ SESSION_TYPES = [
     {
         'name': 'stackelberg_competition',
         'display_name': "Stackelberg Competition",
-        'money_per_point': 0.01,
+        'real_world_currency_per_point': 0.01,
         'num_demo_participants': 2,
         'app_sequence': [
             'stackelberg_competition', 'survey_sample', 'payment_info'
@@ -229,77 +285,20 @@ SESSION_TYPES = [
     {
         'name': 'real_effort',
         'display_name': "Real-effort transcription task",
-        'num_demo_participants':  1,
+        'num_demo_participants': 1,
         'app_sequence': [
             'real_effort',
         ],
     },
-
-    {
-        'name': 'matrix_symmetric',
-        'display_name': "Symmetric Matrix Game DEMO",
-        'num_demo_participants':  2,
-        'app_sequence': [
-            'matrix_symmetric', 'payment_info'
-        ],
-    },
-    {
-        'name': 'matrix_asymmetric',
-        'display_name': "Asymmetric Matrix Game DEMO",
-        'num_demo_participants':  2,
-        'app_sequence': [
-            'matrix_asymmetric','payment_info'
-        ],
-    },
     {
         'name': 'lemon_market',
-        'display_name': "Lemon Market Game DEMO",
-        'num_demo_participants':  3,
+        'display_name': "Lemon Market Game",
+        'num_demo_participants': 3,
         'app_sequence': [
-            'lemon_market','payment_info'
+            'lemon_market', 'payment_info'
         ],
     },
-    {
-        'name': 'cournot_competition',
-        'display_name': "Cournot competititon DEMO",
-        'num_demo_participants':  2,
-        'app_sequence': [
-            'cournot_competition','payment_info'
-        ]
-    }
 ]
 
-
-DEMO_PAGE_INTRO_TEXT = """
-<ul>
-    <li>
-        <a href="https://github.com/oTree-org/otree" target="_blank">
-            Source code
-        </a> for the below games.
-    </li>
-    <li>
-        <a href="http://www.otree.org/" target="_blank">
-            oTree homepage
-        </a>.
-    </li>
-</ul>
-<p>
-    Below are various games implemented with oTree. These games are all open
-    source, and you can modify them as you wish to create your own variations.
-    Click one to learn more and play.
-</p>
-"""
-
-
-PAGE_FOOTER = 'Powered By <a href="http://otree.org" target="_blank">oTree</a>'
-
-# list of extra string to positioning you experiments on search engines
-# Also if you want to add a particular set of SEO words to a particular page
-# add to template context "page_seo" variable.
-# See: http://en.wikipedia.org/wiki/Search_engine_optimization
-SEO = ()
-
-
-WSGI_APPLICATION = 'wsgi.application'
 
 otree.settings.augment_settings(globals())
