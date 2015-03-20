@@ -189,11 +189,7 @@ At the bottom of your `views.py`, you must have a `page_sequence` variable that 
      page_sequence=[
         Start, Offer, Accept, Results]
 
-Each `Page` class has methods and attributes that define things like:
-* the condition for displaying or skipping the page (`is_displayed`)
-* what HTML template to display (`template_name`, t
-* what dynamic variables to pass to the template (`vars_for_template`)
-* what form fields to include on the page for the user to input (`form_model` and `form_fields`)
+Each `Page` class has these methods and attributes:
 
 #### `def vars_for_template(self)`
 
@@ -360,7 +356,10 @@ If you specify a `choices` argument, the default form widget will be a select bo
 
     year_in_school = models.CharField(choices=['Freshman', 'Sophomore', 'Junior', 'Senior'])
 
-If you would like a specially formatted value displayed to the user that is different from the values stored internally, you can return a list consisting itself of tuples of two items (e.g. [(A, B), (A, B) ...]) to use as choices for this field. The first element in each tuple is the actual value to be set on the model, and the second element is the human-readable name. For example:
+If you would like a specially formatted value displayed to the user that is different from the values stored internally,
+you can return a list consisting itself of tuples of two items (e.g. [(A, B), (A, B) ...]) to use as choices for this field.
+The first element in each tuple is the actual value to be set on the model, and the second element is the human-readable name.
+For example:
 
     year_in_school = models.CharField(choices=[
             ('FR', 'Freshman'),
@@ -368,6 +367,9 @@ If you would like a specially formatted value displayed to the user that is diff
             ('JR', 'Junior'),
             ('SR', 'Senior'), 
     ])
+
+After the field has been set, you can access the human-readable name like this:
+`self.get_year_in_school_display() # returns e.g. 'Sophomore'`
 
 If a field is optional, you can do:
 
@@ -763,9 +765,9 @@ If player 1 in a group sees different pages from player 2, you can define separa
 
 To get the maximal benefit, your bot should thoroughly test all parts of your code. Here are some ways you can test your app:
 
-* Ensure that it correctly rejects invalid input. For example, if you ask the user to enter a number that is a multiple of 3, you can verify that entering 4 will be rejected by using the `submit_with_invalid_input` method as follows. This line of code will raise an error if the submission is _accepted_:
+* Ensure that it correctly rejects invalid input. For example, if you ask the user to enter a number that is a multiple of 3, you can verify that entering 4 will be rejected by using the `submit_invalid` method as follows. This line of code will raise an error if the submission is _accepted_:
 
-    `self.submit_with_invalid_input(views.EnterNumber, {'multiple_of_3': 4})`
+    `self.submit_invalid(views.EnterNumber, {'multiple_of_3': 4})`
 
 * You can put assert statements in the bot's `validate_play()` method to check that the correct values are being stored in the database. For example, if a player's bonus is defined to be 100 minus their offer, you can check your program is calculating it correctly as follows:
 
@@ -789,7 +791,7 @@ oTree comes with an admin interface, so that experimenters can manage sessions, 
 Open your browser to the root url of your web application. If you're developing locally, this will be http://127.0.0.1:8000/.
 
 
-# Lab Experiments 
+## Lab Experiments
 
 ### Creating sessions
 
@@ -841,23 +843,23 @@ Outside of oTree, you can create a script that adds a unique `participant_label`
 ### Monitor sessions
 While your session is ongoing, you can monitor the live progress in the admin interface. The admin tables update live, highlighting changes as they occur. The most useful table to monitor is "Session participants", which gives you a summary of all the participants' progress. You can also click the "participants" table of each app to see the details of all the data being entered in your subsessions.
 
-# Online experiments
+## Authenticaton
+
+When you first install oTree, The entire admin interface is accessible without a password.
+However, when you are ready to launch your oTree app, you should password protect the admin so that visitors and participants cannot access sensitive data.
+
+If you are launching an experiment and want visitors to only be able to play your app if you provided them with a start link,
+set the environment variable `OTREE_AUTH_LEVEL` to `EXPERIMENT`.
+
+If you would like to put your site online in public demo mode where anybody can play a demo version of your game,
+set `OTREE_AUTH_LEVEL` to `DEMO`. This will allow people to play in demo mode, but not access the full admin interface.
+
+## Online experiments
 
 Experiments can be launched to participants playing over the internet, in a similar way to how experiments are launched the lab. Login to the admin, create a session, then distribute the links to participants via email or a website.
 
 In a lab, you usually can start all participants at the same time, but this is often not possible online, because some participants might click your link hours after other participants. If your game requires players to play in groups, you may want to set the `group_by_arrival_time` key in  session type dictionary to `True`. This will group players in the order in which they arrive to your site, rather than randomly, so that players who arrive around the same time play with each other.
 
-# oTree programming For Django Devs
-
-
-## Intro to oTree for Django developers
-
-### Differences between oTree and Django
-
-#### Models
-* Field labels should go in the template formfield, rather than the model field's `verbose_name`.
-* `null=True` and `default=None` are not necessary in your model field declarations; in oTree fields are null by default.
-* On `CharField`s, `max_length` is not required.
 
 ## Kiosk Mode 
 
@@ -897,23 +899,26 @@ There are several apps for using Kiosk mode on Mac, for instance: [eCrisper](htt
 
 ## Payment PDF
 
-At the end of your session, you can open and print a page that lists all the participants and how much they should be paid. This is in the Sessions table, in the "payments page" column.
+At the end of your session, you can open and print a page that lists all the participants and how much they should be paid.
 
 ![](http://i.imgur.com/nSMlWcY.png)
 
 ## Export Data
 
-You can download your raw data in text format (CSV) so that you can view and analyze it with a program like Excel, Stata, or R. Go to the "Export data" table and choose your app.
-
-You can also download a documentation file for each app, which explains the meaning of the different variable names. It is auto-generated from your source code. Whatever you specify in a model field's `doc=` argument will show up here.
+You can download your raw data in text format (CSV) so that you can view and analyze it with a program like Excel, Stata, or R.
 
 ## Autogenerated documentation
 
-Each model field you define can also have a `doc=` argument. Any string you add here will be included in the autogenerated documentation file, which can be downloaded through the data export page in the admin.
+Each model field you define can also have a `doc=` argument.
+Any string you add here will be included in the autogenerated documentation file,
+which can be downloaded through the data export page in the admin.
 
 ## Debug Info
 
-Any application can be run so that that debug information is displayed on the bottom of all screens. The debug information consists of the ID in group, the group, the player, the participant label, and the session code. The session code and participant label are two randomly generated alphanumeric codes uniquely identifying the session and participant. The ID in group identies the role of the player (e.g., in a principal-agent game, principals
+Any application can be run so that that debug information is displayed on the bottom of all screens.
+The debug information consists of the ID in group, the group, the player, the participant label, and the session code.
+The session code and participant label are two randomly generated alphanumeric codes uniquely identifying the session and participant.
+The ID in group identifes the role of the player (e.g., in a principal-agent game, principals
 might have the ID in group 1, while agents have 2).
 
 ![](http://i.imgur.com/DZsyhQf.png)
@@ -981,7 +986,8 @@ If it's a production website, you should set the environment variable `OTREE_PRO
 
 ## Database setup
 
-We generally recommend using PostgreSQL as your production database. You can create your database with a command like this:
+oTree is most frequently used with PostgreSQL as the production database.
+You can create your database with a command like this:
 
 `psql -c 'create database django_db;' -U postgres`
 
@@ -993,11 +999,16 @@ Then, you should set the following environment variable, so that it can be read 
 # Amazon Mechanical Turk
 
 ## Overview
-oTree provides integration with <strong><a href="https://www.mturk.com/mturk/welcome" target="_blank">Amazon Mechanical Turk (AMT)</a></strong>. oTree authenticates users visiting from the AMT service, and then sends payments to the correct AMT account. Researchers, however, must have an employer account with AMT, which currently requires a U.S. address and bank account.
+oTree provides integration with <strong><a href="https://www.mturk.com/mturk/welcome" target="_blank">Amazon Mechanical Turk (AMT)</a></strong>.
 
-Note: AMT support is currently under construction. Instructions online to deploy your app to AMT will be added later.
+You can publish your game to Amazon mechanical Turk directly from oTree's admin interface.
+Then, workers on mechanical Turk can accept and play your app as an MTurk HIT and get paid
+a participation fee as well as bonuses they earned by playing your game.
+
 
 ## AWS credentials
+Researchers must have an employer account with AMT, which currently requires a U.S. address and bank account.
+
 To make payments to participants you need to generate
 `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
 [here](https://console.aws.amazon.com/iam/home?#security_credential):
@@ -1008,3 +1019,54 @@ On heroku add generated values to your environment variables:
 
     heroku config:set AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID --app=YOUR_APP_NAME
     heroku config:set AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY --app=YOUR_APP_NAME
+
+
+## Making your session work on MTurk
+
+You should look in `settings.py` for all settings related to Mechanical Turk (do a search for "mturk").
+You can edit the properties of the HIT such as the title and keywords,
+as well as the qualifications required to participate.
+The monetary reward paid to workers is the `fixed_pay` for your `session_type`.
+
+When you publish your HIT to MTurk, it will be visible to workers.
+When a worker clicks on the link to take part in the HIT, they will see the MTurk interface,
+with your app loaded inside a frame (as an `ExternalQuestion`).
+Initially, they will be in preview mode, and will see the `preview_template` you specify in `settings.py`.
+After they accept the HIT, they will see the first page of your session,
+and be able to play your session while it is embedded inside a frame in the MTurk worker interface.
+
+The only modification you should make to your app for it to work on AMT is to add a `{% next_button %}`
+to the final page that your participants see. When the participant clicks this button,
+they will be directed back to the mechanical Turk website and their work will be submitted.
+
+After workers have completed the session, you can click on the "payments" Tab for your session.
+Here, you will be able to approve submissions, and also pay the bonuses that workers earned in your game.
+
+## Multiplayer games
+
+Games that involve synchronous interaction between participants (i.e. wait pages) can be tricky on mechanical Turk.
+First, you should set `group_by_arrival_time` as `True` so that participants are assigned to groups in the order in which they arrive,
+to minimize unnecessary waiting time.
+
+However, there is still the issue that if one participant drops out then other participants might be stuck on a wait page.
+One way to mitigate this attrition problem is to use a "lock-in" task.
+In other words, before your multiplayer game, you can have a subsession that is a single-player app and takes some effort to complete.
+The idea is that a participant takes the effort to complete this initial task, they are less likely to drop out after that point.
+Then, the first few participants to finish the lock in task will be assigned to the same group in the next subsession,
+which is the multiplayer game.
+
+An upcoming feature in oTree that has not yet been implemented is the ability to auto-submit pages
+if the participant drops out or does not complete the page in time.
+This should enable the gameplay to proceed even if there is attrition.
+
+# oTree programming For Django Devs
+
+
+## Intro to oTree for Django developers
+
+### Differences between oTree and Django
+
+#### Models
+* Field labels should go in the template formfield, rather than the model field's `verbose_name`.
+* `null=True` and `default=None` are not necessary in your model field declarations; in oTree fields are null by default.
+* On `CharField`s, `max_length` is not required.

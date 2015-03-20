@@ -121,7 +121,7 @@ SESSION_TYPE_DEFAULTS = {
         'title': 'Title for your experiment',
         'description': 'Description for your experiment',
         'frame_height': 500,
-        'landing_page_template': 'global/MTurkLanding.html',
+        'preview_template': 'global/MTurkPreview.html',
         'minutes_allotted_per_assignment': 60,
         'expiration_hours': 7*24, # 7 days
     },
