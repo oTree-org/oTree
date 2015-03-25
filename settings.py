@@ -138,13 +138,13 @@ SESSION_TYPES = [
         'name': 'principal_agent',
         'display_name': "Principal Agent",
         'num_demo_participants': 2,
-        'app_sequence': ['principal_agent', 'feedback', 'payment_info'],
+        'app_sequence': ['principal_agent', 'payment_info'],
     },
     {
         'name': 'prisoner',
         'display_name': "Prisoner's Dilemma",
         'num_demo_participants': 2,
-        'app_sequence': ['prisoner', 'feedback', 'survey_sample', 'payment_info'],
+        'app_sequence': ['prisoner', 'survey_sample', 'payment_info'],
     },
     {
         'name': 'cournot_competition',
@@ -158,26 +158,26 @@ SESSION_TYPES = [
         'name': 'trust',
         'display_name': "Trust Game",
         'num_demo_participants': 2,
-        'app_sequence': ['trust', 'feedback', 'payment_info'],
+        'app_sequence': ['trust', 'payment_info'],
     },
     {
         'name': 'ultimatum',
         'display_name': "Ultimatum",
         'num_demo_participants': 2,
-        'app_sequence': ['ultimatum', 'feedback', 'payment_info'],
+        'app_sequence': ['ultimatum', 'payment_info'],
     },
     {
         'name': 'ultimatum_strategy',
         'display_name': "Ultimatum (strategy method treatment)",
         'num_demo_participants': 2,
-        'app_sequence': ['ultimatum', 'feedback', 'payment_info'],
+        'app_sequence': ['ultimatum', 'payment_info'],
         'treatment': 'strategy',
     },
     {
         'name': 'ultimatum_non_strategy',
         'display_name': "Ultimatum (direct response treatment)",
         'num_demo_participants': 2,
-        'app_sequence': ['ultimatum', 'feedback', 'payment_info'],
+        'app_sequence': ['ultimatum', 'payment_info'],
         'treatment': 'direct_response',
     },
 
@@ -185,7 +185,7 @@ SESSION_TYPES = [
         'name': 'dictator',
         'display_name': "Dictator Game",
         'num_demo_participants': 2,
-        'app_sequence': ['dictator', 'feedback', 'payment_info'],
+        'app_sequence': ['dictator', 'payment_info'],
     },
     {
         'name': 'matching_pennies',
@@ -199,7 +199,7 @@ SESSION_TYPES = [
         'name': 'traveler_dilemma',
         'display_name': "Traveler's Dilemma",
         'num_demo_participants': 2,
-        'app_sequence': ['traveler_dilemma', 'feedback', 'payment_info'],
+        'app_sequence': ['traveler_dilemma', 'payment_info'],
     },
     {
         'name': 'survey',
@@ -245,14 +245,14 @@ SESSION_TYPES = [
         'name': 'volunteer_dilemma',
         'display_name': "Volunteer's Dilemma",
         'num_demo_participants': 3,
-        'app_sequence': ['volunteer_dilemma', 'feedback', 'payment_info'],
+        'app_sequence': ['volunteer_dilemma', 'payment_info'],
     },
     {
         'name': 'bertrand_competition',
         'display_name': "Bertrand Competition",
         'num_demo_participants': 2,
         'app_sequence': [
-            'bertrand_competition', 'feedback', 'payment_info'
+            'bertrand_competition', 'payment_info'
         ],
     },
     {
