@@ -129,13 +129,6 @@ SESSION_TYPE_DEFAULTS = {
 
 SESSION_TYPES = [
     {
-        'name': 'demo_game',
-        'display_name': "Demo Game",
-        'num_demo_participants': 1,
-        'num_bots': 1,
-        'app_sequence': ['demo_game'],
-    },
-    {
         'name': 'public_goods',
         'display_name': "Public Goods",
         'num_demo_participants': 3,
