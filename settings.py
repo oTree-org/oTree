@@ -144,14 +144,14 @@ SESSION_TYPES = [
         'name': 'prisoner',
         'display_name': "Prisoner's Dilemma",
         'num_demo_participants': 2,
-        'app_sequence': ['prisoner', 'survey_sample', 'payment_info'],
+        'app_sequence': ['prisoner', 'payment_info'],
     },
     {
         'name': 'cournot_competition',
         'display_name': "Cournot Competition",
         'num_demo_participants': 2,
         'app_sequence': [
-            'cournot_competition', 'survey_sample', 'payment_info'
+            'cournot_competition', 'payment_info'
         ],
     },
     {
@@ -192,7 +192,7 @@ SESSION_TYPES = [
         'display_name': "Matching Pennies",
         'num_demo_participants': 2,
         'app_sequence': [
-            'matching_pennies', 'survey_sample', 'payment_info'
+            'matching_pennies', 'payment_info'
         ],
     },
     {
@@ -218,7 +218,7 @@ SESSION_TYPES = [
         'display_name': "Beauty Contest",
         'num_demo_participants': 5,
         'num_bots': 5,
-        'app_sequence': ['beauty', 'survey_sample', 'payment_info'],
+        'app_sequence': ['beauty', 'payment_info'],
     },
     {
         'name': 'common_value_auction',
@@ -232,7 +232,7 @@ SESSION_TYPES = [
         'real_world_currency_per_point': 0.01,
         'num_demo_participants': 2,
         'app_sequence': [
-            'stackelberg_competition', 'survey_sample', 'payment_info'
+            'stackelberg_competition', 'payment_info'
         ],
     },
     {
@@ -259,14 +259,14 @@ SESSION_TYPES = [
         'name': 'stag_hunt',
         'display_name': "Stag Hunt",
         'num_demo_participants': 2,
-        'app_sequence': ['stag_hunt', 'survey_sample', 'payment_info'],
+        'app_sequence': ['stag_hunt', 'payment_info'],
     },
     {
         'name': 'battle_of_the_sexes',
         'display_name': "Battle of the Sexes",
         'num_demo_participants': 2,
         'app_sequence': [
-            'battle_of_the_sexes', 'survey_sample', 'payment_info'
+            'battle_of_the_sexes', 'payment_info'
         ],
     },
     {
