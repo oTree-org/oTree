@@ -98,7 +98,7 @@ class Results(Page):
         buyer = self.group.get_player_by_role('buyer')
 
         return {
-
+            'buyer': buyer,
             'seller': buyer.choice and self.group.get_player_by_id(
                 buyer.choice + 1)
                 }

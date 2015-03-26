@@ -205,7 +205,7 @@ SESSION_TYPES = [
         'name': 'survey',
         'display_name': "Survey",
         'num_demo_participants': 1,
-        'app_sequence': ['survey'],
+        'app_sequence': ['survey', 'payment_info'],
     },
     {
         'name': 'bargaining',
