@@ -104,6 +104,7 @@ class Results(Page):
         return {
             'fixed_pay_int': int(self.group.agent_fixed_pay),
             'received': self.player.payoff - Constants.bonus,
+            'effort_cost': cost_from_effort(self.group.agent_work_effort),
         }
 
 

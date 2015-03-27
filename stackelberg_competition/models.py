@@ -45,6 +45,8 @@ class Constants:
     fixed_pay = c(50)
     training_1_correct = c(300)
 
+    training_question_1 = "Suppose firm A first decided to produce 20 units. Then firm B would be informed of firm A's production and decided to produce 30 units. What would be the profit for firm B?"
+
 class Subsession(otree.models.BaseSubsession):
 
     pass

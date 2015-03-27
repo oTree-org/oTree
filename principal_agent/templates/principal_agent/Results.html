@@ -11,7 +11,7 @@
 
     <p>
         {% if group.contract_accepted %}
-            {% if participate_condition %}
+            {% if player.role == 'agent' %}
             You <strong>accepted</strong> the contract.
             {% else %}
             Participant B <strong>accepted</strong> your contract.
