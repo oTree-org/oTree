@@ -162,7 +162,7 @@ SESSION_TYPES = [
     },
     {
         'name': 'ultimatum',
-        'display_name': "Ultimatum",
+        'display_name': "Ultimatum (randomized: strategy vs. direct response)",
         'num_demo_participants': 2,
         'app_sequence': ['ultimatum', 'payment_info'],
     },
