@@ -7,8 +7,6 @@ from .models import Constants
 
 class Demographics(Page):
 
-    template_name = 'survey/Survey_Demo.html'
-
     form_model = models.Player
     form_fields = ['q_country',
                   'q_age',
@@ -16,8 +14,6 @@ class Demographics(Page):
 
 
 class CognitiveReflectionTest(Page):
-
-    template_name = 'survey/Survey_Cog.html'
 
     form_model = models.Player
     form_fields = ['crt_bat',

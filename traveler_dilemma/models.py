@@ -45,7 +45,7 @@ class Constants:
     reward = c(2)
 
     # Player's deduction for the higher claim
-    penalty = c(2)
+    penalty = reward
 
     # The maximum claim to be requested
     max_amount = c(100)
