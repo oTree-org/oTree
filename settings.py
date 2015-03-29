@@ -23,9 +23,11 @@ if os.environ.get('IS_OTREE_DOT_ORG') in {None, '', '0'}:
     # Change this to something unique (e.g. mash your keyboard),
     # and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzz'
+    PAGE_FOOTER = ''
 else:
     ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
     SECRET_KEY = os.environ['OTREE_SECRET_KEY']
+    PAGE_FOOTER = 'To report a bug, click the "?" in the bottom right corner.'
 
 
 DATABASES = {
@@ -84,9 +86,6 @@ DEMO_PAGE_INTRO_TEXT = """
     Click one to learn more and play.
 </p>
 """
-
-
-PAGE_FOOTER = 'Powered By <a href="http://otree.org" target="_blank">oTree</a>'
 
 # list of extra string to positioning you experiments on search engines
 # Also if you want to add a particular set of SEO words to a particular page
