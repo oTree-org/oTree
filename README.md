@@ -42,8 +42,6 @@ Sign up to be notified about updates to oTree [here](https://docs.google.com/for
     - [Forms in templates](#forms-in-templates)
     - [User Input Validation](#user-input-validation)
 - [Object model and `self`](#object-model-and-self)
-- [in your models.py](#in-your-modelspy)
-- [in your views.py](#in-your-viewspy)
 - [Groups and multiplayer games](#groups-and-multiplayer-games)
     - [Wait pages](#wait-pages)
     - [Group re-matching between rounds](#group-re-matching-between-rounds)
