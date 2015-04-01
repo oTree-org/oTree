@@ -20,6 +20,13 @@ chris@otree.org (you can also add me on Skype by searching this email address; p
 
 Please contact me if you find any bugs or issues in oTree or this documentation. oTree is under heavy development, therefore documentation might contain discrepancies with actual API.
 
+## Contributors
+
+* Gregor Muellegger (http://gremu.net/)
+* Juan B. Cabral
+* Alexander Schepanovski (https://github.com/Suor/)
+* Alexander Sandukovskiy
+
 ## Mailing list
 Sign up to be notified about updates to oTree [here](https://docs.google.com/forms/d/1jD4tocuX07DFYN2jDY2tcNXpkOCSqLhSOMboOgaVGtw/viewform)
 
