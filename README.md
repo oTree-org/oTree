@@ -23,6 +23,8 @@ Please contact me if you find any bugs or issues in oTree or this documentation.
 ## Mailing list
 Sign up to be notified about updates to oTree [here](https://docs.google.com/forms/d/1jD4tocuX07DFYN2jDY2tcNXpkOCSqLhSOMboOgaVGtw/viewform)
 
+# Docs
+
 - [Setup](#setup)
     - [Install Python](#install-python)
     - [oTree Launcher](#otree-launcher)
