@@ -170,8 +170,8 @@ In oTree, an app is a folder containing Python and HTML code. When you create yo
 ## Creating an app
 
 From the oTree launcher, click the "Terminal" button. (If the button is disabled, make sure you have stopped the server.) When the console window appears, type this:
-```
-    ./otree startapp your_app_name
+```bash
+./otree startapp your_app_name
 ```
 This will create a new app folder based on a oTree template, with most of the structure already set up for you.
 
@@ -241,7 +241,7 @@ Each page that your players see is defined by a `Page` class in `views.py`. (You
 For example, if 1 round of your game involves showing the player a sequence of 5 pages, your `views.py` should contain 5 page classes.
 
 At the bottom of your `views.py`, you must have a `page_sequence` variable that specifies the order in which players are routed through your pages. For example:
-```
+```python
 page_sequence=[Start, Offer, Accept, Results]
 ```
 Each `Page` class has these methods and attributes:
@@ -307,7 +307,7 @@ oTree uses Django's [template system] (https://docs.djangoproject.com/en/dev/top
 ### Template blocks
 
 Instead of writing the full HTML of your page, for example::
-
+```HTML+Django
     <!DOCTYPE html>
     <html lang="en">
         <head>
@@ -326,16 +326,16 @@ You define 2 blocks:
 
         {% next_button %}
     {% endblock %}
-
+```
 You may want to customize the appearance or functionality of all pages in your app (e.g. by adding custom CSS or JavaScript). To do this, edit the file `templates/global/Base.html`.
 
 ### Images, videos, CSS, JavaScript
 
 To include images, CSS, or even JavaScript in your pages, put the following line in your template below the ``extends`` block:
-
+```HTML+Django
     {% extends "Base.html" %}
     {% load staticfiles %}
-
+```
 And follow the [instructions here] (https://docs.djangoproject.com/en/dev/howto/static-files/).
 
 ### Plugins 
@@ -351,9 +351,9 @@ You can use it if you want a [custom style] (http://getbootstrap.com/css/), or a
 To use Bootstrap, usually you add a ``class=`` attributes to your HTML element.
 
 For example, the following HTML will create a "Success" alert:
-
+```HTML
     <div class="alert alert-success">Great job!</div>
-
+```
 #### HighCharts
 
 oTree comes pre-loaded with [HighCharts](http://www.highcharts.com/demo). You can find examples in the library of how to use it.
@@ -409,7 +409,7 @@ offer = models.PositiveIntegerField(min=12, max=24)
 ```
 If you specify a `choices` argument, the default form widget will be a select box with these choices instead of the standard text field.
 ```python
-    year_in_school = models.CharField(choices=['Freshman', 'Sophomore', 'Junior', 'Senior'])
+year_in_school = models.CharField(choices=['Freshman', 'Sophomore', 'Junior', 'Senior'])
 ```
 If you would like a specially formatted value displayed to the user that is different from the values stored internally,
 you can return a list consisting itself of tuples of two items (e.g. [(A, B), (A, B) ...]) to use as choices for this field.
@@ -640,7 +640,7 @@ In oTree apps, currency values have their own data type. You can define a curren
 
 Note: instead of using Python's built-in `range` function, you should use oTree's `currency_range` with currency values. For example, `currency_range(c(0), c(0.10), c(0.02))` returns something like:
 
-```
+```python
 [Money($0.00), Money($0.02), Money($0.04), Money($0.06), Money($0.08), Money($0.10)]
 ```
 ## Assigning payoffs
@@ -659,7 +659,7 @@ which takes as an argument the current session
 
 Let's say `real_world_currency_per_point = 0.02`
 
-```
+```python
 c(10) # evaluates to Currency(10 points)
 c(10).to_real_world_currency(self.session) # evaluates to $0.20
 ```
@@ -732,7 +732,7 @@ Subsession objects have an attribute `round_number`, which contains the current 
 
 Player objects have methods `in_previous_rounds()` and `in_all_rounds()` that returns a list of players representing the same participant in previous rounds of the same app. The difference is that `in_all_rounds()` includes the current round's player. For example, if you wanted to calculate a participant's payoff for all previous rounds of a game, plus the current one:
 ```python
-    cumulative_payoff = sum([p.payoff for p in self.player.in_all_rounds()])
+cumulative_payoff = sum([p.payoff for p in self.player.in_all_rounds()])
 ```
 Similarly, subsession objects have methods `in_previous_rounds()` and `in_all_rounds()` that work the same way.
 
@@ -783,15 +783,15 @@ This automated test system saves the programmer the effort of having to re-test 
 oTree tests entire sessions, rather that individual apps in isolation. This is to make sure the entire session runs, just as participants will play it in the lab.
 
 Let's say you want to test the session named `ultimatum` in `settings.py`. To test, click the "Terminal" button in the oTree launcher run the following command from your project's root directory:
-
-    ./otree test ultimatum_game
-
+```bash
+./otree test ultimatum_game
+```
 This command will test the session, with the number of participants specified in `settings.py`. For example, `num_bots` is 30, then when you run the tests, 30 bots will be instantiated and will play concurrently.
 
 To run tests for all sessions in `settings.py`, run:
-
-    ./otree test
-
+```bash
+./otree test
+```
 ### Writing tests
 
 Tests are contained in your app's `tests.py`. Fill out the `play_round()` method of your `PlayerBot` (and `ExperimenterBot` if you have experimenter pages). It should simulate each page submission. For example:
@@ -1014,7 +1014,7 @@ TODO: add content about
 
 ### To create new remote:
 
-```
+```bash
 heroku login  # if not yet
 heroku create
 git push heroku master
@@ -1022,21 +1022,21 @@ git push heroku master
 
 ### To add an existing remote:
 
-```
+```bash
 heroku git:remote -a myherokuapp
 ```
 
 ### Testing on Heroku
 
 To recreate and push to Heroku, run this command:
-```
+```bash
 git push myherokuapp master
 ./otree-heroku resetdb myherokuapp
 ```
 Where `myherokuapp` is the name of your Heroku app `myherokuapp.herokuapp.com`
 
 If it's a production website, you should set the environment variable `OTREE_PRODUCTION`, with:
-```
+```bash
 heroku config:set OTREE_PRODUCTION=1 --app myherokuapp
 ```
 
@@ -1082,10 +1082,10 @@ To make payments to participants you need to generate
 ![AWS key](http://i.imgur.com/dNhkOiA.png)
 
 On heroku add generated values to your environment variables:
-
-    heroku config:set AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID --app=YOUR_APP_NAME
-    heroku config:set AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY --app=YOUR_APP_NAME
-
+```bash
+heroku config:set AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID --app=YOUR_APP_NAME
+heroku config:set AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY --app=YOUR_APP_NAME
+```
 
 ## Making your session work on MTurk
 
