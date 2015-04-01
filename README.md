@@ -22,7 +22,7 @@ Please contact me if you find any bugs or issues in oTree or this documentation.
 
 ## Contributors
 
-* Gregor Muellegger (http://gremu.net/)
+* Gregor Muellegger (http://gremu.net/, https://github.com/gregmuellegger)
 * Juan B. Cabral
 * Alexander Schepanovski (https://github.com/Suor/)
 * Alexander Sandukovskiy
