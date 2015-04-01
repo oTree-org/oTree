@@ -1061,6 +1061,16 @@ You can publish your game to Amazon mechanical Turk directly from oTree's admin 
 Then, workers on mechanical Turk can accept and play your app as an MTurk HIT and get paid
 a participation fee as well as bonuses they earned by playing your game.
 
+## Server requirements
+
+Amazon MTurk requires the support of SSL by the server on which you deploy oTree.
+That is you should be able to access your server with the following link `https://www.myserver.com`.
+
+There are two Out of the Box solutions that oTree supports:
+
+* running your experiment on oTree local SSL server with the following command `./otree runsslserver`. This SSL 
+server is fully compatible with oTree and can be used interchangeably with regular server `./otree runserver`.
+* deploying oTree on Heroku. Heroku by default support SSL. Deploying to heroku is explained [here](#heroku).
 
 ## AWS credentials
 Researchers must have an employer account with AMT, which currently requires a U.S. address and bank account.
@@ -1097,6 +1107,19 @@ they will be directed back to the mechanical Turk website and their work will be
 
 After workers have completed the session, you can click on the "payments" Tab for your session.
 Here, you will be able to approve submissions, and also pay the bonuses that workers earned in your game.
+
+## Testing your hit in sandbox
+
+The Mechanical Turk Developer Sandbox is a simulated environment that lets
+you test Human Intelligence Tasks (HITs) prior to
+publication in the marketplace. This environment is available for both 
+[worker](https://workersandbox.mturk.com/mturk/welcome) and 
+[requester](https://requester.mturk.com/developer/sandbox).
+
+After publishing the HIT you can test it both as a worker and as a requester
+using the links provided on "MTurk" Tab of your session admin panel.
+These links will work only locally given that you created
+your HIT being on local server(`./otree runsslserver`).
 
 ## Multiplayer games
 
