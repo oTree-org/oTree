@@ -27,7 +27,7 @@ if os.environ.get('IS_OTREE_DOT_ORG') in {None, '', '0'}:
 else:
     ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
     SECRET_KEY = os.environ['OTREE_SECRET_KEY']
-    PAGE_FOOTER = 'To report a bug or mistake, click the "?" in the bottom right corner.'
+    PAGE_FOOTER = ''
 
 
 DATABASES = {
