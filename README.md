@@ -148,13 +148,13 @@ Each subsession is defined in an oTree app. The above session would require 3 di
 * Questionnaire
 
 You can define your session's properties in `SESSION_TYPES` in `settings.py`. Here are the parameters for the above example:
-
-         {
-        'name':'my_session',
-        'fixed_pay':10.00,
-        'app_sequence':['trust', 'ultimatum', 'questionnaire'],
-         }
-
+```python
+{
+    'name':'my_session',
+    'fixed_pay':10.00,
+    'app_sequence':['trust', 'ultimatum', 'questionnaire'],
+}
+```
 ## Participants and players
 
 In oTree, the terms "player" and "participant" have distinct meanings. The distinction between a participant and a player is the same as the distinction between a session and a subsession.
@@ -170,9 +170,9 @@ In oTree, an app is a folder containing Python and HTML code. When you create yo
 ## Creating an app
 
 From the oTree launcher, click the "Terminal" button. (If the button is disabled, make sure you have stopped the server.) When the console window appears, type this:
-
+```
     ./otree startapp your_app_name
-
+```
 This will create a new app folder based on a oTree template, with most of the structure already set up for you.
 
 Think of this as a skeleton to which you can add as much as you want.
@@ -216,12 +216,12 @@ For example, let's say you are programming an ultimatum game, where in each two-
 You need to define a Python class that defines the structure of this database table. You define what fields (columns) are in the table, what their data types are, and so on. When you run your experiment, the SQL tables will get automatically generated, and each time users visit, new rows will get added to the tables.
 
 Here is how to define the above table structure:
-
-    class Group(otree.models.BaseGroup):
-        ...
-        amount_offered = models.CurrencyField()
-        offer_accepted = models.BooleanField()
-
+```python
+class Group(otree.models.BaseGroup):
+    ...
+    amount_offered = models.CurrencyField()
+    offer_accepted = models.BooleanField()
+```
 oTree stores your data in standard database tables (SQL), which you can later export to CSV for analysis in Stata, R, Matlab, Excel, etc.
 
 ### Constants
@@ -241,10 +241,9 @@ Each page that your players see is defined by a `Page` class in `views.py`. (You
 For example, if 1 round of your game involves showing the player a sequence of 5 pages, your `views.py` should contain 5 page classes.
 
 At the bottom of your `views.py`, you must have a `page_sequence` variable that specifies the order in which players are routed through your pages. For example:
-
-     page_sequence=[
-        Start, Offer, Accept, Results]
-
+```
+page_sequence=[Start, Offer, Accept, Results]
+```
 Each `Page` class has these methods and attributes:
 
 #### `def vars_for_template(self)`
@@ -256,20 +255,20 @@ oTree automatically passes group, player, subsession, and Constants objects to t
 Should return True if the page should be shown, and False if the page should be skipped. Default behavior is to show the page.
 
 For example, if you only want a page to be shown to P2 in each group:
-
-    def is_displayed(self):
-        return self.player.id_in_group == 2
-
+```python
+def is_displayed(self):
+    return self.player.id_in_group == 2
+```
 #### `template_name`
 
 The name of the HTML template to display. This can be omitted if the template has the same name as the Page class.
 
 Example:
-
-    # This will look inside your app under the 'templates' directory, 
-    # to '/app_name/MyView.html'
-    template_name = 'app_name/MyView.html'
-    
+```python
+# This will look inside your app under the 'templates' directory, 
+# to '/app_name/MyView.html'
+template_name = 'app_name/MyView.html'
+```
 #### `timeout_seconds`
 
 Set to an integer that specifies how many seconds the user has to complete the page. After the time runs out, the page
@@ -405,32 +404,32 @@ For example, if you have a form containing a `PositiveIntegerField`,
 oTree will not let the user submit values that are not positive integers, like `-1`, `1.5`, or `hello`.
 
 Additionally, you can customize validation by passing extra arguments to your model field definition. For example, if you want to require a number to be between 12 and 24, you can specify it like this:
-
-    offer = models.PositiveIntegerField(min=12, max=24)
-
+```python
+offer = models.PositiveIntegerField(min=12, max=24)
+```
 If you specify a `choices` argument, the default form widget will be a select box with these choices instead of the standard text field.
-
+```python
     year_in_school = models.CharField(choices=['Freshman', 'Sophomore', 'Junior', 'Senior'])
-
+```
 If you would like a specially formatted value displayed to the user that is different from the values stored internally,
 you can return a list consisting itself of tuples of two items (e.g. [(A, B), (A, B) ...]) to use as choices for this field.
 The first element in each tuple is the actual value to be set on the model, and the second element is the human-readable name.
 For example:
-
-    year_in_school = models.CharField(choices=[
-            ('FR', 'Freshman'),
-            ('SO', 'Sophomore'),
-            ('JR', 'Junior'),
-            ('SR', 'Senior'), 
-    ])
-
+```python
+year_in_school = models.CharField(choices=[
+    ('FR', 'Freshman'),
+    ('SO', 'Sophomore'),
+    ('JR', 'Junior'),
+    ('SR', 'Senior'), 
+])
+```
 After the field has been set, you can access the human-readable name like this:
 `self.get_year_in_school_display() # returns e.g. 'Sophomore'`
 
 If a field is optional, you can do:
-
-    offer = models.PositiveIntegerField(blank=True)
-
+```python
+offer = models.PositiveIntegerField(blank=True)
+```
 ### Dynamic validation
 
 If you need a form's choices or validation logic to depend on some dynamic calculation, then you can instead define one of the below methods in your `Page` class in `views.py`.
@@ -438,10 +437,10 @@ If you need a form's choices or validation logic to depend on some dynamic calcu
 * `def {field_name}_choices(self)`
 
 Example:
-
-    def offer_choices(self):
-        return currency_range(0, self.player.endowment)
-
+```python
+def offer_choices(self):
+    return currency_range(0, self.player.endowment)
+```
 * `def {field_name}_min(self)`
 
 The dynamic alternative to `min`.
@@ -455,19 +454,19 @@ The dynamic alternative to `max`.
 This is the most flexible method for validating a field.
 
 For example, let's say your form has an integer field called `odd_negative`, which must be odd and negative: You would enforce this as follows:
-
-    def odd_negative_error_message(self, value):
-        if not (value < 0 and value % 2):
-            return 'Must be odd and negative'
-
+```python
+def odd_negative_error_message(self, value):
+    if not (value < 0 and value % 2):
+        return 'Must be odd and negative'
+```
 ### Validating multiple fields together
 
 Let's say you have 3 integer fields in your form whose names are `int1`, `int2`, and `int3`, and the values submitted must sum to 100. You would define the `error_message` method in your Page class:
-
-    def error_message(self, values):
-        if values["int1"] + values["int2"] + values["int3"] != 100:
-            return 'The numbers must add up to 100'
-
+```python
+def error_message(self, values):
+    if values["int1"] + values["int2"] + values["int3"] != 100:
+        return 'The numbers must add up to 100'
+```
 # Object model and `self`
 
 In oTree code, you will see the variable `self` all throughout the code. `self` is the way you refer to the current object in Python. It is therefore important to understand that the meaning of `self` is totally different depending on where you are in your code. For example, if you are inside a Page class, `self.player.payoff` refers to the current player object, but if you are inside the Player class in models.py, `self.player.payoff` is invalid because `self` is the player; you instead need to do `self.payoff`.
@@ -475,7 +474,7 @@ In oTree code, you will see the variable `self` all throughout the code. `self` 
 oTree's different objects are all connected; 
 here is an example of how to traverse these connections using the "dot" operator.
 
-```
+```python
 class Session(...) # this class is defined in oTree-core
     def example(self):
 
@@ -621,14 +620,14 @@ The text in the body of the wait page
 For the first round, the players are split into groups of `Constants.players_per_group`. This matching is random, unless you have set `group_by_arrival_time` set in your session type in settings.py, in which case players are grouped in the order they start the first round.
 
 In subsequent rounds, by default, the groups chosen are kept the same. If you would like to change this, you can define the grouping logic in `Subsession.before_session_starts`. For example, if you want players to be reassigned to the same groups but to have roles randomly shuffled around within their groups (e.g. so player 1 will either become player 2 or remain player 1), you would do this:
-
-    def before_session_starts(self):
-        if self.round_number > 1:
-            for group in self.get_groups():
-                players = group.get_players()
-                players.reverse()
-                group.set_players(players)
-
+```python
+def before_session_starts(self):
+    if self.round_number > 1:
+        for group in self.get_groups():
+            players = group.get_players()
+            players.reverse()
+            group.set_players(players)
+```
 A group has a method `set_players` that takes as an argument a list of the players to assign to that group, in order. Alternatively, a subsession has a method `set_groups` that takes as an argument a list of lists, with each sublist representing a group. You can use this to rearrange groups between rounds, but note that the `before_session_starts` method is run when the session is created, before players begin playing. Therefore you cannot use this method to shuffle players depending on the results of previous rounds (there is a separate technique for doing this which will be added to the documentation in the future).
 
 # Money and Points 
@@ -668,56 +667,55 @@ c(10).to_real_world_currency(self.session) # evaluates to $0.20
 # Treatments
 
 If you want to assign participants to different treatment groups, you can put the code in the subsession's `before_session_starts` method. For example, if you want some participants to have a blue background to their screen and some to have a red background, you would randomize as follows:
-
-    def before_session_starts(self):
-        # randomize to treatments
-        for player in self.get_players():
-            player.color = random.choice(['blue', 'red'])
-
+```python
+def before_session_starts(self):
+    # randomize to treatments
+    for player in self.get_players():
+        player.color = random.choice(['blue', 'red'])
+```
 (To actually set the screen color you would need to pass `player.color` to some CSS code in the template, but that part is omitted here.)
 
 If your game has multiple rounds, note that the above code gets executed for each round. So if you want to ensure that participants are assigned to the same treatment group each round, you should set the property at the participant level, which persists across subsessions, and only set it in the first round:
-
-    def before_session_starts(self):
-        if self.round_number == 1:
-            for p in self.get_players():
-                p.participant.vars['color'] = random.choice(['blue', 'red'])
-
+```python
+def before_session_starts(self):
+    if self.round_number == 1:
+        for p in self.get_players():
+            p.participant.vars['color'] = random.choice(['blue', 'red'])
+```
 Then, in the view code, you can access the participant's color with `self.player.participant.vars['color']`.
 
 ## Choosing which treatment to play
 
 In the above example, players got randomized to treatments. This is useful in a live experiment, but when you are testing your game, it is often useful to choose explicitly which treatment to play. Let's say you are developing the game from the above example and want to show your colleagues both treatments (red and blue). You can create 2 session types in settings.py that have the same keys to session type dictionary , except the `treatment` key:
 
-```
-SESSION_TYPES =  
-      [
-        {
-            'name':'my_game_blue',
-            # other arguments...
+```python
+SESSION_TYPES = [
+    {
+        'name':'my_game_blue',
+        # other arguments...
 
-            'treatment':'blue',
+        'treatment':'blue',
 
-        },
-        {
-           'name':'my_game_red',
-            # other arguments...
-            'treatment':'red',
-        },
-     ]
+    },
+    {
+        'name':'my_game_red',
+        # other arguments...
+        'treatment':'red',
+    },
+]
 ```
 
 Then in the `before_session_starts` method, you can check which of the 2 session types it is:
-
-    def before_session_starts(self):
-        for p in self.get_players():
-            if 'treatment' in self.session.session_type:
-                # demo mode
-                p.color = self.session.session_type['treatment']
-            else:
-                # live experiment mode
-                p.color = random.choice(['blue', 'red'])
-
+```python
+def before_session_starts(self):
+    for p in self.get_players():
+        if 'treatment' in self.session.session_type:
+            # demo mode
+            p.color = self.session.session_type['treatment']
+        else:
+            # live experiment mode
+            p.color = random.choice(['blue', 'red'])
+```
 Then, when someone visits your demo page, they will see the "red" and "blue" treatment, and choose to play one or the other. Of course, you can also have a third treatment that omits the `vars` argument and therefore randomizes participants to blue or red.
 
 # Rounds
@@ -733,9 +731,9 @@ Subsession objects have an attribute `round_number`, which contains the current 
 ## Accessing data from previous rounds
 
 Player objects have methods `in_previous_rounds()` and `in_all_rounds()` that returns a list of players representing the same participant in previous rounds of the same app. The difference is that `in_all_rounds()` includes the current round's player. For example, if you wanted to calculate a participant's payoff for all previous rounds of a game, plus the current one:
-
-        cumulative_payoff = sum([p.payoff for p in self.player.in_all_rounds()])
-
+```python
+    cumulative_payoff = sum([p.payoff for p in self.player.in_all_rounds()])
+```
 Similarly, subsession objects have methods `in_previous_rounds()` and `in_all_rounds()` that work the same way.
 
 ## Accessing data from previous subsessions in different apps
@@ -797,28 +795,28 @@ To run tests for all sessions in `settings.py`, run:
 ### Writing tests
 
 Tests are contained in your app's `tests.py`. Fill out the `play_round()` method of your `PlayerBot` (and `ExperimenterBot` if you have experimenter pages). It should simulate each page submission. For example:
-
-    self.submit(views.Start)
-    self.submit(views.Offer, {'offer_amount': 50})
-
+```python
+self.submit(views.Start)
+self.submit(views.Offer, {'offer_amount': 50})
+```
 Here, we first submit the `Start` page, which does not contain a form. The next page is `Offer`, which contains a form whose field is called `offer_amount`, which we set to `50`. This is a way of automating the task of 
 
 Your test bot must simulate playing the game correctly. The bot in the above example would raise an error if the page after `Start` was called `Instructions` rather than `Offer`, or if the field `offer_amount` was actually called something else. Your test bot is a specification of how you expect your app to work, so when it raises an error, it will alert you that your app is not behaving as intended.
 
 Rather than programming many separate bots, you program one bot that can play any variation of the game. For example, if you have different treatment groups that play different pages, you can branch by checking a variable on the treatment. For example, here is how you would play if one treatment group sees a "threshold" page but the other treatment group should see an "accept" page:
-
-        if self.group.threshold:
-            self.submit(views.Threshold, {'offer_accept_threshold': 30})
-        else:
-            self.submit(views.Accept, {'offer_accepted': True})
-
+```python
+if self.group.threshold:
+    self.submit(views.Threshold, {'offer_accept_threshold': 30})
+else:
+    self.submit(views.Accept, {'offer_accepted': True})
+```
 If player 1 in a group sees different pages from player 2, you can define separate methods `play_p1()` and `play_p2()` and branch like this:
-
-        if self.player.id_in_group == 0:
-            self.play_p1()
-        else:
-            self.play_p2()
-
+```python
+if self.player.id_in_group == 0:
+    self.play_p1()
+else:
+    self.play_p2()
+```
 To get the maximal benefit, your bot should thoroughly test all parts of your code. Here are some ways you can test your app:
 
 * Ensure that it correctly rejects invalid input. For example, if you ask the user to enter a number that is a multiple of 3, you can verify that entering 4 will be rejected by using the `submit_invalid` method as follows. This line of code will raise an error if the submission is _accepted_:
