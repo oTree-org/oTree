@@ -474,6 +474,27 @@ def error_message(self, values):
     if values["int1"] + values["int2"] + values["int3"] != 100:
         return 'The numbers must add up to 100'
 ```
+
+## Custom widgets and hidden fields
+
+It's not mandatory to use the `{% formfield %}` element; you can write the raw HTML for any form input if you wish
+to customize its behavior or appearance.
+Just include an `<input>` element with the same `name` attribute as the field. For example, if you want a hidden input,
+you can do this:
+
+```
+# models.py
+my_hidden_input = models.PositiveIntegerField()
+
+# views.py
+form_fields = ['my_hidden_input', 'some_other_field']
+
+# HTML template
+<input type="hidden" name="my_hidden_input" value="5" id="id_my_hidden_input"/>
+```
+
+Then you can use JavaScript to set the value of that input, by selecting the element by id "id_my_hidden_input" (e.g. with jQuery).
+
 # Object model and `self`
 
 In oTree code, you will see the variable `self` all throughout the code. `self` is the way you refer to the current object in Python. It is therefore important to understand that the meaning of `self` is totally different depending on where you are in your code. For example, if you are inside a Page class, `self.player.payoff` refers to the current player object, but if you are inside the Player class in models.py, `self.player.payoff` is invalid because `self` is the player; you instead need to do `self.payoff`.
