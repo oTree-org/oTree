@@ -6,7 +6,6 @@ from boto.mturk.qualification import (LocaleRequirement,
                                       NumberHitsApprovedRequirement)
 
 import otree.settings
-#from otree.common import RealWorldCurrency
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -37,7 +36,6 @@ DATABASES = {
 }
 
 
-CREATE_DEFAULT_SUPERUSER = True
 ADMIN_USERNAME = 'admin'
 AUTH_LEVEL = os.environ.get('OTREE_AUTH_LEVEL')
 ACCESS_CODE_FOR_DEFAULT_SESSION = 'idd1610'
@@ -45,8 +43,7 @@ ACCESS_CODE_FOR_DEFAULT_SESSION = 'idd1610'
 # settting for intergration with AWS Mturk
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-MTURK_HOST = 'mechanicalturk.amazonaws.com'
-MTURK_SANDBOX_HOST = 'mechanicalturk.sandbox.amazonaws.com'
+
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'USD'
@@ -86,16 +83,6 @@ DEMO_PAGE_INTRO_TEXT = """
     Click one to learn more and play.
 </p>
 """
-
-# list of extra string to positioning you experiments on search engines
-# Also if you want to add a particular set of SEO words to a particular page
-# add to template context "page_seo" variable.
-# See: http://en.wikipedia.org/wiki/Search_engine_optimization
-SEO = ()
-
-
-WSGI_APPLICATION = 'wsgi.application'
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # from here on are qualifications requirements for workers
 # see description for requirements on Amazon Mechanical Turk website:
