@@ -1036,11 +1036,10 @@ If you have been developing your project on your local PC, you should push your 
 
 ## Heroku
 
-TODO: add content about
+### First steps
+Create a free account on [Heroku](https://www.heroku.com/), and follow the installation instructions for Django.
 
-* add-ons (Sentry, PG backups)
-
-### To create new remote:
+### To create a new remote:
 
 ```bash
 heroku login  # if not yet
@@ -1058,12 +1057,13 @@ heroku git:remote -a myherokuapp
 
 To recreate and push to Heroku, run this command:
 ```bash
-git push myherokuapp master
+git push heroku master
 ./otree-heroku resetdb myherokuapp
 ```
 Where `myherokuapp` is the name of your Heroku app `myherokuapp.herokuapp.com`
 
-If it's a production website, you should set the environment variable `OTREE_PRODUCTION`, with:
+If it's a production website, you should set the environment variables (e.g. `OTREE_PRODUCTION` and `OTREE_AUTH_LEVEL`), like this:
+
 ```bash
 heroku config:set OTREE_PRODUCTION=1 --app myherokuapp
 ```
