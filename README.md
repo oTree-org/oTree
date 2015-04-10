@@ -650,11 +650,10 @@ For the first round, the players are split into groups of `Constants.players_per
 In subsequent rounds, by default, the groups chosen are kept the same. If you would like to change this, you can define the grouping logic in `Subsession.before_session_starts`. For example, if you want players to be reassigned to the same groups but to have roles randomly shuffled around within their groups (e.g. so player 1 will either become player 2 or remain player 1), you would do this:
 ```python
 def before_session_starts(self):
-    if self.round_number > 1:
-        for group in self.get_groups():
-            players = group.get_players()
-            players.reverse()
-            group.set_players(players)
+    for group in self.get_groups():
+        players = group.get_players()
+        players.reverse()
+        group.set_players(players)
 ```
 A group has a method `set_players` that takes as an argument a list of the players to assign to that group, in order. Alternatively, a subsession has a method `set_groups` that takes as an argument a list of lists, with each sublist representing a group. You can use this to rearrange groups between rounds, but note that the `before_session_starts` method is run when the session is created, before players begin playing. Therefore you cannot use this method to shuffle players depending on the results of previous rounds (there is a separate technique for doing this which will be added to the documentation in the future).
 
