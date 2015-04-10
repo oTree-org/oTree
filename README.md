@@ -18,7 +18,7 @@ This repository contains the games; the oTree core libraries are [here](https://
 ## Contact
 chris@otree.org (you can also add me on Skype by searching this email address; please mention oTree in your contact request)
 
-Please contact me if you find any bugs or issues in oTree or this documentation. oTree is under heavy development, therefore documentation might contain discrepancies with actual API.
+**Please contact me if any part of oTree does not work for you (or is unclear/confusing).**
 
 ## Contributors
 
