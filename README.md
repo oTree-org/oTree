@@ -93,7 +93,7 @@ Sign up to be notified about updates to oTree [here](https://docs.google.com/for
 
 oTree requires [Python 2.7](https://www.python.org/download/releases/2.7.7/).
 
-On Windows, select the option to add Python to your PATH while installing.
+Add Python to your Path environment variable.
 
 On Mac/Unix, it is very likely that Python is already installed. Open the Terminal and write ``python`` and hit Enter. If you get something like `-bash: python: command not found` you will have to install it yourself.
 
@@ -319,9 +319,11 @@ Instead of writing the full HTML of your page, for example::
     <html lang="en">
         <head>
         <!-- and so on... -->
-    
+```
+
 You define 2 blocks:
 
+```HTML+Django
     {% block title %}
         Title goes here
     {% endblock %}
@@ -334,13 +336,13 @@ You define 2 blocks:
         {% next_button %}
     {% endblock %}
 ```
+
 You may want to customize the appearance or functionality of all pages in your app (e.g. by adding custom CSS or JavaScript). To do this, edit the file `templates/global/Base.html`.
 
 ### Images, videos, CSS, JavaScript
 
-To include images, CSS, or even JavaScript in your pages, put the following line in your template below the ``extends`` block:
+To include images, CSS, or JavaScript in your pages, put the following line in your template below the ``extends`` block:
 ```HTML+Django
-    {% extends "Base.html" %}
     {% load staticfiles %}
 ```
 And follow the [instructions here] (https://docs.djangoproject.com/en/dev/howto/static-files/).
@@ -365,7 +367,7 @@ For example, the following HTML will create a "Success" alert:
 
 oTree comes pre-loaded with [HighCharts](http://www.highcharts.com/demo). You can find examples in the library of how to use it.
 
-To pass data like a list of values from Python to HighCharts, you can use the `otree.common.safe_json()` function. This converts to the correct JSON syntax and also uses "mark_safe" for the template.
+To pass data like a list of values from Python to HighCharts, you should first pass it through the `otree.common.safe_json()` function. This converts to the correct JSON syntax and also uses "mark_safe" for the template.
 
 Example:
 
@@ -406,7 +408,7 @@ _Example 1:_
 _Example 2:_
 ![](http://i.imgur.com/BtG8ZHX.png)
 
-oTree automatically validates all input submitted by the user.
+oTree automatically validates all input submitted by the user.t
 For example, if you have a form containing a `PositiveIntegerField`,
 oTree will not let the user submit values that are not positive integers, like `-1`, `1.5`, or `hello`.
 
@@ -419,16 +421,18 @@ If you specify a `choices` argument, the default form widget will be a select bo
 year_in_school = models.CharField(choices=['Freshman', 'Sophomore', 'Junior', 'Senior'])
 ```
 If you would like a specially formatted value displayed to the user that is different from the values stored internally,
-you can return a list consisting itself of tuples of two items (e.g. [(A, B), (A, B) ...]) to use as choices for this field.
+you can return a list consisting itself of tuples of two items to use as choices for this field.
 The first element in each tuple is the actual value to be set on the model, and the second element is the human-readable name.
 For example:
 ```python
-year_in_school = models.CharField(choices=[
-    ('FR', 'Freshman'),
-    ('SO', 'Sophomore'),
-    ('JR', 'Junior'),
-    ('SR', 'Senior'), 
-])
+year_in_school = models.CharField(
+    choices=[
+        ('FR', 'Freshman'),
+        ('SO', 'Sophomore'),
+        ('JR', 'Junior'),
+        ('SR', 'Senior'),
+    ]
+)
 ```
 After the field has been set, you can access the human-readable name like this:
 `self.get_year_in_school_display() # returns e.g. 'Sophomore'`
@@ -475,6 +479,13 @@ def error_message(self, values):
         return 'The numbers must add up to 100'
 ```
 
+## Widgets
+
+The full list of form input widgets offered by Django is
+[here](https://docs.djangoproject.com/en/1.7/ref/forms/widgets/#built-in-widgets).
+
+oTree additionally offers `RadioSelectHorizontal` and `SliderInput`.
+
 ## Custom widgets and hidden fields
 
 It's not mandatory to use the `{% formfield %}` element; you can write the raw HTML for any form input if you wish
@@ -493,7 +504,11 @@ form_fields = ['my_hidden_input', 'some_other_field']
 <input type="hidden" name="my_hidden_input" value="5" id="id_my_hidden_input"/>
 ```
 
-Then you can use JavaScript to set the value of that input, by selecting the element by id "id_my_hidden_input" (e.g. with jQuery).
+Then you can use JavaScript to set the value of that input, by selecting the element by id "id_my_hidden_input".
+
+For simple widgets you can use jQuery; for more complex or custom form interfaces,
+you can use a front-end framework with databinding, like React or Polymer.
+
 
 # Object model and `self`
 
@@ -561,9 +576,6 @@ class Group(otree.models.Group):
 
 class Player(otree.models.Player):
 
-    def my_custom_method(self):
-        pass
-
     def example(self):
 
         # current player object
@@ -609,7 +621,7 @@ You can follow pointers in a transitive manner. For example, if you are in the P
 
 In oTree, you can define multiplayer interactive games through the use of groups
 
-To do this, go to your app's models.py and set `Constants.players_per_group`. For example, in a 2-player game like an ultimatum game or prisoner's dilemma, you would set this to 2. If your app does not involve dividing the players into multiple groups, then set it to `None`. e.g. it is a single-player game or a game where everybody in the subsession interacts together as 1 group. In this case, `self.group.get_players()` will return everybody in the subsession. If you need your groups to have uneven sizes (for example, 2 vs 3), you can do this: `players_per_group=[2,3]`; in this case, if you have a session with 15 players, the group sizes would be [2,3,2,3,2,3]
+To do this, go to your app's models.py and set `Constants.players_per_group`. For example, in a 2-player game like an ultimatum game or prisoner's dilemma, you would set this to 2. If your app does not involve dividing the players into multiple groups, then set it to `None`. e.g. it is a single-player game or a game where everybody in the subsession interacts together as 1 group. In this case, `self.group.get_players()` will return everybody in the subsession. If you need your groups to have uneven sizes (for example, 2 vs 3), you can do this: `players_per_group=[2,3]`; in this case, if you have a session with 15 players, the group sizes would be `[2,3,2,3,2,3]`.
 
 Each player has a numeric field `id_in_group`. This is useful in multiplayer games where players have different roles, so that you can determine if the player is player 1, player 2, or so on.
 
@@ -661,9 +673,9 @@ A group has a method `set_players` that takes as an argument a list of the playe
 
 In many experiments, participants play for currency: either virtual points, or real money. oTree supports both scenarios. Participants can be awarded a fixed base pay (i.e. participation fee). In addition, in each subsession, they can be awarded an additional payoff.
 
-You can specify the payment currency in `settings.py`, by setting `PAYMENT_CURRENCY_CODE` to "USD", "EUR", "GBP", and so on. This means that all currency amounts the participants see will be automatically formatted in that currency, and at the end of the session when you print out the payments page, amounts will be displayed in that currency.
+You can specify the payment currency in `settings.py`, by setting `REAL_WORLD_CURRENCY_CODE` to "USD", "EUR", "GBP", and so on. This means that all currency amounts the participants see will be automatically formatted in that currency, and at the end of the session when you print out the payments page, amounts will be displayed in that currency.
 
-In oTree apps, currency values have their own data type. You can define a currency value with the `c()` function, e.g. `c(10)` or `c(0)`. Correspondingly, there is a special model field for currency values: `CurrencyField`. For example, each player has a `payoff` field, which is a `CurrencyField`. Currency values work just like numbers (you can do mathematical operations like addition, multiplication, etc), but when you pass them to an HTML template, they are automatically formatted as currency. For example, if you set `player.payoff = c(1.20)`, and then pass it to a template, it will be formatted as `$1.20` or `1,20 €`, etc., depending on your `PAYMENT_CURRENCY_CODE` and `LANGUAGE_CODE` settings.
+In oTree apps, currency values have their own data type. You can define a currency value with the `c()` function, e.g. `c(10)` or `c(0)`. Correspondingly, there is a special model field for currency values: `CurrencyField`. For example, each player has a `payoff` field, which is a `CurrencyField`. Currency values work just like numbers (you can do mathematical operations like addition, multiplication, etc), but when you pass them to an HTML template, they are automatically formatted as currency. For example, if you set `player.payoff = c(1.20)`, and then pass it to a template, it will be formatted as `$1.20` or `1,20 €`, etc., depending on your `REAL_WORLD_CURRENCY_CODE` and `LANGUAGE_CODE` settings.
 
 Note: instead of using Python's built-in `range` function, you should use oTree's `currency_range` with currency values. For example, `currency_range(c(0), c(0.10), c(0.02))` returns something like:
 
@@ -743,7 +755,9 @@ def before_session_starts(self):
             # live experiment mode
             p.color = random.choice(['blue', 'red'])
 ```
-Then, when someone visits your demo page, they will see the "red" and "blue" treatment, and choose to play one or the other. Of course, you can also have a third treatment that omits the `vars` argument and therefore randomizes participants to blue or red.
+
+Then, when someone visits your demo page, they will see the "red" and "blue" treatment, and choose to play one or the other.
+If the demo argument is not passed, the color is randomized.
 
 # Rounds
 
@@ -751,13 +765,15 @@ In oTree, "rounds" and "subsessions" are almost synonymous. The difference is th
 
 ## Round numbers
 
-You can specify how many rounds a game should be played in models.py, in `Comstants.num_rounds`.
+You can specify how many rounds a game should be played in models.py, in `Constants.num_rounds`.
 
 Subsession objects have an attribute `round_number`, which contains the current round number, starting from 1.
 
 ## Accessing data from previous rounds
 
-Player objects have methods `in_previous_rounds()` and `in_all_rounds()` that returns a list of players representing the same participant in previous rounds of the same app. The difference is that `in_all_rounds()` includes the current round's player. For example, if you wanted to calculate a participant's payoff for all previous rounds of a game, plus the current one:
+Player objects have methods `in_previous_rounds()` and `in_all_rounds()` that each return a list of players representing the same participant in previous rounds of the same app. The difference is that `in_all_rounds()` includes the current round's player.
+For example, if you wanted to calculate a participant's payoff for all previous rounds of a game, plus the current one:
+
 ```python
 cumulative_payoff = sum([p.payoff for p in self.player.in_all_rounds()])
 ```
@@ -765,7 +781,9 @@ Similarly, subsession objects have methods `in_previous_rounds()` and `in_all_ro
 
 ## Accessing data from previous subsessions in different apps
 
-The above method only works if the same app is repeated for multiple rounds. If you want to pass data between subsessions of different app types (e.g. the participant is in the questionnaire and needs to see data from their ultimatum game results), you should store this data in the participant object, which persists across subsessions. Each participant has a field called `vars`, which is a dictionary that can store any data about the player. For example, if you ask the participant's name in one subsession and you need to access it later, you would store it like this:
+`in_all_rounds()` only is useful when you need to access data from a previous round of the same app.
+If you want to pass data between subsessions of different app types (e.g. the participant is in the questionnaire and needs to see data from their ultimatum game results),
+you should store this data in the participant object, which persists across subsessions. Each participant has a field called `vars`, which is a dictionary that can store any data about the player. For example, if you ask the participant's name in one subsession and you need to access it later, you would store it like this:
 
 `self.player.participant.vars['first name'] = 'Chris'`
 
@@ -775,7 +793,7 @@ Then in a future subsession, you would retrieve this value like this:
 
 ## Global variables
 
-For session-wide globals, you can use `self.session.vars.
+For session-wide globals, you can use `self.session.vars`.
 
 This is a dictionary just like `participant.vars`.
 
