@@ -26,6 +26,7 @@ chris@otree.org (you can also add me on Skype by searching this email address; p
 * Juan B. Cabral
 * Alexander Schepanovski (https://github.com/Suor/)
 * Alexander Sandukovskiy
+* Som Datye
 
 ## Mailing list
 Sign up to be notified about updates to oTree [here](https://docs.google.com/forms/d/1jD4tocuX07DFYN2jDY2tcNXpkOCSqLhSOMboOgaVGtw/viewform)
