@@ -1195,3 +1195,38 @@ This should enable the gameplay to proceed even if there is attrition.
 * Field labels should go in the template formfield, rather than the model field's `verbose_name`.
 * `null=True` and `default=None` are not necessary in your model field declarations; in oTree fields are null by default.
 * On `CharField`s, `max_length` is not required.
+
+# Upgrading/reinstalling oTree
+
+There are several alternatives for upgrading or reinstalling oTree.
+
+(TODO: when to use which)
+
+## From-scratch reinstallation
+
+* On Windows: Browse to ``%APPDATA%` and delete the folder `otree-launcher`
+* On Mac/Linux: Delete the folder `~/.otree-launcher`
+* Re-download the launcher according to the instructions on [http://www.otree.org/download/](http://www.otree.org/download/)
+
+## In-place upgrade
+
+Start the launcher and click the "terminal" button to get your console. Then type:
+
+```
+git pull https://github.com/oTree-org/oTree.git master
+pip install -r requirements_base.txt
+./otree resetdb
+```
+
+Note: you may get merge conflicts if you have modified many files.
+
+## Upgrade oTree core libraries (minimal option)
+
+Start the launcher and click the "terminal" button to get your console. Then type:
+
+Modify `otree-core` version number in `requirements_base.txt` (the latest version is [here](https://github.com/oTree-org/oTree/blob/master/requirements_base.txt)),
+then run:
+
+```
+pip install -r requirements_base.txt
+```
