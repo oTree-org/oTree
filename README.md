@@ -1083,7 +1083,7 @@ Where `myherokuapp` is the name of your Heroku app `myherokuapp.herokuapp.com`
 If it's a production website, you should set the environment variables (e.g. `OTREE_PRODUCTION` and `OTREE_AUTH_LEVEL`), like this:
 
 ```bash
-heroku config:set OTREE_PRODUCTION=1 --app myherokuapp
+heroku config:set OTREE_PRODUCTION=1
 ```
 
 ## Database setup
@@ -1129,8 +1129,8 @@ To make payments to participants you need to generate
 
 On heroku add generated values to your environment variables:
 ```bash
-heroku config:set AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID --app=YOUR_APP_NAME
-heroku config:set AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY --app=YOUR_APP_NAME
+heroku config:set AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID
+heroku config:set AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY
 ```
 
 ## Making your session work on MTurk
