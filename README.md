@@ -90,21 +90,9 @@ Sign up to be notified about updates to oTree [here](https://docs.google.com/for
 
 # Setup
 
-## Install Python
+See the installation instructions [here](http://www.otree.org/download/).
 
-oTree requires [Python 2.7](https://www.python.org/download/releases/2.7.7/).
-
-Add Python to your Path environment variable.
-
-On Mac/Unix, it is very likely that Python is already installed. Open the Terminal and write ``python`` and hit Enter. If you get something like `-bash: python: command not found` you will have to install it yourself.
-
-## oTree Launcher
-
-You can download the oTree launcher executable [here](http://www.otree.org/download/). Unzip it to your desktop or another easy-to-access location.
-
-## Alternative manual setup
-
-As an alternative to the launcher, you can clone this repo and then run these commands:
+Or, clone this repo and run:
 
     pip install -r requirements_base.txt
     ./otree resetdb
