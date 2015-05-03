@@ -121,30 +121,29 @@ SESSION_TYPES = [
         'app_sequence': ['public_goods', 'payment_info'],
     },
     {
-        'name': 'principal_agent',
-        'display_name': "Principal Agent",
+        'name': 'trust',
+        'display_name': "Trust Game",
         'num_demo_participants': 2,
-        'app_sequence': ['principal_agent', 'payment_info'],
+        'app_sequence': ['trust', 'payment_info'],
+    },
+    {
+        'name': 'beauty',
+        'display_name': "Beauty Contest",
+        'num_demo_participants': 5,
+        'num_bots': 5,
+        'app_sequence': ['beauty', 'payment_info'],
+    },
+    {
+        'name': 'survey',
+        'display_name': "Survey",
+        'num_demo_participants': 1,
+        'app_sequence': ['survey', 'payment_info'],
     },
     {
         'name': 'prisoner',
         'display_name': "Prisoner's Dilemma",
         'num_demo_participants': 2,
         'app_sequence': ['prisoner', 'payment_info'],
-    },
-    {
-        'name': 'cournot_competition',
-        'display_name': "Cournot Competition",
-        'num_demo_participants': 2,
-        'app_sequence': [
-            'cournot_competition', 'payment_info'
-        ],
-    },
-    {
-        'name': 'trust',
-        'display_name': "Trust Game",
-        'num_demo_participants': 2,
-        'app_sequence': ['trust', 'payment_info'],
     },
     {
         'name': 'ultimatum',
@@ -166,7 +165,40 @@ SESSION_TYPES = [
         'app_sequence': ['ultimatum', 'payment_info'],
         'treatment': 'direct_response',
     },
-
+    {
+        'name': 'battle_of_the_sexes',
+        'display_name': "Battle of the Sexes",
+        'num_demo_participants': 2,
+        'app_sequence': [
+            'battle_of_the_sexes', 'payment_info'
+        ],
+    },
+    {
+        'name': 'vickrey_auction',
+        'display_name': "Vickrey Auction",
+        'num_demo_participants': 3,
+        'app_sequence': ['vickrey_auction', 'payment_info'],
+    },
+    {
+        'name': 'volunteer_dilemma',
+        'display_name': "Volunteer's Dilemma",
+        'num_demo_participants': 3,
+        'app_sequence': ['volunteer_dilemma', 'payment_info'],
+    },
+    {
+        'name': 'cournot_competition',
+        'display_name': "Cournot Competition",
+        'num_demo_participants': 2,
+        'app_sequence': [
+            'cournot_competition', 'payment_info'
+        ],
+    },
+    {
+        'name': 'principal_agent',
+        'display_name': "Principal Agent",
+        'num_demo_participants': 2,
+        'app_sequence': ['principal_agent', 'payment_info'],
+    },
     {
         'name': 'dictator',
         'display_name': "Dictator Game",
@@ -188,23 +220,10 @@ SESSION_TYPES = [
         'app_sequence': ['traveler_dilemma', 'payment_info'],
     },
     {
-        'name': 'survey',
-        'display_name': "Survey",
-        'num_demo_participants': 1,
-        'app_sequence': ['survey', 'payment_info'],
-    },
-    {
         'name': 'bargaining',
         'display_name': "Bargaining Game",
         'num_demo_participants': 2,
         'app_sequence': ['bargaining', 'payment_info'],
-    },
-    {
-        'name': 'beauty',
-        'display_name': "Beauty Contest",
-        'num_demo_participants': 5,
-        'num_bots': 5,
-        'app_sequence': ['beauty', 'payment_info'],
     },
     {
         'name': 'common_value_auction',
@@ -222,18 +241,6 @@ SESSION_TYPES = [
         ],
     },
     {
-        'name': 'vickrey_auction',
-        'display_name': "Vickrey Auction",
-        'num_demo_participants': 3,
-        'app_sequence': ['vickrey_auction', 'payment_info'],
-    },
-    {
-        'name': 'volunteer_dilemma',
-        'display_name': "Volunteer's Dilemma",
-        'num_demo_participants': 3,
-        'app_sequence': ['volunteer_dilemma', 'payment_info'],
-    },
-    {
         'name': 'bertrand_competition',
         'display_name': "Bertrand Competition",
         'num_demo_participants': 2,
@@ -246,14 +253,6 @@ SESSION_TYPES = [
         'display_name': "Stag Hunt",
         'num_demo_participants': 2,
         'app_sequence': ['stag_hunt', 'payment_info'],
-    },
-    {
-        'name': 'battle_of_the_sexes',
-        'display_name': "Battle of the Sexes",
-        'num_demo_participants': 2,
-        'app_sequence': [
-            'battle_of_the_sexes', 'payment_info'
-        ],
     },
     {
         'name': 'real_effort',
