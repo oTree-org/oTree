@@ -218,7 +218,8 @@ class Group(otree.models.BaseGroup):
     amount_offered = models.CurrencyField()
     offer_accepted = models.BooleanField()
 ```
-oTree stores your data in standard database tables (SQL), which you can later export to CSV for analysis in Stata, R, Matlab, Excel, etc.
+
+Every time you add, remove, or change a field in `models.py`, you need to run `./otree resetdb` (or, in the launcher, click "Clear Database").
 
 ### Constants
 
