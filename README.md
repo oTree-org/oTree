@@ -151,6 +151,13 @@ You can define your session's properties in `SESSION_TYPES` in `settings.py`. He
     'app_sequence':['trust', 'ultimatum', 'questionnaire'],
 }
 ```
+
+`app_sequence` allows you to have a session that consists of multiple apps.
+For example, the questionnaire is a separate standalone app, rather than being part of the `ultimatum` app.
+The advantage of this is that you can reuse the same questionnaire app in different session types,
+simply by adding it to the end of `app_sequence`.
+
+
 ## Participants and players
 
 In oTree, the terms "player" and "participant" have distinct meanings. The distinction between a participant and a player is the same as the distinction between a session and a subsession.
@@ -218,6 +225,7 @@ class Group(otree.models.BaseGroup):
     amount_offered = models.CurrencyField()
     offer_accepted = models.BooleanField()
 ```
+
 oTree stores your data in standard database tables (SQL), which you can later export to CSV for analysis in Stata, R, Matlab, Excel, etc.
 
 ### Constants
