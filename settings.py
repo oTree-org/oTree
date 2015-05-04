@@ -124,7 +124,7 @@ SESSION_TYPES = [
         'name': 'public_goods_simple',
         'display_name': "Public Goods (Simple Version)",
         'num_demo_participants': 3,
-        'app_sequence': ['public_goods_simple', 'survey'],
+        'app_sequence': ['public_goods_simple', 'survey', 'payment_info'],
     },
     {
         'name': 'trust',

@@ -1,6 +1,7 @@
 # oTree tutorial
 
-Here are the steps to create a simple public goods game.
+In this tutorial we will create a simple public goods game.
+The completed app is [here](https://github.com/oTree-org/oTree/tree/master/public_goods_simple).
 
 ## Install oTree
 
@@ -54,6 +55,7 @@ class Player(otree.models.BasePlayer):
 What data points are we interested in recording about each group?
 We might be interested in knowing the total contributions to the group,
 and the individual share returned to each player.
+So, we define those 2 fields:
 
 
 ```Python
@@ -70,6 +72,8 @@ We also need to define the logic for how these fields get calculated. Let's defi
 ```Python
 class Group(otree.models.BaseGroup):
 
+    # ...
+
     total_contribution = models.CurrencyField()
     individual_share = models.CurrencyField()
 
@@ -83,14 +87,15 @@ class Group(otree.models.BaseGroup):
 
 ## Define the template
 
-Let's first create our HTML templates. This game will have 2 pages.
+This game will have 2 pages.
 
 * Page 1: players decide how much to contribute
 * Page 2: players are told the results
 
 So, let's make 2 HTML files under `templates/public_goods_simple/`.
 
-The first is `Contribute.html`.
+The first is `Contribute.html`, which contains a brief explanation of the game,
+and a form field where the player can enter their contribution.
 
 ```HTML+Django
 
@@ -174,10 +179,11 @@ class Results(Page):
 
 We are almost done, but one more page is needed. After a player makes a contribution, they cannot see the results page
 right away; they first need to wait for the other players to contribute. You therefore need to add a `WaitPage`.
-
-When all players have completed the `Contribute` page, the players' payoffs can be calculated.
+There should be some logic in this wait page. When all players have completed the `Contribute` page,
+the players' payoffs can be calculated.
 You can trigger this calculation inside the the `after_all_players_arrive` method on the `WaitPage`,
 which automatically gets called when all players have arrived at the wait page:
+
 
 ```
 class ResultsWaitPage(WaitPage):
@@ -185,6 +191,8 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 ```
+
+
 
 Now we define `page_sequence` to specify the order in which the pages are shown:
 
@@ -201,7 +209,8 @@ page_sequence = [
 ## Define the session type in settings.py
 
 Now we go to `settings.py` and define a session type.
-In many experiments, the user should fill out an 'exit survey'. You can add an exit survey by adding the app to
+In lab experiments, it's typical for users to fill out an exit survey, and then see how much money they made.
+So let's do this by adding the existing "exit survey" and "payment info" apps to
 `app_sequence`.
 
 
@@ -211,10 +220,13 @@ SESSION_TYPES = [
         'name': 'public_goods_simple',
         'display_name': "Public Goods (Simple Version)",
         'num_demo_participants': 3,
-        'app_sequence': ['public_goods_simple', 'survey'],
+        'app_sequence': ['public_goods_simple', 'survey', 'payment_info'],
     },
     # ...
 ```
+
+However, we must also remember to add a `{% next_button %}` element to the `Results.html`, so the user can click a button
+taking them to the next app in the sequence.
 
 ## Reset the database and run
 
