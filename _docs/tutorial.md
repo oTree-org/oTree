@@ -18,9 +18,9 @@ Then go to the folder `public_goods_simple` that was created.
 
 Let's define our data model in `models.py`.
 
-First, let's define our constants and parameters -- things that are the same for all players in all games:
+First, let's modify the `Constants` class to define our constants and parameters -- things that are the same for all players in all games.
 
-* There are 3 players per group. So, let's change `players_per_group` to 3. Once this is done, oTree will automatically divide players into groups of 3.
+* There are 3 players per group. So, let's change `players_per_group` to 3. oTree will then automatically divide players into groups of 3.
 * The endowment to each player is 100 points. So, let's define `endowment` and set it to `c(100)`. (`c()` means it is a currency amount; see the docs for more info).
 * Each contribution is multiplied by 1.8. So let's define `efficiency_factor` and set it to 1.8:
 
@@ -37,11 +37,12 @@ class Constants:
     efficiency_factor = 1.8
 ```
 
-Now let's think about the entities in this game: the Player and the Group.
+Now let's think about the main entities in this game: the Player and the Group.
 
 What data points are we interested in recording about each player? The main thing is how much they contributed.
 So, we define a field `contribution`:
 
+```Python
 class Player(otree.models.BasePlayer):
 
     # ...
