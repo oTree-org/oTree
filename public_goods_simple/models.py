@@ -18,7 +18,7 @@ Simple public goods game
 """
 
 class Constants:
-    name_in_url = 'public_goods'
+    name_in_url = 'public_goods_simple'
     players_per_group = 3
     num_rounds = 1
 

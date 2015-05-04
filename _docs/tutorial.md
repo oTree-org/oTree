@@ -29,7 +29,7 @@ Now we have:
 ```Python
 
 class Constants:
-    name_in_url = 'public_goods'
+    name_in_url = 'public_goods_simple'
     players_per_group = 3
     num_rounds = 1
 
