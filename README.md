@@ -88,6 +88,10 @@ Sign up to be notified about updates to oTree [here](https://docs.google.com/for
 - [oTree programming For Django Devs](#otree-programming-for-django-devs)
     - [Intro to oTree for Django developers](#intro-to-otree-for-django-developers)
 
+# Tutorial
+
+See the tutorial [here](_docs/tutorial.md)
+
 # Setup
 
 See the installation instructions [here](http://www.otree.org/download/).
