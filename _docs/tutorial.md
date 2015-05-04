@@ -208,7 +208,7 @@ page_sequence = [
 
 ## Define the session type in settings.py
 
-Now we go to `settings.py` and define a session type.
+Now we go to `settings.py` and add an entry to `SESSION_TYPES`.
 In lab experiments, it's typical for users to fill out an exit survey, and then see how much money they made.
 So let's do this by adding the existing "exit survey" and "payment info" apps to
 `app_sequence`.
