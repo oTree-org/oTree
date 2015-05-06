@@ -510,6 +510,10 @@ Then you can use JavaScript to set the value of that input, by selecting the ele
 For simple widgets you can use jQuery; for more complex or custom form interfaces,
 you can use a front-end framework with databinding, like React or Polymer.
 
+If you want your custom widget's style to look like the rest of the oTree widgets,
+you should look at the generated HTML from the {% formfield %} tag.
+You can copy and paste the markup into the template and use that as a starting point for modifications.
+
 
 # Object model and `self`
 
