@@ -14,7 +14,7 @@ class PlayerBot(Bot):
     """Bot that plays one round"""
 
     def play_round(self):
-        self.submit(views.MyPage, {'my_field': c(1)})
+        self.submit(views.Contribute, {'contribution': c(1)})
         self.submit(views.Results)
 
     def validate_play(self):
