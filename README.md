@@ -151,7 +151,7 @@ You can define your session's properties in `SESSION_TYPES` in `settings.py`. He
 ```python
 {
     'name':'my_session',
-    'fixed_pay':10.00,
+    'participation_fee':10.00,
     'app_sequence':['trust', 'ultimatum', 'questionnaire'],
 }
 ```
@@ -435,7 +435,9 @@ year_in_school = models.CharField(
     ]
 )
 ```
-After the field has been set, you can access the human-readable name like this:
+
+After the field has been set, you can access the human-readable name using [get_FOO_display](https://docs.djangoproject.com/en/1.8/ref/models/instances/#django.db.models.Model.get_FOO_display)
+method, like this:
 `self.get_year_in_school_display() # returns e.g. 'Sophomore'`
 
 If a field is optional, you can do:
@@ -689,7 +691,12 @@ Note: instead of using Python's built-in `range` function, you should use oTree'
 ```
 ## Assigning payoffs
 
-Each player has a `payoff` field, which is a `CurrencyField`. If your player makes money, you should store it in this field. At the end of the experiment, a participant's total profit is calculated by adding the fixed base pay to the `payoff` that participant earned as a player in each subsession.
+Each player has a `payoff` field, which is a `CurrencyField`.
+If your player makes money, you should store it in this field.
+`player.participant.payoff` is the sum of the payoffs a participant made in each subsession.
+At the end of the experiment, a participant's total profit is calculated by adding the fixed base pay
+to the `payoff` that participant earned as a player in each subsession.
+
 
 ## Points (i.e. "experimental currency")
 
@@ -923,26 +930,32 @@ choose an active session from the dropdown. Then, copy
 
 If you are running your experiment in a lab, you should deploy the links to the target workstations using whatever means is available to you. If you have a tool that can push distinct URLs to each PC in the lab, you can use that. Or you can set up a unique email account for each workstation, and then send the unique links to PCs using a mail merge. Then open the link on each PC.
 
-#### Player labels
-oTree uses a unique code to identify each participant. However, you can assign each session participant a "label" that can be any convenient way to identify them to you, such as:
+#### Participant labels
+
+oTree uses a unique code to identify each participant.
+However, you can assign each participant a "label" that can be any convenient way to identify them to you,
+such as:
 
 * Name
 * Computer workstation number
 * Email address
 * ID number
 
-This label will be displayed in places where participants are listed, like the oTree admin interface or the payments page.
+This label will be displayed in places where participants are listed,
+like the oTree admin interface or the payments page.
 
 You can assign each participant a label by adding a parameter to each start link.
-For example, if you want to assign a participant the label "WORKSTATION_1", you would take the start link for that participant:
+For example, if you want to assign a participant the label "WORKSTATION_1",
+you would take the start link for that participant:
 
-    http://[participant's unique link]?some_param=1
+    http://[participant's start link]
 
 And change it to:
 
-    http://[participant's unique link]?some_param=1&participant_label=WORKSTATION_1
+    http://[participant's start link]?participant_label=WORKSTATION_1
 
-Outside of oTree, you can create a script that adds a unique `participant_label` to each start link as indicated above. Then, when the link is opened, the oTree server will register that participant label for that participant.
+Outside of oTree, you can create a script that adds a unique `participant_label` to each start link as indicated above. Then,
+when the link is opened, the oTree server will register that participant label for that participant.
 
 ### Monitor sessions
 While your session is ongoing, you can monitor the live progress in the admin interface. The admin tables update live, highlighting changes as they occur. The most useful table to monitor is "Session participants", which gives you a summary of all the participants' progress. You can also click the "participants" table of each app to see the details of all the data being entered in your subsessions.
@@ -1180,7 +1193,7 @@ heroku config:set AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY
 You should look in `settings.py` for all settings related to Mechanical Turk (do a search for "mturk").
 You can edit the properties of the HIT such as the title and keywords,
 as well as the qualifications required to participate.
-The monetary reward paid to workers is the `fixed_pay` for your `session_type`.
+The monetary reward paid to workers is the `participation_fee` for your `session_type`.
 
 When you publish your HIT to MTurk, it will be visible to workers.
 When a worker clicks on the link to take part in the HIT, they will see the MTurk interface,
