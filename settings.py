@@ -22,12 +22,11 @@ if os.environ.get('IS_OTREE_DOT_ORG') in {None, '', '0'}:
     # Change this to something unique (e.g. mash your keyboard),
     # and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzz'
-    PAGE_FOOTER = ''
 else:
     ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
     SECRET_KEY = os.environ['OTREE_SECRET_KEY']
-    PAGE_FOOTER = ''
 
+PAGE_FOOTER = ''
 
 DATABASES = {
     'default': dj_database_url.config(
