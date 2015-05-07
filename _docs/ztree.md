@@ -214,12 +214,8 @@ and sets values for the fields.
 
 ### Profit and TotalProfit
 
-In each subsession, the `player` has a field called `payoff`.
-
-The equivalent of `TotalProfit` is to sum up the `payoff` from each subsession. This can be done with:
-`self.player.participant.payoff`
-
-ShowUpFee: session_type.fixed_pay
+ShowUpFee: session_type.participation_fee
+Profit: player.payoff
 FinalProfit: participant.payoff
 MoneyToPay: participant.money_to_pay()
 

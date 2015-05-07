@@ -98,7 +98,7 @@ MTURK_WORKER_REQUIREMENTS = [
 
 SESSION_TYPE_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
-    'fixed_pay': 10.00,
+    'participation_fee': 10.00,
     'num_bots': 12,
     'doc': "",
     'group_by_arrival_time': False,
