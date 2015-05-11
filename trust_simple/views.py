@@ -10,11 +10,6 @@ from .models import Constants
 
 class Send(Page):
 
-    """This page is only for P1
-    P1 sends amount (all, some, or none) to P2
-    This amount is tripled by experimenter,
-    i.e if sent amount by P1 is 5, amount received by P2 is 15"""
-
     form_model = models.Group
     form_fields = ['sent_amount']
 
@@ -25,9 +20,6 @@ class WaitForP1(WaitPage):
     pass
 
 class SendBack(Page):
-
-    """This page is only for P2
-    P2 sends back some amount (of the tripled amount received) to P1"""
 
     form_model = models.Group
     form_fields = ['sent_back_amount']
@@ -51,14 +43,11 @@ class SendBack(Page):
 
 class ResultsWaitPage(WaitPage):
 
-
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
 
 class Results(Page):
-
-    """This page displays the earnings of each player"""
 
     def vars_for_template(self):
         return {

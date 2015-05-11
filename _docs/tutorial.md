@@ -1,11 +1,13 @@
 # oTree tutorial
 
-In this tutorial we will create a simple public goods game.
+This tutorial will cover the creation of 2 games: a simple public goods game, and a simple trust game.
+Before proceeding through this tutorial, install oTree according to the instructions at
+[http://www.otree.org/download/](http://www.otree.org/download/)
+
+# Part 1: Public goods game
+
+We will now create a simple public goods game.
 The completed app is [here](https://github.com/oTree-org/oTree/tree/master/public_goods_simple).
-
-## Install oTree
-
-Follow the instructions at [http://www.otree.org/download/](http://www.otree.org/download/)
 
 ## Create the app
 
@@ -14,6 +16,7 @@ Create the public goods app with this command:
 `./otree startapp public_goods_simple`
 
 Then go to the folder `public_goods_simple` that was created.
+
 
 ## Define models.py
 
@@ -238,3 +241,182 @@ This is because we have defined new fields in `models.py`,
 and the SQL database needs to be re-generated to create these tables and columns.
 
 Then, run the server and open your browser to [http://127.0.0.1:8000](http://127.0.0.1:8000) to play the game.
+
+# Part 2: Trust game
+
+Now let's create a Trust game, which is a different type of game, to allow us to highlight some different features of oTree.
+
+This is a trust game with 2 players.
+
+To start, Player 1 receives 10 points;
+Player 2 receives nothing.
+Player 1 can send some or all of his points to Player 2.
+Before B receives these points they will be tripled.
+Once B receives the tripled points he can decide to send some or all of his points to A.
+
+The completed app is [here](https://github.com/oTree-org/oTree/tree/master/trust_simple).
+
+## Create the app
+
+`./otree startapp trust_simple`
+
+## Define models.py
+
+First we define our app's constants. The endowment is 10 points and the donation gets tripled.
+
+```
+class Constants:
+    name_in_url = 'trust_simple'
+    players_per_group = 2
+    num_rounds = 1
+
+    endowment = c(10)
+    multiplication_factor = 3
+```
+
+Then we think about how to define fields on the data model.
+There are 2 critical data points to capture: the "sent" amount from P1, and the "sent back" amount from P2.
+
+Your first instinct may be to define the fields on the Player like this:
+
+```
+class Player(otree.models.BasePlayer):
+
+    # <built-in>
+    ...
+    # </built-in>
+
+    sent_amount = models.CurrencyField()
+    sent_back_amount = models.CurrencyField()
+```
+
+The problem with this model is that `sent_amount` only applies to P1,
+   and `sent_back_amount` only applies to P2.
+   It does not make sense that P1 should have a field called `sent_back_amount`.
+   How can we make our data model more accurate?
+
+We can do it by defining those fields at the `Group` level.
+This makes sense because each group has exactly 1 `sent_amount` and exactly 1 `sent_back_amount`:
+
+```
+class Group(otree.models.BaseGroup):
+
+    # <built-in>
+    ...
+    # </built-in>
+
+    sent_amount = models.CurrencyField()
+    sent_back_amount = models.CurrencyField()
+```
+
+Even though it may not seem that important at this point,
+modeling our data correctly will make the rest of our work easier.
+
+Now we add more details: Let's let P1 choose from a dropdown menu how much to donate,
+rather than entering free text. To do this, we use the `choices=` argument, as well as
+the `currency_range` function:
+
+```
+    sent_amount = models.CurrencyField(
+        choices=currency_range(0, Constants.endowment, c(1)),
+    )
+```
+
+Also, let's define the payoff function on the group:
+
+```
+    def set_payoffs(self):
+        p1 = self.get_player_by_id(1)
+        p2 = self.get_player_by_id(2)
+        p1.payoff = Constants.endowment - self.sent_amount + self.sent_back_amount
+        p2.payoff = self.sent_amount * Constants.multiplication_factor - self.sent_back_amount
+```
+
+
+## Define the templates and views
+
+We need 3 pages:
+
+* P1's "Send" page
+* P2's "Send back" page
+* "Results" page that both users see.
+
+It would also be good if game instructions appeared on each page so that players are clear how the game works.
+We can define a file `Instructions.html` that gets included on each page.
+
+### Instructions.html
+
+This template uses Django's template inheritance with the `{% extends %}` command.
+For basic apps you don't need to know the details of how template inheritance works.
+
+```
+{% extends "global/Instructions.html" %}
+
+{% block instructions %}
+<p>
+    This is a trust game with 2 players.
+</p>
+<p>
+    To start, participant A receives {{ Constants.endowment }};
+    participant B receives nothing.
+    Participant A can send some or all of his {{ Constants.endowment }} to participant B.
+    Before B receives these points they will be tripled.
+    Once B receives the tripled points he can decide to send some or all of his points to A.
+</p>
+{% endblock %}
+```
+
+### Send
+
+This page looks like the templates we have seen so far.
+Note the use of `{% include %}` to automatically insert another template.
+
+```
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Trust Game: Your Choice
+{% endblock %}
+
+{% block content %}
+
+    {% include 'trust_simple/Instructions.html' %}
+
+    <p>
+    You are Participant A. Now you have {{Constants.endowment}}.
+    </p>
+
+    {% formfield group.sent_amount with label="How much do you want to send to participant B?" %}
+
+    {% next_button %}
+
+{% endblock %}
+```
+
+We also define the view in views.py:
+
+```
+class Send(Page):
+
+    form_model = models.Group
+    form_fields = ['sent_amount']
+
+    def is_displayed(self):
+        return self.player.id_in_group == 1
+```
+
+The `{% formfield %}` in the template must match the `form_model` and `form_fields` in the view.
+
+Also, we use `is_displayed` to only show this to P1; P2 skips the page.
+
+### SendBack
+
+
+
+## Define views.py
+
+## Define the session type in settings.py
+
+## Reset the database and run
+

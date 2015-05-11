@@ -1,6 +1,5 @@
 {% extends "global/Base.html" %}
 {% load staticfiles otree_tags %}
-{% load i18n %}
 
 {% block title %}
     Trust Game: Your Choice
@@ -17,8 +16,5 @@
     {% formfield group.sent_amount with label="How much do you want to send to participant B?" %}
 
     {% next_button %}
-
-
-
 
 {% endblock %}

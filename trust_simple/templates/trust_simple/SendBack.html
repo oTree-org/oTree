@@ -1,6 +1,5 @@
 {% extends "global/Base.html" %}
 {% load staticfiles otree_tags %}
-{% load i18n %}
 
 {% block title %}
     Trust Game: Your Choice
@@ -18,7 +17,5 @@ You are Participant B. Participant A sent you {{group.sent_amount}} and you rece
     {% formfield group.sent_back_amount with label=prompt %}
 
     {% next_button %}
-
-
 
 {% endblock %}

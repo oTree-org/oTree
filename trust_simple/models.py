@@ -19,7 +19,6 @@ class Constants:
     players_per_group = 2
     num_rounds = 1
 
-    #Initial amount allocated to each player
     endowment = c(10)
     multiplication_factor = 3
 
@@ -42,7 +41,6 @@ class Group(otree.models.BaseGroup):
 
     sent_back_amount = models.CurrencyField(
         doc="""Amount sent back by P2""",
-        min=c(0),
     )
 
     def set_payoffs(self):
