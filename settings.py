@@ -132,6 +132,12 @@ SESSION_TYPES = [
         'app_sequence': ['trust', 'payment_info'],
     },
     {
+        'name': 'trust_simple',
+        'display_name': "Trust Game (simple version from tutorial)",
+        'num_demo_participants': 2,
+        'app_sequence': ['trust_simple'],
+    },
+    {
         'name': 'beauty',
         'display_name': "Beauty Contest",
         'num_demo_participants': 5,

@@ -1,0 +1,31 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+{% if player.id_in_group == 1 %}
+    <p>
+        You sent Participant B <strong>{{ group.sent_amount }}</strong>.
+        Participant B returned <strong>{{group.sent_back_amount}}</strong>.
+    </p>
+    {% else %}
+    <p>
+        Participant A sent you <strong>{{ group.sent_amount }}</strong>.
+        You returned <strong>{{group.sent_back_amount}}</strong>.
+    </p>
+
+{% endif %}
+
+    <p>
+    Therefore, your total payoff is <strong>{{player.payoff}}</strong>.
+    </p>
+
+    {% include 'trust_simple/Instructions.html' %}
+
+{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Trust Game: Your Choice
+{% endblock %}
+
+{% block content %}
+
+    {% include 'trust_simple/Instructions.html' %}
+
+<p>
+You are Participant B. Participant A sent you {{group.sent_amount}} and you received {{tripled_amount}}.
+    Now you have {{tripled_amount}}. How many points will you send to participant A?
+</p>
+
+    {% formfield group.sent_back_amount with label=prompt %}
+
+    {% next_button %}
+
+
+
+{% endblock %}
