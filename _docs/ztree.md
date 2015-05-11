@@ -1,7 +1,8 @@
-# oTree for z-Tree programmers
+# oTree glossary for z-Tree programmers
 
 For those familiar with z-Tree, here are some notes on the equivalents of various z-Tree
-concepts in oTree. For full explanations of each concept, see the
+concepts in oTree. This document just gives the names of the oTree feature;
+for full explanations of each concept, see the
 [reference documentation](https://github.com/oTree-org/oTree/blob/master/README.md).
 
 This list will expand over time. If you would like to request
@@ -89,7 +90,6 @@ The closest equivalent is `before_session_starts`.
 
 ### Tables
 
-
 #### Subjects table
 
 In z-Tree you define variables that go in the subjects table.
@@ -105,7 +105,7 @@ This returns a list of all players in the subsession.
 Each player has the same set of fields, so this structure is conceptually
 similar to a table.
 
-oTree also has a "groups" table, where you can store data
+oTree also has a "Group" object (essentially a "groups" table), where you can store data
 at the group level, if it is not specific to any one player but rather the same
 for all players in the group, like the total contribution by the group
 (e.g. `self.group.total_contribution`).
