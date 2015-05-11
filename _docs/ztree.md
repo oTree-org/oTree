@@ -1,14 +1,18 @@
-# Comparison with z-Tree
+# oTree for z-Tree programmers
 
-For those familiar with z-Tree, here are some examples of how some z-Tree
-concepts are expressed in oTree. If you would like to request
-an item added to this list,
+For those familiar with z-Tree, here are some notes on the equivalents of various z-Tree
+concepts in oTree. For full explanations of each concept, see the
+[reference documentation](https://github.com/oTree-org/oTree/blob/master/README.md).
+
+This list will expand over time. If you would like to request
+an item added to this list, or if you have a correction to make,
 please email chris@otree.org.
 
 ### z-Tree & z-Leafs
 
-oTree is web-based so it does not have an equivalent of z-Leafs. As long as the oTree server
-is running, you can open links on
+oTree is web-based so it does not have an equivalent of z-Leafs.
+You run oTree on your server and then visit the site in the browser
+of the clients.
 
 ### Treatments
 
@@ -16,29 +20,29 @@ In oTree, these are apps in `app_sequence` in `settings.py`.
 
 ### Periods
 
-In oTree, these are called "rounds". You can set `num_rounds`, and get the current round number with
+In oTree, these are called "rounds".
+You can set `num_rounds`, and get the current round number with
 self.subsession.round_number.
 
 ### Stages
 
 oTree calls these "pages", and they are defined in `views.py`.
 
+### Waiting screens
+
+In oTree, participants can move through pages and subsessions individually.
+Participants can be in different apps or rounds (i.e. treatments or periods) at the same time.
+
+If you would like to restrict this independent movement,
+you can use oTree's equivalent of "Wait for all...",
+which is to insert a `WaitPage` at the desired place in the `page_sequence`.
+
 ### Subjects
 
-oTree calls these 'players'
+oTree calls these 'players' or 'participants'. See the reference docs for
+the distinction between players and participants.
 
-### Variables
-
-In z-Tree you define variables that go in the subjects table.
-
-In oTree, you define the structure of your table by defining "fields" in `models.py`.
-Each field defines a column in the table, and has an associated data type (number, text, etc).
-
-### Accessing data from previous periods and treatments
-
-See the reference on `in_previous_rounds` and `participant.vars`.
-
-### Participate
+### Participate=1
 
 Each oTree page has an `is_displayed` method that returns True or False.
 
@@ -46,16 +50,6 @@ Each oTree page has an `is_displayed` method that returns True or False.
 
 In oTree, define a `timeout_seconds` on your `Page`.
 You can also optionally define `auto_submit_values`.
-
-#
-
-z-Tree:
-
-`sum( same( Group ), Contribution );`
-
-oTree:
-
-`sum([p.contribution for p in self.group.get_players()])`
 
 ### Questionnaires
 
@@ -67,8 +61,6 @@ You program them the same way as a normal oTree app. See the "survey" app for an
 In z-Tree, programs are executed for each row in the current table, at the same time.
 
 In oTree, code is executed individually as each participant progresses through the game.
-
-
 
 For example, suppose you have this `Page`:
 
@@ -91,11 +83,55 @@ respectively.
 If you want code to be executed for all participants at the same time,
 it should go in `before_session_starts` or `after_all_players_arrive`.
 
-## Tables
+### Background programs
 
-### Table functions
+The closest equivalent is `before_session_starts`.
 
-#### find()
+### Tables
+
+
+#### Subjects table
+
+In z-Tree you define variables that go in the subjects table.
+
+In oTree, you define the structure of your table by defining "fields" in `models.py`.
+Each field defines a column in the table, and has an associated data type (number, text, etc).
+
+You can access all players like this:
+
+`self.subsession.get_players()`
+
+This returns a list of all players in the subsession.
+Each player has the same set of fields, so this structure is conceptually
+similar to a table.
+
+oTree also has a "groups" table, where you can store data
+at the group level, if it is not specific to any one player but rather the same
+for all players in the group, like the total contribution by the group
+(e.g. `self.group.total_contribution`).
+
+#### Globals table
+
+`self.session.vars` can hold global variables.
+
+#### Table functions
+
+oTree does not have table functions. If you want to carry out calculations over the whole table,
+you should do so explicitly.
+
+For example, in z-Tree:
+
+```
+S = sum(C)
+```
+
+In oTree you would do:
+
+```
+S = sum([p for p in self.subsession.get_players()])
+```
+
+##### find()
 
 Use `group.get_players()` to get all players in the same group, and `subsession.get_players()`
  to get all players in the same subsession.
@@ -119,34 +155,25 @@ for p in self.subsession.get_players():
 
 You can also use `group.get_player_by_id()` and `group.get_player_by_role()`.
 
-Whereas the z-Tree language is table-oriented, Python is object-oriented.
-
-oTree is based on Python.
-
-
-#### Subjects table
-
-You define variables for each player
-
-the structure of your table
-
-You can access all players like this:
-
-`self.subsession.get_players()`
-
-This returns a list of all players
-
-
-#### Globals table
-
-`self.session.vars` can hold global variables
-
 
 ### Groups
 
 Set `players_per_group` to any number you desire.
 When you create your session, you will be prompted to choose a number of participants.
 oTree will then automatically divide these players into groups.
+
+#### Calculations on the group
+
+For example:
+
+z-Tree:
+
+`sum( same( Group ), Contribution );`
+
+oTree:
+
+`sum([p.contribution for p in self.group.get_players()])`
+
 
 #### Player types
 
@@ -176,13 +203,9 @@ def role(self):
         return 'responder'
 ```
 
-### Waiting screens
+### Accessing data from previous periods and treatments
 
-In oTree, participants can move through pages and subsessions individually.
-Participants can be in different apps or rounds (i.e. treatments or periods) at the same time.
-
-If you would like to restrict this independent movement, you can use oTree's equivalent of "Wait for all...",
-which is to insert a `WaitPage` at the desired place in the `page_sequence`.
+See the reference on `in_all_rounds`, `in_previous_rounds` and `participant.vars`.
 
 ### History box
 
@@ -207,29 +230,37 @@ You can program a history box to your liking using `in_all_rounds`. For example:
 
 ### Parameters table
 
+Any parameters that are constant within an app should be defined in `Constants` in `models.py`.
+Some parameters are defined in `settings.py`.
+
 Define a method in `before_session_starts` that loops through all players in the subsession
 and sets values for the fields.
 
-## Money and currency
+### Clients table
 
-### Profit and TotalProfit
+In the admin interface, when you run a session you can click on "Monitor".
+This is similar to the z-Tree Clients table.
 
-ShowUpFee: session_type.participation_fee
-Profit: player.payoff
-FinalProfit: participant.payoff
-MoneyToPay: participant.money_to_pay()
+There is a button "Advance slowest participant(s)",
+which is similar to z-Tree's "Leave stage" command.
 
-### The equivalent of
 
-### Experimental currency units (ECU)
+### Money and currency
+
+* ShowUpFee: session_type['participation_fee']
+* Profit: player.payoff
+* FinalProfit: participant.payoff
+* MoneyToPay: participant.money_to_pay()
+
+#### Experimental currency units (ECU)
 
 The oTree equivalent of ECU is points, and the exchange rate is defined by `money_per_point`.
 
 In oTree you also have the option to not use ECU and to instead play the game in real money.
 
-## Layout
+### Layout
 
-### Data display and input
+#### Data display and input
 
 In the HTML template, you output the current player's contribution like this:
 
@@ -243,7 +274,7 @@ If you need the player to input their contribution, you do it like this:
 {% formfield player.contribution %}
 ```
 
-### Layout: !text
+#### Layout: !text
 
 In z-Tree you would do this:
 
@@ -271,7 +302,9 @@ Your income is {{ size }}.
 Another way to accomplish this is the `get_FOO_display`, which is
 described in the reference with the example about `get_year_in_school_display`.
 
-## Code examples
+## Miscellaneous code examples
+
+### Get the other player's choice in a 2-person game
 
 z-Tree:
 ```
@@ -284,3 +317,49 @@ oTree:
 others_choice = self.get_others_in_group()[0].choice
 ```
 
+### Check if a list is sorted smallest to largest
+
+z-Tree (source: z-Tree mailing list):
+
+```
+iterator(i, 10 ).sum( iterator(j, 10 ).count( :i<j & ::values[ :i ] > ::values[ j ] )) ==0 
+```
+
+oTree:
+
+```
+values==sorted(values) 
+```
+
+### Randomly shuffle a list
+
+z-Tree (source: z-Tree mailing list):
+
+```
+iterator(i, size_array - 1).do {
+    address = roundup( random() * (:size_array + 1 - i), 1);
+    if (address != :size_array + 1 - i) {
+    temp = :random_sequence[:size_array + 1 - i];
+    :random_sequence[:size_array + 1 - i] = :random_sequence[address];
+    :random_sequence[address] = temp;
+    }
+}
+```
+
+oTree:
+
+```
+random.shuffle(random_sequence)
+```
+
+### Choose 3 random periods for payment
+
+z-Tree: see [here](https://files.nyu.edu/awb257/public/slides/RandomRoundPayoffsTreatmentOrder.pdf):
+
+oTree:
+
+```
+if self.subsession.round_number == Constants.num_rounds:
+    random_players = random.sample(self.in_all_rounds(), 3)
+    self.payoff = sum([p.potential_payoff for p in random_players])
+```
