@@ -482,6 +482,12 @@ def error_message(self, values):
         return 'The numbers must add up to 100'
 ```
 
+### Determining the list of form fields dynamically
+
+If you need the list of form fields to be dynamic,
+instead of `form_fields` you can define a method `get_form_fields(self)` that returns
+the list.
+
 ## Widgets
 
 The full list of form input widgets offered by Django is
