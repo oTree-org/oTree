@@ -144,7 +144,7 @@ The second template will be called `Results.html`.
         You started with an endowment of {{ Constants.endowment }}, of which you contributed {{ player.contribution }}.
         Your group contributed {{ group.total_contributions }},
         resulting in an individual share of {{ group.individual_share }}.
-        Your profit is therefore {{ player.payoff }}:
+        Your profit is therefore {{ player.payoff }}.
     </p>
 
 {% endblock %}
@@ -415,6 +415,8 @@ The `{% formfield %}` in the template must match the `form_model` and `form_fiel
 
 Also, we use `is_displayed` to only show this to P1; P2 skips the page.
 
+Note that we write `self.player.id_in_group`, because this is in `views.py`.
+
 ### SendBack
 
 This is the page that P2 sees to send money back. Here is the template:
@@ -445,7 +447,7 @@ You are Participant B. Participant A sent you {{group.sent_amount}} and you rece
 Here is the code from views.py. Notes:
 
 * We use `vars_for_template` to pass the variable `tripled_amount` to the template.
-Django does not let you multiply numbers directly in a template,
+Django does not let you do calculations directly in a template,
 so this number needs to be calculated in Python code and passed to the template.
 * We define a method `sent_back_amount_choices` to populate the dropdown menu dynamically.
 This is the feature called `{field_name}_choices`, which is explained in the reference documentation.
