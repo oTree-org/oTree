@@ -141,15 +141,11 @@ The second template will be called `Results.html`.
 {% block content %}
 
     <p>
+        You started with an endowment of {{ Constants.endowment }}, of which you contributed {{ player.contribution }}.
         Your group contributed {{ group.total_contributions }},
         resulting in an individual share of {{ group.individual_share }}.
-        Your profit is therefore:
+        Your profit is therefore {{ player.payoff }}:
     </p>
-
-    <p>
-    {{ Constants.endowment }} - {{ player.contribution }} + {{ group.individual_share }} = {{ player.payoff }}
-    </p>
-
 
 {% endblock %}
 
@@ -182,11 +178,16 @@ class Results(Page):
 
 We are almost done, but one more page is needed. After a player makes a contribution, they cannot see the results page
 right away; they first need to wait for the other players to contribute. You therefore need to add a `WaitPage`.
+
 There should be some logic in this wait page. When all players have completed the `Contribute` page,
 the players' payoffs can be calculated.
 You can trigger this calculation inside the the `after_all_players_arrive` method on the `WaitPage`,
-which automatically gets called when all players have arrived at the wait page:
+which automatically gets called when all players have arrived at the wait page.
+Another advantage of putting the code here is that it only gets executed once,
+rather than being executed separately for each participant, which is redundant.
 
+We write `self.group.set_payoffs()` because earlier we decided to name the payoff calculation method `set_payoffs`,
+ and it's a method under the `Group` class. That's why we prefix it with `self.group`.
 
 ```
 class ResultsWaitPage(WaitPage):
@@ -322,6 +323,10 @@ the `currency_range` function:
     )
 ```
 
+We'd also like P2 to use a dropdown menu to choose how much to send back,
+but we can't specify a fixed list of `choices`, because P2's available choices depend on how much P1 donated.
+I'll show a bit later how we can make this list dynamic.
+
 Also, let's define the payoff function on the group:
 
 ```
@@ -412,11 +417,153 @@ Also, we use `is_displayed` to only show this to P1; P2 skips the page.
 
 ### SendBack
 
+This is the page that P2 sees to send money back. Here is the template:
 
+```
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
 
-## Define views.py
+{% block title %}
+    Trust Game: Your Choice
+{% endblock %}
 
-## Define the session type in settings.py
+{% block content %}
+
+    {% include 'trust_simple/Instructions.html' %}
+
+<p>
+You are Participant B. Participant A sent you {{group.sent_amount}} and you received {{tripled_amount}}.
+</p>
+
+    {% formfield group.sent_back_amount with label="How much do you want to send back?" %}
+
+    {% next_button %}
+
+{% endblock %}
+```
+
+Here is the code from views.py. Notes:
+
+* We use `vars_for_template` to pass the variable `tripled_amount` to the template.
+Django does not let you multiply numbers directly in a template,
+so this number needs to be calculated in Python code and passed to the template.
+* We define a method `sent_back_amount_choices` to populate the dropdown menu dynamically.
+This is the feature called `{field_name}_choices`, which is explained in the reference documentation.
+
+```
+class SendBack(Page):
+
+    form_model = models.Group
+    form_fields = ['sent_back_amount']
+
+    def is_displayed(self):
+        return self.player.id_in_group == 2
+
+    def vars_for_template(self):
+        return {
+            'tripled_amount': self.group.sent_amount * Constants.multiplication_factor
+        }
+
+    def sent_back_amount_choices(self):
+        return currency_range(
+            c(0),
+            self.group.sent_amount * Constants.multiplication_factor,
+            c(1) * Constants.multiplication_factor
+        )
+```
+
+### Results
+
+The results page needs to look slightly different for P1 vs. P2.
+So, we use the `{% if %}` statement (part of [Django's template language](https://docs.djangoproject.com/en/1.7/topics/templates/))
+to condition on the current player's `id_in_group`.
+
+```
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+{% if player.id_in_group == 1 %}
+    <p>
+        You sent Participant B {{ group.sent_amount }}.
+        Participant B returned {{group.sent_back_amount}}.
+    </p>
+    {% else %}
+    <p>
+        Participant A sent you {{ group.sent_amount }}.
+        You returned {{group.sent_back_amount}}.
+    </p>
+
+{% endif %}
+
+    <p>
+    Therefore, your total payoff is {{player.payoff}}.
+    </p>
+
+    {% include 'trust_simple/Instructions.html' %}
+
+{% endblock %}
+
+```
+
+Here is the Python code for this page in views.py:
+
+```
+class Results(Page):
+
+    def vars_for_template(self):
+        return {
+            'tripled_amount': self.group.sent_amount * Constants.multiplication_factor
+        }
+```
+
+### Wait pages and page sequence
+
+This game has 2 wait pages:
+
+* P2 needs to wait while P1 decides how much to send
+* P1 needs to wait while P2 decides how much to send back
+
+After the second wait page, we should calculate the payoffs. So, we use `after_all_players_arrive`.
+
+So, we define these pages:
+
+```
+class WaitForP1(WaitPage):
+    pass
+
+class ResultsWaitPage(WaitPage):
+
+    def after_all_players_arrive(self):
+        self.group.set_payoffs()
+
+```
+
+## Add an entry to `SESSION_TYPES` in `settings.py`
+
+```
+    {
+        'name': 'trust_simple',
+        'display_name': "Trust Game (simple version from tutorial)",
+        'num_demo_participants': 2,
+        'app_sequence': ['trust_simple'],
+    },
+```
 
 ## Reset the database and run
 
+If you are on the command line, enter:
+
+```
+./otree resetdb
+./otree runserver
+```
+
+If you are using the launcher, click the button equivalents to these commands.
+
+Then open your browser to [http://127.0.0.1:8000](http://127.0.0.1:8000) to play the game.

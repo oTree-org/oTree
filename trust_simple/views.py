@@ -28,10 +28,9 @@ class SendBack(Page):
         return self.player.id_in_group == 2
 
     def vars_for_template(self):
-        tripled_amount = self.group.sent_amount * Constants.multiplication_factor
-
-        return {'endowment': Constants.endowment,
-                'tripled_amount': tripled_amount}
+        return {
+            'tripled_amount': self.group.sent_amount * Constants.multiplication_factor
+        }
 
     def sent_back_amount_choices(self):
         return currency_range(

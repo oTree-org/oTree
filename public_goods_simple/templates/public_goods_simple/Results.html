@@ -8,13 +8,10 @@
 {% block content %}
 
     <p>
-        Your group contributed {{ group.total_contribution }},
+        You started with an endowment of {{ Constants.endowment }}, of which you contributed {{ player.contribution }}.
+        Your group contributed {{ group.total_contributions }},
         resulting in an individual share of {{ group.individual_share }}.
-        Your profit is therefore:
-    </p>
-
-    <p>
-    {{ Constants.endowment }} - {{ player.contribution }} + {{ group.individual_share }} = {{ player.payoff }}
+        Your profit is therefore {{ player.payoff }}:
     </p>
 
     {% next_button %}

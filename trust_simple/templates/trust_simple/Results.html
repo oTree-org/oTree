@@ -9,22 +9,21 @@
 
 {% if player.id_in_group == 1 %}
     <p>
-        You sent Participant B <strong>{{ group.sent_amount }}</strong>.
-        Participant B returned <strong>{{group.sent_back_amount}}</strong>.
+        You sent Participant B {{ group.sent_amount }}.
+        Participant B returned {{group.sent_back_amount}}.
     </p>
     {% else %}
     <p>
-        Participant A sent you <strong>{{ group.sent_amount }}</strong>.
-        You returned <strong>{{group.sent_back_amount}}</strong>.
+        Participant A sent you {{ group.sent_amount }}.
+        You returned {{group.sent_back_amount}}.
     </p>
 
 {% endif %}
 
     <p>
-    Therefore, your total payoff is <strong>{{player.payoff}}</strong>.
+    Therefore, your total payoff is {{player.payoff}}.
     </p>
 
     {% include 'trust_simple/Instructions.html' %}
 
 {% endblock %}
-
