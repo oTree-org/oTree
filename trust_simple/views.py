@@ -36,7 +36,7 @@ class SendBack(Page):
         return currency_range(
             c(0),
             self.group.sent_amount * Constants.multiplication_factor,
-            c(1) * Constants.multiplication_factor
+            c(1)
         )
 
 

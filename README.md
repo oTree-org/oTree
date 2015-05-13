@@ -453,7 +453,7 @@ If you need a form's choices or validation logic to depend on some dynamic calcu
 Example:
 ```python
 def offer_choices(self):
-    return currency_range(0, self.player.endowment)
+    return currency_range(0, self.player.endowment, 1)
 ```
 * `def {field_name}_min(self)`
 
@@ -690,7 +690,9 @@ You can specify the payment currency in `settings.py`, by setting `REAL_WORLD_CU
 
 In oTree apps, currency values have their own data type. You can define a currency value with the `c()` function, e.g. `c(10)` or `c(0)`. Correspondingly, there is a special model field for currency values: `CurrencyField`. For example, each player has a `payoff` field, which is a `CurrencyField`. Currency values work just like numbers (you can do mathematical operations like addition, multiplication, etc), but when you pass them to an HTML template, they are automatically formatted as currency. For example, if you set `player.payoff = c(1.20)`, and then pass it to a template, it will be formatted as `$1.20` or `1,20 €`, etc., depending on your `REAL_WORLD_CURRENCY_CODE` and `LANGUAGE_CODE` settings.
 
-Note: instead of using Python's built-in `range` function, you should use oTree's `currency_range` with currency values. For example, `currency_range(c(0), c(0.10), c(0.02))` returns something like:
+Note: instead of using Python's built-in `range` function, you should use oTree's `currency_range` with currency values.
+It takes 3 arguments (start, stop, step), just like range. However, note that it is an inclusive range.
+For example, `currency_range(c(0), c(0.10), c(0.02))` returns something like:
 
 ```python
 [Money($0.00), Money($0.02), Money($0.04), Money($0.06), Money($0.08), Money($0.10)]

@@ -155,7 +155,8 @@ The second template will be called `Results.html`.
 
 Now we define our views, which decide the logic for how to display the HTML templates.
 
-Since we have 2 templates, we need 2 view classes, with the same names as the templates (`Contribute` and `Results`).
+Since we have 2 templates, we need 2 `Page` classes in `views.py`.
+The names should match those of the templates (`Contribute` and `Results`).
 
 First let's define `Contribute`. We need to define `form_model` and `form_fields` to specify that this page contains a form
 letting you set `Player.contribution`:
@@ -470,7 +471,7 @@ class SendBack(Page):
         return currency_range(
             c(0),
             self.group.sent_amount * Constants.multiplication_factor,
-            c(1) * Constants.multiplication_factor
+            c(1)
         )
 ```
 
@@ -544,6 +545,18 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
+```
+
+Then we define the page sequence:
+
+```
+page_sequence = [
+    Send,
+    WaitForP1,
+    SendBack,
+    ResultsWaitPage,
+    Results,
+]
 ```
 
 ## Add an entry to `SESSION_TYPES` in `settings.py`
