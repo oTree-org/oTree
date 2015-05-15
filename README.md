@@ -1129,14 +1129,10 @@ $ git add .
 $ git commit -am '[commit message]'
 ```
 
-If you get this output:
+(If you get the message `fatal: Not a git repository (or any of the parent directories): .git`
+then you first need to initialize the git repo.)
 
-```
-fatal: Not a git repository (or any of the parent directories): .git
-```
-
-Then you need to initialize the git repository.
-
+Then do:
 
 ```
 $ git push heroku master
