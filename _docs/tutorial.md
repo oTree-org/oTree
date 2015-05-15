@@ -142,7 +142,7 @@ The second template will be called `Results.html`.
 
     <p>
         You started with an endowment of {{ Constants.endowment }}, of which you contributed {{ player.contribution }}.
-        Your group contributed {{ group.total_contributions }},
+        Your group contributed {{ group.total_contribution }},
         resulting in an individual share of {{ group.individual_share }}.
         Your profit is therefore {{ player.payoff }}.
     </p>
