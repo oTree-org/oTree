@@ -1120,7 +1120,23 @@ Heroku generates a random name (in this case lit-bastion-5032) for your app, or 
 
 ### Deploy your code
 
-`cd` to the root directory of your oTree project. Then do:
+`cd` to the root directory of your oTree project.
+
+Make sure you have committed any changes as follows:
+
+```
+$ git add .
+$ git commit -am '[commit message]'
+```
+
+If you get this output:
+
+```
+fatal: Not a git repository (or any of the parent directories): .git
+```
+
+Then you need to initialize the git repository.
+
 
 ```
 $ git push heroku master
