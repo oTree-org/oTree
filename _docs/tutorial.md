@@ -13,7 +13,7 @@ The completed app is [here](https://github.com/oTree-org/oTree/tree/master/publi
 
 Create the public goods app with this command:
 
-`./otree startapp public_goods_simple`
+`python otree startapp public_goods_simple`
 
 Then go to the folder `public_goods_simple` that was created.
 
@@ -236,7 +236,7 @@ taking them to the next app in the sequence.
 ## Reset the database and run
 
 Before you run the server, you need to reset the database.
-In the launcher, click the button "clear the database". Or, on the command line, run `./otree resetdb`.
+In the launcher, click the button "clear the database". Or, on the command line, run `python otree resetdb`.
 
 Every time you add, change, or remove a field in `models.py`
 This is because we have defined new fields in `models.py`,
@@ -260,7 +260,7 @@ The completed app is [here](https://github.com/oTree-org/oTree/tree/master/trust
 
 ## Create the app
 
-`./otree startapp trust_simple`
+`python otree startapp trust_simple`
 
 ## Define models.py
 
@@ -575,8 +575,8 @@ page_sequence = [
 If you are on the command line, enter:
 
 ```
-./otree resetdb
-./otree runserver
+python otree resetdb
+python otree runserver
 ```
 
 If you are using the launcher, click the button equivalents to these commands.
