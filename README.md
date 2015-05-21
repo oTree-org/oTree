@@ -232,6 +232,8 @@ class Group(otree.models.BaseGroup):
 
 Every time you add, remove, or change a field in `models.py`, you need to run `python otree resetdb` (or, in the launcher, click "Clear Database").
 
+The full list of available fields is in the Django documentation [here](https://docs.djangoproject.com/en/1.7/ref/models/fields/#field-types).
+
 ### Constants
 
 The `Constants` class is the recommended place to put your app's parameters and other constants (i.e. things that do not vary from player to player)
