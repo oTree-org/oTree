@@ -582,3 +582,4 @@ python otree runserver
 If you are using the launcher, click the button equivalents to these commands.
 
 Then open your browser to [http://127.0.0.1:8000](http://127.0.0.1:8000) to play the game.
+
