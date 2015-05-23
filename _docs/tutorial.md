@@ -567,3 +567,13 @@ If you are on the command line, enter:
 If you are using the launcher, click the button equivalents to these commands.
 
 Then open your browser to [http://127.0.0.1:8000](http://127.0.0.1:8000) to play the game.
+
+# Part 3: Matching pennies
+
+We will now create a "Matching pennies" game with the following features:
+
+* 4 rounds
+* The roles of the players will be reversed halfway through
+* In each round, a "history box" will display the results of previous rounds
+* A random round will be chosen for payment
+
