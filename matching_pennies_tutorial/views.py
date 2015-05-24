@@ -31,9 +31,9 @@ class ResultsSummary(Page):
 
         return {
             'total_payoff': sum([p.payoff for p in self.player.in_all_rounds()]),
-            'paying_round': self.session.vars['paying_round']
+            'paying_round': self.session.vars['paying_round'],
+            'player_in_all_rounds': self.player.in_all_rounds(),
         }
-
 
 
 page_sequence = [

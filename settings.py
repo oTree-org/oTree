@@ -225,6 +225,14 @@ SESSION_TYPES = [
         ],
     },
     {
+        'name': 'matching_pennies_tutorial',
+        'display_name': "Matching Pennies (tutorial version)",
+        'num_demo_participants': 2,
+        'app_sequence': [
+            'matching_pennies_tutorial',
+        ],
+    },
+    {
         'name': 'traveler_dilemma',
         'display_name': "Traveler's Dilemma",
         'num_demo_participants': 2,

@@ -1,6 +1,11 @@
 # oTree tutorial
 
-This tutorial will cover the creation of 2 games: a simple public goods game, and a simple trust game.
+This tutorial will cover the creation of 3 games:
+
+* Public goods game
+* Trust game
+* Matching pennies
+
 Before proceeding through this tutorial, install oTree according to the instructions at
 [http://www.otree.org/download/](http://www.otree.org/download/)
 
@@ -592,6 +597,8 @@ We will now create a "Matching pennies" game with the following features:
 * In each round, a "history box" will display the results of previous rounds
 * A random round will be chosen for payment
 
+The completed app is [here](https://github.com/oTree-org/oTree/tree/master/matching_pennies_tutorial).
+
 ## Create the app
 
 `python otree startapp matching_pennies_tutorial`
@@ -703,7 +710,7 @@ class Subsession(otree.models.BaseSubsession):
 
 Now we define our `Group` class.
 We define the payoff method. We use `get_player_by_role` to fetch each of the 2 players in the group.
-We could also use `get_player_by_id`, but I find it easier to remember which player is which
+We could also use `get_player_by_id`, but I find it easier to identify the players
  by their roles as matcher/mismatcher.
 Then, depending on whether the penny sides match, we either make P1 or P2 the winner.
 
@@ -860,7 +867,7 @@ class ResultsWaitPage(WaitPage):
 
 ### ResultsSummary
 
-We now define the `ResultsSummary` page. Let's create `ResultsSummary.html`:
+Let's create `ResultsSummary.html`:
 
 ```
 {% extends "global/Base.html" %}
@@ -872,6 +879,19 @@ We now define the `ResultsSummary` page. Let's create `ResultsSummary.html`:
 
 {% block content %}
 
+    <table class="table">
+        <tr>
+            <th>Round</th>
+            <th>Player and outcome</th>
+        </tr>
+        {% for p in player_in_all_rounds %}
+            <tr>
+                <td>{{ p.subsession.round_number }}</td>
+                <td>You were the {{ p.role }} and {% if p.is_winner %} won {% else %} lost {% endif %}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
     <p>
         The paying round was {{ paying_round }}.
         Your total payoff is therefore {{ total_payoff }}.
@@ -881,11 +901,15 @@ We now define the `ResultsSummary` page. Let's create `ResultsSummary.html`:
 {% endblock %}
 ```
 
+Now we define the corresponding class in views.py.
 
+* It only gets shown in the last round, so we set `is_displayed` accordingly.
+* We retrieve the value of `paying_round` from `session.vars`
+* We get the user's total payoff by summing up how much they made in each round.
+* We pass the round history to the template with `player.in_all_rounds()`
 
-It only gets shown in the last round, so we set `is_displayed` accordingly.
-
-
+In the `Choice` page we used `in_previous_rounds`, but here we use `in_all_rounds`.
+This is because we also want to include the result of the current round.
 
 
 ```
@@ -898,20 +922,66 @@ class ResultsSummary(Page):
 
         return {
             'total_payoff': sum([p.payoff for p in self.player.in_all_rounds()]),
-            'paying_round': self.session.vars['paying_round']
+            'paying_round': self.session.vars['paying_round'],
+            'player_in_all_rounds': self.player.in_all_rounds(),
         }
 ```
 
-### Wait pages and page sequence
+The payoff is calculated in a Python "list comprehension".
+ These are frequently used in the oTree sample games,
+ so if you are curious you can read online about how list comprehensions work.
+ The same code could be written as:
+
+```
+total_payoff = 0
+for p in self.player.in_all_rounds():
+   total_payoff += p.payoff
+
+return {
+    'total_payoff': total_payoff,
+    ...
+```
+
+### Page sequence
+
+Now we define the `page_sequence`:
+
+```
+page_sequence = [
+    Choice,
+    ResultsWaitPage,
+    ResultsSummary
+]
+```
+
+This page sequence will loop for each round.
+However, `ResultsSummary` is skipped in every round except the last, because of how we set `is_displayed`,
+resulting in this sequence of pages:
+
+* Choice [Round 1]
+* ResultsWaitPage [Round 1]
+* Choice [Round 2]
+* ResultsWaitPage [Round 2]
+* Choice [Round 3]
+* ResultsWaitPage [Round 3]
+* Choice [Round 4]
+* ResultsWaitPage [Round 4]
+* ResultsSummary [Round 4]
 
 ## Add an entry to `SESSION_TYPES` in `settings.py`
 
+When we run a real experiment in the lab, we will want multiple groups,
+but to test the demo we just set `num_demo_participants` to 2,
+meaning there will be 1 group.
+
 ```
     {
-        'name': 'trust_simple',
-        'display_name': "Trust Game (simple version from tutorial)",
+        'name': 'matching_pennies_tutorial',
+        'display_name': "Matching Pennies (tutorial version)",
         'num_demo_participants': 2,
-        'app_sequence': ['trust_simple'],
+        'app_sequence': [
+            'matching_pennies_tutorial',
+        ],
     },
 ```
 
