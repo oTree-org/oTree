@@ -13,7 +13,7 @@ The completed app is [here](https://github.com/oTree-org/oTree/tree/master/publi
 
 Create the public goods app with this command:
 
-`./otree startapp public_goods_simple`
+`python otree startapp public_goods_simple`
 
 Then go to the folder `public_goods_simple` that was created.
 
@@ -142,9 +142,9 @@ The second template will be called `Results.html`.
 
     <p>
         You started with an endowment of {{ Constants.endowment }}, of which you contributed {{ player.contribution }}.
-        Your group contributed {{ group.total_contributions }},
+        Your group contributed {{ group.total_contribution }},
         resulting in an individual share of {{ group.individual_share }}.
-        Your profit is therefore {{ player.payoff }}:
+        Your profit is therefore {{ player.payoff }}.
     </p>
 
 {% endblock %}
@@ -155,7 +155,8 @@ The second template will be called `Results.html`.
 
 Now we define our views, which decide the logic for how to display the HTML templates.
 
-Since we have 2 templates, we need 2 view classes, with the same names as the templates (`Contribute` and `Results`).
+Since we have 2 templates, we need 2 `Page` classes in `views.py`.
+The names should match those of the templates (`Contribute` and `Results`).
 
 First let's define `Contribute`. We need to define `form_model` and `form_fields` to specify that this page contains a form
 letting you set `Player.contribution`:
@@ -235,7 +236,7 @@ taking them to the next app in the sequence.
 ## Reset the database and run
 
 Before you run the server, you need to reset the database.
-In the launcher, click the button "clear the database". Or, on the command line, run `./otree resetdb`.
+In the launcher, click the button "clear the database". Or, on the command line, run `python otree resetdb`.
 
 Every time you add, change, or remove a field in `models.py`
 This is because we have defined new fields in `models.py`,
@@ -259,7 +260,7 @@ The completed app is [here](https://github.com/oTree-org/oTree/tree/master/trust
 
 ## Create the app
 
-`./otree startapp trust_simple`
+`python otree startapp trust_simple`
 
 ## Define models.py
 
@@ -415,6 +416,8 @@ The `{% formfield %}` in the template must match the `form_model` and `form_fiel
 
 Also, we use `is_displayed` to only show this to P1; P2 skips the page.
 
+Note that we write `self.player.id_in_group`, because this is in `views.py`.
+
 ### SendBack
 
 This is the page that P2 sees to send money back. Here is the template:
@@ -445,7 +448,7 @@ You are Participant B. Participant A sent you {{group.sent_amount}} and you rece
 Here is the code from views.py. Notes:
 
 * We use `vars_for_template` to pass the variable `tripled_amount` to the template.
-Django does not let you multiply numbers directly in a template,
+Django does not let you do calculations directly in a template,
 so this number needs to be calculated in Python code and passed to the template.
 * We define a method `sent_back_amount_choices` to populate the dropdown menu dynamically.
 This is the feature called `{field_name}_choices`, which is explained in the reference documentation.
@@ -468,7 +471,7 @@ class SendBack(Page):
         return currency_range(
             c(0),
             self.group.sent_amount * Constants.multiplication_factor,
-            c(1) * Constants.multiplication_factor
+            c(1)
         )
 ```
 
@@ -544,6 +547,18 @@ class ResultsWaitPage(WaitPage):
 
 ```
 
+Then we define the page sequence:
+
+```
+page_sequence = [
+    Send,
+    WaitForP1,
+    SendBack,
+    ResultsWaitPage,
+    Results,
+]
+```
+
 ## Add an entry to `SESSION_TYPES` in `settings.py`
 
 ```
@@ -560,8 +575,8 @@ class ResultsWaitPage(WaitPage):
 If you are on the command line, enter:
 
 ```
-./otree resetdb
-./otree runserver
+python otree resetdb
+python otree runserver
 ```
 
 If you are using the launcher, click the button equivalents to these commands.
@@ -577,3 +592,332 @@ We will now create a "Matching pennies" game with the following features:
 * In each round, a "history box" will display the results of previous rounds
 * A random round will be chosen for payment
 
+## Create the app
+
+`python otree startapp matching_pennies_tutorial`
+
+## Define models.py
+
+We define our constants as we have previously.
+Matching pennies is a 2-person game,
+and the payoff for winning a paying round is 100 points.
+
+```
+class Constants:
+    name_in_url = 'matching_pennies_tutorial'
+    players_per_group = 2
+    num_rounds = 4
+    stakes = c(100)
+```
+
+Now let's define our `Player` class:
+
+* In each round, each player decides "Heads" or "Tails", so we define a field `penny_side`.
+* We also have a boolean field `is_winner` that records if this player won this round.
+* We define the `role` method to define which player is the "Matcher" and which is the "Mismatcher".
+
+So we have:
+
+```
+class Player(otree.models.BasePlayer):
+
+    # <built-in>
+    # ...
+    # </built-in>
+
+    penny_side = models.CharField(
+        choices=['Heads', 'Tails'],
+        widget=widgets.RadioSelect()
+    )
+
+    is_winner = models.BooleanField()
+
+    def role(self):
+        if self.id_in_group == 1:
+            return 'Mismatcher'
+        if self.id_in_group == 2:
+            return 'Matcher'
+```
+
+Now let's define the code to randomly choose a round for payment.
+Let's define the code in `Subsession.before_session_starts`,
+which is the place to put global code that initializes the state of the game,
+before gameplay starts.
+
+The value of the chosen round is "global" rather than different for each participant,
+so the logical place to store it is as a "global" variable in `self.session.vars`.
+
+So, we start by writing something like this,
+which chooses a random integer between 1 and 4,
+ and then assigns it into `session.vars`:
+
+```
+class Subsession(otree.models.BaseSubsession):
+
+    def before_session_starts(self):
+        paying_round = random.randint(1, Constants.num_rounds)
+        self.session.vars['paying_round'] = paying_round
+```
+
+There is a slight mistake, however.
+Because there are 4 rounds (i.e. subsessions), this code will get executed 4 times,
+each time overwriting the previous value of `session.vars['paying_round']`, which is superfluous.
+We can fix this with an `if` statement that makes it only run once (on the first round):
+
+```
+class Subsession(otree.models.BaseSubsession):
+
+    def before_session_starts(self):
+        if self.round_number == 1:
+            paying_round = random.randint(1, Constants.num_rounds)
+            self.session.vars['paying_round'] = paying_round
+```
+
+Now, let's also define the code to swap roles halfway through.
+This kind of group-shuffling code should also go in `before_session_starts`.
+We put it after our existing code.
+
+In oTree, groups are randomly determined in the first round,
+and in each round, the groups are kept the same as the previous round,
+ unless you shuffle them. So, at the beginning of round 3,
+ we should do the shuffle.
+ (So that the groups will be in opposite order during rounds 3 and 4.)
+
+ We use `group.get_players()` to get the ordered list of players in each group,
+ and then reverse it (e.g. the list `[P1, P2]` becomes `[P2, P1]`).
+ Then we use `group.set_players()` to set this as the new group order:
+
+```
+class Subsession(otree.models.BaseSubsession):
+
+    def before_session_starts(self):
+        if self.round_number == 1:
+            ...
+        if self.round_number == 3:
+            # reverse the roles
+            for group in self.get_groups():
+                players = group.get_players()
+                players.reverse()
+                group.set_players(players)
+```
+
+Now we define our `Group` class.
+We define the payoff method. We use `get_player_by_role` to fetch each of the 2 players in the group.
+We could also use `get_player_by_id`, but I find it easier to remember which player is which
+ by their roles as matcher/mismatcher.
+Then, depending on whether the penny sides match, we either make P1 or P2 the winner.
+
+So, we start with this:
+
+```
+class Group(otree.models.BaseGroup):
+
+    # <built-in>
+    ...
+    # </built-in>
+
+
+    def set_payoffs(self):
+        matcher = self.get_player_by_role('Matcher')
+        mismatcher = self.get_player_by_role('Mismatcher')
+
+        if matcher.penny_side == mismatcher.penny_side:
+            matcher.is_winner = True
+            mismatcher.is_winner = False
+        else:
+            matcher.is_winner = False
+            mismatcher.is_winner = True
+```
+
+We should expand this code by setting the actual `payoff` field.
+However, the player should only receive a payoff if the current round is the randomly chosen paying round.
+Otherwise, the payoff should be 0 points.
+So, we check the current round number and compare it against the value we previously stored in `session.vars`.
+We loop through both players (`[P1,P2]`, or `[mismatcher, matcher]`) and do the same check for both of them.
+
+```
+class Group(otree.models.BaseGroup):
+
+    # <built-in>
+    subsession = models.ForeignKey(Subsession)
+    # </built-in>
+
+
+    def set_payoffs(self):
+        matcher = self.get_player_by_role('Matcher')
+        mismatcher = self.get_player_by_role('Mismatcher')
+
+        if matcher.penny_side == mismatcher.penny_side:
+            matcher.is_winner = True
+            mismatcher.is_winner = False
+        else:
+            matcher.is_winner = False
+            mismatcher.is_winner = True
+        for player in [mismatcher, matcher]:
+            if self.subsession.round_number == self.session.vars['paying_round'] and player.is_winner:
+                player.payoff = Constants.stakes
+            else:
+                player.payoff = c(0)
+```
+
+## Define the templates and views
+
+This game essentially 2 pages:
+* A `Choice` page that gets repeated for each round. The user is asked to choose heads/tails,
+and they are also shown a "history box" showing the results of previous rounds.
+* A `ResultsSummary` page that only gets displayed once at the end,
+and tells the user their final payoff.
+
+### Choice
+
+In `views.py`, we define the `Choice` page.
+This page should contain a form field that sets `player.penny_side`,
+so we set `form_model` and `form_fields`.
+
+Also, on this page we would like to display a "history box" table
+that shows the result of all previous rounds.
+So, we can use `player.in_previous_rounds()`, which returns a list
+referring to the same participant in rounds 1, 2, 3, etc.
+(For more on the distinction between "player" and "participant", see the reference docs.)
+
+```
+class Choice(Page):
+
+    form_model = models.Player
+    form_fields = ['penny_side']
+
+    def vars_for_template(self):
+        return {
+            'player_in_previous_rounds': self.player.in_previous_rounds(),
+        }
+```
+
+We then create a template `Choice.html` below.
+This is similar to the templates we have previously created,
+but note the `{% for %}` loop that creates all rows in the history table.
+`{% for %}` is part of the Django template language.
+
+```
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Round {{ subsession.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+
+    <h4>Instructions</h4>
+    <p>
+        This is a matching pennies game.
+        Player 1 is the 'Mismatcher' and wins if the choices mismatch;
+        Player 2 is the 'Matcher' and wins if they match.
+
+    </p>
+
+    <p>
+        At the end, a random round will be chosen for payment.
+    </p>
+
+    <h4>Round history</h4>
+    <table class="table">
+        <tr>
+            <th>Round</th>
+            <th>Player and outcome</th>
+        </tr>
+        {% for p in player_in_previous_rounds %}
+            <tr>
+                <td>{{ p.subsession.round_number }}</td>
+                <td>You were the {{ p.role }} and {% if p.is_winner %} won {% else %} lost {% endif %}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <p>
+        In this round, you are the {{ player.role }}.
+    </p>
+
+    {% formfield player.penny_side with label="I choose:" %}
+
+    {% next_button %}
+
+{% endblock %}
+```
+
+### ResultsWaitPage
+
+Before a player proceeds to the next round`s `Choice` page,
+ they need to wait for the other player to complete the `Choice` page as well.
+ So, as usual, we use a `WaitPage`.
+ Also, once both players have arrived at the wait page, we call the `set_payoffs` method we defined earlier.
+
+```
+class ResultsWaitPage(WaitPage):
+
+    def after_all_players_arrive(self):
+        self.group.set_payoffs()
+```
+
+### ResultsSummary
+
+We now define the `ResultsSummary` page. Let's create `ResultsSummary.html`:
+
+```
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Final results
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        The paying round was {{ paying_round }}.
+        Your total payoff is therefore {{ total_payoff }}.
+    </p>
+
+
+{% endblock %}
+```
+
+
+
+It only gets shown in the last round, so we set `is_displayed` accordingly.
+
+
+
+
+```
+class ResultsSummary(Page):
+
+    def is_displayed(self):
+        return self.subsession.round_number == Constants.num_rounds
+
+    def vars_for_template(self):
+
+        return {
+            'total_payoff': sum([p.payoff for p in self.player.in_all_rounds()]),
+            'paying_round': self.session.vars['paying_round']
+        }
+```
+
+### Wait pages and page sequence
+
+## Add an entry to `SESSION_TYPES` in `settings.py`
+
+```
+    {
+        'name': 'trust_simple',
+        'display_name': "Trust Game (simple version from tutorial)",
+        'num_demo_participants': 2,
+        'app_sequence': ['trust_simple'],
+    },
+```
+
+## Reset the database and run
+
+```
+python otree resetdb
+python otree runserver
+```
