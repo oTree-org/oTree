@@ -631,7 +631,8 @@ class Constants:
 
 Now let's define our `Player` class:
 
-* In each round, each player decides "Heads" or "Tails", so we define a field `penny_side`.
+* In each round, each player decides "Heads" or "Tails", so we define a field `penny_side`,
+which will be displayed as a radio button.
 * We also have a boolean field `is_winner` that records if this player won this round.
 * We define the `role` method to define which player is the "Matcher" and which is the "Mismatcher".
 

@@ -527,10 +527,46 @@ You can copy and paste the markup into the template and use that as a starting p
 
 # Object model and `self`
 
-In oTree code, you will see the variable `self` all throughout the code. `self` is the way you refer to the current object in Python. It is therefore important to understand that the meaning of `self` is totally different depending on where you are in your code. For example, if you are inside a Page class, `self.player.payoff` refers to the current player object, but if you are inside the Player class in models.py, `self.player.payoff` is invalid because `self` is the player; you instead need to do `self.payoff`.
+In oTree code, you will see the variable `self` all throughout the code.
+In Python, `self` refers to the object whose class you are currently in.
 
-oTree's different objects are all connected; 
-here is an example of how to traverse these connections using the "dot" operator.
+For example, in this example, `self` refers to a `Player` object:
+
+```
+class Player(object):
+
+    def my_method(self):
+        return self.my_field
+```
+
+In the next example, however, `self` refers to a `Group` object:
+
+```
+class Group(object):
+
+    def my_method(self):
+        return self.my_field
+```
+
+`self` is conceptually similar to the word "me".
+You refer to yourself as "me", but others refer to you by your name.
+And when your friend says the word "me",
+it has a different meaning from when you say the word "me".
+
+oTree's different objects are all connected, as illustrated by this diagram.
+
+https://i.imgur.com/foFSxix.jpg
+
+Player, group, subsession, and session are in a simple hierarchy,
+'session' being at the top and 'player' being at the bottom.
+Then, the 'page' has an arrow to all 4 of these objects.
+
+For example, if you are in a method on the `Player` class,
+you can access the player's payoff with `self.payoff` (because `self` is the player).
+But if you are inside a `Page` class in `views.py`, the equivalent expression
+you instead need to do `self.player.payoff`, which traverses the pointer from 'page' to 'player'.
+
+Here are some code examples to illustrate:
 
 ```python
 class Session(...) # this class is defined in oTree-core
@@ -630,7 +666,9 @@ class MyPage(Page):
 
 ```
 
-You can follow pointers in a transitive manner. For example, if you are in the Page class, you can access the participant as `self.player.participant`. If you are in the Player class, you can access the session type as `self.session.session_type`.
+You can follow pointers in a transitive manner.
+For example, if you are in the Page class, you can access the participant as `self.player.participant`.
+If you are in the Player class, you can access the session type as `self.session.session_type`.
 
 # Groups and multiplayer games
 
