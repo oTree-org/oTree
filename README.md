@@ -555,7 +555,7 @@ it has a different meaning from when you say the word "me".
 
 oTree's different objects are all connected, as illustrated by this diagram.
 
-https://i.imgur.com/foFSxix.jpg
+![](https://i.imgur.com/foFSxix.jpg)
 
 Player, group, subsession, and session are in a simple hierarchy,
 'session' being at the top and 'player' being at the bottom.
