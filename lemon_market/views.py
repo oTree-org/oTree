@@ -51,7 +51,7 @@ class Production(Page):
     form_model = models.Player
     form_fields = ['quality', 'price']
 
-    auto_submit_values = {'price': Constants.INITIAL, 'quality': 20}
+    timeout_submission = {'price': Constants.INITIAL, 'quality': 20}
 
     def is_displayed(self):
         return self.player.role().startswith('seller')

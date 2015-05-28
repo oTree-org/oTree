@@ -80,7 +80,7 @@ class Accept(Page):
     form_model = models.Group
     form_fields = ['contract_accepted', 'agent_work_effort']
 
-    auto_submit_values = {
+    timeout_submission = {
         'contract_accepted': False,
         'agent_work_effort': 1,
     }

@@ -31,7 +31,7 @@ class Contribute(Page):
     form_model = models.Player
     form_fields = ['contribution']
 
-    auto_submit_values = {'contribution': c(Constants.endowment/2)}
+    timeout_submission = {'contribution': c(Constants.endowment/2)}
 
 
 class ResultsWaitPage(WaitPage):
