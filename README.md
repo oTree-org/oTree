@@ -15,6 +15,14 @@ oTree programming is accessible to programmers without advanced experience in we
 
 This repository contains the games; the oTree core libraries are [here](https://github.com/oTree-org/otree-core).
 
+## Quick start
+
+```
+pip install -r requirements_base.txt
+python otree resetdb
+python otree runserver
+```
+
 ## Contact
 chris@otree.org (you can also add me on Skype by searching this email address; please mention oTree in your contact request)
 
