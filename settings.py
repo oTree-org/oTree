@@ -107,6 +107,7 @@ SESSION_TYPE_DEFAULTS = {
         'description': 'Description for your experiment',
         'frame_height': 500,
         'preview_template': 'global/MTurkPreview.html',
+        'mturk_error_page': 'global/MTurkErrorPage.html',
         'minutes_allotted_per_assignment': 60,
         'expiration_hours': 7*24, # 7 days
     },
