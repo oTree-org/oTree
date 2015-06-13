@@ -39,7 +39,7 @@ ADMIN_USERNAME = 'admin'
 AUTH_LEVEL = os.environ.get('OTREE_AUTH_LEVEL')
 ACCESS_CODE_FOR_DEFAULT_SESSION = 'my_access_code'
 
-# settting for intergration with AWS Mturk
+# setting for integration with AWS Mturk
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
@@ -94,6 +94,13 @@ MTURK_WORKER_REQUIREMENTS = [
     PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
     NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5)
 ]
+
+# since workers on Amazon MTurk can return the hit
+# we need extra participants created on the
+# server.
+# The following setting is ratio:
+# num_participants_server / num_participants_mturk
+MTURK_NUM_PARTICIPANTS_MULT = 2
 
 SESSION_TYPE_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
