@@ -1,0 +1,38 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Decide
+{% endblock %}
+
+{% block content %}
+
+    <div class="box effect7">
+    <h4>Instructions</h4>
+    <p>
+        In this study, you will be in a randomly formed group of
+        {{ Constants.players_per_group }} participants.
+        Each participant in the group is given {{ Constants.endowment }}.
+        Each participant in the group decides how much she or he is going to contribute to
+        the project. Contribution could be any amount from 0 to {{ Constants.endowment }}.
+    </p>
+    <p>
+        The earnings from the project are calculated as follows:
+        The contributions of all {{ Constants.players_per_group }} participants are added up,
+        the total contribution is multiplied by a factor of {{ Constants.efficiency_factor }},
+        and the resulting amount is the total earnings from the project,
+        which is evenly split among all {{ Constants.players_per_group }} participants.
+        Your payoff equals your earnings from the project,
+        plus the amount you did not contribute.
+    </p>
+    </div>
+
+
+    {% formfield player.contribution with label="How much will you contribute to the project?" %}
+
+    {% next_button %}
+
+
+
+{% endblock %}
