@@ -40,6 +40,8 @@ class Constants:
     multiplication_factor = 3
     bonus = c(10)
 
+    training_answer_x_correct = c(130)
+    training_answer_y_correct = c(10)
 
 class Subsession(otree.models.BaseSubsession):
 
@@ -61,6 +63,7 @@ class Group(otree.models.BaseGroup):
 
     sent_back_amount = models.CurrencyField(
         doc="""Amount sent back by P2""",
+        min=c(0),
     )
 
     def set_payoffs(self):
@@ -68,9 +71,6 @@ class Group(otree.models.BaseGroup):
         p2 = self.get_player_by_id(2)
         p1.payoff = Constants.bonus + Constants.amount_allocated - self.sent_amount + self.sent_back_amount
         p2.payoff = Constants.bonus + self.sent_amount * Constants.multiplication_factor - self.sent_back_amount
-
-    def sent_back_amount_bounds(self):
-        return [0, self.sent_amount * Constants.multiplication_factor]
 
 
 class Player(otree.models.BasePlayer):

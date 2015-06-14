@@ -20,12 +20,10 @@ class PlayerBot(Bot):
             'q_gender': 'Male'})
 
         self.submit(views.CognitiveReflectionTest, {
-            'crt_bat_float': 0.10,
+            'crt_bat': 10,
             'crt_widget': 5,
             'crt_lake': 48
         })
-
-        self.submit(views.End)
 
     def validate_play(self):
         pass

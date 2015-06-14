@@ -9,7 +9,7 @@
 
     {% if num_q == 1 %}
         <p>
-            {% formfield player.training_question_1 with label='Suppose Player 1 picked "Heads" and Player 2 guessed "Tails". Which of the following will be the result of that round?' %}%}
+            {% formfield player.training_question_1 with label=Constants.training_question_1 %}
         </p>
     {% endif %}
 

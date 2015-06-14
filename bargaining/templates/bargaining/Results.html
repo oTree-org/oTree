@@ -1,6 +1,5 @@
 {% extends "global/Base.html" %}
 {% load staticfiles otree_tags %}
-{% load i18n %}
 
 {% block title %}
     Results
@@ -14,12 +13,9 @@
 <tr><th>The other participant demanded</th><td>{{player.other_player.request_amount}}</td></tr>
 <tr><th>Sum of your demands</th><td>{{sum}}</td></tr>
 <tr><th>Thus you earn</th><td>{{earn}}</td></tr>
-<tr><th>In addition you get a participation fee of</th><td>10</td></tr>
+<tr><th>In addition you get a participation fee of</th><td>10 points</td></tr>
 <tr><th>So in sum you will get</th><td>{{player.payoff}}</td></tr>
 </table>
-<p>
-To complete the study, please answer a short questionnaire that will now follow.
-</p>
 
 <p>{% next_button %}</p>
 

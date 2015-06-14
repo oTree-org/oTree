@@ -1,6 +1,5 @@
 {% extends "global/Base.html" %}
 {% load staticfiles otree_tags %}
-{% load i18n %}
 
 
 {% block title %}
@@ -11,7 +10,7 @@
 
     <p>
         {% if group.contract_accepted %}
-            {% if participate_condition %}
+            {% if player.role == 'agent' %}
             You <strong>accepted</strong> the contract.
             {% else %}
             Participant B <strong>accepted</strong> your contract.
@@ -46,7 +45,6 @@
         {% endif %}
     </p>
 
-    <p>To complete the study, please answer a short questionnaire that will now follow.</p>
     <p>{% next_button %}</p>
 
     {% include "principal_agent/Rules.html" %}

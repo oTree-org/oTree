@@ -7,8 +7,6 @@ from .models import Constants
 
 class Demographics(Page):
 
-    template_name = 'survey/Survey_Demo.html'
-
     form_model = models.Player
     form_fields = ['q_country',
                   'q_age',
@@ -17,24 +15,15 @@ class Demographics(Page):
 
 class CognitiveReflectionTest(Page):
 
-    template_name = 'survey/Survey_Cog.html'
-
     form_model = models.Player
-    form_fields = ['crt_bat_float',
+    form_fields = ['crt_bat',
                   'crt_widget',
                   'crt_lake']
 
-    def after_valid_form_submission(self):
-        self.player.crt_bat = self.player.crt_bat_float * 100
-
-
-class End(Page):
-
-    def vars_for_template(self):
+    def before_next_page(self):
         self.player.set_payoff()
-        return None
 
-
-page_sequence = [Demographics,
-            CognitiveReflectionTest,
-            End]
+page_sequence = [
+    Demographics,
+    CognitiveReflectionTest
+]

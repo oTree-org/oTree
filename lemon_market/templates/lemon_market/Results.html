@@ -9,16 +9,16 @@ Results (Period {{subsession.round_number}} of {{Constants.num_rounds}})
 {% block content %}
 You are {{player.role}}. 
 {% if buyer.choice %}
-{% if player.role == 'buyer' %}
-You bought from seller {{buyer.choice}}. The quality grade of your purchase is <strong>{{seller.get_quality_display}}</strong>.
-{% else %}
-The buyer purchased a <strong>{{seller.get_quality_display}}</strong> grade from <strong>{{seller.role}}</strong> at a price of <strong>{{seller.price}}</strong>.
-{% endif %}
-{# buyer bought nothing #}
+    {% if player.role == 'buyer' %}
+        You bought from seller {{buyer.choice}}. The quality grade of your purchase is <strong>{{seller.get_quality_display}}</strong>.
+    {% else %}
+        The buyer purchased a <strong>{{seller.get_quality_display}}</strong> grade from <strong>{{seller.role}}</strong> at a price of <strong>{{seller.price}}</strong>.
+    {% endif %}
+    {# buyer bought nothing #}
 {% elif player.role == 'buyer' %}
-You bought nothing in this period.
+    You bought nothing in this period.
 {% else %}
-The buyer bought nothing in this period.
+    The buyer bought nothing in this period.
 {% endif %}
 Thus your period payoff is <strong>{{player.payoff}}</strong>.
 

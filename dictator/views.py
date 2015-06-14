@@ -52,8 +52,6 @@ class Offer(Page):
 
 class ResultsWaitPage(WaitPage):
 
-
-
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
@@ -61,6 +59,7 @@ class ResultsWaitPage(WaitPage):
         if self.player.id_in_group == 2:
             return "You are participant 2. \
                 Waiting for participant 1 to decide."
+        return 'Please wait'
 
 
 class Results(Page):

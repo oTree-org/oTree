@@ -163,7 +163,7 @@ class Results(Page):
         return self.subsession.round_number == Constants.num_rounds
 
     def total_payoff(self):
-        return self.player.payoff + self.player.participant.session.fixed_pay
+        return self.player.payoff + self.player.participant.session.participation_fee
 
     def vars_for_template(self):
 

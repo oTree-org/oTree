@@ -61,31 +61,23 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    template_name = 'global/ResultsTable.html'
-
     def vars_for_template(self):
         other = self.player.other_player().claim
         if self.player.claim < other:
             reward = Constants.reward
+            penalty = c(0)
         elif self.player.claim > other:
-            reward = -Constants.penalty
+            reward = c(0)
+            penalty = Constants.penalty
         else:
-            reward = 0
+            reward = c(0)
+            penalty = c(0)
         return {
-            'table': [
-                ('', 'Points'),
-                ('You claimed', self.player.claim),
-                ('The other traveler claimed',
-                 self.player.other_player().claim),
-                ('Amount paid to both',
-                 int(self.player.payoff - Constants.bonus - reward)),
-                ('Your reward/penalty', reward and '%+i' % reward),
-                ('Thus you receive',
-                 int(self.player.payoff - Constants.bonus)),
-                ('In addition you get a participation fee of',
-                 Constants.bonus),
-                ('So in sum you will get', self.player.payoff),
-                ]}
+            'reward': reward,
+            'penalty': penalty,
+            'payoff_before_bonus': self.player.payoff - Constants.bonus,
+            'amount_paid_to_both': self.player.payoff - Constants.bonus - reward,
+        }
 
 
 page_sequence = [Introduction,

@@ -84,13 +84,13 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     # training
-    training_buyer_earnings = models.IntegerField(
+    training_buyer_earnings = models.CurrencyField(
         verbose_name="Buyer's period payoff would be")
 
-    training_seller1_earnings = models.IntegerField(
+    training_seller1_earnings = models.CurrencyField(
         verbose_name="Seller 1's period payoff would be")
 
-    training_seller2_earnings = models.IntegerField(
+    training_seller2_earnings = models.CurrencyField(
         verbose_name="Seller 2's period payoff would be")
 
     # seller
@@ -107,7 +107,7 @@ class Player(otree.models.BasePlayer):
         widget=widgets.RadioSelectHorizontal())
 
     # buyer
-    choice = models.PositiveSmallIntegerField(
+    choice = models.PositiveIntegerField(
         choices=[(i, 'Buy from seller %i' % i) for i in
                  range(1, Constants.players_per_group)] + [(0, 'Buy nothing')],
         blank=True,
