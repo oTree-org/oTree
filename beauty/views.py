@@ -60,10 +60,6 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    def total_payoff(self):
-        return self.player.payoff + Constants.fixed_pay
-
-
     def vars_for_template(self):
         other_guesses = []
         winners_cnt = int(self.player.is_winner)
@@ -71,14 +67,13 @@ class Results(Page):
             other_guesses.append(p.guess_value)
             winners_cnt += int(p.is_winner)
 
-        return { #
-                'other_guesses': other_guesses, #
-                'other_guesses_count': len(other_guesses), #
-                'two_third_average': round(self.group.two_third_guesses, 4), #
-                'winners_cnt': winners_cnt,
-
-
-                 } #
+        return {
+            'other_guesses': other_guesses,
+            'other_guesses_count': len(other_guesses),
+            'two_third_average': round(self.group.two_third_guesses, 4),
+            'winners_cnt': winners_cnt,
+            'total_payoff': self.player.payoff + Constants.fixed_pay,
+        }
 
 
 page_sequence = [Introduction,

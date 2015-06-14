@@ -1,6 +1,5 @@
 {% extends "global/Base.html" %}
 {% load staticfiles otree_tags %}
-{% load i18n %}
 
 {% block title %}
     Results
@@ -12,18 +11,17 @@
 You chose to send participant B <strong>{{group.sent_amount}}</strong>. Participant B returned <strong>{{group.sent_back_amount}}</strong>.
 </p>
 <p>
-You were initially endowed with <strong>100 points</strong>, chose to send <strong>{{group.sent_amount}}</strong>, received <strong>{{group.sent_back_amount}}</strong> thus you now have <strong>100-{{group.sent_amount}}+{{sent_back_amount}}={{result}}</strong>.
+You were initially endowed with <strong>100 points</strong>, chose to send <strong>{{group.sent_amount}}</strong>, received <strong>{{group.sent_back_amount}}</strong> thus you now have <strong>(100 points)-{{group.sent_amount}}+{{group.sent_back_amount}}={{result}}</strong>.
 {% else %}
 Participant A sent you <strong>{{group.sent_amount}}</strong>. They were tripled so you received <strong>{{tripled_amount}}</strong>. You chose to return <strong>{{group.sent_back_amount}}</strong>.
 </p>
 <p>
-You were initially endowed with <strong>0 points</strong>, received <strong>{{tripled_amount}}</strong>, chose to return <strong>{{group.sent_back_amount}}</strong> thus you now have <strong>{{tripled_amount}}-{{group.sent_back_amount}}={{result}}</strong>.
+You were initially endowed with <strong>0 points</strong>, received <strong>{{tripled_amount}}</strong>, chose to return <strong>{{group.sent_back_amount}}</strong> thus you now have <strong>({{tripled_amount}})-({{group.sent_back_amount}})=({{result}})</strong>.
 {% endif %}
 </p>
 <p>
 In addition, you received {{Constants.bonus}} for participation. Therefore, your total payoff is <strong>{{player.payoff}}</strong>.
 </p>
-<p>To complete the study, please answer a short questionnaire that will now follow.</p>
 
 <p>{% next_button %}</p>
 

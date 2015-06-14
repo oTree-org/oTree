@@ -84,6 +84,9 @@ class SendBack(Page):
                 'prompt':
                 'Please enter a number from 0 to %s:' % tripled_amount}
 
+    def sent_back_amount_max(self):
+        return self.group.sent_amount * Constants.multiplication_factor
+
 
 class ResultsWaitPage(WaitPage):
 
@@ -101,6 +104,7 @@ class Results(Page):
 
         return {'amount_allocated': Constants.amount_allocated,
                 'result': self.player.payoff - Constants.bonus,
+                'tripled_amount': self.group.sent_amount * Constants.multiplication_factor
                 }
 
 

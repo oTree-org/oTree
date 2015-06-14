@@ -80,6 +80,11 @@ class Accept(Page):
     form_model = models.Group
     form_fields = ['contract_accepted', 'agent_work_effort']
 
+    timeout_submission = {
+        'contract_accepted': False,
+        'agent_work_effort': 1,
+    }
+
     def vars_for_template(self):
         return {
             'EFFORT_TO_RETURN': safe_json(Constants.EFFORT_TO_RETURN),
@@ -104,6 +109,7 @@ class Results(Page):
         return {
             'fixed_pay_int': int(self.group.agent_fixed_pay),
             'received': self.player.payoff - Constants.bonus,
+            'effort_cost': cost_from_effort(self.group.agent_work_effort),
         }
 
 

@@ -50,7 +50,6 @@ class Player(otree.models.BasePlayer):
                                 verbose_name='What is your gender?',
                                 widget=widgets.RadioSelect())
 
-    crt_bat_float = models.DecimalField(max_digits=6, decimal_places=2)
     crt_bat = models.PositiveIntegerField()
     crt_widget = models.PositiveIntegerField()
     crt_lake = models.PositiveIntegerField()

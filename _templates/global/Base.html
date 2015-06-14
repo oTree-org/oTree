@@ -1,0 +1,9 @@
+{% extends "otree/FormPage.html" %}
+
+{% load staticfiles otree_tags %}
+
+
+{% block head_content  %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}global/custom.css" />
+{% endblock %}

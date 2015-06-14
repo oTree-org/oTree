@@ -1,6 +1,5 @@
 {% extends "global/Base.html" %}
 {% load staticfiles otree_tags %}
-{% load i18n %}
 
 {% block title %}
     Results
@@ -33,9 +32,6 @@
         <tr><td>So in sum you will get:</td><td>{{ player.payoff }}</td></tr>
     </table>
     <p></p>
-    <p>
-        To complete the study, please answer a short questionnaire that will now follow.
-    </p>
 
     {% next_button %}
     

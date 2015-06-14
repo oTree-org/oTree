@@ -5,25 +5,12 @@ from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
 from .models import Constants
 
-def vars_for_all_templates(self):
-    return {
-            'endowment': Constants.endowment,
-            'players_per_group': Constants.players_per_group,
-            'efficiency_factor': Constants.efficiency_factor
-            }
-
-
 class Introduction(Page):
 
     """Description of the game: How to play and returns expected"""
-
-    def vars_for_template(self):
-        return {'no_of_players': Constants.players_per_group,
-                'efficiency_factor': Constants.efficiency_factor}
-
+    pass
 
 class Question(Page):
-    #template_name = 'public_goods/Question.html'
 
     def is_displayed(self):
         return True
@@ -37,7 +24,6 @@ class Feedback(Page):
         return True
 
 
-
 class Contribute(Page):
 
     """Player: Choose how much to contribute"""
@@ -45,7 +31,7 @@ class Contribute(Page):
     form_model = models.Player
     form_fields = ['contribution']
 
-    auto_submit_values = {'contribution': c(Constants.endowment/2)}
+    timeout_submission = {'contribution': c(Constants.endowment/2)}
 
 
 class ResultsWaitPage(WaitPage):

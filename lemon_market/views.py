@@ -51,7 +51,7 @@ class Production(Page):
     form_model = models.Player
     form_fields = ['quality', 'price']
 
-    auto_submit_values = {'price': Constants.INITIAL, 'quality': 20}
+    timeout_submission = {'price': Constants.INITIAL, 'quality': 20}
 
     def is_displayed(self):
         return self.player.role().startswith('seller')
@@ -98,7 +98,7 @@ class Results(Page):
         buyer = self.group.get_player_by_role('buyer')
 
         return {
-
+            'buyer': buyer,
             'seller': buyer.choice and self.group.get_player_by_id(
                 buyer.choice + 1)
                 }

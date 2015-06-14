@@ -1,6 +1,5 @@
 {% extends "global/Base.html" %}
 {% load staticfiles otree_tags %}
-{% load i18n %}
 
 {% block title %}
     Results
@@ -33,10 +32,6 @@
             <td>{{ total_plus_base }}</td>
         </tr>
     </table>
-
-    <p>
-        To complete the study, please answer the questionnaire that will now follow.
-    </p>
 
     {% next_button %}
 

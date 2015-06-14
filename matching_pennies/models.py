@@ -41,16 +41,15 @@ class Constants:
     base_points = c(50)
     training_1_correct = 'Player 1 gets 100 points, Player 2 gets 0 points'
     feedback1_explanation = 'Player 1 gets 100 points, Player 2 gets 0 points'
-    feedback1_question = 'Suppose Player 1 picked "Heads" and Player 2 guessed "Tails". Which of the following will be the result of that round?',
+    training_question_1 = 'Suppose Player 1 picked "Heads" and Player 2 guessed "Tails". Which of the following will be the result of that round?'
 
 class Subsession(otree.models.BaseSubsession):
 
     def before_session_starts(self):
-        if self.round_number > 1:
-            for group in self.get_groups():
-                players = group.get_players()
-                players.reverse()
-                group.set_players(players)
+        for group in self.get_groups():
+            players = group.get_players()
+            players.reverse()
+            group.set_players(players)
 
 class Group(otree.models.BaseGroup):
 

@@ -7,24 +7,24 @@ Solution to Understanding Question {{ num_q }} of {{ total_q }}
 
 
 {% block content %}
-{% ifequal x 130 %}
-<p class="text-success">
-Your answer {{player.training_answer_x}} for participant A was correct.
-</p>
+{% if player.training_answer_x == Constants.training_answer_x_correct %}
+    <p class="text-success">
+    Your answer {{player.training_answer_x}} for participant A was correct.
+    </p>
 {% else %}
-<p class="text-danger">
-Your answer {{player.training_answer_x}} for participant A was incorrect.
-</p>
-{% endifequal %}
-{% ifequal y 10 %}
-<p class="text-success">
-Your answer {{player.training_answer_y}} for participant B was correct.
-</p>
+    <p class="text-danger">
+    Your answer {{player.training_answer_x}} for participant A was incorrect.
+    </p>
+{% endif %}
+{% if player.training_answer_y == Constants.training_answer_y_correct %}
+    <p class="text-success">
+    Your answer {{player.training_answer_y}} for participant B was correct.
+    </p>
 {% else %}
-<p class="text-danger">
-Your answer {{player.training_answer_y}} for participant B was incorrect.
-</p>
-{% endifequal %}
+    <p class="text-danger">
+    Your answer {{player.training_answer_y}} for participant B was incorrect.
+    </p>
+{% endif %}
 <p>
 Suppose that participant A sent 20 points to participant B. Having received the tripled amount, participant B sent 50 points to participant A. In the end, how many points would participant A and B have?
 </p>

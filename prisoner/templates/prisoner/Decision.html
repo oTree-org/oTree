@@ -1,16 +1,46 @@
 {% extends "global/Base.html" %}
 {% load staticfiles otree_tags %}
-{% load i18n %}
 
 {% block title %}
     Your Choice
 {% endblock %}
 
+{% block custom_styles %}
+
+    <style>
+        .highlight-row-on-hover:hover td {
+            background-color: #fcf8e3;
+        }
+    </style>
+
+{% endblock %}
+
 {% block content %}
 
-    {% formfield player.decision with label="I will" %}
+    <div class="form-group required">
+        <table class="table table-bordered text-center" style="width: auto; margin: auto">
+            <tr>
+                <th colspan="2" rowspan="2"></th>
+                <th colspan="2">The Other Participant</th>
+            </tr>
+            <tr>
+                <th>Cooperate</th>
+                <th>Defect</th>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th rowspan="2"><span class="rotate90">You</span></th>
+                <td><button name="decision" value="Cooperate" class="btn btn-primary btn-large">I will cooperate</button></td>
+                <td>{{Constants.cooperate_amount}}, {{Constants.cooperate_amount}}</td>
+                <td>0 point, {{Constants.defect_cooperate_amount}}</td>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <td><button name="decision" value="Defect" class="btn btn-primary btn-large">I will defect</button></td>
+                <td>{{Constants.defect_cooperate_amount}}, 0 point</td>
+                <td>{{Constants.defect_amount}}, {{Constants.defect_amount}}</td>
+            </tr>
+        </table>
+    </div>
 
-    {% next_button %}
 
     {% include 'prisoner/Instructions.html' %}
 

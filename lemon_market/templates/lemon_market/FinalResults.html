@@ -11,11 +11,10 @@ You have finished all 3 periods. Purchases for all periods are summarized below:
 <p>
 You are <strong>{{player.role}}</strong>. The period <strong>{{player.subsession.round_number}}</strong> was selected for payoffs and your payoff for this period was <strong>{{player.payoff}}</strong> points. In addition, you received {{ participation_fee }} points for participation. Thus, your total payoff is <strong>{{payoff}}</strong>.
 </p>
-<p>
-To complete the study, please answer a short questionnaire that will now follow.
-</p>
-{% next_button %}
-<script>
+
+    {% next_button %}
+
+    <script>
 {% include "lemon_market/FinalResults.js" %}
 </script>
 {% endblock %}
