@@ -10,12 +10,15 @@ import otree.settings
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-
+# OTREE_PRODUCTION just controls whether Django runs in
+# DEBUG mode. If OTREE_PRODUCTION==1, then DEBUG=False
 if os.environ.get('OTREE_PRODUCTION') in {None, '', '0'}:
     DEBUG = True
 else:
     DEBUG = False
 
+# IS_OTREE_DOT_ORG is only used on demo.otree.org.
+# you can assume it is None/''/0.
 if os.environ.get('IS_OTREE_DOT_ORG') in {None, '', '0'}:
     ADMIN_PASSWORD = 'otree'
     # don't share this with anybody.
@@ -23,6 +26,8 @@ if os.environ.get('IS_OTREE_DOT_ORG') in {None, '', '0'}:
     # and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzz'
 else:
+    # ignore the next 2 lines;
+    # only used on demo.otree.org
     ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
     SECRET_KEY = os.environ['OTREE_SECRET_KEY']
 
@@ -36,7 +41,25 @@ DATABASES = {
 
 
 ADMIN_USERNAME = 'admin'
+
+# AUTH_LEVEL:
+# If you are launching an experiment and want visitors to only be able to
+# play your app if you provided them with a start link, set the
+# environment variable OTREE_AUTH_LEVEL to EXPERIMENT.
+
+# If you would like to put your site online in public demo mode where
+# anybody can play a demo version of your game, set OTREE_AUTH_LEVEL
+# to DEMO. This will allow people to play in demo mode, but not access
+# the full admin interface.
+
 AUTH_LEVEL = os.environ.get('OTREE_AUTH_LEVEL')
+
+# ACCESS_CODE_FOR_DEFAULT_SESSION:
+# If you have a "default session" set,
+# then an access code will be appended to the URL for authentication.
+# You can change this as frequently as you'd like,
+# to prevent unauthorized server access.
+
 ACCESS_CODE_FOR_DEFAULT_SESSION = 'my_access_code'
 
 # setting for integration with AWS Mturk
