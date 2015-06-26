@@ -63,6 +63,8 @@ class Production(Page):
                 Constants.num_rounds),
             'question': 'You are %s.' % self.player.role()}
 
+class SimpleWaitPage(WaitPage):
+    pass
 
 class Purchase(Page):
 
@@ -77,9 +79,6 @@ class Purchase(Page):
         return {
             'title': 'Purchase (Period %i of %i)' % (self.subsession.round_number, Constants.num_rounds)
             }
-
-class SimpleWaitPage(WaitPage):
-    pass
 
 class ResultsWaitPage(WaitPage):
 
@@ -113,7 +112,7 @@ class FinalResults(Page):
         for player in self.player.in_all_rounds():
             if player.subsession.final:
                 break
-        data = {'player': player,
+        data = {'old_player': player,
                 'payoff': player.payoff + Constants.participation_fee,
                 'participation_fee': Constants.participation_fee}
         # 
