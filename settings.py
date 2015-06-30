@@ -112,12 +112,20 @@ DEMO_PAGE_INTRO_TEXT = """
 # and also in docs for boto:
 # https://boto.readthedocs.org/en/latest/ref/mturk.html?highlight=mturk#module-boto.mturk.qualification
 
-MTURK_WORKER_REQUIREMENTS = [
-    LocaleRequirement("EqualTo", "US"),
-    PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
-    NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5),
-]
-
+mturk_hit_settings = {
+    'keywords': ['easy', 'bonus', 'choice', 'study'],
+    'title': 'Title for your experiment',
+    'description': 'Description for your experiment',
+    'frame_height': 500,
+    'preview_template': 'global/MTurkPreview.html',
+    'minutes_allotted_per_assignment': 60,
+    'expiration_hours': 7*24, # 7 days
+    'qualification_requirements': [
+        LocaleRequirement("EqualTo", "US"),
+        PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
+        NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5)
+    ]
+}
 
 SESSION_TYPE_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
@@ -125,15 +133,7 @@ SESSION_TYPE_DEFAULTS = {
     'num_bots': 12,
     'doc': "",
     'group_by_arrival_time': False,
-    'mturk_hit_settings': {
-        'keywords': ['easy', 'bonus', 'choice', 'study'],
-        'title': 'Title for your experiment',
-        'description': 'Description for your experiment',
-        'frame_height': 500,
-        'preview_template': 'global/MTurkPreview.html',
-        'minutes_allotted_per_assignment': 60,
-        'expiration_hours': 7*24, # 7 days,
-    },
+    'mturk_hit_settings': mturk_hit_settings
 }
 
 SESSION_TYPES = [
