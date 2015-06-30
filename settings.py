@@ -120,6 +120,12 @@ mturk_hit_settings = {
     'preview_template': 'global/MTurkPreview.html',
     'minutes_allotted_per_assignment': 60,
     'expiration_hours': 7*24, # 7 days
+    'grant_qualification': {
+        'name': 'no retakes for experiment ###',
+        'description': 'You are not allowed to retake this experiment',
+        'status': 'Active',
+        'auto_granted': True,
+    },
     'qualification_requirements': [
         LocaleRequirement("EqualTo", "US"),
         PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
