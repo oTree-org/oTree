@@ -1,9 +1,7 @@
 import os
 
 import dj_database_url
-from boto.mturk.qualification import (LocaleRequirement,
-                                      PercentAssignmentsApprovedRequirement,
-                                      NumberHitsApprovedRequirement)
+from boto.mturk import qualification
 
 import otree.settings
 
@@ -120,11 +118,12 @@ mturk_hit_settings = {
     'preview_template': 'global/MTurkPreview.html',
     'minutes_allotted_per_assignment': 60,
     'expiration_hours': 7*24, # 7 days
-    #'exclusion_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
+    #'grant_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
     'qualification_requirements': [
-        LocaleRequirement("EqualTo", "US"),
-        PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
-        NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5)
+        qualification.LocaleRequirement("EqualTo", "US"),
+        qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
+        qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5),
+        #qualification.Requirement('YOUR_QUALIFICATION_ID_HERE', 'DoesNotExist')
     ]
 }
 
