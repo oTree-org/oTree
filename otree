@@ -23,4 +23,4 @@ if __name__ == "__main__":
     execute_from_command_line(sys.argv, script_file=__file__)
 
     deprecate.dwarning(
-        "Please 'otree' command instead 'python otree' or 'otree.bat'")
+        "Please use 'otree' command instead 'python otree' or 'otree.bat'")
