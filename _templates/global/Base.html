@@ -4,10 +4,15 @@
 
 
 {% block global_styles  %}
-<link rel="stylesheet" type="text/css" href="{% static 'global/custom.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'global/custom.css' %}" />
 {% endblock %}
 
 {% block global_scripts  %}
+    <!-- HighCharts charting library is pre-loaded with oTree -->
+    <script src="//code.highcharts.com/highcharts.js"></script>
+    <script src="//code.highcharts.com/highcharts-3d.js"></script>
+    <script src="//code.highcharts.com/modules/exporting.js"></script>
+    <!--Custom scripts-->
     <script type="text/javascript" href="{% static 'global/custom.js' %}" />
 {% endblock %}
 
