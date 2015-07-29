@@ -5,7 +5,7 @@
     Bid
 {% endblock %}
 
-{% block page_styles %}
+{% block styles %}
 <link href="{% static "vickrey_auction/jquery-ui/jquery-ui.min.css" %}" rel="stylesheet">
 <style type="text/css">
     .bid-slider {
@@ -23,7 +23,7 @@
 </style>
 {% endblock %}
 
-{% block page_scripts %}
+{% block scripts %}
 <script type="text/javascript" src="{% static "vickrey_auction/jquery-ui/jquery-ui.min.js" %}"></script>
 <script type="text/javascript">
 jQuery(document).ready(function ($) {
