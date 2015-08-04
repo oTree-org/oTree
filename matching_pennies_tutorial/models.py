@@ -3,6 +3,7 @@
 from __future__ import division
 from otree.db import models
 import otree.models
+import otree.constants
 from otree import widgets
 from otree.common import Currency as c, currency_range
 import random
@@ -13,7 +14,7 @@ doc = """
 A demo of how rounds work in oTree, in the context of 'matching pennies'
 """
 
-class Constants:
+class Constants(otree.constants.BaseConstants):
     name_in_url = 'matching_pennies_tutorial'
     players_per_group = 2
     num_rounds = 4

@@ -6,6 +6,7 @@ import random
 
 from otree.db import models
 import otree.models
+import otree.constants
 from otree import widgets
 from otree.common import Currency as c, currency_range
 # </standard imports>
@@ -19,7 +20,7 @@ amount, both players get demanded portions. Otherwise, both get nothing.
 source_code ="https://github.com/oTree-org/oTree/tree/master/bargaining"
 
 
-class Constants:
+class Constants(otree.constants.BaseConstants):
     name_in_url = 'bargaining'
     players_per_group = 2
     num_rounds = 1

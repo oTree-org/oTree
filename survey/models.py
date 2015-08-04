@@ -3,6 +3,7 @@
 from __future__ import division
 from otree.db import models
 import otree.models
+import otree.constants
 from otree import widgets
 from otree.common import Currency as c, currency_range
 import random
@@ -11,7 +12,7 @@ import random
 from django_countries.fields import CountryField
 
 
-class Constants:
+class Constants(otree.constants.BaseConstants):
     name_in_url = 'survey'
     players_per_group = None
     num_rounds = 1

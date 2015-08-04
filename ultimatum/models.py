@@ -3,6 +3,7 @@
 from __future__ import division
 from otree.db import models
 import otree.models
+import otree.constants
 from otree import widgets
 from otree.common import Currency as c, currency_range
 import random
@@ -15,7 +16,7 @@ It comes in two flavors, with and without hypothetical questions about the secon
 In the latter treatment, the second player is given a list of all possible offers, and is asked which ones to accept or reject.
 """
 
-class Constants:
+class Constants(otree.constants.BaseConstants):
 
     name_in_url = 'ultimatum'
     players_per_group = 2

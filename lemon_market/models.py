@@ -3,6 +3,7 @@
 from __future__ import division
 from otree.db import models
 import otree.models
+import otree.constants
 from otree import widgets
 from otree.common import Currency as c, currency_range
 # </standard imports>
@@ -39,7 +40,7 @@ keywords = ("Lemon Market",)
 
 
 
-class Constants:
+class Constants(otree.constants.BaseConstants):
     name_in_url = 'lemon_market'
     players_per_group = 3
     num_rounds = 3

@@ -3,6 +3,7 @@
 from __future__ import division
 from otree.db import models
 import otree.models
+import otree.constants
 from otree import widgets
 import random
 from otree.common import Currency as c, currency_range
@@ -45,7 +46,7 @@ links = {
 keywords = ("Stag Hunt", "Coordination", "Cooperation", "Social Contract")
 
 
-class Constants:
+class Constants(otree.constants.BaseConstants):
     name_in_url = 'stag_hunt'
     players_per_group = 2
     num_rounds = 1

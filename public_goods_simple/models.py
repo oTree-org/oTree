@@ -5,6 +5,7 @@ from __future__ import division
 import random
 
 import otree.models
+import otree.constants
 from otree.db import models
 from otree import widgets
 from otree.common import Currency as c, currency_range, safe_json
@@ -17,7 +18,7 @@ doc = """
 Simple public goods game
 """
 
-class Constants:
+class Constants(otree.constants.BaseConstants):
     name_in_url = 'public_goods_simple'
     players_per_group = 3
     num_rounds = 1

@@ -3,6 +3,7 @@
 from __future__ import division
 from otree.db import models
 import otree.models
+import otree.constants
 from otree import widgets
 from otree import forms
 from otree.common import Currency as c, currency_range
@@ -14,7 +15,7 @@ doc = """
 This is a task that requires real effort from participants. Subjects are shown two images of incomprehensible text. Subjects are required to transcribe (copy) the text into a text entry field. The quality of a subject's transcription is measured by the <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a>.
 """
 
-class Constants:
+class Constants(otree.constants.BaseConstants):
 
     name_in_url = 'real_effort'
     players_per_group = None
