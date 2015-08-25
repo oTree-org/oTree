@@ -17,17 +17,17 @@ else:
 
 # IS_OTREE_DOT_ORG is only used on demo.otree.org.
 # you can assume it is None/''/0.
-if os.environ.get('IS_OTREE_DOT_ORG') in {None, '', '0'}:
+if os.environ.get('IS_OTREE_DOT_ORG') not in {None, '', '0'}:
+    # ignore the next 2 lines;
+    # only used on demo.otree.org
+    ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
+    SECRET_KEY = os.environ['OTREE_SECRET_KEY']
+else:
     ADMIN_PASSWORD = 'otree'
     # don't share this with anybody.
     # Change this to something unique (e.g. mash your keyboard),
     # and then delete this comment.
     SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzz'
-else:
-    # ignore the next 2 lines;
-    # only used on demo.otree.org
-    ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
-    SECRET_KEY = os.environ['OTREE_SECRET_KEY']
 
 PAGE_FOOTER = ''
 
