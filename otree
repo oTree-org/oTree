@@ -18,11 +18,9 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 
     from otree.management.cli import execute_from_command_line
-    # from otree import deprecate
+    from otree import deprecate
 
     execute_from_command_line(sys.argv, script_file=__file__)
 
-    # 2015-07-07: first i need to think how we should
-    # modify our documentation to reflect this deprecation
-    # deprecate.dwarning(
-    #     "Please use 'otree' command instead 'python otree' or 'otree.bat'")
+    deprecate.dwarning(
+         "Please use 'otree' command instead of 'python otree' or 'otree.bat'")
