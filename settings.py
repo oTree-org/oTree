@@ -20,9 +20,11 @@ else:
 if os.environ.get('IS_OTREE_DOT_ORG') not in {None, '', '0'}:
     # ignore the next 2 lines;
     # only used on demo.otree.org
+    ADMIN_USERNAME = 'admin'
     ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
     SECRET_KEY = os.environ['OTREE_SECRET_KEY']
 else:
+    ADMIN_USERNAME = 'admin'
     ADMIN_PASSWORD = 'otree'
     # don't share this with anybody.
     # Change this to something unique (e.g. mash your keyboard),
@@ -38,13 +40,12 @@ DATABASES = {
 }
 
 
-ADMIN_USERNAME = 'admin'
+
 
 # AUTH_LEVEL:
 # If you are launching an experiment and want visitors to only be able to
 # play your app if you provided them with a start link, set the
 # environment variable OTREE_AUTH_LEVEL to EXPERIMENT.
-
 # If you would like to put your site online in public demo mode where
 # anybody can play a demo version of your game, set OTREE_AUTH_LEVEL
 # to DEMO. This will allow people to play in demo mode, but not access
