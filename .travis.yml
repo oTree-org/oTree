@@ -5,6 +5,6 @@ install:
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
 script:
-  - ./otree test
+  - otree test
 env:
   - DATABASE_URL=postgres://postgres@localhost/travis_ci_test
