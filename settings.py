@@ -10,10 +10,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # OTREE_PRODUCTION just controls whether Django runs in
 # DEBUG mode. If OTREE_PRODUCTION==1, then DEBUG=False
-if os.environ.get('OTREE_PRODUCTION') in {None, '', '0'}:
-    DEBUG = True
-else:
+if os.environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
     DEBUG = False
+else:
+    DEBUG = True
 
 # IS_OTREE_DOT_ORG is only used on demo.otree.org.
 # you can assume it is None/''/0.
