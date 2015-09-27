@@ -19,8 +19,8 @@ This repository contains the games; the oTree core libraries are [here](https://
 
 ```
 pip install -r requirements_base.txt
-python otree resetdb
-python otree runserver
+otree resetdb
+otree runserver
 ```
 
 ## Contact
