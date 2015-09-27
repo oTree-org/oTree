@@ -15,21 +15,12 @@ if os.environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
 else:
     DEBUG = True
 
-# IS_OTREE_DOT_ORG is only used on demo.otree.org.
-# you can assume it is None/''/0.
-if os.environ.get('IS_OTREE_DOT_ORG') not in {None, '', '0'}:
-    # ignore the next 2 lines;
-    # only used on demo.otree.org
-    ADMIN_USERNAME = 'admin'
-    ADMIN_PASSWORD = os.environ['OTREE_ADMIN_PASSWORD']
-    SECRET_KEY = os.environ['OTREE_SECRET_KEY']
-else:
-    ADMIN_USERNAME = 'admin'
-    ADMIN_PASSWORD = 'otree'
-    # don't share this with anybody.
-    # Change this to something unique (e.g. mash your keyboard),
-    # and then delete this comment.
-    SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzz'
+ADMIN_USERNAME = 'admin'
+ADMIN_PASSWORD = 'otree'
+# don't share this with anybody.
+# Change this to something unique (e.g. mash your keyboard),
+# and then delete this comment.
+SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzz'
 
 PAGE_FOOTER = ''
 
@@ -38,9 +29,6 @@ DATABASES = {
         default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
     )
 }
-
-
-
 
 # AUTH_LEVEL:
 # If you are launching an experiment and want visitors to only be able to
