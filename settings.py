@@ -126,7 +126,6 @@ SESSION_CONFIG_DEFAULTS = {
     'participation_fee': 10.00,
     'num_bots': 12,
     'doc': "",
-    'group_by_arrival_time': False,
     'mturk_hit_settings': mturk_hit_settings,
 }
 
