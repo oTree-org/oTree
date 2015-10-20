@@ -68,10 +68,8 @@ INSTALLED_APPS = [
     'otree',
 ]
 
-if 'SENTRY_DSN' in os.environ:
-    INSTALLED_APPS += [
-        'raven.contrib.django.raven_compat',
-    ]
+
+SENTRY_DSN = os.environ.get('SENTRY_DSN')
 
 DEMO_PAGE_INTRO_TEXT = """
 <ul>
