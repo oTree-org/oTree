@@ -2,8 +2,9 @@
 # <standard imports>
 from __future__ import division
 from otree.db import models
-import otree.models
-import otree.constants
+from otree.constants import BaseConstants
+from otree.models import BaseSubsession, BaseGroup, BasePlayer
+
 from otree import widgets
 from otree import forms
 from otree.common import Currency as c, currency_range
@@ -15,7 +16,7 @@ doc = """
 This is a task that requires real effort from participants. Subjects are shown two images of incomprehensible text. Subjects are required to transcribe (copy) the text into a text entry field. The quality of a subject's transcription is measured by the <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a>.
 """
 
-class Constants(otree.constants.BaseConstants):
+class Constants(BaseConstants):
 
     name_in_url = 'real_effort'
     players_per_group = None
@@ -69,19 +70,19 @@ def text_is_close_enough(text_user, text_reference, max_error_rate):
     return distance <= error_threshold
 
 
-class Subsession(otree.models.BaseSubsession):
+class Subsession(BaseSubsession):
 
     pass
 
 
-class Group(otree.models.BaseGroup):
+class Group(BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
 
-class Player(otree.models.BasePlayer):
+class Player(BasePlayer):
 
     # <built-in>
     group = models.ForeignKey(Group, null=True)

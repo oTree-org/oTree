@@ -63,10 +63,8 @@ USE_POINTS = True
 # see: https://docs.djangoproject.com/en/1.6/topics/i18n/
 LANGUAGE_CODE = 'en-us'
 
-
-INSTALLED_APPS = [
-    'otree',
-]
+# if an app is included in SESSION_CONFIGS, you don't need to list it here
+INSTALLED_APPS = []
 
 
 SENTRY_DSN = os.environ.get('SENTRY_DSN')

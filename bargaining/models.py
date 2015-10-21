@@ -5,8 +5,9 @@ from __future__ import division
 import random
 
 from otree.db import models
-import otree.models
-import otree.constants
+from otree.constants import BaseConstants
+from otree.models import BaseSubsession, BaseGroup, BasePlayer
+
 from otree import widgets
 from otree.common import Currency as c, currency_range
 # </standard imports>
@@ -20,7 +21,7 @@ amount, both players get demanded portions. Otherwise, both get nothing.
 source_code ="https://github.com/oTree-org/oTree/tree/master/bargaining"
 
 
-class Constants(otree.constants.BaseConstants):
+class Constants(BaseConstants):
     name_in_url = 'bargaining'
     players_per_group = 2
     num_rounds = 1
@@ -29,13 +30,13 @@ class Constants(otree.constants.BaseConstants):
     bonus = c(10)
 
 
-class Subsession(otree.models.BaseSubsession):
+class Subsession(BaseSubsession):
 
     pass
 
 
 
-class Group(otree.models.BaseGroup):
+class Group(BaseGroup):
 
 
     # <built-in>
@@ -55,7 +56,7 @@ class Group(otree.models.BaseGroup):
                 p.payoff = Constants.bonus
 
 
-class Player(otree.models.BasePlayer):
+class Player(BasePlayer):
 
     # <built-in>
     group = models.ForeignKey(Group, null=True)

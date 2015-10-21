@@ -2,8 +2,9 @@
 # <standard imports>
 from __future__ import division
 from otree.db import models
-import otree.models
-import otree.constants
+from otree.constants import BaseConstants
+from otree.models import BaseSubsession, BaseGroup, BasePlayer
+
 from otree import widgets
 from otree.common import Currency as c, currency_range
 import random
@@ -32,7 +33,7 @@ links = {
 keywords = ("Cournot Competition",)
 
 
-class Constants(otree.constants.BaseConstants):
+class Constants(BaseConstants):
     name_in_url = 'cournot_competition'
     players_per_group = 2
     num_rounds = 1
@@ -46,12 +47,12 @@ class Constants(otree.constants.BaseConstants):
     feedback1_question = """Suppose firm Q produced 20 units and firm P produced 30 units. What would be the profit for firm P?"""
     feedback1_explanation=  """Total units produced were 20 + 30 = 50. The unit selling price was 60 – 50 = 10. The profit for firm P would be the product of the unit selling price and the unit produced by firm P, that is 10 × 30 = 300"""
 
-class Subsession(otree.models.BaseSubsession):
+class Subsession(BaseSubsession):
 
     name_in_url = 'cournot_competition'
 
 
-class Group(otree.models.BaseGroup):
+class Group(BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -72,7 +73,7 @@ class Group(otree.models.BaseGroup):
             p.payoff = self.price * p.units
 
 
-class Player(otree.models.BasePlayer):
+class Player(BasePlayer):
 
     # <built-in>
     group = models.ForeignKey(Group, null=True)

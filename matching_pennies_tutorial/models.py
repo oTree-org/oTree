@@ -2,8 +2,9 @@
 # <standard imports>
 from __future__ import division
 from otree.db import models
-import otree.models
-import otree.constants
+from otree.constants import BaseConstants
+from otree.models import BaseSubsession, BaseGroup, BasePlayer
+
 from otree import widgets
 from otree.common import Currency as c, currency_range
 import random
@@ -14,13 +15,13 @@ doc = """
 A demo of how rounds work in oTree, in the context of 'matching pennies'
 """
 
-class Constants(otree.constants.BaseConstants):
+class Constants(BaseConstants):
     name_in_url = 'matching_pennies_tutorial'
     players_per_group = 2
     num_rounds = 4
     stakes = c(100)
 
-class Subsession(otree.models.BaseSubsession):
+class Subsession(BaseSubsession):
 
     def before_session_starts(self):
         if self.round_number == 1:
@@ -33,7 +34,7 @@ class Subsession(otree.models.BaseSubsession):
                 players.reverse()
                 group.set_players(players)
 
-class Group(otree.models.BaseGroup):
+class Group(BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -58,7 +59,7 @@ class Group(otree.models.BaseGroup):
 
 
 
-class Player(otree.models.BasePlayer):
+class Player(BasePlayer):
 
     # <built-in>
     group = models.ForeignKey(Group, null=True)

@@ -6,8 +6,9 @@ from __future__ import division
 """
 
 from otree.db import models
-import otree.models
-import otree.constants
+from otree.constants import BaseConstants
+from otree.models import BaseSubsession, BaseGroup, BasePlayer
+
 from otree.common import Currency as c, currency_range
 from otree import widgets
 
@@ -37,7 +38,7 @@ links = {
 
 keywords = ("Traveler's Dilemma",)
 
-class Constants(otree.constants.BaseConstants):
+class Constants(BaseConstants):
     name_in_url = 'traveler_dilemma'
     players_per_group = 2
     num_rounds = 1
@@ -58,19 +59,19 @@ class Constants(otree.constants.BaseConstants):
 
 
 
-class Subsession(otree.models.BaseSubsession):
+class Subsession(BaseSubsession):
 
     pass
 
 
-class Group(otree.models.BaseGroup):
+class Group(BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
     # </built-in>
 
 
-class Player(otree.models.BasePlayer):
+class Player(BasePlayer):
 
 
     # <built-in>

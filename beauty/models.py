@@ -2,8 +2,9 @@
 # <standard imports>
 from __future__ import division
 from otree.db import models
-import otree.models
-import otree.constants
+from otree.constants import BaseConstants
+from otree.models import BaseSubsession, BaseGroup, BasePlayer
+
 from otree import widgets
 from otree.common import Currency as c, currency_range
 import random
@@ -48,7 +49,7 @@ keywords = (
 )
 
 
-class Constants(otree.constants.BaseConstants):
+class Constants(BaseConstants):
     players_per_group = 5
     num_rounds = 1
     name_in_url = 'beauty'
@@ -63,12 +64,12 @@ class Constants(otree.constants.BaseConstants):
     training_1_maximun_offered_points = c(100)
 
 
-class Subsession(otree.models.BaseSubsession):
+class Subsession(BaseSubsession):
 
     pass
 
 
-class Group(otree.models.BaseGroup):
+class Group(BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -116,7 +117,7 @@ class Group(otree.models.BaseGroup):
 
 
 
-class Player(otree.models.BasePlayer):
+class Player(BasePlayer):
 
     # <built-in>
     group = models.ForeignKey(Group, null=True)

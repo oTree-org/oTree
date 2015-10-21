@@ -31,7 +31,7 @@ class Bot(otree.test.Bot):
 
 
 
-class BaseGroup(otree.models.BaseGroup):
+class BaseGroup(BaseGroup):
 
     def z(self):
 

@@ -2,8 +2,9 @@
 # <standard imports>
 from __future__ import division
 from otree.db import models
-import otree.models
-import otree.constants
+from otree.constants import BaseConstants
+from otree.models import BaseSubsession, BaseGroup, BasePlayer
+
 from otree import widgets
 from otree.common import Currency as c, currency_range
 import random
@@ -16,7 +17,7 @@ It comes in two flavors, with and without hypothetical questions about the secon
 In the latter treatment, the second player is given a list of all possible offers, and is asked which ones to accept or reject.
 """
 
-class Constants(otree.constants.BaseConstants):
+class Constants(BaseConstants):
 
     name_in_url = 'ultimatum'
     players_per_group = 2
@@ -30,7 +31,7 @@ class Constants(otree.constants.BaseConstants):
     offer_choices_count = len(offer_choices)
     keep_give_amounts = [(offer, endowment - offer) for offer in offer_choices]
 
-class Subsession(otree.models.BaseSubsession):
+class Subsession(BaseSubsession):
 
     def before_session_starts(self):
         # randomize to treatments
@@ -41,7 +42,7 @@ class Subsession(otree.models.BaseSubsession):
                 g.strategy = random.choice([True, False])
 
 
-class Group(otree.models.BaseGroup):
+class Group(BaseGroup):
 
     subsession = models.ForeignKey(Subsession)
 
@@ -83,7 +84,7 @@ class Group(otree.models.BaseGroup):
             p2.payoff = Constants.payoff_if_rejected
 
 
-class Player(otree.models.BasePlayer):
+class Player(BasePlayer):
 
     group = models.ForeignKey(Group, null=True)
     subsession = models.ForeignKey(Subsession)

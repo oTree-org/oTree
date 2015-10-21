@@ -2,8 +2,9 @@
 # <standard imports>
 from __future__ import division
 from otree.db import models
-import otree.models
-import otree.constants
+from otree.constants import BaseConstants
+from otree.models import BaseSubsession, BaseGroup, BasePlayer
+
 from otree import widgets
 from otree.common import Currency as c, currency_range
 import random
@@ -35,7 +36,7 @@ links = {
 
 keywords = ("Matching Pennies",)
 
-class Constants(otree.constants.BaseConstants):
+class Constants(BaseConstants):
     name_in_url = 'matching_pennies'
     players_per_group = 2
     num_rounds = 3
@@ -44,7 +45,7 @@ class Constants(otree.constants.BaseConstants):
     feedback1_explanation = 'Player 1 gets 100 points, Player 2 gets 0 points'
     training_question_1 = 'Suppose Player 1 picked "Heads" and Player 2 guessed "Tails". Which of the following will be the result of that round?'
 
-class Subsession(otree.models.BaseSubsession):
+class Subsession(BaseSubsession):
 
     def before_session_starts(self):
         for group in self.get_groups():
@@ -52,7 +53,7 @@ class Subsession(otree.models.BaseSubsession):
             players.reverse()
             group.set_players(players)
 
-class Group(otree.models.BaseGroup):
+class Group(BaseGroup):
 
     # <built-in>
     subsession = models.ForeignKey(Subsession)
@@ -75,7 +76,7 @@ class Group(otree.models.BaseGroup):
             p1.is_winner = True
 
 
-class Player(otree.models.BasePlayer):
+class Player(BasePlayer):
 
     # <built-in>
     group = models.ForeignKey(Group, null=True)
