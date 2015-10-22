@@ -28,14 +28,3 @@ class Bot(otree.test.Bot):
         self.subsession = models.Subsession()
         self.group = models.Group()
         self.player = models.Player()
-
-
-
-class BaseGroup(BaseGroup):
-
-    def z(self):
-
-        self.players_foo = [models.Player()]
-
-    class Meta:
-        abstract = True

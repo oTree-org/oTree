@@ -13,19 +13,19 @@
 
 {% if player.role == "husband" %}
 
-    You chose to go to <strong>{{player.decision}}</strong> and Wife chose to go to
-    <strong>{{player.other_player.decision}}</strong>. As a result, your payoff is
-    <strong>{{player.payoff}}</strong>. In addition,
+    You chose to go to <b>{{player.decision}}</b> and Wife chose to go to
+    <b>{{player.other_player.decision}}</b>. As a result, your payoff is
+    <b>{{player.payoff}}</b>. In addition,
     you received 10 points for participation. Thus, your total payoff is
-    <strong>{{total_payoff}}</strong>.
+    <b>{{total_payoff}}</b>.
 
 {% else %}
 
-    You chose to go to <strong>{{player.decision}}</strong> and Husband chose to go to
-    <strong>{{player.other_player.decision}}</strong>. As a result, your payoff is
-    <strong>{{player.payoff}}</strong>. In addition,
+    You chose to go to <b>{{player.decision}}</b> and Husband chose to go to
+    <b>{{player.other_player.decision}}</b>. As a result, your payoff is
+    <b>{{player.payoff}}</b>. In addition,
     you received 10 points for participation. Thus, your total payoff is
-    <strong>{{total_payoff}}</strong>.
+    <b>{{total_payoff}}</b>.
 
 {% endif %}
 </p>

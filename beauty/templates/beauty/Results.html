@@ -11,7 +11,7 @@
 
 
 <p>
-    You picked <strong>{{player.guess_value}}</strong>. Others picked
+    You picked <b>{{player.guess_value}}</b>. Others picked
 
     {% if other_guesses_count > 1%}
         {% for g in other_guesses %}
@@ -27,20 +27,20 @@
         {% endfor %}
     {% endif %}
 
-    The two-third of the average was <strong>{{ two_third_average|floatformat:"-4" }}</strong>
-    and the closest was <strong>{{group.best_guess}}</strong>.
+    The two-third of the average was <b>{{ two_third_average|floatformat:"-4" }}</b>
+    and the closest was <b>{{group.best_guess}}</b>.
 
     {% if group.tie %}
         There are {{ winners_cnt }} participants who picked this number and
         you {% if player.is_winner %} were {% else %} were not {% endif %} one of
-        them. As a result, you received <strong>{{ player.payoff }}</strong>.
+        them. As a result, you received <b>{{ player.payoff }}</b>.
     {% else %}
         As a result, you {% if player.is_winner %} were {% else %} were not {% endif %}
-        the winner and received <strong>{{ player.payoff}}</strong>.
+        the winner and received <b>{{ player.payoff}}</b>.
     {% endif %}
 
     In addition, you received 10 points for participation. Thus, your total
-    payoff is <strong>{{ total_payoff }}</strong>.
+    payoff is <b>{{ total_payoff }}</b>.
 
 </p>
 

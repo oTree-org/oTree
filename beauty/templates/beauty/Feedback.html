@@ -11,24 +11,24 @@
 
     {% if player.is_training_question_1_win_pick_correct %}
         <p class="text-success">
-            Your answer <strong>'The winner(s) picked: {{player.training_question_1_win_pick}}'</strong>
+            Your answer <b>'The winner(s) picked: {{player.training_question_1_win_pick}}'</b>
             was correct.
         </p>
     {% else %}
         <p class="text-danger">
-            Your answer <strong>'The winner(s) picked: {{player.training_question_1_win_pick}}'</strong>
+            Your answer <b>'The winner(s) picked: {{player.training_question_1_win_pick}}'</b>
             was incorrect.
         </p>
     {% endif %}
 
     {% if player.is_training_question_1_my_payoff_correct %}
         <p class="text-success">
-            Your answer <strong>'My payoff would be: {{player.training_question_1_my_payoff}}'</strong>
+            Your answer <b>'My payoff would be: {{player.training_question_1_my_payoff}}'</b>
             was correct.
         </p>
     {% else %}
         <p class="text-danger">
-            Your answer <strong>'My payoff would be: {{player.training_question_1_my_payoff}}'</strong>
+            Your answer <b>'My payoff would be: {{player.training_question_1_my_payoff}}'</b>
             was incorrect.
         </p>
     {% endif %}
@@ -41,8 +41,8 @@
     </p>
 
     <p>
-        <strong>Solution:</strong> The winners picked <strong>10</strong>
-        and your payoff would be <strong>50 points</strong>.
+        <b>Solution:</b> The winners picked <b>10</b>
+        and your payoff would be <b>50 points</b>.
     </p>
 
     <p>
@@ -50,7 +50,7 @@
         Explanation: The average of all chosen numbers was (10+20+20+10+30)/5=18
         as given. Two-third of 18 was 18/3*2=12. 10 was the closest
         chosen number to 12. Thus you and the otherparticipant who picked it
-        were the winners. Each of you would receive <strong>50 points</strong>.
+        were the winners. Each of you would receive <b>50 points</b>.
     </p>
 
     {% next_button %}
