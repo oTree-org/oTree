@@ -30,8 +30,8 @@ chris@otree.org (you can also add me on Skype by searching this email address; p
 
 ## Contributors
 
+* Juan B. Cabral (http://jbcabral.org/, https://github.com/leliel12)
 * Gregor Muellegger (http://gremu.net/, https://github.com/gregmuellegger)
-* Juan B. Cabral
 * Alexander Schepanovski (https://github.com/Suor/)
 * Alexander Sandukovskiy
 * Som Datye
