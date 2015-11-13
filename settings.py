@@ -8,7 +8,7 @@ import otree.settings
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# OTREE_PRODUCTION just controls whether Django runs in
+# the environment variable OTREE_PRODUCTION controls whether Django runs in
 # DEBUG mode. If OTREE_PRODUCTION==1, then DEBUG=False
 if os.environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
     DEBUG = False
@@ -17,6 +17,7 @@ else:
 
 ADMIN_USERNAME = 'admin'
 ADMIN_PASSWORD = 'otree'
+
 # don't share this with anybody.
 # Change this to something unique (e.g. mash your keyboard),
 # and then delete this comment.
@@ -31,9 +32,9 @@ DATABASES = {
 }
 
 # AUTH_LEVEL:
-# If you are launching an experiment and want visitors to only be able to
+# If you are launching a study and want visitors to only be able to
 # play your app if you provided them with a start link, set the
-# environment variable OTREE_AUTH_LEVEL to EXPERIMENT.
+# environment variable OTREE_AUTH_LEVEL to STUDY.
 # If you would like to put your site online in public demo mode where
 # anybody can play a demo version of your game, set OTREE_AUTH_LEVEL
 # to DEMO. This will allow people to play in demo mode, but not access
@@ -66,8 +67,7 @@ LANGUAGE_CODE = 'en-us'
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = []
 
-
-SENTRY_DSN = os.environ.get('SENTRY_DSN')
+# SENTRY_DSN = ''
 
 DEMO_PAGE_INTRO_TEXT = """
 <ul>
