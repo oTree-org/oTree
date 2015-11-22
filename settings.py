@@ -1,4 +1,5 @@
 import os
+from os import environ
 
 import dj_database_url
 from boto.mturk import qualification
@@ -10,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # the environment variable OTREE_PRODUCTION controls whether Django runs in
 # DEBUG mode. If OTREE_PRODUCTION==1, then DEBUG=False
-if os.environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
+if environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
     DEBUG = False
 else:
     DEBUG = True
@@ -40,7 +41,7 @@ DATABASES = {
 # to DEMO. This will allow people to play in demo mode, but not access
 # the full admin interface.
 
-AUTH_LEVEL = os.environ.get('OTREE_AUTH_LEVEL')
+AUTH_LEVEL = environ.get('OTREE_AUTH_LEVEL')
 
 # ACCESS_CODE_FOR_DEFAULT_SESSION:
 # If you have a "default session" set,
@@ -51,8 +52,8 @@ AUTH_LEVEL = os.environ.get('OTREE_AUTH_LEVEL')
 ACCESS_CODE_FOR_DEFAULT_SESSION = 'my_access_code'
 
 # setting for integration with AWS Mturk
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
