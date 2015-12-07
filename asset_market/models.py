@@ -77,10 +77,6 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     # transaction fields
     transaction_price = models.CurrencyField(doc="""Given by 0.5*(BP+SP)""")
     shares_traded = models.PositiveIntegerField(initial=0)

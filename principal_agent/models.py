@@ -113,10 +113,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     total_return = models.CurrencyField(
         doc="""Total return from agent's effort = [Return for single unit of
             agent's work effort] * [Agent's work effort]"""
@@ -180,10 +176,6 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
     training_my_payoff = models.CurrencyField(
         verbose_name='I would receive')
     training_other_payoff = models.CurrencyField(

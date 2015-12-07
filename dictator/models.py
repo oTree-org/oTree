@@ -59,10 +59,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     kept = models.CurrencyField(
         doc="""Amount dictator decided to keep for himself""",
         min=0, max=Constants.allocated_amount,
@@ -77,11 +73,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     training_participant1_payoff = models.CurrencyField(
         verbose_name="Participant 1's payoff would be")

@@ -39,10 +39,6 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
 
 
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
 
 
     def set_payoffs(self):
@@ -57,11 +53,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     request_amount = models.CurrencyField(
         doc="""

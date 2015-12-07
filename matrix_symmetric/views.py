@@ -17,8 +17,7 @@ class ResultsWaitPage(WaitPage):
         for p in self.group.get_players():
             p.set_payoff()
 
-    def body_text(self):
-        return "Waiting for the other player."
+    body_text = "Waiting for the other player."
 
 
 class Results(Page):

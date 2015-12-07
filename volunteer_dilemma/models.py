@@ -57,10 +57,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
 
     def set_payoffs(self):
         baseline_amount = Constants.bonus
@@ -73,11 +69,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     training_my_payoff = models.CurrencyField(
         verbose_name='My payoff would be')

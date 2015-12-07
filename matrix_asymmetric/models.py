@@ -55,10 +55,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     def set_payoffs(self):
         row_player = self.get_player_by_role('row')
         column_player = self.get_player_by_role('column')
@@ -90,11 +86,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     def other_player(self):
         """Returns other player in group"""

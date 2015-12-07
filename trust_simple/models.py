@@ -32,10 +32,6 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
 
 
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     sent_amount = models.CurrencyField(
         choices=currency_range(0, Constants.endowment, c(1)),
         doc="""Amount sent by P1""",
@@ -53,8 +49,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
+    pass

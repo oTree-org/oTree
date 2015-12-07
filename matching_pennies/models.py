@@ -48,16 +48,13 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
 
     def before_session_starts(self):
-        for group in self.get_groups():
-            players = group.get_players()
-            players.reverse()
-            group.set_players(players)
+        if self.round_number % 2 == 0:
+            for group in self.get_groups():
+                players = group.get_players()
+                players.reverse()
+                group.set_players(players)
 
 class Group(BaseGroup):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
 
     def set_payoffs(self):
@@ -77,11 +74,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     training_question_1 = models.CharField(max_length=100,
                                            choices=['Player 1 gets 0 points, Player 2 gets 0 points',

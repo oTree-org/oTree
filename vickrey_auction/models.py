@@ -63,10 +63,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     def highest_bid(self):
         return max([p.bid_amount for p in self.get_players()])
 
@@ -87,11 +83,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     private_value = models.CurrencyField(
         null=True,

@@ -20,24 +20,14 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-
     pass
 
 
-
 class Group(BaseGroup):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
+    pass
 
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     def set_payoff(self):
         """Calculate payoff, which is zero for the survey"""

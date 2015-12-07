@@ -44,8 +44,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    subsession = models.ForeignKey(Subsession)
-
     strategy = models.BooleanField(
         doc="""Whether this group uses strategy method"""
     )
@@ -86,7 +84,5 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-
+    pass
 

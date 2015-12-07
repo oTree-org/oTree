@@ -70,18 +70,9 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
+    pass
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     training_question_1_my_payoff = models.CurrencyField(min=0, max=Constants.training_1_maximun_offered_points)
 

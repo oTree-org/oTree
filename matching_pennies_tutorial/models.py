@@ -33,13 +33,10 @@ class Subsession(BaseSubsession):
                 players = group.get_players()
                 players.reverse()
                 group.set_players(players)
+        if self.round_number > 3:
+            self.group_like_round(3)
 
 class Group(BaseGroup):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
 
     def set_payoffs(self):
         matcher = self.get_player_by_role('Matcher')
@@ -60,11 +57,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     penny_side = models.CharField(
         choices=['Heads', 'Tails'],

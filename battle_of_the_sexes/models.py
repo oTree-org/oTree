@@ -88,10 +88,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
 
 
     def set_payoffs(self):
@@ -112,11 +108,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     training_question_1_husband = models.CurrencyField(min=0, max=Constants.training_1_maximum_offered_points)
 

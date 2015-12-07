@@ -54,10 +54,6 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
 
 
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     sent_amount = models.CurrencyField(
         min=0, max=Constants.amount_allocated,
         doc="""Amount sent by P1""",
@@ -77,10 +73,6 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
     training_answer_x = models.CurrencyField(verbose_name='Participant A would have')
     training_answer_y = models.CurrencyField(verbose_name='Participant B would have')
 

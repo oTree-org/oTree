@@ -39,8 +39,7 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
-    def body_text(self):
-        return "Waiting for other participants to contribute."
+    body_text = "Waiting for other participants to contribute."
 
 
 class Results(Page):

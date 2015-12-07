@@ -43,18 +43,9 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
+    pass
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
+    pass
 
 

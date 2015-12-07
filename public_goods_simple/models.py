@@ -33,10 +33,6 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     total_contribution = models.CurrencyField()
     individual_share = models.CurrencyField()
 
@@ -48,9 +44,5 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    group = models.ForeignKey(Group, null = True)
-    # </built-in>
 
     contribution = models.CurrencyField(min=0, max=Constants.endowment)

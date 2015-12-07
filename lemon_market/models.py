@@ -56,10 +56,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     buyer_choice = models.PositiveIntegerField()
 
     def set_payoff(self):
@@ -79,11 +75,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
 
     # training
     training_buyer_earnings = models.CurrencyField(
