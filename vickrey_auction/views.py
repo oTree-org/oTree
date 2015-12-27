@@ -36,7 +36,6 @@ class Feedback1(Page):
     def vars_for_template(self):
         return {
             'num_q': 1
-
         }
 
 
@@ -45,31 +44,16 @@ class Bid(Page):
     form_model = models.Player
     form_fields = ['bid_amount']
 
-    def vars_for_template(self):
-        if self.player.private_value is None:
-            self.player.private_value = self.player.generate_private_value()
-
-        return {
-                'min_bid': c(Constants.min_allowable_bid),
-                'max_bid': c(Constants.max_allowable_bid)}
-
 
 class ResultsWaitPage(WaitPage):
 
-
-
     def after_all_players_arrive(self):
         self.group.set_winner()
-
-    body_text = "Waiting for the other participant."
+        self.group.set_payoffs()
 
 
 class Results(Page):
-
-    def vars_for_template(self):
-        if self.player.payoff is None:
-            self.player.set_payoff()
-
+    pass
 
 
 page_sequence = [Introduction,

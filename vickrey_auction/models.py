@@ -59,7 +59,12 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+    def before_session_starts(self):
+        for p in self.get_players():
+            p.private_value = random.randint(
+            Constants.min_allowable_bid, Constants.max_allowable_bid
+        )
+
 
 class Group(BaseGroup):
 
@@ -81,6 +86,16 @@ class Group(BaseGroup):
         winner = random.choice(players_with_highest_bid)
         winner.is_winner = True
 
+    def set_payoffs(self):
+        second_highest_bid = self.second_highest_bid()
+        for p in self.get_players():
+            p.payoff = Constants.fixed_payoff
+            if p.is_winner:
+                p.payoff += (
+                    p.private_value - second_highest_bid
+                )
+                if p.payoff < 0:
+                    p.payoff = 0
 
 class Player(BasePlayer):
 
@@ -106,16 +121,4 @@ class Player(BasePlayer):
         return (self.training_question_1_my_payoff==
                 Constants.training_question_1_my_payoff_correct)
 
-    def generate_private_value(self):
-        return random.randint(
-            Constants.min_allowable_bid, Constants.max_allowable_bid
-        )
 
-    def set_payoff(self):
-        self.payoff = Constants.fixed_payoff
-        if self.is_winner:
-            self.payoff += (
-                self.private_value - self.group.second_highest_bid()
-            )
-            if self.payoff < 0:
-                self.payoff = 0
