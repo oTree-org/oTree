@@ -37,7 +37,7 @@ chris@otree.org (you can also add me on Skype by searching this email address; p
 * Som Datye
 
 ## Mailing list
-Sign up to be notified about updates to oTree [here](https://docs.google.com/forms/d/1jD4tocuX07DFYN2jDY2tcNXpkOCSqLhSOMboOgaVGtw/viewform)
+[Help & discussion mailing list](https://groups.google.com/forum/#!forum/otree)
 
 # Docs
 
