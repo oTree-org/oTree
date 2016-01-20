@@ -83,8 +83,3 @@ class Player(BasePlayer):
         doc="""Whether this player offered lowest price"""
     )
 
-    def is_sole_winner(self):
-        return self.is_a_winner and self.group.num_winners == 1
-
-    def is_shared_winner(self):
-        return self.is_a_winner and self.group.num_winners > 1
