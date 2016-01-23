@@ -306,5 +306,5 @@ SESSION_CONFIGS = [
     },
 ]
 
-
+# don't put anything after this point.
 otree.settings.augment_settings(globals())
