@@ -9,7 +9,8 @@ class Introduction(Page):
 
     template_name = 'common_value_auction/Introduction.html'
 
-
+    def before_next_page(self):
+        self.player.item_value_estimate =  self.group.generate_value_estimate()
 
 
 class Bid(Page):
@@ -17,24 +18,19 @@ class Bid(Page):
     form_model = models.Player
     form_fields = ['bid_amount']
 
-    def vars_for_template(self):
-     if  self.player.item_value_estimate is None:
-             self.player.item_value_estimate =  self.group.generate_value_estimate()
-
-
 
 
 class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
         self.group.set_winner()
+        for p in self.group.get_players():
+            p.set_payoff()
 
 
 class Results(Page):
 
     def vars_for_template(self):
-        if self.player.payoff is None:
-            self.player.set_payoff()
         return {
             'is_greedy': self.group.item_value - self.player.bid_amount < 0
         }
