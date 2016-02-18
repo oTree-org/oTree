@@ -304,6 +304,12 @@ SESSION_CONFIGS = [
             'lemon_market', 'payment_info'
         ],
     },
+    {
+        'name': 'my_public_goods',
+        'display_name': "My Public Goods (Simple Version)",
+        'num_demo_participants': 3,
+        'app_sequence': ['public_goods', 'survey', 'payment_info'],
+    },
 ]
 
 
