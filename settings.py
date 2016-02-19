@@ -316,6 +316,12 @@ SESSION_CONFIGS = [
         'num_demo_participants': 2,
         'app_sequence': ['my_trust'],
     },
+    {
+        'name': 'reputation',
+        'display_name': "Reputation Game",
+        'num_demo_participants': 2,
+        'app_sequence': ['reputation'],
+    },
 ]
 
 

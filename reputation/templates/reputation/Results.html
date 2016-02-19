@@ -2,21 +2,28 @@
 {% load staticfiles otree_tags %}
 
 {% block title %}
-    Page title
+    Results
 {% endblock %}
 
 {% block content %}
 
-<!--
-Documentation on how to write a django template here:
-https://docs.djangoproject.com/en/dev/topics/templates/
+{% if player.id_in_group == 1 %}
+    <p>
+        You sent Participant B {{ group.sent_amount }}.
+        Participant B returned {{group.sent_back_amount}}.
+    </p>
+{% else %}
+    <p>
+        Participant A sent you {{ group.sent_amount }}.
+        You returned {{group.sent_back_amount}}.
+    </p>
 
-Bootstrap comes pre-loaded, so you can use any Bootstrap elements:
-http://getbootstrap.com/components/
+{% endif %}
 
--->
+    <p>
+    Therefore, your total payoff is {{player.payoff}}.
+    </p>
 
-    {% next_button %}
+    {% include 'my_trust/Instructions.html' %}
+
 {% endblock %}
-
-
