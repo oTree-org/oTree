@@ -8,20 +8,55 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class MyPage(Page):
+class Send(Page):
+
+    form_model = models.Group
+    form_fields = ['sent_amount']
+
+    def is_displayed(self):
+        return self.player.id_in_group == 1
+    
+    
+class SendBack(Page):
+
+    form_model = models.Group
+    form_fields = ['sent_back_amount']
+
+    def is_displayed(self):
+        return self.player.id_in_group == 2
+
+    def vars_for_template(self):
+        return {
+            'tripled_amount': self.group.sent_amount * Constants.multiplication_factor
+        }
+
+    def sent_back_amount_choices(self):
+        return currency_range(
+            c(0),
+            self.group.sent_amount * Constants.multiplication_factor,
+            c(1)
+        )
+
+class WaitForP1(WaitPage):
     pass
 
 class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
-        pass
+        self.group.set_payoffs()
 
 class Results(Page):
-    pass
+
+    def vars_for_template(self):
+        return {
+            'tripled_amount': self.group.sent_amount * Constants.multiplication_factor
+        }
 
 
 page_sequence = [
-    MyPage,
+    Send,
+    WaitForP1,
+    SendBack,
     ResultsWaitPage,
-    Results
+    Results,
 ]

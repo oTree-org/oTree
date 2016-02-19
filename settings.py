@@ -310,6 +310,12 @@ SESSION_CONFIGS = [
         'num_demo_participants': 3,
         'app_sequence': ['public_goods', 'survey', 'payment_info'],
     },
+    {
+        'name': 'my_trust',
+        'display_name': "My Trust Game (simple version from tutorial)",
+        'num_demo_participants': 2,
+        'app_sequence': ['my_trust'],
+    },
 ]
 
 
