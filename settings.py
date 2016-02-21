@@ -322,6 +322,14 @@ SESSION_CONFIGS = [
         'num_demo_participants': 2,
         'app_sequence': ['reputation'],
     },
+    {
+    'name': 'my_matching_pennies',
+    'display_name': "My Matching Pennies (tutorial version)",
+    'num_demo_participants': 2,
+    'app_sequence': [
+        'my_matching_pennies',
+    ],
+},
 ]
 
 
