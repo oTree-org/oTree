@@ -32,7 +32,7 @@ class SendBack(Page):
 
     def sent_back_amount_error_message(self, value):
         if not (value >= 0 and value <= self.group.sent_amount * Constants.multiplication_factor):
-            return 'Don\'t have this kind of money!'
+            return 'You don\'t have this kind of money!'
 
 class WaitForP1(WaitPage):
     pass
