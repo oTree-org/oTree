@@ -129,6 +129,12 @@ SESSION_CONFIG_DEFAULTS = {
 
 SESSION_CONFIGS = [
     {
+        'name': 'reputation',
+        'display_name': "Reputation Game",
+        'num_demo_participants': 2,
+        'app_sequence': ['reputation'],
+    },
+    {
         'name': 'public_goods',
         'display_name': "Public Goods",
         'num_demo_participants': 3,
@@ -315,12 +321,6 @@ SESSION_CONFIGS = [
         'display_name': "My Trust Game (simple version from tutorial)",
         'num_demo_participants': 2,
         'app_sequence': ['my_trust'],
-    },
-    {
-        'name': 'reputation',
-        'display_name': "Reputation Game",
-        'num_demo_participants': 2,
-        'app_sequence': ['reputation'],
     },
     {
     'name': 'my_matching_pennies',
