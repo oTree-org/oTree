@@ -26,6 +26,12 @@ SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzz'
 
 PAGE_FOOTER = ''
 
+# To use a database other than sqlite,
+# set the DATABASE_URL environment variable.
+# Examples:
+# postgres://USER:PASSWORD@HOST:PORT/NAME
+# mysql://USER:PASSWORD@HOST:PORT/NAME
+
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
