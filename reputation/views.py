@@ -44,12 +44,12 @@ class Bribe(Page):
 
     def vars_for_template(self):
         return {
-            'max_bribe': self.group.max_bribe(),
+            'max_bribe': self.group.fine()*6,
             'fine': self.group.fine()
         }
 
     def bribe_error_message(self, value):
-        if not (value >= 0 and value <= self.group.max_bribe()):
+        if not (value >= 0 and value <= self.group.fine()*6):
             return 'Please enter number between 0 and your maximum bribe'
 
 class WaitForP1(WaitPage):
