@@ -23,7 +23,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'reputation'
     players_per_group = 2
-    num_rounds = 2
+    num_rounds = 1
 
     endowment = c(100)
     multiplication_factor = 4
@@ -42,16 +42,14 @@ class Group(BaseGroup):
 
     sent = models.CurrencyField(min=50, max=Constants.endowment)
     sent_back = models.CurrencyField()
+    bribe = models.CurrencyField()
 
     def multiplication(self):
-        multiplied = self.sent * Constants.multiplication_factor
+        return self.sent * Constants.multiplication_factor
 
-    # inspection of receivers function
-    def inspection(self):
-        if random.random() > 0.15:
-            return  'random big!'
-        else:
-            return 'random small!'
+    def max_bribe(self):
+        return (self.multiplication() * 0.5 - self.sent_back) * 6
+
 
     def set_payoffs(self):
 
@@ -59,7 +57,7 @@ class Group(BaseGroup):
             if p.participant.vars['role'] == 'sender':
                 p.payoff = Constants.endowment - self.sent + self.sent_back
             else:
-                p.payoff = self.sent * Constants.multiplication_factor - self.sent_back
+                p.payoff = self.sent * Constants.multiplication_factor - self.sent_back - self.bribe
 
 
 class Player(BasePlayer):

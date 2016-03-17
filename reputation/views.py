@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
 
+import random
+
 from otree.common import Currency as c, currency_range, safe_json
 
 from . import models
@@ -15,39 +17,39 @@ class Send(Page):
 
     def is_displayed(self):
         return self.player.id_in_group == 1
-
-    def vars_for_template(self):
-        return {
-            'inspection': self.group.inspection()
-        }
-
-class MultiplicationPage(WaitPage):
-
-    def after_all_players_arrive(self):
-        self.group.multiplication()
     
 class SendBack(Page):
-
-
     form_model = models.Group
     form_fields = ['sent_back']
 
     def is_displayed(self):
         return self.player.id_in_group == 2
 
+    def vars_for_template(self):
+        return {
+            'multiplied': self.group.multiplication()
+        }
+
     def sent_back_error_message(self, value):
-        if not (value >= 0 and value <= self.group.multiplied):
+        if not (value >= 0 and value <= self.group.multiplication()):
             return 'You don\'t have this kind of money!'
 
 class Bribe(Page):
+    form_model = models.Group
+    form_fields = ['bribe']
 
+    # determination whether receiver is eligible to pay bribe
     def is_displayed(self):
-        return self.player.id_in_group == 2 and 5 > 4
+        return self.player.id_in_group == 2 and random.random() > 0.000001 and (self.group.sent_back - self.group.multiplication() * 0.5 < 0)
 
     def vars_for_template(self):
         return {
-            'max_bribe': self.group.sent_back * 6
+            'max_bribe': self.group.max_bribe()
         }
+
+    def bribe_error_message(self, value):
+        if not (value >= 0 and value <= self.group.max_bribe()):
+            return 'Please enter number between 0 and your maximum bribe'
 
 class WaitForP1(WaitPage):
     pass
@@ -73,7 +75,6 @@ class FinalResults(Page):
 page_sequence = [
     Send,
     WaitForP1,
-    MultiplicationPage,
     SendBack,
     Bribe,
     ResultsWaitPage,
