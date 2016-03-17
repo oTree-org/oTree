@@ -49,10 +49,9 @@ class FinalResults(Page):
 
     def vars_for_template(self):
 
-        for player in self.subsession.get_players():
-            player.payoff = sum([p.payoff for p in self.player.in_all_rounds()])
-
-       # player.payoff = 100
+        return {
+            'player_payoff': sum([p.payoff for p in self.player.in_all_rounds()])
+        }
 
 
 
