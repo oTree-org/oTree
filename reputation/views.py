@@ -30,7 +30,8 @@ class SendBack(Page):
 
     def vars_for_template(self):
         return {
-            'multiplied': self.group.multiplication()
+            'multiplied': self.group.multiplication(),
+            'uncooperative': self.group.is_uncooperative()
         }
 
     def sent_back_error_message(self, value):

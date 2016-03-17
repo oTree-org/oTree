@@ -68,7 +68,6 @@ class Group(BaseGroup):
         else:
             return c(0)
 
-
     # if player was found to be uncooperative, changes the message for player 1 in group on 'send' page
     def is_uncooperative(self):
         if self.get_player_by_id(2).participant.vars['uncooperative'] == True:

@@ -13,6 +13,15 @@
         You are Participant B. Participant A sent you {{group.sent}}
         and you received {{multiplied}}.
     </p>
+    {% if uncooperative == True %}
+        <p>
+            You have been found to be uncooperative in previous rounds!
+        </p>
+    {% else %}
+        <p>
+            You have not been found to be uncooperative in previous rounds, either because of successful briberies or honest cooperation.
+        </p>
+    {% endif %}
 
     {% formfield group.sent_back with label="How much do you want to send back?" %}
 
