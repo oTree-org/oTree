@@ -37,6 +37,26 @@ class Subsession(BaseSubsession):
             for p in self.get_players():
                 p.participant.vars['role'] = treatments.next()
                 p.participant.vars['uncooperative'] = False
+        else:
+            players = self.get_players()
+            random.shuffle(players)
+
+            senders = [p for p in players if p.participant.vars['role'] == 'sender']
+            receivers = [p for p in players if p.participant.vars['role'] == 'receiver']
+
+            group_matrix = []
+
+            num_groups = int(len(players)/2)
+
+
+            for i in range(num_groups):
+                new_group = [
+                    senders.pop(),
+                    receivers.pop()
+                ]
+                group_matrix.append(new_group)
+
+            self.set_groups(group_matrix)
 
 
 
