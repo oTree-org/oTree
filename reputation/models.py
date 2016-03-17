@@ -44,20 +44,36 @@ class Group(BaseGroup):
     sent_back = models.CurrencyField()
     bribe = models.CurrencyField()
 
+    # money transferred by sender, multiplied
     def multiplication(self):
         return self.sent * Constants.multiplication_factor
 
+    # maximum bribe receiver can pay
     def max_bribe(self):
         return (self.multiplication() * 0.5 - self.sent_back) * 6
 
+    # fine receiver should pay. If positive, receiver returned less than half the money
+    def fine(self):
+        return self.multiplication() * 0.5 - self.sent_back
 
+    # determination of whether receiever pays the bribe, fine, or neither
+    def fine_bribe(self):
+        if random.random() > 0.0000001 and (self.fine() > 0):
+            if self.bribe > random.randrange(0,self.max_bribe()):
+                return self.bribe
+            else:
+                return self.fine()
+        else:
+            return c(0)
+
+    # payoffs for each round
     def set_payoffs(self):
 
         for p in self.get_players():
             if p.participant.vars['role'] == 'sender':
                 p.payoff = Constants.endowment - self.sent + self.sent_back
             else:
-                p.payoff = self.sent * Constants.multiplication_factor - self.sent_back - self.bribe
+                p.payoff = self.sent * Constants.multiplication_factor - self.sent_back - self.fine_bribe()
 
 
 class Player(BasePlayer):

@@ -40,11 +40,12 @@ class Bribe(Page):
 
     # determination whether receiver is eligible to pay bribe
     def is_displayed(self):
-        return self.player.id_in_group == 2 and random.random() > 0.000001 and (self.group.sent_back - self.group.multiplication() * 0.5 < 0)
+        return self.player.id_in_group == 2 and random.random() > 0.0000001 and (self.group.fine() > 0)
 
     def vars_for_template(self):
         return {
-            'max_bribe': self.group.max_bribe()
+            'max_bribe': self.group.max_bribe(),
+            'fine': self.group.fine()
         }
 
     def bribe_error_message(self, value):
