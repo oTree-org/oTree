@@ -42,12 +42,18 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
-class Results(Page):
+class FinalResults(Page):
+
+    def is_displayed(self):
+        return  self.subsession.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        return {
-            'multiplied_amount': self.group.sent_amount * Constants.multiplication_factor
-        }
+
+        for player in self.subsession.get_players():
+            player.payoff = sum([p.payoff for p in self.player.in_all_rounds()])
+
+       # player.payoff = 100
+
 
 
 page_sequence = [
@@ -55,5 +61,5 @@ page_sequence = [
     WaitForP1,
     SendBack,
     ResultsWaitPage,
-    Results,
+    FinalResults,
 ]
