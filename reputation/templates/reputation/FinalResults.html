@@ -7,23 +7,23 @@
 
 {% block content %}
 
-{% if player.id_in_group == 1 %}
+    {% if player.id_in_group == 1 %}
+        <p>
+            You sent Participant B {{group.sent}}.
+            Participant B returned {{group.sent_back}}.
+        </p>
+    {% else %}
+        <p>
+            Participant A sent you {{group.sent}}.
+            You returned {{group.sent_back}}.
+        </p>
+
+    {% endif %}
+
     <p>
-        You sent Participant B {{group.sent}}.
-        Participant B returned {{group.sent_back}}.
-    </p>
-{% else %}
-    <p>
-        Participant A sent you {{group.sent}}.
-        You returned {{group.sent_back}}.
+        Therefore, your total payoff is {{player_payoff}}.
     </p>
 
-{% endif %}
-
-    <p>
-    Therefore, your total payoff is {{player_payoff}}.
-    </p>
-
-    {% include 'my_trust/Instructions.html' %}
+    {% include 'reputation/Instructions.html' %}
 
 {% endblock %}

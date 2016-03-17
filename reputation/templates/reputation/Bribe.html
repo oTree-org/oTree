@@ -10,7 +10,7 @@
     {% include 'reputation/Instructions.html' %}
 
     <p>
-    You were caught returning less than half of what you received! Please enter the size of the bribe you're willing to make to avoid paying the fine and being exposed as uncooperative player in later rounds. Maximum size of a bribe for you is {{max_bribe}}. If you fail to pay the bribe, you're subject to {{ fine }} fine.
+        You were caught returning less than half of what you received! Please enter the size of the bribe you're willing to make to avoid paying the fine and being exposed as uncooperative player in later rounds. Maximum size of a bribe for you is {{max_bribe}}. If you fail to pay the bribe, you're subject to {{ fine }} fine.
     </p>
 
     {% formfield group.bribe with label="What is your bribe?" %}

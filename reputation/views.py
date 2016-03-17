@@ -17,7 +17,10 @@ class Send(Page):
 
     def is_displayed(self):
         return self.player.id_in_group == 1
-    
+
+    def vars_for_template(self):
+        return { 'uncooperative': self.group.is_uncooperative() }
+
 class SendBack(Page):
     form_model = models.Group
     form_fields = ['sent_back']
@@ -70,7 +73,6 @@ class FinalResults(Page):
         return {
             'player_payoff': sum([p.payoff for p in self.player.in_all_rounds()])
         }
-
 
 
 page_sequence = [

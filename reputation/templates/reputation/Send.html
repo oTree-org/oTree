@@ -10,8 +10,18 @@
     {% include 'reputation/Instructions.html' %}
 
     <p>
-    You are Participant A. Now you have {{Constants.endowment}}.
+        You are Participant A. Now you have {{Constants.endowment}}. You can send from 50 to 100 point.
     </p>
+
+    {% if uncooperative == True %}
+        <p>
+            Your partner is uncooperative!
+        </p>
+    {% else %}
+        <p>
+            Your partner has not been found to be uncooperative.
+        </p>
+    {% endif %}
 
     {% formfield group.sent with label="How much do you want to send to participant B?" %}
 
