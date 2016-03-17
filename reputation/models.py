@@ -40,16 +40,26 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    sent_amount = models.CurrencyField(min=50, max=Constants.endowment)
-    sent_back_amount = models.CurrencyField()
+    sent = models.CurrencyField(min=50, max=Constants.endowment)
+    sent_back = models.CurrencyField()
+
+    def multiplication(self):
+        multiplied = self.sent * Constants.multiplication_factor
+
+    # inspection of receivers function
+    def inspection(self):
+        if random.random() > 0.15:
+            return  'random big!'
+        else:
+            return 'random small!'
 
     def set_payoffs(self):
 
         for p in self.get_players():
             if p.participant.vars['role'] == 'sender':
-                p.payoff = Constants.endowment - self.sent_amount + self.sent_back_amount
+                p.payoff = Constants.endowment - self.sent + self.sent_back
             else:
-                p.payoff = self.sent_amount * Constants.multiplication_factor - self.sent_back_amount
+                p.payoff = self.sent * Constants.multiplication_factor - self.sent_back
 
 
 class Player(BasePlayer):

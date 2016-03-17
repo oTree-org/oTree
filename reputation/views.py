@@ -11,28 +11,43 @@ from .models import Constants
 class Send(Page):
 
     form_model = models.Group
-    form_fields = ['sent_amount']
+    form_fields = ['sent']
 
     def is_displayed(self):
         return self.player.id_in_group == 1
-    
+
+    def vars_for_template(self):
+        return {
+            'inspection': self.group.inspection()
+        }
+
+class MultiplicationPage(WaitPage):
+
+    def after_all_players_arrive(self):
+        self.group.multiplication()
     
 class SendBack(Page):
 
+
     form_model = models.Group
-    form_fields = ['sent_back_amount']
+    form_fields = ['sent_back']
 
     def is_displayed(self):
         return self.player.id_in_group == 2
 
+    def sent_back_error_message(self, value):
+        if not (value >= 0 and value <= self.group.multiplied):
+            return 'You don\'t have this kind of money!'
+
+class Bribe(Page):
+
+    def is_displayed(self):
+        return self.player.id_in_group == 2 and 5 > 4
+
     def vars_for_template(self):
         return {
-            'multiplied_amount': self.group.sent_amount * Constants.multiplication_factor
+            'max_bribe': self.group.sent_back * 6
         }
-
-    def sent_back_amount_error_message(self, value):
-        if not (value >= 0 and value <= self.group.sent_amount * Constants.multiplication_factor):
-            return 'You don\'t have this kind of money!'
 
 class WaitForP1(WaitPage):
     pass
@@ -58,7 +73,9 @@ class FinalResults(Page):
 page_sequence = [
     Send,
     WaitForP1,
+    MultiplicationPage,
     SendBack,
+    Bribe,
     ResultsWaitPage,
     FinalResults,
 ]

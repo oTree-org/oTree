@@ -10,11 +10,11 @@
     {% include 'reputation/Instructions.html' %}
 
     <p>
-        You are Participant B. Participant A sent you {{group.sent_amount}}
-        and you received {{multiplied_amount}}.
+        You are Participant B. Participant A sent you {{group.sent}}
+        and you received {{group.multiplied}}.
     </p>
 
-    {% formfield group.sent_back_amount with label="How much do you want to send back?" %}
+    {% formfield group.sent_back with label="How much do you want to send back?" %}
 
     {% next_button %}
 

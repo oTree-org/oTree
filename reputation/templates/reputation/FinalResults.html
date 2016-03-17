@@ -9,13 +9,13 @@
 
 {% if player.id_in_group == 1 %}
     <p>
-        You sent Participant B {{ group.sent_amount }}.
-        Participant B returned {{group.sent_back_amount}}.
+        You sent Participant B {{group.sent}}.
+        Participant B returned {{group.sent_back}}.
     </p>
 {% else %}
     <p>
-        Participant A sent you {{ group.sent_amount }}.
-        You returned {{group.sent_back_amount}}.
+        Participant A sent you {{group.sent}}.
+        You returned {{group.sent_back}}.
     </p>
 
 {% endif %}
