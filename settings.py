@@ -112,10 +112,10 @@ mturk_hit_settings = {
     'expiration_hours': 7*24, # 7 days
     #'grant_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
     'qualification_requirements': [
-        qualification.LocaleRequirement("EqualTo", "US"),
-        qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
-        qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5),
-        #qualification.Requirement('YOUR_QUALIFICATION_ID_HERE', 'DoesNotExist')
+        # qualification.LocaleRequirement("EqualTo", "US"),
+        # qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
+        # qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5),
+        # qualification.Requirement('YOUR_QUALIFICATION_ID_HERE', 'DoesNotExist')
     ]
 }
 
