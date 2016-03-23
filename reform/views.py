@@ -9,15 +9,12 @@ from .models import Constants
 
 
 class Contribute(Page):
-
-    form_model = models.Player
-    form_fields = ['contribution']
-
+    pass
 
 class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
-        self.group.set_payoffs()
+        self.group.payoffs()
 
 
 class Results(Page):

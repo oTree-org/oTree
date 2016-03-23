@@ -13,36 +13,35 @@ from otree.common import Currency as c, currency_range, safe_json
 
 # </standard imports>
 
-author = 'Your name here'
+author = 'Alex'
 
 doc = """
-Simple public goods game
+Reputation game
 """
 
 class Constants(BaseConstants):
-    name_in_url = 'public_goods_simple'
-    players_per_group = 3
+    name_in_url = 'reform'
+    players_per_group = 2
     num_rounds = 1
-
-    endowment = c(100)
-    efficiency_factor = 1.8
+    base_sales = 16
+    base_consumption = 4
+    reform_penalty = 4
+    reform_benefits = 0.5
 
 
 class Subsession(BaseSubsession):
-    pass
-
+    def before_session_starts(self):
+        round_number = self.round_number
 
 class Group(BaseGroup):
-    total_contribution = models.CurrencyField()
-    individual_share = models.CurrencyField()
+    def num_reforms(self):
+        return self.round_number - 1
+    reformed_player = random.randint(1,5)
 
-    def set_payoffs(self):
-        self.total_contribution = sum([p.contribution for p in self.get_players()])
-        self.individual_share = self.total_contribution * Constants.efficiency_factor / Constants.players_per_group
+    def payoffs(self):
         for p in self.get_players():
-            p.payoff = Constants.endowment - p.contribution + self.individual_share
+            p.payoff = Constants.base_sales - p.reforms * Constants.reform_penalty + Constants.base_consumption + self.num_reforms * 0.5
 
 
 class Player(BasePlayer):
-
-    contribution = models.CurrencyField(min=0, max=Constants.endowment)
+    pass
