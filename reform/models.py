@@ -30,17 +30,32 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    def before_session_starts(self):
-        round_number = self.round_number
+    pass
 
 class Group(BaseGroup):
+    # before any upheavals number of reforms is equal to round number
     def num_reforms(self):
-        return self.round_number - 1
-    reformed_player = random.randint(1,5)
+        return self.subsession.round_number
+    # pick one player to be reformed
+    reformed_player = random.randint(1,Constants.players_per_group)
+    # increase number of reforms by 1 for this player
+    def reform(self):
+        for p in self.get_players():
+            if p == self.reformed_player:
+                if 'p.reforms' in locals():
+                    p.reforms += 1
+                else:
+                    p.reforms = 1
+            else:
+                if 'p.reforms' in locals():
+                    pass
+                else:
+                    p.reforms = 0
 
+    # base sales + base consumption + number of global reforms passed - number of times player has been reformed * reform penalty
     def payoffs(self):
         for p in self.get_players():
-            p.payoff = Constants.base_sales - p.reforms * Constants.reform_penalty + Constants.base_consumption + self.num_reforms * 0.5
+            p.payoff = Constants.base_sales + Constants.base_consumption + self.num_reforms() - p.reforms * Constants.reform_penalty
 
 
 class Player(BasePlayer):
