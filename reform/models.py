@@ -41,7 +41,7 @@ class Group(BaseGroup):
     # increase number of reforms by 1 for this player
     def reform(self):
         for p in self.get_players():
-            if p == self.reformed_player:
+            if p.id_in_group == self.reformed_player:
                 if 'p.reforms' in locals():
                     p.reforms += 1
                 else:
