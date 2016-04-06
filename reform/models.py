@@ -37,21 +37,22 @@ class Group(BaseGroup):
     def num_reforms(self):
         return self.subsession.round_number
 
+    reformed_id = 0
+
     # pick one player to be reformed
     def reformed_player(self):
         if self.subsession.round_number == 1:
             for p in self.get_players():
                 p.reforms = 0
         while True:
-            reformed_id = random.randint(1,Constants.players_per_group)
-            if self.num_reforms() - self.get_player_by_id(reformed_id).reforms*Constants.players_per_group > 0:
+            self.reformed_id = random.randint(1,Constants.players_per_group)
+            if self.num_reforms() - self.get_player_by_id(self.reformed_id).reforms*Constants.players_per_group > 0:
                 break
-        return reformed_id
 
     # increase number of reforms by 1 for this player
     def reform(self):
         for p in self.get_players():
-            if p.id_in_group == self.reformed_player:
+            if p.id_in_group == self.reformed_id:
                 p.reforms += 1
             else:
                 pass
