@@ -13,13 +13,13 @@ class Contribute(Page):
     def vars_for_template(self):
 
         return {
-            'get_round_number': self.group.num_reforms,
-            'unfortunate': self.group.reformed_player
+            'get_round_number': self.group.num_reforms
         }
 
 class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
+        self.group.reformed_player()
         self.group.reform()
         self.group.payoffs()
 

@@ -36,21 +36,26 @@ class Group(BaseGroup):
     # before any upheavals number of reforms is equal to round number
     def num_reforms(self):
         return self.subsession.round_number
+
     # pick one player to be reformed
-    reformed_player = random.randint(1,Constants.players_per_group)
+    def reformed_player(self):
+        if self.subsession.round_number == 1:
+            for p in self.get_players():
+                p.reforms = 0
+        while True:
+            reformed_id = random.randint(1,Constants.players_per_group)
+            if self.num_reforms() - self.get_player_by_id(reformed_id).reforms*Constants.players_per_group > 0:
+                break
+        return reformed_id
+
     # increase number of reforms by 1 for this player
     def reform(self):
         for p in self.get_players():
             if p.id_in_group == self.reformed_player:
-                if 'p.reforms' in locals():
-                    p.reforms += 1
-                else:
-                    p.reforms = 1
+                p.reforms += 1
             else:
-                if 'p.reforms' in locals():
-                    pass
-                else:
-                    p.reforms = 0
+                pass
+
 
     # base sales + base consumption + number of global reforms passed - number of times player has been reformed * reform penalty
     def payoffs(self):
