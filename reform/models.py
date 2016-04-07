@@ -43,7 +43,6 @@ class Group(BaseGroup):
         return self.subsession.round_number
 
     reformed_id = 0
-
     # pick one player to be reformed
     def reformed_player(self):
         while True:
@@ -59,14 +58,24 @@ class Group(BaseGroup):
             else:
                 pass
 
+    solidarity_benefits = {1: 0.2, 2: 0.5, 3: 1, 4: 1.6, 5: 2.3}
 
-    # base sales + base consumption + number of global reforms passed - number of times player has been reformed * reform penalty
+    total_approvals = 0
+    def approvals(self):
+        return sum(p.approval for p in self.get_players())
+
     def payoffs(self):
         for p in self.get_players():
-            p.payoff = Constants.base_sales - ( p.participant.vars['reforms'] * Constants.reform_penalty ) + Constants.base_consumption + (( self.num_reforms() - p.participant.vars['reforms'] ) * Constants.reform_benefits)
+            p.payoff = \
+            Constants.base_sales \
+            - ( p.participant.vars['reforms'] * Constants.reform_penalty ) \
+            + Constants.base_consumption \
+            + (( self.num_reforms() - p.participant.vars['reforms'] ) * Constants.reform_benefits) \
+            - ( p.approval * Constants.approval_cost ) \
+            + self.solidarity_benefits[self.approvals()]
 
 
 class Player(BasePlayer):
 
-    CHOICES = ["approve","disapprove"]
-    approval = models.CharField(widget=widgets.RadioSelect, choices=CHOICES)
+    CHOICES = ((1, "Approve"),(0, "Disapprove"))
+    approval = models.FloatField(widget=widgets.RadioSelect, choices=CHOICES)

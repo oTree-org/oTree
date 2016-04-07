@@ -30,6 +30,7 @@ class ReformApproval(Page):
 class Results(WaitPage):
 
     def after_all_players_arrive(self):
+        self.group.approvals()
         self.group.payoffs()
 
 
@@ -41,7 +42,9 @@ class FinalResults(Page):
     def vars_for_template(self):
 
         return {
-            'player_payoff': sum([p.payoff for p in self.player.in_all_rounds()])
+            'player_payoff': sum([p.payoff for p in self.player.in_all_rounds()]),
+            'total_approvals': self.group.approvals(),
+            'solidarity': self.group.solidarity_benefits[5]
         }
 
 page_sequence =[
