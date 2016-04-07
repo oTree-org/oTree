@@ -26,6 +26,12 @@ SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzz'
 
 PAGE_FOOTER = ''
 
+# To use a database other than sqlite,
+# set the DATABASE_URL environment variable.
+# Examples:
+# postgres://USER:PASSWORD@HOST:PORT/NAME
+# mysql://USER:PASSWORD@HOST:PORT/NAME
+
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
@@ -106,10 +112,10 @@ mturk_hit_settings = {
     'expiration_hours': 7*24, # 7 days
     #'grant_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
     'qualification_requirements': [
-        qualification.LocaleRequirement("EqualTo", "US"),
-        qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
-        qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5),
-        #qualification.Requirement('YOUR_QUALIFICATION_ID_HERE', 'DoesNotExist')
+        # qualification.LocaleRequirement("EqualTo", "US"),
+        # qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
+        # qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5),
+        # qualification.Requirement('YOUR_QUALIFICATION_ID_HERE', 'DoesNotExist')
     ]
 }
 
@@ -338,5 +344,5 @@ SESSION_CONFIGS = [
 },
 ]
 
-
+# don't put anything after this point.
 otree.settings.augment_settings(globals())

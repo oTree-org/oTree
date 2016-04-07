@@ -29,7 +29,11 @@ class Constants(BaseConstants):
 
     offer_choices = currency_range(0, endowment, offer_increment)
     offer_choices_count = len(offer_choices)
-    keep_give_amounts = [(offer, endowment - offer) for offer in offer_choices]
+
+    keep_give_amounts = []
+    for offer in offer_choices:
+        keep_give_amounts.append((offer, endowment - offer))
+
 
 class Subsession(BaseSubsession):
 

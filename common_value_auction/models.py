@@ -77,9 +77,6 @@ class Group(BaseGroup):
 
         return estimate
 
-    def other_players_count(self):
-        return len(self.other_players_count()-1)
-
 
 class Player(BasePlayer):
 

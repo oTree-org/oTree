@@ -75,5 +75,4 @@ class Player(BasePlayer):
 
     volunteer = models.BooleanField(
         doc="""Whether player volunteers""",
-        widget=widgets.RadioSelect(),
     )

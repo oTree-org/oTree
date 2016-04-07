@@ -18,7 +18,8 @@ class PlayerBot(Bot):
         self.submit(views.Feedback)
         self.submit(
             views.Contribute, {
-                "contribution": random.choice(range(0, Constants.endowment))
+                "contribution": random.choice(
+                    range(0, int(Constants.endowment)))
             }
         )
         self.submit(views.Results)
