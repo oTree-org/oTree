@@ -22,7 +22,7 @@ Reputation game
 class Constants(BaseConstants):
     name_in_url = 'reform'
     players_per_group = 2
-    num_rounds = 3
+    num_rounds = 1
     base_sales = 16
     base_consumption = 4
     reform_penalty = 4
@@ -40,8 +40,6 @@ class Group(BaseGroup):
     # before any upheavals number of reforms is equal to round number
     def num_reforms(self):
         return self.subsession.round_number
-
-    reformed_id = 0
 
     # pick one player to be reformed
     def reformed_player(self):
@@ -62,7 +60,7 @@ class Group(BaseGroup):
     # base sales + base consumption + number of global reforms passed - number of times player has been reformed * reform penalty
     def payoffs(self):
         for p in self.get_players():
-            p.payoff = Constants.base_sales + Constants.base_consumption + self.num_reforms() - p.participant.vars['reforms'] * Constants.reform_penalty
+            p.payoff = Constants.base_sales - ( p.participant.vars['reforms'] * Constants.reform_penalty ) + Constants.base_consumption + (( self.num_reforms() - p.participant.vars['reforms'] ) * Constants.reform_benefits)
 
 
 class Player(BasePlayer):

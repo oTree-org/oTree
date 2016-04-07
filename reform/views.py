@@ -8,13 +8,10 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class Contribute(Page):
+class Introduction(Page):
 
-    def vars_for_template(self):
-
-        return {
-            'get_round_number': self.group.num_reforms
-        }
+    def is_displayed(self):
+        return  self.subsession.round_number == 1
 
 class ResultsWaitPage(WaitPage):
 
@@ -36,7 +33,7 @@ class Results(Page):
         }
 
 page_sequence =[
-    Contribute,
+    Introduction,
     ResultsWaitPage,
     Results
 ]
