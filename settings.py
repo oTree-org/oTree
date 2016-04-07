@@ -65,6 +65,7 @@ AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
+POINTS_DECIMAL_PLACES = 1
 
 
 # e.g. en-gb, de-de, it-it, fr-fr.
