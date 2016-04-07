@@ -22,7 +22,7 @@ Reputation game
 class Constants(BaseConstants):
     name_in_url = 'reform'
     players_per_group = 2
-    num_rounds = 1
+    num_rounds = 3
     base_sales = 16
     base_consumption = 4
     reform_penalty = 4
@@ -30,7 +30,11 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+
+    def before_session_starts(self):
+        if self.round_number == 1:
+            for p in self.get_players():
+                p.participant.vars['reforms'] = 0
 
 class Group(BaseGroup):
     # before any upheavals number of reforms is equal to round number
@@ -41,19 +45,16 @@ class Group(BaseGroup):
 
     # pick one player to be reformed
     def reformed_player(self):
-        if self.subsession.round_number == 1:
-            for p in self.get_players():
-                p.reforms = 0
         while True:
             self.reformed_id = random.randint(1,Constants.players_per_group)
-            if self.num_reforms() - self.get_player_by_id(self.reformed_id).reforms*Constants.players_per_group > 0:
+            if self.num_reforms() - self.get_player_by_id(self.reformed_id).participant.vars['reforms']*Constants.players_per_group > 0:
                 break
 
     # increase number of reforms by 1 for this player
     def reform(self):
         for p in self.get_players():
             if p.id_in_group == self.reformed_id:
-                p.reforms += 1
+                p.participant.vars['reforms'] += 1
             else:
                 pass
 
@@ -61,7 +62,7 @@ class Group(BaseGroup):
     # base sales + base consumption + number of global reforms passed - number of times player has been reformed * reform penalty
     def payoffs(self):
         for p in self.get_players():
-            p.payoff = Constants.base_sales + Constants.base_consumption + self.num_reforms() - p.reforms * Constants.reform_penalty
+            p.payoff = Constants.base_sales + Constants.base_consumption + self.num_reforms() - p.participant.vars['reforms'] * Constants.reform_penalty
 
 
 class Player(BasePlayer):
