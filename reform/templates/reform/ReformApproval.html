@@ -10,9 +10,17 @@
     {% include 'reform/Instructions.html' %}
 
     <p>
-        Please decide whether you want to approve of reforms.
+        Please decide whether you want to approve of reforms. Approving a reform costs 0.3 points.
+    </p>
+    <p>
+        число одобривших 	1	2	3	4	5
+    </p>
+    <p>
+        Бонусы всей группе	0.2	0.5	1.0	1.6	2.3
+
     </p>
 
+    {% formfield player.approval with label="Do you approve of the reform?" %}
 
     {% next_button %}
 

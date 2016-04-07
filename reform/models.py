@@ -27,6 +27,7 @@ class Constants(BaseConstants):
     base_consumption = 4
     reform_penalty = 4
     reform_benefits = 0.5
+    approval_cost = 0.3
 
 
 class Subsession(BaseSubsession):
@@ -66,4 +67,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+
+    CHOICES = ["approve","disapprove"]
+    approval = models.CharField(widget=widgets.RadioSelect, choices=CHOICES)

@@ -13,20 +13,25 @@ class Introduction(Page):
     def is_displayed(self):
         return  self.subsession.round_number == 1
 
+
 class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
         self.group.reformed_player()
         self.group.reform()
 
+
 class ReformApproval(Page):
 
-    pass
+    form_model = models.Player
+    form_fields = ['approval']
+
 
 class Results(WaitPage):
 
     def after_all_players_arrive(self):
         self.group.payoffs()
+
 
 class FinalResults(Page):
 
