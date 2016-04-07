@@ -22,7 +22,7 @@ Reputation game
 class Constants(BaseConstants):
     name_in_url = 'reform'
     players_per_group = 2
-    num_rounds = 1
+    num_rounds = 2
     base_sales = 16
     base_consumption = 4
     reform_penalty = 4
@@ -58,11 +58,13 @@ class Group(BaseGroup):
             else:
                 pass
 
-    solidarity_benefits = {1: 0.2, 2: 0.5, 3: 1, 4: 1.6, 5: 2.3}
-
+    solidarity_benefits = {0: 0.0, 1: 0.2, 2: 0.5, 3: 1, 4: 1.6, 5: 2.3}
     total_approvals = 0
     def approvals(self):
         return sum(p.approval for p in self.get_players())
+
+    def abolish(self):
+        return sum(p.abolish for p in self.get_players())
 
     def payoffs(self):
         for p in self.get_players():
@@ -77,5 +79,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    CHOICES = ((1, "Approve"),(0, "Disapprove"))
-    approval = models.FloatField(widget=widgets.RadioSelect, choices=CHOICES)
+    approval_choices = ((1, "Approve"),(0, "Disapprove"))
+    approval = models.FloatField(widget=widgets.RadioSelect, choices=approval_choices)
+
+    abolish = models.FloatField(widget=widgets.SliderInput(attrs={'step': '1'}), min=0, max= 5)

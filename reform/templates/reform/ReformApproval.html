@@ -22,6 +22,12 @@
 
     {% formfield player.approval with label="Do you approve of the reform?" %}
 
+    <p>
+        How much points are you willing to spend to abolish the system?
+    </p>
+
+    {% formfield player.abolish with label="Abolish the system?" %}
+
     {% next_button %}
 
 {% endblock %}

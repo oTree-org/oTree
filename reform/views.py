@@ -24,7 +24,7 @@ class ResultsWaitPage(WaitPage):
 class ReformApproval(Page):
 
     form_model = models.Player
-    form_fields = ['approval']
+    form_fields = ['approval','abolish']
 
 
 class Results(WaitPage):
@@ -37,7 +37,7 @@ class Results(WaitPage):
 class FinalResults(Page):
 
     def is_displayed(self):
-        return  self.subsession.round_number == Constants.num_rounds
+        return  self.subsession.round_number == Constants.num_rounds or self.group.abolish() >= 16
 
     def vars_for_template(self):
 
