@@ -1,0 +1,19 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Contribute
+{% endblock %}
+
+{% block content %}
+
+    {% include 'reform/Instructions.html' %}
+
+    <p>
+        Please decide whether you want to approve of reforms.
+    </p>
+
+
+    {% next_button %}
+
+{% endblock %}

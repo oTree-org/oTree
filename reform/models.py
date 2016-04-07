@@ -41,6 +41,8 @@ class Group(BaseGroup):
     def num_reforms(self):
         return self.subsession.round_number
 
+    reformed_id = 0
+
     # pick one player to be reformed
     def reformed_player(self):
         while True:
@@ -48,7 +50,7 @@ class Group(BaseGroup):
             if self.num_reforms() - self.get_player_by_id(self.reformed_id).participant.vars['reforms']*Constants.players_per_group > 0:
                 break
 
-    # increase number of reforms by 1 for this player
+    # increase number of reforms by 1 for reformed player
     def reform(self):
         for p in self.get_players():
             if p.id_in_group == self.reformed_id:

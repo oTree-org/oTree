@@ -18,10 +18,17 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.reformed_player()
         self.group.reform()
+
+class ReformApproval(Page):
+
+    pass
+
+class Results(WaitPage):
+
+    def after_all_players_arrive(self):
         self.group.payoffs()
 
-
-class Results(Page):
+class FinalResults(Page):
 
     def is_displayed(self):
         return  self.subsession.round_number == Constants.num_rounds
@@ -35,5 +42,7 @@ class Results(Page):
 page_sequence =[
     Introduction,
     ResultsWaitPage,
-    Results
+    ReformApproval,
+    Results,
+    FinalResults
 ]
