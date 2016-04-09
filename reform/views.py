@@ -11,7 +11,7 @@ from .models import Constants
 class Introduction(Page):
 
     def is_displayed(self):
-        return  self.subsession.round_number == 1
+        return  self.subsession.round_number == 333
 
 
 class ResultsWaitPage(WaitPage):
@@ -21,7 +21,7 @@ class ResultsWaitPage(WaitPage):
         self.group.reform()
 
 
-class ReformApproval(Page):
+class Decisions(Page):
 
     form_model = models.Player
     form_fields = ['approval','abolish']
@@ -37,20 +37,20 @@ class Results(WaitPage):
 class FinalResults(Page):
 
     def is_displayed(self):
-        return  self.subsession.round_number == Constants.num_rounds or self.group.abolish() >= 16
+        return  self.subsession.round_number == Constants.num_rounds or self.group.abolish() >= Constants.points_to_abolish
 
     def vars_for_template(self):
 
         return {
             'player_payoff': sum([p.payoff for p in self.player.in_all_rounds()]),
             'total_approvals': self.group.approvals(),
-            'solidarity': self.group.solidarity_benefits[5]
+            'solidarity': Constants.solidarity_benefits[self.group.approvals()]
         }
 
 page_sequence =[
     Introduction,
     ResultsWaitPage,
-    ReformApproval,
+    Decisions,
     Results,
     FinalResults
 ]

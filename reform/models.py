@@ -22,12 +22,14 @@ Reputation game
 class Constants(BaseConstants):
     name_in_url = 'reform'
     players_per_group = 2
-    num_rounds = 2
+    num_rounds = 3
     base_sales = 16
     base_consumption = 4
     reform_penalty = 4
     reform_benefits = 0.5
     approval_cost = 0.3
+    solidarity_benefits = {0: 0.0, 1: 0.2, 2: 0.5, 3: 1, 4: 1.6, 5: 2.3}
+    points_to_abolish = 6
 
 
 class Subsession(BaseSubsession):
@@ -58,7 +60,7 @@ class Group(BaseGroup):
             else:
                 pass
 
-    solidarity_benefits = {0: 0.0, 1: 0.2, 2: 0.5, 3: 1, 4: 1.6, 5: 2.3}
+
     total_approvals = 0
     def approvals(self):
         return sum(p.approval for p in self.get_players())
@@ -74,7 +76,8 @@ class Group(BaseGroup):
             + Constants.base_consumption \
             + (( self.num_reforms() - p.participant.vars['reforms'] ) * Constants.reform_benefits) \
             - ( p.approval * Constants.approval_cost ) \
-            + self.solidarity_benefits[self.approvals()]
+            + Constants.solidarity_benefits[self.approvals()] \
+            - p.abolish
 
 
 class Player(BasePlayer):
@@ -82,4 +85,4 @@ class Player(BasePlayer):
     approval_choices = ((1, "Approve"),(0, "Disapprove"))
     approval = models.FloatField(widget=widgets.RadioSelect, choices=approval_choices)
 
-    abolish = models.FloatField(widget=widgets.SliderInput(attrs={'step': '1'}), min=0, max= 5)
+    abolish = models.FloatField(widget=widgets.SliderInput(attrs={'step': '1'}), min=0, max= 5, default=0)
