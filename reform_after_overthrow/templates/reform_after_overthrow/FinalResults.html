@@ -1,0 +1,16 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Your profit is {{ player_payoff }}. Reform was approved by {{ total_approvals }} people.
+    </p>
+
+    {% include 'reform/Instructions.html' %}
+
+{% endblock %}
