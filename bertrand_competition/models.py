@@ -15,8 +15,6 @@ doc = """
 2 firms complete in a market by setting prices for homogenous goods.
 """
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/bertrand_competition"
-
 bibliography = (
     (
         'Kruse, J. B., Rassenti, S., Reynolds, S. S., & Smith, V. L. (1994). '
@@ -29,15 +27,6 @@ bibliography = (
         'Industrial Organization, 18(1), 7-22.'
     )
 )
-
-links = {
-    "Wikipedia": {
-        "Bertrand Competition":
-            "http://en.wikipedia.org/wiki/Bertrand_competition"
-    }
-}
-
-keywords = ("Bertrand Competition",)
 
 
 class Constants(BaseConstants):

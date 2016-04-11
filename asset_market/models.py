@@ -22,9 +22,6 @@ In this asset market, two players trade shares that give probabilistic dividends
 
 """
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/asset_market"
-
-
 bibliography = (
     (
         'Smith, Vernon L., Gerry L. Suchanek, and Arlington W. Williams. '
@@ -42,19 +39,6 @@ bibliography = (
         'asset markets." Journal of Economic Surveys 27.3 (2013): 570-588.'
     )
 )
-
-
-links = {
-    "Wikipedia": {
-        "Stock Market Bubbles":
-            "https://en.wikipedia.org/wiki/Stock_market_bubble",
-        "Market Games":
-            "https://en.wikipedia.org/wiki/Experimental_economics#Market_games"
-    }
-}
-
-
-keywords = ("Stock Market", "Finance", "Bubble", "Trade")
 
 
 class Constants(BaseConstants):

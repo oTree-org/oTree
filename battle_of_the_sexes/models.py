@@ -22,9 +22,6 @@ from
 
 """
 
-source_code = (
-    "https://github.com/oTree-org/oTree/tree/master/battle_of_the_sexes"
-)
 
 bibliography = (
     (
@@ -46,18 +43,6 @@ bibliography = (
         '(1989): 568-587.'
     )
 )
-
-
-links = {
-    "Wikipedia": {
-        "Battle of the Sexes":
-            "https://en.wikipedia.org/wiki/Battle_of_the_sexes_%28game_theory%29",
-        "Coordination Game": "https://en.wikipedia.org/wiki/Coordination_game"
-    }
-}
-
-
-keywords = ("Battle of the Sexes", "Coordination")
 
 
 class Constants(BaseConstants):

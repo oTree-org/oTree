@@ -17,9 +17,6 @@ the closest guess wins.
 """
 
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/beauty"
-
-
 bibliography = (
     (
         'Nagel, Rosemarie. "Unraveling in guessing games: An experimental '
@@ -30,22 +27,6 @@ bibliography = (
         'Newspaper and lab beauty-contest experiments." American Economic '
         'Review (2002): 1687-1701.'
     )
-)
-
-
-links = {
-    "Wikipedia": {
-        "Beauty Contest":
-            "http://en.wikipedia.org/wiki/Keynesian_beauty_contest",
-        "Guess 2/3 of the Average":
-            "http://en.wikipedia.org/wiki/Guess_2/3_of_the_average"
-    }
-}
-
-
-keywords = (
-    "Beauty Contest", "Guessing Game", "Paradox",
-    "Common Knowledge", "Rationality"
 )
 
 

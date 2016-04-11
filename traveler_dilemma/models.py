@@ -22,22 +22,6 @@ for classroom/teaching use.
 """
 
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/traveler_dilemma"
-
-
-bibliography = ()
-
-
-links = {
-    "Wikipedia": {
-        "Traveler's Dilemma":
-            "https://en.wikipedia.org/wiki/Traveler%27s_dilemma"
-    }
-}
-
-
-keywords = ("Traveler's Dilemma",)
-
 class Constants(BaseConstants):
     name_in_url = 'traveler_dilemma'
     players_per_group = 2

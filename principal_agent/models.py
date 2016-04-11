@@ -19,9 +19,6 @@ accept. The agent then chooses an effort level. The implementation is based on
 </a>.
 """
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/principal_agent"
-
-
 bibliography = (
     (
         'Gächter, Simon, and Manfred Königstein. "Design a Contract: A Simple '
@@ -37,20 +34,6 @@ bibliography = (
         'Charness, Gary, Guillaume R. Frechette, and John H. Kagel. "How '
         'robust is laboratory gift exchange?." Experimental Economics 7.2'
     )
-)
-
-
-links = {
-    "Wikipedia": {
-        "Principal-agent Problem":
-            "http://en.wikipedia.org/wiki/Principal%E2%80%93agent_problem"
-    }
-}
-
-
-keywords = (
-    "Principal-Agent Problem", "Gift Exchange",
-    "Labor Market", "Contract Design"
 )
 
 

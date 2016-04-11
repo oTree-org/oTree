@@ -19,19 +19,6 @@ Bids are private. The player with the highest bid wins the auction, but
 payoff depends on the bid amount and the actual value.<br/>
 """
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/common_value_auction"
-
-bibliography = ()
-
-links = {
-    "Wikipedia": {
-        "Common Value Auction":
-            "http://en.wikipedia.org/wiki/Common_value_auction"
-    }
-}
-
-keywords = ("Common Value Auction",)
-
 
 class Constants(BaseConstants):
     name_in_url = 'common_value_auction'

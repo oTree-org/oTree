@@ -18,8 +18,6 @@ available amount. If the sum of demands is no larger than the available
 amount, both players get demanded portions. Otherwise, both get nothing.
 """
 
-source_code ="https://github.com/oTree-org/oTree/tree/master/bargaining"
-
 
 class Constants(BaseConstants):
     name_in_url = 'bargaining'
