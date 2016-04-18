@@ -15,11 +15,11 @@ class PlayerBot(Bot):
 
     def play_round(self):
 
-        if round == Constants.num_rounds:
-            self.submit(views.Decisions, {'approval': random.randint(0,1), 'abolish': 0})
+        if self.subsession.round_number == Constants.num_rounds:
+            self.submit(views.Decisions, {'approval': random.randint(0,1), 'vote_to_overthrow': 0})
             self.submit(views.FinalResults)
         else:
-            self.submit(views.Decisions, {'approval': 1, 'abolish': 0})
+            self.submit(views.Decisions, {'approval': random.randint(0,1), 'vote_to_overthrow': random.randint(0,Constants.max_overthrow_vote_for_player)})
 
     def validate_play(self):
         pass

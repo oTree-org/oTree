@@ -16,7 +16,7 @@ from otree.common import Currency as c, currency_range, safe_json
 author = 'Alex'
 
 doc = """
-Reputation game
+reforming game
 """
 
 class Constants(BaseConstants):
@@ -29,7 +29,9 @@ class Constants(BaseConstants):
     reform_benefits = 0.5
     approval_cost = 0.3
     solidarity_benefits = {0: 0.0, 1: 0.2, 2: 0.5, 3: 1, 4: 1.6, 5: 2.3}
-    points_to_abolish = 6
+    points_to_overthrow = 6
+    max_overthrow_vote_for_player = 5
+    max_reforms = 5
 
 
 class Subsession(BaseSubsession):
@@ -38,6 +40,7 @@ class Subsession(BaseSubsession):
         if self.round_number == 1:
             for p in self.get_players():
                 p.participant.vars['reforms'] = 0
+            self.session.vars['overthrow'] = 0
 
 class Group(BaseGroup):
     # before any upheavals number of reforms is equal to round number
@@ -53,7 +56,7 @@ class Group(BaseGroup):
                 break
 
     # increase number of reforms by 1 for reformed player
-    def reform(self):
+    def reform_a_player(self):
         for p in self.get_players():
             if p.id_in_group == self.reformed_id:
                 p.participant.vars['reforms'] += 1
@@ -65,19 +68,33 @@ class Group(BaseGroup):
     def approvals(self):
         return sum(p.approval for p in self.get_players())
 
-    def abolish(self):
-        return sum(p.abolish for p in self.get_players())
+    # sums up players votes for overthrow and switches regime, if necessary
+    def total_votes_for_overthrow(self):
+        if sum(p.vote_to_overthrow for p in self.get_players()) >= Constants.points_to_overthrow and self.session.vars['overthrow'] == 0:
+            self.session.vars['overthrow'] = 1
+        return sum(p.vote_to_overthrow for p in self.get_players())
 
     def payoffs(self):
+        if self.session.vars['overthrow'] == 0:
+            for p in self.get_players():
+                p.payoff = \
+                Constants.base_sales \
+                - ( p.participant.vars['reforms'] * Constants.reform_penalty ) \
+                + Constants.base_consumption \
+                + (( self.num_reforms() - p.participant.vars['reforms'] ) * Constants.reform_benefits) \
+                - ( p.approval * Constants.approval_cost ) \
+                + Constants.solidarity_benefits[self.approvals()] \
+                - p.vote_to_overthrow
+        else:
+            for p in self.get_players():
+                p.payoff = \
+                Constants.base_sales
+
+    reforms_votes_group = []
+    # aggregate proposed number of reforms (after overthrow mechanic)
+    def reform(self):
         for p in self.get_players():
-            p.payoff = \
-            Constants.base_sales \
-            - ( p.participant.vars['reforms'] * Constants.reform_penalty ) \
-            + Constants.base_consumption \
-            + (( self.num_reforms() - p.participant.vars['reforms'] ) * Constants.reform_benefits) \
-            - ( p.approval * Constants.approval_cost ) \
-            + Constants.solidarity_benefits[self.approvals()] \
-            - p.abolish
+            self.reforms_votes_group.append(p.reforms_votes)
 
 
 class Player(BasePlayer):
@@ -85,4 +102,6 @@ class Player(BasePlayer):
     approval_choices = ((1, "Approve"),(0, "Disapprove"))
     approval = models.FloatField(widget=widgets.RadioSelect, choices=approval_choices)
 
-    abolish = models.FloatField(widget=widgets.SliderInput(attrs={'step': '1'}), min=0, max= 5, default=0)
+    vote_to_overthrow = models.FloatField(widget=widgets.SliderInput(attrs={'step': '1'}), min=0, max=Constants.max_overthrow_vote_for_player, default=3)
+
+    reforms_votes = models.FloatField(widget=widgets.SliderInput(attrs={'step': '1'}), min=0, max=Constants.max_reforms, default=3)

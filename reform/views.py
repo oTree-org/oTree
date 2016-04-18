@@ -18,39 +18,62 @@ class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
         self.group.reformed_player()
-        self.group.reform()
+        self.group.reform_a_player()
 
 
-class Decisions(Page):
+class PreOverthrow(Page):
+
+    def is_displayed(self):
+        return self.session.vars['overthrow'] == 0
 
     form_model = models.Player
-    form_fields = ['approval','abolish']
+    form_fields = ['approval','vote_to_overthrow']
 
+class PostOverthrow(Page):
 
-class Results(WaitPage):
+    def is_displayed(self):
+        return self.session.vars['overthrow'] == 1
+
+    form_model = models.Player
+    form_fields = ['reforms_votes']
+
+class PreOverthrowCalculations(WaitPage):
+
+    def is_displayed(self):
+        return self.session.vars['overthrow'] == 0
 
     def after_all_players_arrive(self):
         self.group.approvals()
+        self.group.payoffs()
+        self.group.total_votes_for_overthrow()
+
+
+class PostOverthrowCalculations(WaitPage):
+
+    def is_displayed(self):
+        return self.session.vars['overthrow'] == 1
+
+    def after_all_players_arrive(self):
         self.group.payoffs()
 
 
 class FinalResults(Page):
 
     def is_displayed(self):
-        return  self.subsession.round_number == Constants.num_rounds or self.group.abolish() >= Constants.points_to_abolish
+        return  self.subsession.round_number == Constants.num_rounds
 
     def vars_for_template(self):
 
         return {
-            'player_payoff': sum([p.payoff for p in self.player.in_all_rounds()]),
-            'total_approvals': self.group.approvals(),
-            'solidarity': Constants.solidarity_benefits[self.group.approvals()]
+            'player_payoff': sum([p.payoff for p in self.player.in_all_rounds()])
         }
 
 page_sequence =[
     Introduction,
     ResultsWaitPage,
-    Decisions,
-    Results,
+    PreOverthrow,
+    PostOverthrow,
+    PreOverthrowCalculations,
+    PostOverthrowCalculations,
     FinalResults
 ]
