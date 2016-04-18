@@ -140,7 +140,7 @@ SESSION_CONFIGS = [
         'display_name': "Reform Game",
         'num_demo_participants': 2,
         'app_sequence': ['reform'],
-    }
+    },
     {
         'name': 'reputation',
         'display_name': "Reputation Game",
