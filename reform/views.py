@@ -14,17 +14,22 @@ class Introduction(Page):
         return  self.subsession.round_number == 333
 
 
-class ResultsWaitPage(WaitPage):
+class ReformingCalculations(WaitPage):
 
     def after_all_players_arrive(self):
         self.group.reformed_player()
-        self.group.reform_a_player()
+        # self.group.reform_a_player()
 
 
 class PreOverthrow(Page):
 
     def is_displayed(self):
         return self.session.vars['overthrow'] == 0
+
+    def vars_for_template(self):
+        return {
+            'reformed_player': self.group.reformed_id
+    }
 
     form_model = models.Player
     form_fields = ['approval','vote_to_overthrow']
@@ -43,6 +48,7 @@ class PostOverthrowCalculations(WaitPage):
         return self.session.vars['overthrow'] == 1
 
     def after_all_players_arrive(self):
+        self.group.reform()
         self.group.payoffs()
 
 class PreOverthrowCalculations(WaitPage):
@@ -69,7 +75,7 @@ class FinalResults(Page):
 
 page_sequence =[
     Introduction,
-    ResultsWaitPage,
+    ReformingCalculations,
     PreOverthrow,
     PostOverthrow,
     PostOverthrowCalculations,

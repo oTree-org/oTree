@@ -23,10 +23,10 @@
     {% formfield player.approval with label="Do you approve of the reform?" %}
 
     <p>
-        How much points are you willing to spend to overthrow the system?
+        You have an option of trying to overthrow the system. If sum of points to do so within your group is greater or equal to {{ Constants.points_to_overthrow }}, then the regime will be overthrown, and every player within your group will lose 10 points immediately. However, in each of the subsequent rounds your group will be able to choose the number of reforms it desires to be implemented, and, in case of successful coordination, potentially improve everybody's payoff.
     </p>
 
-    {% formfield player.vote_to_overthrow with label="Overthrow the system?" %}
+    {% formfield player.vote_to_overthrow with label="How much points are you willing to spend to try overthrow the system?" %}
 
     {% next_button %}
 

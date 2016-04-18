@@ -22,7 +22,7 @@ reforming game
 class Constants(BaseConstants):
     name_in_url = 'reform'
     players_per_group = 2
-    num_rounds = 1
+    num_rounds = 2
     base_sales = 16
     base_consumption = 4
     reform_penalty = 4
@@ -45,7 +45,7 @@ class Subsession(BaseSubsession):
             self.session.vars['overthrow'] = 0
 
 class Group(BaseGroup):
-    # before any upheavals number of reforms is equal to round number
+    # before the overthrow, number of reforms is equal to round number
     def num_reforms(self):
         return self.subsession.round_number
 
@@ -56,15 +56,19 @@ class Group(BaseGroup):
             self.reformed_id = random.randint(1,Constants.players_per_group)
             if self.num_reforms() - self.get_player_by_id(self.reformed_id).participant.vars['reforms']*Constants.players_per_group > 0:
                 break
-
-    # increase number of reforms by 1 for reformed player
-    def reform_a_player(self):
         for p in self.get_players():
             if p.id_in_group == self.reformed_id:
                 p.participant.vars['reforms'] += 1
-            else:
-                pass
 
+    # increase number of reforms by 1 for reformed player
+    # def reform_a_player(self):
+    #     for p in self.get_players():
+    #         if p.id_in_group == self.reformed_id:
+    #             p.participant.vars['reforms'] += 1
+    #         else:
+    #             pass
+
+    # counting approvals for the government to give according solidarity benefits to everybody
     total_approvals = 0
     def approvals(self):
         return sum(p.approval for p in self.get_players())
@@ -79,35 +83,48 @@ class Group(BaseGroup):
 
         return sum(p.vote_to_overthrow for p in self.get_players())
 
-    def payoffs(self):
-        if self.session.vars['overthrow'] == 0:
-            for p in self.get_players():
-                p.payoff = \
-                Constants.base_sales \
-                - ( p.participant.vars['reforms'] * Constants.reform_penalty ) \
-                + Constants.base_consumption \
-                + (( self.num_reforms() - p.participant.vars['reforms'] ) * Constants.reform_benefits) \
-                - ( p.approval * Constants.approval_cost ) \
-                + Constants.solidarity_benefits[self.approvals()] \
-                - p.vote_to_overthrow
-        else:
-            for p in self.get_players():
-                p.payoff = \
-                Constants.base_sales \
-                + Constants.losses_from_chaos
-
     reforms_votes_group = []
     # aggregate proposed number of reforms (after overthrow mechanic)
     def reform(self):
         for p in self.get_players():
             self.reforms_votes_group.append(p.reforms_votes)
 
+    def payoffs(self):
+        # normal payoff
+        if self.session.vars['overthrow'] == 0:
+            for p in self.get_players():
+                p.payoff = \
+                    Constants.base_sales \
+                    - ( p.participant.vars['reforms'] * Constants.reform_penalty ) \
+                    + Constants.base_consumption \
+                    + (( self.num_reforms() - p.participant.vars['reforms'] ) * Constants.reform_benefits) \
+                    - ( p.approval * Constants.approval_cost ) \
+                    + Constants.solidarity_benefits[self.approvals()] \
+                    - p.vote_to_overthrow
+        # payoff after overthrow if coordination of reforming achieved
+        elif self.reforms_votes_group.count(self.reforms_votes_group[0]) == len(self.reforms_votes_group):
+            for p in self.get_players():
+                p.payoff = \
+                    Constants.base_sales \
+                    + Constants.base_consumption \
+                    + self.reforms_votes_group[0] * Constants.reform_benefits
+        # payoff after overthrow if no coordination of reforming achieved
+        else:
+            for p in self.get_players():
+                p.payoff = \
+                    Constants.base_sales \
+                    + Constants.base_consumption \
+                    + Constants.losses_from_chaos
+
 
 class Player(BasePlayer):
 
+    # form showing whether a player approves government's reforms
     approval_choices = ((1, "Approve"),(0, "Disapprove"))
     approval = models.FloatField(widget=widgets.RadioSelect, choices=approval_choices)
 
+    # form showing how much a player is spending on trying to overthrow the system
     vote_to_overthrow = models.FloatField(widget=widgets.SliderInput(attrs={'step': '1'}), min=0, max=Constants.max_overthrow_vote_for_player, default=3)
 
+    # form showing how much reforms a player desires after the overthrow
     reforms_votes = models.FloatField(widget=widgets.SliderInput(attrs={'step': '1'}), min=0, max=Constants.max_reforms, default=3)
