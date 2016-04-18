@@ -128,7 +128,7 @@ mturk_hit_settings = {
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
     'participation_fee': 10.00,
-    'num_bots': 10,
+    'num_bots': 12,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
 }
@@ -140,7 +140,7 @@ SESSION_CONFIGS = [
         'display_name': "Reform Game",
         'num_demo_participants': 2,
         'app_sequence': ['reform'],
-    },
+    }
     {
         'name': 'reputation',
         'display_name': "Reputation Game",
