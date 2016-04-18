@@ -22,7 +22,7 @@ reforming game
 class Constants(BaseConstants):
     name_in_url = 'reform'
     players_per_group = 2
-    num_rounds = 3
+    num_rounds = 1
     base_sales = 16
     base_consumption = 4
     reform_penalty = 4
@@ -32,6 +32,8 @@ class Constants(BaseConstants):
     points_to_overthrow = 6
     max_overthrow_vote_for_player = 5
     max_reforms = 5
+    losses_from_overthrow = -10
+    losses_from_chaos = -5
 
 
 class Subsession(BaseSubsession):
@@ -63,7 +65,6 @@ class Group(BaseGroup):
             else:
                 pass
 
-
     total_approvals = 0
     def approvals(self):
         return sum(p.approval for p in self.get_players())
@@ -72,6 +73,10 @@ class Group(BaseGroup):
     def total_votes_for_overthrow(self):
         if sum(p.vote_to_overthrow for p in self.get_players()) >= Constants.points_to_overthrow and self.session.vars['overthrow'] == 0:
             self.session.vars['overthrow'] = 1
+            # chaos loses or something
+            for p in self.get_players():
+                p.payoff += Constants.losses_from_overthrow
+
         return sum(p.vote_to_overthrow for p in self.get_players())
 
     def payoffs(self):
@@ -88,7 +93,8 @@ class Group(BaseGroup):
         else:
             for p in self.get_players():
                 p.payoff = \
-                Constants.base_sales
+                Constants.base_sales \
+                + Constants.losses_from_chaos
 
     reforms_votes_group = []
     # aggregate proposed number of reforms (after overthrow mechanic)

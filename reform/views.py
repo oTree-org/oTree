@@ -37,6 +37,14 @@ class PostOverthrow(Page):
     form_model = models.Player
     form_fields = ['reforms_votes']
 
+class PostOverthrowCalculations(WaitPage):
+
+    def is_displayed(self):
+        return self.session.vars['overthrow'] == 1
+
+    def after_all_players_arrive(self):
+        self.group.payoffs()
+
 class PreOverthrowCalculations(WaitPage):
 
     def is_displayed(self):
@@ -46,15 +54,6 @@ class PreOverthrowCalculations(WaitPage):
         self.group.approvals()
         self.group.payoffs()
         self.group.total_votes_for_overthrow()
-
-
-class PostOverthrowCalculations(WaitPage):
-
-    def is_displayed(self):
-        return self.session.vars['overthrow'] == 1
-
-    def after_all_players_arrive(self):
-        self.group.payoffs()
 
 
 class FinalResults(Page):
@@ -73,7 +72,7 @@ page_sequence =[
     ResultsWaitPage,
     PreOverthrow,
     PostOverthrow,
-    PreOverthrowCalculations,
     PostOverthrowCalculations,
+    PreOverthrowCalculations,
     FinalResults
 ]
