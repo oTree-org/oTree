@@ -22,7 +22,7 @@ reforming game
 class Constants(BaseConstants):
     name_in_url = 'reform'
     players_per_group = 2
-    num_rounds = 2
+    num_rounds = 3
     base_sales = 16
     base_consumption = 4
     reform_penalty = 4
@@ -38,10 +38,13 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
 
+    # need to introduce reforms participant var in order for them to carry over to next rounds. The same thing with overthrow switch.
+    # regarding reformed_this_round -- this is ugly, but I couldn't come up with a way to create indicator of whether a player was reformed this round without p.participant.vars
     def before_session_starts(self):
         if self.round_number == 1:
             for p in self.get_players():
                 p.participant.vars['reforms'] = 0
+                p.participant.vars['reformed_this_round'] = 0
             self.session.vars['overthrow'] = 0
 
 class Group(BaseGroup):
@@ -59,14 +62,9 @@ class Group(BaseGroup):
         for p in self.get_players():
             if p.id_in_group == self.reformed_id:
                 p.participant.vars['reforms'] += 1
-
-    # increase number of reforms by 1 for reformed player
-    # def reform_a_player(self):
-    #     for p in self.get_players():
-    #         if p.id_in_group == self.reformed_id:
-    #             p.participant.vars['reforms'] += 1
-    #         else:
-    #             pass
+                p.participant.vars['reformed_this_round'] = 1
+            else:
+                p.participant.vars['reformed_this_round'] = 0
 
     # counting approvals for the government to give according solidarity benefits to everybody
     total_approvals = 0

@@ -11,7 +11,7 @@ from .models import Constants
 class Introduction(Page):
 
     def is_displayed(self):
-        return  self.subsession.round_number == 333
+        return  self.subsession.round_number == 1
 
 
 class ReformingCalculations(WaitPage):
@@ -27,9 +27,16 @@ class PreOverthrow(Page):
         return self.session.vars['overthrow'] == 0
 
     def vars_for_template(self):
-        return {
-            'reformed_player': self.group.reformed_id
-    }
+        if self.subsession.round_number == 1:
+            return {
+                'reformed_this_round': self.player.participant.vars['reformed_this_round']
+            }
+        else:
+            return {
+                'reformed_this_round': self.player.participant.vars['reformed_this_round'],
+                'player_payoff_in_previous_round': self.player.in_round(self.subsession.round_number-1).payoff,
+                'player_payoff': sum([p.payoff for p in self.player.in_previous_rounds()])
+            }
 
     form_model = models.Player
     form_fields = ['approval','vote_to_overthrow']
@@ -41,6 +48,12 @@ class PostOverthrow(Page):
 
     form_model = models.Player
     form_fields = ['reforms_votes']
+
+    def vars_for_template(self):
+        return {
+            'player_payoff_in_previous_round': self.player.in_round(self.subsession.round_number-1).payoff,
+            'player_payoff': sum([p.payoff for p in self.player.in_previous_rounds()])
+        }
 
 class PostOverthrowCalculations(WaitPage):
 

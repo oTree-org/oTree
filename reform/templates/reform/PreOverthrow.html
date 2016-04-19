@@ -9,19 +9,27 @@
 
     {% include 'reform/Instructions.html' %}
 
+    {% if subsession.round_number != 1 %}
+
+        <p style="font-size: larger; color: darkblue">
+                       Your payoff in the previous round was {{ player_payoff_in_previous_round }} points, and your total payoffs for all previous rounds is {{ player_payoff }} points.
+        </p>
+
+    {% endif %}
+
+    {% if reformed_this_round == 1 %}
+
+        <p style="font-size: large; color: red;">
+            You were you reformed this round and as a result will permanently lose {{ Constants.reform_penalty }} points in payoff in each round while every other member of your group will permanently gain {{ Constants.reform_benefits }} points in payoff in each round.
+        </p>
+        <br>
+    {% endif %}
     <p>
         Please decide whether you want to approve of reforms. Approving a reform costs 0.3 points.
     </p>
-    <p>
-        число одобривших 	1	2	3	4	5
-    </p>
-    <p>
-        Бонусы всей группе	0.2	0.5	1.0	1.6	2.3
-
-    </p>
 
     {% formfield player.approval with label="Do you approve of the reform?" %}
-
+    <br>
     <p>
         You have an option of trying to overthrow the system. If sum of points to do so within your group is greater or equal to {{ Constants.points_to_overthrow }}, then the regime will be overthrown, and every player within your group will lose 10 points immediately. However, in each of the subsequent rounds your group will be able to choose the number of reforms it desires to be implemented, and, in case of successful coordination, potentially improve everybody's payoff.
     </p>
