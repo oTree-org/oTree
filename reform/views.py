@@ -33,6 +33,7 @@ class PreOverthrow(Page):
             }
         else:
             return {
+                'total_approvals': self.group.approvals_in_previous_round(),
                 'reformed_this_round': self.player.participant.vars['reformed_this_round'],
                 'player_payoff_in_previous_round': self.player.in_round(self.subsession.round_number-1).payoff,
                 'player_payoff': sum([p.payoff for p in self.player.in_previous_rounds()])

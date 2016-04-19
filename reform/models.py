@@ -46,6 +46,7 @@ class Subsession(BaseSubsession):
                 p.participant.vars['reforms'] = 0
                 p.participant.vars['reformed_this_round'] = 0
             self.session.vars['overthrow'] = 0
+        self.session.vars['total_approvals'] = 0
 
 class Group(BaseGroup):
     # before the overthrow, number of reforms is equal to round number
@@ -67,9 +68,11 @@ class Group(BaseGroup):
                 p.participant.vars['reformed_this_round'] = 0
 
     # counting approvals for the government to give according solidarity benefits to everybody
-    total_approvals = 0
     def approvals(self):
         return sum(p.approval for p in self.get_players())
+
+    def approvals_in_previous_round(self):
+        return int(sum(p.in_previous_rounds()[-1].approval for p in self.get_players()))
 
     # sums up players votes for overthrow and switches regime, if necessary
     def total_votes_for_overthrow(self):
