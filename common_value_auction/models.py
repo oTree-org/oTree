@@ -32,7 +32,9 @@ class Constants(BaseConstants):
     estimate_error_margin = 1
 
 class Subsession(BaseSubsession):
-    pass
+    def before_session_starts(self):
+        for g in self.get_groups():
+            g.item_value = round(random.uniform(Constants.min_allowable_bid, Constants.max_allowable_bid), 1)
 
 
 class Group(BaseGroup):
@@ -46,10 +48,8 @@ class Group(BaseGroup):
         winner.is_winner = True
 
     item_value = models.CurrencyField(
-        initial=lambda: round(random.uniform(Constants.min_allowable_bid, Constants.max_allowable_bid), 1),
         doc="""Common value of the item to be auctioned, random for treatment"""
     )
-
 
     def generate_value_estimate(self):
         minimum = self.item_value - Constants.estimate_error_margin
