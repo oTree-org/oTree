@@ -46,7 +46,9 @@ class Subsession(BaseSubsession):
                 p.participant.vars['reforms'] = 0
                 p.participant.vars['reformed_this_round'] = 0
             self.session.vars['overthrow'] = 0
+            self.session.vars['overthrow_round'] = 0
         self.session.vars['total_approvals'] = 0
+        self.session.vars['coordinated_reforms'] = 0
 
 class Group(BaseGroup):
     # before the overthrow, number of reforms is equal to round number
@@ -78,6 +80,7 @@ class Group(BaseGroup):
     def total_votes_for_overthrow(self):
         if sum(p.vote_to_overthrow for p in self.get_players()) >= Constants.points_to_overthrow and self.session.vars['overthrow'] == 0:
             self.session.vars['overthrow'] = 1
+            self.session.vars['overthrow_round'] = self.subsession.round_number
             # chaos loses or something
             for p in self.get_players():
                 p.payoff += Constants.losses_from_overthrow
@@ -109,6 +112,7 @@ class Group(BaseGroup):
                     Constants.base_sales \
                     + Constants.base_consumption \
                     + self.reforms_votes_group[0] * Constants.reform_benefits
+            self.session.vars['coordinated_reforms'] = self.reforms_votes_group[0]
         # payoff after overthrow if no coordination of reforming achieved
         else:
             for p in self.get_players():

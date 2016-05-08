@@ -7,19 +7,62 @@
 
 {% block content %}
 
+    <style>
+        #content {
+            display: none;
+        }
+        #show:target #content {
+            display: inline-block;
+        }
+        #show:target #open {
+            display: none;
+        }
+
+    </style>
+
     {% include 'reform/Instructions.html' %}
 
-    <p style="font-size: larger; color: darkblue">
-                       Your payoff in the previous round was {{ player_payoff_in_previous_round }} points, and your total payoffs for all previous rounds is {{ player_payoff }} points.
-    </p>
+    <div id="show">
 
-    <p>
-        You have successfully overthrown the system! Now pick the number of reforms you want to be in place. If every player in your group chooses the same number of reforms, then you'll get benefit of num_reforms * 0.5 each. If coordination between you fails, then every player in the group will lose 5 points from chaos this round.
-    </p>
+        {% if current_round == overthrow_starts %}
 
-    {% formfield player.reforms_votes with label="Reforms to implement" %}
+            <p style="font-size: larger; color: darkblue">
+                You have successfully overthrown the system!
+                <br />
+                Your payoff in the previous round was {{ player_payoff_in_previous_round }} points
+                <br />
+                Your total payoff for all previous rounds is {{ player_payoff }} points.
+            </p>
+
+        {% else %}
+
+            <p style="font-size: larger; color: darkblue">
+
+                {% if coordinated_reforms_in_previous_round > 0 %}
+                    In the previous round your group has successfully implemented {{ coordinated_reforms_in_previous_round }} reforms!
+                {% else %}
+                    In the previous round your group has failed to coordinate the number of reforms and everybody suffered losses from chaos!
+                {% endif %}
+                <br />
+                Your payoff in the previous round was {{ player_payoff_in_previous_round }} points
+                <br />
+                Your total payoff for all previous rounds is {{ player_payoff }} points.
+            </p>
+
+        {% endif %}
+
+        <a href="#show" id="open"><div class="btn btn-primary btn-large">Далее</div></a>
+        <div id="content">
+            <p>
+                Now pick the number of reforms you want to be in place. If every player in your group chooses the same number of reforms, then you'll get benefit of num_reforms * 0.5 each. If coordination between you fails, then every player in the group will lose 5 points from chaos this round.
+            </p>
+
+            {% formfield player.reforms_votes with label="Reforms to implement" %}
+
+            {% next_button %}
 
 
-    {% next_button %}
+        </div>
+    </div>
 
 {% endblock %}
