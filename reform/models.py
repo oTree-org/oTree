@@ -47,8 +47,8 @@ class Subsession(BaseSubsession):
                 p.participant.vars['reformed_this_round'] = 0
             self.session.vars['overthrow'] = 0
             self.session.vars['overthrow_round'] = 0
+            self.session.vars['coordinated_reforms'] = 0
         self.session.vars['total_approvals'] = 0
-        self.session.vars['coordinated_reforms'] = 0
 
 class Group(BaseGroup):
     # before the overthrow, number of reforms is equal to round number
@@ -107,14 +107,15 @@ class Group(BaseGroup):
                     - p.vote_to_overthrow
         # payoff after overthrow if coordination of reforming achieved
         elif self.reforms_votes_group.count(self.reforms_votes_group[0]) == len(self.reforms_votes_group):
+            self.session.vars['coordinated_reforms'] = self.reforms_votes_group[0]
             for p in self.get_players():
                 p.payoff = \
                     Constants.base_sales \
                     + Constants.base_consumption \
-                    + self.reforms_votes_group[0] * Constants.reform_benefits
-            self.session.vars['coordinated_reforms'] = self.reforms_votes_group[0]
+                    + self.session.vars['coordinated_reforms'] * Constants.reform_benefits
         # payoff after overthrow if no coordination of reforming achieved
         else:
+            self.session.vars['coordinated_reforms'] = 0
             for p in self.get_players():
                 p.payoff = \
                     Constants.base_sales \

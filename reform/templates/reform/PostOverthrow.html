@@ -5,20 +5,11 @@
     Decisions
 {% endblock %}
 
+{% block styles %}
+    <link href="{% static "reform/style.css" %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-
-    <style>
-        #content {
-            display: none;
-        }
-        #show:target #content {
-            display: inline-block;
-        }
-        #show:target #open {
-            display: none;
-        }
-
-    </style>
 
     {% include 'reform/Instructions.html' %}
 
@@ -26,7 +17,7 @@
 
         {% if current_round == overthrow_starts %}
 
-            <p style="font-size: larger; color: darkblue">
+            <p>
                 You have successfully overthrown the system!
                 <br />
                 Your payoff in the previous round was {{ player_payoff_in_previous_round }} points
@@ -36,7 +27,7 @@
 
         {% else %}
 
-            <p style="font-size: larger; color: darkblue">
+            <p>
 
                 {% if coordinated_reforms_in_previous_round > 0 %}
                     In the previous round your group has successfully implemented {{ coordinated_reforms_in_previous_round }} reforms!
@@ -61,8 +52,8 @@
 
             {% next_button %}
 
-
         </div>
+
     </div>
 
 {% endblock %}

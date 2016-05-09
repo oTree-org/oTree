@@ -13,7 +13,6 @@ class Introduction(Page):
     def is_displayed(self):
         return  self.subsession.round_number == 1
 
-
 class ReformingCalculations(WaitPage):
 
     def after_all_players_arrive(self):
@@ -85,10 +84,21 @@ class FinalResults(Page):
         return  self.subsession.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-
-        return {
-            'player_payoff': sum([p.payoff for p in self.player.in_all_rounds()])
-        }
+        if self.session.vars['overthrow'] == 0:
+            return {
+                'overthrow': self.session.vars['overthrow'],
+                'total_approvals': self.group.approvals(),
+                'player_payoff_in_last_round': self.player.payoff,
+                'player_payoff': sum([p.payoff for p in self.player.in_all_rounds()])
+            }
+        else:
+            return {
+                'overthrow': self.session.vars['overthrow'],
+                'player_payoff_in_last_round': self.player.payoff,
+                'player_payoff': sum([p.payoff for p in self.player.in_all_rounds()]),
+                'overthrow_starts': self.session.vars['overthrow_round'] + 1,
+                'coordinated_reforms_in_last_round': self.session.vars['coordinated_reforms']
+            }
 
 page_sequence =[
     Introduction,

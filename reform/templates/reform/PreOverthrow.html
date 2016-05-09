@@ -5,21 +5,11 @@
     Decisions
 {% endblock %}
 
+{% block styles %}
+    <link href="{% static "reform/style.css" %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-
-    <style>
-        #content {
-            display: none;
-        }
-        #show:target #content {
-            display: inline-block;
-        }
-        #show:target #open {
-            display: none;
-        }
-
-    </style>
-
 
     {% include 'reform/Instructions.html' %}
 
@@ -27,7 +17,7 @@
 
         {% if subsession.round_number != 1 %}
 
-            <p style="font-size: larger; color: darkblue">
+            <p>
                 In the previous round reform was approved by {{ total_approvals }} people.
                 <br />
                 Your payoff in the previous round was {{ player_payoff_in_previous_round }} points
@@ -39,18 +29,19 @@
 
         {% if reformed_this_round == 1 %}
 
-            <p style="font-size: large; color: red;">
-                You were you reformed this round and as a result will permanently lose {{ Constants.reform_penalty }} points in payoff in each round while every other member of your group will permanently gain {{ Constants.reform_benefits }} points in payoff in each round.
+            <p>
+                You were you reformed this round and as a result will permanently lose {{ Constants.reform_penalty }} points in payoff in each round until the overthrow, while every other member of your group will permanently gain {{ Constants.reform_benefits }} points in payoff in each round until the overthrow.
+            </p>
+            <br />
+        {% else %}
+            <p>
+                Another player was reformed this round and as a result will permanently lose {{ Constants.reform_penalty }} points in payoff in each round until the overthrow, while you and every other member of your group will permanently gain {{ Constants.reform_benefits }} points in payoff in each round until the overthrow.
             </p>
             <br>
         {% endif %}
 
-    {% if subsession.round_number != 1 or reformed_this_round == 1 %}
-
         <a href="#show" id="open"><div class="btn btn-primary btn-large">Далее</div></a>
         <div id="content">
-
-            {% endif %}
 
             <p>
                 Please decide whether you want to approve of reforms. Approving a reform costs 0.3 points.
@@ -66,11 +57,7 @@
 
             {% next_button %}
 
-        {% if subsession.round_number != 1 or reformed_this_round == 1 %}
-
         </div>
-
-            {% endif %}
 
     </div>
 

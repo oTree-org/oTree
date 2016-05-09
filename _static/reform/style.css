@@ -1,0 +1,9 @@
+#content {
+    display: none;
+}
+#show:target #content {
+    display: inline-block;
+}
+#show:target #open {
+    display: none;
+}

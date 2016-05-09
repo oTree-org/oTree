@@ -7,10 +7,34 @@
 
 {% block content %}
 
+    {% if overthrow == 0 %}
+        <p>
+            In the last round reform was approved by {{ total_approvals }} people.
+            <br />
+            Your payoff in the last round was {{ player_payoff_in_last_round }} points
+            <br />
+            Your total payoff for all rounds is {{ player_payoff }} points.
+        </p>
+    {% else %}
+        <p>
+
+            {% if current_round != overthrow_starts %}
+
+                {% if coordinated_reforms_in_last_round > 0 %}
+                    In the last round your group has successfully implemented {{ coordinated_reforms_in_last_round }} reforms!
+                {% else %}
+                    In the last round your group has failed to coordinate the number of reforms and everybody suffered losses from chaos!
+                {% endif %}
+
+            {% endif %}
+
+            <br />
+            Your payoff in the last round was {{ player_payoff_in_last_round }} points
+            <br />
+            Your total payoff for all rounds is {{ player_payoff }} points.
+        </p>
+    {% endif %}
     <p>
-        Your profit is {{ player_payoff }}.
+        This was the final round. Thanks for participating in the game!
     </p>
-
-    {% include 'reform/Instructions.html' %}
-
 {% endblock %}
