@@ -18,11 +18,11 @@
         {% if subsession.round_number != 1 %}
 
             <p>
-                In the previous round reform was approved by {{ total_approvals }} people.
+                В предыдущем раунде реформа была поддержана {{ total_approvals }} людьми.
                 <br />
-                Your payoff in the previous round was {{ player_payoff_in_previous_round }} points
+                В предыдущем раунде ваша прибыль составила {{ player_payoff_in_previous_round }} баллов.
                 <br />
-                Your total payoff for all previous rounds is {{ player_payoff }} points.
+                За все предыдущие раунды ваша прибыль составила {{ player_payoff }} баллов.
             </p>
 
         {% endif %}
@@ -30,12 +30,12 @@
         {% if reformed_this_round == 1 %}
 
             <p>
-                You were you reformed this round and as a result will permanently lose {{ Constants.reform_penalty }} points in payoff in each round until the overthrow, while every other member of your group will permanently gain {{ Constants.reform_benefits }} points in payoff in each round until the overthrow.
+                В этот раунде реформа затронула вас, и в результате этого в каждом следующем раунде вы будете получать на {{ Constants.reform_penalty }} баллов меньше, вплоть до смены режима. Каждый остальной игрок в вашей группе будет получать на {{ Constants.reform_benefits }} баллов больше в каждом следующем раунде, вплоть до смены режима.
             </p>
             <br />
         {% else %}
             <p>
-                Another player was reformed this round and as a result will permanently lose {{ Constants.reform_penalty }} points in payoff in each round until the overthrow, while you and every other member of your group will permanently gain {{ Constants.reform_benefits }} points in payoff in each round until the overthrow.
+                В этом раунде раформа вас не затронула -- другой игрок был реформирован, и в результате этого в каждом следующем раунде он будет получать на {{ Constants.reform_penalty }} баллов меньше, вплоть до смены режима. Каждый остальной игрок в вашей группе, включая вас, будет получать на {{ Constants.reform_benefits }} баллов больше в каждом следующем раунде, вплоть до смены режима.
             </p>
             <br>
         {% endif %}
@@ -44,16 +44,16 @@
         <div id="content">
 
             <p>
-                Please decide whether you want to approve of reforms. Approving a reform costs 0.3 points.
+                Пожалуйста решите, поддерживаете ли вы реформу, в этом раунде. Поддержка стоит {{ Constants.approval_cost }} балл.
             </p>
 
-            {% formfield player.approval with label="Do you approve of the reform?" %}
+            {% formfield player.approval with label="Поддерживаете ли вы реформу?" %}
             <br>
             <p>
-                You have an option of trying to overthrow the system. If sum of points to do so within your group is greater or equal to {{ Constants.points_to_overthrow }}, then the regime will be overthrown, and every player within your group will lose 10 points immediately. However, in each of the subsequent rounds your group will be able to choose the number of reforms it desires to be implemented, and, in case of successful coordination, potentially improve everybody's payoff.
+                Вы можете потратить от 0 до 5 баллов на то, чтобы попробовать сменить режим. Если сумма баллов, потраченных на это, в вашей группе составит {{ Constants.points_to_overthrow }} баллов или больше, произойдёт смена режима, и каждый игрок в группе единовременно потеряет {{ Constants.losses_from_overthrow }} баллов. Также произойдёт отмена всех существующих реформ, а во всех последующих раундах игроки сами смогут выбирать количество реформ, которые они хотят принять, потенциально увеличивая доход каждого игрока.
             </p>
 
-            {% formfield player.vote_to_overthrow with label="How much points are you willing to spend to try overthrow the system?" %}
+            {% formfield player.vote_to_overthrow with label="Сколько баллов вы хотите потратить на то, чтобы попробовать сменить режим?" %}
 
             {% next_button %}
 

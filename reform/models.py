@@ -32,8 +32,8 @@ class Constants(BaseConstants):
     points_to_overthrow = 6
     max_overthrow_vote_for_player = 5
     max_reforms = 5
-    losses_from_overthrow = -10
-    losses_from_chaos = -5
+    losses_from_overthrow = 10
+    losses_from_chaos = 5
 
 
 class Subsession(BaseSubsession):
@@ -83,7 +83,7 @@ class Group(BaseGroup):
             self.session.vars['overthrow_round'] = self.subsession.round_number
             # chaos loses or something
             for p in self.get_players():
-                p.payoff += Constants.losses_from_overthrow
+                p.payoff -= Constants.losses_from_overthrow
 
         return sum(p.vote_to_overthrow for p in self.get_players())
 
@@ -120,7 +120,7 @@ class Group(BaseGroup):
                 p.payoff = \
                     Constants.base_sales \
                     + Constants.base_consumption \
-                    + Constants.losses_from_chaos
+                    - Constants.losses_from_chaos
 
 
 class Player(BasePlayer):

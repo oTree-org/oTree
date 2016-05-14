@@ -13,6 +13,17 @@ class Introduction(Page):
     def is_displayed(self):
         return  self.subsession.round_number == 1
 
+    def vars_for_template(self):
+        return {
+            'num_others_in_group': Constants.players_per_group - 1,
+            'zero': Constants.solidarity_benefits[0],
+            'one': Constants.solidarity_benefits[1],
+            'two': Constants.solidarity_benefits[2],
+            'three': Constants.solidarity_benefits[3],
+            'four': Constants.solidarity_benefits[4],
+            'five': Constants.solidarity_benefits[5]
+        }
+
 class ReformingCalculations(WaitPage):
 
     def after_all_players_arrive(self):

@@ -18,11 +18,11 @@
         {% if current_round == overthrow_starts %}
 
             <p>
-                You have successfully overthrown the system!
+                Вашей группе удалось сменить режим!
                 <br />
-                Your payoff in the previous round was {{ player_payoff_in_previous_round }} points
+                В предыдущем раунде ваша прибыль составила {{ player_payoff_in_previous_round }} баллов.
                 <br />
-                Your total payoff for all previous rounds is {{ player_payoff }} points.
+                За все предыдущие раунды ваша прибыль составила {{ player_payoff }} баллов.
             </p>
 
         {% else %}
@@ -30,14 +30,13 @@
             <p>
 
                 {% if coordinated_reforms_in_previous_round > 0 %}
-                    In the previous round your group has successfully implemented {{ coordinated_reforms_in_previous_round }} reforms!
+                    В предыдущем раунде ваша группа успешно реализовала {{ coordinated_reforms_in_previous_round }} реформ.
                 {% else %}
-                    In the previous round your group has failed to coordinate the number of reforms and everybody suffered losses from chaos!
+                    В предыдущем раунде ваша группа не смогла договориться о количестве желаемых реформ, и в результате каждый игрок потерял {{ Constants.losses_from_chaose }} баллов.
                 {% endif %}
+                В предыдущем раунде ваша прибыль составила {{ player_payoff_in_previous_round }} баллов.
                 <br />
-                Your payoff in the previous round was {{ player_payoff_in_previous_round }} points
-                <br />
-                Your total payoff for all previous rounds is {{ player_payoff }} points.
+                За все предыдущие раунды ваша прибыль составила {{ player_payoff }} баллов.
             </p>
 
         {% endif %}
@@ -45,10 +44,10 @@
         <a href="#show" id="open"><div class="btn btn-primary btn-large">Далее</div></a>
         <div id="content">
             <p>
-                Now pick the number of reforms you want to be in place. If every player in your group chooses the same number of reforms, then you'll get benefit of num_reforms * 0.5 each. If coordination between you fails, then every player in the group will lose 5 points from chaos this round.
+                Пожалуйста выберите количество реформ, которых вы желаете реализовать. ....payoff. Голосование ничего вам не стоит, но сли вам не удастся договориться о количестве реформ, каждый игрок в группе потеряет {{ Constants.losses_from_chaos }} баллов в этом раунде.
             </p>
 
-            {% formfield player.reforms_votes with label="Reforms to implement" %}
+            {% formfield player.reforms_votes with label="Сколько реформ реализовать?" %}
 
             {% next_button %}
 
