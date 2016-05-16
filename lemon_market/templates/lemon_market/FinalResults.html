@@ -14,6 +14,13 @@ You are <strong>{{player.role}}</strong>. The period <strong>{{old_player.subses
 
     {% next_button %}
 
+{% endblock %}
+
+{% block scripts %}
+    <script src="//code.highcharts.com/highcharts.js"></script>
+    <script src="//code.highcharts.com/highcharts-3d.js"></script>
+    <script src="//code.highcharts.com/modules/exporting.js"></script>
+
     <script>
 {% include "lemon_market/FinalResults.js" %}
 </script>
