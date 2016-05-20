@@ -1,2 +1,2 @@
-otree-core==0.5.0
+otree-core==0.5.1
 Django
