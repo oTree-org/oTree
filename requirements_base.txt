@@ -1,6 +1,5 @@
 alabaster==0.7.7
 amqp==1.4.9
-anaconda-client==1.4.0
 anaconda-navigator==1.1.0
 anyjson==0.3.3
 argcomplete==1.0.0
