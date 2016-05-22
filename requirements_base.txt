@@ -84,7 +84,6 @@ jupyter-core==4.1.0
 kombu==3.0.31
 locket==0.2.0
 lxml==3.6.0
-MarkupSafe==0.23
 menuinst==1.3.2
 mistune==0.7.2
 mock==2.0.0
