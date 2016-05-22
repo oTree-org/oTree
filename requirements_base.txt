@@ -95,7 +95,6 @@ networkx==1.11
 nltk==3.2
 nose==1.3.7
 notebook==4.1.0
-numba==0.24.0
 numexpr==2.5
 odo==0.4.2
 openpyxl==2.3.2
