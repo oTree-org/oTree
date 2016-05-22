@@ -122,7 +122,6 @@ pyreadline==2.1
 pytest==2.8.5
 python-dateutil==2.5.1
 pytz==2016.4
-pywin32==220
 PyYAML==3.11
 pyzmq==15.2.0
 QtAwesome==0.3.2
