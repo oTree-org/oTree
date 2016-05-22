@@ -27,7 +27,7 @@ SECRET_KEY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzz'
 PAGE_FOOTER = ''
 
 # To use a database other than sqlite,
-# set the DATABASE_URL environment variable.
+ # set the DATABASE_URL environment variable.
 # Examples:
 # postgres://USER:PASSWORD@HOST:PORT/NAME
 # mysql://USER:PASSWORD@HOST:PORT/NAME
@@ -70,7 +70,7 @@ POINTS_DECIMAL_PLACES = 1
 
 # e.g. en-gb, de-de, it-it, fr-fr.
 # see: https://docs.djangoproject.com/en/1.6/topics/i18n/
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = []

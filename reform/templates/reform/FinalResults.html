@@ -2,7 +2,7 @@
 {% load staticfiles otree_tags %}
 
 {% block title %}
-    Results
+    Результаты
 {% endblock %}
 
 {% block content %}
@@ -11,9 +11,9 @@
         <p>
             В предыдущем раунде реформа была поддержана {{ total_approvals }} людьми.
             <br />
-            В предыдущем раунде ваша прибыль составила {{ player_payoff_in_previous_round }} баллов.
+            В предыдущем раунде ваша прибыль составила {{ player_payoff_in_previous_round }}.
             <br />
-            За все раунды ваша прибыль составила {{ player_payoff }} баллов.
+            За все раунды ваша прибыль составила {{ player_payoff }}.
         </p>
     {% else %}
         <p>
@@ -23,15 +23,15 @@
                 {% if coordinated_reforms_in_last_round > 0 %}
                     В предыдущем раунде ваша группа успешно реализовала {{ coordinated_reforms_in_previous_round }} реформ.
                 {% else %}
-                    В предыдущем раунде ваша группа не смогла договориться о количестве желаемых реформ, и в результате каждый игрок потерял {{ Constants.losses_from_chaose }} баллов.
+                    В предыдущем раунде ваша группа не смогла договориться о количестве желаемых реформ, и в результате каждый игрок потерял {{ Constants.losses_from_chaose }}.
                 {% endif %}
 
             {% endif %}
 
             <br />
-            В предыдущем раунде ваша прибыль составила {{ player_payoff_in_previous_round }} баллов.
+            В предыдущем раунде ваша прибыль составила {{ player_payoff_in_previous_round }}.
             <br />
-            За все раунды ваша прибыль составила {{ player_payoff }} баллов.
+            За все раунды ваша прибыль составила {{ player_payoff }}.
         </p>
     {% endif %}
     <p>

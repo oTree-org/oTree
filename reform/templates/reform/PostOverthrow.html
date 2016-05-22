@@ -2,7 +2,7 @@
 {% load staticfiles otree_tags %}
 
 {% block title %}
-    Decisions
+    Решения
 {% endblock %}
 
 {% block styles %}
@@ -11,8 +11,6 @@
 
 {% block content %}
 
-    {% include 'reform/Instructions.html' %}
-
     <div id="show">
 
         {% if current_round == overthrow_starts %}
@@ -20,9 +18,9 @@
             <p>
                 Вашей группе удалось сменить режим!
                 <br />
-                В предыдущем раунде ваша прибыль составила {{ player_payoff_in_previous_round }} баллов.
+                В предыдущем раунде ваша прибыль составила {{ player_payoff_in_previous_round }}.
                 <br />
-                За все предыдущие раунды ваша прибыль составила {{ player_payoff }} баллов.
+                За все предыдущие раунды ваша прибыль составила {{ player_payoff }}.
             </p>
 
         {% else %}
@@ -32,11 +30,11 @@
                 {% if coordinated_reforms_in_previous_round > 0 %}
                     В предыдущем раунде ваша группа успешно реализовала {{ coordinated_reforms_in_previous_round }} реформ.
                 {% else %}
-                    В предыдущем раунде ваша группа не смогла договориться о количестве желаемых реформ, и в результате каждый игрок потерял {{ Constants.losses_from_chaose }} баллов.
+                    В предыдущем раунде ваша группа не смогла договориться о количестве желаемых реформ, и в результате каждый игрок потерял {{ Constants.losses_from_chaose }} очков.
                 {% endif %}
-                В предыдущем раунде ваша прибыль составила {{ player_payoff_in_previous_round }} баллов.
+                В предыдущем раунде ваша прибыль составила {{ player_payoff_in_previous_round }}.
                 <br />
-                За все предыдущие раунды ваша прибыль составила {{ player_payoff }} баллов.
+                За все предыдущие раунды ваша прибыль составила {{ player_payoff }}.
             </p>
 
         {% endif %}
@@ -44,7 +42,7 @@
         <a href="#show" id="open"><div class="btn btn-primary btn-large">Далее</div></a>
         <div id="content">
             <p>
-                Пожалуйста выберите количество реформ, которых вы желаете реализовать. ....payoff. Голосование ничего вам не стоит, но сли вам не удастся договориться о количестве реформ, каждый игрок в группе потеряет {{ Constants.losses_from_chaos }} баллов в этом раунде.
+                Пожалуйста выберите количество реформ, которых вы желаете реализовать. ....payoff. Голосование ничего вам не стоит, но сли вам не удастся договориться о количестве реформ, каждый игрок в группе потеряет {{ Constants.losses_from_chaos }} очков в этом раунде.
             </p>
 
             {% formfield player.reforms_votes with label="Сколько реформ реализовать?" %}

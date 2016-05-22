@@ -126,7 +126,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     # form showing whether a player approves government's reforms
-    approval_choices = ((1, "Approve"),(0, "Disapprove"))
+    approval_choices = ((1, "Одобряю"),(0, "Не одобряю"))
     approval = models.FloatField(widget=widgets.RadioSelect, choices=approval_choices)
 
     # form showing how much a player is spending on trying to overthrow the system
