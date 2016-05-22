@@ -131,9 +131,6 @@ raven==5.17.0
 redis==2.10.5
 requests==2.10.0
 rope==0.9.4
-scikit-image==0.12.3
-scikit-learn==0.17.1
-scipy==0.17.0
 selenium==2.53.2
 simplegeneric==0.8.1
 singledispatch==3.4.0.3
