@@ -15,9 +15,6 @@ One player decides how to divide a certain amount between himself and the other
 player.
 """
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/dictator"
-
-
 bibliography = (
     (
         'Kahneman, Daniel, Jack L. Knetsch, and Richard H. Thaler. "Fairness '
@@ -30,16 +27,6 @@ bibliography = (
         'American Economic Review(1996): 653-660.'
     )
 )
-
-
-links = {
-    "Wikipedia": {
-        "Dictator Game": "https://en.wikipedia.org/wiki/Dictator_game"
-    }
-}
-
-
-keywords = ("Dictator Game", "Fairness", "Homo Economicus")
 
 
 class Constants(BaseConstants):

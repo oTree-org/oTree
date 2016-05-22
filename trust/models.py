@@ -20,18 +20,6 @@ tripled. The trust game was first proposed by
 """
 
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/trust"
-
-
-bibliography = ()
-
-
-links = {}
-
-
-keywords = ("Trust Game",)
-
-
 class Constants(BaseConstants):
     name_in_url = 'trust'
     players_per_group = 2

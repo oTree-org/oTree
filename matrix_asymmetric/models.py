@@ -16,17 +16,6 @@ In the asymmetric matrix game, the strategy sets for both players are
 different.
 """
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/matrix_asymmetric"
-
-
-bibliography = ()
-
-
-links = {}
-
-
-keywords = ()
-
 
 class Constants(BaseConstants):
     name_in_url = 'matrix_asymmetric'

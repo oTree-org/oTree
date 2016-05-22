@@ -21,26 +21,6 @@ based on
 </a>.
 """
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/lemon_market"
-
-
-bibliography = ()
-
-
-links = {
-    "Wikipedia": {
-        "The Market for Lemons":
-            "https://en.wikipedia.org/wiki/The_Market_for_Lemons"
-    }
-}
-
-
-keywords = ("Lemon Market",)
-
-
-
-
-
 class Constants(BaseConstants):
     name_in_url = 'lemon_market'
     players_per_group = 3

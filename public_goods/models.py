@@ -17,22 +17,6 @@ random.
 """
 
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/public_goods"
-
-
-bibliography = ()
-
-
-links = {
-    "Wikipedia": {
-        "Public Goods Game": "https://en.wikipedia.org/wiki/Public_goods_game"
-    }
-}
-
-
-keywords = ("Public Goods",)
-
-
 class Constants(BaseConstants):
     name_in_url = 'public_goods'
     players_per_group = 3

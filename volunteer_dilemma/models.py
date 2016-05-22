@@ -14,26 +14,12 @@ Each player decides if to free ride or to volunteer from which all will
 benefit.
 """
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/volunteer_dilemma"
-
-
 bibliography = (
     (
         "Diekmann, A. (1985). Volunteer's dilemma. Journal of Conflict "
         "Resolution, 605-610."
     ),
 )
-
-
-links = {
-    "Wikipedia": {
-        "Volunteer's Dilemma":
-            "http://en.wikipedia.org/wiki/Volunteer%27s_dilemma"
-    }
-}
-
-
-keywords = ("Volunteer's Dilemma",)
 
 
 class Constants(BaseConstants):

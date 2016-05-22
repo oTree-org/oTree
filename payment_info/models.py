@@ -17,18 +17,6 @@ Examples are given for the lab and Amazon Mechanical Turk (AMT).
 """
 
 
-source_code = ""
-
-
-bibliography = ()
-
-
-links = {}
-
-
-keywords = ()
-
-
 class Constants(BaseConstants):
     name_in_url = 'payment_info'
     players_per_group = None

@@ -17,31 +17,11 @@ player can only submit one bid.
 
 """
 
-
-source_code = "https://github.com/oTree-org/oTree/tree/master/vickrey_auction"
-
-
 bibliography = (
     (
         'Vickrey, William. "Counterspeculation, auctions, and competitive '
         'sealed tenders." The Journal of finance 16.1 (1961): 8-37'
     ),
-)
-
-
-links = {
-    "Wikipedia": {
-        "Vickrey Auction": "http://en.wikipedia.org/wiki/Vickrey_auction",
-        "Generalized Second-Price Auction":
-            "http://en.wikipedia.org/wiki/Generalized_second-price_auction",
-        "Auction": "http://en.wikipedia.org/wiki/Auction",
-    }
-}
-
-
-keywords = (
-    "Auction", "Second-Price Auction",
-    "Vickrey Auction", "Sealed-Bid Auction"
 )
 
 

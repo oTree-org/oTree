@@ -16,17 +16,6 @@ In the symmetric matrix game, the payoffs for playing a particular strategy
 depend only on the other strategies employed, not on who is playing them.
 """
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/matrix_symmetric"
-
-
-bibliography = ()
-
-
-links = {}
-
-
-keywords = ()
-
 
 class Constants(BaseConstants):
     name_in_url = 'matrix_symmetric'

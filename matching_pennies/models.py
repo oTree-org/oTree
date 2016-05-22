@@ -21,21 +21,6 @@ would often have more of these).
 """
 
 
-source_code = "https://github.com/oTree-org/oTree/tree/master/matching_pennies"
-
-
-bibliography = ()
-
-
-links = {
-    "Wikipedia": {
-        "Matching Pennies": "https://en.wikipedia.org/wiki/Matching_pennies"
-    }
-}
-
-
-keywords = ("Matching Pennies",)
-
 class Constants(BaseConstants):
     name_in_url = 'matching_pennies'
     players_per_group = 2
