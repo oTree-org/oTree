@@ -12,7 +12,6 @@ backports.ssl-match-hostname==3.4.0.2
 beautifulsoup4==4.4.1
 billiard==3.3.0.22
 bitarray==0.8.1
-blaze==0.9.1
 bokeh==0.11.1
 boto==2.40.0
 Bottleneck==1.0.0
