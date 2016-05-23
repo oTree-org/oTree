@@ -4,7 +4,6 @@ anyjson==0.3.3
 argcomplete==1.0.0
 asgi-redis==0.11.0
 asgiref==0.13.0
-astropy==1.1.2
 autobahn==0.14.0
 Babel==2.2.0
 backports-abc==0.4
@@ -60,7 +59,6 @@ futures==3.0.3
 gevent==1.1.0
 greenlet==0.4.9
 grin==1.2.1
-h5py==2.5.0
 HeapDict==1.0.0
 honcho==0.7.1
 huey==1.1.2
