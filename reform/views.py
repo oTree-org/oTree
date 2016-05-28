@@ -107,7 +107,8 @@ class FinalResults(Page):
                 'overthrow': self.session.vars['overthrow'],
                 'player_payoff_in_last_round': self.player.payoff,
                 'player_payoff': sum([p.payoff for p in self.player.in_all_rounds()]),
-                'overthrow_starts': self.session.vars['overthrow_round'] + 1,
+                'current_round': self.subsession.round_number,
+                'overthrow_round': self.session.vars['overthrow_round'],
                 'coordinated_reforms_in_last_round': self.session.vars['coordinated_reforms']
             }
 

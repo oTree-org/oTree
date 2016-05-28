@@ -18,7 +18,7 @@
     {% else %}
         <p>
 
-            {% if current_round != overthrow_starts %}
+            {% if current_round != overthrow_round %}
 
                 {% if coordinated_reforms_in_last_round > 0 %}
                     В предыдущем раунде ваша группа успешно реализовала {{ coordinated_reforms_in_last_round }} реформ.
@@ -27,7 +27,7 @@
                 {% endif %}
 
             {% endif %}
-
+            В предыдущем раунде
             <br />
             В предыдыдущем раунде ваша прибыль составила {{ player_payoff_in_last_round }}.
             <br />
