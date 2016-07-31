@@ -2,12 +2,86 @@
 {% load staticfiles otree_tags %}
 
 {% block title %}
-    Результаты
+    Угадай точку
+{% endblock %}
+
+{% block styles %}
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
 {% endblock %}
 
 {% block content %}
+    <p id="guess_result">Try to guess the point I picked in the rectangle below by clicking on it!</p>
+    <div style="margin: auto;  right: 0; left: 0; width: 768px; height: 512px;
+     background-color: #ddd; border-radius: 6px; cursor: pointer;"
+         onclick="guessCheck(event)"></div>
 
-    <p>
-        Это был финальный раунд. Спасибо за участие!
+    <p id="coords_box">Click the box!</p>
+    <p id="coords_generated_box"></p>
+
+  <!--  <p>
+        <label for="amount">Pick radius (bigger = easier to guess):</label>
+        <input type="text" id="amount" readonly style="border: 0 ; color:#f6931f; font-weight:bold;">
     </p>
+    <div id="slider" style="width:256px; margin-top: -32px"></div> -->
+
+    {% block scripts %}
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+        <script type="text/javascript">
+            window.onload = function(e) {
+                window.onkeydown = function(event) {
+                    if (event.ctrlKey && (event.keyCode == 61 || event.keyCode == 187 || event.key  == 173 || event.keyCode == 189))
+                    {
+                        event.preventDefault();
+                        return false;
+                    }
+                }
+            }
+
+            var offset;
+
+            $( "*", document.body ).click(function( event ) {
+                offset = $( this ).offset();
+                event.stopPropagation();
+            });
+
+            var slider_value = 128;
+            /*$( function() {
+                $( "#slider" ).slider({
+                    range: "min",
+                    min: 1,
+                    max: 256,
+                    value: 32,
+                    slide: function( event, ui ) {
+                        $( "#amount" ).val( ui.value );
+                    }
+                });
+                slider_value = $( "#slider" ).slider( "value" ) ;
+                $( "#amount" ).val( slider_value );
+            } ); */
+
+            function guessCheck(event) {
+                var x = event.pageX;
+                var y = event.pageY;
+                var x_generated = Math.floor((Math.random() * 768) + offset.left);
+                var y_generated = Math.floor((Math.random() * 512) + offset.top);
+                var coords = "You picked X coordinate: " + x + " and Y coordinate: " + y;
+                var coords_generated = "I generated X coordinate: " + x_generated + " and Y coordinate: " + y_generated;
+                document.getElementById("coords_box").innerHTML = coords;
+                document.getElementById("coords_generated_box").innerHTML = coords_generated;
+                if (x > x_generated - slider_value && x < x_generated+slider_value && y > y_generated-slider_value && y < y_generated+slider_value) {
+                    document.getElementById("guess_result").innerHTML = "You guessed right!";
+                }
+                else {
+                    document.getElementById("guess_result").innerHTML = "You guessed wrong!";
+                }
+            }
+
+        </script>
+
+    {% endblock %}
+
 {% endblock %}
