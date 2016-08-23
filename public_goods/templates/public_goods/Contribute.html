@@ -1,0 +1,16 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Contribute
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.contribution with label="How much will you contribute to the project (from 0 to 100)?" %}
+
+    {% next_button %}
+
+    {% include Constants.instructions_file %}
+
+{% endblock %}

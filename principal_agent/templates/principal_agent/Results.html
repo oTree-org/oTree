@@ -1,0 +1,52 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        {% if group.contract_accepted %}
+            {% if player.role == 'agent' %}
+            You <strong>accepted</strong> the contract.
+            {% else %}
+            Participant B <strong>accepted</strong> your contract.
+            {% endif %}
+            <table class="table table-condensed" style="width:auto">
+                <tr>
+                    <th>Fixed payment</th>
+                    <th>Return share</th>
+                    <th>Effort Level</th>
+                    <th>Effort Cost</th>
+                    <th>Total Return</th>
+                    <th>You Received</th>
+                </tr>
+                <tr>
+                    <td>{{ group.agent_fixed_pay }}</td>
+                    <td>{{ group.return_share_as_percentage }}%</td>
+                    <td>{{ group.agent_work_effort }}</td>
+                    <td>{{ effort_cost }}</td>
+                    <td>{{ group.total_return }}</td>
+                    <td>{{ received|floatformat }}</td>
+                </tr>
+            </table>
+    <p>
+    In addition to your initial 30 points, your payoff is <strong>{{player.payoff}}</strong>.
+    </p>
+        {% else %}
+            {% if player.role == 'agent' %}
+            You <strong>rejected</strong> the contract. Thus you received <strong>10 points</strong>. Your payoff equals your initial 30 points plus 10, that is, <strong>{{player.payoff}}</strong>.
+            {% else %}
+            Participant B <strong>rejected</strong> your contract. Thus you have received nothing. Your payoff equals initial <strong>{{player.payoff}}</strong>.
+            {% endif %}
+        {% endif %}
+    </p>
+
+    <p>{% next_button %}</p>
+
+    {% include Constants.instructions_file %}
+
+{% endblock %}

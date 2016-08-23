@@ -1,0 +1,19 @@
+{% load otree_tags staticfiles %}
+
+<div class="instructions well well-lg">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+
+    <p>
+        You have been randomly and anonymously paired with another participant.
+        There are {{ Constants.amount_shared }} for you to divide.
+        Both of you have to simultaneously and independently demand a portion
+        of the {{ Constants.amount_shared }} for yourselves. If the sum of your
+        demands is smaller or equal to {{ Constants.amount_shared }}, both of
+        you get what you demanded. If the sum of your demands is larger
+        than {{ Constants.amount_shared }},
+        both of you get nothing.
+    </p>
+</div>

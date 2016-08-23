@@ -1,0 +1,17 @@
+{% extends "global/Base.html" %}
+{% load otree_tags %}
+
+{% block title %}Your Decision{% endblock %}
+
+{% block content %}
+<p>
+You are <strong>Participant 1</strong>. Now please decide how many points you will keep for yourself.
+</p>
+
+{% formfield group.kept %}
+
+{% next_button %}
+
+    {% include Constants.instructions_file %}
+
+{% endblock %}

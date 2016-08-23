@@ -1,0 +1,22 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Propose a contract
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You are <strong>Participant A</strong>. Please propose a contract for Participant B.
+    </p>
+
+    {% formfield group.agent_fixed_pay %}
+    {% formfield group.agent_return_share %}
+
+    {% next_button %}
+
+    {% include Constants.instructions_file %}
+
+{% endblock %}
+

@@ -1,0 +1,32 @@
+{% extends "global/Base.html" %}
+{% load otree_tags %}
+
+{% block title %}Results for Period 1-3{% endblock title %}
+
+{% block content %}
+    <p>
+        You have finished all 3 periods. Purchases for all periods are
+        summarized below:
+    </p>
+    <div id="container"
+         style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <p>
+        You are <strong>{{ player.role }}</strong>. The period
+        <strong>{{ old_player.subsession.round_number }}</strong> was selected
+        for payoffs and your payoff for this period was
+        <strong>{{ player.payoff }}</strong> points.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="//code.highcharts.com/highcharts.js"></script>
+    <script src="//code.highcharts.com/highcharts-3d.js"></script>
+    <script src="//code.highcharts.com/modules/exporting.js"></script>
+
+    <script>
+        {% include "lemon_market/FinalResults.js.html" %}
+    </script>
+{% endblock %}

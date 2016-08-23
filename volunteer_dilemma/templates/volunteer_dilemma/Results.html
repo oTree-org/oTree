@@ -1,0 +1,24 @@
+{% extends "global/Base.html" %}
+{% load otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+
+{% block content %}
+<p>
+{% if player.volunteer %}
+You volunteered. As a result, your payoff is <strong>100-40=60 points</strong>.
+{% elif num_volunteers > 0 %}
+You did not volunteer but some did. As a result, your payoff is <strong>100 points</strong>. 
+{% else %}
+You did not volunteer and no one did. As a result, your payoff is <strong>0 points</strong>.
+{% endif %}
+</p>
+
+<p>{% next_button %}</p>
+
+    {% include Constants.instructions_file %}
+
+{% endblock %}

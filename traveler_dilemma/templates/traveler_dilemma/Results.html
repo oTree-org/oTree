@@ -1,0 +1,39 @@
+{% extends "global/Base.html" %}
+{% load otree_tags %}
+{% block title %}Results{% endblock %}
+{% block content %}
+<table class=table style='width: auto'>
+    <tr>
+        <th></th>
+        <th>Points</th>
+    </tr>
+    <tr>
+        <td>You claimed</td>
+        <td>{{ player.claim }}</td>
+    </tr>
+    <tr>
+        <td>The other traveler claimed</td>
+        <td>{{ player.other_player.claim }}</td>
+    </tr>
+    <tr>
+        <td>Amount paid to both</td>
+        <td>{{ amount_paid_to_both }}</td>
+    </tr>
+    <tr>
+        <td>Your reward</td>
+        <td>{{ reward }}</td>
+    </tr>
+    <tr>
+        <td>Your penalty</td>
+        <td>{{ penalty }}</td>
+    </tr>
+    <tr>
+        <td>Thus you receive</td>
+        <td>{{ player.payoff }}</td>
+    </tr>
+
+</table>
+
+<p>{% next_button %}</p>
+{% include Constants.instructions_file %}
+{% endblock %}

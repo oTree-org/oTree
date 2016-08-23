@@ -1,0 +1,63 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Response
+{% endblock %}
+
+{% block content %}
+
+    <p>You are <strong>Player B</strong>. Player A has offered you a contract with the following details:</p>
+
+    <table class='table text-center' style='width: auto; margin: auto'>
+        <tr><th>Fixed payment</th><th>Return share</th></tr>
+        <tr><td>{{ group.agent_fixed_pay }}</td><td>{{ group.return_share_as_percentage }}%</td></tr>
+    </table>
+
+    {% formfield group.contract_accepted with label='Will you accept or reject the above contract?' %}
+    <div id=effort>
+    {% formfield group.agent_work_effort with label='Please choose your level of effort' %}
+    </div>
+
+    <p id=calculate></p>
+
+    <p>
+    {% next_button %}
+    </p>
+
+    {% include Constants.instructions_file %}
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+$(function() {
+        $('#effort').hide();
+        $('input[type=radio]').change(function(){
+            if ($('#id_contract_accepted_1').prop('checked'))
+            $('#effort').show();
+            else
+            $('#effort').hide();
+            });
+        });
+        $('input[type=radio]').change(function(){
+            var effort;
+            if ($('#id_contract_accepted_1').prop('checked')) {
+                effort = $('input[name=agent_work_effort]:checked').val()
+                if (!effort) {
+                    $('p#calculate').text('');
+                    return;
+                }
+                //  [B's Return Share in %] × [Total Return] + [B's Fixed Payment] – [B's Effort Cost]
+                payoff = {{return_share}} * {{EFFORT_TO_COST}}[effort] / 100 + {{fixed_pay_int}} - {{EFFORT_TO_COST}}[effort];
+            } else {
+                effort = 'to reject';
+                payoff = 10;
+            }
+            $('p#calculate').text('You will receive '+payoff+' points if you choose '+effort+'.');
+        });
+</script>
+
+
+{% endblock %}

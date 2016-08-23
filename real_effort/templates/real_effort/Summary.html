@@ -1,0 +1,50 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Summary
+{% endblock %}
+
+{% block content %}
+
+    <p class="text-success">
+        The table below shows some statistics for the transcriptions you have entered. 
+        In a real study this table would usually not be shown to subjects.
+        <br>
+        The <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein</a> distance is given in the last column.
+        Note that the difference between the length of the given text and the length of
+        the text entered is a lower bound on the Levenshtein distance.
+    </p>
+
+    <div class="panel panel-success">
+
+        <table class="table">
+
+            <div class="panel-heading">
+                Statistics for transcriptions
+            </div>
+
+            <tr>
+                <th>Transcription #</th>
+                <th>Length of given text</th>
+                <th>Length of text entered</th>
+                <th>Levenshtein distance</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>{{ transcription_length_1 }}</td>
+                <td>{{ transcription_entered_1}}</td>
+                <td>{{ player.distance_1 }}</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>{{ transcription_length_2 }}</td>
+                <td>{{ transcription_entered_2}}</td>
+                <td>{{ player.distance_2 }}</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+{% endblock %}

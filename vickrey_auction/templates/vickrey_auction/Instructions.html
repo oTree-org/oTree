@@ -1,0 +1,36 @@
+{% load otree_tags staticfiles %}
+
+<div class="instructions well well-lg">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+
+    <p>
+        You have been randomly and anonymously matched with another 2
+        participants in an auction. Each of you is given 100 points to start.
+    </p>
+    <p>
+        Before bidding, you will learn the value of the object to you. The
+        value of the object differs from participant to participant and is
+        randomly and independently drawn from 0 to 100 for each participant.
+    </p>
+    <p>
+        At auction, you will privately submit one bid for the object. A bid
+        can be anything from 0 to 100 points. The participant with the highest
+        bid wins the object and pays the second highest bid. A random device
+        will select the winner in the event of a tie bid and the winner will
+        pay the highest bid other than her or his own bid.
+    </p>
+    <p>
+        The payoff of the winner is calculated as (in points)<br/>
+        <strong>
+            Winner’s payoff = 100 + Private value of the object to the winner - Second highest bid
+        </strong><br/>
+        The payoffs for others are the initial 100 points.
+    </p>
+    <p>
+        For your convenience, these instructions will remain available to you on all subsequent screens of this study.
+    </p>
+
+</div>

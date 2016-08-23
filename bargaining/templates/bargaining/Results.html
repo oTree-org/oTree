@@ -1,0 +1,37 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+
+{% block content %}
+    <table class=table style="width: auto">
+        <tr>
+            <th></th>
+            <th>Points</th>
+        </tr>
+        <tr>
+            <th>You demanded</th>
+            <td>{{ player.request_amount }}</td>
+        </tr>
+        <tr>
+            <th>The other participant demanded</th>
+            <td>{{ player.other_player.request_amount }}</td>
+        </tr>
+        <tr>
+            <th>Sum of your demands</th>
+            <td>{{ sum }}</td>
+        </tr>
+        <tr>
+            <th>Thus you earn</th>
+            <td>{{ player.payoff }}</td>
+        </tr>
+    </table>
+
+    <p>{% next_button %}</p>
+
+    {% include Constants.instructions_file %}
+
+{% endblock %}

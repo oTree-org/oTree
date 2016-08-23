@@ -1,0 +1,25 @@
+{% extends "global/Base.html" %}
+{% load otree_tags %}
+
+{% block title %}
+    Purchase (Period {{ subsession.round_number }} of {{ Constants.num_rounds }})
+{% endblock %}
+
+{% block content %}
+<p>You are buyer.</p>
+<p>
+    <strong>Below are the listed prices from the sellers:</strong><br/>
+    {% for p in group.get_players %}
+    {% if 'seller' in p.role %}
+    <i>Price from {{p.role}}: {{p.price}}</i><br/>
+    {% endif %}
+    {% endfor %}
+</p>
+
+{% formfield player.choice %}
+
+{% next_button %}
+
+{% include Constants.instructions_file %}
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+    <p>
+        {% if player.role == 'A' %}
+            You chose to send participant B
+            <strong>{{ group.sent_amount }}</strong>. Participant B returned
+            <strong>{{ group.sent_back_amount }}</strong>.
+            </p>
+            <p>
+                You were initially endowed with <strong>100 points</strong>,
+                chose to send <strong>{{ group.sent_amount }}</strong>,
+                received <strong>{{ group.sent_back_amount }}</strong> thus you
+                now have <strong>(100
+                points)-{{ group.sent_amount }}+{{ group.sent_back_amount }}={{ player.payoff }}</strong>.
+                {% else %}
+                Participant A sent you <strong>{{ group.sent_amount }}</strong>.
+                They were tripled so you received
+                <strong>{{ tripled_amount }}</strong>. You chose to return
+                <strong>{{ group.sent_back_amount }}</strong>.
+            </p>
+            <p>
+            You were initially endowed with <strong>0 points</strong>, received
+            <strong>{{ tripled_amount }}</strong>, chose to return
+            <strong>{{ group.sent_back_amount }}</strong> thus you now have
+            <strong>({{ tripled_amount }})-({{ group.sent_back_amount }})=({{ player.payoff }})</strong>
+            .
+        {% endif %}
+        </p>
+
+    <p>{% next_button %}</p>
+
+    {% include Constants.instructions_file %}
+
+{% endblock %}
+
