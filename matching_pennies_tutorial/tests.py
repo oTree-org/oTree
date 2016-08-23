@@ -13,7 +13,3 @@ class PlayerBot(Bot):
             views.Choice,
             {"penny_side": random.choice(['Heads', 'Tails'])}
         )
-
-        # submitted in last round
-        if self.subsession.round_number == Constants.num_rounds:
-            yield (views.ResultsSummary)

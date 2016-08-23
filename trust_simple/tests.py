@@ -21,8 +21,5 @@ class PlayerBot(Bot):
         else:
             yield (views.SendBack, {'sent_back_amount': 6})
 
-        # finally, show results
-        yield (views.Results)
-
 
 
