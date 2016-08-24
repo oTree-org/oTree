@@ -32,13 +32,13 @@
             <tr class="highlight-row-on-hover">
                 <th rowspan="2"><span class="rotate90">You</span></th>
                 <td><button name="decision" value="Cooperate" class="btn btn-primary btn-large">I will cooperate</button></td>
-                <td>{{Constants.cooperate_amount}}, {{Constants.cooperate_amount}}</td>
-                <td>0 point, {{Constants.defect_cooperate_amount}}</td>
+                <td>{{Constants.both_cooperate_payoff}}, {{Constants.both_cooperate_payoff}}</td>
+                <td>{{ Constants.betrayed_payoff }}, {{Constants.betray_payoff}}</td>
             </tr>
             <tr class="highlight-row-on-hover">
                 <td><button name="decision" value="Defect" class="btn btn-primary btn-large">I will defect</button></td>
-                <td>{{Constants.defect_cooperate_amount}}, 0 point</td>
-                <td>{{Constants.defect_amount}}, {{Constants.defect_amount}}</td>
+                <td>{{Constants.betray_payoff}}, {{ Constants.betrayed_payoff }}</td>
+                <td>{{Constants.both_defect_payoff}}, {{Constants.both_defect_payoff}}</td>
             </tr>
         </table>
     </div>

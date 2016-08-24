@@ -25,13 +25,13 @@ class Constants(BaseConstants):
 
     instructions_file = 'prisoner/Instructions.html'
 
-    #  Points made if player defects and the other cooperates""",
-    defect_cooperate_amount = c(300)
+    # payoff if 1 player defects and the other cooperates""",
+    betray_payoff = c(300)
+    betrayed_payoff = c(0)
 
-    # Points made if both players cooperate
-    cooperate_amount = c(200)
-    cooperate_defect_amount = c(0)
-    defect_amount = c(100)
+    # payoff if both players cooperate or both defect
+    both_cooperate_payoff = c(200)
+    both_defect_payoff = c(100)
 
 
 class Subsession(BaseSubsession):
@@ -53,11 +53,11 @@ class Player(BasePlayer):
         return self.get_others_in_group()[0]
 
     def set_payoff(self):
-        points_matrix = {'Cooperate': {'Cooperate': Constants.cooperate_amount,
-                                       'Defect': Constants.cooperate_defect_amount},
+        points_matrix = {'Cooperate': {'Cooperate': Constants.both_cooperate_payoff,
+                                       'Defect': Constants.betrayed_payoff},
                          'Defect': {
-                             'Cooperate': Constants.defect_cooperate_amount,
-                             'Defect': Constants.defect_amount}}
+                             'Cooperate': Constants.betray_payoff,
+                             'Defect': Constants.both_defect_payoff}}
 
         self.payoff = (points_matrix[self.decision]
                        [self.other_player().decision])
