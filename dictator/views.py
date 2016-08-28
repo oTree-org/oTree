@@ -31,11 +31,11 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     def offer(self):
-        return Constants.allocated_amount - self.group.kept
+        return Constants.endowment - self.group.kept
 
     def vars_for_template(self):
         return {
-            'offer': Constants.allocated_amount - self.group.kept,
+            'offer': Constants.endowment - self.group.kept,
         }
 
 

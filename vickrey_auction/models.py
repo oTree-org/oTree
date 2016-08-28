@@ -31,7 +31,7 @@ class Constants(BaseConstants):
     players_per_group = 3
     num_rounds = 1
 
-    instructions_file = 'vickrey_auction/Instructions.html'
+    instructions_template = 'vickrey_auction/Instructions.html'
 
     fixed_payoff = c(100)
     min_allowable_bid = c(0)

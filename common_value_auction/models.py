@@ -26,7 +26,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
 
-    instructions_file = 'common_value_auction/Instructions.html'
+    instructions_template = 'common_value_auction/Instructions.html'
 
     min_allowable_bid = c(0)
     max_allowable_bid = c(10)

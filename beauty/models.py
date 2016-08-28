@@ -35,7 +35,7 @@ class Constants(BaseConstants):
     num_rounds = 1
     name_in_url = 'beauty'
 
-    instructions_file = 'beauty/Instructions.html'
+    instructions_template = 'beauty/Instructions.html'
 
     winner_payoff = c(100)
     guess_max = 100

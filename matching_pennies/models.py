@@ -25,7 +25,7 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 3
 
-    instructions_file = 'matching_pennies/Instructions.html'
+    instructions_template = 'matching_pennies/Instructions.html'
 
 
 class Subsession(BaseSubsession):

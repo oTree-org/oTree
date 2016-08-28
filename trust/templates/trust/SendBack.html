@@ -12,6 +12,6 @@ You are Participant B. Participant A sent you {{group.sent_amount}} and you rece
 
     {% formfield group.sent_back_amount with label=prompt %}
     <p>{% next_button %}</p>
-    {% include Constants.instructions_file %}
+    {% include Constants.instructions_template %}
 
 {% endblock %}

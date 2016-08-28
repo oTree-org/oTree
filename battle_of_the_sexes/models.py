@@ -50,16 +50,16 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 1
 
-    instructions_file = 'battle_of_the_sexes/Instructions.html'
+    instructions_template = 'battle_of_the_sexes/Instructions.html'
 
     # """Amount rewarded to husband if football is chosen"""
-    football_husband_amount = opera_wife_amount = c(300)
+    football_husband_payoff = opera_wife_payoff = c(300)
 
     # Amount rewarded to wife if football is chosen
-    football_wife_amount = opera_husband_amount = c(200)
+    football_wife_payoff = opera_husband_payoff = c(200)
 
     # amount rewarded to either if the choices don't match
-    mismatch_amount = c(0)
+    mismatch_payoff = c(0)
 
 
 class Subsession(BaseSubsession):
@@ -72,16 +72,16 @@ class Group(BaseGroup):
         wife = self.get_player_by_role('wife')
 
         if husband.decision != wife.decision:
-            husband.payoff = Constants.mismatch_amount
-            wife.payoff = Constants.mismatch_amount
+            husband.payoff = Constants.mismatch_payoff
+            wife.payoff = Constants.mismatch_payoff
 
         else:
             if husband.decision == 'Football':
-                husband.payoff = Constants.football_husband_amount
-                wife.payoff = Constants.football_wife_amount
+                husband.payoff = Constants.football_husband_payoff
+                wife.payoff = Constants.football_wife_payoff
             else:
-                husband.payoff = Constants.opera_husband_amount
-                wife.payoff = Constants.opera_wife_amount
+                husband.payoff = Constants.opera_husband_payoff
+                wife.payoff = Constants.opera_wife_payoff
 
 
 class Player(BasePlayer):

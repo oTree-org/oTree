@@ -45,7 +45,7 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 2
 
-    instructions_file = 'asset_market/Instructions.html'
+    instructions_template = 'asset_market/Instructions.html'
 
     endowment = c(20)
     num_shares = 10

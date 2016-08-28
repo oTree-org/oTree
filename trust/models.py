@@ -26,7 +26,7 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 1
 
-    instructions_file = 'trust/Instructions.html'
+    instructions_template = 'trust/Instructions.html'
 
     # Initial amount allocated to each player
     amount_allocated = c(100)

@@ -38,14 +38,14 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 1
 
-    instructions_file = 'stag_hunt/Instructions.html'
+    instructions_template = 'stag_hunt/Instructions.html'
 
-    # e.g. stag_hare_amount means:
+    # e.g. stag_hare_payoff means:
     # "if I choose stag and the other player chooses hare, how much do I make?
-    stag_stag_amount = c(200)
-    stag_hare_amount = c(0)
-    hare_stag_amount = c(100)
-    hare_hare_amount = c(100)
+    stag_stag_payoff = c(200)
+    stag_hare_payoff = c(0)
+    hare_stag_payoff = c(100)
+    hare_hare_payoff = c(100)
 
 
 class Subsession(BaseSubsession):
@@ -70,12 +70,12 @@ class Player(BasePlayer):
     def set_payoff(self):
         payoff_matrix = {
             'Stag': {
-                'Stag': Constants.stag_stag_amount,
-                'Hare': Constants.stag_hare_amount,
+                'Stag': Constants.stag_stag_payoff,
+                'Hare': Constants.stag_hare_payoff,
             },
             'Hare': {
-                'Stag': Constants.hare_stag_amount,
-                'Hare': Constants.hare_hare_amount,
+                'Stag': Constants.hare_stag_payoff,
+                'Hare': Constants.hare_hare_payoff,
             }
         }
         self.payoff = payoff_matrix[self.decision][

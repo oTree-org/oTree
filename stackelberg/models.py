@@ -23,7 +23,7 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 1
 
-    instructions_file = 'stackelberg/Instructions.html'
+    instructions_template = 'stackelberg/Instructions.html'
 
     # Total production capacity of both players
     total_capacity = 60

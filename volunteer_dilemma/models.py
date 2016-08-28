@@ -28,7 +28,7 @@ class Constants(BaseConstants):
     players_per_group = 3
     num_rounds = 1
 
-    instructions_file = 'volunteer_dilemma/Instructions.html'
+    instructions_template = 'volunteer_dilemma/Instructions.html'
 
     num_other_players = players_per_group - 1
 

@@ -22,7 +22,7 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 1
 
-    instructions_file = 'cournot/Instructions.html'
+    instructions_template = 'cournot/Instructions.html'
 
     base_points = 50
     # Total production capacity of all players

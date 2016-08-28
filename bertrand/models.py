@@ -35,7 +35,7 @@ class Constants(BaseConstants):
     name_in_url = 'bertrand'
     num_rounds = 1
 
-    instructions_file = 'bertrand/Instructions.html'
+    instructions_template = 'bertrand/Instructions.html'
 
     maximum_price = c(100)
 

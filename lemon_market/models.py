@@ -28,7 +28,7 @@ class Constants(BaseConstants):
     players_per_group = 3
     num_rounds = 3
 
-    instructions_file = 'lemon_market/Instructions.html'
+    instructions_template = 'lemon_market/Instructions.html'
 
     INITIAL = c(50)
 
