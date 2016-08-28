@@ -25,8 +25,6 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 # don't share this with anybody.
 SECRET_KEY = '{{ secret_key }}'
 
-PAGE_FOOTER = ''
-
 # To use a database other than sqlite,
 # set the DATABASE_URL environment variable.
 # Examples:
@@ -74,8 +72,8 @@ DEMO_PAGE_INTRO_TEXT = """
 <ul>
     <li>
         <a href="https://github.com/oTree-org/otree" target="_blank">
-            Source code
-        </a> for the below games.
+            oTree on GitHub
+        </a>.
     </li>
     <li>
         <a href="http://www.otree.org/" target="_blank">
@@ -84,9 +82,8 @@ DEMO_PAGE_INTRO_TEXT = """
     </li>
 </ul>
 <p>
-    Below are various games implemented with oTree. These games are all open
-    source, and you can modify them as you wish to create your own variations.
-    Click one to learn more and play.
+    Here are various games implemented with oTree. These games are all open
+    source, and you can modify them as you wish.
 </p>
 """
 
