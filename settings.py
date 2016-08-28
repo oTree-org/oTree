@@ -87,6 +87,19 @@ DEMO_PAGE_INTRO_TEXT = """
 </p>
 """
 
+ROOMS = [
+    {
+        'name': 'econ101',
+        'display_name': 'Econ 101 class',
+        'participant_label_file': '_rooms/econ101.txt',
+    },
+    {
+        'name': 'live_demo',
+        'display_name': 'Room for live demo (no participant labels)',
+    },
+]
+
+
 # from here on are qualifications requirements for workers
 # see description for requirements on Amazon Mechanical Turk website:
 # http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_QualificationRequirementDataStructureArticle.html
@@ -109,6 +122,7 @@ mturk_hit_settings = {
         # qualification.Requirement('YOUR_QUALIFICATION_ID_HERE', 'DoesNotExist')
     ]
 }
+
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
