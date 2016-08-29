@@ -25,7 +25,7 @@ class Constants(BaseConstants):
 
     # """Amount allocated to each player"""
     endowment = c(100)
-    efficiency_factor = 1.8
+    efficiency_factor = 2
 
 
 class Subsession(BaseSubsession):

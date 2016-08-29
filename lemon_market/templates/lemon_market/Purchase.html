@@ -11,12 +11,12 @@
     <strong>Below are the listed prices from the sellers:</strong><br/>
     {% for p in group.get_players %}
     {% if 'seller' in p.role %}
-    <i>Price from {{p.role}}: {{p.price}}</i><br/>
+    <i>Price from {{p.role}}: {{p.seller_proposed_price}}</i><br/>
     {% endif %}
     {% endfor %}
 </p>
 
-{% formfield player.choice %}
+{% formfield group.seller_id with label="Please make a purchase decision:" %}
 
 {% next_button %}
 

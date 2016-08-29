@@ -12,11 +12,11 @@ from . import views
 
 class PlayerBot(Bot):
     def play_round(self):
-        # start game
         yield (views.Introduction)
 
-        # dictator
         if self.player.id_in_group == 1:
-            yield (views.Offer, {"kept": random.randrange(100)})
-
+            yield (views.Offer, {"kept": c(99)})
+            assert self.player.payoff == c(99)
+        else:
+            assert self.player.payoff == c(1)
         yield (views.Results)

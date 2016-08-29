@@ -30,8 +30,7 @@ class Constants(BaseConstants):
     max_units_per_player = int(total_capacity / players_per_group)
 
 class Subsession(BaseSubsession):
-
-    name_in_url = 'cournot'
+    pass
 
 
 class Group(BaseGroup):

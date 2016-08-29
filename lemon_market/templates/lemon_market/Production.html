@@ -9,8 +9,8 @@
 
     <p>You are {{ player.role }}</p>
 
-    {% formfield player.quality %}
-    {% formfield player.price %}
+    {% formfield player.seller_proposed_quality %}
+    {% formfield player.seller_proposed_price %}
 
     {% next_button %}
     {% include Constants.instructions_template %}

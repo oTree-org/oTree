@@ -13,13 +13,11 @@ class Introduction(Page):
 
 
 class Production(Page):
-    form_model = models.Player
-    form_fields = ['quality', 'price']
-
-    timeout_submission = {'price': Constants.INITIAL, 'quality': 20}
-
     def is_displayed(self):
         return self.player.role().startswith('seller')
+
+    form_model = models.Player
+    form_fields = ['seller_proposed_price', 'seller_proposed_quality']
 
 
 class SimpleWaitPage(WaitPage):
@@ -27,31 +25,21 @@ class SimpleWaitPage(WaitPage):
 
 
 class Purchase(Page):
-    form_model = models.Player
-    form_fields = ['choice']
-
     def is_displayed(self):
         return self.player.role() == 'buyer'
+
+    form_model = models.Group
+    form_fields = ['seller_id']
 
 
 class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.set_payoff()
-        if self.subsession.round_number == Constants.num_rounds:
-            final_subsession = choice(self.subsession.in_all_rounds())
-            final_subsession.final = True
-            final_subsession.save()
 
 
 class Results(Page):
     def vars_for_template(self):
-        buyer = self.group.get_player_by_role('buyer')
-
-        return {
-            'buyer': buyer,
-            'seller': buyer.choice and self.group.get_player_by_id(
-                buyer.choice + 1)
-        }
+        return {'seller': self.group.get_seller()}
 
 
 class FinalResults(Page):
@@ -59,33 +47,28 @@ class FinalResults(Page):
         return self.subsession.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        for player in self.player.in_all_rounds():
-            if player.subsession.final:
-                break
-        data = {'old_player': player}
-        #
-        # Filling the data for graph
-        #
-        # transaction price for each round (None if no transaction happened)
-        transaction_price = []
-        for round in self.player.in_all_rounds():
-            if round.group.seller():
-                transaction_price.append(round.group.seller().price)
-            else:
-                transaction_price.append(None)
-        data['series'] = list()
-        data['series'].append({'name': 'Transaction Price',
-                               'data': transaction_price})
-        # payoffs for both buyer and sellers in each round
+        # Filling the data for HighCharts graph
+
+        series = []
+
+        transaction_prices = [g.sale_price for g in self.group.in_all_rounds()]
+        series.append({
+            'name': 'Transaction Price',
+            'data': transaction_prices})
+
         for player in self.group.get_players():
-            payoffs = []
-            for round in player.in_all_rounds():
-                payoffs.append(round.payoff)
-            data['series'].append(
+            payoffs = [p.payoff for p in player.in_all_rounds()]
+            series.append(
                 {'name': 'Earnings for %s' % player.role().capitalize(),
                  'data': payoffs})
-        data['series'] = safe_json(data['series'])
-        return data
+        highcharts_series = safe_json(series)
+
+        round_numbers = safe_json(list(range(1, Constants.num_rounds + 1)))
+
+        return {
+            'highcharts_series': highcharts_series,
+            'round_numbers': round_numbers
+        }
 
 
 page_sequence = [

@@ -2,26 +2,31 @@
 {% load otree_tags %}
 
 {% block title %}
-Results (Period {{subsession.round_number}} of {{Constants.num_rounds}})
+    Results (Period {{ subsession.round_number }} of {{ Constants.num_rounds }}
+    )
 {% endblock %}
 
 
 {% block content %}
-You are {{player.role}}. 
-{% if buyer.choice %}
-    {% if player.role == 'buyer' %}
-        You bought from seller {{buyer.choice}}. The quality grade of your purchase is <strong>{{seller.get_quality_display}}</strong>.
+    You are {{ player.role }}.
+    {% if group.seller_id %}
+        {% if player.role == 'buyer' %}
+            You bought from seller {{ group.seller_id }}
+            at a price of <strong>{{ group.sale_price }}</strong>.
+            The quality grade of your purchase is <strong>{{ seller.get_seller_proposed_quality_display }}</strong>.
+        {% else %}
+            The buyer purchased a <strong>{{ seller.get_seller_proposed_display }}</strong> grade
+            from <strong>{% if player == seller %}you{% else %}{{ seller.role }}{% endif %}</strong>
+            at a price of <strong>{{ group.sale_price }}</strong>.
+        {% endif %}
+        {# buyer bought nothing #}
+    {% elif player.role == 'buyer' %}
+        You bought nothing in this period.
     {% else %}
-        The buyer purchased a <strong>{{seller.get_quality_display}}</strong> grade from <strong>{{seller.role}}</strong> at a price of <strong>{{seller.price}}</strong>.
+        The buyer bought nothing in this period.
     {% endif %}
-    {# buyer bought nothing #}
-{% elif player.role == 'buyer' %}
-    You bought nothing in this period.
-{% else %}
-    The buyer bought nothing in this period.
-{% endif %}
-Thus your period payoff is <strong>{{player.payoff}}</strong>.
+    Thus your period payoff is <strong>{{ player.payoff }}</strong>.
 
-<p> {% next_button %}</p> 
-{% include Constants.instructions_template %}
+    <p> {% next_button %}</p>
+    {% include Constants.instructions_template %}
 {% endblock %}

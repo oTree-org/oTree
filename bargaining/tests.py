@@ -12,15 +12,23 @@ from .models import Constants
 
 class PlayerBot(Bot):
 
+    cases = [
+        'success', # players agree on an amount under the threshold
+        'greedy', # players ask for too much so end up with nothing
+    ]
+
     def play_round(self):
 
         # start
         yield (views.Introduction)
 
-        # request
-        amount = random.randrange(Constants.amount_shared)
-        yield (views.Request, {"request_amount": amount})
+        if self.case == 'success':
+            request_amount = c(10)
+            yield (views.Request, {"request_amount": request_amount})
+            yield (views.Results)
+            assert self.player.payoff == request_amount
 
-        # results
-        yield (views.Results)
-
+        if self.case == 'greedy':
+            yield (views.Request, {"request_amount": Constants.amount_shared})
+            yield (views.Results)
+            assert self.player.payoff == 0
