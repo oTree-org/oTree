@@ -9,20 +9,7 @@ from .models import Constants
 
 class PlayerBot(Bot):
     def play_round(self):
-
-        rounds = Constants.num_rounds
-        round = self.subsession.round_number
-
-        if round == 1:
-            # only submitted on round 1
-            yield (views.Introduction)
-
-        # repeated for the no. of rounds
-        yield (views.Choice,
-               {"penny_side": random.choice(['Heads', 'Tails'])}
-               )
-        yield (views.Results)
-
-        # submitted in last round
-        if round == rounds:
-            yield (views.ResultsSummary)
+        yield (
+            views.Choice,
+            {"penny_side": random.choice(['Heads', 'Tails'])}
+        )

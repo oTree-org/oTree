@@ -234,15 +234,7 @@ SESSION_CONFIGS = [
         'display_name': "Matching Pennies",
         'num_demo_participants': 2,
         'app_sequence': [
-            'matching_pennies', 'payment_info'
-        ],
-    },
-    {
-        'name': 'matching_pennies_tutorial',
-        'display_name': "Matching Pennies (tutorial version)",
-        'num_demo_participants': 2,
-        'app_sequence': [
-            'matching_pennies_tutorial',
+            'matching_pennies',
         ],
     },
     {

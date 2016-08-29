@@ -2,37 +2,28 @@
 {% load staticfiles otree_tags %}
 
 {% block title %}
-    Results for Rounds 1–{{ Constants.num_rounds }}
+    Final results
 {% endblock %}
 
 {% block content %}
 
-    <p>
-        This is a summary of the rounds played.
-    </p>
-
-    <table class="table" style="width:400px; margin-top:20px;">
+    <table class="table">
         <tr>
             <th>Round</th>
             <th>Player and outcome</th>
-            <th>Points</th>
         </tr>
         {% for p in player_in_all_rounds %}
             <tr>
                 <td>{{ p.subsession.round_number }}</td>
-                <td>You were {{ p.role }} and {% if p.is_winner %} won {% else %} lost {% endif %}</td>
-                <td>{{ p.payoff }}</td>
+                <td>You were the {{ p.role }} and {% if p.is_winner %} won {% else %} lost {% endif %}</td>
             </tr>
         {% endfor %}
     </table>
 
     <p>
-        You earned {{ total_payoff }}.
+        The paying round was {{ paying_round }}.
+        Your total payoff is therefore {{ total_payoff }}.
     </p>
 
-
-    {% next_button %}
-
-    {% include Constants.instructions_template %}
 
 {% endblock %}
