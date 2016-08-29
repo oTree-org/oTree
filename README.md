@@ -10,6 +10,10 @@ http://demo.otree.org/
 ## Homepage
 http://www.otree.org/
 
+## Docs
+
+http://otree.readthedocs.org
+
 ## Quick start
 
 Rather than cloning this repo directly,
@@ -162,9 +166,6 @@ Contact chris@otree.org with bug reports.
 * Alexander Sandukovskiy
 * Som Datye
 
-## Docs
-
-http://otree.readthedocs.org
 
 ## Related repositories
 
