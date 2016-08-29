@@ -145,22 +145,10 @@ SESSION_CONFIGS = [
         'app_sequence': ['public_goods', 'payment_info'],
     },
     {
-        'name': 'public_goods_simple',
-        'display_name': "Public Goods (simple version from tutorial)",
-        'num_demo_participants': 3,
-        'app_sequence': ['public_goods_simple', 'survey', 'payment_info'],
-    },
-    {
         'name': 'trust',
         'display_name': "Trust Game",
         'num_demo_participants': 2,
         'app_sequence': ['trust', 'payment_info'],
-    },
-    {
-        'name': 'trust_simple',
-        'display_name': "Trust Game (simple version from tutorial)",
-        'num_demo_participants': 2,
-        'app_sequence': ['trust_simple'],
     },
     {
         'name': 'beauty',
@@ -314,6 +302,20 @@ SESSION_CONFIGS = [
             'lemon_market', 'payment_info'
         ],
     },
+    {
+        'name': 'public_goods_simple',
+        'display_name': "Public Goods (simple version from tutorial)",
+        'num_demo_participants': 3,
+        'app_sequence': ['public_goods_simple', 'survey', 'payment_info'],
+    },
+
+    {
+        'name': 'trust_simple',
+        'display_name': "Trust Game (simple version from tutorial)",
+        'num_demo_participants': 2,
+        'app_sequence': ['trust_simple'],
+    },
+
 ]
 
 # anything you put after the below line will override
