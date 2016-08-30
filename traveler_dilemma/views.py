@@ -20,28 +20,11 @@ class Claim(Page):
 class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
-        for p in self.group.get_players():
-            p.set_payoff()
+        self.group.set_payoffs()
 
 
 class Results(Page):
-
-    def vars_for_template(self):
-        other = self.player.other_player().claim
-        if self.player.claim < other:
-            reward = Constants.reward
-            penalty = c(0)
-        elif self.player.claim > other:
-            reward = c(0)
-            penalty = Constants.penalty
-        else:
-            reward = c(0)
-            penalty = c(0)
-        return {
-            'reward': reward,
-            'penalty': penalty,
-            'amount_paid_to_both': self.player.payoff - reward,
-        }
+    pass
 
 
 page_sequence = [

@@ -30,10 +30,9 @@ class Constants(BaseConstants):
     instructions_template = 'traveler_dilemma/Instructions.html'
 
     # Player's reward for the lowest claim"""
-    reward = c(2)
+    adjustment_abs = c(2)
 
     # Player's deduction for the higher claim
-    penalty = reward
 
     # The maximum claim to be requested
     max_amount = c(100)
@@ -48,7 +47,26 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    pass
+
+    lower_claim = models.CurrencyField()
+
+    def set_payoffs(self):
+        p1, p2 = self.get_players()
+        if p1.claim == p2.claim:
+            self.lower_claim = p1.claim
+            for p in [p1, p2]:
+                p.payoff = self.lower_claim
+                p.adjustment = c(0)
+        else:
+            if p1.claim < p2.claim:
+                winner, loser = p1, p2
+            else:
+                winner, loser = p2, p1
+            self.lower_claim = winner.claim
+            winner.adjustment = Constants.adjustment_abs
+            loser.adjustment = -Constants.adjustment_abs
+            winner.payoff = self.lower_claim + winner.adjustment
+            loser.payoff = self.lower_claim + loser.adjustment
 
 
 class Player(BasePlayer):
@@ -61,14 +79,9 @@ class Player(BasePlayer):
         verbose_name='Please enter a number from 2 to 100'
     )
 
+    adjustment = models.CurrencyField()
+
     def other_player(self):
         return self.get_others_in_group()[0]
 
-    def set_payoff(self):
-        other = self.other_player()
-        if self.claim < other.claim:
-            self.payoff = self.claim + Constants.reward
-        elif self.claim > other.claim:
-            self.payoff = other.claim - Constants.penalty
-        else:
-            self.payoff = self.claim
+

@@ -9,10 +9,6 @@
 
     <p>The results are shown in the following table.</p>
 
-
-
-
-
     <table class="table table-test" style="width:400px; margin-bottom:10px">
 
         <tr>
@@ -27,27 +23,17 @@
 
         <tr>
             <td>Total production:</td>
-            <td>{{ total_quantity }} units</td>
+            <td>{{ group.total_quantity }} units</td>
         </tr>
 
         <tr>
             <td style="border-top-width:4px">Unit selling price:</td>
-            <td style="border-top-width:4px">{{ Constants.total_capacity }} – {{ total_quantity }} = {{ group.price }}</td>
+            <td style="border-top-width:4px">{{ Constants.total_capacity }} – {{ group.total_quantity }} = {{ group.price }}</td>
         </tr>
 
         <tr>
             <td>Your profit:</td>
             <td>{{ player.payoff }}</td>
-        </tr>
-
-        <tr>
-            <td style="border-top-width:4px">In addition, you get a participation fee:</td>
-            <td style="border-top-width:4px">{{ Constants.fixed_pay }}</td>
-        </tr>
-
-        <tr>
-            <td style="border-top-width:4px">In total, you receive:</td>
-            <td style="border-top-width:4px">{{ total_plus_base }}</td>
         </tr>
 
     </table>

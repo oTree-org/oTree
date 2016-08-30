@@ -7,17 +7,20 @@
 
 
 {% block content %}
-<p>
-{% if player.volunteer %}
-You volunteered. As a result, your payoff is <strong>100-40=60 points</strong>.
-{% elif num_volunteers > 0 %}
-You did not volunteer but some did. As a result, your payoff is <strong>100 points</strong>. 
-{% else %}
-You did not volunteer and no one did. As a result, your payoff is <strong>0 points</strong>.
-{% endif %}
-</p>
+    <p>
+        {% if player.volunteer %}
+            You volunteered. As a result, your payoff is
+            <strong>{{ player.payoff }}</strong>.
+        {% elif num_volunteers > 0 %}
+            You did not volunteer but some did. As a result, your payoff is
+            <strong>{{ player.payoff }}</strong>.
+        {% else %}
+            You did not volunteer and no one did. As a result, your payoff is
+            <strong>{{ player.payoff }}</strong>.
+        {% endif %}
+    </p>
 
-<p>{% next_button %}</p>
+    <p>{% next_button %}</p>
 
     {% include Constants.instructions_template %}
 

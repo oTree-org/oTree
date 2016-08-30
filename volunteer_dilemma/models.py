@@ -47,6 +47,8 @@ class Group(BaseGroup):
     def set_payoffs(self):
         if any(p.volunteer for p in self.get_players()):
             baseline_amount = Constants.general_benefit
+        else:
+            baseline_amount = c(0)
         for p in self.get_players():
             p.payoff = baseline_amount
             if p.volunteer:

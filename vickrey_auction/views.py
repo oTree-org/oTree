@@ -17,7 +17,6 @@ class Bid(Page):
 
 class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
-        self.group.set_winner()
         self.group.set_payoffs()
 
 

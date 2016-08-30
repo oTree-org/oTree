@@ -33,59 +33,47 @@ class Constants(BaseConstants):
 
     instructions_template = 'vickrey_auction/Instructions.html'
 
-    fixed_payoff = c(100)
-    min_allowable_bid = c(0)
-    max_allowable_bid = c(100)
+    endowment = c(100)
 
 
 class Subsession(BaseSubsession):
     def before_session_starts(self):
         for p in self.get_players():
-            p.private_value = random.randint(
-                Constants.min_allowable_bid, Constants.max_allowable_bid
-            )
+            p.private_value = random.randint(0, Constants.endowment)
 
 
 class Group(BaseGroup):
-    def highest_bid(self):
-        return max([p.bid_amount for p in self.get_players()])
+    highest_bid = models.CurrencyField()
+    second_highest_bid = models.CurrencyField()
 
-    def second_highest_bid(self):
-        values = sorted(
-            (p.bid_amount for p in self.get_players()), reverse=True
-        )
-        return values[1]
+    def set_highest_bids(self):
+        bids = sorted((p.bid_amount for p in self.get_players()), reverse=True)
+        self.highest_bid = bids[0]
+        self.second_highest_bid = bids[1]
 
-    def set_winner(self):
+    def set_payoffs(self):
+        self.set_highest_bids()
         players_with_highest_bid = [
             p for p in self.get_players()
-            if p.bid_amount == self.highest_bid()
+            if p.bid_amount == self.highest_bid
             ]
         # if tie, winner is chosen at random
         winner = random.choice(players_with_highest_bid)
         winner.is_winner = True
-
-    def set_payoffs(self):
-        second_highest_bid = self.second_highest_bid()
         for p in self.get_players():
-            p.payoff = Constants.fixed_payoff
+            p.payoff = Constants.endowment
             if p.is_winner:
-                p.payoff += (
-                    p.private_value - second_highest_bid
-                )
-                if p.payoff < 0:
-                    p.payoff = 0
+                p.payoff += (p.private_value - self.second_highest_bid)
+
 
 
 class Player(BasePlayer):
     private_value = models.CurrencyField(
-        null=True,
         doc="How much the player values the item, generated randomly"
     )
 
     bid_amount = models.CurrencyField(
-        null=True,
-        min=Constants.min_allowable_bid, max=Constants.max_allowable_bid,
+        min=0, max=Constants.endowment,
         doc="Amount bidded by the player"
     )
 

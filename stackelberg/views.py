@@ -39,19 +39,11 @@ class ResultsWaitPage(WaitPage):
     body_text = "Waiting for the other participant to decide."
 
     def after_all_players_arrive(self):
-        for p in self.group.get_players():
-            p.set_payoff()
-
+        self.group.set_payoffs()
 
 class Results(Page):
     def vars_for_template(self):
-        self.player.set_payoff()
-
-        return {
-            'total_quantity': self.player.quantity + self.player.other_player().quantity,
-            'total_plus_base': self.player.payoff + Constants.fixed_pay
-        }
-
+        pass
 
 page_sequence = [Introduction,
                  ChoiceOne,

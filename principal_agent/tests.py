@@ -26,6 +26,6 @@ class PlayerBot(Bot):
         yield (views.Results)
 
         if self.player.id_in_group == 1:
-            assert self.player.payoff == 46 + 30, self.player.payoff
+            assert self.player.payoff == 46 + 30
         else:
-            assert self.player.payoff == 34 + 30, self.player.payoff
+            assert self.player.payoff == 34 + 30

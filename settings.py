@@ -273,12 +273,6 @@ SESSION_CONFIGS = [
         ],
     },
     {
-        'name': 'stag_hunt',
-        'display_name': "Stag Hunt",
-        'num_demo_participants': 2,
-        'app_sequence': ['stag_hunt', 'payment_info'],
-    },
-    {
         'name': 'real_effort',
         'display_name': "Real-effort transcription task",
         'num_demo_participants': 1,

@@ -30,17 +30,23 @@ class Constants(BaseConstants):
 
     max_units_per_player = int(total_capacity / 2)
 
-    fixed_pay = c(50)
-
 
 class Subsession(BaseSubsession):
     pass
 
 
 class Group(BaseGroup):
+    total_quantity = models.PositiveIntegerField()
+
     price = models.CurrencyField(
         doc="""Unit price: P = T - Q1 - Q2, where T is total capacity and Q_i are the units produced by the players"""
     )
+
+    def set_payoffs(self):
+        self.total_quantity = sum(player.quantity for player in self.get_players())
+        self.price = Constants.total_capacity - c(self.total_quantity)
+        for player in self.get_players():
+            player.payoff = self.price * player.quantity
 
 
 class Player(BasePlayer):
@@ -52,7 +58,3 @@ class Player(BasePlayer):
 
     def other_player(self):
         return self.get_others_in_group()[0]
-
-    def set_payoff(self):
-        self.group.price = Constants.total_capacity - self.quantity - self.other_player().quantity
-        self.payoff = self.group.price * self.quantity

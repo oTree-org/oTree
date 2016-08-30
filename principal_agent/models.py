@@ -104,7 +104,7 @@ class Group(BaseGroup):
     agent_fixed_pay = models.CurrencyField(
         doc="""Amount offered as fixed pay to agent""",
         min=Constants.min_fixed_payment, max=Constants.max_fixed_payment,
-        verbose_name='Fixed Payment (from %i to %i)' % (
+        verbose_name='Fixed Payment (from {} to {})'.format(
             Constants.min_fixed_payment, Constants.max_fixed_payment)
     )
 

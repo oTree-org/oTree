@@ -13,10 +13,6 @@ from . import views
 class PlayerBot(Bot):
     def play_round(self):
         yield (views.Introduction)
-
-        yield (
-            views.Decision,
-            {"decision": random.choice(['Cooperate', 'Defect'])}
-        )
-
+        yield (views.Decision, {"decision": 'Cooperate'})
+        assert 'Both of you chose to cooperate' in self.html
         yield (views.Results)
