@@ -53,7 +53,6 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     units = models.PositiveIntegerField(
-        initial=None,
         min=0, max=Constants.max_units_per_player,
         doc="""Quantity of units to produce"""
     )

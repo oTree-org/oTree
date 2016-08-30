@@ -3,76 +3,58 @@ from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range, safe_json
-from .models import Constants, levenshtein, text_is_close_enough
+from .models import Constants, levenshtein, distance_and_ok
 from django.conf import settings
 
 
-class Transcription1(Page):
-    template_name = 'real_effort/Transcription.html'
-
+class Transcribe(Page):
     form_model = models.Player
-    form_fields = ['transcription_1']
+    form_fields = ['transcribed_text']
 
     def vars_for_template(self):
+
         return {
-            'number': 1,
-            'magic_link': settings.DEBUG and Constants.show_transcription_1,
-            'transcription': Constants.reference_texts[0],
+            'image_path': 'real_effort/paragraphs/{}.png'.format(
+                self.round_number),
+            'reference_text': Constants.reference_texts[self.round_number - 1],
             'debug': settings.DEBUG,
-            'error_rate_percent': int(
-                100 * Constants.error_rate_transcription_1)
+            'required_accuracy': 100 * (1 - Constants.allowed_error_rates[self.round_number - 1])
         }
 
-    def transcription_1_error_message(self, text_user):
-        if not text_is_close_enough(text_user, Constants.reference_texts[0],
-                                    Constants.error_rate_transcription_1):
-            if Constants.error_rate_transcription_1 == 0.0:
-                return Constants.transcription_error_0
-            else:
-                return Constants.transcription_error_positive
+    def transcribed_text_error_message(self, transcribed_text):
+        reference_text = Constants.reference_texts[self.round_number - 1]
+        allowed_error_rate = Constants.allowed_error_rates[
+            self.round_number - 1]
+        distance, ok = distance_and_ok(transcribed_text, reference_text,
+                                       allowed_error_rate)
+        if ok:
+            self.player.levenshtein_distance = distance
         else:
-            self.distance_1 = levenshtein(Constants.reference_texts[0],
-                                          text_user)
+            if allowed_error_rate == 0:
+                return "The transcription should be exactly the same as on the image."
+            else:
+                return "This transcription appears to contain too many errors."
+
+    def before_next_page(self):
+        self.player.payoff = 0
 
 
-class Transcription2(Page):
-    template_name = 'real_effort/Transcription.html'
-
-    form_model = models.Player
-    form_fields = ['transcription_2']
+class Results(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        return {'number': 2,
-                'magic_link': settings.DEBUG and Constants.show_transcription_2,
-                'transcription': Constants.reference_texts[1],
-                'error_rate_percent': int(
-                    100 * Constants.error_rate_transcription_2)}
+        data_series = []
+        for prev_player in self.player.in_all_rounds():
+            data = {
+                'round_number': prev_player.round_number,
+                'reference_text_length': len(Constants.reference_texts[prev_player.round_number - 1]),
+                'transcribed_text_length': len(prev_player.transcribed_text),
+                'distance': prev_player.levenshtein_distance,
+            }
+            data_series.append(data)
 
-    def transcription_2_error_message(self, text_user):
-        if not text_is_close_enough(text_user, Constants.reference_texts[1],
-                                    Constants.error_rate_transcription_2):
-            if Constants.error_rate_transcription_2 == 0.0:
-                return Constants.transcription_error_0
-            else:
-                return Constants.transcription_error_positive
-        else:
-            self.distance_2 = levenshtein(Constants.reference_texts[1],
-                                          text_user)
+        return {'data_series': data_series}
 
 
-class Summary(Page):
-    def vars_for_template(self):
-        self.player.set_payoff()
-        return {
-            # 'distance_1' : self.player.distance_1,
-            'transcription_entered_1': len(self.player.transcription_1),
-            'transcription_length_1': len(Constants.reference_texts[0]),
-            # 'distance_2' : self.player.distance_2,
-            'transcription_entered_2': len(self.player.transcription_2),
-            'transcription_length_2': len(Constants.reference_texts[1]),
-        }
-
-
-page_sequence = [Transcription1,
-                 Transcription2,
-                 Summary]
+page_sequence = [Transcribe, Results]

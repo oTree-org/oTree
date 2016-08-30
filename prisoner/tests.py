@@ -15,4 +15,5 @@ class PlayerBot(Bot):
         yield (views.Introduction)
         yield (views.Decision, {"decision": 'Cooperate'})
         assert 'Both of you chose to cooperate' in self.html
+        assert self.player.payoff == Constants.both_cooperate_payoff
         yield (views.Results)

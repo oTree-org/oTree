@@ -25,3 +25,9 @@ class PlayerBot(Bot):
             'crt_lake': 48
         })
 
+        for value in [
+            self.player.crt_bat,
+            self.player.q_country,
+            self.player.payoff
+        ]:
+            assert value is not None

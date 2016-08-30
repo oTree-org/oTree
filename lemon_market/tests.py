@@ -43,6 +43,7 @@ class PlayerBot(Bot):
             else:
                 yield (views.Purchase, {'seller_id': 0})
                 assert 'You bought nothing' in self.html
+                assert "your period payoff is {}".format(Constants.initial_endowment)
 
         yield (views.Results)
         if self.subsession.round_number == Constants.num_rounds:

@@ -45,4 +45,12 @@ class PlayerBot(Bot):
             num_winners = sum([1 for p in self.group.get_players() if p.is_winner])
             assert num_winners == 1
 
+        for field in [
+            self.player.bid_amount,
+            self.player.payoff,
+            self.player.item_value_estimate,
+            self.player.is_winner
+        ]:
+            assert field is not None
+
         yield (views.Results)
