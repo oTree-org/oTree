@@ -1,26 +1,16 @@
-# -*- coding: utf-8 -*-
-# <standard imports>
-from __future__ import division
-from otree.db import models
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
-
-from otree import widgets
-from otree.common import Currency as c, currency_range
-
-# </standard imports>
+from otree.api import (
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
+    Currency as c, currency_range
+)
+import random
 
 doc = """
 Each player decides if to free ride or to volunteer from which all will
 benefit.
-"""
 
-bibliography = (
-    (
-        "Diekmann, A. (1985). Volunteer's dilemma. Journal of Conflict "
-        "Resolution, 605-610."
-    ),
-)
+See: Diekmann, A. (1985). Volunteer's dilemma. Journal of Conflict
+Resolution, 605-610.
+"""
 
 
 class Constants(BaseConstants):

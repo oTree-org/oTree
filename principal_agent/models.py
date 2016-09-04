@@ -1,15 +1,9 @@
-# -*- coding: utf-8 -*-
-# <standard imports>
-from __future__ import division
-from otree.db import models
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
-
-from otree import widgets
-from otree.common import Currency as c, currency_range
+from otree.api import (
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
+    Currency as c, currency_range
+)
+import random
 import utils
-
-# </standard imports>
 
 
 doc = """
@@ -19,23 +13,6 @@ accept. The agent then chooses an effort level. The implementation is based on
     Gächter and Königstein (2006)
 </a>.
 """
-
-bibliography = (
-    (
-        'Gächter, Simon, and Manfred Königstein. "Design a Contract: A Simple '
-        'Principal-Agent Problem as a Classroom Experiment." The Journal of '
-        'Economic Education 40.2 (2009): 173-187.'
-    ),
-    (
-        'Fehr, Ernst, Georg Kirchsteiger, and Arno Riedl. "Does fairness '
-        'prevent market clearing? An experimental investigation." The '
-        'Quarterly Journal of Economics(1993): 437-459.'
-    ),
-    (
-        'Charness, Gary, Guillaume R. Frechette, and John H. Kagel. "How '
-        'robust is laboratory gift exchange?." Experimental Economics 7.2'
-    )
-)
 
 
 class Constants(BaseConstants):

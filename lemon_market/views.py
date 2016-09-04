@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
-from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
-from random import choice
 from .models import Constants
 from otree.common import safe_json
 

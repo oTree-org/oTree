@@ -1,29 +1,17 @@
-# -*- coding: utf-8 -*-
-# <standard imports>
-from __future__ import division
-from otree.db import models
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
-
-from otree import widgets
-from otree.common import Currency as c, currency_range
+from otree.api import (
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
+    Currency as c, currency_range
+)
 import random
-
-# </standard imports>
 
 
 doc = """
 In this Vickrey auction, 3 players bid for an object with private values. Each
 player can only submit one bid.
 
+See: Vickrey, William. "Counterspeculation, auctions, and competitive '
+sealed tenders." The Journal of finance 16.1 (1961): 8-37.
 """
-
-bibliography = (
-    (
-        'Vickrey, William. "Counterspeculation, auctions, and competitive '
-        'sealed tenders." The Journal of finance 16.1 (1961): 8-37'
-    ),
-)
 
 
 class Constants(BaseConstants):

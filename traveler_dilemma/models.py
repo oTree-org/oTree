@@ -1,16 +1,8 @@
-# -*- coding: utf-8 -*-
-from __future__ import division
-
-"""Documentation at https://github.com/oTree-org/otree/wiki
-
-"""
-
-from otree.db import models
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
-
-from otree.common import Currency as c, currency_range
-from otree import widgets
+from otree.api import (
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
+    Currency as c, currency_range
+)
+import random
 
 doc = """
 Kaushik Basu's famous traveler's dilemma (

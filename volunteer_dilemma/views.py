@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
-from __future__ import division
-from otree.common import Currency as c, currency_range
+from otree.api import Currency as c, currency_range
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
-from django.utils.safestring import mark_safe
 
 
 class Introduction(Page):

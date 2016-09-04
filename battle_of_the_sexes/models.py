@@ -1,17 +1,8 @@
-# -*- coding: utf-8 -*-
-# <standard imports>
-from __future__ import division
-
+from otree.api import (
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
+    Currency as c, currency_range
+)
 import random
-
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
-
-from otree.db import models
-from otree import widgets
-from otree.common import Currency as c, currency_range
-
-# </standard imports>
 
 
 doc = """
@@ -22,27 +13,6 @@ from
 </a>.
 
 """
-
-bibliography = (
-    (
-        'Luce, R. Duncan, and Howard Raiffa. Games and decisions: '
-        'Introduction and critical survey. Courier Dover Publications, 2012.'
-    ),
-    (
-        'Rapoport, Anatol. Two-person game theory. Courier Dover '
-        'Publications, 1999.'
-    ),
-    (
-        'Cooper, Russell, et al. "Forward induction in the '
-        'battle-of-the-sexes games."The American Economic Review (1993): '
-        '1303-1316.'
-    ),
-    (
-        'Cooper, Russell, et al. "Communication in the battle of the sexes '
-        'game: some experimental results." The RAND Journal of Economics '
-        '(1989): 568-587.'
-    )
-)
 
 
 class Constants(BaseConstants):

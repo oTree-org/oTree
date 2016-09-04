@@ -1,17 +1,8 @@
-# -*- coding: utf-8 -*-
-# <standard imports>
-from __future__ import division
-from otree.db import models
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
-
-from otree import widgets
-from otree import forms
-from otree.common import Currency as c, currency_range
+from otree.api import (
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
+    Currency as c, currency_range
+)
 import random
-from django.core.validators import MaxLengthValidator
-
-# </standard imports>
 
 doc = """
 This is a task that requires real effort from participants.

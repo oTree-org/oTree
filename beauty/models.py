@@ -1,33 +1,17 @@
-# -*- coding: utf-8 -*-
-# <standard imports>
-from __future__ import division
-from otree.db import models
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
-
-from otree import widgets
-from otree.common import Currency as c, currency_range
+from otree.api import (
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
+    Currency as c, currency_range
+)
 import random
-
-# </standard imports>
 
 
 doc = """
 5 players guess what 2/3 of the average of their guesses will be; the one with
 the closest guess wins.
-"""
 
-bibliography = (
-    (
-        'Nagel, Rosemarie. "Unraveling in guessing games: An experimental '
-        'study."The American Economic Review (1995): 1313-1326.'
-    ),
-    (
-        'Bosch-Domenech, Antoni, et al. "One, two,(three), infinity,...: '
-        'Newspaper and lab beauty-contest experiments." American Economic '
-        'Review (2002): 1687-1701.'
-    )
-)
+See: Nagel, Rosemarie. "Unraveling in guessing games: An experimental
+study. The American Economic Review (1995): 1313-1326.
+"""
 
 
 class Constants(BaseConstants):

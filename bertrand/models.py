@@ -1,33 +1,17 @@
-# -*- coding: utf-8 -*-
-# <standard imports>
-from __future__ import division
-from otree.db import models
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
-
-from otree import widgets
-from otree.common import Currency as c, currency_range
+from otree.api import (
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
+    Currency as c, currency_range
+)
 import random
-
-# </standard imports>
 
 
 doc = """
 2 firms complete in a market by setting prices for homogenous goods.
-"""
 
-bibliography = (
-    (
-        'Kruse, J. B., Rassenti, S., Reynolds, S. S., & Smith, V. L. (1994). '
-        'Bertrand-Edgeworth competition in experimental markets. '
-        'Econometrica: Journal of the Econometric Society, 343-371.'
-    ),
-    (
-        'Dufwenberg, M., & Gneezy, U. (2000). Price competition and market '
-        'concentration: an experimental study. International Journal of '
-        'Industrial Organization, 18(1), 7-22.'
-    )
-)
+See "Kruse, J. B., Rassenti, S., Reynolds, S. S., & Smith, V. L. (1994).
+Bertrand-Edgeworth competition in experimental markets.
+Econometrica: Journal of the Econometric Society, 343-371."
+"""
 
 
 class Constants(BaseConstants):

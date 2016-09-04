@@ -1,8 +1,4 @@
-# -*- coding: utf-8 -*-
-from __future__ import division
-
-from otree.common import Currency as c, currency_range
-
+from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from . import models
 from .models import Constants

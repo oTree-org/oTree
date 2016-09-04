@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import division
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants, cost_from_effort

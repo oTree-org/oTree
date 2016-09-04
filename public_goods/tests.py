@@ -1,14 +1,10 @@
-# -*- coding: utf-8 -*-
-from __future__ import division
-
-import random
-
-from otree.common import Currency as c, currency_range
-
+from otree.api import (
+    Currency as c, currency_range, SubmissionMustFail, Submission
+)
+from . import views
 from ._builtin import Bot
 from .models import Constants
-from . import views
-from otree.api import SubmissionMustFail, Submission
+import random
 
 
 class PlayerBot(Bot):

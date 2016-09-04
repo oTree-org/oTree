@@ -1,33 +1,19 @@
-# -*- coding: utf-8 -*-
-# <standard imports>
-from __future__ import division
-from otree.db import models
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
-
-from otree import widgets
-from otree.common import Currency as c, currency_range
-
-# </standard imports>
+from otree.api import (
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
+    Currency as c, currency_range
+)
+import random
 
 
 doc = """
 One player decides how to divide a certain amount between himself and the other
 player.
-"""
 
-bibliography = (
-    (
-        'Kahneman, Daniel, Jack L. Knetsch, and Richard H. Thaler. "Fairness '
-        'and the assumptions of economics." Journal of business (1986): '
-        'S285-S300.'
-    ),
-    (
-        'Hoffman, Elizabeth, Kevin McCabe, and Vernon L. Smith. "Social '
-        'distance and other-regarding behavior in dictator games." The '
-        'American Economic Review(1996): 653-660.'
-    )
-)
+See: Kahneman, Daniel, Jack L. Knetsch, and Richard H. Thaler. "Fairness
+and the assumptions of economics." Journal of business (1986):
+S285-S300.
+
+"""
 
 
 class Constants(BaseConstants):

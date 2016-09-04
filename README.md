@@ -20,7 +20,7 @@ Rather than cloning this repo directly,
 run these commands:
 
 ```
-pip install -U otree-core
+pip3 install -U otree-core
 otree startproject oTree
 otree resetdb
 otree runserver
