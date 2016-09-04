@@ -10,7 +10,7 @@ doc = """
 The principal offers a contract to the agent, who can decide if to reject or
 accept. The agent then chooses an effort level. The implementation is based on
 <a href="http://www.nottingham.ac.uk/cedex/documents/papers/2006-04.pdf" target="_blank">
-    Gächter and Königstein (2006)
+    Gaechter and Koenigstein (2006)
 </a>.
 """
 
