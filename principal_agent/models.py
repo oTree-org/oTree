@@ -32,7 +32,7 @@ class Constants(BaseConstants):
     reject_agent_pay = c(10)
 
     agent_return_share_choices = [
-        [percent / 100, '{}%'.format(percent)]
+        [percent / 100.0, '{}%'.format(percent)]
         for percent in range(10, 100 + 1, 10)]
 
     EFFORT_TO_RETURN = {

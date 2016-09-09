@@ -4,7 +4,6 @@ from otree.api import (
 from . import views
 from ._builtin import Bot
 from .models import Constants
-import random
 
 
 class PlayerBot(Bot):

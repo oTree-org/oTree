@@ -132,7 +132,6 @@ mturk_hit_settings = {
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
     'participation_fee': 1.00,
-    'num_bots': 6,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
 }
@@ -154,7 +153,6 @@ SESSION_CONFIGS = [
         'name': 'beauty',
         'display_name': "Beauty Contest",
         'num_demo_participants': 5,
-        'num_bots': 5,
         'app_sequence': ['beauty', 'payment_info'],
     },
     {

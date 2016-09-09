@@ -1,4 +1,3 @@
-import random
 from otree.api import Currency as c, currency_range, SubmissionMustFail
 from . import views
 from ._builtin import Bot
