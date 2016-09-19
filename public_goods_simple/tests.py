@@ -3,8 +3,8 @@ from . import views
 from ._builtin import Bot
 from .models import Constants
 
+
 class PlayerBot(Bot):
-    """Bot that plays one round"""
 
     def play_round(self):
         yield (views.Contribute, {'contribution': c(1)})

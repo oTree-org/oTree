@@ -24,8 +24,8 @@
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript" src="{% static "vickrey_auction/jquery-ui/jquery-ui.min.js" %}"></script>
-<script type="text/javascript">
+<script src="{% static "vickrey_auction/jquery-ui/jquery-ui.min.js" %}"></script>
+<script>
 jQuery(document).ready(function ($) {
     var PRIVATE_VALUE = {{ player.private_value.to_number|escapejs }};
 
