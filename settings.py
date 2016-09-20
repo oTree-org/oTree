@@ -162,6 +162,12 @@ SESSION_CONFIGS = [
         'app_sequence': ['survey', 'payment_info'],
     },
     {
+        'name': 'quiz',
+        'display_name': "Quiz",
+        'num_demo_participants': 1,
+        'app_sequence': ['quiz'],
+    },
+    {
         'name': 'prisoner',
         'display_name': "Prisoner's Dilemma",
         'num_demo_participants': 2,
@@ -292,7 +298,6 @@ SESSION_CONFIGS = [
         'num_demo_participants': 3,
         'app_sequence': ['public_goods_simple', 'survey', 'payment_info'],
     },
-
     {
         'name': 'trust_simple',
         'display_name': "Trust Game (simple version from tutorial)",
