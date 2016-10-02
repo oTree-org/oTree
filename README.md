@@ -147,9 +147,10 @@ class PlayerBot(Bot):
 
 ## Features at a glance
 
-- Publish your games to **Amazon Mechanical Turk**
-- Program **bots** to simulate human players, can be used for multi-agent simulation.
-- Flexible API for **group re-matching**
+- Program [bots](http://otree.readthedocs.io/en/latest/bots.html) to simulate human players, can be used for multi-agent simulation.
+- Flexible API for [group re-matching](http://otree.readthedocs.io/en/latest/groups.html#group-matching)
+- Publish your games to [Amazon Mechanical Turk](http://otree.readthedocs.io/en/latest/mturk.html)
+
 
 ## Contact & support
 
