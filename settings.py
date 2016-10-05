@@ -16,11 +16,6 @@ if environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
 else:
     DEBUG = True
 
-ADMIN_USERNAME = 'admin'
-
-# for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
-
 
 # don't share this with anybody.
 SECRET_KEY = '{{ secret_key }}'
@@ -38,15 +33,21 @@ DATABASES = {
 }
 
 # AUTH_LEVEL:
-# If you are launching a study and want visitors to only be able to
-# play your app if you provided them with a start link, set the
-# environment variable OTREE_AUTH_LEVEL to STUDY.
-# If you would like to put your site online in public demo mode where
-# anybody can play a demo version of your game, set OTREE_AUTH_LEVEL
-# to DEMO. This will allow people to play in demo mode, but not access
-# the full admin interface.
+# this setting controls which parts of your site are freely accessible,
+# and which are password protected:
+# - If it's not set (the default), then the whole site is freely accessible.
+# - If you are launching a study and want visitors to only be able to
+#   play your app if you provided them with a start link, set it to STUDY.
+# - If you would like to put your site online in public demo mode where
+#   anybody can play a demo version of your game, but not access the rest
+#   of the admin interface, set it to DEMO.
 
+# for flexibility, you can set it in the environment variable OTREE_AUTH_LEVEL
 AUTH_LEVEL = environ.get('OTREE_AUTH_LEVEL')
+
+ADMIN_USERNAME = 'admin'
+# for security, best to set admin password in an environment variable
+ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 
 # setting for integration with AWS Mturk
