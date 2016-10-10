@@ -18,6 +18,8 @@ class Constants(BaseConstants):
     endowment = c(10)
     multiplication_factor = 3
 
+    instructions_template = 'trust_simple/Instructions.html'
+
 
 class Subsession(BaseSubsession):
     pass

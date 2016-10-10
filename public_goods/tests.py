@@ -15,7 +15,6 @@ class PlayerBot(Bot):
         yield (views.Introduction)
 
         if case == 'basic':
-            assert self.player.payoff == None
             if self.player.id_in_group == 1:
                 for invalid_contribution in [-1, 101]:
                     yield SubmissionMustFail(views.Contribute, {
