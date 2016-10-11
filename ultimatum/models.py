@@ -41,6 +41,10 @@ class Subsession(BaseSubsession):
                 g.strategy = random.choice([True, False])
 
 
+def question(amount):
+    return 'Would you accept an offer of {}?'.format(c(amount))
+
+
 class Group(BaseGroup):
     strategy = models.BooleanField(
         doc="""Whether this group uses strategy method"""
@@ -52,17 +56,30 @@ class Group(BaseGroup):
         doc="if offered amount is accepted (direct response method)"
     )
 
-    response_0 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
-    response_10 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
-    response_20 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
-    response_30 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
-    response_40 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
-    response_50 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
-    response_60 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
-    response_70 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
-    response_80 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
-    response_90 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
-    response_100 = models.BooleanField(widget=widgets.RadioSelectHorizontal())
+    # for strategy method
+    response_0 = models.BooleanField(
+        widget=widgets.RadioSelectHorizontal(), verbose_name=question(0))
+    response_10 = models.BooleanField(
+        widget=widgets.RadioSelectHorizontal(), verbose_name=question(10))
+    response_20 = models.BooleanField(
+        widget=widgets.RadioSelectHorizontal(), verbose_name=question(20))
+    response_30 = models.BooleanField(
+        widget=widgets.RadioSelectHorizontal(), verbose_name=question(30))
+    response_40 = models.BooleanField(
+        widget=widgets.RadioSelectHorizontal(), verbose_name=question(40))
+    response_50 = models.BooleanField(
+        widget=widgets.RadioSelectHorizontal(), verbose_name=question(50))
+    response_60 = models.BooleanField(
+        widget=widgets.RadioSelectHorizontal(), verbose_name=question(60))
+    response_70 = models.BooleanField(
+        widget=widgets.RadioSelectHorizontal(), verbose_name=question(70))
+    response_80 = models.BooleanField(
+        widget=widgets.RadioSelectHorizontal(), verbose_name=question(80))
+    response_90 = models.BooleanField(
+        widget=widgets.RadioSelectHorizontal(), verbose_name=question(90))
+    response_100 = models.BooleanField(
+        widget=widgets.RadioSelectHorizontal(), verbose_name=question(100))
+
 
     def set_payoffs(self):
         p1, p2 = self.get_players()
