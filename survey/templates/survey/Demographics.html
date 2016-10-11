@@ -11,15 +11,15 @@
         Please answer the following questions.
     </p>
 
-    {% formfield player.q_country %}
-    {% formfield player.q_age %}
-    {% formfield player.q_gender %}
+    {% for field in form %}
+        {% formfield field %}
+    {% endfor %}
 
     {% next_button %}
 
 {% endblock %}
 
-{% block content_at_bottom_of_body %}
+{% block scripts %}
 
     <script>
         function sort(a, b) {
