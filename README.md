@@ -1,8 +1,10 @@
 # oTree
 
-oTree is a Python framework for multiplayer strategy games, especially for economics and
-psychology research. You can build games like the prisoner's dilemma, public goods games,
-auctions, and surveys.
+oTree is a framework based on Python and Django that lets you build:
+
+- Multiplayer strategy games, like the prisoner's dilemma, public goods game, and auctions
+- Controlled behavioral experiments in economics, psychology, and related fields
+- Surveys and quizzes
 
 ## Live demo
 http://demo.otree.org/
