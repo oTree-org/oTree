@@ -14,7 +14,7 @@
         </tr>
         {% for p in player_in_all_rounds %}
             <tr>
-                <td>{{ p.subsession.round_number }}</td>
+                <td>{{ p.round_number }}</td>
                 <td>You were the {{ p.role }} and {% if p.is_winner %} won {% else %} lost {% endif %}</td>
             </tr>
         {% endfor %}
