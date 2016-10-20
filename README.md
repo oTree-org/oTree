@@ -28,60 +28,147 @@ otree resetdb
 otree runserver
 ```
 
-## Example game: public goods
+## Example game: guess 2/3 of the average
 
-Below is a full implementation of a [public goods game](https://en.wikipedia.org/wiki/Public_goods_game),
-which you can play [here](http://otree-demo.herokuapp.com/demo/public_goods_simple/).
+Below is a full implementation of the
+[Guess 2/3 of the average](https://en.wikipedia.org/wiki/Guess_2/3_of_the_average) game,
+where everyone guesses a number, and the winner is the person closest to 2/3 of the average.
+You can play the below game [here](http://otree-demo.herokuapp.com/demo/guess_two_thirds/).
 
 ### models.py
 
 ```python
 from otree.api import (
-    BaseConstants, BaseSubsession, BaseGroup, BasePlayer, models, Currency
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
+    Currency
 )
 
 class Constants(BaseConstants):
-    name_in_url = 'public_goods_simple'
     players_per_group = 3
-    num_rounds = 1
-    endowment = Currency(100)
-    efficiency_factor = 2
+    num_rounds = 3
+    name_in_url = 'guess_two_thirds'
+
+    jackpot = Currency(100)
+    guess_max = 100
+
 
 class Subsession(BaseSubsession):
     pass
 
+
 class Group(BaseGroup):
-    total_contribution = models.CurrencyField()
-    individual_share = models.CurrencyField()
+    two_thirds_avg = models.FloatField()
+    best_guess = models.PositiveIntegerField()
+    num_winners = models.PositiveIntegerField()
 
     def set_payoffs(self):
-        self.total_contribution = sum(p.contribution for p in self.get_players())
-        self.individual_share = self.total_contribution * Constants.efficiency_factor / Constants.players_per_group
-        for p in self.get_players():
-            p.payoff = Constants.endowment - p.contribution + self.individual_share
+        players = self.get_players()
+        guesses = [p.guess for p in players]
+        two_thirds_avg = (2 / 3) * sum(guesses) / len(players)
+        self.two_thirds_avg = round(two_thirds_avg, 2)
+
+        self.best_guess = min(guesses,
+            key=lambda guess: abs(guess - self.two_thirds_avg))
+
+        winners = [p for p in players if p.guess == self.best_guess]
+        self.num_winners = len(winners)
+
+        for p in winners:
+            p.is_winner = True
+            p.payoff = Constants.jackpot / self.num_winners
+
+    def two_thirds_avg_history(self):
+        return [g.two_thirds_avg for g in self.in_previous_rounds()]
+
 
 class Player(BasePlayer):
-    contribution = models.CurrencyField(min=0, max=Constants.endowment)
+    guess = models.PositiveIntegerField(max=Constants.guess_max)
+    is_winner = models.BooleanField(initial=False)
 ```
 
 ### views.py
 
 ```python
-from otree.api import Page, WaitPage
 from . import models
+from otree.api import Page, WaitPage
 
-class Contribute(Page):
+
+class Introduction(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+
+class Guess(Page):
     form_model = models.Player
-    form_fields = ['contribution']
+    form_fields = ['guess']
+
 
 class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
-class Results(Page):
-    pass
 
-page_sequence = [Contribute, ResultsWaitPage, Results]
+class Results(Page):
+    def vars_for_template(self):
+        sorted_guesses = sorted(p.guess for p in self.group.get_players())
+
+        return {'sorted_guesses': sorted_guesses}
+
+
+page_sequence = [Introduction,
+                 Guess,
+                 ResultsWaitPage,
+                 Results]
+```
+
+### Instructions.html
+
+```django
+{% load otree_tags staticfiles %}
+
+<div class="instructions well well-lg">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+
+    <p>
+        You are in a group of {{ Constants.players_per_group }} people.
+        Each of you will be asked to choose a
+        number between 0 and {{ Constants.guess_max }}.
+        The winner will be the participant whose
+        number is closest to 2/3 of the
+        average of all chosen numbers.
+    </p>
+
+    <p>
+        The winner will receive {{ Constants.jackpot }}.
+        In case of a tie, the {{ Constants.jackpot }}
+        will be equally divided among winners.
+    </p>
+
+    <p>This game will be played for {{ Constants.num_rounds }} rounds.</p>
+
+</div>
+```
+
+### Introduction.html
+
+```django
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Introduction
+{% endblock %}
+
+{% block content %}
+
+    {% include 'guess_two_thirds/Instructions.html' %}
+
+    {% next_button %}
+
+{% endblock %}
 ```
 
 ### Contribute.html
@@ -91,21 +178,22 @@ page_sequence = [Contribute, ResultsWaitPage, Results]
 {% load staticfiles otree_tags %}
 
 {% block title %}
-    Contribute
+    Your Guess
 {% endblock %}
 
 {% block content %}
 
-    <p>
-        This is a public goods game with
-        {{ Constants.players_per_group }} players per group,
-        an endowment of {{ Constants.endowment }},
-        and an efficiency factor of {{ Constants.efficiency_factor }}.
-    </p>
+    {% if player.round_number > 1 %}
+        <p>
+            Here were the two-thirds-average values in previous rounds:
+            {{ group.two_thirds_avg_history }}
+        </p>
+    {% endif %}
 
-    {% formfield player.contribution with label="How much will you contribute?" %}
-
+    {% formfield player.guess with label="Please pick a number from 0 to 100:" %}
     {% next_button %}
+
+    {% include 'guess_two_thirds/Instructions.html' %}
 
 {% endblock %}
 ```
@@ -122,29 +210,38 @@ page_sequence = [Contribute, ResultsWaitPage, Results]
 
 {% block content %}
 
+    <p>Here were the numbers guessed:</p>
+
     <p>
-        You started with an endowment of {{ Constants.endowment }},
-        of which you contributed {{ player.contribution }}.
-        Your group contributed {{ group.total_contribution }},
-        resulting in an individual share of {{ group.individual_share }}.
-        Your profit is therefore {{ player.payoff }}.
+        {{ sorted_guesses }}
+    </p>
+
+    <p>
+        Two-thirds of the average of these numbers is {{ group.two_thirds_avg }};
+        the closest guess was {{ group.best_guess }}.
+    </p>
+
+    <p>Your guess was {{ player.guess }}.</p>
+
+    <p>
+        {% if player.is_winner %}
+            {% if group.num_winners > 1 %}
+                Therefore, you are one of the {{ group.num_winners }} winners
+                who tied for the best guess.
+            {% else %}
+                Therefore, you win!
+            {% endif %}
+        {% else %}
+            Therefore, you did not win.
+        {% endif %}
+    Your payoff is {{ player.payoff }}.
     </p>
 
     {% next_button %}
 
+    {% include 'guess_two_thirds/Instructions.html' %}
+
 {% endblock %}
-```
-
-### bots.py (optional, for automated testing)
-
-```python
-from otree.api import Bot
-from . import views
-
-class PlayerBot(Bot):
-    def play_round(self):
-        yield (views.Contribute, {'contribution': 99})
-        yield (views.Results)
 ```
 
 ## Features at a glance

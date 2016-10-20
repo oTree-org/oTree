@@ -46,6 +46,7 @@ class Player(BasePlayer):
         return self.get_others_in_group()[0]
 
     def set_payoff(self):
+
         points_matrix = {
             'Cooperate':
                 {

@@ -14,7 +14,6 @@ class PlayerBot(Bot):
             if self.player.id_in_group == 1:
                 for invalid_guess in [-1, 101]:
                     yield SubmissionMustFail(views.Guess, {"guess": invalid_guess})
-            if self.player.id_in_group == 1:
                 yield (views.Guess, {"guess": 9})
                 assert self.player.payoff == Constants.jackpot
                 assert 'you win' in self.html
@@ -26,7 +25,7 @@ class PlayerBot(Bot):
             if self.player.id_in_group in [1, 2]:
                 yield (views.Guess, {"guess": 9})
                 assert self.player.payoff == Constants.jackpot / 2
-                assert 'you are one of the 2 people' in self.html
+                assert 'you are one of the 2 winners' in self.html
             else:
                 yield (views.Guess, {"guess": 10})
                 assert self.player.payoff == 0

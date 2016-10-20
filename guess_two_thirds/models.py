@@ -5,8 +5,12 @@ from otree.api import (
 
 
 doc = """
+a.k.a. Keynesian beauty contest.
+
 Players all guess a number; whoever guesses closest to
 2/3 of the average wins.
+
+See https://en.wikipedia.org/wiki/Guess_2/3_of_the_average
 """
 
 
@@ -30,7 +34,6 @@ class Group(BaseGroup):
     best_guess = models.PositiveIntegerField()
     num_winners = models.PositiveIntegerField()
 
-
     def set_payoffs(self):
         players = self.get_players()
         guesses = [p.guess for p in players]
@@ -49,6 +52,7 @@ class Group(BaseGroup):
 
     def two_thirds_avg_history(self):
         return [g.two_thirds_avg for g in self.in_previous_rounds()]
+
 
 class Player(BasePlayer):
     guess = models.PositiveIntegerField(max=Constants.guess_max)

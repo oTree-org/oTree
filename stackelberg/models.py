@@ -37,7 +37,7 @@ class Group(BaseGroup):
 
     def set_payoffs(self):
         self.total_quantity = sum(player.quantity for player in self.get_players())
-        self.price = Constants.total_capacity - c(self.total_quantity)
+        self.price = c(Constants.total_capacity - self.total_quantity)
         for player in self.get_players():
             player.payoff = self.price * player.quantity
 
