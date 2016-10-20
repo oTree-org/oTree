@@ -151,10 +151,10 @@ SESSION_CONFIGS = [
         'app_sequence': ['trust', 'payment_info'],
     },
     {
-        'name': 'beauty',
-        'display_name': "Beauty Contest",
-        'num_demo_participants': 5,
-        'app_sequence': ['beauty', 'payment_info'],
+        'name': 'guess_two_thirds',
+        'display_name': "Guess 2/3 of the Average",
+        'num_demo_participants': 3,
+        'app_sequence': ['guess_two_thirds', 'payment_info'],
     },
     {
         'name': 'survey',

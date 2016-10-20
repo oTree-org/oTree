@@ -1,0 +1,26 @@
+{% load otree_tags staticfiles %}
+
+<div class="instructions well well-lg">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+
+    <p>
+        You are in a group of {{ Constants.players_per_group }} people.
+        Each of you will be asked to choose a
+        number between 0 and {{ Constants.guess_max }}.
+        The winner will be the participant whose
+        number is closest to 2/3 of the
+        average of all chosen numbers.
+    </p>
+
+    <p>
+        The winner will receive {{ Constants.jackpot }}.
+        In case of a tie, the {{ Constants.jackpot }}
+        will be equally divided among winners.
+    </p>
+
+    <p>This game will be played for {{ Constants.num_rounds }} rounds.</p>
+
+</div>

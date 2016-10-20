@@ -46,11 +46,18 @@ class Player(BasePlayer):
         return self.get_others_in_group()[0]
 
     def set_payoff(self):
-        points_matrix = {'Cooperate': {'Cooperate': Constants.both_cooperate_payoff,
-                                       'Defect': Constants.betrayed_payoff},
-                         'Defect': {
-                             'Cooperate': Constants.betray_payoff,
-                             'Defect': Constants.both_defect_payoff}}
+        points_matrix = {
+            'Cooperate':
+                {
+                    'Cooperate': Constants.both_cooperate_payoff,
+                    'Defect': Constants.betrayed_payoff
+                },
+            'Defect':
+                {
+                    'Cooperate': Constants.betray_payoff,
+                    'Defect': Constants.both_defect_payoff
+                }
+        }
 
         self.payoff = (points_matrix[self.decision]
                        [self.other_player().decision])
