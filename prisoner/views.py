@@ -14,8 +14,6 @@ class Decision(Page):
 
 
 class ResultsWaitPage(WaitPage):
-    body_text = 'Waiting for the other participant to choose.'
-
     def after_all_players_arrive(self):
         for p in self.group.get_players():
             p.set_payoff()
@@ -23,8 +21,6 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     def vars_for_template(self):
-        self.player.set_payoff()
-
         return {
             'my_decision': self.player.decision.lower(),
             'other_player_decision': self.player.other_player().decision.lower(),

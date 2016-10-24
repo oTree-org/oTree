@@ -195,14 +195,6 @@ SESSION_CONFIGS = [
         'treatment': 'direct_response',
     },
     {
-        'name': 'battle_of_the_sexes',
-        'display_name': "Battle of the Sexes",
-        'num_demo_participants': 2,
-        'app_sequence': [
-            'battle_of_the_sexes', 'payment_info'
-        ],
-    },
-    {
         'name': 'vickrey_auction',
         'display_name': "Vickrey Auction",
         'num_demo_participants': 3,
@@ -291,6 +283,14 @@ SESSION_CONFIGS = [
         'num_demo_participants': 3,
         'app_sequence': [
             'lemon_market', 'payment_info'
+        ],
+    },
+    {
+        'name': 'battle_of_the_sexes',
+        'display_name': "Battle of the Sexes",
+        'num_demo_participants': 2,
+        'app_sequence': [
+            'battle_of_the_sexes', 'payment_info'
         ],
     },
     {

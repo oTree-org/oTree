@@ -1,4 +1,4 @@
-# oTree
+# oTree 1.0
 
 oTree is a framework based on Python and Django that lets you build:
 
@@ -33,6 +33,7 @@ otree runserver
 Below is a full implementation of the
 [Guess 2/3 of the average](https://en.wikipedia.org/wiki/Guess_2/3_of_the_average) game,
 where everyone guesses a number, and the winner is the person closest to 2/3 of the average.
+The game is repeated for 3 rounds.
 You can play the below game [here](http://otree-demo.herokuapp.com/demo/guess_two_thirds/).
 
 ### models.py
@@ -121,133 +122,63 @@ page_sequence = [Introduction,
                  Results]
 ```
 
-### Instructions.html
+### HTML templates
 
-```django
-{% load otree_tags staticfiles %}
+[Instructions.html](https://github.com/oTree-org/oTree/blob/master/guess_two_thirds/templates/guess_two_thirds/Instructions.html)
+[Introduction.html](https://github.com/oTree-org/oTree/blob/master/guess_two_thirds/templates/guess_two_thirds/Introduction.html)
+[Guess.html](https://github.com/oTree-org/oTree/blob/master/guess_two_thirds/templates/guess_two_thirds/Guess.html)
+[Results.html](https://github.com/oTree-org/oTree/blob/master/guess_two_thirds/templates/guess_two_thirds/Results.html)
 
-<div class="instructions well well-lg">
+### tests.py (optional)
 
-    <h3 class="panel-sub-heading">
-        Instructions
-    </h3>
+Test bots for multiplayer games run in parallel, 
+and can run either from the command line,
+or in the browser, which you can try [here](http://otree-demo.herokuapp.com/demo/matching_pennies_bots/).
 
-    <p>
-        You are in a group of {{ Constants.players_per_group }} people.
-        Each of you will be asked to choose a
-        number between 0 and {{ Constants.guess_max }}.
-        The winner will be the participant whose
-        number is closest to 2/3 of the
-        average of all chosen numbers.
-    </p>
+```python
 
-    <p>
-        The winner will receive {{ Constants.jackpot }}.
-        In case of a tie, the {{ Constants.jackpot }}
-        will be equally divided among winners.
-    </p>
+from otree.api import Bot, SubmissionMustFail
+from . import views
+from .models import Constants
 
-    <p>This game will be played for {{ Constants.num_rounds }} rounds.</p>
+class PlayerBot(Bot):
+    cases = ['p1_wins', 'p1_and_p2_win']
 
-</div>
+    def play_round(self):
+        if self.subsession.round_number == 1:
+            yield (views.Introduction)
+
+        if self.case == 'p1_wins':
+            if self.player.id_in_group == 1:
+                for invalid_guess in [-1, 101]:
+                    yield SubmissionMustFail(views.Guess, {"guess": invalid_guess})
+                yield (views.Guess, {"guess": 9})
+                assert self.player.payoff == Constants.jackpot
+                assert 'you win' in self.html
+            else:
+                yield (views.Guess, {"guess": 10})
+                assert self.player.payoff == 0
+                assert 'you did not win' in self.html
+        else:
+            if self.player.id_in_group in [1, 2]:
+                yield (views.Guess, {"guess": 9})
+                assert self.player.payoff == Constants.jackpot / 2
+                assert 'you are one of the 2 winners' in self.html
+            else:
+                yield (views.Guess, {"guess": 10})
+                assert self.player.payoff == 0
+                assert 'you did not win' in self.html
+
+        yield (views.Results)
 ```
 
-### Introduction.html
+See docs on [bots](http://otree.readthedocs.io/en/latest/bots.html).
 
-```django
-{% extends "global/Base.html" %}
-{% load staticfiles otree_tags %}
 
-{% block title %}
-    Introduction
-{% endblock %}
+## Features 
 
-{% block content %}
-
-    {% include 'guess_two_thirds/Instructions.html' %}
-
-    {% next_button %}
-
-{% endblock %}
-```
-
-### Contribute.html
-
-```django
-{% extends "global/Base.html" %}
-{% load staticfiles otree_tags %}
-
-{% block title %}
-    Your Guess
-{% endblock %}
-
-{% block content %}
-
-    {% if player.round_number > 1 %}
-        <p>
-            Here were the two-thirds-average values in previous rounds:
-            {{ group.two_thirds_avg_history }}
-        </p>
-    {% endif %}
-
-    {% formfield player.guess with label="Please pick a number from 0 to 100:" %}
-    {% next_button %}
-
-    {% include 'guess_two_thirds/Instructions.html' %}
-
-{% endblock %}
-```
-
-### Results.html
-
-```django
-{% extends "global/Base.html" %}
-{% load staticfiles otree_tags %}
-
-{% block title %}
-    Results
-{% endblock %}
-
-{% block content %}
-
-    <p>Here were the numbers guessed:</p>
-
-    <p>
-        {{ sorted_guesses }}
-    </p>
-
-    <p>
-        Two-thirds of the average of these numbers is {{ group.two_thirds_avg }};
-        the closest guess was {{ group.best_guess }}.
-    </p>
-
-    <p>Your guess was {{ player.guess }}.</p>
-
-    <p>
-        {% if player.is_winner %}
-            {% if group.num_winners > 1 %}
-                Therefore, you are one of the {{ group.num_winners }} winners
-                who tied for the best guess.
-            {% else %}
-                Therefore, you win!
-            {% endif %}
-        {% else %}
-            Therefore, you did not win.
-        {% endif %}
-    Your payoff is {{ player.payoff }}.
-    </p>
-
-    {% next_button %}
-
-    {% include 'guess_two_thirds/Instructions.html' %}
-
-{% endblock %}
-```
-
-## Features at a glance
-
-- Program [bots](http://otree.readthedocs.io/en/latest/bots.html) to simulate human players, can be used for multi-agent simulation.
-- Flexible API for [group re-matching](http://otree.readthedocs.io/en/latest/groups.html#group-matching)
+- Extensive admin interface for launching games & surveys, managing participants, monitoring data, etc.
+- Flexible API, e.g. for [group re-matching](http://otree.readthedocs.io/en/latest/groups.html#group-matching)
 - Publish your games to [Amazon Mechanical Turk](http://otree.readthedocs.io/en/latest/mturk.html)
 
 
