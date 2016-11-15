@@ -69,9 +69,9 @@ class Player(BasePlayer):
 
     seller_proposed_quality = models.CurrencyField(
         choices=[
-            (30, 'High'),
-            (20, 'Medium'),
-            (10, 'Low')],
+            (c(30), 'High'),
+            (c(20), 'Medium'),
+            (c(10), 'Low')],
         verbose_name='Please select a quality grade you want to produce',
         widget=widgets.RadioSelectHorizontal())
 
