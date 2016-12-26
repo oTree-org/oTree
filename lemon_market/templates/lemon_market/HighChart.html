@@ -1,0 +1,38 @@
+<div id="highcharts-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<script src="//code.highcharts.com/highcharts.js"></script>
+<script src="//code.highcharts.com/highcharts-3d.js"></script>
+
+<script>
+    $(function () {
+        $('#highcharts-container').highcharts({
+            title: {
+                text: 'Results'
+            },
+            xAxis: {
+                categories: {{ round_numbers }},
+                title: {text: 'Round'}
+            },
+            yAxis: {
+                title: {
+                    text: 'Points'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: 'points'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: {{ highcharts_series }}
+        });
+    });
+</script>

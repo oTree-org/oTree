@@ -19,7 +19,7 @@ class PlayerBot(Bot):
                 views.Production,
                 {
                     'seller_proposed_price': Constants.initial_endowment,
-                    'seller_proposed_quality': c(10)
+                    'seller_proposed_quality': 10
                 })
             if case == 'purchase':
                 assert 'at a price of <strong>{}'.format(

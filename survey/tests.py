@@ -8,9 +8,9 @@ class PlayerBot(Bot):
     def play_round(self):
 
         yield (views.Demographics, {
-            'q_country': 'BS',
-            'q_age': 24,
-            'q_gender': 'Male'})
+            'country': 'BS',
+            'age': 24,
+            'gender': 'Male'})
 
         yield (views.CognitiveReflectionTest, {
             'crt_bat': 10,
@@ -20,7 +20,7 @@ class PlayerBot(Bot):
 
         for value in [
             self.player.crt_bat,
-            self.player.q_country,
+            self.player.country,
             self.player.payoff
         ]:
             assert value is not None

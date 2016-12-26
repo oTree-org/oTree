@@ -44,28 +44,9 @@ class FinalResults(Page):
         return self.subsession.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        # Filling the data for HighCharts graph
+        return self.subsession.vars_for_admin_report()
 
-        series = []
 
-        transaction_prices = [g.sale_price for g in self.group.in_all_rounds()]
-        series.append({
-            'name': 'Transaction Price',
-            'data': transaction_prices})
-
-        for player in self.group.get_players():
-            payoffs = [p.payoff for p in player.in_all_rounds()]
-            series.append(
-                {'name': 'Earnings for %s' % player.role().capitalize(),
-                 'data': payoffs})
-        highcharts_series = safe_json(series)
-
-        round_numbers = safe_json(list(range(1, Constants.num_rounds + 1)))
-
-        return {
-            'highcharts_series': highcharts_series,
-            'round_numbers': round_numbers
-        }
 
 
 page_sequence = [

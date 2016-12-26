@@ -196,6 +196,7 @@ Contact chris@otree.org with bug reports.
 * Alexander Schepanovski (https://github.com/Suor/)
 * Alexander Sandukovskiy
 * Som Datye
+* Benson Njogu (https://github.com/benarito)
 
 
 ## Related repositories

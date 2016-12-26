@@ -1,6 +1,6 @@
 from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    Currency as c, currency_range, safe_json
 )
 import random
 
@@ -28,7 +28,31 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+
+    def vars_for_admin_report(self):
+        group = self.get_groups()[0]
+
+        series = []
+
+        transaction_prices = [g.sale_price for g in group.in_all_rounds()]
+        series.append({
+            'name': 'Transaction Price',
+            'data': transaction_prices})
+
+        for player in group.get_players():
+            payoffs = [p.payoff for p in player.in_all_rounds()]
+            series.append(
+                {'name': 'Earnings for %s' % player.role().capitalize(),
+                 'data': payoffs})
+        highcharts_series = safe_json(series)
+
+        round_numbers = safe_json(list(range(1, Constants.num_rounds + 1)))
+
+        return {
+            'highcharts_series': highcharts_series,
+            'round_numbers': round_numbers
+        }
+
 
 
 class Group(BaseGroup):
@@ -69,9 +93,9 @@ class Player(BasePlayer):
 
     seller_proposed_quality = models.CurrencyField(
         choices=[
-            (c(30), 'High'),
-            (c(20), 'Medium'),
-            (c(10), 'Low')],
+            (30, 'High'),
+            (20, 'Medium'),
+            (10, 'Low')],
         verbose_name='Please select a quality grade you want to produce',
         widget=widgets.RadioSelectHorizontal())
 
