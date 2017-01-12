@@ -8,7 +8,6 @@ class PlayerBot(Bot):
     def play_round(self):
 
         yield (views.Demographics, {
-            'country': 'BS',
             'age': 24,
             'gender': 'Male'})
 
@@ -20,7 +19,6 @@ class PlayerBot(Bot):
 
         for value in [
             self.player.crt_bat,
-            self.player.country,
             self.player.payoff
         ]:
             assert value is not None

@@ -16,7 +16,6 @@ if environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
 else:
     DEBUG = True
 
-
 # don't share this with anybody.
 SECRET_KEY = '{{ secret_key }}'
 

@@ -4,8 +4,6 @@ from otree.api import (
 )
 import random
 
-from django_countries.fields import CountryField
-
 
 class Constants(BaseConstants):
     name_in_url = 'survey'
@@ -26,8 +24,6 @@ class Player(BasePlayer):
         """Calculate payoff, which is zero for the survey"""
         self.payoff = 0
 
-    country = CountryField(
-        verbose_name='What is your country of citizenship?')
     age = models.PositiveIntegerField(verbose_name='What is your age?',
                                         choices=range(13, 125),
                                         initial=None)
