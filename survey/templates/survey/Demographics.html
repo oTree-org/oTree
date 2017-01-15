@@ -18,14 +18,3 @@
     {% next_button %}
 
 {% endblock %}
-
-{% block scripts %}
-
-    <script>
-        function sort(a, b) {
-            return (a.innerHTML > b.innerHTML) ? 1 : -1;
-        }
-        $('#id_country option').sort(sort).appendTo('#id_country');
-    </script>
-
-{% endblock %}
