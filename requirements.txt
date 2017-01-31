@@ -1,2 +1,3 @@
-# this is for Heroku. Locally, you should install requirements_base.txt
--r requirements_heroku.txt
+# this is for Heroku and other servers.
+# Locally, you should install requirements_base.txt
+-r requirements_server.txt
