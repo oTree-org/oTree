@@ -20,17 +20,15 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    def set_payoff(self):
-        """Calculate payoff, which is zero for the survey"""
-        self.payoff = 0
 
-    age = models.PositiveIntegerField(verbose_name='What is your age?',
-                                        choices=range(13, 125),
-                                        initial=None)
-    gender = models.CharField(initial=None,
-                                choices=['Male', 'Female'],
-                                verbose_name='What is your gender?',
-                                widget=widgets.RadioSelect())
+    age = models.PositiveIntegerField(
+        verbose_name='What is your age?',
+        min=13, max=125)
+
+    gender = models.CharField(
+        choices=['Male', 'Female'],
+        verbose_name='What is your gender?',
+        widget=widgets.RadioSelect())
 
     crt_bat = models.PositiveIntegerField(
         verbose_name='''

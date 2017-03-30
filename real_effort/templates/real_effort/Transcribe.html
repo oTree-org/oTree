@@ -35,13 +35,17 @@
                 transcription is {{ required_accuracy }}% accurate.
             </p>
         </div>
-        <script>
-            $(document).ready(function () {
-                $('a#prefill').click(function () {
-                    $('#id_transcribed_text').val('{{ reference_text }}');
-                })
-            });
-        </script>
 
     {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        var referenceText = {{ reference_text }};
+        $('a#prefill').click(function () {
+            $('#id_transcribed_text').val(referenceText);
+        })
+    });
+</script>
 {% endblock %}

@@ -1,4 +1,4 @@
-# oTree 1.0
+# oTree
 
 oTree is a framework based on Python and Django that lets you build:
 

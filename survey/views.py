@@ -16,9 +16,6 @@ class CognitiveReflectionTest(Page):
                    'crt_widget',
                    'crt_lake']
 
-    def before_next_page(self):
-        self.player.set_payoff()
-
 
 page_sequence = [
     Demographics,
