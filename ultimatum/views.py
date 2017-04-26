@@ -27,7 +27,7 @@ class Accept(Page):
     form_fields = ['offer_accepted']
 
     def is_displayed(self):
-        return self.player.id_in_group == 2 and not self.group.strategy
+        return self.player.id_in_group == 2 and not self.group.use_strategy_method
 
     timeout_seconds = 600
 
@@ -38,7 +38,7 @@ class AcceptStrategy(Page):
                    Constants.offer_choices]
 
     def is_displayed(self):
-        return self.player.id_in_group == 2 and self.group.strategy
+        return self.player.id_in_group == 2 and self.group.use_strategy_method
 
 
 class ResultsWaitPage(WaitPage):

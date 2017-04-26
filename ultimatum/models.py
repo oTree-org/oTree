@@ -36,9 +36,9 @@ class Subsession(BaseSubsession):
         # randomize to treatments
         for g in self.get_groups():
             if 'treatment' in self.session.config:
-                g.strategy = self.session.config['treatment'] == 'strategy'
+                g.use_strategy_method = self.session.config['use_strategy_method']
             else:
-                g.strategy = random.choice([True, False])
+                g.use_strategy_method = random.choice([True, False])
 
 
 def question(amount):
@@ -46,7 +46,7 @@ def question(amount):
 
 
 class Group(BaseGroup):
-    strategy = models.BooleanField(
+    use_strategy_method = models.BooleanField(
         doc="""Whether this group uses strategy method"""
     )
 
@@ -84,7 +84,7 @@ class Group(BaseGroup):
     def set_payoffs(self):
         p1, p2 = self.get_players()
 
-        if self.strategy:
+        if self.use_strategy_method:
             self.offer_accepted = getattr(self, 'response_{}'.format(
                 int(self.amount_offered)))
 

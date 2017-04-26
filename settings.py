@@ -188,14 +188,14 @@ SESSION_CONFIGS = [
         'display_name': "Ultimatum (strategy method treatment)",
         'num_demo_participants': 2,
         'app_sequence': ['ultimatum', 'payment_info'],
-        'treatment': 'strategy',
+        'use_strategy_method': True,
     },
     {
         'name': 'ultimatum_non_strategy',
         'display_name': "Ultimatum (direct response treatment)",
         'num_demo_participants': 2,
         'app_sequence': ['ultimatum', 'payment_info'],
-        'treatment': 'direct_response',
+        'use_strategy_method': False,
     },
     {
         'name': 'vickrey_auction',

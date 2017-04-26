@@ -10,7 +10,7 @@ class PlayerBot(Bot):
         if self.player.id_in_group == 1:
             yield (views.Offer, {'amount_offered': c(10)})
         else:
-            if self.group.strategy:
+            if self.group.use_strategy_method:
                 yield (views.AcceptStrategy, {'response_{}'.format(
                     int(offer)): True for offer in Constants.offer_choices})
             else:

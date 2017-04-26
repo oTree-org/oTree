@@ -43,11 +43,7 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
-
-    def vars_for_template(self):
-        return {
-            'tripled_amount': self.group.sent_amount * Constants.multiplication_factor
-        }
+    pass
 
 
 page_sequence = [
