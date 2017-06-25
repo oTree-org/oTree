@@ -42,7 +42,7 @@
 {% block scripts %}
 <script>
     $(document).ready(function () {
-        var referenceText = {{ reference_text }};
+        var referenceText = {{ reference_text|json }};
         $('a#prefill').click(function () {
             $('#id_transcribed_text').val(referenceText);
         })

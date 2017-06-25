@@ -17,18 +17,39 @@
         text-align: center;
     }
 
-    .payoff {
-        margin: 1.5em 0;
-    }
 </style>
 {% endblock %}
+
+
+{% block content %}
+
+    <p>
+        The value of the object to you is <strong>{{ player.private_value }}</strong>.
+        If you win the auction, you would have a payoff of
+        <strong>{{ endowment_plus_private_value }} - second highest bid</strong>.
+    </p>
+
+    <div class="form-group required">
+        <label class="control-label" for="id_bid_amount">
+            Please submit a bid for the object (from 0 to {{ Constants.endowment }}):</label>
+        <div class="controls">
+            <input type="hidden" name="bid_amount" id="id_bid_amount" value="0">
+            <div class="bid-slider"></div>
+            <div class="bid">Your bid: <strong><span class="bid-value"></span> points</strong></div>
+        </div>
+    </div>
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}
+
 
 {% block scripts %}
 <script src="{% static "vickrey_auction/jquery-ui/jquery-ui.min.js" %}"></script>
 <script>
 jQuery(document).ready(function ($) {
-    var PRIVATE_VALUE = {{ private_value }};
-
     var input = $('#id_bid_amount');
 
     $('.bid-slider').slider({
@@ -42,38 +63,9 @@ jQuery(document).ready(function ($) {
 
     function updateBidValue() {
         $('.bid-value').text(input.val());
-        $('.payoff-value').text(calculatePayoff());
-    }
-
-    function calculatePayoff() {
-        var value = parseInt(input.val());
-        var payoff = 100 + PRIVATE_VALUE;
-        return payoff;
     }
 
     updateBidValue();
 });
 </script>
-{% endblock %}
-
-{% block content %}
-
-    <p>
-        Your value to the object is <strong>{{ player.private_value }}</strong>.
-    </p>
-
-    <div class="form-group required">
-        <label class="control-label" for="id_bid_amount">Please submit a bid for the object (from 0 to 100):</label>
-        <div class="controls">
-            <input type="hidden" name="bid_amount" id="id_bid_amount" value="0">
-            <div class="bid-slider"></div>
-            <div class="bid">Your bid: <strong><span class="bid-value"></span> points</strong></div>
-            <div class="payoff">If you win the auction, you would have a payoff of <strong><span class="payoff-value"></span> points - Second highest bid</strong>.</div>
-        </div>
-    </div>
-
-    {% next_button %}
-
-    {% include Constants.instructions_template %}
-
 {% endblock %}

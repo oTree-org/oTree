@@ -1,6 +1,6 @@
 from . import models
 from ._builtin import Page, WaitPage
-from otree.api import Currency as c, currency_range, safe_json
+from otree.api import Currency as c, currency_range
 from .models import Constants
 
 
@@ -13,7 +13,7 @@ class Bid(Page):
     form_fields = ['bid_amount']
 
     def vars_for_template(self):
-        return {'private_value': safe_json(self.player.private_value)}
+        return {'endowment_plus_private_value': Constants.endowment + self.player.private_value}
 
 
 class ResultsWaitPage(WaitPage):

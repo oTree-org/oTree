@@ -1,7 +1,6 @@
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
-from otree.common import safe_json
 
 
 class Introduction(Page):

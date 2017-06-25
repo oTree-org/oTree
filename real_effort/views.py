@@ -1,6 +1,6 @@
 from . import models
 from ._builtin import Page, WaitPage
-from otree.api import Currency as c, currency_range, safe_json
+from otree.api import Currency as c, currency_range
 from .models import Constants, levenshtein, distance_and_ok
 from django.conf import settings
 
@@ -14,7 +14,7 @@ class Transcribe(Page):
         return {
             'image_path': 'real_effort/paragraphs/{}.png'.format(
                 self.round_number),
-            'reference_text': safe_json(Constants.reference_texts[self.round_number - 1]),
+            'reference_text': Constants.reference_texts[self.round_number - 1],
             'debug': settings.DEBUG,
             'required_accuracy': 100 * (1 - Constants.allowed_error_rates[self.round_number - 1])
         }

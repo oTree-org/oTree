@@ -1,6 +1,6 @@
 from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range, safe_json
+    Currency as c, currency_range
 )
 import random
 
@@ -44,13 +44,10 @@ class Subsession(BaseSubsession):
             series.append(
                 {'name': 'Earnings for %s' % player.role().capitalize(),
                  'data': payoffs})
-        highcharts_series = safe_json(series)
-
-        round_numbers = safe_json(list(range(1, Constants.num_rounds + 1)))
 
         return {
-            'highcharts_series': highcharts_series,
-            'round_numbers': round_numbers
+            'highcharts_series': series,
+            'round_numbers': list(range(1, Constants.num_rounds + 1))
         }
 
 

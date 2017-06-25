@@ -34,25 +34,22 @@ class Group(BaseGroup):
     highest_bid = models.CurrencyField()
     second_highest_bid = models.CurrencyField()
 
-    def set_highest_bids(self):
-        bids = sorted((p.bid_amount for p in self.get_players()), reverse=True)
+    def set_payoffs(self):
+        players = self.get_players()
+        bids = sorted([p.bid_amount for p in players], reverse=True)
         self.highest_bid = bids[0]
         self.second_highest_bid = bids[1]
-
-    def set_payoffs(self):
-        self.set_highest_bids()
         players_with_highest_bid = [
-            p for p in self.get_players()
+            p for p in players
             if p.bid_amount == self.highest_bid
             ]
         # if tie, winner is chosen at random
         winner = random.choice(players_with_highest_bid)
         winner.is_winner = True
-        for p in self.get_players():
+        for p in players:
             p.payoff = Constants.endowment
             if p.is_winner:
                 p.payoff += (p.private_value - self.second_highest_bid)
-
 
 
 class Player(BasePlayer):

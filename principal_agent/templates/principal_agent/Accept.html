@@ -15,11 +15,10 @@
     </table>
 
     {% formfield group.contract_accepted with label='Will you accept or reject the above contract?' %}
-    <div id=effort>
+    <div id="effort">
     {% formfield group.agent_work_effort with label='Please choose your level of effort' %}
     </div>
-
-    <p id=calculate></p>
+    <p id="payoffMsg"></p>
 
     <p>
     {% next_button %}
@@ -33,30 +32,42 @@
 
 <script>
 $(function() {
-        $('#effort').hide();
-        $('input[type=radio]').change(function(){
-            if ($('#id_contract_accepted_1').prop('checked'))
-            $('#effort').show();
-            else
-            $('#effort').hide();
-            });
-        });
-        $('input[type=radio]').change(function(){
-            var effort;
-            if ($('#id_contract_accepted_1').prop('checked')) {
-                effort = $('input[name=agent_work_effort]:checked').val()
-                if (!effort) {
-                    $('p#calculate').text('');
-                    return;
-                }
-                //  [B's Return Share in %] × [Total Return] + [B's Fixed Payment] – [B's Effort Cost]
-                payoff = {{return_share}} * {{EFFORT_TO_COST}}[effort] / 100 + {{fixed_pay_int}} - {{EFFORT_TO_COST}}[effort];
-            } else {
-                effort = 'to reject';
-                payoff = 10;
-            }
-            $('p#calculate').text('You will receive '+payoff+' points if you choose '+effort+'.');
-        });
+
+
+    var $effortDiv = $('#effort');
+    $effortDiv.hide();
+    $('input').change(function () {
+        var payoffMsg;
+
+        var contractAccepted = $('input[name=contract_accepted]:checked').val();
+
+        if (contractAccepted == 'True') {
+            $effortDiv.show();
+        } else {
+            $effortDiv.hide();
+        }
+
+        var effort = $('input[name=agent_work_effort]:checked').val();
+        if (contractAccepted == 'False') {
+            payoffMsg = 'You will receive 10 points if you choose to reject';
+        }
+        else if (!effort) {
+            payoffMsg = '';
+        }
+        else if (contractAccepted == 'True' && effort) {
+            var effortToCost = {{ Constants.EFFORT_TO_COST|json }};
+            var effortToReturn = {{ Constants.EFFORT_TO_RETURN|json }};
+            var agentReturnShare = {{ group.agent_return_share|json }};
+            var agentFixedPay = {{ group.agent_fixed_pay|json }};
+
+            //  [B's Return Share in %] × [Total Return] + [B's Fixed Payment] – [B's Effort Cost]
+            var payoff = agentReturnShare * effortToReturn[effort] + agentFixedPay - effortToCost[effort];
+            payoff = Math.round(payoff);
+            payoffMsg = 'You will receive ' + payoff + ' points if you choose ' + effort + '.';
+        }
+        $('p#payoffMsg').text(payoffMsg);
+    });
+});
 </script>
 
 
