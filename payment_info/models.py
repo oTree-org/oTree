@@ -17,12 +17,7 @@ class Constants(BaseConstants):
     num_rounds = 1
 
 class Subsession(BaseSubsession):
-
-    def before_session_starts(self):
-        for p in self.get_players():
-            p.payoff = 0
-
-
+    pass
 
 class Group(BaseGroup):
     pass
