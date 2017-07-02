@@ -6,9 +6,9 @@ from .models import Constants
 
 class PlayerBot(Bot):
     cases = [
-        {'offer': 0, 'return': 0, 'p1_payoff': 10, 'p2_payoff': 0},
-        {'offer': 5, 'return': 10, 'p1_payoff': 15, 'p2_payoff': 5},
-        {'offer': 10, 'return': 30, 'p1_payoff': 30, 'p2_payoff': 0}
+        {'offer': c(0), 'return': c(0), 'p1_payoff': c(10), 'p2_payoff': c(0)},
+        {'offer': c(5), 'return': c(10), 'p1_payoff': c(15), 'p2_payoff': c(5)},
+        {'offer': c(10), 'return': c(30), 'p1_payoff': c(30), 'p2_payoff': c(0)}
     ]
 
     def play_round(self):

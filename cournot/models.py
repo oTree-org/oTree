@@ -18,7 +18,6 @@ class Constants(BaseConstants):
 
     instructions_template = 'cournot/Instructions.html'
 
-    base_points = 50
     # Total production capacity of all players
     total_capacity = 60
     max_units_per_player = int(total_capacity / players_per_group)

@@ -22,7 +22,7 @@ class Constants(BaseConstants):
 
     instructions_template = 'principal_agent/Instructions.html'
 
-    bonus = c(30)
+    base_pay = c(30)
     min_fixed_payment = c(-30)
     max_fixed_payment = c(30)
 
@@ -126,8 +126,8 @@ class Group(BaseGroup):
                              self.total_return + self.agent_fixed_pay
             agent.payoff = money_to_agent - self.agent_work_cost
             principal.payoff = self.total_return - money_to_agent
-        principal.payoff += Constants.bonus
-        agent.payoff += Constants.bonus
+        principal.payoff += Constants.base_pay
+        agent.payoff += Constants.base_pay
 
     def return_share_as_percentage(self):
         return utils.float_as_percentage(self.agent_return_share)

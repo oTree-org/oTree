@@ -6,36 +6,36 @@
 {% endblock %}
 
 {% block content %}
-    <p>
-        {% if player.role == 'A' %}
-            You chose to send participant B
-            <strong>{{ group.sent_amount }}</strong>. Participant B returned
-            <strong>{{ group.sent_back_amount }}</strong>.
-            </p>
-            <p>
-                You were initially endowed with <strong>100 points</strong>,
-                chose to send <strong>{{ group.sent_amount }}</strong>,
-                received <strong>{{ group.sent_back_amount }}</strong> thus you
-                now have <strong>(100
-                points)-{{ group.sent_amount }}+{{ group.sent_back_amount }}={{ player.payoff }}</strong>.
-                {% else %}
-                Participant A sent you <strong>{{ group.sent_amount }}</strong>.
-                They were tripled so you received
-                <strong>{{ tripled_amount }}</strong>. You chose to return
-                <strong>{{ group.sent_back_amount }}</strong>.
-            </p>
-            <p>
-            You were initially endowed with <strong>0 points</strong>, received
-            <strong>{{ tripled_amount }}</strong>, chose to return
-            <strong>{{ group.sent_back_amount }}</strong> thus you now have
-            <strong>({{ tripled_amount }})-({{ group.sent_back_amount }})=({{ player.payoff }})</strong>
-            .
-        {% endif %}
+
+    {% if player.role == 'A' %}
+        <p>
+            You chose to send participant B {{ group.sent_amount }}.
+            Participant B returned {{ group.sent_back_amount }}.
         </p>
+        <p>
+            You were initially endowed with {{ Constants.endowment }},
+            chose to send {{ group.sent_amount }},
+            received {{ group.sent_back_amount }}
+            thus you now have:
+            {{ Constants.endowment }}-{{ group.sent_amount }}+{{ group.sent_back_amount }}=<strong>{{ player.payoff }}</strong>
+        </p>
+    {% else %}
+        <p>
+            Participant A sent you {{ group.sent_amount }}.
+            They were tripled so you received {{ tripled_amount }}.
+            You chose to return {{ group.sent_back_amount }}.
+        </p>
+        <p>
+            You received {{ tripled_amount }},
+            chose to return {{ group.sent_back_amount }}
+            thus you now have:
+            ({{ tripled_amount }})-({{ group.sent_back_amount }})=<strong>{{ player.payoff }}</strong>
+        </p>
+        .
+    {% endif %}
 
     <p>{% next_button %}</p>
 
     {% include Constants.instructions_template %}
 
 {% endblock %}
-

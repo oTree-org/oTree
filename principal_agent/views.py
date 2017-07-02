@@ -47,7 +47,7 @@ class Results(Page):
 
     def vars_for_template(self):
         return {
-            'received': self.player.payoff - Constants.bonus,
+            'received': self.player.payoff - Constants.base_pay,
             'effort_cost': cost_from_effort(self.group.agent_work_effort),
         }
 

@@ -21,8 +21,7 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
-    def vars_for_template(self):
-        return {'total_plus_base': self.player.payoff + Constants.base_points}
+    pass
 
 
 page_sequence = [

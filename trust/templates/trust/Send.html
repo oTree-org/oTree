@@ -8,10 +8,10 @@
 {% block content %}
 
     <p>
-    You are Participant A. Now you have {{Constants.amount_allocated}}. How many points will you send to participant B?
+    You are Participant A. Now you have {{Constants.endowment}}. How much will you send to participant B?
     </p>
 
-    {% formfield group.sent_amount with label="Please enter a number from 0 to 100:" %}
+    {% formfield group.sent_amount with label="Please enter an amount from 0 to 100:" %}
     <p>
     {% next_button %}
     </p>

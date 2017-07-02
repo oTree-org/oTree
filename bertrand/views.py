@@ -23,7 +23,6 @@ class Results(Page):
     def vars_for_template(self):
         return {
             'table': [
-                ('', 'Points'),
                 ('Your price', self.player.price),
                 ('Lowest price', min(
                     p.price for p in self.group.get_players())),

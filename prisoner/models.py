@@ -47,7 +47,7 @@ class Player(BasePlayer):
 
     def set_payoff(self):
 
-        points_matrix = {
+        payoff_matrix = {
             'Cooperate':
                 {
                     'Cooperate': Constants.both_cooperate_payoff,
@@ -60,5 +60,5 @@ class Player(BasePlayer):
                 }
         }
 
-        self.payoff = (points_matrix[self.decision]
+        self.payoff = (payoff_matrix[self.decision]
                        [self.other_player().decision])

@@ -22,7 +22,7 @@ class Constants(BaseConstants):
     instructions_template = 'trust/Instructions.html'
 
     # Initial amount allocated to each player
-    amount_allocated = c(100)
+    endowment = c(100)
     multiplication_factor = 3
 
 
@@ -32,7 +32,7 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
     sent_amount = models.CurrencyField(
-        min=0, max=Constants.amount_allocated,
+        min=0, max=Constants.endowment,
         doc="""Amount sent by P1""",
     )
 
@@ -44,7 +44,7 @@ class Group(BaseGroup):
     def set_payoffs(self):
         p1 = self.get_player_by_id(1)
         p2 = self.get_player_by_id(2)
-        p1.payoff = Constants.amount_allocated - self.sent_amount + self.sent_back_amount
+        p1.payoff = Constants.endowment - self.sent_amount + self.sent_back_amount
         p2.payoff = self.sent_amount * Constants.multiplication_factor - self.sent_back_amount
 
 

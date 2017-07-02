@@ -16,7 +16,7 @@
         cooperate or defect.
         Your payoffs will be determined by the choices of both as below:
     </p>
-    <p><i>In each cell, the amount (in points) to the left is the payoff for
+    <p><i>In each cell, the amount to the left is the payoff for
         you and to the right for the other participant.</i></p>
 
     <table class='table table-bordered text-center'
@@ -33,11 +33,11 @@
             <th rowspan=2><span class="rotate90">You</span></th>
             <th>Cooperate</th>
             <td>{{ Constants.both_cooperate_payoff }}, {{ Constants.both_cooperate_payoff }}</td>
-            <td>0 point, {{ Constants.betray_payoff }}</td>
+            <td>0, {{ Constants.betray_payoff }}</td>
         </tr>
         <tr>
             <th>Defect</th>
-            <td>{{ Constants.betray_payoff }}, 0 point</td>
+            <td>{{ Constants.betray_payoff }}, 0</td>
             <td>{{ Constants.both_defect_payoff }}, {{ Constants.both_defect_payoff }}</td>
         </tr>
     </table>

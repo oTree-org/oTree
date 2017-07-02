@@ -68,7 +68,7 @@ class Player(BasePlayer):
         doc="""
         Each player's claim
         """,
-        verbose_name='Please enter a number from 2 to 100'
+        verbose_name='Please enter an amount from {} to {}'.format(Constants.min_amount, Constants.max_amount)
     )
 
     adjustment = models.CurrencyField()

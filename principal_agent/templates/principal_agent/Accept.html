@@ -49,7 +49,7 @@ $(function() {
 
         var effort = $('input[name=agent_work_effort]:checked').val();
         if (contractAccepted == 'False') {
-            payoffMsg = 'You will receive 10 points if you choose to reject';
+            payoffMsg = 'You will receive {{ Constants.reject_agent_pay }} if you choose to reject';
         }
         else if (!effort) {
             payoffMsg = '';
@@ -63,7 +63,7 @@ $(function() {
             //  [B's Return Share in %] × [Total Return] + [B's Fixed Payment] – [B's Effort Cost]
             var payoff = agentReturnShare * effortToReturn[effort] + agentFixedPay - effortToCost[effort];
             payoff = Math.round(payoff);
-            payoffMsg = 'You will receive ' + payoff + ' points if you choose ' + effort + '.';
+            payoffMsg = 'You will receive ' + payoff + ' if you choose ' + effort + '.';
         }
         $('p#payoffMsg').text(payoffMsg);
     });

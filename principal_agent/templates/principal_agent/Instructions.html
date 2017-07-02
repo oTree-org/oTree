@@ -8,13 +8,12 @@
 
     <p>
         You have been randomly and anonymously paired with another player. Each
-        of you will be given 30 points to start and be randomly assigned to be
+        of you will be given {{ Constants.base_pay }} to start and be randomly assigned to be
         Participant A or Participant B. You will learn your role before making
         any decision.
     </p>
     <p>
-        Participant A will propose a contract to B. The contract includes two
-        figures (in points) that must be chosen as follows:
+        Participant A will propose a contract to B that has 2 components:
     </p>
     <ul>
         <li><strong>Fixed Payment</strong>, which can be any number from -30 to
@@ -31,7 +30,7 @@
     <p>
         Once Participant A has submitted the contract, Participant B must
         decide whether to accept or to reject it. If rejected, A will receive
-        nothing while B will receive 10 points. If accepted, Participant B then
+        nothing while B will receive {{ Constants.reject_agent_pay }}. If accepted, Participant B then
         chooses:
     </p>
     <ul>
@@ -43,7 +42,7 @@
         Effort is costly only to Participant B and determines the total return,
         which will be apportioned according to the proposed return share. <i>The
         following table shows the relationship between B's effort, the cost of
-        effort, and the resulting total return (in points):</i>
+        effort, and the resulting total return:</i>
     </p>
     <table class=table>
         <tr>
@@ -95,7 +94,7 @@
             – [B's Effort Cost]</strong>
     </p>
     <p>
-        Your payoff from the study is the initial 30 points plus what you
+        Your payoff from the study is the initial {{ Constants.base_pay }} plus what you
         receive.
     </p>
 </div>
