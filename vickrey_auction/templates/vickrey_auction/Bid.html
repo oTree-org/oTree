@@ -54,7 +54,7 @@ jQuery(document).ready(function ($) {
 
     $('.bid-slider').slider({
         min: 0,
-        max: 100,
+        max: {{ Constants.endowment|json }},
         slide: function (event, ui) {
             input.val(ui.value);
             updateBidValue();

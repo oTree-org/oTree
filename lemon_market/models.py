@@ -25,6 +25,7 @@ class Constants(BaseConstants):
     instructions_template = 'lemon_market/Instructions.html'
 
     initial_endowment = c(50)
+    buyer_extra_value = c(5)
 
 
 class Subsession(BaseSubsession):
@@ -72,7 +73,7 @@ class Group(BaseGroup):
             self.sale_price = seller.seller_proposed_price
 
             buyer = self.get_player_by_role('buyer')
-            buyer.payoff += seller.seller_proposed_quality + 5 - seller.seller_proposed_price
+            buyer.payoff += seller.seller_proposed_quality + Constants.buyer_extra_value - seller.seller_proposed_price
             seller.payoff += seller.seller_proposed_price - seller.seller_proposed_quality
 
     def get_seller(self):

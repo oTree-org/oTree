@@ -10,7 +10,7 @@ class Introduction(Page):
 
 class Production(Page):
     def is_displayed(self):
-        return self.player.role().startswith('seller')
+        return self.player.role() != 'buyer'
 
     form_model = models.Player
     form_fields = ['seller_proposed_price', 'seller_proposed_quality']
