@@ -21,4 +21,4 @@ class PlayerBot(Bot):
             self.player.crt_bat,
             self.player.payoff
         ]:
-            assert value is not None
+            assert value != None

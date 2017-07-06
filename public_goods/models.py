@@ -23,7 +23,7 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     def vars_for_admin_report(self):
-        contributions = [p.contribution for p in self.get_players() if p.contribution is not None]
+        contributions = [p.contribution for p in self.get_players() if p.contribution != None]
         if contributions:
             return {
                 'avg_contribution': sum(contributions)/len(contributions),

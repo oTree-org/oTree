@@ -68,7 +68,7 @@ class Group(BaseGroup):
         for p in self.get_players():
             p.payoff = Constants.initial_endowment
 
-        if self.seller_id is not 0:
+        if self.seller_id != 0:
             seller = self.get_seller()
             self.sale_price = seller.seller_proposed_price
 

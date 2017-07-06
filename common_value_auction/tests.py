@@ -44,6 +44,6 @@ class PlayerBot(Bot):
             self.player.item_value_estimate,
             self.player.is_winner
         ]:
-            assert field is not None
+            assert field != None
 
         yield (views.Results)
