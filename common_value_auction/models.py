@@ -25,7 +25,7 @@ class Constants(BaseConstants):
     max_allowable_bid = c(10)
 
     # Error margin for the value estimates shown to the players
-    estimate_error_margin = 1
+    estimate_error_margin = c(1)
 
 
 class Subsession(BaseSubsession):
@@ -37,19 +37,20 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    def highest_bid(self):
-        return max([p.bid_amount for p in self.get_players()])
-
-    def set_winner(self):
-        players_with_highest_bid = [p for p in self.get_players() if
-                                    p.bid_amount == self.highest_bid()]
-        winner = random.choice(
-            players_with_highest_bid)  # if tie, winner is chosen at random
-        winner.is_winner = True
-
     item_value = models.CurrencyField(
         doc="""Common value of the item to be auctioned, random for treatment"""
     )
+
+    highest_bid = models.CurrencyField()
+
+    def set_winner(self):
+        self.highest_bid = max([p.bid_amount for p in self.get_players()])
+
+        players_with_highest_bid = [p for p in self.get_players() if
+                                    p.bid_amount == self.highest_bid]
+        winner = random.choice(
+            players_with_highest_bid)  # if tie, winner is chosen at random
+        winner.is_winner = True
 
     def generate_value_estimate(self):
         minimum = self.item_value - Constants.estimate_error_margin

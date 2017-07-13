@@ -1,4 +1,4 @@
-otree-core>=1.2.7
+otree-core>=1.3.9
 
 # Heroku requires Django to be explicitly in requirements file
 # in order to run collectstatic
