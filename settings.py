@@ -2,7 +2,7 @@ import os
 from os import environ
 
 import dj_database_url
-from boto.mturk import qualification
+# from boto.mturk import qualification
 
 import otree.settings
 
@@ -120,6 +120,8 @@ mturk_hit_settings = {
     'minutes_allotted_per_assignment': 60,
     'expiration_hours': 7*24, # 7 days
     #'grant_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
+    # to use qualification requirements, you need to uncomment the 'qualification' import
+    # at the top of this file.
     'qualification_requirements': [
         # qualification.LocaleRequirement("EqualTo", "US"),
         # qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
