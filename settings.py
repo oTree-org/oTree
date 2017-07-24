@@ -2,7 +2,6 @@ import os
 from os import environ
 
 import dj_database_url
-# from boto.mturk import qualification
 
 import otree.settings
 
@@ -112,7 +111,7 @@ ROOMS = [
 # https://boto.readthedocs.org/en/latest/ref/mturk.html?highlight=mturk#module-boto.mturk.qualification
 
 mturk_hit_settings = {
-    'keywords': ['easy', 'bonus', 'choice', 'study'],
+    'keywords': ['bonus', 'study'],
     'title': 'Title for your experiment',
     'description': 'Description for your experiment',
     'frame_height': 500,
@@ -120,14 +119,7 @@ mturk_hit_settings = {
     'minutes_allotted_per_assignment': 60,
     'expiration_hours': 7*24, # 7 days
     #'grant_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
-    # to use qualification requirements, you need to uncomment the 'qualification' import
-    # at the top of this file.
-    'qualification_requirements': [
-        # qualification.LocaleRequirement("EqualTo", "US"),
-        # qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
-        # qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5),
-        # qualification.Requirement('YOUR_QUALIFICATION_ID_HERE', 'DoesNotExist')
-    ]
+    'qualification_requirements': []
 }
 
 

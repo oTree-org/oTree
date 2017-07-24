@@ -18,7 +18,7 @@ class Constants(BaseConstants):
 
     # """Amount allocated to each player"""
     endowment = c(100)
-    efficiency_factor = 2
+    multiplier = 2
 
 
 class Subsession(BaseSubsession):
@@ -45,7 +45,7 @@ class Group(BaseGroup):
 
     def set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
-        self.individual_share = self.total_contribution * Constants.efficiency_factor / Constants.players_per_group
+        self.individual_share = self.total_contribution * Constants.multiplier / Constants.players_per_group
         for p in self.get_players():
             p.payoff = (Constants.endowment - p.contribution) + self.individual_share
 

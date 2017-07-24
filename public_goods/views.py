@@ -30,7 +30,7 @@ class Results(Page):
 
     def vars_for_template(self):
         return {
-            'total_earnings': self.group.total_contribution * Constants.efficiency_factor,
+            'total_earnings': self.group.total_contribution * Constants.multiplier,
         }
 
 
