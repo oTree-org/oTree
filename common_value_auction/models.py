@@ -29,7 +29,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    def before_session_starts(self):
+    def creating_session(self):
         for g in self.get_groups():
             g.item_value = round(random.uniform(Constants.min_allowable_bid,
                                                 Constants.max_allowable_bid),

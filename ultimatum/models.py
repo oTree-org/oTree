@@ -32,7 +32,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    def before_session_starts(self):
+    def creating_session(self):
         # randomize to treatments
         for g in self.get_groups():
             if 'treatment' in self.session.config:
