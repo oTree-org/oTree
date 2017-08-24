@@ -21,6 +21,10 @@ class Send(Page):
         return self.player.id_in_group == 1
 
 
+class SendBackWaitPage(WaitPage):
+    pass
+
+
 class SendBack(Page):
     """This page is only for P2
     P2 sends back some amount (of the tripled amount received) to P1"""
@@ -60,7 +64,7 @@ class Results(Page):
 page_sequence = [
     Introduction,
     Send,
-    WaitPage,
+    SendBackWaitPage,
     SendBack,
     ResultsWaitPage,
     Results,

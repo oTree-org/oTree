@@ -60,5 +60,4 @@ class Player(BasePlayer):
                 }
         }
 
-        self.payoff = (payoff_matrix[self.decision]
-                       [self.other_player().decision])
+        self.payoff = payoff_matrix[self.decision][self.other_player().decision]
