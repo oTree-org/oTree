@@ -12,7 +12,7 @@
     You are <strong>{{ player.role }}</strong>. What will you do for the evening?
 </p>
 
-    {% formfield player.decision with label='Please make a choice:' %}
+    {% formfield player.decision label='Please make a choice:' %}
     {% next_button %}
 
     {% include Constants.instructions_template %}

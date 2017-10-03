@@ -13,7 +13,7 @@
     How much will you send to participant A?
 </p>
 
-    {% formfield group.sent_back_amount with label=prompt %}
+    {% formfield group.sent_back_amount label=prompt %}
     <p>{% next_button %}</p>
     {% include Constants.instructions_template %}
 

@@ -14,9 +14,9 @@
         <tr><td>{{ group.agent_fixed_pay }}</td><td>{{ group.return_share_as_percentage }}%</td></tr>
     </table>
 
-    {% formfield group.contract_accepted with label='Will you accept or reject the above contract?' %}
+    {% formfield group.contract_accepted label='Will you accept or reject the above contract?' %}
     <div id="effort">
-    {% formfield group.agent_work_effort with label='Please choose your level of effort' %}
+    {% formfield group.agent_work_effort label='Please choose your level of effort' %}
     </div>
     <p id="payoffMsg"></p>
 
