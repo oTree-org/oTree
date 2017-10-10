@@ -39,7 +39,7 @@ class Player(BasePlayer):
     decision = models.CharField(
         choices=['Cooperate', 'Defect'],
         doc="""This player's decision""",
-        widget=widgets.RadioSelect()
+        widget=widgets.RadioSelect
     )
 
     def other_player(self):

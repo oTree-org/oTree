@@ -28,7 +28,7 @@ class Player(BasePlayer):
     gender = models.CharField(
         choices=['Male', 'Female'],
         verbose_name='What is your gender?',
-        widget=widgets.RadioSelect())
+        widget=widgets.RadioSelect)
 
     crt_bat = models.PositiveIntegerField(
         verbose_name='''

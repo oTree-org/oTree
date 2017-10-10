@@ -58,7 +58,7 @@ class Player(BasePlayer):
     decision = models.CharField(
         choices=['Football', 'Opera'],
         doc="""Either football or the opera""",
-        widget=widgets.RadioSelect()
+        widget=widgets.RadioSelect
     )
 
     def other_player(self):

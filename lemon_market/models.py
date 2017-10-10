@@ -60,7 +60,7 @@ class Group(BaseGroup):
         choices=[(i, 'Buy from seller %i' % i) for i in
                  range(1, Constants.players_per_group)] + [
                     (0, 'Buy nothing')],
-        widget=widgets.RadioSelect(),
+        widget=widgets.RadioSelect,
         doc="""0 means no purchase made"""
     )  # seller index
 
@@ -95,7 +95,7 @@ class Player(BasePlayer):
             (20, 'Medium'),
             (10, 'Low')],
         verbose_name='Please select a quality grade you want to produce',
-        widget=widgets.RadioSelectHorizontal())
+        widget=widgets.RadioSelectHorizontal)
 
     def seller_id(self):
         # player 1 is the buyer, so seller 1 is actually player 2

@@ -89,13 +89,13 @@ class Group(BaseGroup):
         choices=Constants.agent_return_share_choices,
         doc="""Agent's share of total return""",
         verbose_name='Return Share',
-        widget=widgets.RadioSelectHorizontal()
+        widget=widgets.RadioSelectHorizontal
     )
 
     agent_work_effort = models.PositiveIntegerField(
         choices=range(1, 10 + 1),
         doc="""Agent's work effort, [1, 10]""",
-        widget=widgets.RadioSelectHorizontal(),
+        widget=widgets.RadioSelectHorizontal,
     )
 
     agent_work_cost = models.CurrencyField(
@@ -104,7 +104,7 @@ class Group(BaseGroup):
 
     contract_accepted = models.BooleanField(
         doc="""Whether agent accepts proposal""",
-        widget=widgets.RadioSelect(),
+        widget=widgets.RadioSelect,
         choices=(
             (True, 'Accept'),
             (False, 'Reject'),

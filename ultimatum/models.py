@@ -58,27 +58,27 @@ class Group(BaseGroup):
 
     # for strategy method
     response_0 = models.BooleanField(
-        widget=widgets.RadioSelectHorizontal(), verbose_name=question(0))
+        widget=widgets.RadioSelectHorizontal, verbose_name=question(0))
     response_10 = models.BooleanField(
-        widget=widgets.RadioSelectHorizontal(), verbose_name=question(10))
+        widget=widgets.RadioSelectHorizontal, verbose_name=question(10))
     response_20 = models.BooleanField(
-        widget=widgets.RadioSelectHorizontal(), verbose_name=question(20))
+        widget=widgets.RadioSelectHorizontal, verbose_name=question(20))
     response_30 = models.BooleanField(
-        widget=widgets.RadioSelectHorizontal(), verbose_name=question(30))
+        widget=widgets.RadioSelectHorizontal, verbose_name=question(30))
     response_40 = models.BooleanField(
-        widget=widgets.RadioSelectHorizontal(), verbose_name=question(40))
+        widget=widgets.RadioSelectHorizontal, verbose_name=question(40))
     response_50 = models.BooleanField(
-        widget=widgets.RadioSelectHorizontal(), verbose_name=question(50))
+        widget=widgets.RadioSelectHorizontal, verbose_name=question(50))
     response_60 = models.BooleanField(
-        widget=widgets.RadioSelectHorizontal(), verbose_name=question(60))
+        widget=widgets.RadioSelectHorizontal, verbose_name=question(60))
     response_70 = models.BooleanField(
-        widget=widgets.RadioSelectHorizontal(), verbose_name=question(70))
+        widget=widgets.RadioSelectHorizontal, verbose_name=question(70))
     response_80 = models.BooleanField(
-        widget=widgets.RadioSelectHorizontal(), verbose_name=question(80))
+        widget=widgets.RadioSelectHorizontal, verbose_name=question(80))
     response_90 = models.BooleanField(
-        widget=widgets.RadioSelectHorizontal(), verbose_name=question(90))
+        widget=widgets.RadioSelectHorizontal, verbose_name=question(90))
     response_100 = models.BooleanField(
-        widget=widgets.RadioSelectHorizontal(), verbose_name=question(100))
+        widget=widgets.RadioSelectHorizontal, verbose_name=question(100))
 
 
     def set_payoffs(self):
