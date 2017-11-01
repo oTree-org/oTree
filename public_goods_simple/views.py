@@ -5,13 +5,11 @@ from .models import Constants
 
 
 class Contribute(Page):
-
     form_model = models.Player
     form_fields = ['contribution']
 
 
 class ResultsWaitPage(WaitPage):
-
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
@@ -19,7 +17,8 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
     pass
 
-page_sequence =[
+
+page_sequence = [
     Contribute,
     ResultsWaitPage,
     Results

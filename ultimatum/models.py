@@ -35,7 +35,7 @@ class Subsession(BaseSubsession):
     def creating_session(self):
         # randomize to treatments
         for g in self.get_groups():
-            if 'treatment' in self.session.config:
+            if 'use_strategy_method' in self.session.config:
                 g.use_strategy_method = self.session.config['use_strategy_method']
             else:
                 g.use_strategy_method = random.choice([True, False])
