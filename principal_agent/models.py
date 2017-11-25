@@ -3,7 +3,6 @@ from otree.api import (
     Currency as c, currency_range
 )
 import random
-import utils
 
 
 doc = """
@@ -130,7 +129,7 @@ class Group(BaseGroup):
         agent.payoff += Constants.base_pay
 
     def return_share_as_percentage(self):
-        return utils.float_as_percentage(self.agent_return_share)
+        return int(self.agent_return_share * 100)
 
 
 class Player(BasePlayer):
