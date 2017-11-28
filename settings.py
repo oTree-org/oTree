@@ -72,7 +72,7 @@ INSTALLED_APPS = ['otree']
 
 # SENTRY_DSN = ''
 
-DEMO_PAGE_INTRO_TEXT = """
+DEMO_PAGE_INTRO_HTML = """
 <ul>
     <li>
         <a href="https://github.com/oTree-org/otree" target="_blank">
