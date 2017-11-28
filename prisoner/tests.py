@@ -7,7 +7,7 @@ from .models import Constants
 class PlayerBot(Bot):
     def play_round(self):
         yield (views.Introduction)
-        yield (views.Decision, {"decision": 'Cooperate'})
+        yield (views.Decision, {"cooperate": True})
         assert 'Both of you chose to cooperate' in self.html
         assert self.player.payoff == Constants.both_cooperate_payoff
         yield (views.Results)

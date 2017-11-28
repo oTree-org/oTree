@@ -36,11 +36,17 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    decision = models.CharField(
-        choices=['Cooperate', 'Defect'],
-        doc="""This player's decision""",
-        widget=widgets.RadioSelect
+    cooperate = models.BooleanField(
+        choices=[
+            [False, 'Defect'],
+            [True, 'Cooperate']
+        ]
     )
+
+    def decision_label(self):
+        if self.cooperate:
+            return 'cooperate'
+        return 'defect'
 
     def other_player(self):
         return self.get_others_in_group()[0]
@@ -48,16 +54,16 @@ class Player(BasePlayer):
     def set_payoff(self):
 
         payoff_matrix = {
-            'Cooperate':
+            True:
                 {
-                    'Cooperate': Constants.both_cooperate_payoff,
-                    'Defect': Constants.betrayed_payoff
+                    True: Constants.both_cooperate_payoff,
+                    False: Constants.betrayed_payoff
                 },
-            'Defect':
+            False:
                 {
-                    'Cooperate': Constants.betray_payoff,
-                    'Defect': Constants.both_defect_payoff
+                    True: Constants.betray_payoff,
+                    False: Constants.both_defect_payoff
                 }
         }
 
-        self.payoff = payoff_matrix[self.decision][self.other_player().decision]
+        self.payoff = payoff_matrix[self.cooperate][self.other_player().cooperate]

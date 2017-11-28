@@ -10,7 +10,7 @@ class Introduction(Page):
 
 class Decision(Page):
     form_model = models.Player
-    form_fields = ['decision']
+    form_fields = ['cooperate']
 
 
 class ResultsWaitPage(WaitPage):
@@ -21,10 +21,11 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     def vars_for_template(self):
+        opponent = self.player.other_player()
         return {
-            'my_decision': self.player.decision.lower(),
-            'other_player_decision': self.player.other_player().decision.lower(),
-            'same_choice': self.player.decision == self.player.other_player().decision,
+            'my_decision': self.player.decision_label(),
+            'other_player_decision': opponent.decision_label(),
+            'same_choice': self.player.cooperate == opponent.cooperate,
         }
 
 
