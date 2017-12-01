@@ -6,7 +6,7 @@ from .models import Constants
 class PlayerBot(Bot):
 
     def play_round(self):
-        yield (views.Choice, {"penny_side": 'Heads'})
+        yield (views.Choice, {"heads": True})
         if self.player.role() == 'Matcher':
             assert self.player.is_winner
         else:

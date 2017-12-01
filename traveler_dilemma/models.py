@@ -67,8 +67,7 @@ class Player(BasePlayer):
         min=Constants.min_amount, max=Constants.max_amount,
         doc="""
         Each player's claim
-        """,
-        verbose_name='Please enter an amount from {} to {}'.format(Constants.min_amount, Constants.max_amount)
+        """
     )
 
     adjustment = models.CurrencyField()

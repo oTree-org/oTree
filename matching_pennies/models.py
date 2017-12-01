@@ -38,7 +38,7 @@ class Group(BaseGroup):
         matcher = self.get_player_by_role('Matcher')
         mismatcher = self.get_player_by_role('Mismatcher')
 
-        if matcher.penny_side == mismatcher.penny_side:
+        if matcher.heads == mismatcher.heads:
             matcher.is_winner = True
             mismatcher.is_winner = False
         else:
@@ -52,9 +52,11 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    penny_side = models.CharField(
-        choices=['Heads', 'Tails'],
-        widget=widgets.RadioSelect
+    heads = models.BooleanField(
+        choices=[
+            [True, 'Heads'],
+            [False, 'Tails'],
+        ],
     )
 
     is_winner = models.BooleanField()

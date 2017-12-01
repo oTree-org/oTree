@@ -5,10 +5,12 @@
 
 {% block content %}
 <p>
-You are <strong>Participant 1</strong>. Now please decide how much you will keep for yourself.
+    You are <strong>Participant 1</strong>.
+    Please decide how much of the {{ Constants.endowment }}
+    you will keep for yourself.
 </p>
 
-{% formfield group.kept %}
+{% formfield group.kept label="I will keep" %}
 
 {% next_button %}
 

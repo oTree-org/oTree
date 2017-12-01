@@ -35,7 +35,6 @@ class Group(BaseGroup):
     kept = models.CurrencyField(
         doc="""Amount dictator decided to keep for himself""",
         min=0, max=Constants.endowment,
-        verbose_name='I will keep (from 0 to %i)' % Constants.endowment
     )
 
     def set_payoffs(self):

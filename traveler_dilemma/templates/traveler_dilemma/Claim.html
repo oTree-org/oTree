@@ -6,8 +6,8 @@
 {% endblock %}
 
 {% block content %}
-<p>How much will you claim for your antique?</p>
-    {% formfield player.claim %}
+
+    {% formfield player.claim label='How much will you claim for your antique?' %}
     {% next_button %}
     
     {% include Constants.instructions_template %}

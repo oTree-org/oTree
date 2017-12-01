@@ -80,14 +80,11 @@ class Group(BaseGroup):
     agent_fixed_pay = models.CurrencyField(
         doc="""Amount offered as fixed pay to agent""",
         min=Constants.min_fixed_payment, max=Constants.max_fixed_payment,
-        verbose_name='Fixed Payment (from {} to {})'.format(
-            Constants.min_fixed_payment, Constants.max_fixed_payment)
     )
 
     agent_return_share = models.FloatField(
         choices=Constants.agent_return_share_choices,
         doc="""Agent's share of total return""",
-        verbose_name='Return Share',
         widget=widgets.RadioSelectHorizontal
     )
 

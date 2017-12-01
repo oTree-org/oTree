@@ -9,8 +9,8 @@
 
     <p>You are {{ player.role }}</p>
 
-    {% formfield player.seller_proposed_quality %}
-    {% formfield player.seller_proposed_price %}
+    {% formfield player.seller_proposed_quality label='What quality grade do you want to produce?' %}
+    {% formfield player.seller_proposed_price label='What price do you want to sell at?' %}
 
     {% next_button %}
     {% include Constants.instructions_template %}

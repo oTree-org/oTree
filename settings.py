@@ -149,42 +149,10 @@ SESSION_CONFIGS = [
         'app_sequence': ['guess_two_thirds', 'payment_info'],
     },
     {
-        'name': 'survey',
-        'display_name': "Survey",
-        'num_demo_participants': 1,
-        'app_sequence': ['survey', 'payment_info'],
-    },
-    {
-        'name': 'quiz',
-        'display_name': "Quiz",
-        'num_demo_participants': 1,
-        'app_sequence': ['quiz'],
-    },
-    {
         'name': 'prisoner',
         'display_name': "Prisoner's Dilemma",
         'num_demo_participants': 2,
         'app_sequence': ['prisoner', 'payment_info'],
-    },
-    {
-        'name': 'ultimatum',
-        'display_name': "Ultimatum (randomized: strategy vs. direct response)",
-        'num_demo_participants': 2,
-        'app_sequence': ['ultimatum', 'payment_info'],
-    },
-    {
-        'name': 'ultimatum_strategy',
-        'display_name': "Ultimatum (strategy method treatment)",
-        'num_demo_participants': 2,
-        'app_sequence': ['ultimatum', 'payment_info'],
-        'use_strategy_method': True,
-    },
-    {
-        'name': 'ultimatum_non_strategy',
-        'display_name': "Ultimatum (direct response treatment)",
-        'num_demo_participants': 2,
-        'app_sequence': ['ultimatum', 'payment_info'],
-        'use_strategy_method': False,
     },
     {
         'name': 'vickrey_auction',
@@ -278,18 +246,10 @@ SESSION_CONFIGS = [
         ],
     },
     {
-        'name': 'battle_of_the_sexes',
-        'display_name': "Battle of the Sexes",
-        'num_demo_participants': 2,
-        'app_sequence': [
-            'battle_of_the_sexes', 'payment_info'
-        ],
-    },
-    {
         'name': 'public_goods_simple',
         'display_name': "Public Goods (simple version from tutorial)",
         'num_demo_participants': 3,
-        'app_sequence': ['public_goods_simple', 'survey', 'payment_info'],
+        'app_sequence': ['public_goods_simple', 'payment_info'],
     },
     {
         'name': 'trust_simple',

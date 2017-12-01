@@ -85,16 +85,14 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     # seller
     seller_proposed_price = models.CurrencyField(
-        min=0, max=Constants.initial_endowment,
-        verbose_name='Please indicate a price (from 0 to %i) you want to sell'
-                     % Constants.initial_endowment)
+        min=0, max=Constants.initial_endowment
+    )
 
     seller_proposed_quality = models.CurrencyField(
         choices=[
             (30, 'High'),
             (20, 'Medium'),
             (10, 'Low')],
-        verbose_name='Please select a quality grade you want to produce',
         widget=widgets.RadioSelectHorizontal)
 
     def seller_id(self):
