@@ -56,7 +56,7 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     sale_price = models.CurrencyField()
 
-    seller_id = models.PositiveIntegerField(
+    seller_id = models.IntegerField(
         choices=[(i, 'Buy from seller %i' % i) for i in
                  range(1, Constants.players_per_group)] + [
                     (0, 'Buy nothing')],

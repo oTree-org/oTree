@@ -29,7 +29,7 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    total_quantity = models.PositiveIntegerField()
+    total_quantity = models.IntegerField()
 
     price = models.CurrencyField(
         doc="""Unit price: P = T - Q1 - Q2, where T is total capacity and Q_i are the units produced by the players"""
@@ -43,7 +43,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    quantity = models.PositiveIntegerField(
+    quantity = models.IntegerField(
         initial=None,
         min=0, max=Constants.max_units_per_player,
         doc="""Quantity of units to produce"""

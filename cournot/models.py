@@ -32,7 +32,7 @@ class Group(BaseGroup):
         doc="""Unit price: P = T - \sum U_i, where T is total capacity and U_i is the number of units produced by player i"""
     )
 
-    total_units = models.PositiveIntegerField(
+    total_units = models.IntegerField(
         doc="""Total units produced by all players"""
     )
 
@@ -45,7 +45,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    units = models.PositiveIntegerField(
+    units = models.IntegerField(
         min=0, max=Constants.max_units_per_player,
         doc="""Quantity of units to produce"""
     )

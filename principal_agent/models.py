@@ -88,7 +88,7 @@ class Group(BaseGroup):
         widget=widgets.RadioSelectHorizontal
     )
 
-    agent_work_effort = models.PositiveIntegerField(
+    agent_work_effort = models.IntegerField(
         choices=range(1, 10 + 1),
         doc="""Agent's work effort, [1, 10]""",
         widget=widgets.RadioSelectHorizontal,

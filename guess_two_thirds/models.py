@@ -31,8 +31,8 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
     two_thirds_avg = models.FloatField()
-    best_guess = models.PositiveIntegerField()
-    num_winners = models.PositiveIntegerField()
+    best_guess = models.IntegerField()
+    num_winners = models.IntegerField()
 
     def set_payoffs(self):
         players = self.get_players()
@@ -55,5 +55,5 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    guess = models.PositiveIntegerField(max=Constants.guess_max)
+    guess = models.IntegerField(min=0, max=Constants.guess_max)
     is_winner = models.BooleanField(initial=False)

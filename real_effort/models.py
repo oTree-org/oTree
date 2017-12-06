@@ -64,4 +64,4 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     transcribed_text = models.TextField()
-    levenshtein_distance = models.PositiveIntegerField()
+    levenshtein_distance = models.IntegerField()
