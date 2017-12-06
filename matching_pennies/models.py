@@ -25,10 +25,10 @@ class Subsession(BaseSubsession):
             self.session.vars['paying_round'] = paying_round
         if self.round_number == 3:
             # reverse the roles
-            for group in self.get_groups():
-                players = group.get_players()
-                players.reverse()
-                group.set_players(players)
+            matrix = self.get_group_matrix()
+            for row in matrix:
+                row.reverse()
+            self.set_group_matrix(matrix)
         if self.round_number > 3:
             self.group_like_round(3)
 
@@ -38,7 +38,7 @@ class Group(BaseGroup):
         matcher = self.get_player_by_role('Matcher')
         mismatcher = self.get_player_by_role('Mismatcher')
 
-        if matcher.heads == mismatcher.heads:
+        if matcher.tails == mismatcher.tails:
             matcher.is_winner = True
             mismatcher.is_winner = False
         else:
@@ -52,10 +52,10 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    heads = models.BooleanField(
+    tails = models.BooleanField(
         choices=[
-            [True, 'Heads'],
-            [False, 'Tails'],
+            [True, 'Tails'],
+            [False, 'Heads'],
         ],
     )
 

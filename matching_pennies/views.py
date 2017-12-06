@@ -6,7 +6,7 @@ from .models import Constants
 
 class Choice(Page):
     form_model = models.Player
-    form_fields = ['heads']
+    form_fields = ['tails']
 
     def vars_for_template(self):
         return {
