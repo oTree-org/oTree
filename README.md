@@ -188,16 +188,6 @@ See docs on [bots](http://otree.readthedocs.io/en/latest/bots.html).
 
 Contact chris@otree.org with bug reports.
 
-## Contributors
-
-* Gregor Muellegger (http://gremu.net/, https://github.com/gregmuellegger)
-* Juan B. Cabral (http://jbcabral.org/, https://github.com/leliel12)
-* Bertrand Bordage (https://github.com/BertrandBordage)
-* Alexander Schepanovski (https://github.com/Suor/)
-* Alexander Sandukovskiy
-* Som Datye
-* Benson Njogu (https://github.com/benarito)
-
 
 ## Related repositories
 
