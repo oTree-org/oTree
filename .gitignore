@@ -1,11 +1,11 @@
 venv
-*.pyc
 staticfiles
 ./db.sqlite3
 .idea
 *~
 *.sqlite3
-_coverage_results
 _static_root
 _bots*s
 __temp*
+__pycache__/
+*.py[cod]
