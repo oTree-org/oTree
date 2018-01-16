@@ -1,3 +1,0 @@
--r requirements_base.txt
-# packages that are unnecessary on Windows/Mac local dev environments, or don't install properly
-psycopg2>=2.5.1
