@@ -1,5 +1,5 @@
 from otree.api import Currency as c, currency_range, SubmissionMustFail
-from . import views
+from . import pages
 from ._builtin import Bot
 from .models import Constants
 
@@ -8,7 +8,7 @@ class PlayerBot(Bot):
 
     def play_round(self):
         # must reject transcription that is too inaccurate
-        yield SubmissionMustFail(views.Transcribe, {'transcribed_text': 'foo'})
+        yield SubmissionMustFail(pages.Transcribe, {'transcribed_text': 'foo'})
 
         transcription = Constants.reference_texts[self.subsession.round_number - 1]
         add_char = Constants.allowed_error_rates[self.subsession.round_number - 1] > 0
@@ -16,7 +16,7 @@ class PlayerBot(Bot):
             # add a 1-char error, should still be fine
             transcription += 'a'
 
-        yield (views.Transcribe, {'transcribed_text': transcription})
+        yield (pages.Transcribe, {'transcribed_text': transcription})
 
 
         for value in [

@@ -1,5 +1,5 @@
 from otree.api import Currency as c, currency_range, SubmissionMustFail
-from . import views
+from . import pages
 from ._builtin import Bot
 from .models import Constants
 
@@ -14,13 +14,13 @@ class PlayerBot(Bot):
     def play_round(self):
         case = self.case
         if self.player.id_in_group == 1:
-            yield (views.Send, {"sent_amount": case['offer']})
+            yield (pages.Send, {"sent_amount": case['offer']})
 
         else:
             for invalid_return in [-1, case['offer'] * Constants.multiplication_factor + 1]:
-                yield SubmissionMustFail(views.SendBack,
+                yield SubmissionMustFail(pages.SendBack,
                                          {'sent_back_amount': invalid_return})
-            yield (views.SendBack, {'sent_back_amount': case['return']})
+            yield (pages.SendBack, {'sent_back_amount': case['return']})
 
         if self.player.id_in_group == 1:
             expected_payoff = case['p1_payoff']

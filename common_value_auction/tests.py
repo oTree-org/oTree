@@ -1,5 +1,5 @@
 from otree.api import Currency as c, currency_range, SubmissionMustFail
-from . import views
+from . import pages
 from ._builtin import Bot
 from .models import Constants
 
@@ -12,11 +12,11 @@ class PlayerBot(Bot):
         case = self.case
 
         # Introduction
-        yield (views.Introduction)
+        yield (pages.Introduction)
 
         if case == 'basic':
             for invalid_bid in [-1, 11]:
-                yield SubmissionMustFail(views.Bid, {"bid_amount": invalid_bid})
+                yield SubmissionMustFail(pages.Bid, {"bid_amount": invalid_bid})
         if case == 'p1_wins':
             if self.player.id_in_group == 1:
                 bid_amount = 2
@@ -26,7 +26,7 @@ class PlayerBot(Bot):
             bid_amount = 0
         else: # case == 'all_max':
             bid_amount = Constants.max_allowable_bid
-        yield (views.Bid, {"bid_amount": bid_amount})
+        yield (pages.Bid, {"bid_amount": bid_amount})
 
         if case == 'p1_wins':
             if self.player.id_in_group == 1:
@@ -46,4 +46,4 @@ class PlayerBot(Bot):
         ]:
             assert field != None
 
-        yield (views.Results)
+        yield (pages.Results)

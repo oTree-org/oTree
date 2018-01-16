@@ -1,5 +1,5 @@
 from otree.api import Currency as c, currency_range
-from . import views
+from . import pages
 from ._builtin import Bot
 from .models import Constants
 
@@ -28,14 +28,14 @@ class PlayerBot(Bot):
     def play_round(self):
 
         case = self.case
-        yield (views.Introduction)
+        yield (pages.Introduction)
 
         if self.player.id_in_group == 1:
-            yield (views.ChoiceOne, {'quantity': case['p1_quantity']})
+            yield (pages.ChoiceOne, {'quantity': case['p1_quantity']})
             assert self.player.payoff == case['p1_payoff']
 
         elif self.player.id_in_group == 2:
-            yield (views.ChoiceTwo, {'quantity': case['p2_quantity']})
+            yield (pages.ChoiceTwo, {'quantity': case['p2_quantity']})
             assert self.player.payoff == case['p2_payoff']
 
-        yield (views.Results)
+        yield (pages.Results)

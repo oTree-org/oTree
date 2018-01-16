@@ -1,12 +1,12 @@
 from otree.api import Currency as c, currency_range
-from . import views
+from . import pages
 from ._builtin import Bot
 from .models import Constants
 
 class PlayerBot(Bot):
 
     def play_round(self):
-        yield (views.Choice, {"tails": True})
+        yield (pages.Choice, {"tails": True})
         if self.player.role() == 'Matcher':
             assert self.player.is_winner
         else:

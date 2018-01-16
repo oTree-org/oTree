@@ -1,5 +1,5 @@
 from otree.api import Currency as c, currency_range, SubmissionMustFail
-from . import views
+from . import pages
 from ._builtin import Bot
 from .models import Constants
 
@@ -12,11 +12,11 @@ class PlayerBot(Bot):
         case = self.case
 
         if self.subsession.round_number == 1:
-            yield (views.Introduction)
+            yield (pages.Introduction)
 
         if 'seller' in self.player.role():
             yield (
-                views.Production,
+                pages.Production,
                 {
                     'seller_proposed_price': Constants.initial_endowment,
                     'seller_proposed_quality': 10
@@ -28,17 +28,17 @@ class PlayerBot(Bot):
                 assert 'The buyer bought nothing' in self.html
         else:
             # can't make a null purchase
-            yield SubmissionMustFail(views.Purchase)
+            yield SubmissionMustFail(pages.Purchase)
             if case == 'purchase':
-                yield (views.Purchase, {'seller_id': 1})
+                yield (pages.Purchase, {'seller_id': 1})
                 assert 'The quality grade of your purchase is <strong>Low' in self.html
                 assert 'your period payoff is <strong>{}'.format(
                     c(15)) in self.html
             else:
-                yield (views.Purchase, {'seller_id': 0})
+                yield (pages.Purchase, {'seller_id': 0})
                 assert 'You bought nothing' in self.html
                 assert "your period payoff is {}".format(Constants.initial_endowment)
 
-        yield (views.Results)
+        yield (pages.Results)
         if self.subsession.round_number == Constants.num_rounds:
-            yield (views.FinalResults)
+            yield (pages.FinalResults)
