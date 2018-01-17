@@ -1,4 +1,3 @@
-from . import models
 from ._builtin import Page, WaitPage
 
 
