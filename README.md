@@ -87,7 +87,7 @@ class Player(BasePlayer):
     is_winner = models.BooleanField(initial=False)
 ```
 
-### views.py
+### pages.py
 
 ```python
 from . import models
@@ -138,7 +138,7 @@ or in the browser, which you can try [here](http://otree-demo.herokuapp.com/demo
 ```python
 
 from otree.api import Bot, SubmissionMustFail
-from . import views
+from . import pages
 from .models import Constants
 
 class PlayerBot(Bot):
@@ -146,30 +146,30 @@ class PlayerBot(Bot):
 
     def play_round(self):
         if self.subsession.round_number == 1:
-            yield (views.Introduction)
+            yield (pages.Introduction)
 
         if self.case == 'p1_wins':
             if self.player.id_in_group == 1:
                 for invalid_guess in [-1, 101]:
-                    yield SubmissionMustFail(views.Guess, {"guess": invalid_guess})
-                yield (views.Guess, {"guess": 9})
+                    yield SubmissionMustFail(pages.Guess, {"guess": invalid_guess})
+                yield (pages.Guess, {"guess": 9})
                 assert self.player.payoff == Constants.jackpot
                 assert 'you win' in self.html
             else:
-                yield (views.Guess, {"guess": 10})
+                yield (pages.Guess, {"guess": 10})
                 assert self.player.payoff == 0
                 assert 'you did not win' in self.html
         else:
             if self.player.id_in_group in [1, 2]:
-                yield (views.Guess, {"guess": 9})
+                yield (pages.Guess, {"guess": 9})
                 assert self.player.payoff == Constants.jackpot / 2
                 assert 'you are one of the 2 winners' in self.html
             else:
-                yield (views.Guess, {"guess": 10})
+                yield (pages.Guess, {"guess": 10})
                 assert self.player.payoff == 0
                 assert 'you did not win' in self.html
 
-        yield (views.Results)
+        yield (pages.Results)
 ```
 
 See docs on [bots](http://otree.readthedocs.io/en/latest/bots.html).
