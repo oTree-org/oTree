@@ -12,16 +12,18 @@
         Be exact and make sure to get all characters and spaces correct.
     </p>
 
-    <div>
-        <img src="{% static image_path %}"/>
-    </div>
+
+    <img src="{% static image_path %}"/>
+    <br><br>
+
 
     {% formfield player.transcribed_text label="" %}
 
     {% next_button %}
 
     {% if debug %}
-        <div class="box papereffect">
+        <div class="card border-warning">
+            <div class="card-body">
             <h4>Explanation for researchers (shown in debug mode only)</h4>
             <p>
                 You are playing in debug mode, so you can skip the manual
@@ -34,6 +36,7 @@
                 A subject can only advance to the next screen if the
                 transcription is {{ required_accuracy }}% accurate.
             </p>
+            </div>
         </div>
 
     {% endif %}
