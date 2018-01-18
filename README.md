@@ -90,7 +90,6 @@ class Player(BasePlayer):
 ### pages.py
 
 ```python
-from . import models
 from otree.api import Page, WaitPage
 
 

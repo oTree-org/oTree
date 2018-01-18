@@ -52,7 +52,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    question_id = models.PositiveIntegerField()
+    question_id = models.IntegerField()
     question = models.StringField()
     solution = models.StringField()
     submitted_answer = models.StringField(widget=widgets.RadioSelect)
