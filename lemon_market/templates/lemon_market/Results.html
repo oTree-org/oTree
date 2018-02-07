@@ -15,7 +15,7 @@
             at a price of <strong>{{ group.sale_price }}</strong>.
             The quality grade of your purchase is <strong>{{ seller.get_seller_proposed_quality_display }}</strong>.
         {% else %}
-            The buyer purchased a <strong>{{ seller.get_seller_proposed_display }}</strong> grade
+            The buyer purchased a <strong>{{ seller.get_seller_proposed_quality_display }}</strong> grade
             from <strong>{% if player == seller %}you{% else %}{{ seller.role }}{% endif %}</strong>
             at a price of <strong>{{ group.sale_price }}</strong>.
         {% endif %}
