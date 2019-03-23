@@ -27,7 +27,7 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
     sent_amount = models.CurrencyField(
-        choices=currency_range(0, Constants.endowment, c(1)),
+        min=c(0), max=Constants.endowment,
         doc="""Amount sent by P1""",
     )
 

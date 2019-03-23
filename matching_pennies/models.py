@@ -53,7 +53,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     penny_side = models.StringField(
-        choices=['Heads', 'Tails'],
+        choices=[['Heads', 'Heads'], ['Tails', 'Tails']],
         widget=widgets.RadioSelect
     )
 
