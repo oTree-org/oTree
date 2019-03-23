@@ -1,0 +1,53 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Your Choice
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+
+    <style>
+        .highlight-row-on-hover:hover td {
+            background-color: #fcf8e3;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="form-group required">
+        <table class="table table-bordered text-center" style="width: auto; margin: auto">
+            <tr>
+                <th colspan="2" rowspan="2"></th>
+                <th colspan="2">The Other Participant</th>
+            </tr>
+            <tr>
+                <th>Cooperate</th>
+                <th>Defect</th>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th rowspan="2"><span class="rotate90">You</span></th>
+                <td><button name="decision" value="Cooperate" class="btn btn-primary btn-large">I will cooperate</button></td>
+                <td>{{Constants.both_cooperate_payoff}}, {{Constants.both_cooperate_payoff}}</td>
+                <td>{{ Constants.betrayed_payoff }}, {{Constants.betray_payoff}}</td>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <td><button name="decision" value="Defect" class="btn btn-primary btn-large">I will defect</button></td>
+                <td>{{Constants.betray_payoff}}, {{ Constants.betrayed_payoff }}</td>
+                <td>{{Constants.both_defect_payoff}}, {{Constants.both_defect_payoff}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <p>Here you can chat with the other participant.</p>
+
+    {% chat %}
+
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}

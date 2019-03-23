@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}Results for all rounds{% endblock title %}
+
+{% block content %}
+    <p>
+        You have finished all {{ Constants.num_rounds }} periods. Purchases for
+        all periods are
+        summarized below:
+    </p>
+
+    {% include 'lemon_market/HighChart.html' %}
+
+    <p>
+        You are <strong>{{ player.role }}</strong>.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

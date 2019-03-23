@@ -1,0 +1,41 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>Here were the numbers guessed:</p>
+
+    <p>
+        {{ sorted_guesses }}
+    </p>
+
+    <p>
+        Two-thirds of the average of these numbers is {{ group.two_thirds_avg }};
+        the closest guess was {{ group.best_guess }}.
+    </p>
+
+    <p>Your guess was {{ player.guess }}.</p>
+
+    <p>
+        {% if player.is_winner %}
+            {% if group.num_winners > 1 %}
+                Therefore, you are one of the {{ group.num_winners }} winners
+                who tied for the best guess.
+            {% else %}
+                Therefore, you win!
+            {% endif %}
+        {% else %}
+            Therefore, you did not win.
+        {% endif %}
+    Your payoff is {{ player.payoff }}.
+    </p>
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}

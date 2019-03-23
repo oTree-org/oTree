@@ -1,0 +1,14 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Question {{ player.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.submitted_answer label=player.question %}
+
+    {% next_button %}
+
+{% endblock %}

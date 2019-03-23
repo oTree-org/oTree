@@ -1,0 +1,23 @@
+{% load otree %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+    <h3>
+        Instructions
+    </h3>
+
+    <p>
+        You will be grouped randomly and anonymously with
+        another {{ Constants.num_other_players }}
+        participants.
+    </p>
+    <p>
+        Each of you decides independently and simultaneously whether you will
+        volunteer or not. If at least one of you volunteers, everyone will get
+        {{ Constants.general_benefit }}. However, the volunteer(s) will
+        pay {{ Constants.volunteer_cost }}. If no one
+        volunteers, everyone receives nothing.
+    </p>
+    </div>
+</div>

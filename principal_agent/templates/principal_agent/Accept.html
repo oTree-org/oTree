@@ -1,0 +1,74 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Response
+{% endblock %}
+
+{% block content %}
+
+    <p>You are <strong>Player B</strong>. Player A has offered you a contract with the following details:</p>
+
+    <table class='table text-center' style='width: auto; margin: auto'>
+        <tr><th>Fixed payment</th><th>Return share</th></tr>
+        <tr><td>{{ group.agent_fixed_pay }}</td><td>{{ group.return_share_as_percentage }}%</td></tr>
+    </table>
+
+    {% formfield group.contract_accepted label='Will you accept or reject the above contract?' %}
+    <div id="effort">
+    {% formfield group.agent_work_effort label='Please choose your level of effort' %}
+    </div>
+    <p id="payoffMsg"></p>
+
+    <p>
+    {% next_button %}
+    </p>
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+$(document).ready(function() {
+
+
+    var $effortDiv = $('#effort');
+
+    $('input').change(function () {
+        var payoffMsg;
+
+        var contractAccepted = $('input[name=contract_accepted]:checked').val();
+
+        if (contractAccepted === 'False') {
+            $effortDiv.hide();
+        } else {
+            $effortDiv.show();
+        }
+
+        var effort = $('input[name=agent_work_effort]:checked').val();
+        if (contractAccepted === 'False') {
+            payoffMsg = 'You will receive {{ Constants.reject_agent_pay }} if you choose to reject';
+        }
+        else if (!effort) {
+            payoffMsg = '';
+        }
+        else if (contractAccepted === 'True' && effort) {
+            var effortToCost = {{ Constants.EFFORT_TO_COST|json }};
+            var effortToReturn = {{ Constants.EFFORT_TO_RETURN|json }};
+            var agentReturnShare = {{ group.agent_return_share|json }};
+            var agentFixedPay = {{ group.agent_fixed_pay|json }};
+
+            //  [B's Return Share in %] × [Total Return] + [B's Fixed Payment] – [B's Effort Cost]
+            var payoff = agentReturnShare * effortToReturn[effort] + agentFixedPay - effortToCost[effort];
+            payoff = Math.round(payoff);
+            payoffMsg = 'You will receive ' + payoff + ' if you choose ' + effort + '.';
+        }
+        $('p#payoffMsg').text(payoffMsg);
+    });
+});
+</script>
+
+
+{% endblock %}

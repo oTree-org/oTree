@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Survey
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please answer the following questions.
+    </p>
+
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% load otree %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+    <h3>
+        Instructions
+    </h3>
+
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'global/matrix.css' %}"/>
+
+    <p>
+        In this study, you will be randomly and anonymously paired with another
+        participant.
+        Each of you simultaneously and privately chooses whether you want to
+        cooperate or defect.
+        Your payoffs will be determined by the choices of both as below:
+    </p>
+    <p><i>In each cell, the amount to the left is the payoff for
+        you and to the right for the other participant.</i></p>
+
+    <table class='table table-bordered text-center'
+           style='width: auto; margin: auto'>
+        <tr>
+            <th colspan=2 rowspan=2></th>
+            <th colspan=2>The Other Participant</th>
+        </tr>
+        <tr>
+            <th>Cooperate</th>
+            <th>Defect</th>
+        </tr>
+        <tr>
+            <th rowspan=2><span class="rotate90">You</span></th>
+            <th>Cooperate</th>
+            <td>{{ Constants.both_cooperate_payoff }}, {{ Constants.both_cooperate_payoff }}</td>
+            <td>0, {{ Constants.betray_payoff }}</td>
+        </tr>
+        <tr>
+            <th>Defect</th>
+            <td>{{ Constants.betray_payoff }}, 0</td>
+            <td>{{ Constants.both_defect_payoff }}, {{ Constants.both_defect_payoff }}</td>
+        </tr>
+    </table>
+
+</div>
+</div>

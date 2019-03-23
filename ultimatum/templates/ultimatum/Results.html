@@ -1,0 +1,34 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+    <p>
+        {% if player.id_in_group == 1 %}
+            You were given {{ Constants.endowment }}, out of which you offered {{ group.amount_offered }} to the other player.
+            {% if group.offer_accepted %}
+                Your offer was accepted.
+            {% else %}
+                 Your offer was rejected.
+            {% endif %}
+        {% else %}
+            The other player offered you {{ group.amount_offered }} out of the total {{ Constants.endowment }}.
+            {% if group.offer_accepted %}
+                You accepted this offer.
+            {% else %}
+                You rejected this offer.
+            {% endif %}
+        {% endif %}
+    </p>
+
+    <p>
+        Your payoff is therefore {{ player.payoff }}.
+    </p>
+
+    {% next_button %}
+    {% include Constants.instructions_template %}
+
+{% endblock %}

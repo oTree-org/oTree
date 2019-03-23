@@ -1,0 +1,54 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Transcription task {{ subsession.round_number }}/{{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please transcribe (copy) the text below into the input field.
+        Be exact and make sure to get all characters and spaces correct.
+    </p>
+
+
+    <img src="{% static image_path %}"/>
+    <br><br>
+
+
+    {% formfield player.transcribed_text label="" %}
+
+    {% next_button %}
+
+    {% if debug %}
+        <div class="card border-warning">
+            <div class="card-body">
+            <h4>Explanation for researchers (shown in debug mode only)</h4>
+            <p>
+                You are playing in debug mode, so you can skip the manual
+                transcription
+                by clicking <a href="#" id="prefill">this link</a>
+                and clicking "next".
+            </p>
+
+            <p>
+                A subject can only advance to the next screen if the
+                transcription is {{ required_accuracy }}% accurate.
+            </p>
+            </div>
+        </div>
+
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        var referenceText = {{ reference_text|json }};
+        $('#prefill').click(function () {
+            $('#id_transcribed_text').val(referenceText);
+        })
+    });
+</script>
+{% endblock %}

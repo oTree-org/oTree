@@ -1,0 +1,71 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Bid
+{% endblock %}
+
+{% block styles %}
+<link href="{% static "vickrey_auction/jquery-ui/jquery-ui.min.css" %}" rel="stylesheet">
+<style type="text/css">
+    .bid-slider {
+        margin: 1.5em auto;
+        width: 70%;
+    }
+
+    .bid {
+        text-align: center;
+    }
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+    <p>
+        The value of the object to you is <strong>{{ player.private_value }}</strong>.
+        If you win the auction, you would have a payoff of
+        <strong>{{ endowment_plus_private_value }} - second highest bid</strong>.
+    </p>
+
+    <div class="form-group required">
+        <label class="control-label" for="id_bid_amount">
+            Please submit a bid for the object (from 0 to {{ Constants.endowment }}):</label>
+        <div class="controls">
+            <input type="hidden" name="bid_amount" id="id_bid_amount" value="0">
+            <div class="bid-slider"></div>
+            <div class="bid">Your bid: <strong><span class="bid-value"></span></strong></div>
+        </div>
+    </div>
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static "vickrey_auction/jquery-ui/jquery-ui.min.js" %}"></script>
+<script>
+jQuery(document).ready(function ($) {
+    var input = $('#id_bid_amount');
+
+    $('.bid-slider').slider({
+        min: 0,
+        max: {{ Constants.endowment|json }},
+        slide: function (event, ui) {
+            input.val(ui.value);
+            updateBidValue();
+        },
+    });
+
+    function updateBidValue() {
+        $('.bid-value').text(input.val());
+    }
+
+    updateBidValue();
+});
+</script>
+{% endblock %}

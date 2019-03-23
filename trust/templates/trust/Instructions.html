@@ -1,0 +1,28 @@
+{% load otree %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+    <h3>
+        Instructions
+    </h3>
+    <p>
+        You have been randomly and anonymously paired with another participant.
+        One of you will be selected at random to be participant A;
+        the other will be participant B.
+        You will learn whether you are participant A or B prior to making any
+        decision.
+    </p>
+    <p>
+        To start, participant A receives {{ Constants.endowment }};
+        participant B receives
+        nothing.
+        Participant A can send some or all of
+        his {{ Constants.endowment }} to participant B.
+        Before B receives this amount, it will be multiplied
+        by {{ Constants.multiplier }}. Once B receives
+        the tripled amount he can decide to send some or all of it to
+        A.
+    </p>
+</div>
+</div>

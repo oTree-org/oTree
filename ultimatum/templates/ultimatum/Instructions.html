@@ -1,0 +1,97 @@
+{% load otree %}
+
+<div class="instructions well well-lg">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+
+    <div class="panel-body">
+
+        <p>
+            First, every player will be randomly paired with another player. In
+            other words, you will have a counterpart, but you will not be told
+            who it is.
+            Your identity will also remain hidden from your counterpart.
+        </p>
+
+        <p>
+            The two participants in a pair will have two different roles: the
+            <strong>proposer</strong> and the <strong>responder</strong>.
+            You will be assigned randomly to a role, and it will be displayed
+            on the next page.
+        </p>
+
+        <p>
+            The two of you will together receive {{ Constants.endowment }}. The
+            experiment is about how to divide this amount.
+            The proposer will make the responder a take-it-or-leave-it offer,
+            which the responder can accept or reject.
+            If the offer is rejected, both will
+            receive {{ Constants.payoff_if_rejected }}.
+
+        </p>
+
+        <h4 class="panel-sub-heading">
+            Proposer's role
+        </h4>
+
+        <p>
+            The proposer has the following {{ Constants.offer_choices_count }}
+            options on how to divide the {{ Constants.endowment }} between the
+            two players.
+        </p>
+
+        <ol>
+            {% for give, keep in Constants.keep_give_amounts %}
+
+                <li>{{ give }} for the responder (the proposer keeps {{ keep }})</li>
+
+            {% endfor %}
+        </ol>
+
+        <h4 class="panel-sub-heading">
+            Responder's role
+        </h4>
+
+        <p>
+            {% if not group.use_strategy_method %}
+                The responder can either accept or reject the offer.
+            {% else %}
+                While the proposer makes the offer, the responder can select
+                which {{ Constants.offer_choices_count }} offers stated above
+                to accept or reject.
+                After the proposer has made the offer, it will be either
+                accepted or rejected according to the responder's choices.
+            {% endif %}
+        </p>
+
+        <h4 class="panel-sub-heading">
+            Results
+        </h4>
+
+        <p>
+            {% if not group.use_strategy_method %}
+                In the end, when both players have made their decision, a
+                results page will be displayed.
+                Here the offer will be displayed once more, and whether it was
+                accepted or rejected.
+            {% else %}
+                A results page will be displayed once both players have made
+                their decisions and those decisions have been implemented.
+                Here, it will be shown whether the offer was accepted or
+                rejected.
+            {% endif %}
+        </p>
+
+
+        Furthermore, one of the following two payoffs will be displayed:
+        <ul>
+            <li>If the offer is accepted, the players will receive a payoff
+                accordingly
+            </li>
+            <li>If the offer is rejected, both players will
+                receive {{ Constants.payoff_if_rejected }}</li>
+        </ul>
+    </div>
+</div>

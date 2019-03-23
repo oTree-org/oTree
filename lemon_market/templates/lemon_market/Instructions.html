@@ -1,0 +1,71 @@
+{% load otree %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+    <h3>
+        Instructions
+    </h3>
+
+    <p>
+        In this study, you will be grouped randomly and anonymously with
+        another 2 participants. One of you will be randomly assigned to be the
+        buyer and the other 2 the sellers. Sellers and the buyer can trade for
+        {{ Constants.num_rounds }} periods. Prior to making any decision, you will learn your role,
+        which will remain unchanged for all periods.
+    </p>
+    <p>
+        At the beginning of each period, each of you will receive {{ Constants.initial_endowment }}.
+        The sellers will begin by privately choosing a <strong>price</strong>
+        (from 0 to {{ Constants.initial_endowment }}) and a <strong>quality grade</strong> for their products.
+        Then the buyer will have the chance to purchase from one of the sellers
+        at the price listed. Before purchase, the buyer will not observe
+        grades. After purchase, the price and grade of the bought unit will be
+        revealed to all. The grade can be <strong>high, medium, or
+        low;</strong> higher grade costs more to produce and is worth more to
+        the buyer. The table below shows production costs to the sellers and
+        values to the buyer of different grades:
+    </p>
+    <table class=table>
+        <thead>
+        <tr>
+            <th>Grade</th>
+            <th>High</th>
+            <th>Medium</th>
+            <th>Low</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>Production Cost to Sellers</th>
+            <td>30</td>
+            <td>20</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <th>Value to the Buyer</th>
+            <td>35</td>
+            <td>25</td>
+            <td>15</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+        The buyer can buy up to 1 unit of the commodity during a period and
+        each seller can produce up to 1 unit in a period. <strong>Unsold units
+        are not produced and hence incur no cost.</strong>
+    </p>
+    <p>
+        The period payoff for the buyer is:<br/>
+        <strong>
+            Buyer's period payoff = {{ Constants.initial_endowment }} + value of the grade purchased -
+            seller's price
+        </strong></p>
+    <p>
+        The period payoff the sellers is:<br/>
+        <strong>
+            Seller's period payoff = {{ Constants.initial_endowment }} + seller's price - cost of the grade
+            produced
+        </strong></p>
+</div>
+</div>

@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Production
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.units label="How many units will you produce (from 0 to 30)?" %}
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}

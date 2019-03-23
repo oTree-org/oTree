@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Your role and decision
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You are the <strong>responder</strong>.
+    </p>
+
+    <p>
+        The proposer will make you an offer on how to divide
+        the {{ Constants.endowment }}.
+    </p>
+
+    <p>
+        Please choose below how you would respond to each of the possible
+        offers.
+    </p>
+
+    {% formfields %}
+
+    {% next_button %}
+    {% include Constants.instructions_template %}
+
+{% endblock %}
+

@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+        Your role and decision
+{% endblock %}
+
+{% block content %}
+    <p>
+            You are the <strong>proposer</strong>.
+    </p>
+
+    <p>
+            The two of you have been given {{ Constants.endowment }}. Enter the amount that you want to offer to the responder.
+    </p>
+
+    {% formfield group.amount_offered label="How much would you like to offer?" %}
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}

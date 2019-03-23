@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Work effort
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You accepted the contract. Please choose your effort level.
+    </p>
+
+    {% formfield player.agent_work_effort label='Effort level' %}
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>The results are shown in the following table.</p>
+
+    <table class="table">
+
+        <tr>
+            <td>Your firm produced:</td>
+            <td>{{ player.units }} units</td>
+        </tr>
+
+        <tr>
+            <td>The other firm produced:</td>
+            <td>{{ other_player_units }} units</td>
+        </tr>
+
+        <tr>
+            <td>Total production:</td>
+            <td>{{ group.total_units }} units</td>
+        </tr>
+
+        <tr>
+            <td style="border-top-width:4px">Unit selling price:</td>
+            <td style="border-top-width:4px">{{ Constants.total_capacity }} – {{ group.total_units }} = {{ group.unit_price }}</td>
+        </tr>
+
+        <tr>
+            <td>Your profit:</td>
+            <td>{{ player.payoff }}</td>
+        </tr>
+
+    </table>
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}

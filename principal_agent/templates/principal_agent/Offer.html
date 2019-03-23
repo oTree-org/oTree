@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Propose a contract
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You are <strong>Participant A</strong>. Please propose a contract for Participant B.
+    </p>
+
+    {% formfield group.agent_fixed_pay label='Fixed payment' %}
+
+    <p>
+        Fixed payment must be between
+        {{ Constants.min_fixed_payment }} and {{ Constants.max_fixed_payment }}.
+    </p>
+
+    {% formfield group.agent_return_share label='Return Share' %}
+
+    <p></p>
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}
+

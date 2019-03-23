@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+    <p>
+
+        {% if player.id_in_group == 1 %}
+            You decided to keep <strong>{{ group.kept }}</strong> for yourself.
+        {% else %}
+            Participant 1 decided to keep <strong>{{ group.kept }}</strong>, so
+            you got <strong>{{ offer }}</strong>.
+        {% endif %}
+
+        {% next_button %}
+    </p>
+    {% include Constants.instructions_template %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% load otree %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+    <h3>
+        Instructions
+    </h3>
+
+    <p>
+        You have been randomly and anonymously matched with 2 other
+        participants in an auction. Each of you is given {{ Constants.endowment }} to start.
+    </p>
+    <p>
+        Before bidding, you will learn the value of the object to you.
+        The value of the object differs from participant to participant and is
+        randomly and independently drawn from 0 to {{ Constants.endowment }} for each participant.
+    </p>
+    <p>
+        Next, you will privately submit a bid for the object.
+        You can bid from 0 to {{ Constants.endowment }}.
+        The participant with the highest bid wins the object and pays the second highest bid.
+        In the event of a die, the winner will be chosen randomly
+        will select the winner in the event of a tie bid and the winner will
+        pay the highest bid other than her or his own bid.
+    </p>
+    <p>
+        The payoff of the winner is calculated as<br/>
+        <strong>
+            Winner’s payoff = {{ Constants.endowment }} + Private value of the object to the winner - Second highest bid
+        </strong><br/>
+        The payoffs for others are the initial {{ Constants.endowment }}.
+    </p>
+    <p>
+        For your convenience, these instructions will remain available to you on all subsequent screens of this study.
+    </p>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+        Your role and decision
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You are the <strong>responder</strong>.
+    </p>
+
+    <p>
+        The other player has offered you {{ group.amount_offered }}.
+    </p>
+
+    <p><b>Do you wish to accept the offer?</b></p>
+    <div>
+        <button name="offer_accepted" value="True" class="btn btn-primary btn-large">
+            Yes
+        </button>
+        <button name="offer_accepted" value="False" class="btn btn-primary btn-large">
+            No
+        </button>
+    </div>
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}

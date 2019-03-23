@@ -1,0 +1,98 @@
+{% load otree %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+    <h3>
+        Instructions
+    </h3>
+
+    <p>
+        You have been randomly and anonymously paired with another player. Each
+        of you will be randomly assigned to be
+        Participant A or Participant B. You will learn your role before making
+        any decision.
+    </p>
+    <p>
+        Participant A will propose a contract to B that has 2 components:
+    </p>
+    <ul>
+        <li><strong>Fixed Payment</strong>, which can be any number from -30 to
+            30
+        </li>
+        <li><strong>Return Share</strong>, which can be a multiple of 10%, that
+            is 10%, 20%, … , 90%, or 100%
+        </li>
+    </ul>
+    <p>
+        Note that a negative fixed payment means that Participant B will have
+        to pay the amount to Participant A.
+    </p>
+    <p>
+        Once Participant A has submitted the contract, Participant B must
+        decide whether to accept or to reject it. If rejected, A will receive
+        nothing while B will receive {{ Constants.reject_agent_pay }}. If accepted, Participant B then
+        chooses:
+    </p>
+    <ul>
+        <li><strong>Effort Level</strong>, which can be any whole number from 1
+            to 10
+        </li>
+    </ul>
+    <p>
+        Effort is costly only to Participant B and determines the total return,
+        which will be apportioned according to the proposed return share. <i>The
+        following table shows the relationship between B's effort, the cost of
+        effort, and the resulting total return:</i>
+    </p>
+    <table class=table>
+        <tr>
+            <th>Effort Level</th>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <th>Effort Cost</th>
+            <td>0</td>
+            <td>4</td>
+            <td>8</td>
+            <td>12</td>
+            <td>18</td>
+            <td>24</td>
+            <td>32</td>
+            <td>40</td>
+            <td>50</td>
+            <td>60</td>
+        </tr>
+        <tr>
+            <th>Total Return</th>
+            <td>14</td>
+            <td>28</td>
+            <td>42</td>
+            <td>54</td>
+            <td>70</td>
+            <td>84</td>
+            <td>98</td>
+            <td>112</td>
+            <td>126</td>
+            <td>140</td>
+        </tr>
+    </table>
+    <p>
+        Given that the contract is accepted, Participant A will receive:<br/>
+        <strong>(100% – [B’s Return Share in %]) × [Total Return] – [B’s Fixed
+            Payment]</strong><br/>
+        and Participant B will receive:<br/>
+        <strong>[B's Return Share in %] × [Total Return] + [B's Fixed Payment]
+            – [B's Effort Cost]</strong>
+    </p>
+</div>
+</div>

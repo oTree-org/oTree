@@ -1,0 +1,20 @@
+{% load otree %}
+
+<div class="instructions well well-lg" style="">
+
+    <h3>
+        Instructions
+    </h3>
+    <p>
+        You have been randomly and anonymously paired with another participant.
+        Each of you will represent a firm. Each firm manufactures one unit of
+        the same product at no cost.
+    </p>
+    <p>
+        Each of you privately sets your price, anything from 0 to {{ Constants.maximum_price }}.
+        The buyer in the market will always buy one unit of the product at the
+        lower price. In case of a tie, the buyer will buy from one of you at
+        random. Your profit is your price if your product is sold and zero
+        otherwise.
+    </p>
+</div>

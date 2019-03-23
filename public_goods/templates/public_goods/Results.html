@@ -1,0 +1,38 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+  
+
+    <table class="table-condensed" style="width:500px; margin-top:20px;">
+        <tr><td>You contributed:</td><td>{{ player.contribution }}</td></tr>
+        <tr><td>Other participants contributed:</td><td></td></tr>
+        {% for p in player.get_others_in_group %}
+            <tr><td></td><td>{{ p.contribution }}</td></tr>
+        {% endfor %}
+
+        <tr><td>Total contribution:</td><td>{{ group.total_contribution }}</td></tr>
+
+        <tr><td colspan="2"><hr/></td></tr>
+
+        <tr><td>Total earnings from the project:</td><td>{{ total_earnings }}</td></tr>
+        <tr><td>Your earnings from the project:</td><td>{{ group.individual_share }}</td></tr>
+
+        <tr><td colspan="2"><hr/></td></tr>
+
+        <tr><td>Thus in total you earned:</td><td>{{ player.payoff }}</td></tr>
+
+    </table>
+    <p></p>
+
+    {% next_button %}
+
+
+    {% include Constants.instructions_template %}
+
+
+{% endblock %}

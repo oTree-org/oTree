@@ -1,0 +1,50 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+
+    <p>
+        {% if player.is_winner %}
+            You won the auction!
+        {% else %}
+            You did not win the auction!
+        {% endif %}
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>Your value</th>
+            <th>Your bid</th>
+            <th>Winning bid</th>
+            <th>Second-Highest Bid</th>
+            <th>You Paid</th>
+            <th>Your payoff</th>
+        </tr>
+
+        <tr>
+            <td>{{ player.private_value }}</td>
+            <td>{{ player.bid_amount }}</td>
+            <td>{{ group.highest_bid }}</td>
+            <td>{{ group.second_highest_bid }}</td>
+            <td>
+                {% if player.is_winner %}
+                    {{ group.second_highest_bid }}
+                {% else %}
+                    0
+                {% endif %}
+            </td>
+            <td>{{ player.payoff|floatformat:"-2" }}</td>
+        </tr>
+
+    </table>
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}
