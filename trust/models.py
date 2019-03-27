@@ -41,6 +41,9 @@ class Group(BaseGroup):
         min=c(0),
     )
 
+    def sent_back_amount_max(self):
+        return self.sent_amount * Constants.multiplier
+
     def set_payoffs(self):
         p1 = self.get_player_by_id(1)
         p2 = self.get_player_by_id(2)

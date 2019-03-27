@@ -35,6 +35,13 @@ class Group(BaseGroup):
         doc="""Amount sent back by P2""",
     )
 
+    def sent_back_amount_choices(self):
+        return currency_range(
+            c(0),
+            self.sent_amount * Constants.multiplier,
+            c(1)
+        )
+
 
 class Player(BasePlayer):
     pass

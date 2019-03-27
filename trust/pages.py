@@ -41,9 +41,6 @@ class SendBack(Page):
                 'tripled_amount': tripled_amount,
                 'prompt': 'Please an amount from 0 to {}'.format(tripled_amount)}
 
-    def sent_back_amount_max(self):
-        return self.group.sent_amount * Constants.multiplier
-
 
 class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
