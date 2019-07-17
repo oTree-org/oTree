@@ -3,7 +3,6 @@ from otree.api import (
     Currency as c, currency_range
 )
 
-
 doc = """
 This is a one-shot "Prisoner's Dilemma". Two players are asked separately
 whether they want to cooperate or defect. Their choices directly determine the
@@ -37,7 +36,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     decision = models.StringField(
-        choices=[['Cooperate', 'Cooperate'], ['Defect', 'Defect']],
+        choices=['Cooperate', 'Defect'],
         doc="""This player's decision""",
         widget=widgets.RadioSelect
     )
@@ -46,18 +45,15 @@ class Player(BasePlayer):
         return self.get_others_in_group()[0]
 
     def set_payoff(self):
-
-        payoff_matrix = {
-            'Cooperate':
-                {
-                    'Cooperate': Constants.both_cooperate_payoff,
-                    'Defect': Constants.betrayed_payoff
-                },
-            'Defect':
-                {
-                    'Cooperate': Constants.betray_payoff,
-                    'Defect': Constants.both_defect_payoff
-                }
-        }
+        payoff_matrix = dict(
+            Cooperate=dict(
+                Cooperate=Constants.both_cooperate_payoff,
+                Defect=Constants.betrayed_payoff
+            ),
+            Defect=dict(
+                Cooperate=Constants.betray_payoff,
+                Defect=Constants.both_defect_payoff
+            )
+        )
 
         self.payoff = payoff_matrix[self.decision][self.other_player().decision]

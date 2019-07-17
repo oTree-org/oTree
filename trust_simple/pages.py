@@ -23,9 +23,9 @@ class SendBack(Page):
         return self.player.id_in_group == 2
 
     def vars_for_template(self):
-        return {
-            'tripled_amount': self.group.sent_amount * Constants.multiplier
-        }
+        return dict(
+            tripled_amount=self.group.sent_amount * Constants.multiplier,
+        )
 
 
 class ResultsWaitPage(WaitPage):

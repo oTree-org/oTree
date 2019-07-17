@@ -37,9 +37,10 @@ class SendBack(Page):
     def vars_for_template(self):
         tripled_amount = self.group.sent_amount * Constants.multiplier
 
-        return {
-                'tripled_amount': tripled_amount,
-                'prompt': 'Please an amount from 0 to {}'.format(tripled_amount)}
+        return dict(
+            tripled_amount=tripled_amount,
+            prompt='Please an amount from 0 to {}'.format(tripled_amount),
+        )
 
 
 class ResultsWaitPage(WaitPage):
@@ -51,9 +52,9 @@ class Results(Page):
     """This page displays the earnings of each player"""
 
     def vars_for_template(self):
-        return {
-            'tripled_amount': self.group.sent_amount * Constants.multiplier
-        }
+        return dict(
+            tripled_amount=self.group.sent_amount * Constants.multiplier
+        )
 
 
 page_sequence = [

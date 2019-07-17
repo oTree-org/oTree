@@ -22,9 +22,9 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     def vars_for_template(self):
-        return {
-            'is_greedy': self.group.item_value - self.player.bid_amount < 0
-        }
+        return dict(
+            is_greedy=self.group.item_value - self.player.bid_amount < 0,
+        )
 
 
 page_sequence = [Introduction,

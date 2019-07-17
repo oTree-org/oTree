@@ -22,11 +22,11 @@ class Results(Page):
     def vars_for_template(self):
         me = self.player
         opponent = me.other_player()
-        return {
-            'my_decision': me.decision,
-            'opponent_decision': opponent.decision,
-            'same_choice': me.decision == opponent.decision,
-        }
+        return dict(
+            my_decision=me.decision,
+            opponent_decision=opponent.decision,
+            same_choice=me.decision == opponent.decision
+        )
 
 
 page_sequence = [

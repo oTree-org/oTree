@@ -21,9 +21,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     def vars_for_template(self):
-        return {
-            'offer': Constants.endowment - self.group.kept,
-        }
+        return dict(offer=Constants.endowment - self.group.kept)
 
 
 page_sequence = [

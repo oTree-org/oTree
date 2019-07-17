@@ -20,7 +20,7 @@ class Results(Page):
     def vars_for_template(self):
         sorted_guesses = sorted(p.guess for p in self.group.get_players())
 
-        return {'sorted_guesses': sorted_guesses}
+        return dict(sorted_guesses=sorted_guesses)
 
 
 page_sequence = [Introduction,
