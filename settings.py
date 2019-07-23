@@ -26,11 +26,13 @@ SESSION_CONFIGS = [
     ),
     dict(
         name='survey',
+        display_name='survey',
         num_demo_participants=1,
         app_sequence=['survey', 'payment_info']
     ),
     dict(
         name='quiz',
+        display_name='quiz',
         num_demo_participants=1,
         app_sequence=['quiz']
     ),
@@ -51,11 +53,9 @@ ROOMS = [
     dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
 ]
 
-
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
-
 
 DEMO_PAGE_INTRO_HTML = """
 Here are some oTree games.
