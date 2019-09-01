@@ -2,7 +2,7 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
-import random
+
 
 
 doc = """
@@ -20,6 +20,7 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     def creating_session(self):
+        import random
         if self.round_number == 1:
             paying_round = random.randint(1, Constants.num_rounds)
             self.session.vars['paying_round'] = paying_round

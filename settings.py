@@ -30,13 +30,34 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
         app_sequence=['survey', 'payment_info']
     ),
-    dict(
-        name='quiz',
-        display_name='quiz',
-        num_demo_participants=1,
-        app_sequence=['quiz']
-    ),
+    dict(name='trust', display_name="Trust Game", num_demo_participants=2, app_sequence=['trust', 'payment_info']),
+    dict(name='prisoner', display_name="Prisoner's Dilemma", num_demo_participants=2,
+         app_sequence=['prisoner', 'payment_info']),
+    dict(name='volunteer_dilemma', display_name="Volunteer's Dilemma", num_demo_participants=3,
+         app_sequence=['volunteer_dilemma', 'payment_info']),
+    dict(name='cournot', display_name="Cournot Competition", num_demo_participants=2, app_sequence=[
+        'cournot', 'payment_info'
+    ]),
+    dict(name='dictator', display_name="Dictator Game", num_demo_participants=2,
+         app_sequence=['dictator', 'payment_info']),
+    dict(name='matching_pennies', display_name="Matching Pennies", num_demo_participants=2, app_sequence=[
+        'matching_pennies',
+    ]),
+    dict(name='traveler_dilemma', display_name="Traveler's Dilemma", num_demo_participants=2,
+         app_sequence=['traveler_dilemma', 'payment_info']),
+    dict(name='bargaining', display_name="Bargaining Game", num_demo_participants=2,
+         app_sequence=['bargaining', 'payment_info']),
+    dict(name='common_value_auction', display_name="Common Value Auction", num_demo_participants=3,
+         app_sequence=['common_value_auction', 'payment_info']),
+    dict(name='bertrand', display_name="Bertrand Competition", num_demo_participants=2, app_sequence=[
+        'bertrand', 'payment_info'
+    ]),
+    dict(name='public_goods_simple', display_name="Public Goods (simple version from tutorial)",
+         num_demo_participants=3, app_sequence=['public_goods_simple', 'payment_info']),
+    dict(name='trust_simple', display_name="Trust Game (simple version from tutorial)", num_demo_participants=2,
+         app_sequence=['trust_simple']),
 ]
+
 # see the end of this file for the inactive session configs
 
 
@@ -68,129 +89,4 @@ SECRET_KEY = '6lertt4wlb09zj@4wyuy-p-6)i$vh!ljwx&r9bti6kgw54k-h8'
 INSTALLED_APPS = ['otree']
 
 # inactive session configs
-### {
-###     'name': 'trust',
-###     'display_name': "Trust Game",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['trust', 'payment_info'],
-### },
-### {
-###     'name': 'prisoner',
-###     'display_name': "Prisoner's Dilemma",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['prisoner', 'payment_info'],
-### },
-### {
-###     'name': 'ultimatum',
-###     'display_name': "Ultimatum (randomized: strategy vs. direct response)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['ultimatum', 'payment_info'],
-### },
-### {
-###     'name': 'ultimatum_strategy',
-###     'display_name': "Ultimatum (strategy method treatment)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['ultimatum', 'payment_info'],
-###     'use_strategy_method': True,
-### },
-### {
-###     'name': 'ultimatum_non_strategy',
-###     'display_name': "Ultimatum (direct response treatment)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['ultimatum', 'payment_info'],
-###     'use_strategy_method': False,
-### },
-### {
-###     'name': 'vickrey_auction',
-###     'display_name': "Vickrey Auction",
-###     'num_demo_participants': 3,
-###     'app_sequence': ['vickrey_auction', 'payment_info'],
-### },
-### {
-###     'name': 'volunteer_dilemma',
-###     'display_name': "Volunteer's Dilemma",
-###     'num_demo_participants': 3,
-###     'app_sequence': ['volunteer_dilemma', 'payment_info'],
-### },
-### {
-###     'name': 'cournot',
-###     'display_name': "Cournot Competition",
-###     'num_demo_participants': 2,
-###     'app_sequence': [
-###         'cournot', 'payment_info'
-###     ],
-### },
-### {
-###     'name': 'principal_agent',
-###     'display_name': "Principal Agent",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['principal_agent', 'payment_info'],
-### },
-### {
-###     'name': 'dictator',
-###     'display_name': "Dictator Game",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['dictator', 'payment_info'],
-### },
-### {
-###     'name': 'matching_pennies',
-###     'display_name': "Matching Pennies",
-###     'num_demo_participants': 2,
-###     'app_sequence': [
-###         'matching_pennies',
-###     ],
-### },
-### {
-###     'name': 'traveler_dilemma',
-###     'display_name': "Traveler's Dilemma",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['traveler_dilemma', 'payment_info'],
-### },
-### {
-###     'name': 'bargaining',
-###     'display_name': "Bargaining Game",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['bargaining', 'payment_info'],
-### },
-### {
-###     'name': 'common_value_auction',
-###     'display_name': "Common Value Auction",
-###     'num_demo_participants': 3,
-###     'app_sequence': ['common_value_auction', 'payment_info'],
-### },
-### {
-###     'name': 'bertrand',
-###     'display_name': "Bertrand Competition",
-###     'num_demo_participants': 2,
-###     'app_sequence': [
-###         'bertrand', 'payment_info'
-###     ],
-### },
-### {
-###     'name': 'real_effort',
-###     'display_name': "Real-effort transcription task",
-###     'num_demo_participants': 1,
-###     'app_sequence': [
-###         'real_effort',
-###     ],
-### },
-### {
-###     'name': 'lemon_market',
-###     'display_name': "Lemon Market Game",
-###     'num_demo_participants': 3,
-###     'app_sequence': [
-###         'lemon_market', 'payment_info'
-###     ],
-### },
-### {
-###     'name': 'public_goods_simple',
-###     'display_name': "Public Goods (simple version from tutorial)",
-###     'num_demo_participants': 3,
-###     'app_sequence': ['public_goods_simple', 'payment_info'],
-### },
-### {
-###     'name': 'trust_simple',
-###     'display_name': "Trust Game (simple version from tutorial)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['trust_simple'],
-### },
+

@@ -2,7 +2,7 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
-import random
+
 
 doc = """
 In a common value auction game, players simultaneously bid on the item being
@@ -31,6 +31,7 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def creating_session(self):
         for g in self.get_groups():
+            import random
             item_value = random.uniform(
                 Constants.min_allowable_bid,
                 Constants.max_allowable_bid
@@ -46,6 +47,7 @@ class Group(BaseGroup):
     highest_bid = models.CurrencyField()
 
     def set_winner(self):
+        import random
         players = self.get_players()
         self.highest_bid = max([p.bid_amount for p in players])
 
@@ -55,6 +57,7 @@ class Group(BaseGroup):
         winner.is_winner = True
 
     def generate_value_estimate(self):
+        import random
         minimum = self.item_value - Constants.estimate_error_margin
         maximum = self.item_value + Constants.estimate_error_margin
         estimate = random.uniform(minimum, maximum)
