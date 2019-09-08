@@ -58,7 +58,6 @@ SESSION_CONFIGS = [
          app_sequence=['trust_simple']),
 ]
 
-# see the end of this file for the inactive session configs
 
 
 # ISO-639 code
