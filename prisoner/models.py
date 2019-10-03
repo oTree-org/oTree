@@ -31,7 +31,9 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    pass
+    def set_payoffs(self):
+        for p in self.get_players():
+            p.set_payoff()
 
 
 class Player(BasePlayer):
