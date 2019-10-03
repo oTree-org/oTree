@@ -55,6 +55,8 @@ class Group(BaseGroup):
         winner = random.choice(
             players_with_highest_bid)  # if tie, winner is chosen at random
         winner.is_winner = True
+        for p in players:
+            p.set_payoff()
 
     def generate_value_estimate(self):
         import random

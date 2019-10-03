@@ -31,11 +31,7 @@ class SendBack(Page):
 class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
-        group = self.group
-        p1 = group.get_player_by_id(1)
-        p2 = group.get_player_by_id(2)
-        p1.payoff = Constants.endowment - group.sent_amount + group.sent_back_amount
-        p2.payoff = group.sent_amount * Constants.multiplier - group.sent_back_amount
+        self.group.set_payoffs()
 
 
 class Results(Page):

@@ -14,9 +14,7 @@ class Decision(Page):
 
 class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
-        for p in self.group.get_players():
-            p.set_payoff()
-
+        self.group.set_payoffs()
 
 class Results(Page):
     def vars_for_template(self):
