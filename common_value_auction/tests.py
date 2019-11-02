@@ -24,7 +24,7 @@ class PlayerBot(Bot):
                 bid_amount = 1
         elif case == 'all_0':
             bid_amount = 0
-        else: # case == 'all_max':
+        else:  # case == 'all_max':
             bid_amount = Constants.max_allowable_bid
         yield (pages.Bid, {"bid_amount": bid_amount})
 
@@ -42,7 +42,7 @@ class PlayerBot(Bot):
             self.player.bid_amount,
             self.player.payoff,
             self.player.item_value_estimate,
-            self.player.is_winner
+            self.player.is_winner,
         ]:
             assert field != None
 

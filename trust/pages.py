@@ -52,9 +52,7 @@ class Results(Page):
     """This page displays the earnings of each player"""
 
     def vars_for_template(self):
-        return dict(
-            tripled_amount=self.group.sent_amount * Constants.multiplier
-        )
+        return dict(tripled_amount=self.group.sent_amount * Constants.multiplier)
 
 
 page_sequence = [

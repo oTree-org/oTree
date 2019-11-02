@@ -17,8 +17,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [
-    Contribute,
-    ResultsWaitPage,
-    Results
-]
+page_sequence = [Contribute, ResultsWaitPage, Results]

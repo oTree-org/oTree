@@ -16,6 +16,7 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
+
 class Results(Page):
     def vars_for_template(self):
         me = self.player
@@ -23,13 +24,8 @@ class Results(Page):
         return dict(
             my_decision=me.decision,
             opponent_decision=opponent.decision,
-            same_choice=me.decision == opponent.decision
+            same_choice=me.decision == opponent.decision,
         )
 
 
-page_sequence = [
-    Introduction,
-    Decision,
-    ResultsWaitPage,
-    Results
-]
+page_sequence = [Introduction, Decision, ResultsWaitPage, Results]

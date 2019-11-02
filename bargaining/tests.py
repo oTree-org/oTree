@@ -7,8 +7,8 @@ from .models import Constants
 class PlayerBot(Bot):
 
     cases = [
-        'success', # players agree on an amount under the threshold
-        'greedy', # players ask for too much so end up with nothing
+        'success',  # players agree on an amount under the threshold
+        'greedy',  # players ask for too much so end up with nothing
     ]
 
     def play_round(self):

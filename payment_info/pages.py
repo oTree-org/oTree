@@ -4,12 +4,9 @@ from .models import Constants
 
 
 class PaymentInfo(Page):
-
     def vars_for_template(self):
         participant = self.participant
-        return dict(
-            redemption_code=participant.label or participant.code
-        )
+        return dict(redemption_code=participant.label or participant.code)
 
 
 page_sequence = [PaymentInfo]

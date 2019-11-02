@@ -1,6 +1,11 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency,
 )
 
 
@@ -40,8 +45,9 @@ class Group(BaseGroup):
         two_thirds_avg = (2 / 3) * sum(guesses) / len(players)
         self.two_thirds_avg = round(two_thirds_avg, 2)
 
-        self.best_guess = min(guesses,
-            key=lambda guess: abs(guess - self.two_thirds_avg))
+        self.best_guess = min(
+            guesses, key=lambda guess: abs(guess - self.two_thirds_avg)
+        )
 
         winners = [p for p in players if p.guess == self.best_guess]
         self.num_winners = len(winners)

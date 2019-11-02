@@ -11,8 +11,10 @@ class Send(Page):
     def is_displayed(self):
         return self.player.id_in_group == 1
 
+
 class WaitForP1(WaitPage):
     pass
+
 
 class SendBack(Page):
 
@@ -23,13 +25,10 @@ class SendBack(Page):
         return self.player.id_in_group == 2
 
     def vars_for_template(self):
-        return dict(
-            tripled_amount=self.group.sent_amount * Constants.multiplier,
-        )
+        return dict(tripled_amount=self.group.sent_amount * Constants.multiplier)
 
 
 class ResultsWaitPage(WaitPage):
-
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
@@ -38,10 +37,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [
-    Send,
-    WaitForP1,
-    SendBack,
-    ResultsWaitPage,
-    Results,
-]
+page_sequence = [Send, WaitForP1, SendBack, ResultsWaitPage, Results]

@@ -1,6 +1,12 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
 
 
@@ -25,10 +31,11 @@ class Group(BaseGroup):
         players = self.get_players()
         contributions = [p.contribution for p in players]
         self.total_contribution = sum(contributions)
-        self.individual_share = self.total_contribution * Constants.multiplier / Constants.players_per_group
+        self.individual_share = (
+            self.total_contribution * Constants.multiplier / Constants.players_per_group
+        )
         for p in players:
             p.payoff = Constants.endowment - p.contribution + self.individual_share
-
 
 
 class Player(BasePlayer):

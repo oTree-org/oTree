@@ -1,8 +1,13 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
-
 
 
 doc = """
@@ -34,7 +39,8 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     kept = models.CurrencyField(
         doc="""Amount dictator decided to keep for himself""",
-        min=0, max=Constants.endowment,
+        min=0,
+        max=Constants.endowment,
     )
 
     def set_payoffs(self):

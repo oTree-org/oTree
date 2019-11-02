@@ -1,6 +1,12 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
 
 
@@ -44,7 +50,8 @@ class Player(BasePlayer):
         doc="""
         Amount requested by this player.
         """,
-        min=0, max=Constants.amount_shared
+        min=0,
+        max=Constants.amount_shared,
     )
 
     def other_player(self):

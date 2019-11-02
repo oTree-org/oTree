@@ -1,8 +1,13 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
-
 
 
 doc = """
@@ -21,6 +26,7 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def creating_session(self):
         import random
+
         if self.round_number == 1:
             paying_round = random.randint(1, Constants.num_rounds)
             self.session.vars['paying_round'] = paying_round
@@ -46,7 +52,10 @@ class Group(BaseGroup):
             matcher.is_winner = False
             mismatcher.is_winner = True
         for player in [mismatcher, matcher]:
-            if self.subsession.round_number == self.session.vars['paying_round'] and player.is_winner:
+            if (
+                self.subsession.round_number == self.session.vars['paying_round']
+                and player.is_winner
+            ):
                 player.payoff = Constants.stakes
             else:
                 player.payoff = c(0)
@@ -54,8 +63,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     penny_side = models.StringField(
-        choices=[['Heads', 'Heads'], ['Tails', 'Tails']],
-        widget=widgets.RadioSelect
+        choices=[['Heads', 'Heads'], ['Tails', 'Tails']], widget=widgets.RadioSelect
     )
 
     is_winner = models.BooleanField()

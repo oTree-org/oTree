@@ -1,6 +1,12 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
 
 doc = """
@@ -30,7 +36,6 @@ class Constants(BaseConstants):
 
     # The minimum claim to be requested
     min_amount = c(2)
-
 
 
 class Subsession(BaseSubsession):
@@ -64,10 +69,11 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     claim = models.CurrencyField(
-        min=Constants.min_amount, max=Constants.max_amount,
+        min=Constants.min_amount,
+        max=Constants.max_amount,
         doc="""
         Each player's claim
-        """
+        """,
     )
 
     adjustment = models.CurrencyField()

@@ -8,9 +8,7 @@ class Choice(Page):
     form_fields = ['penny_side']
 
     def vars_for_template(self):
-        return dict(
-            player_in_previous_rounds=self.player.in_previous_rounds(),
-        )
+        return dict(player_in_previous_rounds=self.player.in_previous_rounds())
 
 
 class ResultsWaitPage(WaitPage):
@@ -32,8 +30,4 @@ class ResultsSummary(Page):
         )
 
 
-page_sequence = [
-    Choice,
-    ResultsWaitPage,
-    ResultsSummary
-]
+page_sequence = [Choice, ResultsWaitPage, ResultsSummary]

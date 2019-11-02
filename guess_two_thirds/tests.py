@@ -3,6 +3,7 @@ from . import pages
 from ._builtin import Bot
 from .models import Constants
 
+
 class PlayerBot(Bot):
     cases = ['p1_wins', 'p1_and_p2_win']
 
