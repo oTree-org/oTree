@@ -23,7 +23,4 @@ class Results(Page):
         return dict(sorted_guesses=sorted_guesses)
 
 
-page_sequence = [Introduction,
-                 Guess,
-                 ResultsWaitPage,
-                 Results]
+page_sequence = [Introduction, Guess, ResultsWaitPage, Results]

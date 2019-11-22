@@ -6,18 +6,12 @@ from .models import Constants
 
 class Demographics(Page):
     form_model = 'player'
-    form_fields = ['age',
-                   'gender']
+    form_fields = ['age', 'gender']
 
 
 class CognitiveReflectionTest(Page):
     form_model = 'player'
-    form_fields = ['crt_bat',
-                   'crt_widget',
-                   'crt_lake']
+    form_fields = ['crt_bat', 'crt_widget', 'crt_lake']
 
 
-page_sequence = [
-    Demographics,
-    CognitiveReflectionTest
-]
+page_sequence = [Demographics, CognitiveReflectionTest]

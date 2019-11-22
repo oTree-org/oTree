@@ -1,6 +1,12 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
 
 
@@ -23,18 +29,20 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     def vars_for_admin_report(self):
-        contributions = [p.contribution for p in self.get_players() if p.contribution != None]
+        contributions = [
+            p.contribution for p in self.get_players() if p.contribution != None
+        ]
         if contributions:
             return dict(
                 avg_contribution=sum(contributions) / len(contributions),
                 min_contribution=min(contributions),
-                max_contribution=max(contributions)
+                max_contribution=max(contributions),
             )
         else:
             return dict(
                 avg_contribution='(no data)',
                 min_contribution='(no data)',
-                max_contribution='(no data)'
+                max_contribution='(no data)',
             )
 
 
@@ -45,13 +53,14 @@ class Group(BaseGroup):
 
     def set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
-        self.individual_share = self.total_contribution * Constants.multiplier / Constants.players_per_group
+        self.individual_share = (
+            self.total_contribution * Constants.multiplier / Constants.players_per_group
+        )
         for p in self.get_players():
             p.payoff = (Constants.endowment - p.contribution) + self.individual_share
 
 
 class Player(BasePlayer):
     contribution = models.CurrencyField(
-        min=0, max=Constants.endowment,
-        doc="""The amount contributed by the player""",
+        min=0, max=Constants.endowment, doc="""The amount contributed by the player"""
     )

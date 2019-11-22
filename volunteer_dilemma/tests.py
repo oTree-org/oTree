@@ -21,7 +21,10 @@ class PlayerBot(Bot):
             yield (pages.Decision, {'volunteer': self.player.id_in_group == 1})
             if self.player.id_in_group == 1:
                 assert 'You volunteered' in self.html
-                assert self.player.payoff == Constants.general_benefit - Constants.volunteer_cost
+                assert (
+                    self.player.payoff
+                    == Constants.general_benefit - Constants.volunteer_cost
+                )
             else:
                 assert 'You did not volunteer but some did' in self.html
                 assert self.player.payoff == c(100)

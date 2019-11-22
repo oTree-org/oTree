@@ -19,14 +19,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     def vars_for_template(self):
-        return dict(
-            other_player_request=self.player.other_player().request
-        )
+        return dict(other_player_request=self.player.other_player().request)
 
 
-page_sequence = [
-    Introduction,
-    Request,
-    ResultsWaitPage,
-    Results,
-]
+page_sequence = [Introduction, Request, ResultsWaitPage, Results]

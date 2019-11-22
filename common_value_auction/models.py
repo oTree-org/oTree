@@ -1,8 +1,13 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
-
 
 doc = """
 In a common value auction game, players simultaneously bid on the item being
@@ -32,9 +37,9 @@ class Subsession(BaseSubsession):
     def creating_session(self):
         for g in self.get_groups():
             import random
+
             item_value = random.uniform(
-                Constants.min_allowable_bid,
-                Constants.max_allowable_bid
+                Constants.min_allowable_bid, Constants.max_allowable_bid
             )
             g.item_value = round(item_value, 1)
 
@@ -48,18 +53,23 @@ class Group(BaseGroup):
 
     def set_winner(self):
         import random
+
         players = self.get_players()
         self.highest_bid = max([p.bid_amount for p in players])
 
-        players_with_highest_bid = [p for p in players if p.bid_amount == self.highest_bid]
+        players_with_highest_bid = [
+            p for p in players if p.bid_amount == self.highest_bid
+        ]
         winner = random.choice(
-            players_with_highest_bid)  # if tie, winner is chosen at random
+            players_with_highest_bid
+        )  # if tie, winner is chosen at random
         winner.is_winner = True
         for p in players:
             p.set_payoff()
 
     def generate_value_estimate(self):
         import random
+
         minimum = self.item_value - Constants.estimate_error_margin
         maximum = self.item_value + Constants.estimate_error_margin
         estimate = random.uniform(minimum, maximum)
@@ -80,13 +90,13 @@ class Player(BasePlayer):
     )
 
     bid_amount = models.CurrencyField(
-        min=Constants.min_allowable_bid, max=Constants.max_allowable_bid,
-        doc="""Amount bidded by the player"""
+        min=Constants.min_allowable_bid,
+        max=Constants.max_allowable_bid,
+        doc="""Amount bidded by the player""",
     )
 
     is_winner = models.BooleanField(
-        initial=False,
-        doc="""Indicates whether the player is the winner"""
+        initial=False, doc="""Indicates whether the player is the winner"""
     )
 
     def set_payoff(self):

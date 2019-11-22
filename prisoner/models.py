@@ -1,6 +1,12 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
 
 doc = """
@@ -40,7 +46,7 @@ class Player(BasePlayer):
     decision = models.StringField(
         choices=[['Cooperate', 'Cooperate'], ['Defect', 'Defect']],
         doc="""This player's decision""",
-        widget=widgets.RadioSelect
+        widget=widgets.RadioSelect,
     )
 
     def other_player(self):
@@ -50,12 +56,11 @@ class Player(BasePlayer):
         payoff_matrix = dict(
             Cooperate=dict(
                 Cooperate=Constants.both_cooperate_payoff,
-                Defect=Constants.betrayed_payoff
+                Defect=Constants.betrayed_payoff,
             ),
             Defect=dict(
-                Cooperate=Constants.betray_payoff,
-                Defect=Constants.both_defect_payoff
-            )
+                Cooperate=Constants.betray_payoff, Defect=Constants.both_defect_payoff
+            ),
         )
 
         self.payoff = payoff_matrix[self.decision][self.other_player().decision]

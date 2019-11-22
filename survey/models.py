@@ -1,8 +1,13 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
-
 
 
 class Constants(BaseConstants):
@@ -21,14 +26,13 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    age = models.IntegerField(
-        label='What is your age?',
-        min=13, max=125)
+    age = models.IntegerField(label='What is your age?', min=13, max=125)
 
     gender = models.StringField(
         choices=[['Male', 'Male'], ['Female', 'Female']],
         label='What is your gender?',
-        widget=widgets.RadioSelect)
+        widget=widgets.RadioSelect,
+    )
 
     crt_bat = models.IntegerField(
         label='''

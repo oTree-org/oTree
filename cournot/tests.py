@@ -3,6 +3,7 @@ from . import pages
 from ._builtin import Bot
 from .models import Constants
 
+
 class PlayerBot(Bot):
 
     cases = ['min', 'max']
@@ -21,4 +22,3 @@ class PlayerBot(Bot):
             assert self.player.payoff == c(0)
 
         yield (pages.Results)
-

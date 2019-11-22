@@ -21,9 +21,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [
-    Introduction,
-    Decide,
-    ResultsWaitPage,
-    Results
-]
+page_sequence = [Introduction, Decide, ResultsWaitPage, Results]

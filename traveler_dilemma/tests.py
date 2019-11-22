@@ -3,12 +3,9 @@ from . import pages
 from ._builtin import Bot
 from .models import Constants
 
+
 class PlayerBot(Bot):
-    cases = [
-        'both_min',
-        'both_max',
-        'p1_lower'
-    ]
+    cases = ['both_min', 'both_max', 'p1_lower']
 
     def play_round(self):
         case = self.case

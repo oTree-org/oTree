@@ -1,8 +1,13 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
-
 
 
 doc = """
@@ -33,6 +38,7 @@ class Group(BaseGroup):
 
     def set_payoffs(self):
         import random
+
         players = self.get_players()
         self.winning_price = min([p.price for p in players])
         winners = [p for p in players if p.price == self.winning_price]
@@ -49,8 +55,9 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     price = models.CurrencyField(
-        min=0, max=Constants.maximum_price,
-        doc="""Price player offers to sell product for"""
+        min=0,
+        max=Constants.maximum_price,
+        doc="""Price player offers to sell product for""",
     )
 
     is_winner = models.BooleanField()

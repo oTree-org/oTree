@@ -1,8 +1,13 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
-
 
 
 doc = """
@@ -27,20 +32,13 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
     sent_amount = models.CurrencyField(
-        min=c(0), max=Constants.endowment,
-        doc="""Amount sent by P1""",
+        min=c(0), max=Constants.endowment, doc="""Amount sent by P1"""
     )
 
-    sent_back_amount = models.CurrencyField(
-        doc="""Amount sent back by P2""",
-    )
+    sent_back_amount = models.CurrencyField(doc="""Amount sent back by P2""")
 
     def sent_back_amount_choices(self):
-        return currency_range(
-            c(0),
-            self.sent_amount * Constants.multiplier,
-            c(1)
-        )
+        return currency_range(c(0), self.sent_amount * Constants.multiplier, c(1))
 
     def set_payoffs(self):
         p1 = self.get_player_by_id(1)

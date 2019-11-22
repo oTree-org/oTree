@@ -1,6 +1,12 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
+    Currency as c,
+    currency_range,
 )
 
 
@@ -22,6 +28,7 @@ class Constants(BaseConstants):
     total_capacity = 60
     max_units_per_player = int(total_capacity / players_per_group)
 
+
 class Subsession(BaseSubsession):
     pass
 
@@ -30,9 +37,7 @@ class Group(BaseGroup):
 
     unit_price = models.CurrencyField()
 
-    total_units = models.IntegerField(
-        doc="""Total units produced by all players"""
-    )
+    total_units = models.IntegerField(doc="""Total units produced by all players""")
 
     def set_payoffs(self):
         players = self.get_players()
@@ -45,11 +50,10 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     units = models.IntegerField(
-        min=0, max=Constants.max_units_per_player,
-        doc="""Quantity of units to produce"""
+        min=0,
+        max=Constants.max_units_per_player,
+        doc="""Quantity of units to produce""",
     )
 
     def other_player(self):
         return self.get_others_in_group()[0]
-
-
