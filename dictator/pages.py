@@ -15,8 +15,7 @@ class Offer(Page):
 
 
 class ResultsWaitPage(WaitPage):
-    def after_all_players_arrive(self):
-        self.group.set_payoffs()
+    after_all_players_arrive = 'set_payoffs'
 
 
 class Results(Page):

@@ -9,7 +9,6 @@ from otree.api import (
     currency_range,
 )
 
-
 doc = """
 In a common value auction game, players simultaneously bid on the item being
 auctioned.<br/>
