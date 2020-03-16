@@ -1,4 +1,4 @@
-from otree.api import Currency as c, currency_range, SubmissionMustFail
+from otree.api import Currency as c, currency_range, SubmissionMustFail, expect
 from . import pages
 from ._builtin import Bot
 from .models import Constants
@@ -12,11 +12,11 @@ class PlayerBot(Bot):
         case = self.case
 
         # Introduction
-        yield (pages.Introduction)
+        yield pages.Introduction
 
         if case == 'basic':
             for invalid_bid in [-1, 11]:
-                yield SubmissionMustFail(pages.Bid, {"bid_amount": invalid_bid})
+                yield SubmissionMustFail(pages.Bid, dict(bid_amount=invalid_bid))
         if case == 'p1_wins':
             if self.player.id_in_group == 1:
                 bid_amount = 2
@@ -26,17 +26,17 @@ class PlayerBot(Bot):
             bid_amount = 0
         else:  # case == 'all_max':
             bid_amount = Constants.max_allowable_bid
-        yield (pages.Bid, {"bid_amount": bid_amount})
+        yield pages.Bid, dict(bid_amount=bid_amount)
 
         if case == 'p1_wins':
             if self.player.id_in_group == 1:
-                assert 'You won the auction' in self.html
+                expect('You won the auction', 'in', self.html)
             else:
-                assert 'You did not win' in self.html
+                expect('You did not win', 'in', self.html)
 
         if self.player.id_in_group == 1:
             num_winners = sum([1 for p in self.group.get_players() if p.is_winner])
-            assert num_winners == 1
+            expect(num_winners, 1)
 
         for field in [
             self.player.bid_amount,
@@ -44,6 +44,6 @@ class PlayerBot(Bot):
             self.player.item_value_estimate,
             self.player.is_winner,
         ]:
-            assert field != None
+            expect(field, '!=', None)
 
-        yield (pages.Results)
+        yield pages.Results
