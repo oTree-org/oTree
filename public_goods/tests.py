@@ -10,7 +10,7 @@ class PlayerBot(Bot):
 
     def play_round(self):
         case = self.case
-        yield (pages.Introduction)
+        yield pages.Introduction)
 
         if case == 'basic':
             if self.player.id_in_group == 1:
@@ -21,9 +21,9 @@ class PlayerBot(Bot):
 
         contribution = {'min': 0, 'max': 100, 'basic': 50}[case]
 
-        yield (pages.Contribute, {"contribution": contribution})
+        yield pages.Contribute, {"contribution": contribution}
 
-        yield (pages.Results)
+        yield pages.Results)
 
         if self.player.id_in_group == 1:
 
