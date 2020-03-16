@@ -1,4 +1,4 @@
-from otree.api import Currency as c, currency_range, SubmissionMustFail
+from otree.api import Currency as c, currency_range, SubmissionMustFail, expect
 from . import pages
 from ._builtin import Bot
 from .models import Constants
@@ -28,4 +28,4 @@ class PlayerBot(Bot):
         else:
             expected_payoff = case['p2_payoff']
 
-        assert self.player.payoff == expected_payoff
+        expect(self.player.payoff, expected_payoff)

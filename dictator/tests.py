@@ -10,7 +10,7 @@ class PlayerBot(Bot):
 
         if self.player.id_in_group == 1:
             yield pages.Offer, {"kept": c(99)}
-            assert self.player.payoff == c(99)
+            expect(self.player.payoff, c(99))
         else:
-            assert self.player.payoff == c(1)
+            expect(self.player.payoff, c(1))
         yield pages.Results

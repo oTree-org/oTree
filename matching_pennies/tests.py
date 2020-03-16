@@ -1,4 +1,4 @@
-from otree.api import Currency as c, currency_range
+from otree.api import Currency as c, currency_range, expect
 from . import pages
 from ._builtin import Bot
 from .models import Constants
@@ -17,4 +17,4 @@ class PlayerBot(Bot):
             total_payoffs = 0
             for player in self.group.get_players():
                 total_payoffs += sum(p.payoff for p in player.in_all_rounds())
-            assert total_payoffs == Constants.stakes
+            expect(total_payoffs, Constants.stakes)

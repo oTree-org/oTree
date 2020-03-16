@@ -21,4 +21,4 @@ class PlayerBot(Bot):
             # if everyone produces max, price is driven to 0
             expect(self.player.payoff, c(0))
 
-        yield pages.Results)
+        yield pages.Results

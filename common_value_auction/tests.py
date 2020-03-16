@@ -1,4 +1,4 @@
-from otree.api import Currency as c, currency_range, SubmissionMustFail
+from otree.api import Currency as c, currency_range, SubmissionMustFail, expect
 from . import pages
 from ._builtin import Bot
 from .models import Constants
@@ -36,7 +36,7 @@ class PlayerBot(Bot):
 
         if self.player.id_in_group == 1:
             num_winners = sum([1 for p in self.group.get_players() if p.is_winner])
-            assert num_winners == 1
+            expect(num_winners, 1)
 
         for field in [
             self.player.bid_amount,
@@ -46,4 +46,4 @@ class PlayerBot(Bot):
         ]:
             assert field != None
 
-        yield pages.Results)
+        yield pages.Results
