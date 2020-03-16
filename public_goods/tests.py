@@ -16,12 +16,12 @@ class PlayerBot(Bot):
             if self.player.id_in_group == 1:
                 for invalid_contribution in [-1, 101]:
                     yield SubmissionMustFail(
-                        pages.Contribute, {'contribution': invalid_contribution}
+                        pages.Contribute, dict(contribution=invalid_contribution)
                     )
 
-        contribution = {'min': 0, 'max': 100, 'basic': 50}[case]
+        contribution = dict(min=0, max=100, basic=50)[case]
 
-        yield pages.Contribute, {"contribution": contribution}
+        yield pages.Contribute, dict(contribution=contribution)
 
         yield pages.Results
 

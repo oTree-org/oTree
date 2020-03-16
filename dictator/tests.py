@@ -9,7 +9,7 @@ class PlayerBot(Bot):
         yield pages.Introduction
 
         if self.player.id_in_group == 1:
-            yield pages.Offer, {"kept": c(99)}
+            yield pages.Offer, dict(kept=c(99))
             expect(self.player.payoff, c(99))
         else:
             expect(self.player.payoff, c(1))

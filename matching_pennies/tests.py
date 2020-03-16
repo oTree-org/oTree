@@ -6,11 +6,11 @@ from .models import Constants
 
 class PlayerBot(Bot):
     def play_round(self):
-        yield pages.Choice, {"penny_side": 'Heads'}
+        yield pages.Choice, dict(penny_side='Heads')
         if self.player.role() == 'Matcher':
-            assert self.player.is_winner
+            expect(self.player.is_winner, True)
         else:
-            assert not self.player.is_winner
+            expect(self.player.is_winner, False)
 
         if self.player.round_number == Constants.num_rounds:
             # only 1 person should be paid in only 1 round

@@ -8,7 +8,7 @@ from .models import Constants
 class PlayerBot(Bot):
     def play_round(self):
 
-        yield pages.Demographics, {'age': 24, 'gender': 'Male'}
+        yield pages.Demographics, dict(age=24, gender='Male')
 
         yield (
             pages.CognitiveReflectionTest,
@@ -16,4 +16,4 @@ class PlayerBot(Bot):
         )
 
         for value in [self.player.crt_bat, self.player.payoff]:
-            assert value != None
+            expect(value, '!=', None)

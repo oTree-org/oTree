@@ -14,17 +14,17 @@ class PlayerBot(Bot):
         yield pages.Introduction
 
         if case == 'both_min':
-            yield pages.Claim, {"claim": Constants.min_amount}
+            yield pages.Claim, dict(claim=Constants.min_amount)
             expect(self.player.payoff, Constants.min_amount)
         elif case == 'both_max':
-            yield pages.Claim, {"claim": Constants.max_amount}
+            yield pages.Claim, dict(claim=Constants.max_amount)
             expect(self.player.payoff, Constants.max_amount)
         else:
             if self.player.id_in_group == 1:
-                yield pages.Claim, {"claim": Constants.min_amount}
+                yield pages.Claim, dict(claim=Constants.min_amount)
                 expect(self.player.payoff, Constants.min_amount + 2)
             else:
-                yield pages.Claim, {"claim": Constants.min_amount + 1}
+                yield pages.Claim, dict(claim=Constants.min_amount + 1)
                 expect(self.player.payoff, Constants.min_amount - 2)
 
         yield pages.Results

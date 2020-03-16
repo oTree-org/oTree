@@ -14,22 +14,22 @@ class PlayerBot(Bot):
         if self.case == 'p1_wins':
             if self.player.id_in_group == 1:
                 for invalid_guess in [-1, 101]:
-                    yield SubmissionMustFail(pages.Guess, {"guess": invalid_guess})
-                yield pages.Guess, {"guess": 9}
+                    yield SubmissionMustFail(pages.Guess, dict(guess=invalid_guess))
+                yield pages.Guess, dict(guess=9)
                 expect(self.player.payoff, Constants.jackpot)
-                assert 'you win' in self.html
+                expect('you win', 'in', self.html)
             else:
-                yield pages.Guess, {"guess": 10}
+                yield pages.Guess, dict(guess=10)
                 expect(self.player.payoff, 0)
-                assert 'you did not win' in self.html
+                expect('you did not win', 'in', self.html)
         else:
             if self.player.id_in_group in [1, 2]:
-                yield pages.Guess, {"guess": 9}
+                yield pages.Guess, dict(guess=9)
                 expect(self.player.payoff, Constants.jackpot / 2)
-                assert 'you are one of the 2 winners' in self.html
+                expect('you are one of the 2 winners', 'in', self.html)
             else:
-                yield pages.Guess, {"guess": 10}
+                yield pages.Guess, dict(guess=10)
                 expect(self.player.payoff, 0)
-                assert 'you did not win' in self.html
+                expect('you did not win', 'in', self.html)
 
         yield pages.Results

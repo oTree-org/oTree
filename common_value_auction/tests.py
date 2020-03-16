@@ -30,9 +30,9 @@ class PlayerBot(Bot):
 
         if case == 'p1_wins':
             if self.player.id_in_group == 1:
-                assert 'You won the auction' in self.html
+                expect('You won the auction', 'in', self.html)
             else:
-                assert 'You did not win' in self.html
+                expect('You did not win', 'in', self.html)
 
         if self.player.id_in_group == 1:
             num_winners = sum([1 for p in self.group.get_players() if p.is_winner])
@@ -44,6 +44,6 @@ class PlayerBot(Bot):
             self.player.item_value_estimate,
             self.player.is_winner,
         ]:
-            assert field != None
+            expect(field, '!=', None)
 
         yield pages.Results
