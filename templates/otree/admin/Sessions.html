@@ -1,0 +1,188 @@
+{% extends "otree/BaseAdmin.html" %}
+{% load static %}
+
+{% block internal_scripts %}
+{{ block.super }}
+<script>
+
+/*
+****************************
+****************************
+Code for "checkAll" checkbox
+in the header
+****************************
+****************************
+*/
+$(function() {
+    checkFunction('session', 'checkAll');
+});
+function checkFunction(checkName, checkAllName) {
+// code for "checkAll" checkbox
+$('input[name=' +  checkAllName + ']:visible').click (function () {
+    $('input[name=' + checkName + ']:visible').prop('checked', $(this).prop('checked')).trigger("change")
+});
+// if all checkboxes are selected check also "checkAll" checkbox
+$('input[name=' + checkName + ']').change (function () {
+    var check = ($("input[name=" + checkName + "]:checked:visible").length == $("input[name=" + checkName + "]:visible").length);
+    $("input[name=" + checkAllName + "]:visible").prop('checked', check);
+})
+}
+/*
+****************************
+****************************
+Smart Action Buttons
+(Delete and Archive)
+They active only if at least 
+one action-item is selected
+****************************
+****************************
+*/
+$(function() {
+    $('input[name=session]').change(function () {
+        var actionButtons = $('.action-on-selected-sessions');
+        var numCheckedSessions = $('input[name=session]:checked').length;
+        console.log(numCheckedSessions);
+        if ( numCheckedSessions === 0 ) {
+            actionButtons.attr('disabled', true);
+        }
+        else {
+            actionButtons.attr('disabled', false);
+        }
+    })
+});
+
+
+
+
+</script>
+
+{% endblock %}
+
+{% block title %}
+    {% if is_archive %}
+        Archived Sessions
+    {% else %}
+        Sessions
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+    <form action="{% url 'CreateSession' %}">
+        <div class="btn-group" style="float: right;">
+            <button class="btn btn-primary">
+                Create new session
+            </button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+            </button>
+            <div class="dropdown-menu" role="menu">
+                <a class="dropdown-item" href="{% url 'CreateSession' %}?is_mturk=1">For MTurk</a>
+            </div>
+        </div>
+    </form>
+
+    <br>
+
+    {% if object_list %}
+    <form action="{% url 'DeleteSessions' %}" method="post">
+        {% csrf_token %}
+
+        <div class="modal fade" id="delete-confirm" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete selected session(s)</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                        Are you sure you want to delete the selected session(s)?
+                        </p>
+                        <p class="text-danger">
+                        This action is irreversible.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group" role="group">
+            <button type="submit"
+                    class="action-on-selected-sessions btn btn-secondary"
+                    disabled formaction="{% url 'ToggleArchivedSessions' %}">
+                <img src='{% static "glyphicons/folder-closed.png" %}'>
+                {% if is_archive %}Un-Archive{% else %}Archive{% endif %}
+            </button>
+            <button type="button"
+                    class="action-on-selected-sessions btn btn-secondary"
+                    disabled
+                    data-toggle="modal" data-target="#delete-confirm">
+                <img src='{% static "glyphicons/delete.png" %}'> Delete
+            </button>
+        </div>
+
+        <br><br>
+
+        <table class="table">
+            <thead>
+                <th>
+                    <input name="checkAll" type="checkbox" value="">
+                </th>
+                <th>Code</th>
+                <th>Label</th>
+                <th>Config</th>
+                <th></th>
+            </thead>
+            <tbody>
+            {% for s in object_list %}
+            <tr {% if s.archived %}class="hidden"{% endif %}>
+                <td>
+                    <input name="session" type="checkbox" value="{{ s.code }}">
+                </td>
+                <td><a href="{% url 'SessionDescription' s.code %}">{{ s.code }}</a></td>
+                <td>{{ s.label }}</td>
+                <td>{{ s.config.name }}</td>
+                <td>
+                    <a href="{% url 'SessionStartLinks' s.code %}" class="btn btn-sm" role="button">
+                        <img src='{% static "glyphicons/link.png" %}'> Links
+                    </a>
+                    <a href="{% url 'SessionEditProperties' s.code %}" class="btn btn-sm" role="button">
+                        <img src='{% static "glyphicons/pencil.png" %}'> Edit
+                    </a>
+                    <a href="{% url 'SessionMonitor' s.code %}" class="btn btn-sm" role="button">
+                        <img src='{% static "glyphicons/eye-open.png" %}'> Monitor
+                    </a>
+                    <a href="{% url 'SessionData' s.code %}" class="btn btn-sm" role="button">
+                        <img src='{% static "glyphicons/list-alt.png" %}'> Data
+                    </a>
+                    <a href="{% if s.is_mturk %}{% url 'MTurkSessionPayments' s.code %}{% else %}{% url 'SessionPayments' s.code %}{% endif %}" class="btn btn-sm" role="button">
+                        <img src='{% static "glyphicons/usd.png" %}'> Payments
+                    </a>
+                    {% if s.is_mturk %}
+                        <a href="{% url 'MTurkCreateHIT' s.code %}"
+                           class="btn btn-sm {% if s.mturk_is_active %}btn-success{% endif %}" role="button">
+                            <img src='{% static "glyphicons/cloud.png" %}'> MTurk&nbsp;&nbsp;&nbsp;
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </form>
+    {% endif %}
+    {% if not is_archive and archived_sessions_exist %}
+        <div>
+            <form action="" method="GET">
+            <a href="?archived=1">Archived sessions</a>
+            </form>
+        </div>
+    {% endif %}
+    {% include "otree/includes/messages.html" %}
+{% endblock %}

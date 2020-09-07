@@ -1,0 +1,28 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+    {% if num_q == 1 %}
+        <p>
+            Suppose that you picked 10 and other participants in your group
+            picked 20, 20, 10, 30. The average of all chosen numbers is 18.
+            Which number did the winner(s) pick and what would be your payoff?
+        </p>
+        <p>
+            {% formfield player.training_question_1_win_pick with label='The winner(s) picked:' %}
+        </p>
+        <p>
+            {% formfield player.training_question_1_my_payoff with label='My payoff would be:' %}
+        </p>
+    {% endif %}
+
+    {% next_button %}
+
+    {% include 'beauty/Instructions.html' %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Set Your Price
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.price with label="Please enter a number from 0 to 100 as your price" %}
+
+
+<p>{% next_button %}</p>
+
+    {% include instructions %}
+
+{% endblock %}

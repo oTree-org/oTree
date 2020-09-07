@@ -1,0 +1,132 @@
+{% load otree i18n %}
+
+<div class='otree-chat' id='_js-otree-chat-{{ channel }}'>
+    <div class='otree-chat__messages'></div>
+    <input type="text" class="otree-chat__input" size="40">
+    {% comment %}Translators: Chat widget "send" button text{% endcomment %}
+    <button type="button" class="otree-chat__btn-send">{% trans 'Send' %}</button>
+</div>
+
+
+<style>
+.otree-chat {
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 30px 0 0 0;
+}
+.otree-chat__messages {
+    height: 200px;
+    overflow: auto;
+    background: #eee;
+    margin: 2px 0 5px 0;
+}
+
+.otree-chat__nickname {
+    display: inline-block;
+    color: #C07A36;
+    width: 150px;
+    font-weight: bold;
+}
+</style>
+
+
+<script>
+$(function () {
+
+    // helper function to escape HTML
+    var entityMap = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+      '/': '&#x2F;',
+      '`': '&#x60;',
+      '=': '&#x3D;'
+    };
+
+    function escapeHtml (string) {
+      return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+        return entityMap[s];
+      });
+    }
+
+    var varsFromDjango = {{ chat_vars_for_js|json }};
+    var channel = varsFromDjango.channel;
+    var socketPath = varsFromDjango.socket_path;
+    var participantID = varsFromDjango.participant_id;
+    var nickname_i_see_for_myself = varsFromDjango.nickname_i_see_for_myself;
+
+    var $chatWidget = $('#_js-otree-chat-' + channel);
+
+    var $messageInput = $chatWidget.find('input');
+    var socket = makeReconnectingWebSocket(socketPath);
+    var $msgdiv = $chatWidget.find('.otree-chat__messages');
+
+    // Handle incoming messages
+    socket.onmessage = function (message) {
+
+        var messages = JSON.parse(message.data);
+
+        var messagesHTML = '';
+
+        for (var i = 0; i < messages.length; i++) {
+            var chatMessage = messages[i];
+            var nickname = chatMessage.nickname;
+
+            {% comment %}
+            Show my own nickname, so I know how it will look to
+            others who read it.
+            {% endcomment %}
+            // need to use ID instead of code, for security
+            if (chatMessage.participant_id === participantID) {
+                nickname = nickname_i_see_for_myself;
+            }
+
+            messagesHTML += "<div class='otree-chat__msg'>" +
+                        "<span class='otree-chat__nickname'>" + escapeHtml(nickname) + "</span>" +
+                        "<span class='otree-chat__body'>" + escapeHtml(chatMessage.body) + "</span>" +
+                        "</div>";
+
+        }
+        $msgdiv.append(messagesHTML);
+        $msgdiv.scrollTop($msgdiv.prop("scrollHeight"));
+    };
+
+    socket.onopen = function () {
+        console.log("Connected to chat socket");
+        // clear message history so we can re-populate
+        $msgdiv.empty();
+    };
+
+    function sendMessage() {
+        var body = $messageInput.val();
+
+        if (!body) {
+            return;
+        }
+
+        var data = {
+            'body': $messageInput.val(),
+            'nickname_signed': varsFromDjango.nickname_signed
+        };
+
+        socket.send(JSON.stringify(data));
+
+        $messageInput.val('');
+    }
+
+    $chatWidget.find('button').click(function(e) {
+        sendMessage();
+    });
+
+    // pressing "enter" in the message box should submit a message,
+    // NOT the page's form
+    $messageInput.on('keypress', function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+});
+</script>

@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+{% block title %}Results{% endblock %}
+{% block content %}
+    <table class=table style='width: auto'>
+        <tr>
+            <td>You claimed</td>
+            <td>{{ player.claim }}</td>
+        </tr>
+        <tr>
+            <td>The other traveler claimed</td>
+            <td>{{ other_player_claim }}</td>
+        </tr>
+        <tr>
+            <td>Winning claim (i.e. lower claim)</td>
+            <td>{{ group.lower_claim }}</td>
+        </tr>
+        <tr>
+            <td>Your adjustment</td>
+            <td>{{ player.adjustment }}</td>
+        </tr>
+        <tr>
+            <td>Thus you receive</td>
+            <td>{{ player.payoff }}</td>
+        </tr>
+
+    </table>
+
+    <p>{% next_button %}</p>
+    {% include Constants.instructions_template %}
+{% endblock %}

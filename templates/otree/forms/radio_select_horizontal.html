@@ -1,0 +1,13 @@
+{% with id=widget.attrs.id %}
+    {% comment %}
+	the 'widget' variable is a dict, NOT the widget instance
+	{% endcomment %}
+    {% for group, options, index in widget.optgroups %}
+        {% for option in options %}
+            <div class="form-check form-check-inline">
+                {% include "django/forms/widgets/input.html" with widget=option %}
+                <label for="{{ id }}_{{ option.index }}" class="form-check-label">{{ option.label }}</label>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endwith %}

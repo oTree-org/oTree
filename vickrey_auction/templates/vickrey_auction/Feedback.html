@@ -1,0 +1,39 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Solution to Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+
+
+    {% if player.is_training_question_1_my_payoff_correct %}
+        <p class="text-success">Your answer {{player.training_question_1_my_payoff}} was correct.</p>
+    {% else %}
+        <p class="text-danger">Your answer {{player.training_question_1_my_payoff}} was incorrect</p>
+    {% endif %}
+
+
+    <p>
+        Suppose that your value to the object was 65 points and you bid 60.
+        The other 2 participants bid 55 and 45 respectively.
+        What would be your payoff?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.training_question_1_my_payoff_correct}}.</strong>
+    </p>
+    <p>
+        <strong>Explanation:</strong> You bid 60 which was the highest among
+        all bids (60, 55, 45), thus you won the object. You paid the second
+        highest bid, which was <strong>55</strong>. Since the object valued
+        <strong>65</strong> to you, your payoff was
+        <strong>100+65-55={{Constants.training_question_1_my_payoff_correct}}</strong>.
+    </p>
+
+    {% next_button %}
+
+    {% include 'vickrey_auction/Instructions.html' %}
+
+{% endblock %}

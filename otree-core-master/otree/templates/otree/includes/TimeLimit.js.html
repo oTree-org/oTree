@@ -1,0 +1,36 @@
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'otree/js/jquery.countdown.js' %}"></script>
+
+<script type="text/javascript">
+    $(function() {
+        {% if view.timeout_seconds %}
+            $('div#time-limit').show();
+            var currentDate = new Date();
+            var milliseconds = {{ view.remaining_timeout_seconds }}*1000;
+            $('div#clock').countdown(currentDate.valueOf() + milliseconds, function(event) {
+
+                switch(event.type) {
+                    case "seconds":
+                        //if ((event.lasting.hours == 0) && (event.lasting.minutes == 0)) {
+                        $(this).find('span#'+event.type).html(event.value);
+                        //}
+                        break;
+                    case "minutes":
+                        $(this).find('span#minutes').html(event.lasting.hours * 60 + parseInt(event.value));
+                        break;
+                    case "finished":
+                        $('#clock').hide(duration=0);
+                        $('#time-out-message').show(duration=0);
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: 'auto_submit',
+                            value: '1'
+                        }).appendTo('form');
+                        $('#form').submit();
+
+                        break;
+                }
+            });
+        {% endif %}
+    });
+</script>

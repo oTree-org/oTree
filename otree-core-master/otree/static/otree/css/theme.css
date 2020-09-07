@@ -1,0 +1,84 @@
+/*************************
+ *         FORMS         *
+ *************************/
+
+/* Checkbox and radio button lists shall not have bullet points for every
+   item. */
+.controls > ul {
+    list-style-type: none;
+    padding-left: 2em;
+}
+
+/* Input fields should only take up to 400px width and not stretch over the
+   whole screen */
+.input-group,
+input.form-control,
+select.form-control,
+textarea.form-control {
+    max-width: 400px;
+}
+
+/* This allows the number field to contain around 7 digits. */
+input[type=number].form-control {
+    width: 100px;
+}
+
+.input-group-narrow {
+    /* Choosing a very small value that will always be filled with the input
+     * type and input-group-addon. That way we don't allow a gap between the
+     * two. See: https://github.com/oTree-org/otree-core/issues/257
+     */
+    max-width: 10px;
+}
+
+/* Dropdowns shall occupy only the needed space. */
+select.form-control {
+    width: auto;
+}
+
+.form-control-errors {
+    margin-top: 5px;
+    color: #b94a48;
+}
+
+
+/* Hide those input spinners on webkit and mozilla browsers */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance : none; margin : 0; }
+input[type=number] { -moz-appearance : textfield; }
+
+/* Slider Widget */
+.slider [data-slider-value] {
+    min-width: 5em;
+}
+.asteriskField {
+    display: none;
+}
+
+.radio {
+    margin-top:0px;
+}
+.help-block {
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+
+/* DEBUG TOOLBAR */
+
+.scrollable {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+table.table-debug td.debug-var-name {
+    width: 20% !important;
+
+}
+
+table.table-debug td.debug-var-value {
+    max-width: 0px;
+}

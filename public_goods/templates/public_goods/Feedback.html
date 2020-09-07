@@ -1,0 +1,33 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Solution to Understanding Question 1 of 1
+{% endblock %}
+
+{% block content %}
+
+
+    <p>
+        Your answer <span  class="text-info">{{ player.question }}</span> was {% if player.question_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+    <p>
+        Suppose in a group, 1 participant contributed 80 points, 1 participant contributed 40,
+        and 1 participant contributed nothing. What would be the payoff of the participant who contributed 80 points?
+    </p>
+
+    <p>
+        <strong>Solution: 92 points</strong>
+    </p>
+
+    <p>
+        <strong>Explanation:</strong> Total contribution from all participants was 80+40+0=120. Total earnings from the project were 120*1.8=216.
+        Each participant got an equal share of the earnings, that is, 216/3=72. Hence, payoff for the participant who contributed 80 points
+        was 100-80+72=92.
+    </p>
+    {% next_button %}
+
+    {% include 'public_goods/Instructions.html' %}
+
+{% endblock %}

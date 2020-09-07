@@ -1,14 +1,8 @@
 from otree.api import (
-    models,
-    widgets,
-    BaseConstants,
-    BaseSubsession,
-    BaseGroup,
-    BasePlayer,
-    Currency as c,
-    currency_range,
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
+    Currency as c, currency_range
 )
-
+import random
 
 doc = """
 Each player decides if to free ride or to volunteer from which all will
@@ -24,7 +18,7 @@ class Constants(BaseConstants):
     players_per_group = 3
     num_rounds = 1
 
-    instructions_template = 'volunteer_dilemma/instructions.html'
+    instructions_template = 'volunteer_dilemma/Instructions.html'
 
     num_other_players = players_per_group - 1
 
@@ -56,4 +50,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    volunteer = models.BooleanField(doc="""Whether player volunteers""")
+    volunteer = models.BooleanField(
+        doc="""Whether player volunteers""",
+    )

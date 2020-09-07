@@ -1,0 +1,63 @@
+{% extends "otree/admin/Session.html" %}
+
+{% block internal_scripts %}
+{{ block.super }}
+<script>
+$(document).ready(function() {
+    ajax_json_results();
+    makeTableDraggable($('#results-table'));
+});
+function ajax_json_results() {
+    var start = Date.now();
+    var $table = $('#results-table');
+    $.ajax({
+        url: '{% url "SessionData" session.code %}',
+        type: 'GET',
+        contentType: "application/json",
+        error: function(jqXHR, textStatus) {
+            $( "div#server_error" ).show();
+            setTimeout(ajax_json_results, 10000);
+        },
+        success: function (new_json) {
+            $( "div#server_error" ).hide();
+            updateTable($table, new_json);
+            var msElapsed = Date.now() - start;
+            // feedback mechanism to avoid straining the server:
+            // back off if requests are taking a long time
+            var msUntilNextRequest = Math.max(msElapsed*2, 3000);
+            setTimeout(ajax_json_results, msUntilNextRequest);
+        }
+    });
+}
+</script>
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+<table id="results-table" class="table table-bordered table-hover table-condensed">
+    <thead>
+        <tr>
+            <th rowspan="3">ID in session</th>
+            {% for header, colspan in subsession_headers %}
+                <th colspan="{{ colspan }}">{{ header }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for header, colspan in model_headers %}
+                <th colspan="{{ colspan }}">{{ header }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for header in field_headers %}
+                <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<div id="server_error" class="alert alert-danger" style="display: none;">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    Failed to connect to server
+</div>
+<small>You can download data in Excel or CSV format <a href="{% url 'ExportIndex' %}">here</a>.</small>
+{% endblock %}

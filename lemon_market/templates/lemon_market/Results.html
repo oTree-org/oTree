@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results (Period {{ subsession.round_number }} of {{ Constants.num_rounds }}
+    )
+{% endblock %}
+
+
+{% block content %}
+    <p>
+        You are {{ player.role }}.
+        {% if group.seller_id == 0 %}
+            {% if player.role == 'buyer' %}
+                You bought nothing in this period.
+            {% else %}
+                The buyer bought nothing in this period.
+            {% endif %}
+        {% else %}
+            {% if player.role == 'buyer' %}
+                You bought from seller {{ group.seller_id }}
+                at a price of {{ group.sale_price }}.
+                The quality grade of your purchase is {{ group.sale_quality }}.
+            {% else %}
+                The buyer purchased a {{ group.sale_quality }}
+                grade from
+                    {% if player.id_in_group == group.seller_id %}
+                        you
+                    {% else %}
+                        seller {{ group.seller_id }}
+                    {% endif %}
+                at a price of {{ group.sale_price }}.
+            {% endif %}
+        {% endif %}
+
+        Thus your period payoff is <strong>{{ player.payoff }}</strong>.
+    </p>
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+{% endblock %}

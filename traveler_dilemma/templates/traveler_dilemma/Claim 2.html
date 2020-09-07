@@ -1,0 +1,15 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Claim
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.claim label='How much will you claim for your antique?' %}
+    {% next_button %}
+    
+    {% include Constants.instructions_template %}
+
+{% endblock %}

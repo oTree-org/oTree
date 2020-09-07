@@ -1,0 +1,39 @@
+{% extends "demo/Base.html" %}
+
+
+{% block title %}LaTeX Support{% endblock %}
+
+
+{% block content %}
+
+<table class="table-bordered">
+    <tr>
+        <th>Formula</th>
+        <th>Output</th>
+    </tr>
+    <tr>
+        <td>
+            <code>&lt;span class="latex"&gt;c = \pm\sqrt{a^2 + b^2}&lt;/span&gt;</code>
+        </td>
+        <td>
+            <span class="latex">c = \pm\sqrt{a^2 + b^2}</span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>
+                &lt;span class="latex"&gt;<br>
+                    f(x) = \int_{-\infty}^\infty<br>
+                    \hat f(\xi)\,e^{2 \pi i \xi x}<br>
+                    \,d\xi<br>
+                &lt;/span&gt;</code>
+        </td>
+        <td>
+            <span class="latex">f(x) = \int_{-\infty}^\infty
+            \hat f(\xi)\,e^{2 \pi i \xi x}
+            \,d\xi</span>
+        </td>
+    </tr>
+</table>
+
+{% endblock %}

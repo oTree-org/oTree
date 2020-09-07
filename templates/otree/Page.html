@@ -1,0 +1,55 @@
+{% extends "otree/Base.html" %}
+{% load i18n %}
+{% load otree static %}
+{% comment %}
+NOTE:
+we should keep this page as simple as possible so that 'view source' is friendly
+i removed many linebreaks to make output HTML cleaner
+{% endcomment %}
+{% block body_main %}
+    <div class="otree-body container">
+        <h2 class="otree-title page-header">{% block title %}{% endblock %}</h2>
+        {% if view.remaining_timeout_seconds != None %}
+            {% include 'otree/includes/TimeLimit.html' with form_element_id="form" %}
+        {% endif %}
+        {% if form.errors %}
+            <div class="otree-form-errors alert alert-danger">
+                {% blocktrans trimmed %}Please fix the errors in the form.{% endblocktrans %}
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}{% for varname,value in javascript_vars %}<script>let {{ varname }} = {{ value|json }};</script>{% endfor %}
+        <form action="" method="post" role="form" id="form" autocomplete="off">{% csrf_token %}
+            <div class="_otree-content">{% block content %}{% endblock %}</div>
+        </form>
+        <br/>
+        {# need the default:False for projects with old MTurkLandingPage #}
+        {% if view.is_debug|default:False %}
+            <br>
+            {% include 'otree/includes/debug_info.html' %}
+        {% endif %}
+    </div>
+{% endblock %}
+{% block internal_styles %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'otree/css/page.css' %}">
+{% endblock %}
+{% block internal_scripts %}
+    {{ block.super }}
+    <script id="websocket-redirect" src="{% static 'otree/js/page-websocket-redirect.js' %}"
+            data-socket-url="{{ view.socket_url|safe }}"
+            data-redirect-url="{{ view.redirect_url|safe }}"
+            data-is-browser-bot="{{ participant.is_browser_bot  }}"
+            data-is-debug="{{ view.is_debug|default:"" }}"
+    ></script>
+    {% comment %}
+    the below is a special flag.
+    2018-04-25: why not put it in a response header?
+    ...this had to do with handling an edge case with OutOfRangeNotification.
+    look at this again when i have time.
+    {% endcomment %}
+    {% if participant.is_browser_bot %} <!-- browser-bot-auto-submit -->{% endif %}
+    {% if view.remaining_timeout_seconds != None %}
+        {% include 'otree/includes/TimeLimit.js.html' %}
+    {% endif %}
+    {{ form.media|default:"" }}
+{% endblock %}

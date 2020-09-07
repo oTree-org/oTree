@@ -1,0 +1,30 @@
+{% load staticfiles otree_tags %}
+<div class="well">
+<h4>Debug info</h4>
+{% if form.errors %}
+    {% include 'otree/includes/_formfield_is_missing_error.html' %}
+{% endif %}
+
+{% for table in view.debug_tables %}
+    <div class="panel panel-warning">
+        <div class="panel-heading">{{ table.title|safe }}</div>
+        <div class="scrollable">
+            <table class="table table-hover table-debug">
+                {% for k, v in table.rows %}
+                    <tr>
+                        <td class="debug-var-name">{{ k }}</td>
+                        <td class="debug-var-value">
+                            {% if v|is_text %}
+                            <code>{{ v|strip|br }}</code>
+                            {% else %}
+                            <code>{{ v }}</code>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endfor %}
+
+</div>

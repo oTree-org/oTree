@@ -1,0 +1,43 @@
+#monitor-table th, #monitor-table td, #results-table th, #results-table td {
+    text-align: center;
+    word-wrap: break-word;
+}
+
+table.draggable {
+    display: block;
+    overflow-x: auto;
+    margin-bottom: 0;
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+table.draggable.grabbing {
+    cursor: move;
+}
+
+
+/* the 104px comes from 940/9...it's hardcoded to fit the current container
+ size...maybe there is a better way */
+
+table.draggable td, table.draggable th {
+    min-width: 104px;
+    max-width: 104px
+}
+
+
+table.draggable thead {
+    display: block;
+}
+
+table.draggable tbody {
+    display: block;
+    max-height: 450px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

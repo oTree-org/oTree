@@ -1,0 +1,26 @@
+{% load static otree %}
+<script src="{% static 'otree/js/jquery.countdown.min.js' %}"></script>
+
+<script>
+    $(function () {
+        var currentDate = new Date();
+        var remainingTimeoutSeconds = {{ view.remaining_timeout_seconds|json }};
+        var milliseconds = Math.floor(remainingTimeoutSeconds * 1000);
+        $('.otree-timer__time-left').countdown(currentDate.valueOf() + milliseconds)
+            .on('update.countdown', function (event) {
+                // %-N is "Total count of minutes till the end, non-padded"
+                // %S is seconds left
+                var format = '%-N:%S';
+                $(this).html(event.strftime(format));
+            })
+            .on('finish.countdown', function (event) {
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'timeout_happened',
+                    value: '1'
+                }).appendTo('form');
+                $('#form').submit();
+            });
+    });
+</script>
+

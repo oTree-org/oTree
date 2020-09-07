@@ -1,0 +1,18 @@
+{% extends "demo/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load floppyforms %}
+
+
+{% block title %}oTree demo pages{% endblock %}
+
+
+{% block content %}
+
+<ul>
+    <li><a href="{% url "latex" %}">LaTeX Support</a></li>
+    <li><a href="{% url "widgets" %}">Widgets</a></li>
+</ul>
+
+{% endblock %}
+

@@ -1,0 +1,23 @@
+{% extends 'otree/WaitPage.html' %}
+{% load i18n %}
+{% load static %}
+{% block internal_scripts %}
+    {{ block.super }}
+    <!-- this is an HTML file rather than JavaScript static file because context variables need to be passed to it -->
+
+    <script type="text/javascript">
+        function heartbeat() {
+        var args = {
+            type: "GET",
+            url: '{% url "ParticipantRoomHeartbeat" view.tab_unique_id %}',
+            // necessary for IE
+            cache: false
+        };
+        $.ajax(args);
+    }
+
+    var SECOND = 1000;
+    window.setInterval(heartbeat, 10 * SECOND);
+    </script>
+
+ {% endblock %}

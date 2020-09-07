@@ -1,0 +1,27 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+    {% if num_q == 1 %}
+        <p>
+            Suppose that you went for a stag and the other participant went
+            for a hare. What would be your payoffs respectively?
+        </p>
+        <p>
+            {% formfield player.training_question_1_my_payoff with label='My payoff would be:' %}
+        </p>
+        <p>
+            {% formfield player.training_question_1_other_payoff with label='The other participant’s payoff would be:' %}
+        </p>
+    {% endif %}
+
+    {% next_button %}
+
+    {% include 'stag_hunt/Instructions.html' %}
+
+{% endblock %}

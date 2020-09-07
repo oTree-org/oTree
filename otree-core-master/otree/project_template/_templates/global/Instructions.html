@@ -1,0 +1,11 @@
+{% load otree_tags staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'global/instructions.css' %}" />
+
+<div class="box papereffect">
+    <h4>Instructions</h4>
+    {% block instructions %}{% endblock %}
+    <p>
+    For your convenience, these instructions will remain available to you on all subsequent screens of this study.
+    </p>
+</div>

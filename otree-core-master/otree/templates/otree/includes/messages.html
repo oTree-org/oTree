@@ -1,0 +1,6 @@
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags.split|last }}">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+    </div>
+{% endfor %}

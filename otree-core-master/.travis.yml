@@ -1,0 +1,22 @@
+language: python
+sudo: false
+# Specify Python 3.5 explicitley. We can still run Python 2.x tests in that
+# environment, but Python 3.5 won't be available the other way around.
+# See for details: https://github.com/travis-ci/travis-ci/issues/4794
+python: 3.5
+install:
+  - pip install tox
+script:
+  - tox -r
+services:
+  - redis-server
+env:
+  - TOXENV=style
+  - TOXENV=coverage
+  - TOXENV=python3-warnings
+  - TOXENV=py27-unittest
+  - TOXENV=py27-integration
+  - TOXENV=py27-experiments
+  - TOXENV=py35-unittest
+  - TOXENV=py35-integration
+  - TOXENV=py35-experiments

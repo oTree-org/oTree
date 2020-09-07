@@ -1,0 +1,38 @@
+{% extends "otree/BaseAdmin.html" %}
+
+{% block title %}
+    Demo
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3 well">
+        <div>
+            {{ intro_text|safe }}
+        </div>
+        {% if is_debug %}
+        <div>
+            You can add entries to this list in <code>settings.py</code>.
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="col-md-9">
+        <div class="list-group">
+        {% for s in session_info %}
+            <a href="{{ s.url }}" class="list-group-item" target="_blank">
+                {% if s.num_demo_participants == 1 %}
+                <span class="label label-default pull-right">
+                {% elif s.num_demo_participants == 2 %}
+                <span class="label label-info pull-right">
+                {% else %}
+                <span class="label label-danger pull-right">
+                {% endif %}
+                Participants: {{s.num_demo_participants}}</span>
+                {{ s.display_name }}
+            </a>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

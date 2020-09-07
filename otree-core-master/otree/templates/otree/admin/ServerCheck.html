@@ -1,0 +1,139 @@
+{% extends "otree/BaseAdmin.html" %}
+
+{% block title %}
+    Server Readiness Checks
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        For details on how to fix any issues highlighted below,
+        see <a href="http://otree.readthedocs.io/en/latest/server.html">here</a>.
+    </p>
+
+    {% if pypi_results.pypi_connection_error %}
+        <div class="alert alert-warning">
+            <strong>Update status unknown</strong>
+            Could not connect to <a href="https://pypi.python.org/pypi/otree-core">PyPI</a>
+            to check if your otree-core package is up to date.
+        </div>
+    {% elif pypi_results.update_needed %}
+        <div class="alert alert-danger">
+            <strong>You are using an old oTree version</strong>
+            {{ pypi_results.update_message }}
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+          You have a recent version of oTree ({{ pypi_results.installed_version }}).
+        </div>
+    {% endif %}
+
+    {% if sqlite %}
+        <div class="alert alert-danger">
+            <strong>Using SQLite</strong> You are using SQLite, which is only suitable during development and testing
+            of your app. Before launching a study, you should upgrade to Postgres (or MySQL etc).
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+          You are using a proper database (Postgres, MySQL, etc).
+        </div>
+    {% endif %}
+
+    {% if debug %}
+        <div class="alert alert-danger">
+            <strong>DEBUG mode is on</strong>
+            You should only use DEBUG mode during development and testing
+            of your app.
+            Before launching a study, you should switch DEBUG mode off.
+            To turn off DEBUG mode,
+            {% if heroku %}
+                run:
+                <p><code>heroku config:set OTREE_PRODUCTION=1</code></p>
+            {% else %}
+                set the environment variable <code>OTREE_PRODUCTION</code> to <code>1</code>.
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+          DEBUG mode is off
+        </div>
+    {% endif %}
+
+    {% if runserver %}
+        <div class="alert alert-danger">
+            <strong>You are using <code>otree runserver</code></strong>,
+            which is only suitable for local development.
+            When launching a real study, you should run a proper multi-process server,
+            e.g. <code>otree runprodserver</code>.
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+          You are using a server other than <code>runserver</code>.
+        </div>
+    {% endif %}
+
+
+    {% if not sentry %}
+        <div class="alert alert-danger">
+            <strong>Sentry not configured</strong>
+            Sentry can send you the details of each server error by email.
+            This is necessary because once you have turned off <code>DEBUG</code> mode,
+            you will no longer see Django’s yellow error pages;
+            you or your users will just see generic "500 server error" pages.
+            To set up Sentry, see <a href="http://otree.readthedocs.io/en/latest/server.html#sentry">here</a>.
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            Sentry is configured.
+        </div>
+    {% endif %}
+
+    {% if not auth_level %}
+        <div class="alert alert-danger">
+            <strong>No password protection</strong>
+            To prevent unauthorized server access, you should
+            set the environment variable <code>OTREE_AUTH_LEVEL</code>.
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            Password protection is on.
+            Your app's <code>AUTH_LEVEL</code> is <code>{{ auth_level }}</code>.
+        </div>
+    {% endif %}
+
+    {% if not db_synced %}
+        <div class="alert alert-danger">
+            <strong>Database is missing tables</strong>
+            You should run <code>otree resetdb</code>.
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            Your database appears to be synced.
+        </div>
+    {% endif %}
+
+
+    <!--
+    {% if not huey %}
+        <div class="alert alert-warning">
+            <strong>No timeout worker found</strong>
+            <p>
+            If your study has timeouts on pages (with <code>timeout_seconds</code>,
+            we recommend turning on the timeoutworker dyno.
+            This will ensure that the page timeouts will be enforced even if a user closes their browser.
+            </p>
+            {% if heroku %}
+                <p>In your app dashboard, make sure your timeoutworker dyno is turned on.</p>
+            {% else %}
+                <p>Make sure you are running the timeoutworker process.</p>
+            {% endif %}
+
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            Celery is on.
+        </div>
+    {% endif %}
+    -->
+{% endblock %}
+

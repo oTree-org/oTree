@@ -1,0 +1,184 @@
+{% extends "otree/admin/Session.html" %}
+
+{% block content %}
+    {{ block.super }}
+    <table id="monitor-table"
+           class="table table-bordered table-hover table-condensed">
+        <thead>
+        <tr>
+            {% for header in column_names %}
+                <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <p><span id="num_participants_visited"></span>/{{ session.num_participants }} participants started.</p>
+    <br/>
+    {% if not session.use_browser_bots %}
+    <button id="advance_users" class="btn btn-primary" type="button"
+       data-toggle="popover" data-trigger="hover"
+       data-content="{{ advance_users_button_text }}">
+        Advance slowest user(s)
+    </button>
+    {% endif %}
+
+
+    <br>
+    <div id="refresh_server_error" class="alert alert-danger"
+         style="display: none;">
+        Failed to refresh data from the server.
+    </div>
+
+    <div id="auto_advance_server_error" class="alert alert-danger"
+         style="display: none;">
+        An error occurred and participants could not be advanced.
+        See the server logs for details.
+    </div>
+
+    {% csrf_token %}
+
+{% endblock %}
+
+
+{% block internal_scripts %}
+{{ block.super }}
+<script>
+var $table, $tbody;
+
+$(document).ready(function() {
+    $table = $('#monitor-table');
+    $tbody = $table.find('tbody');
+
+    ajax_and_refresh_table();
+    setup_ajax_advance();
+    makeTableDraggable($table);
+
+    $('[data-toggle="popover"]').popover();
+});
+// wrap timestamp into timeago tag
+function wrap_timestamp() {
+    $( "td[data-field='_last_page_timestamp']:not(:has(*))" ).each(function( index ) {
+        if ( $(this).text() != "") {
+            var date = new Date($(this).text() * 1000);
+            $(this).text("");
+            $(this).append('<time class="timeago" datetime="' + date.toISOString() + '"></time>');
+            $("time.timeago").timeago();
+        }
+    });
+    // remove timestamp for disconnected users
+    $( "tr:has(> td[data-field='status']:contains('Disconnected'))" ).each(function( index ) {
+        $(this).children("td[data-field='_last_page_timestamp']").text("");
+    });
+}
+
+// ajax request for advance session button
+function setup_ajax_advance() {
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+    $('#advance_users').on('click', function () {
+        $('#advance_users').attr("disabled", true);
+        $.ajax({
+            url: '{% url 'AdvanceSession' session.code %}',
+            type: 'POST',
+            error: function(jqXHR, textStatus) {
+                $("div#auto_advance_server_error").show();
+                // enable the button so they can try again?
+                $('#advance_users').attr("disabled", false);
+            },
+            success: function() {
+                $("div#auto_advance_server_error").hide();
+                $('#advance_users').attr("disabled", false);
+            }
+        });
+    });
+}
+
+
+function refreshTable(new_json) {
+    $("div#refresh_server_error").hide();
+    $('#num_participants_visited').html(new_json.length);
+    var old_json = $table.data("raw");
+    // build table for the first time
+    if (old_json === undefined) {
+        populateTableBody($tbody, new_json);
+    } else {
+        // compute delta and update
+        // corresponding values in table
+
+        var diffpatcher = jsondiffpatch.create({
+            objectHash: function (obj) {
+                return obj.code;
+            }
+        });
+        var deltas = diffpatcher.diff(old_json, new_json);
+        for (var i in deltas) {
+            if (i === '_t') {
+                // this is a special value; skip it.
+                continue;
+            }
+            var delta = deltas[i];
+            var rowSelector = 'tr:eq(' + i + ')';
+            var nthBodyRow = $tbody.find(rowSelector);
+            // Array means an insertion
+            if (delta.constructor === Array) {
+                var newRowHTML = createTableRow(delta[0]);
+                var numRows = $tbody.find('tr').length;
+                if (parseInt(i) === numRows) {
+                    $tbody.append(newRowHTML);
+                } else {
+                    var newRow = $(newRowHTML);
+                    newRow.insertBefore(nthBodyRow);
+                }
+                flashGreen($tbody.find(rowSelector))
+            } else {
+                for (header_name in delta) {
+                    var cell_to_update = nthBodyRow.find("td[data-field='" + header_name + "']");
+                    cell_to_update.text(delta[header_name][1]);
+                    flashGreen(cell_to_update);
+                }
+            }
+        }
+    }
+    wrap_timestamp();
+    $table.data("raw", new_json);
+}
+
+
+// ajax requests to the server for participants data
+function ajax_and_refresh_table() {
+    var start = Date.now();
+    $.ajax({
+        url: '{% url "SessionMonitor" session.code %}',
+        type: 'GET',
+        contentType: "application/json",
+        error: function(jqXHR, textStatus) {
+            $( "div#refresh_server_error" ).show();
+            setTimeout(ajax_and_refresh_table, 10000);
+        },
+        success: function(new_json) {
+            refreshTable(new_json);
+            var msElapsed = Date.now() - start;
+            // feedback mechanism to avoid straining the server:
+            // back off if requests are taking a long time
+            var msUntilNextRequest = Math.max(msElapsed*2, 3000);
+            setTimeout(ajax_and_refresh_table, msUntilNextRequest);
+        }
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% load otree otree_internal %}
+<div class="form-check{% if field.errors %} has-error{% endif %}{% if field.field.required %} required{% endif %}">
+    {% with classes=field.css_classes %}
+        <label class="form-check-label {{ classes }} field-{{ field.name }}"{% if field|id %} for="{{ field|id }}"{% endif %}>
+            {{ field }}
+            {{ label }}
+        </label>
+        {% include "otree/forms/errors.html" with errors=field.errors %}
+        {% if field.help_text %}
+            <p class="help-block">{{ field.help_text }}</p>
+        {% endif %}
+    {% endwith %}
+</div>

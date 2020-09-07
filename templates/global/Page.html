@@ -1,0 +1,10 @@
+{% extends "global/Base.html" %}
+
+{% comment %}
+This is a fallback in case the project was created before we renamed Base.html
+to Page.html. This will ensure that customizations to Base.html will still
+be applied, even if the template inherits from Page.html.
+
+If the user has a Page.html, however, it will take precedence over this
+template.
+{% endcomment %}

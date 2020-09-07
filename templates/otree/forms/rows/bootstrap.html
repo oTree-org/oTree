@@ -1,0 +1,19 @@
+{% load otree otree_internal %}
+<div class="form-group{% if field.errors %} has-error{% endif %}{% if field.field.required %} required{% endif %}">
+    {% with classes=field.css_classes %}
+        {% if field.is_hidden %}
+            {{ field.as_hidden }}
+        {% else %}
+            {% if label %}{% if field|id %}<label class="col-form-label" for="{{ field|id }}">{% endif %}{{ label }}{% if label|last not in ".:!?" %}:{% endif %}{% if field|id %}</label>{% endif %}{% endif %}
+            <div class="controls {{ classes }} field-{{ field.name }}">
+                {{ field }}
+                {% include "otree/forms/errors.html" with errors=field.errors %}
+                {% if field.help_text %}
+                    <small>
+                        <p class="form-text text-muted">{{ field.help_text }}</p>
+                    </small>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>

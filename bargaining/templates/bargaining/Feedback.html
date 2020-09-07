@@ -1,0 +1,37 @@
+{% extends "global/Base.html" %}
+{% load otree_tags %}
+
+{% block title %}
+Solution to Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+{% ifequal player.training_amount_mine 0 %}
+<p class="text-success">
+Your answer {{player.training_amount_mine}} for yourself was correct.
+</p>
+{% else %}
+<p class="text-danger">
+Your answer {{player.training_amount_mine}} for yourself was incorrect.
+</p>
+{% endifequal %}
+{% ifequal player.training_amount_other 0 %}
+<p class="text-success">
+Your answer {{player.training_amount_other}} for the other participant was correct.
+</p>
+{% else %}
+<p class="text-danger">
+Your answer {{player.training_amount_other}} for the other participant was incorrect.
+</p>
+{% endifequal %}
+<p>
+Suppose that you demanded 55 points and the other participant demanded 80 points. What would you and the other participant get respectively?
+</p>
+<p><strong>Solution: Both of you would get 0.</strong></p>
+<p><strong>Explanation:</strong> The sum of your demands was 55+80=135, which was larger than 100. Hence both of you would get nothing.
+</p>
+<p>
+{% next_button %}
+</p>
+{% include instructions %}
+{% endblock %}

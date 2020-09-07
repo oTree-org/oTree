@@ -1,0 +1,144 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-27 20:55-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. Translators: A player's default chat nickname,
+#. which is "Player" + their ID in group. For example:
+#. "Player 2".
+#: .\chat.py:21
+#, python-brace-format
+msgid "Player {id_in_group}"
+msgstr ""
+
+#. Translators: the name someone sees displayed for themselves in a chat.
+#. It's their nickname followed by "(Me)". For example:
+#. "Michael (Me)" or "Player 1 (Me)".
+#: .\chat.py:60
+#, python-brace-format
+msgid "{nickname} (Me)"
+msgstr ""
+
+#. Translators: for required form fields
+#: .\constants_internal.py:56
+msgid "This field is required."
+msgstr "Это поле обязательно для заполнения."
+
+#. Translators: display a number of points,
+#. like "1 point", "2 points", ...
+#. See "Plural-Forms" above for pluralization rules
+#. in this language.
+#. Explanation at http://bit.ly/1IurMu7
+#. In most languages, msgstr[0] is singular,
+#. and msgstr[1] is plural
+#. the {} represents the number;
+#. don't forget to include it in your translation
+#: .\currency\__init__.py:225
+msgid "{} point"
+msgid_plural "{} points"
+msgstr[0] "{} очко"
+msgstr[1] "{} очка"
+msgstr[2] "{} очков"
+
+#: .\db\models.py:254
+msgid "Yes"
+msgstr "Да"
+
+#: .\db\models.py:255
+msgid "No"
+msgstr "Нет"
+
+#: .\forms\forms.py:238
+msgid "Value must be greater than or equal to {}."
+msgstr "Значение должно быть больше или равно {}."
+
+#: .\forms\forms.py:244
+msgid "Value must be less than or equal to {}."
+msgstr "Значение должно быть меньше или равно {}."
+
+#. Translators: the label next to a "points" input field
+#: .\forms\widgets.py:43
+msgid "points"
+msgstr "очков"
+
+#: .\templates\otree\OutOfRangeNotification.html:9
+msgid "No more pages left to show."
+msgstr "Это последняя страница."
+
+#: .\templates\otree\Page.html:17
+#: .\templates\otree\admin\MTurkCreateHIT.html:67
+msgid "Please fix the errors in the form."
+msgstr "Пожалуйста внесите исправления в поля формы."
+
+#: .\templates\otree\RoomInputLabel.html:7
+msgid "Welcome"
+msgstr ""
+
+#. Translators: If the user enters an invalid participant label
+#: .\templates\otree\RoomInputLabel.html:13
+msgid "Invalid entry; try again."
+msgstr ""
+
+#: .\templates\otree\RoomInputLabel.html:15
+msgid "Please enter your participant label."
+msgstr ""
+
+#: .\templates\otree\WaitPage.html:49
+msgid ""
+"An error occurred. Please check the logs or ask the administrator for help."
+msgstr ""
+
+#: .\templates\otree\login.html:47
+msgid "Forgotten your password or username?"
+msgstr "Забыли свой логин или пароль?"
+
+#: .\templates\otree\login.html:52
+msgid "Log in"
+msgstr "Вход"
+
+#. Translators: The text on the button the user clicks to get to the next page
+#: .\templates\otree\tags\NextButton.html:5
+msgid "Next"
+msgstr "Далее"
+
+#. Translators: Chat widget "send" button text
+#: .\templates\otreechat_core\widget.html:7
+msgid "Send"
+msgstr ""
+
+#: .\views\abstract.py:886
+msgid "Time left to complete this page:"
+msgstr "Для выполнения задания на этой странице у вас осталось:"
+
+#. Translators: the default title of a wait page
+#: .\views\abstract.py:961 .\views\participant.py:291
+msgid "Please wait"
+msgstr "Пожалуйста подождите"
+
+#: .\views\abstract.py:1403
+msgid "Waiting for the other participants."
+msgstr "Пожалуйста ожидайте других участников."
+
+#: .\views\abstract.py:1405
+msgid "Waiting for the other participant."
+msgstr "Пожалуйста ожидайте другого участника."
+
+#: .\views\participant.py:292
+msgid "Waiting for your session to begin"
+msgstr ""

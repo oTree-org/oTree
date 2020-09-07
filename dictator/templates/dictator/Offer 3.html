@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}Your Decision{% endblock %}
+
+{% block content %}
+<p>
+    You are <strong>Participant 1</strong>.
+    Please decide how much of the {{ Constants.endowment }}
+    you will keep for yourself.
+</p>
+
+{% formfield group.kept label="I will keep" %}
+
+{% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}

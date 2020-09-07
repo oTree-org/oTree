@@ -1,0 +1,60 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Transcription task {{ number }}/{{ paragraph_count }}
+{% endblock %}
+
+{% block content %}
+
+
+
+
+    <p>
+        Please transcribe (that is copy) the text below into the input field. Be exact and make
+        sure to get all characters and spaces correct.
+    </p>
+
+    <div>
+        <img src="{{ STATIC_URL }}paragraphs/new_para{{ number }}.png" />
+    </div>
+
+    {% if number == 1 %}
+        {% formfield player.transcription_1 with label="" %}
+    {% elif number == 2 %}
+        {% formfield player.transcription_2 with label="" %}
+    {% elif number == 3 %}
+        {% formfield player.transcription_3 with label="" %}
+    {% endif %}
+
+    {% if magic_link %}
+    <script>
+    $( document ).ready(function() {
+        $('a#prefill').click(function()
+        { 
+        $('#id_transcription_{{ number }}').val('{{ transcription }}');
+        })
+    });
+    </script>
+    <p>
+        By the way we have magic <a href="#" id="prefill">link</a> for you.
+    </p>
+    {% endif %}
+
+    {% next_button %}
+    {% if settings.DEBUG %}
+    <div class="box papereffect">
+        <h4>Explanation for researchers (shown in debug mode only)</h4>
+        <p>
+        {% if error_rate_percent != 0 %}
+        The text has {{ transcription | length }} characters including space.
+        A subject can only advance to the next screen if the Levenshtein distance
+        is less than {{ error_rate_percent }}% of the total characters.
+        {% else %}
+        This text is rather short ({{ transcription | length }} characters including space).
+        A subject can only advance to the next screen if he makes no mistakes.
+        {% endif %}
+        </p>
+    </div>
+    {% endif %}
+{% endblock %}

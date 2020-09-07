@@ -1,0 +1,24 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Transaction (Period {{ round_num }} of {{ num_of_rounds }})
+{% endblock %}
+
+{% block content %}
+
+    <p>
+    {% if group.shares_traded %}
+        You just {% if self.player.order_type == 'Buy' %} bought{% else %} sold {% endif %} {{ group.shares_traded }} shares at the price of {{ transaction_price }}.
+        Now, your positions are the following:
+    {% else %}
+        No transaction took place this period. Your positions are not changed:
+    {% endif %}
+     </p>
+    <h5 class="text-info text-center">Cash: {{ player.cash }};  Shares: {{ player.shares }}</h5>
+
+    {% next_button %}
+
+    {% include 'asset_market/Rules.html' %}
+
+{% endblock %}

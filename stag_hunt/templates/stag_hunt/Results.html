@@ -1,0 +1,23 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+
+    <p>
+        You went for a <strong>{{ player.decision|lower }}</strong> and the other
+        participant went for a <strong>{{ player.other_player.decision|lower }}</strong>.
+        As a result, your payoff is <strong>{{ player.payoff }}</strong>.
+        In addition, you received 10 points for participation. Thus, your
+        total payoff is <strong>{{ total_payoff }}</strong>.
+    </p>
+
+    {% next_button %}
+
+    {% include 'stag_hunt/Instructions.html' %}
+
+{% endblock %}

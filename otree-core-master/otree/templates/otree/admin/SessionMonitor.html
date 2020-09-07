@@ -1,0 +1,125 @@
+{% extends "otree/admin/Session.html" %}
+
+{% block internal_scripts %}
+{{ block.super }}
+<script>
+$(document).ready(function() {
+    ajax_json_participants();
+    setInterval(ajax_json_participants , 4000);
+    setup_ajax_advance();
+
+    makeTableDraggable($('#monitor-table'));
+});
+// wrap timestamp into timeago tag
+function wrap_timestamp() {
+    $( "td[data-field='_last_page_timestamp']:not(:has(*))" ).each(function( index ) {
+        if ( $(this).text() != "") {
+            var date = new Date($(this).text() * 1000);
+            $(this).text("");
+            $(this).append('<time class="timeago" datetime="' + date.toISOString() + '"></time>');
+            $("time.timeago").timeago();
+        }
+    });
+    // remove timestamp for disconnected users
+    $( "tr:has(> td[data-field='status']:contains('Disconnected'))" ).each(function( index ) {
+        $(this).children("td[data-field='_last_page_timestamp']").text("");
+    });
+}
+
+// ajax request for advance session button
+function setup_ajax_advance() {
+    $('#advance_users').on('click', function () {
+        $('#advance_users').attr("disabled", true);
+        $.ajax({
+            url: '{% url 'AdvanceSession' session.code %}',
+            type: 'GET',
+            error: function(jqXHR, textStatus) {
+                $( "div#auto_advance_server_error" ).show();
+                // enable the button so they can try again?
+                $('#advance_users').attr("disabled", false);
+            },
+            success: function() {
+                $( "div#auto_advance_server_error" ).hide();
+                ajax_json_participants();
+                $('#advance_users').attr("disabled", false);
+            }
+        });
+    });
+}
+
+
+
+// ajax requests to the server for participants data
+function ajax_json_participants() {
+    $.ajax({
+        url: '{% url "session_participants_list" session.code %}',
+        type: 'GET',
+        error: function(jqXHR, textStatus) {
+            $( "div#refresh_server_error" ).show();
+        },
+        success: function(new_json) {
+            $( "div#refresh_server_error" ).hide();
+            var old_json = $( "table" ).data("raw");
+            // build table for the first time
+            if ( old_json === undefined ) {
+                var htmlTable = createTableBodyFromJson(new_json);
+                $("#monitor-table").append(htmlTable);
+            }
+            // compute delta and update
+            // corresponding values in table
+            else {
+                var diffpatcher = jsondiffpatch.create({
+                    objectHash: function(obj) {
+                        return obj.code;
+                    }
+                });
+                var delta = diffpatcher.diff(old_json, new_json);
+                for (i in delta) {
+                    for (header_name in delta[i]) {
+                        var cell_to_update = $( "tbody tr:eq(" + i + ") \
+                                                 td[data-field='" + header_name + "']" );
+                        cell_to_update.text(delta[i][header_name][1]);
+                        cell_to_update.css('background-color', 'green');
+                        cell_to_update.animate({
+                                backgroundColor: "white"
+                            },
+                            5000
+                        );
+                    }
+                }
+            }
+            wrap_timestamp();
+            $( "table" ).data("raw", new_json);
+        }
+    });
+}
+</script>
+{% endblock %}
+{% block content %}
+{{ block.super }}
+<table id="monitor-table" class="table table-bordered table-hover table-condensed">
+    <thead>
+        <tr>
+            {% for header in column_names %}
+                <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+</table>
+<br/>
+<a id="advance_users" class="btn btn-primary" role="button" data-toggle="popover" data-trigger="hover"
+data-content="Advance the slowest user(s) by one page, by forcing a timeout on their current page.">
+Advance slowest user(s)
+</a>
+
+    <div id="refresh_server_error" class="alert alert-danger" style="display: none;">
+    Failed to refresh data from the server.
+</div>
+
+<div id="auto_advance_server_error" class="alert alert-danger" style="display: none;">
+    An error occurred and participants could not be advanced.
+    See the server logs for details.
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,25 @@
+<div id="session-config-{{ config.name }}" class="summary" style="display:{{ config_display|default_if_none:"block" }}">
+
+{% if config.doc %}
+    <h4>Session description</h4>
+    <p>
+    {{ config.doc|safe }}
+    </p>
+{% endif %}
+
+<h4>App sequence</h4>
+<table class="table table-hover">
+
+{% for app in config.app_sequence_display %}
+    <tr>
+        <th>{{ app.name }}</th>
+        <td>
+            <p>
+                {{ app.doc|safe }}
+            </p>
+        </td>
+    </tr>
+{% endfor %}
+</table>
+
+</div>

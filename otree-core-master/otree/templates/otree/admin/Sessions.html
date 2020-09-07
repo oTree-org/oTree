@@ -1,0 +1,222 @@
+{% extends "otree/BaseAdmin.html" %}
+{% load otree_tags floppyforms %}
+
+{% block internal_scripts %}
+{{ block.super }}
+<script type="text/javascript" charset="utf-8">
+/*
+****************************
+****************************
+Show hidden archived sessions
+****************************
+****************************
+*/
+$(function() {
+    if ($("tr.hidden").length == 0)
+    {
+        $("#div_show_hidden").addClass("hidden");
+    }
+    $("#div_show_hidden a").click(function(event) {
+        event.preventDefault();
+        $("#div_show_hidden").addClass("hidden");
+        $("tr.hidden").removeClass("hidden");
+    })
+});
+/*
+****************************
+****************************
+Code for "checkAll" checkbox
+in the header
+****************************
+****************************
+*/
+$(function() {
+    checkFunction('item-action', 'checkAll');
+});
+function checkFunction(checkName, checkAllName) {
+// code for "checkAll" checkbox
+$('input[name=' +  checkAllName + ']:visible').click (function () {
+    $('input[name=' + checkName + ']:visible').prop('checked', $(this).prop('checked')).trigger("change")
+});
+// if all checkboxes are selected check also "checkAll" checkbox
+$('input[name=' + checkName + ']').change (function () {
+    var check = ($("input[name=" + checkName + "]:checked:visible").length == $("input[name=" + checkName + "]:visible").length);
+    $("input[name=" + checkAllName + "]:visible").prop('checked', check);
+})
+}
+/*
+****************************
+****************************
+Smart Action Buttons
+(Delete and Archive)
+They active only if at least 
+one action-item is selected
+****************************
+****************************
+*/
+$(function() {
+    $('input[name=item-action]').change(function () {
+        if ( $('input[name=item-action]:checked').length == 0 ) {
+            $('button.action').attr('disabled', true);
+        }
+        else {
+            $('button.action').attr('disabled', false);
+        }
+    })
+});
+/*
+****************************
+****************************
+Activate tooltips
+****************************
+****************************
+*/
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+/*
+****************************
+****************************
+Show modal window for
+deletion
+****************************
+****************************
+*/
+$(document).ready(function() {
+    $("button[type=submit]").click(function() {
+        $("button[type=submit]").removeAttr("clicked");
+        $(this).attr("clicked", "true");
+    });
+    $('#form').on('submit', function(ev) {
+        if ($("button#action-delete[clicked=true]").length > 0) {
+            $('#delete-confirm').modal({
+                show: 'false'
+            });
+            ev.preventDefault();
+        }
+    })
+});
+</script>
+<style type="text/css" media="screen">
+.codes {
+    font-family: 'Courier New'
+}
+</style>
+{% endblock %}
+{% block title %}
+oTree 
+Sessions
+<div class="btn-group" style="float: right;">
+    <a class="btn btn-primary" href="{% url 'CreateSession' %}">
+        <span class="glyphicon glyphicon-plus"></span> Create new session
+    </a>
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="{% url 'CreateSession' %}?mturk=1">For MTurk</a></li>
+    </ul>
+</div>
+{% endblock %}
+{% block content %}
+{{ block.super }}
+<div class="modal fade" id="delete-confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content panel-danger">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Delete selected session(s)</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                Are you sure you want to remove selected session(s)?
+                </p>
+                <p class="text-danger">
+                This action is irreversible.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" id="action-delete-confirm" class="btn btn-primary" formaction="{% url 'DeleteSessions' %}">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% if object_list %}
+
+<div class="btn-group" role="group">
+    <button type="submit" id="action-archive" class="action btn btn-default" data-toggle="tooltip" title="Archive" data-placement="bottom" formaction="{% url 'ToggleArchivedSessions' %}" disabled>
+        <span class="glyphicon glyphicon-folder-close"></span>
+    </button>
+    <button type="submit" id="action-delete" class="action btn btn-default" data-toggle="tooltip" title="Delete" data-placement="bottom"  formaction="{% url 'DeleteSessions' %}" disabled>
+        <span class="glyphicon glyphicon-trash"></span>
+    </button>
+</div>
+<table class="table">
+    <thead>
+        <th>
+            <input name="checkAll" type="checkbox" value="">
+        </th>
+        <th>Code</th>
+        <th>Label</th>
+        <th>Type</th>
+        <th></th>
+    </thead>
+    <tbody>
+    {% for s in object_list %}
+    <tr {% add_class s.archived 'hidden' %}>
+        <td>
+            <input name="item-action" type="checkbox" value="{{ s.code }}">
+        </td>
+        <td><a href="{% url 'SessionDescription' s.code %}">{{ s.code }}</a></td>
+        <td>{{ s.label }}</td>
+        <td>{{ s.config.name }}</td>
+        <td>
+            <a href="{% url 'SessionStartLinks' s.code %}" class="btn btn-primary btn-sm" role="button">
+                <span class="glyphicon glyphicon-link"></span> Links
+            </a>
+            <a href="{% url 'SessionEditProperties' s.code %}" class="btn btn-primary btn-sm" role="button">
+                <span class="glyphicon glyphicon-pencil"></span> Edit
+            </a>
+            <a href="{% url 'SessionMonitor' s.code %}" class="btn btn-primary btn-sm" role="button">
+                <span class="glyphicon glyphicon-eye-open"></span> Monitor
+            </a>
+            <a href="{% url 'SessionResults' s.code %}" class="btn btn-primary btn-sm" role="button">
+                <span class="glyphicon glyphicon-list-alt"></span> Results
+            </a>
+            <a href="{% if s.is_for_mturk %}{% url 'MTurkSessionPayments' s.code %}{% else %}{% url 'SessionPayments' s.code %}{% endif %}" class="btn btn-primary btn-sm" role="button">
+                <span class="glyphicon glyphicon-usd"></span> Payments
+            </a>
+            {% if s.is_for_mturk %}
+                {% if not s.mturk_HITId %}
+                <a href="{% url 'MTurkCreateHIT' s.code %}" class="btn btn-primary btn-sm" role="button">
+                    <span class="glyphicon glyphicon-cloud"></span> MTurk&nbsp;&nbsp;&nbsp;
+                </a>
+                {% else %}
+                <div class="btn-group">
+                    <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                        <span class="glyphicon glyphicon-cloud"></span> MTurk <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ s.mturk_requester_url }}" target="_blank">Requester link</a></li>
+                        <li><a href="{{ s.mturk_worker_url }}" target="_blank">Worker link</a></li>
+                    </ul>
+                </div>
+                {% endif %}
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div id="div_show_hidden">
+    <a href="#">Show archived sessions</a>
+</div>
+{% else %}
+    <p>No sessions yet. Click the button to create a new session.</p>
+{% endif %}
+{% include "otree/includes/messages.html" %}
+{% endblock %}

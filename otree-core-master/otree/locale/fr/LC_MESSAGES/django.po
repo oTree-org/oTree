@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-27 15:20+0900\n"
+"PO-Revision-Date: 2015-06-10 09:22+0100\n"
+"Last-Translator: Rousselle Jean-Marc <roussell@supagro.inra.fr>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#. Translators: display a number of points,
+#. like "1 point", "2 points", ...
+#. See "Plural-Forms" above for pluralization rules
+#. in this language.
+#. Explanation at http://bit.ly/1IurMu7
+#. In most languages, msgstr[0] is singular,
+#. and msgstr[1] is plural
+#: .\common.py:96
+msgid "{} point"
+msgid_plural "{} points"
+msgstr[0] "{} point"
+msgstr[1] "{} points"
+
+#. Translators: for required form fields
+#: .\constants_internal.py:73
+msgid "This field is required."
+msgstr "Ce champ est nécessaire"
+
+#: .\db\models.py:247
+msgid "Yes"
+msgstr "Oui"
+
+#: .\db\models.py:248
+msgid "No"
+msgstr "Non"
+
+#: .\forms\forms.py:311
+msgid "Value must be greater than or equal to {}."
+msgstr "La valeur doit être supérieure ou égale à {}."
+
+#: .\forms\forms.py:315
+msgid "Value must be less than or equal to {}."
+msgstr "La valeur doit être inférieure ou égale à {}."
+
+#. Translators: for multiple-choice fields,
+#. show the valid choices.
+#. e.g. "Value must be one of: A, B, C"
+#: .\forms\forms.py:327
+msgid "Value must be one of: {}"
+msgstr "La valeur doit prendre une des modalités suivantes : {}"
+
+#. Translators: the label next to a "points" input field
+#: .\forms\widgets.py:103
+msgid "points"
+msgstr "points"
+
+#: .\templates\otree\BaseExperiment.html:18 .\templates\otree\BaseAdmin.html:34
+msgid "Please fix the errors in the form."
+msgstr "S'il vous plaît, veuillez corriger les erreurs dans le formulaire."
+
+#: .\templates\otree\OutOfRangeNotification.html:11
+msgid "No more pages left to show."
+msgstr "Aucune autre page à montrer."
+
+#: .\templates\otree\WaitPage.html:41
+msgid ""
+"An error occurred. Please check the logs or ask the administrator for help."
+msgstr ""
+
+#: .\templates\otree\includes\TimeLimit.html:6
+msgid "Time left to complete this page:"
+msgstr "Temps restant pour compléter cette page"
+
+#: .\templates\otree\login.html:35
+msgid "Forgotten your password or username?"
+msgstr "Nom d'utilisateur ou mot de passe oublié ?"
+
+#: .\templates\otree\login.html:39
+msgid "Log in"
+msgstr "Connexion"
+
+#. Translators: The text on the button the user clicks to get to the next page
+#: .\templates\otree\tags\NextButton.html:4
+msgid "Next"
+msgstr "Suivant"
+
+#. Translators: the default title of a wait page
+#: .\views\abstract.py:406
+msgid "Please wait"
+msgstr "Veuillez patienter"
+
+#: .\views\abstract.py:613
+msgid "Waiting for the other participants."
+msgstr "En attente des autres participants."
+
+#: .\views\abstract.py:615
+msgid "Waiting for the other participant."
+msgstr "En attente de l'autre participant."
+
+#. Translators: the default body text on the waiting page
+#. to inform the user we are waiting.
+#: .\views\abstract.py:619
+msgid "Waiting"
+msgstr "Patientez"
+
+#: .\views\concrete.py:123
+msgid "Waiting until other participants or the study supervisor are ready."
+msgstr ""
+"Patientez jusqu'à ce que les autres participants ou le superviseur de "
+"l'étude soient prêts."
+
+#~ msgid "Time ran out."
+#~ msgstr "Le temps imparti est écoulé."
+
+#~ msgid "An error occurred."
+#~ msgstr "Une erreur s'est produite"

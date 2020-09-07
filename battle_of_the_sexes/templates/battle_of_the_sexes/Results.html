@@ -1,0 +1,37 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+<p>
+
+
+
+{% if player.role == "husband" %}
+
+    You chose to go to <strong>{{player.decision}}</strong> and Wife chose to go to
+    <strong>{{player.other_player.decision}}</strong>. As a result, your payoff is
+    <strong>{{player.payoff}}</strong>. In addition,
+    you received 10 points for participation. Thus, your total payoff is
+    <strong>{{total_payoff}}</strong>.
+
+{% else %}
+
+    You chose to go to <strong>{{player.decision}}</strong> and Husband chose to go to
+    <strong>{{player.other_player.decision}}</strong>. As a result, your payoff is
+    <strong>{{player.payoff}}</strong>. In addition,
+    you received 10 points for participation. Thus, your total payoff is
+    <strong>{{total_payoff}}</strong>.
+
+{% endif %}
+</p>
+
+    {% next_button %}
+
+    {% include 'battle_of_the_sexes/Instructions.html' %}
+
+{% endblock %}

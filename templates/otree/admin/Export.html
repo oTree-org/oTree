@@ -1,0 +1,221 @@
+{% extends "otree/BaseAdmin.html" %}
+{% load static otree %}
+
+{% block title %}
+    Data Export
+{% endblock %}
+
+
+{% block content %}
+
+    {% if db_is_empty %}
+        <p>No sessions have taken place yet.</p>
+    {% else %}
+
+        <div class="card">
+            <h4 class="card-header">
+                Citation requirement
+            </h4>
+            <div class="card-body">
+                <p>
+                    If you publish research conducted using oTree,
+                    you are required by the oTree license to cite <a
+                        href="http://dx.doi.org/10.1016/j.jbef.2015.12.001">this
+                    paper</a>.
+                </p>
+                <p>
+                    Citation:
+                </p>
+                <p>
+                    Chen, D.L., Schonger, M., Wickens, C., 2016. oTree - An
+                    open-source
+                    platform for laboratory, online and field experiments.
+                    Journal of Behavioral and Experimental Finance, vol 9:
+                    88-97
+                </p>
+
+            </div>
+        </div>
+
+        <h3>All apps</h3>
+        <p>
+
+            <a href="javascript:void(0)" class="download-link"
+               id="wide-xlsx"
+               data-file-extension="xlsx">Excel</a>
+            |
+            <a href="javascript:void(0)" class="download-link"
+               id="wide-csv"
+               data-file-extension="csv">CSV</a>
+        </p>
+        <p>
+            Data for all apps in one file.
+            There is one row per participant;
+            different apps and rounds are stacked horizontally.
+            This format is useful if you want to correlate participants'
+            behavior in one app with their behavior in another app.
+        </p>
+
+        <h3>Per-app</h3>
+        <p>
+            These files contain a row for each player in the given app.
+            If there are multiple rounds, there will be multiple rows for the
+            same participant.
+            This format is useful if you are mainly interested in one app,
+            or if you want to correlate data between rounds of the same app.
+        </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>App</th>
+                <th>Data</th>
+                <th>Documentation</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for app in app_names %}
+                <tr>
+                    <td>
+                        {{ app }}
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" class="download-link"
+                           id="app-{{ app }}-xlsx"
+                           data-app="{{ app }}"
+                           data-file-extension="xlsx">Excel</a>
+                        |
+                        <a href="javascript:void(0)" class="download-link"
+                           id="app-{{ app }}-csv"
+                           data-app="{{ app }}"
+                           data-file-extension="csv">CSV</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'ExportAppDocs' app %}">TXT</a>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <p>
+            If the above links don't work for you, you can try the URLs
+            /ExportWide/ and /ExportApp/your_app_name/
+            For xlsx, add ?xlsx=1 to the URL.
+        </p>
+
+        <h3>Time spent on each page</h3>
+        <p><a href="{% url 'ExportTimeSpent' %}">
+            <img src='{% static "glyphicons/download-alt.png" %}'>
+            <b>Download</b></a></p>
+
+        {% if chat_messages_exist %}
+            <h3>Chat logs</h3>
+            <p><a href="{% url 'ExportChat' %}">
+                <img src='{% static "glyphicons/download-alt.png" %}'>
+                <b>Download</b></a></p>
+        {% endif %}
+
+    {% endif %}
+
+    <br/>
+
+    {% if extensions_views %}
+        <h3>Third-party data exports</h3>
+
+        {% for ViewCls in extensions_views %}
+            <p><a href="{% url ViewCls.url_name %}">
+                <img src='{% static "glyphicons/download-alt.png" %}'>
+                <b>{{ ViewCls.display_name }}</b></a></p>
+        {% endfor %}
+
+    {% endif %}
+
+    <br/>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+
+        var socket;
+
+        function initWebSocket() {
+            socket = makeReconnectingWebSocket('/export/');
+            socket.onmessage = function (e) {
+                var content = JSON.parse(e.data);
+                saveReceivedFile(content);
+            };
+        }
+
+        initWebSocket();
+
+        $(function () {
+            $('.download-link').click(function () {
+                $this = $(this);
+                var fileExtension = $this.data('fileExtension');
+
+                var linkId = $this.attr('id');
+                var content = {
+                    'file_extension': fileExtension,
+                    'link_id': linkId
+                };
+                var appName = $this.data('app');
+                if (appName) {
+                    content['app_name'] = appName;
+                }
+                socket.send(JSON.stringify(content));
+                $this.append(' <em>Downloading...</em>');
+            })
+        });
+
+        $(function () {
+            $('.wide-link').click(function () {
+                $this = $(this);
+                var fileExtension = $this.data('fileExtension');
+                var linkId = $this.attr('id');
+                socket.send(JSON.stringify({
+                    'file_extension': fileExtension,
+                    'link_id': linkId
+                }));
+                $this.append(' <em>Downloading...</em>');
+            })
+        });
+
+        function s2ab(s) {
+            var buf = new ArrayBuffer(s.length);
+            var view = new Uint8Array(buf);
+            for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+            return buf;
+        }
+
+        function saveReceivedFile(content) {
+            var c = content;
+            if (c.file_extension === 'xlsx') {
+                var data = s2ab(atob(c.data));
+            } else {
+                var data = c.data;
+            }
+            var file = new Blob([data], {type: c.mime_type});
+            if (window.navigator.msSaveOrOpenBlob) // IE10+
+                window.navigator.msSaveOrOpenBlob(file, c.file_name);
+            else { // Others
+                var a = document.createElement("a"),
+                    url = URL.createObjectURL(file);
+                a.href = url;
+                a.download = c.file_name;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(function () {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 0);
+            }
+            $('#' + c.link_id + ' > ' + 'em').remove();
+        }
+    </script>
+
+
+{% endblock %}

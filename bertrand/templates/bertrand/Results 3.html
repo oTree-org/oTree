@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <tr>
+            <th>Your price</th>
+            <td>{{ player.price }}</td>
+        </tr>
+        <tr>
+            <th>Lowest price</th>
+            <td>{{ group.winning_price }}</td>
+        </tr>
+        <tr>
+            <th>Was your product sold?</th>
+            <td>{% if player.is_winner %} Yes {% else %} No {% endif %}</td>
+        </tr>
+        <tr>
+            <th>Your payoff</th>
+            <td>{{ player.payoff }}</td>
+        </tr>
+    </table>
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}

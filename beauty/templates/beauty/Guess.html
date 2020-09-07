@@ -1,0 +1,16 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Your Guess
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.guess_value with label="Please pick a number from 0 to 100:" %}
+    {% next_button %}
+
+
+    {% include "beauty/Instructions.html" %}
+
+{% endblock %}

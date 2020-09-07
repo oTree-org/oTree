@@ -1,0 +1,13 @@
+{% extends "otree/Base.html" %}
+{% load i18n %}
+
+{% block body_main %}
+    <div style="padding-left: 50px">
+    <h2>{% block title %}Finished{% endblock %}</h2>
+
+    <p>
+        {% blocktrans trimmed %}No more pages left to show.{% endblocktrans %}
+    </p>
+    </div>
+
+{% endblock %}

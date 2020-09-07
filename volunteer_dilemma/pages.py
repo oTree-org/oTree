@@ -13,11 +13,15 @@ class Decision(Page):
 
 
 class ResultsWaitPage(WaitPage):
-    after_all_players_arrive = 'set_payoffs'
+    def after_all_players_arrive(self):
+        self.group.set_payoffs()
 
 
 class Results(Page):
     pass
 
 
-page_sequence = [Introduction, Decision, ResultsWaitPage, Results]
+page_sequence = [Introduction,
+                 Decision,
+                 ResultsWaitPage,
+                 Results]

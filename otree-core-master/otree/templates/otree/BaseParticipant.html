@@ -1,0 +1,48 @@
+{% extends "otree/Base.html" %}
+{% load i18n %}
+{% load floppyforms otree_tags %}
+{% block content_main %}
+<div class="container" style='max-width:970px'>
+    <div class="page-header" style="padding-top: 40px">
+        <h2>{% block title %}{% endblock %}</h2>
+    </div>
+    {% block menus %}{% endblock %}
+    <div>
+
+        {% if view.has_timeout %}
+            {% include 'otree/includes/TimeLimit.html' with form_element_id="form" %}
+        {% endif %}
+
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                {% blocktrans %}Please fix the errors in the form.{% endblocktrans %}
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div id="error-notice" class="alert alert-danger" style="display:none">
+            {% blocktrans %}An error occurred. Please check the logs or ask the administrator for help.{% endblocktrans %}
+        </div>
+
+
+        <form action="" method="post" role="form" class="form" id="form">{% csrf_token %}
+            <input type="hidden" value="{{ request.path }}" name="origin_url" />
+            {% pageform form using %}
+                {% formconfig row using "floppyforms/rows/bootstrap.html" %}
+                {% block content %}{% endblock %}
+            {% endpageform %}
+        </form>
+    </div>
+    <br/>
+{% if view.is_debug %}
+    {% include 'otree/includes/debug_info.html' %}
+{% endif %}
+</div>
+{% endblock %}
+<!--end content_main-->
+{% block internal_scripts %}
+    {{ block.super }}
+    {% if view.has_timeout %}
+        {% include 'otree/includes/TimeLimit.js.html' %}
+    {% endif %}
+{% endblock %}

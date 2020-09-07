@@ -1,0 +1,10 @@
+{% extends "otree/FormPage.html" %}
+
+{% load staticfiles floppyforms otree_tags %}
+{% load i18n %}
+
+
+{% block head_content  %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}global/custom.css" />
+{% endblock %}

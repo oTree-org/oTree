@@ -1,0 +1,95 @@
+{% extends "otree/BaseAdmin.html" %}
+{% load otree_tags floppyforms %}
+
+{% block head_title %}
+{{ session.config.display_name }}: session '{{ session.code }}'{% if session.is_demo %} (demo) {% endif %}
+{% endblock %}
+
+{% block title %}
+{{ session.config.display_name }}: session <code>{{ session.code }}</code>{% if session.is_demo %} (demo) {% endif %}
+{% endblock %}
+
+{% block menus %}
+<nav class="navbar">
+    <div class="container-fluid">
+        <ul class="nav nav-pills nav-justified">
+            <li role="presentation" class="{% active_page request 'SessionDescription' session.code %}">
+                <a href="{% url 'SessionDescription' session.code %}"><span class="glyphicon glyphicon-pushpin"></span> Description</a>
+            </li>
+            <li role="presentation" class="{% active_page request 'SessionStartLinks' session.code %}">
+                <a href="{% url 'SessionStartLinks' session.code %}"><span class="glyphicon glyphicon-link"></span> Links</a>
+            </li>
+            {% if not session.is_demo %}
+            <li role="presentation" class="{% active_page request 'SessionEditProperties' session.code %}">
+                <a href="{% url 'SessionEditProperties' session.code %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+            </li>
+            {% endif %}
+            <li role="presentation" class="{% active_page request 'SessionMonitor' session.code %}">
+                <a href="{% url 'SessionMonitor' session.code %}"><span class="glyphicon glyphicon-eye-open"></span> Monitor</a>
+            </li>
+            <li role="presentation" class="{% active_page request 'SessionResults' session.code %}">
+                <a href="{% url 'SessionResults' session.code %}"><span class="glyphicon glyphicon-list-alt"></span> Results</a>
+            </li>
+            {% if session.is_for_mturk %}
+            <li role="presentation" class="{% active_page request 'MTurkSessionPayments' session.code %}">
+                <a href="{% url 'MTurkSessionPayments' session.code %}">
+            {% else %}
+            <li role="presentation" class="{% active_page request 'SessionPayments' session.code %}">
+                <a href="{% url 'SessionPayments' session.code %}">
+            {% endif %}
+                    <span class="glyphicon glyphicon-usd"></span> Payments
+                </a>
+            </li>
+            {% if session.is_demo %}
+            <li role="presentation">
+                <a href="{% url 'CreateDemoSession' session.config.name %}" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Recreate session from scratch. You can also copy this link and share with others.">
+                    <span class="glyphicon glyphicon-refresh"></span> New
+                </a>
+            </li>
+            {% endif %}
+            {% if session.is_for_mturk %}
+            <li role="presentation" class="{% active_page request 'MTurkCreateHIT' session.code %}">
+                <a href="{% url 'MTurkCreateHIT' session.code %}"><span class="glyphicon glyphicon-cloud"></span> MTurk</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div><!-- /.container-fluid -->
+</nav>
+{% endblock %}
+
+{% block internal_scripts %}
+    {{ block.super }}
+    <!-- this is an HTML file rather than JavaScript static file because context variables need to be passed to it -->
+<script type="text/javascript">
+$(document).ready(function () {
+
+
+    var socket;
+    // TODO: add to view
+    var index_in_pages = {{ view.index_in_pages }};
+
+    initWebSocket();
+
+    function initWebSocket() {
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var ws_path = ws_scheme + '://' + window.location.host + "{{ view.socket_url|safe }}";
+
+        socket = new ReconnectingWebSocket(ws_path);
+        socket.onmessage = function(e) {
+
+            // for displaying info about bot errors, etc.
+            var data = JSON.parse(e.data);
+            alert(data.message);
+        };
+        socket.onopen = function() {
+            console.log('WebSocket connected');
+        };
+        socket.onclose = function() {
+            console.log('WebSocket disconnected');
+        }
+    }
+
+});
+
+</script>
+{% endblock %}

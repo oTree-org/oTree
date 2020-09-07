@@ -1,0 +1,42 @@
+{% extends "demo/Base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load floppyforms %}
+{% load otree_tags %}
+
+
+{% block title %}Widgets{% endblock %}
+
+
+{% block content %}
+
+    <h3><code>otree.forms.CharField</code></h3>
+    {% formrow form.char %}
+
+    <h3><code>otree.forms.CharField(widget=otree.forms.Textarea)</code></h3>
+    {% formrow form.text %}
+
+    <h3><code>otree.forms.RadioSelect</code></h3>
+    {% formrow form.radio_select %}
+
+    <h3><code>otree.forms.RadioSelectHorizontal</code></h3>
+    {% formrow form.radio_select_horizontal %}
+
+    <h3><code>otree.forms.CurrencyField</code></h3>
+    {% formrow form.currency %}
+
+    <h3><code>otree.forms.CurrencyChoiceField</code></h3>
+    {% formrow form.currency_choice %}
+
+    <h3><code>otree.widgets.SliderInput</code></h3>
+    {% formrow form.slider %}
+
+    <h3><code>otree.widgets.SliderInput(show_value=False)</code></h3>
+    {% formrow form.unprecise_slider %}
+
+    <h3><code>otree.widgets.SliderInput(attrs={'min': 1, 'max': 50, 'step': 0.01})</code></h3>
+    {% formrow form.precise_slider %}
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,151 @@
+{% load otree staticfiles %}
+
+<form id="form">
+  {% csrf_token %}
+
+  {% formfield form.session_config %}
+
+  <div class="form-group{% if form.num_participants.errors %} has-error{% endif %} required">
+    <label class="col-form-label" for="id_num_participants">
+      {{ form.num_participants.label }}
+    </label>
+    <div class="controls  field-num_participants">
+      {{ form.num_participants }}
+      {% if form.num_participants.errors %}
+        {% include "otree/forms/errors.html" with errors=form.num_participants.errors %}
+      {% endif %}
+      {% for config in configs %}
+        <div id="lcm-{{ config.name }}" class="lcm"
+             style="display:none">
+          <p>Must be a multiple of {{ config.get_lcm }}</p></div>
+      {% endfor %}
+      <p class="help-block">{{ form.num_participants.help_text }}</p>
+    </div>
+  </div>
+
+  {{ form.is_mturk }}
+  {{ form.room_name }}
+
+  <div>
+    <input class="btn btn-primary"
+           value="Create"
+           id="btn-create-session"
+           type="submit">
+  </div>
+  <br>
+  <div id="create-session-wait" class="alert alert-info" style="display:none">Please wait</div>
+  <div id="create-session-error" class="alert alert-danger" style="display:none"></div>
+  <br>
+  {% for config in configs %}
+
+    <div class="edit-config"
+         id="edit-config-{{ config.name }}" style="display: none">
+      <h4>
+        <a data-toggle="collapse"
+           href="#edit-config-table-{{ config.name }}"
+           class="btn-block">
+          Configure session
+          <img src='{% static "glyphicons/cogwheel.png" %}'>
+        </a>
+      </h4>
+      <div class="collapse"
+           id="edit-config-table-{{ config.name }}">
+        {% if config.custom_editable_fields %}
+          <h5>Custom</h5>
+          <table class="table">
+            {% for field in config.custom_editable_fields_html %}
+              {{ field|safe }}
+            {% endfor %}
+          </table>
+        {% else %}
+          <p><i>
+            You can make more properties configurable
+            by adding them to your session config in
+            settings.py.
+          </i></p>
+        {% endif %}
+
+        {# we only need to clarify that these are built-in if there are also custom ones #}
+        {% if config.custom_editable_fields %}
+          <h5>General</h5>{% endif %}
+        <table class="table">
+          {% for field in config.builtin_editable_fields_html %}
+            {{ field|safe }}
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+
+    {% include "otree/includes/SessionInfo.html" with config=config config_display="none" %}
+
+  {% endfor %}
+</form>
+
+<script>
+
+    function showSessionConfigInfo(sessionconfigname) {
+        $('.summary').hide();
+        $('.edit-config').hide();
+        $('#session-config-' + sessionconfigname).show();
+        $('#edit-config-' + sessionconfigname).show();
+        $('.lcm').hide();
+        $('#lcm-' + sessionconfigname).show();
+    }
+
+    $(document).ready(function () {
+        $('.summary').hide();
+        $('.edit-config').hide();
+        $('.lcm').hide();
+        var current_session_config = $('#id_session_config').val();
+        if (current_session_config) {
+            showSessionConfigInfo(current_session_config);
+        }
+
+        $('#id_session_config').change(function () {
+            showSessionConfigInfo($(this).val());
+        })
+
+        let $createSessionError = $("#create-session-error");
+        let $createSessionWait = $("#create-session-wait");
+        let socket = makeReconnectingWebSocket("/create_session/");
+        let $btnCreateSession = $('#btn-create-session');
+        $btnCreateSession.click(function (e) {
+            $btnCreateSession.prop('disabled', true);
+            $createSessionError.hide();
+            $createSessionWait.show();
+
+            let ary = $('#form').serializeArray();
+            let form_data = {};
+            for (let entry of ary) {
+                form_data[entry.name] = entry.value;
+            }
+            socket.send(JSON.stringify(form_data));
+            e.preventDefault();
+        });
+
+        // handle incoming messages
+        socket.onmessage = function (message) {
+            $createSessionWait.hide();
+            let data = JSON.parse(message.data);
+            if (data.traceback) {
+                $createSessionError.text(data.error);
+                $createSessionError.append('<pre>' + data.traceback + '</pre>');
+                $createSessionError.show();
+            } else if (data.validation_errors) {
+                $createSessionError.text(JSON.stringify(data.validation_errors));
+                $createSessionError.show();
+            } else if (data.session_url) {
+                // because the user could press back button later
+                $createSessionError.hide();
+                $createSessionWait.hide();
+                window.location.href = data.session_url;
+                return; // so that we don't re-enable create button
+            } else {
+                $createSessionError.text("Unexpected error: " + message.data);
+            }
+            $btnCreateSession.prop('disabled', false);
+        }
+    });
+
+</script>

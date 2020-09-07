@@ -1,0 +1,18 @@
+{% load mark_field_as_rendered from otree_tags %}{% load defaultlabel from otree_tags %}{% load floppyforms %}{% block row %}{% for field in fields %}
+<div class="checkbox{% if field.errors %} has-error{% endif %}{% if field.field.required %} required{% endif %}">
+    {% with classes=field.css_classes label=label|defaultlabel:field.label help_text=help_text|default:field.help_text %}
+    {% block field %}
+        {% block label %}<label class="control-label {{ classes }} field-{{ field.name }}"{% if field|id %} for="{{ field|id }}"{% endif %}>
+            {% block widget %}{% formfield field %}{% endblock %}
+            {{ label }}
+        </label>{% endblock %}
+        {% block errors %}{% include "floppyforms/errors.html" with errors=field.errors %}{% endblock %}
+        {% block help_text %}{% if field.help_text %}
+            <p class="help-block">{{ field.help_text }}</p>
+        {% endif %}{% endblock %}
+        {% block hidden_fields %}{% for field in hidden_fields %}{{ field.as_hidden }}{% endfor %}{% endblock %}
+    {% endblock %}
+    {% endwith %}
+    {% mark_field_as_rendered field %}
+</div>
+{% endfor %}{% endblock %}

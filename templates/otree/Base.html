@@ -1,0 +1,41 @@
+{% load i18n otree static %}
+{# NOTE: keep this compact so that view-source is friendly for users #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block head_title %}{% block title %}
+    {% endblock %}{% endblock %}</title>
+    {% block internal_styles %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'bootstrap4/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap4/css/bootstrap-reboot.min.css' %}">
+        <link rel="stylesheet" href="{% static 'otree/css/theme.css' %}">
+        {% comment %}
+        this actually belongs in internal_scripts, but we are in the process
+        of deprecating it, so some people's apps might still rely on jQuery being
+        available within the content block.
+        {% endcomment %}
+        <script src="{% static 'otree/js/jquery-3.2.1.min.js' %}"></script>
+    {% endblock %}
+    {# these blocks are for public API #}
+    {% block global_styles %}{% endblock %}
+    {% block app_styles %}{% endblock %}
+    {% block styles %}{% endblock %}
+</head>
+<body>
+{% block body_main %}{% endblock %}
+
+{% block internal_scripts %}
+    <script src="{% static 'otree/js/reconnecting-websocket-iife.min.js' %}" type="text/javascript"></script>
+    {% block bootstrap_scripts %}
+    <script src="{% static 'bootstrap4/js/bootstrap.bundle.min.js' %}"></script>
+    {% endblock %}
+    <script src="{% static 'otree/js/common.js' %}"></script>
+{% endblock %}
+{# these blocks are for public API #}
+{% block global_scripts %}{% endblock %}
+{% block app_scripts %}{% endblock %}
+{% block scripts %}{% endblock %}
+<div id='disconnected-alert' class="top-left-fixed-alert" style="visibility: hidden">Lost server connection...</div>
+</body>
+</html>

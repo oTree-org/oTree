@@ -1,0 +1,4 @@
+# this is for Heroku and other servers.
+# Locally, you should install requirements_base.txt
+-r requirements_base.txt
+psycopg2>=2.5.1

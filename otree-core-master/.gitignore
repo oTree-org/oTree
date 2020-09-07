@@ -1,0 +1,17 @@
+build/
+database.db
+dist/
+django_otree/
+docs/_build/doctrees
+docs/_build/html/_sources/
+docs/app/Thumbs.db
+django_otree.egg-info/
+myapp*
+.idea/
+otree-core.geany
+*.pyc
+tests/db.sqlite3
+otree_core.egg-info/
+.tox/
+.coverage
+htmlcov/

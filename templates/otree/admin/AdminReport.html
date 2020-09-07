@@ -1,0 +1,36 @@
+{% extends "otree/admin/Session.html" %}
+{% load otree i18n %}
+
+
+{% block content %}
+    {{ block.super }}
+    <form action="" method="get" role="form" class="form" id="form">
+        <table cellpadding="10">
+            <tr>
+                <td>{% formfield form.app_name %}</td>
+                <td>{% formfield form.round_number %}</td>
+                <td>
+                    <button type="submit" id="submit" class="btn btn-primary">
+                        Go
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    {% include user_template %}
+
+    {% if view.is_debug|default:False %}
+        <br><br>
+        {% include 'otree/includes/debug_info.html' %}
+    {% endif %}
+
+    <script>
+    $(function() {
+        $('#id_app_name').change(function() {
+            $('#id_round_number').val('');
+        });
+    });
+    </script>
+
+{% endblock %}

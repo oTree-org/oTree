@@ -1,0 +1,11 @@
+{% extends "global/Feedback.html" %}
+
+{% block explanation %}
+{% include "principal_agent/Question.html" %}
+<p>
+<strong>Solution:</strong> You would receive <strong>46 points</strong> and Participant B <strong>34 points</strong>.
+</p>
+<p>
+<strong>Explanation:</strong> According to the table, total return was <strong>140</strong> and the cost was <strong>60</strong>. You would receive 140*(100%-60%)-10=<strong>46</strong>. Participant B would receive 140*60%-60+10=<strong>34</strong> points.
+</p>
+{% endblock %}

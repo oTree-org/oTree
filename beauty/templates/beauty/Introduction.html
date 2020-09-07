@@ -1,0 +1,18 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Introduction
+{% endblock %}
+
+{% block content %}
+
+    {% include 'beauty/Instructions.html' %}
+
+    <p>
+       On the next page, you will have to answer one question to make sure you understand the instructions correctly.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

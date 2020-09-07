@@ -1,0 +1,16 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Production
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.units with label="How many units will you produce (from 0 to 30)?" %}
+
+    {% next_button %}
+
+    {% include 'cournot_competition/Instructions.html' %}
+
+{% endblock %}

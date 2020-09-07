@@ -1,0 +1,46 @@
+{% extends "otree/BaseAdmin.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3 card bg-light">
+        <div class="card-body">
+            {% if otreehub_url %}
+                <div class="alert alert-secondary" role="alert">
+                    Download this project on <a href="{{ otreehub_url }}">oTree Hub</a>.
+                </div>
+            {% endif %}
+            <div>
+                {{ intro_html|safe }}
+            </div>
+            {% if is_debug %}
+                <div>
+                    To add to this list, create a new session config.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="list-group">
+        {% for s in session_info %}
+            <a href="{{ s.url }}" class="list-group-item session-config" target="_blank">
+                {% if s.num_demo_participants == 1 %}
+                <span class="badge badge-secondary float-right">
+                {% elif s.num_demo_participants == 2 %}
+                <span class="badge badge-info float-right">
+                {% else %}
+                <span class="badge badge-danger float-right">
+                {% endif %}
+                Participants: {{s.num_demo_participants}}</span>
+                {{ s.display_name }}
+            </a>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

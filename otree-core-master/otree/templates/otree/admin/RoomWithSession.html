@@ -1,0 +1,20 @@
+{% extends "otree/BaseAdmin.html" %}
+{% load otree_tags floppyforms %}
+
+{% block title %}
+    Room: {{ room.display_name }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="alert alert-success">
+        <a href="{{ session_url }}">Go to active session.</a>
+    </div>
+
+    <a class="btn btn-primary" href="{% url "CloseRoom" room.name %}" role="button">
+        Close this room
+    </a>
+
+    {% include "otree/includes/RoomParticipantLinks.html" %}
+
+{% endblock %}

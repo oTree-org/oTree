@@ -1,0 +1,60 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Solution to Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+
+
+    {% if player.is_training_question_1_win_pick_correct %}
+        <p class="text-success">
+            Your answer <strong>'The winner(s) picked: {{player.training_question_1_win_pick}}'</strong>
+            was correct.
+        </p>
+    {% else %}
+        <p class="text-danger">
+            Your answer <strong>'The winner(s) picked: {{player.training_question_1_win_pick}}'</strong>
+            was incorrect.
+        </p>
+    {% endif %}
+
+    {% if player.is_training_question_1_my_payoff_correct %}
+        <p class="text-success">
+            Your answer <strong>'My payoff would be: {{player.training_question_1_my_payoff}}'</strong>
+            was correct.
+        </p>
+    {% else %}
+        <p class="text-danger">
+            Your answer <strong>'My payoff would be: {{player.training_question_1_my_payoff}}'</strong>
+            was incorrect.
+        </p>
+    {% endif %}
+
+
+    <p>
+        Suppose that you picked 10 and other participants in your group picked
+        20, 20, 10, 30. The average of all chosen numbers is 18. Which number
+        did the winner pick and what would be your payoff?
+    </p>
+
+    <p>
+        <strong>Solution:</strong> The winners picked <strong>10</strong>
+        and your payoff would be <strong>50 points</strong>.
+    </p>
+
+    <p>
+
+        Explanation: The average of all chosen numbers was (10+20+20+10+30)/5=18
+        as given. Two-third of 18 was 18/3*2=12. 10 was the closest
+        chosen number to 12. Thus you and the otherparticipant who picked it
+        were the winners. Each of you would receive <strong>50 points</strong>.
+    </p>
+
+    {% next_button %}
+
+    {% include 'beauty/Instructions.html' %}
+
+{% endblock %}

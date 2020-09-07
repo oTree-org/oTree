@@ -1,0 +1,8 @@
+{% extends "otree/Page.html" %}
+{% load otree static %}
+
+{% block global_styles  %}
+{% endblock %}
+
+{% block global_scripts  %}
+{% endblock %}

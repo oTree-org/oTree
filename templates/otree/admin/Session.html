@@ -1,0 +1,59 @@
+{% extends "otree/BaseAdmin.html" %}
+{% load otree_internal staticfiles %}
+
+{% block head_title %}
+{{ session.config.display_name }}: session '{{ session.code }}'{% if session.is_demo %} (demo) {% endif %}
+{% endblock %}
+
+{% block title %}
+{{ session.config.display_name }}: session <code>{{ session.code }}</code>{% if session.is_demo %} (demo) {% endif %}
+{% endblock %}
+
+{% block menus %}
+<ul class="nav nav-tabs justify-content-center">
+    <li role="presentation" class="nav-item">
+        <a class="nav-link {% active_page request 'SessionDescription' session.code %}" href="{% url 'SessionDescription' session.code %}"><img src='{% static "glyphicons/pushpin.png" %}'> Description</a>
+    </li>
+    <li role="presentation" class="nav-item">
+        <a class="nav-link {% active_page request 'SessionStartLinks' session.code %}" href="{% url 'SessionStartLinks' session.code %}"><img src='{% static "glyphicons/link.png" %}'> Links</a>
+    </li>
+    {% if not session.is_demo %}
+    <li role="presentation" class="nav-item">
+        <a class="nav-link {% active_page request 'SessionEditProperties' session.code %}" href="{% url 'SessionEditProperties' session.code %}"><img src='{% static "glyphicons/pencil.png" %}'> Edit</a>
+    </li>
+    {% endif %}
+    <li role="presentation" class="nav-item">
+        <a class="nav-link {% active_page request 'SessionMonitor' session.code %}" href="{% url 'SessionMonitor' session.code %}"><img src='{% static "glyphicons/eye-open.png" %}'> Monitor</a>
+    </li>
+    <li role="presentation" class="nav-item">
+        <a class="nav-link {% active_page request 'SessionData' session.code %}" href="{% url 'SessionData' session.code %}"><img src='{% static "glyphicons/list-alt.png" %}'> Data</a>
+    </li>
+    {% if session.is_mturk %}
+    <li role="presentation" class="nav-item">
+        <a class="nav-link {% active_page request 'MTurkSessionPayments' session.code %}" href="{% url 'MTurkSessionPayments' session.code %}">
+    {% else %}
+    <li role="presentation" class="nav-item">
+        <a class="nav-link {% active_page request 'SessionPayments' session.code %}" href="{% url 'SessionPayments' session.code %}">
+    {% endif %}
+            <img src='{% static "glyphicons/usd.png" %}'> Payments
+        </a>
+    </li>
+    {% if session.has_admin_report %}
+    <li role="presentation" class="nav-item">
+        <a class="nav-link {% active_page request 'AdminReport' session.code %}" href="{% url 'AdminReport' session.code %}"><img src='{% static "glyphicons/stats.png" %}'> Report</a>
+    {% endif %}
+    {% if session.is_mturk %}
+    <li role="presentation" class="nav-item">
+        <a class="nav-link {% active_page request 'MTurkCreateHIT' session.code %}" href="{% url 'MTurkCreateHIT' session.code %}"><img src='{% static "glyphicons/cloud.png" %}'> MTurk</a>
+    </li>
+    {% endif %}
+    {% if session.is_demo %}
+    <li role="presentation">
+        <a class="nav-link" href="{% url 'CreateDemoSession' session.config.name %}" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Recreate session from scratch. You can also copy this link and share with others.">
+            <img src='{% static "glyphicons/refresh.png" %}'> New
+        </a>
+    </li>
+    {% endif %}
+
+</ul>
+{% endblock %}

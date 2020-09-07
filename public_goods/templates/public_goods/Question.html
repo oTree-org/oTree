@@ -1,0 +1,20 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Understanding Question 1 of 1
+{% endblock %}
+
+{% block content %}
+    <p>
+        Suppose in a group, 1 participant contributed 80 points, 1 participant contributed 40, and 1 participant contributed nothing.
+        What would be the payoff of the participant who contributed 80 points?
+    </p>
+
+    {% formfield player.question with label="His payoff would be" %}
+
+    {% next_button %}
+
+    {% include 'public_goods/Instructions.html' %}
+
+{% endblock %}

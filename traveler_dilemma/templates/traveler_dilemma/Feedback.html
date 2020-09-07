@@ -1,0 +1,41 @@
+{% extends "global/Base.html" %}
+{% load otree_tags %}
+
+{% block title %}
+Solution to Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+
+{% block content %}
+{% if player.training_answer_mine == 52 %}
+<p class="text-success">
+Your answer {{player.training_answer_mine}} for your compensation was correct.
+</p>
+{% else %}
+<p class="text-danger">
+Your answer {{player.training_answer_mine}} for your compensation was incorrect.
+</p>
+{% endif %}
+{% if player.training_answer_others == 48 %}
+<p class="text-success">
+Your answer {{player.training_answer_others}} for the other traveler's compensation was correct.
+</p>
+{% else %}
+<p class="text-danger">
+Your answer {{player.training_answer_others}} for the other traveler's compensation was incorrect.
+</p>
+{% endif %}
+<p>
+Suppose that you claim the antiques are worth 50 points and the other traveler claims they are worth 100 points. What would you and the other traveler receive in compensation from the airline?
+</p>
+<p>
+<strong>Solution</strong>: You would receive <strong>52 points</strong> and the other traveler <strong>48 points</strong>.
+</p>
+<p>
+<strong>Explanation</strong>: You and the other traveler made different claims and yours was lower. Hence your claim, equal to 50, was paid to both of you. In addition, you received a reward of 2 and in total got 50+2=52 points. The other traveler received a penalty of 2 and in total got 50-2=48 points.
+</p>
+<p>
+{% next_button %}
+</p>
+{% include instructions %}
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "otree/admin/Session.html" %}
+{% load otree i18n %}
+
+{% block content %}
+
+{{ block.super }}
+
+{% if not mturk_ready %}
+    <p>MTurk is currently disabled.
+        If you want to publish your HIT on MTurk please do the following
+        steps:
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>Step</th>
+            <th>Done?</th>
+        </tr>
+        <tr>
+            <td>
+                Run <code>pip3 install otree[mturk]</code>
+                and in your <code>requirements_base.txt</code>,
+                replace <code>otree==N.N.N</code> with <code>otree[mturk]==N.N.N</code>.
+                This will install oTree along with extra MTurk-specific packages.
+            </td>
+            <td>{{ boto3_installed|yesno }}</td>
+        </tr>
+
+        <tr>
+            <td>Set the settings <code>AWS_ACCESS_KEY_ID</code> and
+            <code>AWS_SECRET_ACCESS_KEY</code></td>
+            <td>{{ aws_keys_exist|yesno }}</td>
+        </tr>
+        <tr>
+            <td>
+                View this page with HTTPS.
+                <ol>
+                    <li>
+                    If using Heroku, you can simply change the URL
+                    in your browser's address bar to start with 'https://'
+                    and reload this page.
+                    </li>
+                    <!-- disabled until we upgrade channels
+                    <li>
+                        If running locally, first
+                        restart the server with <code>otree runprodserver
+                        --dev-https</code>,
+                        then change the URL
+                        in your browser's address bar to start with 'https://'
+                        and reload this page. (You may get a security warning at first)
+                    </li>
+                    -->
+                </ol>
+            </td>
+            <td>{{ https|yesno }}</td>
+        </tr>
+    </table>
+
+    <p>
+        You can read more about Amazon Mechanical Turk integration
+        <a href="http://otree.readthedocs.org/en/latest/mturk.html"
+           target="_blank">here</a>.
+    </p>
+{% elif session.mturk_is_expired %}
+    <p>This HIT has expired, so workers can no longer accept assignments.</p>
+{% elif session.mturk_HITId %}
+    <p>
+        You have published HIT for this session on MTurk
+        {% if session.mturk_use_sandbox %}
+            Sandbox
+        {% endif %}
+        .</p>
+    <p>
+        To look at the HIT as a worker
+        follow this <a href="{{ session.mturk_worker_url }}"
+                       target="_blank">link</a>.
+    </p>
+    <form action="{% url 'MTurkExpireHIT' session.code %}" method="post">{% csrf_token %}
+        <button type="submit" id="btn-expire-hit" class="btn">Expire HIT</button>
+    </form>
+    <p>
+        The above button will expire this HIT early.
+        You should click this button before deleting the session.
+        Otherwise, your nonexistent session will still be advertised
+        on the MTurk website, and MTurk workers will get a "page not found" error.
+        (However, it is safe to delete the session if all assignments have been
+        submitted.)
+    </p>
+{% else %}
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            {% blocktrans trimmed %}Please fix the errors in the
+                form.{% endblocktrans %}
+        </div>
+    {% endif %}
+
+    <form action="" method="post" role="form" class="form"
+          id="form">{% csrf_token %}
+
+        <div class="modal fade" id="mturk-confirm-publish" tabindex="-1"
+             role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Publish HIT?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            You are about to publish HIT for your session
+                            on
+                            MTurk. Are you sure?
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="btn-publish-hit">
+                            Publish
+                            HIT
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'otree/forms/layouts/bootstrap.html' %}
+        {% if missing_next_button_warning %}
+            <div class="alert alert-warning">
+                {{ missing_next_button_warning }}
+            </div>
+        {% endif %}
+        <button type="button"
+                data-toggle="modal"
+                data-target="#mturk-confirm-publish"
+                class="btn btn-primary">
+            Publish HIT
+        </button>
+    </form>
+{% endif %}
+
+{% include "otree/includes/messages.html" %}
+{% endblock %}

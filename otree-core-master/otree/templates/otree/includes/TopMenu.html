@@ -1,0 +1,29 @@
+{% load otree_tags %}
+<!--bootstrap popover launch-->
+<!--end bootstrap popover launch-->
+<div class="navbar navbar-inverse navbar-fixed-top" id="top_menu">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">oTree</a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="{% active_page request 'DemoIndex' %}"><a href="{% url 'DemoIndex' %}">Demo</a></li>
+            <li class="{% active_page request 'Sessions' %}"><a href="{% url 'Sessions' %}">Sessions</a></li>
+            <li class="{% active_page request 'Rooms' %}"><a href="{% url 'Rooms' %}">Rooms</a></li>
+            <li class="{% active_page request 'ExportIndex' %}"><a href="{% url 'ExportIndex' %}">Data</a></li>
+            <li class="{% active_page request 'ServerCheck' %}"><a href="{% url 'ServerCheck' %}">Server Check</a></li>
+            <li class="otree-core-updates"></li>
+
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% endif %}
+        </ul>
+    </div><!--/.nav-collapse -->
+</div><!--/.navbar -->

@@ -1,0 +1,41 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Solution to Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+
+{% block content %}
+{% if player.training_answer_x == Constants.training_answer_x_correct %}
+    <p class="text-success">
+    Your answer {{player.training_answer_x}} for participant A was correct.
+    </p>
+{% else %}
+    <p class="text-danger">
+    Your answer {{player.training_answer_x}} for participant A was incorrect.
+    </p>
+{% endif %}
+{% if player.training_answer_y == Constants.training_answer_y_correct %}
+    <p class="text-success">
+    Your answer {{player.training_answer_y}} for participant B was correct.
+    </p>
+{% else %}
+    <p class="text-danger">
+    Your answer {{player.training_answer_y}} for participant B was incorrect.
+    </p>
+{% endif %}
+<p>
+Suppose that participant A sent 20 points to participant B. Having received the tripled amount, participant B sent 50 points to participant A. In the end, how many points would participant A and B have?
+</p>
+<p>
+<strong>Solution:</strong> Participant A would have <strong>130 points</strong> and B <strong>10 points</strong>.
+</p>
+<p>
+<strong>Explanation:</strong> Participant A first sent 20 points to B. It was tripled thus B received 20*3=60 points. Then participant B sent 50 points to A. Participant A received exactly 50 points. Hence at last A would have 100-20+50=130 points and B would have 60-50=10 points.
+</p>
+<p>
+{% next_button %}
+</p>
+{% include instructions %}
+{% endblock %}

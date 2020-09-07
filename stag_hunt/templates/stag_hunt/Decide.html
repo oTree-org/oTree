@@ -1,0 +1,15 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Decide
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.decision with label='What will you hunt?' %}
+    {% next_button %}
+
+    {% include 'stag_hunt/Instructions.html' %}
+
+{% endblock %}

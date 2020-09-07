@@ -1,0 +1,49 @@
+<div id="session-config-{{ name }}" class="summary" style="display:{{ summary_display|default_if_none:"block" }}">
+
+<h3>{{ display_name }}</h3>
+
+{% if doc %}
+    <h4>Session description</h4>
+    <p>
+    {{ doc }}
+    </p>
+{% endif %}
+
+<h4>App sequence</h4>
+<table class="table table-hover">
+
+{% for app in app_sequence %}
+    <tr>
+        <th>{{ app.name }}</th>
+        <td>
+            <p>
+                {{ app.doc|safe }}
+            </p>
+            {% if app.source_code %}
+                <p>
+                    <strong>Source Code</strong> <a href="{{app.source_code}}" target="_blank">here</a>.
+                </p>
+            {% endif %}
+            {% if app.bibliography %}
+                <strong>Recommended Literature</strong>
+                <ul>
+                    {% for bibl in app.bibliography %}
+                    <li><i>{{bibl}}</i></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% for title, links in app.links %}
+                <p>
+                    <strong>{{title}}:</strong>
+                    {% for name, href in links.items %}
+                        <a target="_blank" href="{{href}}">{{name}}</a>{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                </p>
+            {% endfor %}
+        </td>
+    </tr>
+
+{% endfor %}
+</table>
+
+</div>

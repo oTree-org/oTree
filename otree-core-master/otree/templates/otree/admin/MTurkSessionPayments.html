@@ -1,0 +1,280 @@
+{% extends "otree/admin/Session.html" %}
+{% block internal_scripts %}
+{{ block.super }}
+<script type="text/javascript" charset="utf-8">
+/*
+****************************
+****************************
+Modal window to confirm MTurk
+payment
+****************************
+****************************
+*/
+$(document).ready(function() {
+    $('#pay').click(function() {
+        $('#mturk-payment').modal({
+            show: 'true'
+        });
+        return false;
+    })
+});
+$(document).ready(function() {
+    $('#reject').click(function() {
+        $('#mturk-reject').modal({
+            show: 'true'
+        });
+        return false;
+    })
+});
+/*
+****************************
+****************************
+Code for "checkAll" checkbox
+in the header
+****************************
+****************************
+*/
+$(function() {
+    checkFunction('payment', 'checkAll');
+});
+function checkFunction(checkName, checkAllName) {
+// disable "checkAll" checkbox if we already paid everyone
+if ($("input[name=" + checkName + "][disabled]").length == $("input[name=" + checkName + "]").length) {
+    $("input[name=" + checkAllName + "]").attr('disabled', true);
+}
+// code for "checkAll" checkbox
+$('input[name=' +  checkAllName + ']').click (function () {
+    $('input[name=' + checkName + ']').prop('checked', $(this).prop('checked')).trigger("change")
+});
+// if all checkboxes are selected check also "checkAll" checkbox
+$('input[name=' + checkName + ']').change (function () {
+    var check = ($("input[name=" + checkName + "]:checked").length == $("input[name=" + checkName + "]").length);
+    $("input[name=" + checkAllName + "]").prop('checked', check);
+})
+}
+/*
+****************************
+****************************
+Smart Pay Button
+****************************
+****************************
+*/
+$(function() {
+    $('input[name=payment]').change(function () {
+        var sum = 0.00;
+        $('input[name=payment]:checked:enabled').each(function( index, element ){
+            sum += parseFloat($(this).data('value'));
+        });
+        if (sum > 0.00) {
+            $('#pay').attr('disabled', false).text('Pay via MTurk ( $ ' + sum.toFixed(2) + ' )');
+            $('#reject').attr('disabled', false);
+        }
+        else {
+            $('#pay').attr('disabled', true).text('Pay via MTurk');
+            $('#reject').attr('disabled', true);
+        }
+    })
+});
+</script>
+<style type="text/css" media="screen">
+.codes {
+    font-family: 'Courier New'
+}
+</style>
+{% endblock %}
+{% block content %}
+{{ block.super }}
+    {% if not_published_yet %}
+        <p>
+            The MTurk payments page will appear after you publish this session
+            to MTurk.
+        </p>
+    {% else %}
+<div class="container" style='max-width:970px'>
+    <h3>Session</h3>
+    <table class="table table-condensed">
+        <tr>
+            <th>Session type</th>
+            <td>{{ session.config.name }}</td>
+        </tr>
+
+        <tr>
+            <th>Session code</th>
+            <td class="codes">{{ session.code }}</td>
+        </tr>
+
+        <tr>
+            <th>MTurk Hit Id</th>
+            <td class="codes">{{ session.mturk_HITId }}</td>
+        </tr>
+
+        <tr>
+            <th>Experimenter name</th>
+            <td>{{ session.experimenter_name|default_if_none:"" }}</td>
+        </tr>
+
+    </table>
+
+    {% if participants_not_reviewed %}
+        <h3>Assignments to be reviewed</h3>
+
+        <table class="table table-striped">
+            <tr>
+                <th>Participant code</th>
+                <th>Assignment Id</th>
+                <th>Worker Id</th>
+                <th>
+                    Participation fee (Reward)
+                </th>
+                <th>
+                    Variable pay (Bonus)
+                </th>
+                <th>Total pay</th>
+                <th>
+                    Select
+                    <div class="checkbox">
+                        <label>
+                            <input name="checkAll" type="checkbox" value="">
+                        </label>
+                    </div> 
+                </th>
+            </tr>
+
+            {% for p in participants_not_reviewed %}
+            <tr>
+                <td class="codes">{{ p.code }}</td>
+                <td class="codes">{{ p.mturk_assignment_id|default_if_none:"" }}</td>
+                <td class="codes">{{ p.mturk_worker_id|default_if_none:"" }}</td>
+                <td>
+                    {{ participation_fee }}
+                </td>
+                <td>
+                    {{ p.payoff_in_real_world_currency }}
+                </td>
+                <td>{{ p.money_to_pay }}</td>
+                <td>
+                    <div class="checkbox-inline">
+                        <label>
+                            <input name="payment" data-value="{{ p.money_to_pay.to_number }}" type="checkbox" value="{{ p.mturk_assignment_id }}">
+                        </label>
+                    </div> 
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="btn-group" style="float: right;">
+            <button class="btn btn-primary" id="pay" disabled>Pay via MTurk</button>
+            <button class="btn btn-primary" id="reject" disabled>Reject</button>
+        </div>
+    {% endif %}
+    {% if participants_approved %}
+        <h3>Approved assignments</h3>
+        <table class="table table-striped">
+            <tr>
+                <th>Participant code</th>
+                <th>Assignment Id</th>
+                <th>Worker Id</th>
+                <th>
+                    Participation fee (Reward)
+                </th>
+                <th>
+                    Variable pay (Bonus)
+                </th>
+                <th>Total pay</th>
+            </tr>
+
+            {% for p in participants_approved %}
+            <tr>
+                <td class="codes">{{ p.code }}</td>
+                <td class="codes">{{ p.mturk_assignment_id|default_if_none:"" }}</td>
+                <td class="codes">{{ p.mturk_worker_id|default_if_none:"" }}</td>
+                <td>
+                    {{ participation_fee }}
+                </td>
+                <td>
+                    {{ p.payoff_in_real_world_currency }}
+                </td>
+                <td>{{ p.money_to_pay }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    {% if participants_rejected %}
+        <h3>Rejected assignments</h3>
+        <table class="table table-striped">
+            <tr>
+                <th>Participant code</th>
+                <th>Assignment Id</th>
+                <th>Worker Id</th>
+                <th>
+                    Participation fee (Reward)
+                </th>
+                <th>
+                    Variable pay (Bonus)
+                </th>
+                <th>Total pay</th>
+            </tr>
+
+            {% for p in participants_rejected %}
+            <tr>
+                <td class="codes">{{ p.code }}</td>
+                <td class="codes">{{ p.mturk_assignment_id|default_if_none:"" }}</td>
+                <td class="codes">{{ p.mturk_worker_id|default_if_none:"" }}</td>
+                <td>
+                    {{ participation_fee }}
+                </td>
+                <td>
+                    {{ p.payoff_in_real_world_currency }}
+                </td>
+                <td>{{ p.money_to_pay }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    {% if not participants_not_reviewed and not participants_approved and not participants_rejected %}
+        <p>You have no participants who finished the experiment.</p>
+    {% endif %}
+</div>
+    {% endif %}
+<!--Modal window to confirm payment for assignments-->
+<div class="modal fade" id="mturk-payment" tabindex="-1" role="dialog" aria-labelledby="MTurkPaymentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content panel-warning">
+      <div class="modal-header panel-heading">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">Please confirm</h4>
+      </div>
+      <div class="modal-body">
+          <p>
+            <i>I understand that I am making this payment at my own risk."</i>
+          </p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-default" formaction="{% url 'PayMTurk' session.code %}">Pay</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal window to confirm rejection of assignments-->
+<div class="modal fade" id="mturk-reject" tabindex="-1" role="dialog" aria-labelledby="MTurkRejectModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content panel-warning">
+      <div class="modal-header panel-heading">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">Reject assignments?</h4>
+      </div>
+      <div class="modal-body">
+          <p>
+            Reject the selected assignments.
+          </p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-default" formaction="{% url 'RejectMTurk' session.code %}">Reject</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% include "otree/includes/messages.html" %}
+{% endblock %}

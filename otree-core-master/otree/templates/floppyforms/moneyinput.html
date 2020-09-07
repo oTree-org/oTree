@@ -1,0 +1,9 @@
+<div class="input-group input-group-narrow">
+    {% if currency_symbol_is_prefix %}
+        <span class="input-group-addon">{{ currency_symbol }}</span>
+        {% include "floppyforms/input.html" %}
+    {% else %}
+        {% include "floppyforms/input.html" %}
+        <span class="input-group-addon">{{ currency_symbol }}</span>
+    {% endif %}
+</div>

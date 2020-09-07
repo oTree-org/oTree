@@ -1,0 +1,99 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Split Screen Demo</title>
+        <meta name="description" content="otree">
+        <meta name="keywords" content="otree">
+        <style>
+            body {
+                margin: 0;
+                display: flex;
+                flex-flow: column nowrap;
+                height: 100vh;
+            }
+            body.grabbing iframe {
+                pointer-events: none;
+            }
+            iframe {
+                border: none;
+            }
+            iframe.monitor-frame {
+                flex: 1;
+
+            }
+            .resize-handle {
+                height: 10px;
+                line-height: 10px;
+                font-size: 30px;
+                text-align: center;
+                background: black;
+                color: white;
+                cursor: ns-resize;
+                user-select: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+            }
+            .participant-frames {
+                flex: 1;
+                display: flex;
+                flex-flow: row wrap;
+                /* setting:
+                height: 100%;
+                ...has no effect on IE problem */
+
+            }
+            .monitor-frame {
+                width: 100%;
+            }
+            .participant-frames iframe {
+                flex: 1;
+                border-left: 2px solid black;
+                /* if i set:
+                height: 100%;
+                ...then it works on Edge but not Chrome */
+            }
+            .participant-frames iframe:first-child {
+                border-left-width: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <iframe class="monitor-frame" src="{% url 'SessionMonitor' session.code %}"></iframe>
+        <div class="resize-handle">···</div>
+        <div class="participant-frames">
+            {% for participant_url in participant_urls %}
+                <iframe src="{{ participant_url }}"></iframe>
+            {% endfor %}
+        </div>
+        <script src="{% static 'otree/js/jquery-3.2.1.min.js' %}"></script>
+        <script>
+            $(function () {
+                var $handle = $('.resize-handle'), $body = $('body'), mouseY;
+                $handle.mousedown(function (e) {
+                    e.preventDefault();
+                    $body.addClass('grabbing');
+                    mouseY = e.pageY;
+                });
+                $(document).mousemove(function (e) {
+                    if (!$body.hasClass('grabbing')) {
+                        return;
+                    }
+                    e.preventDefault();
+                    var $frame = $('.monitor-frame');
+                    var height = $frame.height() + e.pageY - mouseY;
+                    $frame.css('min-height', height).css('max-height', height);
+                    mouseY = e.pageY
+                }).mouseup(function (e) {
+                    if (!$body.hasClass('grabbing')) {
+                        return;
+                    }
+                    e.preventDefault();
+                    $body.removeClass('grabbing')
+                });
+            });
+        </script>
+    </body>
+</html>

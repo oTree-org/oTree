@@ -1,0 +1,23 @@
+{% extends "otree/Base.html" %}
+{% load i18n otree_tags %}
+
+{% block content_main %}
+<div style="width:80%; margin:0 auto;">
+<h2>{% block title %}
+    {% trans 'Welcome' %}
+{% endblock %}</h2>
+
+<form method="get">
+    <label for="participant_label">{% trans 'Please enter your participant label.' %}</label>
+    <br/>
+    <input type="text" id="participant_label" name="participant_label" class="form-control" />
+    {% if uses_pin %}
+    <label for="pin">Please enter the session PIN code:</label>
+    <br/>
+    <input type="text" id="pin" name="pin" />
+    {% endif %}
+    <br/>
+    {% next_button %}
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+/* 2018-12-28: what's the difference between this and theme.css? */
+
+.otree-body {
+    max-width:970px
+}
+
+.page-header {
+    padding-top: 40px
+}

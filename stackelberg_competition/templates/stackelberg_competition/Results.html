@@ -1,0 +1,60 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>The results are shown in the following table.</p>
+
+
+
+
+
+    <table class="table table-test" style="width:400px; margin-bottom:10px">
+
+        <tr>
+            <td>Your firm produced:</td>
+            <td>{{ player.quantity }} units</td>
+        </tr>
+
+        <tr>
+            <td>The other firm produced:</td>
+            <td>{{ player.other_player.quantity }} units</td>
+        </tr>
+
+        <tr>
+            <td>Total production:</td>
+            <td>{{ total_quantity }} units</td>
+        </tr>
+
+        <tr>
+            <td style="border-top-width:4px">Unit selling price:</td>
+            <td style="border-top-width:4px">{{ Constants.total_capacity }} – {{ total_quantity }} = {{ group.price }}</td>
+        </tr>
+
+        <tr>
+            <td>Your profit:</td>
+            <td>{{ player.payoff }}</td>
+        </tr>
+
+        <tr>
+            <td style="border-top-width:4px">In addition, you get a participation fee:</td>
+            <td style="border-top-width:4px">{{ Constants.fixed_pay }}</td>
+        </tr>
+
+        <tr>
+            <td style="border-top-width:4px">In total, you receive:</td>
+            <td style="border-top-width:4px">{{ total_plus_base }}</td>
+        </tr>
+
+    </table>
+
+
+    {% next_button %}
+
+    {% include 'stackelberg_competition/Instructions.html' %}
+
+{% endblock %}

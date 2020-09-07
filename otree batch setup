@@ -1,0 +1,14 @@
+cd "Google Drive"
+cd david/bsu/otree-heroku/otree/bsu-games
+git add .
+git commit -am -q
+
+git push heroku master
+
+# this will clear all data from databases
+# python otree-heroku resetdb bsu-games
+
+heroku config:set OTREE_PRODUCTION=1
+heroku config:set OTREE_AUTH_LEVEL=EXPERIMENT
+
+heroku open

@@ -1,0 +1,8 @@
+include LICENSE
+include README.md
+include requirements.txt
+recursive-include otree/static *
+recursive-include otree/templates *
+recursive-include otree/project_template *
+recursive-include otree/app_template/templates *
+recursive-include otree/locale *

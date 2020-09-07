@@ -1,0 +1,88 @@
+{% extends "otree/admin/Session.html" %}
+{% load otree_tags floppyforms %}
+
+{% block internal_scripts %}
+{{ block.super }}
+<script type="text/javascript" charset="utf-8">
+// show modal warning window if user tries to create hit in non-sandbox mode
+// and if we are not already showing this modal to user
+$(document).ready(function() {
+    // this select text in text input box so it is easier to change it
+    $("input[type=text]").click(function() {
+        $(this).select();
+    });
+    $('#form').on('submit', function(ev) {
+        if (($("input[name=in_sandbox]:checked").length == 0) && !($("#mturk-production").hasClass('in'))) {
+            $('#mturk-production').modal({
+                show: 'false'
+            });
+            ev.preventDefault();
+        }
+    })
+});
+</script>
+{% endblock %}
+{% block content %}
+{{ block.super }}
+{% if runserver %}
+    <div class="alert alert-danger">
+        <strong>You are using <code>runserver</code></strong>.
+        On this version of oTree, you may not be able to create HITs when using runserver,
+        because runserver does not support HTTPS.
+        We plan to fix this quite soon, but for now, in order to do MTurk testing,
+        you need to run oTree on an HTTPS server (e.g. Heroku),
+        or downgrade to oTree 0.4.xx.
+    </div>
+{% endif %}
+{% if not mturk_enabled %}
+<p> MTurk is currently disabled.
+If you want to publish your HIT on MTurk please do the following steps:
+<ol>
+    <li>set environmental variables <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code></li>
+    <li>restart the server</li>
+    <li>access this page via secured url <a href="{{ secured_url }}">{{ secured_url }}</a></li>
+</ol>
+You can read more about Amazon Mechanical Turk integration
+<a href="http://otree.readthedocs.org/en/latest/mturk.html" target="_blank">here</a>.
+</p>
+{% else %}
+<div class="modal fade" id="mturk-production" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content panel-warning">
+      <div class="modal-header panel-heading">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">Publish HIT?</h4>
+      </div>
+      <div class="modal-body">
+          <p>
+              You are about to publish HIT for your session on MTurk. Are you sure?
+          </p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Publish HIT</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% if not session.mturk_HITId %}
+{% form form using "floppyforms/layouts/bootstrap.html" %}
+<button type="submit" class="btn btn-primary">Publish HIT</button>
+{% else %}
+<p>
+You have published HIT for this session on MTurk
+{% if session.mturk_sandbox %}
+Sandbox
+{% endif %}
+.</p>
+<p>
+To look at the HIT as <em>requester</em>
+follow this <a href="{{ session.mturk_requester_url }}" target="_blank">link</a>.<br>
+To look at the HIT as a <em>worker</em>
+follow this <a href="{{ session.mturk_worker_url }}" target="_blank">link</a>.
+</p>
+{% for field in form %}{% mark_field_as_rendered field %}{% endfor %}
+{% endif %}
+{% endif %}
+{% include "otree/includes/messages.html" %}
+{% endblock %}

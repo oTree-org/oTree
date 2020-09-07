@@ -1,0 +1,56 @@
+
+<style type="text/css">
+    ul {
+        list-style-type:circle;
+        padding-left:20px;
+    }
+    h3.panel-sub-heading {
+        padding-bottom:10px;
+        padding-left:4px;
+    }
+</style>
+
+<div class="well well-lg" style="padding-top:5px; padding-bottom:15px; margin-top:20px;">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+
+    <p>
+        You have been randomly and anonymously paired with another participant.
+        Each of you will represent a firm. Both firms manufacture the same product.
+    </p>
+
+    <p>
+        The two of you decide sequentially how many units to manufacture.
+        One of you will decide first. The other will be informed of the units produced by the first one and then decide the units for herself/himself.
+        You will learn the order prior to making any decision.
+    </p>
+
+    <p>
+        Your choices can be any number from 0 to {{ Constants.max_units_per_player }}.
+        All produced units will be sold, but the more is produced, the lower the unit selling price will be.
+    </p>
+
+
+    <p>
+        The unit selling price is:
+    </p>
+
+    <ul>
+        <strong>Unit selling price = {{ Constants.total_capacity }} – Units produced by your firm – Units produced by the other firm</strong>
+    </ul>
+
+    <p>
+        Your profit, also measured in points, is therefore:
+    </p>
+
+    <ul>
+        <strong>Your profit = Unit selling price × Units produced by your firm</strong>
+    </ul>
+
+    <p>
+       For your convenience, these instructions will remain available to you on all subsequent screens of this study.
+    </p>
+
+</div>

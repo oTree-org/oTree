@@ -1,0 +1,28 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Solution to Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        The question was: {{ Constants.training_question_1 }}
+    </p>
+
+    <p>
+        You answered: {{ player.training_question_1 }}
+    </p>
+
+    {% if player.is_training_question_1_correct %}
+        <p class="text-success">Your answer is correct.</p>
+    {% else %}
+        <p class="text-danger">Your answer is incorrect. {{ explanation }}.</p>
+    {% endif %}
+
+    {% next_button %}
+
+    {% include 'stackelberg_competition/Instructions.html' %}
+
+{% endblock %}

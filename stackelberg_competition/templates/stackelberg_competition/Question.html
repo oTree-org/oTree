@@ -1,0 +1,20 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+    {% if num_q == 1 %}
+        <p>
+            {% formfield player.training_question_1 with label=Constants.training_question_1 %}
+        </p>
+    {% endif %}
+
+    {% next_button %}
+
+    {% include 'stackelberg_competition/Instructions.html' %}
+
+{% endblock %}

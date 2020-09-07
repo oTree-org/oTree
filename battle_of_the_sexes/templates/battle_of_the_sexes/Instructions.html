@@ -1,0 +1,114 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+
+<style type="text/css">
+    ul {
+        list-style-type:circle;
+        padding-left:20px;
+    }
+    h3.panel-sub-heading {
+        padding-bottom:10px;
+        padding-left:4px;
+    }
+
+    td, th{
+        text-align: center;
+    }
+
+
+    .instructions {
+        position: relative;
+        text-shadow: 0 1px 0 #fff;
+        line-height: 1.5;
+        margin: 60px auto;
+        background-color: #f5f5dc;
+        background-image: linear-gradient(to bottom, #f5f5dc 0px, #fbfbeb 100%);
+        padding-top: 5px;
+        padding-bottom: 15px;
+        margin-top: 20px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+    }
+
+    .instructions:before, .instructions:after {
+        z-index: -1;
+        position: absolute;
+        content: "";
+        bottom: 15px;
+        left: 10px;
+        width: 50%;
+        top: 80%;
+        max-width:300px;
+        background: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+        transform: rotate(-3deg);
+    }
+
+    .instructions:after {
+        transform: rotate(3deg);
+        right: 10px;
+        left: auto;
+    }
+</style>
+
+<div class="instructions well well-lg" style="">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+
+    <p>
+        In this study, you will be paired randomly and anonymously with another participant. One of you will be
+        randomly designated Husband and the other will be designated Wife. Prior to making a decision, you will
+        learn your role.
+    </p>
+
+    <p>
+        Both Husband and Wife have two choices for an evening’s entertainment. Each can either go to a football
+        match or to an opera. Husband prefers football and Wife prefers opera; however, to both it is more important
+        that they go out together than that each see the preferred entertainment.
+    </p>
+
+    <p>
+        Each of you must independently and simultaneously make a decision. Your payoffs will be determined by both
+        choices as shown below:
+    </p>
+
+    <p>
+        <em>In each cell, the amount (in points) to the left is the payoff for Wife and to the right for Husband.</em>
+
+    </p>
+
+    <div class="row">
+        <div class="col-md-7 col-md-offset-2">
+            <table class="table table-hover">
+                <tr>
+                    <th colspan="2"></th>
+                    <th colspan="2">Husband</th>
+                </tr>
+                <tr>
+                    <th colspan="2"></th>
+                    <th>Football</th>
+                    <th>Opera</th>
+                </tr>
+                <tr>
+                    <th rowspan="2"><span class="rotate90">Wife</span> </th>
+                    <th>Football</th>
+                    <td>200, 300</td>
+                    <td>0, 0</td>
+                </tr>
+                <tr>
+                    <th>Opera</th>
+                    <td>0, 0</td>
+                    <td>300, 200</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <p>
+         For your convenience, these instructions will remain available to you on all subsequent screens of this study.
+    </p>
+
+</div>

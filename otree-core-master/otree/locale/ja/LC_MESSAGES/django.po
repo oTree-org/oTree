@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-27 15:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Translators: display a number of points,
+#. like "1 point", "2 points", ...
+#. See "Plural-Forms" above for pluralization rules
+#. in this language.
+#. Explanation at http://bit.ly/1IurMu7
+#. In most languages, msgstr[0] is singular,
+#. and msgstr[1] is plural
+#: .\common.py:96
+msgid "{} point"
+msgid_plural "{} points"
+msgstr[0] "{}ポイント"
+msgstr[1] "{}ポイント"
+
+#. Translators: for required form fields
+#: .\constants_internal.py:73
+msgid "This field is required."
+msgstr "この欄に答える必要があります"
+
+#: .\db\models.py:247
+msgid "Yes"
+msgstr "はい"
+
+#: .\db\models.py:248
+msgid "No"
+msgstr "いいえ"
+
+#: .\forms\forms.py:311
+msgid "Value must be greater than or equal to {}."
+msgstr "{}以上の値を答えてください"
+
+#: .\forms\forms.py:315
+msgid "Value must be less than or equal to {}."
+msgstr "{}以下の値を答えてください"
+
+#. Translators: for multiple-choice fields,
+#. show the valid choices.
+#. e.g. "Value must be one of: A, B, C"
+#: .\forms\forms.py:327
+msgid "Value must be one of: {}"
+msgstr "{}:から選んで答えてください"
+
+#. Translators: the label next to a "points" input field
+#: .\forms\widgets.py:103
+msgid "points"
+msgstr "ポイント"
+
+#: .\templates\otree\BaseExperiment.html:18 .\templates\otree\BaseAdmin.html:34
+msgid "Please fix the errors in the form."
+msgstr "誤りのある欄を修正してください"
+
+#: .\templates\otree\OutOfRangeNotification.html:11
+msgid "No more pages left to show."
+msgstr "これ以上表示するページはりません"
+
+#: .\templates\otree\WaitPage.html:41
+msgid ""
+"An error occurred. Please check the logs or ask the administrator for help."
+msgstr "エラーが起きました。履歴を見るか、管理者に質問してください"
+
+#: .\templates\otree\includes\TimeLimit.html:6
+msgid "Time left to complete this page:"
+msgstr "このページでの残り時間"
+
+#: .\templates\otree\login.html:35
+msgid "Forgotten your password or username?"
+msgstr "パスワードかユーザー名を忘れましたか？"
+
+#: .\templates\otree\login.html:39
+msgid "Log in"
+msgstr "ログイン"
+
+#. Translators: The text on the button the user clicks to get to the next page
+#: .\templates\otree\tags\NextButton.html:4
+msgid "Next"
+msgstr "次へ"
+
+#. Translators: the default title of a wait page
+#: .\views\abstract.py:406
+msgid "Please wait"
+msgstr "しばらくお待ちください"
+
+#: .\views\abstract.py:613
+msgid "Waiting for the other participants."
+msgstr "他の参加者をお待ちください"
+
+#: .\views\abstract.py:615
+msgid "Waiting for the other participant."
+msgstr "他の参加者をお待ちください"
+
+#. Translators: the default body text on the waiting page
+#. to inform the user we are waiting.
+#: .\views\abstract.py:619
+msgid "Waiting"
+msgstr "待機"
+
+#: .\views\concrete.py:123
+msgid "Waiting until other participants or the study supervisor are ready."
+msgstr "他の参加者、もしくは指導員の準備が整うまでお待ちください"

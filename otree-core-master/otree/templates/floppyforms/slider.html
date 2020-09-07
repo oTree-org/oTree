@@ -1,0 +1,8 @@
+{% if show_value %}
+<div class="input-group slider" data-slider>
+    {% include "floppyforms/input.html" %}
+    <span class="input-group-addon" data-slider-value title="current value"></span>
+</div>
+{% else %}
+    {% include "floppyforms/input.html" %}
+{% endif %}

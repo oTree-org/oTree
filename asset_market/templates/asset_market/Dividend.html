@@ -1,0 +1,24 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Dividend Distribution (Period {{ round_num }} of {{ num_of_rounds }})
+{% endblock %}
+
+{% block content %}
+
+
+
+    <p>
+        The dividend per share for Period {{ round_num }} is {{ group.dividend_per_share }}. You have {{ player.shares }} shares thus receive {{ dividend_gain }}
+        for dividends in total. Now your positions are the following:
+    </p>
+
+    <h5 class="text-info text-center">Cash: {{ player.cash }};  Shares: {{ player.shares }}</h5>
+
+    {% next_button %}
+
+    {% include 'asset_market/Rules.html' %}
+
+
+{% endblock %}

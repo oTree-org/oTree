@@ -1,0 +1,81 @@
+{% extends "otree/admin/Session.html" %}
+{% block content %}
+{{ block.super }}
+<div class="container" style='max-width:970px'>
+    <p>
+    PDF generated: <strong>{% now "DATETIME_FORMAT" %}</strong>
+    </p>
+
+
+    <h3>Session</h3>
+    <table class="table">
+        <tr>
+            <th>Session type</th>
+            <td>{{ session.config.name }}</td>
+        </tr>
+
+        <tr>
+            <th>Session code</th>
+            <td style="font-family: 'Courier New'">{{ session.code }}</td>
+        </tr>
+
+        <tr>
+            <th>Time scheduled</th>
+            <td>{{ session.time_scheduled|default_if_none:"" }}</td>
+        </tr>
+
+
+        <tr>
+            <th>Experimenter name</th>
+            <td>{{ session.experimenter_name|default_if_none:"" }}</td>
+        </tr>
+
+    </table>
+
+    <h3>Participants</h3>
+
+
+    <table class="table table-striped">
+        <tr>
+            <th>Participant code</th>
+            <th>Participant label</th>
+            <th>Participation fee</th>
+            <th>Variable pay</th>
+            <th>Total pay</th>
+            <th>Note</th>
+        </tr>
+
+        {% for p in participants %}
+        <tr>
+            <td style="font-family: 'Courier New'">{{ p.code }}</td>
+            <td>{{ p.label|default_if_none:"" }}</td>
+            <td>{{ participation_fee }}</td>
+            <td>{{ p.payoff_in_real_world_currency }}</td>
+            <td>{{ p.money_to_pay }}</td>
+            <td></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <h3>Summary</h3>
+    <table class="table">
+        <tr>
+            <th>Total payments</th>
+            <td>{{ total_payments }}</td>
+        </tr>
+        <tr>
+            <th>Mean payment</th>
+            <td>{{ mean_payment }}</td>
+        </tr>
+    </table>
+
+
+    <h3>Notes/Signature</h3>
+    <div class="well well-lg">
+        <br/>
+        <br/>
+        <br/>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,1 @@
+from otree_startup import execute_from_command_line

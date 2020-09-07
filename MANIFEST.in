@@ -1,0 +1,12 @@
+include LICENSE
+include README.rst
+include requirements.txt
+include requirements_mturk.txt
+recursive-include otree/certs *
+recursive-include otree/static *
+recursive-include otree/templates *
+recursive-include otree/project_template *
+recursive-include otree/app_template/templates *
+recursive-include otree/locale *
+recursive-include otree *.pyi
+recursive-exclude tests *

@@ -1,21 +1,29 @@
 # Don't change anything in this file.
 from .. import models
 import otree.api
-
+from otree.api import Currency as c, currency_range
 
 class Page(otree.api.Page):
-    subsession: models.Subsession
-    group: models.Group
-    player: models.Player
+
+    def z_autocomplete(self):
+        self.subsession = models.Subsession()
+        self.group = models.Group()
+        self.player = models.Player()
 
 
 class WaitPage(otree.api.WaitPage):
-    subsession: models.Subsession
-    group: models.Group
-    player: models.Player
+
+
+    def z_autocomplete(self):
+        self.subsession = models.Subsession()
+        self.group = models.Group()
 
 
 class Bot(otree.api.Bot):
-    subsession: models.Subsession
-    group: models.Group
-    player: models.Player
+
+    def z_autocomplete(self):
+        self.subsession = models.Subsession()
+        self.group = models.Group()
+        self.player = models.Player()
+
+

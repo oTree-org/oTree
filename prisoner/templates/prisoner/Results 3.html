@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        {% if same_choice %}
+            Both of you chose to {{ my_decision }}.
+        {% else %}
+            You chose to {{ my_decision }} and the other participant chose to {{ opponent_decision }}.
+        {% endif %}
+    </p>
+
+    <p>
+        As a result, you earned {{ player.payoff }}.
+    </p>
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}

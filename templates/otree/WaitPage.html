@@ -1,0 +1,135 @@
+{% extends 'otree/Base.html' %}
+{% load i18n %}
+{% load otree %}
+{% block head_title %}{{ title_text }}{% endblock %}
+
+{% block internal_styles %}
+    {{ block.super }}
+    <style>
+        body {
+            background-color: #c0c0c0;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #3b84c3;
+            border-radius: 5px;
+            box-shadow: 0 0 20px #999;
+            /*width: 940px; */
+            margin: 22px auto;
+        }
+
+        .card-body {
+            margin-top: 10px;
+        }
+
+        .page-header {
+           border: 1px solid #c0c0c0;
+        }
+
+        .otree-wait-page {
+            max-width:970px
+        }
+
+        .progress-bar {
+            width: 100%;
+        }
+    </style>
+{% endblock %}
+{% comment %}this template is used by rooms, where javascript_vars does not exist{% endcomment %}
+{% block body_main %}{% for varname,value in javascript_vars|default:None %}<script>let {{ varname }} = {{ value|json }};</script>{% endfor %}
+<div class="otree-wait-page container">
+    <div class="card">
+        <h4 class="otree-wait-page__title card-header">
+            {% block title %}{{ title_text }}{% endblock %}
+        </h4>
+        <div class="card-body">
+            <div id="_otree-server-error" class="alert alert-danger" style="display:none">
+                {% blocktrans trimmed %}An error occurred. Please check the logs or ask the administrator for help.{% endblocktrans %}
+            </div>
+            {% block content %}
+            <p class="otree-wait-page__body">{{ body_text }}</p>
+            {% endblock %}
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"></div>
+            </div>
+        </div>
+    </div>
+    {% if view.is_debug|default:False %}
+        {% include 'otree/includes/debug_info.html' %}
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block internal_scripts %}
+    {{ block.super }}
+    <!-- this is an HTML file rather than JavaScript static file because context variables need to be passed to it -->
+<script type="text/javascript">
+$(document).ready(function () {
+
+    var socket;
+
+    initWebSocket();
+
+    function initWebSocket() {
+        socket = makeReconnectingWebSocket("{{ view.socket_url|safe }}");
+        socket.onmessage = function(e) {
+            var data = JSON.parse(e.data);
+
+            // Handle errors
+            if (data.error) {
+                // maybe the div's default text doesn't get shown
+                $("#_otree-server-error").text(data.error);
+                $("#_otree-server-error").show();
+                return;
+            }
+
+            window.location.href = '{{ view.redirect_url|safe }}';
+
+        };
+    }
+
+    {% if view.group_by_arrival_time|default:False %}
+
+        {% comment %}
+        We should use an AJAX heartbeat rather than relying on just
+        refreshing the page, because on slow servers, this could take a long time,
+        and could be disruptive.
+        We can do this refresh frequently, without worrying about overloading the server
+        or disrupting the user.
+        And other wait pages in oTree don't refresh frequently, so we should be consistent.
+        The extra AJAX view doesn't really add much complexity.
+        Also it makes it easier for folks to test this functionality.
+        {% endcomment %}
+        function heartbeat() {
+            var args = {
+                type: "GET",
+                url: '{% url "ParticipantHeartbeatGBAT" participant.code %}',
+                // necessary for IE
+                cache: false
+            };
+            $.ajax(args);
+        }
+
+        var SECOND = 1000;
+        window.setInterval(heartbeat, 10 * SECOND);
+
+        {% comment %}
+        Refresh the whole page, because if we just used an AJAX heartbeat,
+        then someone could go offline then comes back online,
+        and then enough people would be online, but nothing happens because
+        try_to_regroup is not re-executed. that only happens with a full page load.
+        {% endcomment %}
+
+        window.setInterval(function() {
+                  window.location.reload();
+                }, 60*SECOND);
+
+
+    {% endif %}
+
+
+ });
+ </script>
+ {% endblock %}
+

@@ -1,0 +1,10 @@
+{% if show_value %}
+<div class="input-group slider" data-slider>
+    {% include "django/forms/widgets/input.html" %}
+    <div class="input-group-append">
+        <span class="input-group-text" data-slider-value title="current value"></span>
+    </div>
+</div>
+{% else %}
+    {% include "django/forms/widgets/input.html" %}
+{% endif %}

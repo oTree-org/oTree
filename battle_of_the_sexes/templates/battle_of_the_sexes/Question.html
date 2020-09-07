@@ -1,0 +1,28 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+    {% if num_q == 1 %}
+        <p>
+            Suppose that Husband chose to go for a football match and Wife
+            chose to go for an opera. What would be their payoffs
+            respectively?
+        </p>
+        <p>
+            {% formfield player.training_question_1_husband with label='Payoff for Husband would be:' %}
+        </p>
+        <p>
+            {% formfield player.training_question_1_wife with label='Payoff for Wife would be:' %}
+        </p>
+    {% endif %}
+
+    {% next_button %}
+
+    {% include 'battle_of_the_sexes/Instructions.html' %}
+
+{% endblock %}

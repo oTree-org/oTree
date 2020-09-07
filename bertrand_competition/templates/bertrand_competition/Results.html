@@ -1,0 +1,21 @@
+{% extends "global/Base.html" %}
+{% load otree_tags %}
+{% block title %}Results{% endblock %}
+{% block content %}
+<table class=table style='width: auto'>
+    {% for row in table %}
+    <tr>
+        {% for cell in row %}
+        {% if forloop.counter0 %}
+        <th>{{cell}}</th>
+        {% else %}
+        <td>{{cell}}</td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+<p>{% next_button %}</p>
+{% include instructions %}
+{% endblock %}

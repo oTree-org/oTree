@@ -1,5 +1,5 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree static %}
 
 {% block title %}
     Survey
@@ -11,7 +11,9 @@
         Please answer the following questions.
     </p>
 
-    {% formfields %}
+    {% for field in form %}
+        {% formfield field %}
+    {% endfor %}
 
     {% next_button %}
 

@@ -1,0 +1,60 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load floppyforms otree_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block head_title %}{% block title %}{% endblock %}{% endblock %}</title>
+
+        <meta name="description" content="otree, game theory{% for seo in SEO %}, {{seo}}{% endfor %}{% for seo in page_seo %}, {{seo}}{% endfor %}">
+        <meta name="keywords" content="otree, game theory{% for seo in SEO %}, {{seo}}{% endfor %}{% for seo in page_seo %}, {{seo}}{% endfor %}">
+
+        {% block internal_styles %}
+            {% include 'otree/includes/InternalStyles.html' %}
+        {% endblock %}
+        {% block global_styles %}
+        {% endblock %}
+        {% block app_styles %}
+        {% endblock %}
+        {# 'styles' block is for page-specific styles (for 3rd party programmers only) #}
+        {% block styles %}
+        {% endblock %}
+        <!--head_content deprecated-->
+        {% block head_content %}
+        {% endblock %}
+        <!--custom_styles deprecated-->
+        {% block custom_styles %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block content_at_top_of_body %}{% endblock %}
+        {% block content_main %}{% endblock %}
+
+        {% block internal_content_at_bottom_of_body %}
+        {% endblock %}
+        {% block content_at_bottom_of_body %}{% endblock %}
+        {% block page_footer  %}
+            {% if PAGE_FOOTER %}
+            <footer>
+                <div class="text-center">
+                    {{PAGE_FOOTER|safe}}
+                </div>
+            </footer>
+            {% endif %}
+        {% endblock %}
+        {% block internal_scripts %}
+            {% include 'otree/includes/InternalScripts.html' %}
+        {% endblock %}
+        {% block global_scripts %}
+        {% endblock %}
+        {% block app_scripts %}
+        {% endblock %}
+        {# 'scripts' block is for page-specific scripts (for 3rd party programmers only) #}
+        {% block scripts %}
+        {% endblock %}
+        <!--custom_scripts deprecated-->
+        {% block custom_scripts %}
+        {% endblock %}
+    </body>
+</html>

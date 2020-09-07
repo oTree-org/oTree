@@ -1,0 +1,65 @@
+<h3>Persistent URLs</h3>
+
+<p>
+    These URLs will stay constant for new sessions,
+    even if the database is recreated.
+</p>
+
+
+{% if room.has_participant_labels %}
+<h4>Participant-specific URLs</h4>
+
+    <p>
+        These URLs contain the labels,
+        so participants don't have to enter their label manually.
+    </p>
+
+    {% if collapse_links %}
+    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#participant_links">
+            Show/Hide
+    </button>
+
+    {% endif %}
+
+
+    <div id="participant_links" {% if collapse_links %}class="collapse"{% endif %}>
+    {% comment %}
+        this is a table to be consistent with other start links listings,
+        which may include participant label column
+    {% endcomment %}
+    <table class="table">
+    {% for participant_url in participant_urls %}
+        <tr>
+            {# eventually add participant labels #}
+            <td><a href="{{ participant_url }}" class="participant-link" target="_blank">{{ participant_url }}</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+
+{% endif %}
+
+
+{% if room.use_secure_urls %}
+    {# then dont use room-wide URL #}
+{% else %}
+    <br>
+    <h4>Room-wide URL</h4>
+    <p>
+        Here is the room-wide URL anyone can use.
+        {% if room.has_participant_labels %}
+            Users will be prompted to enter their participant label,
+            which will be validated against your participant_label_file.
+        {% else %}
+            Don't use this link when testing in multiple tabs on the same browser,
+            because all tabs will be assigned to the same participant,
+            using a cookie.
+        {% endif %}
+    </p>
+
+    <p><a href="{{ room_wide_url }}" target="_blank">{{ room_wide_url }}</a></p>
+{% endif %}
+
+<br>
+
+

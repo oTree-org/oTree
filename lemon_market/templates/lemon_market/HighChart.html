@@ -1,0 +1,33 @@
+{% load otree %}
+
+<div id="highcharts-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<script src="//code.highcharts.com/highcharts.js"></script>
+
+<script>
+    $(function () {
+        Highcharts.chart('highcharts-container', {
+            title: {
+                text: 'Results'
+            },
+            xAxis: {
+                categories: {{ round_numbers|json }},
+                title: {text: 'Round'}
+            },
+            yAxis: {
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: {{ highcharts_series|json }}
+        });
+    });
+</script>

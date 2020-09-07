@@ -1,0 +1,141 @@
+{% extends "otree/admin/Session.html" %}
+
+
+{% block content %}
+{{ block.super }}
+
+    {% if use_browser_bots %}
+        <div class="alert alert-info" role="alert">
+            <p>
+            Links will play automatically with browser bots.
+            To disable, go to settings.py and set <code>'use_browser_bots': False</code>
+            in the session config.
+            </p>
+        </div>
+    {% endif %}
+
+{% if room %}
+    <p>
+        This session is taking place in the room
+        <a href="{% url "RoomWithoutSession" room.name %}">{{ room.display_name }}</a>.
+    </p>
+
+    {% include "otree/includes/RoomParticipantLinks.html" %}
+
+    {% comment %}
+    need this because otherwise, if a participant closes their browser,
+    there is no way for them to resume playing.
+    {% endcomment %}
+    {% if not room.has_participant_labels %}
+        <h4>Single-use links</h4>
+
+        <p>
+            Below are single-use links for this session only.
+            You can use these in the event that you need to open (or re-open) a specific
+            participant's link.
+        </p>
+
+        <button class="btn" type="button" data-toggle="collapse" data-target="#session_start_urls_room">
+            Show/Hide
+        </button>
+
+        <div id="session_start_urls_room" class="collapse">
+        <table class="table">
+        {% for participant_url in session_start_urls %}
+            <tr>
+                <td><strong>P{{ forloop.counter }}</strong></td>
+                <td><a href="{{ participant_url }}" class="participant-link" target="_blank">{{ participant_url }}</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+
+    {% endif %}
+
+{% elif session.is_demo %}
+    <p>
+        Below are temporary links for testing and demonstration.
+        To launch a real study, either create persistent links by setting up a <a href="{% url 'Rooms' %}">room</a>,
+        or create a session through the <a href="{% url 'Sessions' %}">sessions page</a>.
+    </p>
+
+    <p>
+        You can either open
+        {% if fullscreen_mode_on %} full-screen mode, {% endif %}
+        the session-wide link, or the single-use links.
+    </p>
+
+    {% if fullscreen_mode_on %}
+        <h4>Full screen mode</h4>
+        <p>
+        <a target="_blank" href="{% url 'SessionFullscreen' session.code %}">Play in full screen mode</a>.
+        </p>
+    {% endif %}
+
+    <h4>Session-wide link</h4>
+    <p>
+        Open the below link in <strong>{{ num_participants }}</strong> browser tabs.
+    </p>
+
+    <p><a target="_blank" href="{{ anonymous_url }}">{{ anonymous_url }}</a></p>
+
+    <h4>Single-use links</h4>
+
+    <p>Open each link in its own browser tab.</p>
+
+    <table class="table">
+    {% for participant_url in participant_urls %}
+        <tr>
+            <td><strong>P{{ forloop.counter }}</strong></td>
+            <td><a href="{{ participant_url }}" class="participant-link" target="_blank">{{ participant_url }}</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% else %}
+
+    <p>
+        You can either use the session-wide link, persistent links,
+        or single-use links.
+    </p>
+
+    <h4>Session-wide link</h4>
+
+    <p>
+        If it is impractical to distribute distinct URLs to each participant,
+        you can give the following start URL to all {{ num_participants }} participants.
+    </p>
+
+    <p><a target="_blank" href="{{ anonymous_url }}">{{ anonymous_url }}</a></p>
+
+    <p>
+        Note: unlike the other link modes, this does not prevent the same person from
+        playing twice.
+    </p>
+
+    <h4>Persistent links</h4>
+
+    <p>
+        If you want to give your participants permanent links that don't change,
+        you should create your session in a <a href="{% url 'Rooms' %}">room</a>.
+    </p>
+
+    <h4>Single-use links</h4>
+
+    <p>
+        Below are single-use links, which you can distribute to your participants.
+        Each link has a unique code for the participant.
+    </p>
+
+    <table class="table">
+    {% for participant_url in participant_urls %}
+        <tr>
+            <td><strong>P{{ forloop.counter }}</strong></td>
+            <td><a href="{{ participant_url }}" class="participant-link" target="_blank">{{ participant_url }}</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You started with an endowment of {{ Constants.endowment }},
+        of which you contributed {{ player.contribution }}.
+        Your group contributed {{ group.total_contribution }},
+        resulting in an individual share of {{ group.individual_share }}.
+        Your profit is therefore {{ player.payoff }}.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

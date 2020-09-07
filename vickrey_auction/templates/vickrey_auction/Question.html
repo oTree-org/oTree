@@ -1,0 +1,26 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+    {% if num_q == 1 %}
+        <p>
+            You were given 100 points to start. Suppose that your value to the
+            object was 65 points and you bid 60. The other 2 participants bid
+            60 and 45 respectively. A coin was flipped and you were selected
+            to be the winner. What would be your payoff?
+        </p>
+        <p>
+            {% formfield player.training_question_1_my_payoff with label='My payoff would be:' %}
+        </p>
+    {% endif %}
+
+    {% next_button %}
+
+    {% include 'vickrey_auction/Instructions.html' %}
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results for Round {{ round_number }} of {{ total_rounds }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        {% if role == 'Player 1' %}
+            You were Player 1. You chose "{{ player.penny_side }}", Player 2 guessed "{{ player.other_player.penny_side }}".
+        {% else %}
+            You were Player 2. You guessed "{{  player.penny_side }}", Player 1 chose "{{ player.other_player.penny_side }}".
+        {% endif%}
+    </p>
+
+    <p>
+        In this round, you win {{ player.payoff }} and your opponent wins {{ player.other_player.payoff }}.
+    </p>
+
+    <p>
+        {% if round_number < total_rounds %}
+            Please click "Next" to proceed to the next round where you will play against the same opponent but your roles will be switched.
+        {% else %}
+            All rounds are now finished.
+        {% endif %}
+    </p>
+
+    {% next_button %}
+
+    {% include 'matching_pennies/Instructions.html' %}
+
+{% endblock %}

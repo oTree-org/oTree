@@ -1,0 +1,8 @@
+{% comment %}
+    - we override this template to add bootstrap classes
+     (if we used all our own widgets maybe we could
+     override a method like optgroups to insert our attrs)
+    - need to use |default so it fails silently
+    - not sure why we need {% localize off %}
+{% endcomment %}
+{% load l10n %}{% load otree_bootstrap_widget %}{% localize off %}{% for name, value in widget|attrs_items %}{% if value is not False %} {{ name }}{% if value is not True %}="{{ value }}"{% endif %}{% endif %}{% endfor %}{% endlocalize %}

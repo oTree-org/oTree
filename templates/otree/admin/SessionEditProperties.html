@@ -1,0 +1,13 @@
+{% extends "otree/admin/Session.html" %}
+{% load otree %}
+
+{% block content %}
+    {{ block.super }}
+    {% include "otree/includes/messages.html" %}
+    <form action="" method="post" role="form" class="form" id="form">
+        {% csrf_token %}
+        {% include "otree/forms/layouts/bootstrap.html" %}
+        {% next_button %}
+    </form>
+
+{% endblock %}

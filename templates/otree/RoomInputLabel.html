@@ -1,0 +1,25 @@
+{% extends "otree/Base.html" %}
+{% load i18n otree %}
+
+{% block body_main %}
+    <div class="container m-5">
+        <h2>
+            {% block title %}{% trans 'Welcome' %}{% endblock %}
+        </h2>
+        <div>
+            <form method="get">
+                {% if invalid_label %}
+                    {% comment %}Translators: If the user enters an invalid participant label{% endcomment %}
+                    <p class="error text-danger">{% trans 'Invalid entry; try again.' %}</p>
+                {% endif %}
+                <label for="participant_label">{% trans 'Please enter your participant label.' %}</label>
+                <br/>
+                <input type="text" id="participant_label"
+                       name="participant_label" class="form-control"/>
+                <br/>
+                {% next_button %}
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

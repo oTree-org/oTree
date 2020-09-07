@@ -1,0 +1,76 @@
+{% extends "otree/Base.html" %}
+{% load i18n %}
+{% load floppyforms otree_tags staticfiles %}
+
+{% block internal_styles %}
+    {{ block.super }}
+    <link href="{% static 'otree/css/table.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block internal_scripts %}
+{{ block.super }}
+<script type="text/javascript" charset="utf-8">
+$(function () {
+    $('[data-toggle="popover"]').popover()
+});
+$(function(){
+    // if top menu link is clicked inside iframe
+    // we exit full mode
+    $("#top_menu a").click(function() {
+        if ( window.location !== window.parent.location ) {
+                window.parent.location.href = $(this).attr("href");
+        }
+    });
+});
+$(function () {
+    $.ajax({
+        url: '{% url 'OtreeCoreUpdateCheck' %}',
+        type: 'GET',
+        success: function(data) {
+            if (!data.pypi_connection_error) {
+                if (data.update_needed) {
+                    $('.otree-core-updates').html(
+                        '<a class="navbar-brand" href="{% url 'ServerCheck' %}"><span class="glyphicon glyphicon-refresh" title="Newer version of oTree available"></span></a>')
+                }
+            }
+        }
+    });
+});
+
+</script>
+
+<script src="{% static 'otree/js/jquery.color-2.1.2.min.js' %}"></script>
+<script src="{% static 'otree/js/jquery.timeago.js' %}"></script>
+<script src="{% static 'otree/js/jsondiffpatch.min.js' %}"></script>
+<script src="{% static 'otree/js/table-utils.js' %}"></script>
+
+{% endblock %}
+{% block content_at_top_of_body %}
+{{ block.super }}
+{% include 'otree/includes/TopMenu.html' %}
+{% endblock %}
+{% block content_main %}
+<div class="container" style='max-width:970px'>
+    <div class="page-header" style="padding-top: 40px">
+        <h2>{% block title %}{% endblock %}</h2>
+    </div>
+    {% block menus %}{% endblock %}
+    <div>
+        {% if form.errors %}
+            <div class="alert alert-danger">
+            {% blocktrans %}Please fix the errors in the form.{% endblocktrans %}
+            </div>
+        {% endif %}
+
+        <form action="" method="post" role="form" class="form" id="form">{% csrf_token %}
+            <input type="hidden" value="{{ request.path }}" name="origin_url" />
+            {% pageform form using %}
+                {% formconfig row using "floppyforms/rows/bootstrap.html" %}
+                {% block content %}{% endblock %}
+            {% endpageform %}
+        </form>
+    </div>
+    <br/>
+</div>
+{% endblock %}
+<!--end content_main-->

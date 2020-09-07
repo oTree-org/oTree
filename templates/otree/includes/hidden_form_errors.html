@@ -1,0 +1,60 @@
+{% if view.first_field_with_errors|default:False %}
+    <div id="hidden-form-errors-warning" class="card-body" style="display: none;">
+        <div class="alert alert-warning">
+            <p>
+                The form field <code>{{ view.first_field_with_errors }}</code> has errors,
+                but its error message is not being displayed, possibly because
+                you did not include the field in the page.
+                There are 2 ways to fix this:
+            <ol>
+                <li>
+                    Include the field with the <code>formfield</code> tag, e.g.
+                    <code>{% templatetag openblock %}
+                        formfield player.{{ view.first_field_with_errors }}
+                        {% templatetag closeblock %}</code>
+                </li>
+                <li>
+                    If you are not using <code>formfield</code> but are instead
+                    writing the raw HTML for the form input,
+                    remember to include
+                    <code>{% templatetag openvariable %}
+                        form.{{ view.first_field_with_errors }}.errors
+                        {% templatetag closevariable %}</code>
+                    somewhere in your page's HTML.
+                </li>
+            </ol>
+
+            {% if view.other_fields_with_errors %}
+                <p>The following other field(s) have the same issue:</p>
+                <ul>
+                    {% for field_with_error in view.other_fields_with_errors %}
+                        <li>
+                            <code>{{ field_with_error }}</code>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <p>
+                    While debugging, you can display all errors in the form with
+                    <code>{% templatetag openvariable %}
+                        form.errors
+                        {% templatetag closevariable %}</code>.
+                </p>
+            {% endif %}
+        </div>
+    </div>
+    {% comment %}
+        formfield: <div class="form-control-errors">error</div>
+        form.errors or form.foo.errors: <ul class="errorlist"></ul>
+    {% endcomment %}
+    <script>
+        window.addEventListener('load', function () {
+            var django_form_errors = document.querySelector('ul.errorlist');
+            var floppy_form_errors = document.querySelector('div.form-control-errors');
+            if (django_form_errors === null && floppy_form_errors === null) {
+                document.querySelector("#hidden-form-errors-warning").style.display = "block";
+            }
+        });
+    </script>
+
+
+{% endif %}

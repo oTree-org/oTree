@@ -1,0 +1,42 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Decision
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You have been randomly and anonymously paired with another player. Both of you see these same instructions.
+        You must privately make a decision between <strong>A</strong> and <strong>B</strong>.
+    </p>
+
+    <p>
+        The payoffs are shown in the table below.
+        The former amount is the payoff for P1 while the latter amount is the payoff for P2.
+        <strong>You are P{{ player.id_in_group }}.</strong>
+    </p>
+
+    <table class="table" style="width:350px; margin-top:15px;">
+        <tr>
+            <th></th>
+            <th>P1: A</th>
+            <th>P1: B</th>
+        </tr>
+        <tr>
+            <th>P2: A</th>
+            <td>{{ Constants.rowAcolumnA_column }}, {{ Constants.rowAcolumnA_row }}</td>
+            <td>{{ Constants.rowAcolumnB_column }}, {{ Constants.rowAcolumnB_row }}</td>
+        </tr>
+        <tr>
+            <th>P2: B</th>
+            <td>{{ Constants.rowBcolumnA_column }}, {{ Constants.rowBcolumnA_row }}</td>
+            <td>{{ Constants.rowBcolumnB_column }}, {{ Constants.rowBcolumnB_row }}</td>
+        </tr>
+    </table>
+
+    {% formfield player.decision with label='Make a choice:' %}
+    {% next_button %}
+
+{% endblock %}

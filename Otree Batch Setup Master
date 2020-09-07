@@ -1,0 +1,15 @@
+cd "iCloud Drive"
+cd Documents
+cd GitHub
+cd oTree2
+git add .
+git commit -am -q
+git push heroku master
+
+# this will clear all data from databases
+# python otree-heroku resetdb bsu-games
+
+heroku config:set OTREE_PRODUCTION=0
+heroku config:set OTREE_AUTH_LEVEL=EXPERIMENT
+
+heroku open

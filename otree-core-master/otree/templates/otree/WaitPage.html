@@ -1,0 +1,101 @@
+{% extends 'otree/Base.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% block head_title %}{{ title_text }}{% endblock %}
+
+{% block internal_styles %}
+    {{ block.super }}
+    <style>
+        body {
+            background-color: #c0c0c0;
+        }
+
+        div.panel-primary {
+            background: white;
+            border: 1px solid #3b84c3;
+            border-radius: 5px;
+            box-shadow: 0 0 20px #999;
+            /*width: 940px; */
+            margin: 22px auto;
+        }
+
+        div.panel-body {
+            margin-top: 10px;
+        }
+
+        div.page-header {
+           border: 1px solid #c0c0c0;
+        }
+    </style>
+{% endblock %}
+
+{% block content_main %}
+
+<div class="container" style='max-width:970px'>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{% block title %}{{ title_text }}{% endblock %}</h3>
+        </div>
+        <div class="panel-body">
+            <div id="error-notice" class="alert alert-danger" style="display:none">
+                {% blocktrans %}An error occurred. Please check the logs or ask the administrator for help.{% endblocktrans %}
+            </div>
+            {% block content %}
+            <p>{{ body_text }}</p>
+            {% endblock %}
+            <div class="progress progress-striped active" id='waitingIndicator'>
+                <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
+    {% if view.is_debug %}
+        {% include 'otree/includes/debug_info.html' %}
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block internal_scripts %}
+    {{ block.super }}
+    <!-- this is an HTML file rather than JavaScript static file because context variables need to be passed to it -->
+<script type="text/javascript">
+$(document).ready(function () {
+
+    var socket;
+
+    initWebSocket();
+
+    function initWebSocket() {
+
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var ws_path = ws_scheme + '://' + window.location.host + "{{ view.socket_url|safe }}";
+        socket = new ReconnectingWebSocket(ws_path);
+        socket.onmessage = function(e) {
+
+            var data = JSON.parse(e.data);
+
+            // Handle errors
+            if (data.error) {
+                // maybe the div's default text doesn't get shown
+                $("#error-notice").text(data.error);
+                $("#error-notice").show();
+                return;
+            }
+
+            console.log('Received redirect message', e.data);
+            window.location.href = '{{ view.redirect_url|safe }}';
+
+        };
+        socket.onopen = function() {
+            console.log('WebSocket connected');
+        };
+        socket.onclose = function() {
+            console.log('WebSocket disconnected');
+        };
+    }
+
+ });
+ </script>
+ {% endblock %}
+
+{# never show footer here #}
+{% block page_footer  %}{% endblock %}

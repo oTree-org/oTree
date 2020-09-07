@@ -1,0 +1,67 @@
+{% comment %}
+    Self contained warning block that should appear if a form field was not
+    rendered on the page. It contains some JavaScript which checks again if a
+    fields was really not rendered. This is necessary to avoid false positives
+    when the user includes the field with handwritten HTML.
+
+    We hide all warnings at page load. The reason is that we might remove
+    the warning when we think it's not valid. And that might result in a
+    flash of the message, then disappearing again.
+{% endcomment %}
+<div class="panel-body unrendered-fields-warning hidden">
+    <div class="alert alert-warning">
+        <p>
+            You did not include the following form fields in the HTML:
+        </p>
+        <ul>
+        {% for missing_field in form_unrendered_fields %}
+            <li data-field-name="{{ missing_field.html_name }}"><code>{{ missing_field.name }}</code></li>
+        {% endfor %}
+        </ul>
+        <p>
+            You can include them by using the <code>{% templatetag openblock %} formfield ... {% templatetag closeblock %}</code> template tag.
+        </p>
+    </div>
+</div>
+<script>
+(function () {
+    var forEach = function (element, callback) {
+        return Array.prototype.forEach.call(element, callback);
+    };
+
+    var fieldDoesExist = function (fieldName) {
+        return document.querySelector('[name=' + fieldName + ']') !== null;
+    };
+
+    var remove = function (element) {
+        element.parentNode.removeChild(element);
+    };
+
+    var checkUnrenderedFields = function () {
+        var warnings = document.querySelectorAll('.unrendered-fields-warning');
+
+        forEach(warnings, function (warning) {
+            warning.classList.remove('hidden');
+
+            var getMissingFields = function () {
+                return warning.querySelectorAll('[data-field-name]');
+            };
+
+            forEach(getMissingFields(), function (missingField) {
+                var fieldName = missingField.dataset.fieldName;
+                if (fieldDoesExist(fieldName)) {
+                    remove(missingField);
+                }
+            });
+
+            if (getMissingFields().length === 0) {
+                remove(warning);
+            }
+        });
+    };
+
+    window.addEventListener('load', function () {
+        checkUnrenderedFields();
+    });
+})();
+</script>

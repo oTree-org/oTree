@@ -1,0 +1,37 @@
+{% extends "global/Base.html" %}
+{% load otree_tags %}
+
+{% block title %}
+    Solution to Understanding Question {{ num_q|default:1 }} of {{ total_q|default:1 }}
+{% endblock %}
+
+{% block content %}
+    {% for question, answer in answers.items|default:answers %}
+        {% ifequal answer.0 answer.1 %}
+            <p class="text-success">
+                Your answer {{answer.0}} for {{question}} was correct.
+            </p>
+        {% else %}
+            <p class="text-danger">
+                Your answer {{answer.0}} for {{question}} was incorrect.
+            </p>
+        {% endifequal %}
+    {% endfor %}
+    {% if answer %}
+        {% ifequal answer.0 answer.1 %}
+            <p class="text-success">
+                Your answer {{answer.0}} was correct.
+            </p>
+        {% else %}
+            <p class="text-danger">
+                Your answer {{answer.0}} was incorrect.
+            </p>
+        {% endifequal %}
+    {% endif %}
+    {% block explanation %}
+        {{explanation|linebreaks}}
+    {% endblock %}
+    <p>{% next_button %}</p>
+
+    {% include instructions %}
+{% endblock %}

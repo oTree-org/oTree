@@ -1,0 +1,34 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Solution to Understanding Question {{ num_q }} of {{ total_q }}
+{% endblock %}
+
+{% block content %}
+
+
+    {% if player.is_training_question_1_husband_correct %}
+        <p class="text-success">Your answer {{player.training_question_1_husband}} for Husband was correct.</p>
+    {% else %}
+        <p class="text-danger">Your answer {{player.training_question_1_husband}} for Husband was incorrect.</p>
+    {% endif %}
+    {% if player.is_training_question_1_wife_correct %}
+        <p class="text-success">Your answer {{player.training_question_1_wife}} for wife was correct.</p>
+    {% else %}
+        <p class="text-danger">Your answer {{player.training_question_1_wife}} for wife was incorrect.</p>
+    {% endif %}
+
+    <p>
+        Suppose that Husband chose to go for a football match and Wife chose to
+        go for an opera. What would be their payoffs respectively?
+    </p>
+    <p>
+        <strong>Solution:</strong> Payoffs for both Husband and Wife would be <strong>0 points.</strong>
+    </p>
+
+    {% next_button %}
+
+    {% include 'battle_of_the_sexes/Instructions.html' %}
+
+{% endblock %}

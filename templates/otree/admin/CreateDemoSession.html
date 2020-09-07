@@ -1,0 +1,99 @@
+{% extends "otree/Base.html" %}
+
+{% block head_title %}
+    creating_session
+{% endblock %}
+
+{% block internal_styles %}
+    {{ block.super }}
+    <style>
+        body {
+            background-color: #c0c0c0;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #3b84c3;
+            border-radius: 5px;
+            box-shadow: 0 0 20px #999;
+            /*width: 940px; */
+            margin: 22px auto;
+        }
+
+        .card-body {
+            margin-top: 10px;
+        }
+
+        .page-header {
+           border: 1px solid #c0c0c0;
+        }
+
+        .otree-wait-page {
+            max-width:970px
+        }
+
+        .progress-bar {
+            width: 100%;
+        }
+    </style>
+{% endblock %}
+
+{% block body_main %}
+<div class="container">
+    <div class="card">
+        <h4 class="card-header">
+            creating_session
+        </h4>
+        <div class="card-body">
+            <p>Please wait, creating session.</p>
+            <div id="create-session-error" class="alert alert-danger" style="display:none"></div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body_main %}
+
+{% block scripts %}
+    {{ block.super }}
+
+    <script>
+    $(document).ready(function () {
+        let ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
+        let ws_path = `${ws_scheme}://${window.location.host}/create_demo_session/`;
+        // use WebSocket instead of ReconnectingWebsocket, because if an error is raised,
+        // the server drops the socket and we shouldn't reconnect.
+        let socket = new WebSocket(ws_path);
+        let $createSessionError = $("#create-session-error");
+
+        let session_config_name = '{{ session_config_name }}';
+
+        socket.onopen = function() {
+          socket.send(JSON.stringify({
+              'session_config': session_config_name
+          }));
+        };
+
+        socket.onmessage = function (message) {
+            let data = JSON.parse(message.data);
+            if (data.traceback) {
+                $createSessionError.text(data.error);
+                $createSessionError.append('<pre>' + data.traceback + '</pre>');
+                $createSessionError.show();
+            }
+            else if (data.validation_errors) {
+                $createSessionError.text(JSON.stringify(data.validation_errors));
+                $createSessionError.show();
+            }
+            else if (data.session_url) {
+                window.location.href = data.session_url;
+            }
+            else {
+                $createSessionError.text("Unexpected error: " + message.data);
+            }
+        }
+    });
+    </script>
+{% endblock scripts %}

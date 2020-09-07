@@ -1,0 +1,1 @@
+{% load floppyforms_internals l10n %}{% localize off %}{% for name, value in attrs.items %} {{ name }}{% if type != "checkbox" and name == "class" %}="form-control {{ value }}"{% else %}{% if not value|istrue %}="{{ value }}"{% endif %}{% endif %}{% endfor %}{% if type != "checkbox" and "class" not in attrs %} class="form-control"{% endif %}{% endlocalize %}

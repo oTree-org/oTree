@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-18 10:00+0900\n"
+"PO-Revision-Date: 2016-05-09 11:30+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.7\n"
+"Last-Translator: \n"
+"Language: nb\n"
+
+#. Translators: display a number of points,
+#. like "1 point", "2 points", ...
+#. See "Plural-Forms" above for pluralization rules
+#. in this language.
+#. Explanation at http://bit.ly/1IurMu7
+#. In most languages, msgstr[0] is singular,
+#. and msgstr[1] is plural
+#. Don't delete the {}! That is where the number will go.
+#: .\common.py:100
+msgid "{} point"
+msgid_plural "{} points"
+msgstr[0] "{} poeng"
+msgstr[1] "{} poeng"
+
+#. Translators: for required form fields
+#: .\constants_internal.py:73
+msgid "This field is required."
+msgstr "Dette feltet må fylles ut."
+
+#: .\db\models.py:255
+msgid "Yes"
+msgstr "Ja"
+
+#: .\db\models.py:256
+msgid "No"
+msgstr "Nei"
+
+#: .\forms\forms.py:316
+msgid "Value must be greater than or equal to {}."
+msgstr "Verdien må være større eller lik {}"
+
+#: .\forms\forms.py:322
+msgid "Value must be less than or equal to {}."
+msgstr "Verdien må være mindre eller lik {}"
+
+#. Translators: for multiple-choice fields,
+#. show the valid choices.
+#. e.g. "Value must be one of: A, B, C"
+#: .\forms\forms.py:334
+msgid "Value must be one of: {}"
+msgstr "Verdien må være en av: {}"
+
+#. Translators: the label next to a "points" input field
+#: .\forms\widgets.py:101
+msgid "points"
+msgstr "poeng"
+
+#: .\templates\otree\BaseExperiment.html:18 .\templates\otree\BaseSite.html:34
+msgid "Please fix the errors in the form."
+msgstr "Vennligst rett feil i skjemaet."
+
+#: .\templates\otree\OutOfRangeNotification.html:11
+msgid "No more pages left to show."
+msgstr "Ingen flere sider å vise."
+
+#: .\templates\otree\WaitPage.html:41
+msgid "An error occurred. Please check the logs or ask the administrator for help."
+msgstr "En feil inntraff. Vennligst sjekk loggen eller spør en administrator om hjelp."
+
+#: .\templates\otree\includes\TimeLimit.html:6
+msgid "Time left to complete this page:"
+msgstr "Tid igjen for å fullføre denne siden:"
+
+#: .\templates\otree\login.html:35
+msgid "Forgotten your password or username?"
+msgstr "Glemt ditt brukernavn eller passord?"
+
+#: .\templates\otree\login.html:39
+msgid "Log in"
+msgstr "Logg inn"
+
+#. Translators: The text on the button the user clicks to get to the next page
+#: .\templates\otree\tags\NextButton.html:4
+msgid "Next"
+msgstr "Neste"
+
+#. Translators: the default title of a wait page
+#: .\views\abstract.py:513
+msgid "Please wait"
+msgstr "Vennligst vent"
+
+#: .\views\abstract.py:689
+msgid "Waiting for the other participants."
+msgstr "Venter på de andre deltagerne."
+
+#: .\views\abstract.py:691
+msgid "Waiting for the other participant."
+msgstr "Venter på den andre deltageren."
+
+#: .\views\concrete.py:78
+msgid "Waiting until other participants or the study supervisor are ready."
+msgstr "Venter til andre deltagere eller undersøkelsens veileder er klare."

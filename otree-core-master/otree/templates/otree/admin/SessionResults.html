@@ -1,0 +1,56 @@
+{% extends "otree/admin/Session.html" %}
+
+{% block internal_scripts %}
+{{ block.super }}
+<script>
+$(document).ready(function() {
+    ajax_json_results();
+    setInterval(ajax_json_results , 4000);
+
+    makeTableDraggable($('#results-table'));
+});
+function ajax_json_results() {
+    var $table = $('#results-table');
+    $.ajax({
+        url: '{% url "SessionResults" session.code %}',
+        type: 'GET',
+        contentType: "application/json",
+        error: function(jqXHR, textStatus) {
+            $( "div#server_error" ).show();
+        },
+        success: function (new_json) {
+            $( "div#server_error" ).hide();
+            updateTable($table, new_json);
+        }
+    });
+}
+</script>
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+<table id="results-table" class="table table-bordered table-hover table-condensed">
+    <thead>
+        <tr>
+            <th rowspan="3">ID in session</th>
+            {% for header, colspan in subsession_headers %}
+                <th colspan="{{ colspan }}">{{ header }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for header, colspan in model_headers %}
+                <th colspan="{{ colspan }}">{{ header }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for header in field_headers %}
+                <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+</table>
+<div id="server_error" class="alert alert-danger" style="display: none;"> 
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    "Failed to connect to server"
+</div>
+{% endblock %}
