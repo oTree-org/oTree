@@ -39,7 +39,6 @@ class SendBack(Page):
 
         return dict(
             tripled_amount=tripled_amount,
-            prompt='Please an amount from 0 to {}'.format(tripled_amount),
         )
 
 

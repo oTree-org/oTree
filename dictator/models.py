@@ -41,6 +41,7 @@ class Group(BaseGroup):
         doc="""Amount dictator decided to keep for himself""",
         min=0,
         max=Constants.endowment,
+        label="I will keep",
     )
 
     def set_payoffs(self):

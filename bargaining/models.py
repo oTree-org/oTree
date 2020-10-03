@@ -52,6 +52,7 @@ class Player(BasePlayer):
         """,
         min=0,
         max=Constants.amount_shared,
+        label="Please enter an amount from 0 to 100"
     )
 
     def other_player(self):

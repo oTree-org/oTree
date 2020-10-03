@@ -53,6 +53,7 @@ class Player(BasePlayer):
         min=0,
         max=Constants.max_units_per_player,
         doc="""Quantity of units to produce""",
+        label="How many units will you produce (from 0 to 30)?"
     )
 
     def other_player(self):
