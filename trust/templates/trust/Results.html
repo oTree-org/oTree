@@ -7,7 +7,7 @@
 
 {% block content %}
 
-    {% if player.role == 'A' %}
+    {% if player.id_in_group == 1 %}
         <p>
             You chose to send participant B {{ group.sent_amount }}.
             Participant B returned {{ group.sent_back_amount }}.
