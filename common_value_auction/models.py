@@ -93,6 +93,7 @@ class Player(BasePlayer):
         min=Constants.min_allowable_bid,
         max=Constants.max_allowable_bid,
         doc="""Amount bidded by the player""",
+        label="Bid amount"
     )
 
     is_winner = models.BooleanField(

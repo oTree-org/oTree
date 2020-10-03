@@ -56,4 +56,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    volunteer = models.BooleanField(doc="""Whether player volunteers""")
+    volunteer = models.BooleanField(
+        label='Do you wish to volunteer?', doc="""Whether player volunteers"""
+    )

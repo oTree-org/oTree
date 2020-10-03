@@ -62,5 +62,6 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     contribution = models.CurrencyField(
-        min=0, max=Constants.endowment, doc="""The amount contributed by the player"""
+        min=0, max=Constants.endowment, doc="""The amount contributed by the player""",
+        label="How much will you contribute to the project (from 0 to 100)?"
     )

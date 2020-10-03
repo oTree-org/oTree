@@ -58,6 +58,7 @@ class Player(BasePlayer):
         min=0,
         max=Constants.maximum_price,
         doc="""Price player offers to sell product for""",
+        label="Please enter an amount from 0 to 100 as your price"
     )
 
     is_winner = models.BooleanField()

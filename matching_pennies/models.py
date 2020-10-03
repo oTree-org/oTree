@@ -63,7 +63,8 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     penny_side = models.StringField(
-        choices=[['Heads', 'Heads'], ['Tails', 'Tails']], widget=widgets.RadioSelect
+        choices=[['Heads', 'Heads'], ['Tails', 'Tails']], widget=widgets.RadioSelect,
+        label="I choose:"
     )
 
     is_winner = models.BooleanField()

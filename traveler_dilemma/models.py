@@ -71,6 +71,7 @@ class Player(BasePlayer):
     claim = models.CurrencyField(
         min=Constants.min_amount,
         max=Constants.max_amount,
+        label='How much will you claim for your antique?',
         doc="""
         Each player's claim
         """,

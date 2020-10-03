@@ -61,5 +61,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    guess = models.IntegerField(min=0, max=Constants.guess_max)
+    guess = models.IntegerField(
+        min=0, max=Constants.guess_max, label="Please pick a number from 0 to 100:"
+    )
     is_winner = models.BooleanField(initial=False)
