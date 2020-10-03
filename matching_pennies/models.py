@@ -42,8 +42,8 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
     def set_payoffs(self):
-        matcher = self.get_player_by_role('Matcher')
-        mismatcher = self.get_player_by_role('Mismatcher')
+        matcher = self.get_player_by_id(1)
+        mismatcher = self.get_player_by_id(2)
 
         if matcher.penny_side == mismatcher.penny_side:
             matcher.is_winner = True
@@ -63,14 +63,12 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     penny_side = models.StringField(
-        choices=[['Heads', 'Heads'], ['Tails', 'Tails']], widget=widgets.RadioSelect,
-        label="I choose:"
+        choices=[['Heads', 'Heads'], ['Tails', 'Tails']],
+        widget=widgets.RadioSelect,
+        label="I choose:",
     )
 
     is_winner = models.BooleanField()
 
-    def role(self):
-        if self.id_in_group == 1:
-            return 'Mismatcher'
-        if self.id_in_group == 2:
-            return 'Matcher'
+    def is_matcher(self):
+        return self.id_in_group == 1
