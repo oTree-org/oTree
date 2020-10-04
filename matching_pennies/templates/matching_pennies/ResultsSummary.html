@@ -15,7 +15,10 @@
         {% for p in player_in_all_rounds %}
             <tr>
                 <td>{{ p.round_number }}</td>
-                <td>You were the {{ p.role }} and {% if p.is_winner %} won {% else %} lost {% endif %}</td>
+                <td>
+                  You were the {% if p.is_matcher %}Matcher{% else %}Mismatcher{% endif %}
+                  and {% if p.is_winner %} won {% else %} lost {% endif %}
+                </td>
             </tr>
         {% endfor %}
     </table>
@@ -24,6 +27,5 @@
         The paying round was {{ paying_round }}.
         Your total payoff is therefore {{ total_payoff }}.
     </p>
-
 
 {% endblock %}
