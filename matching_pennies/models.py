@@ -42,23 +42,24 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
     def set_payoffs(self):
-        matcher = self.get_player_by_role('Matcher')
-        mismatcher = self.get_player_by_role('Mismatcher')
+        p1 = self.get_player_by_id(1)
+        p2 = self.get_player_by_id(2)
+        is_match = p1.penny_side == p2.penny_side
 
-        if matcher.penny_side == mismatcher.penny_side:
-            matcher.is_winner = True
-            mismatcher.is_winner = False
-        else:
-            matcher.is_winner = False
-            mismatcher.is_winner = True
-        for player in [mismatcher, matcher]:
+        for p in [p1, p2]:
+            # a simpler way to write these 4 lines would be:
+            # p.is_winner = (p.is_matcher() == is_match)
+            if p.is_matcher() == is_match:
+                p.is_winner = True
+            else:
+                p.is_winner = False
             if (
                 self.subsession.round_number == self.session.vars['paying_round']
-                and player.is_winner
+                and p.is_winner
             ):
-                player.payoff = Constants.stakes
+                p.payoff = Constants.stakes
             else:
-                player.payoff = c(0)
+                p.payoff = c(0)
 
 
 class Player(BasePlayer):
@@ -70,8 +71,5 @@ class Player(BasePlayer):
 
     is_winner = models.BooleanField()
 
-    def role(self):
-        return {1: 'Matcher', 2: 'Mismatcher'}[self.id_in_group]
-
     def is_matcher(self):
-        return self.role() == 'Matcher'
+        return self.id_in_group == 1
