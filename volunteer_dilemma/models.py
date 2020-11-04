@@ -24,7 +24,7 @@ class Constants(BaseConstants):
     players_per_group = 3
     num_rounds = 1
 
-    instructions_template = 'volunteer_dilemma/instructions.html'
+    instructions_template = name_in_url + '/instructions.html'
 
     num_other_players = players_per_group - 1
 

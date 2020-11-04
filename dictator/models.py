@@ -26,7 +26,7 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 1
 
-    instructions_template = 'dictator/instructions.html'
+    instructions_template = name_in_url + '/instructions.html'
 
     # Initial amount allocated to the dictator
     endowment = c(100)

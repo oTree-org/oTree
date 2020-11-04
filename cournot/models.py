@@ -22,7 +22,7 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 1
 
-    instructions_template = 'cournot/instructions.html'
+    instructions_template = name_in_url + '/instructions.html'
 
     # Total production capacity of all players
     total_capacity = 60

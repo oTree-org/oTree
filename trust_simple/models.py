@@ -23,7 +23,7 @@ class Constants(BaseConstants):
     endowment = c(10)
     multiplier = 3
 
-    instructions_template = 'trust_simple/instructions.html'
+    instructions_template = name_in_url + '/instructions.html'
 
 
 class Subsession(BaseSubsession):
