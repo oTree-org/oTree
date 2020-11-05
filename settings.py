@@ -56,7 +56,7 @@ DEMO_PAGE_INTRO_HTML = """
 Here are some oTree games.
 """
 
-# don't share this with anybody.
+
 SECRET_KEY = '{{ secret_key }}'
 
 INSTALLED_APPS = ['otree']
