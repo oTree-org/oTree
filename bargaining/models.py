@@ -8,7 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-
+from django.utils.translation import gettext_lazy as _
 
 doc = """
 This bargaining game involves 2 players. Each demands for a portion of some
@@ -52,7 +52,7 @@ class Player(BasePlayer):
         """,
         min=0,
         max=Constants.amount_shared,
-        label="Please enter an amount from 0 to 100"
+        label=_("Please enter an amount from 0 to 100")
     )
 
     def other_player(self):

@@ -1,13 +1,14 @@
-{% load otree %}
+{% load otree i18n %}
 
 <div class="card bg-light m-3">
 
     <div class="card-body">
         <h3>
-            Instructions
+            {% trans 'Instructions' %}
         </h3>
 
         <p>
+            {% blocktrans trimmed%}
             You have been randomly and anonymously paired with another participant.
             There is {{ Constants.amount_shared }} for you to divide.
             Both of you have to simultaneously and independently demand a portion
@@ -16,6 +17,7 @@
             you get what you demanded. If the sum of your demands is larger
             than {{ Constants.amount_shared }},
             both of you get nothing.
+            {% endblocktrans %}
         </p>
     </div>
 </div>
