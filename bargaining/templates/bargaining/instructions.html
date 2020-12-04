@@ -8,14 +8,14 @@
         </h3>
 
         <p>
-            {% blocktrans trimmed%}
+            {% blocktrans trimmed with amount_shared=Constants.amount_shared %}
             You have been randomly and anonymously paired with another participant.
-            There is {{ Constants.amount_shared }} for you to divide.
+            There is {{ amount_shared }} for you to divide.
             Both of you have to simultaneously and independently demand a portion
-            of the {{ Constants.amount_shared }} for yourselves. If the sum of your
-            demands is smaller or equal to {{ Constants.amount_shared }}, both of
+            of the {{ amount_shared }} for yourselves. If the sum of your
+            demands is smaller or equal to {{ amount_shared }}, both of
             you get what you demanded. If the sum of your demands is larger
-            than {{ Constants.amount_shared }},
+            than {{ amount_shared }},
             both of you get nothing.
             {% endblocktrans %}
         </p>

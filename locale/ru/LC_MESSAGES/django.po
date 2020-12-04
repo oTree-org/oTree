@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-04 14:48+0300\n"
+"POT-Creation-Date: 2020-12-04 16:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,52 +22,109 @@ msgstr ""
 
 #: bargaining/models.py:55
 msgid "Please enter an amount from 0 to 100"
-msgstr ""
+msgstr "Пожалуйста, введите любую сумму от 0 до 100"
 
 #: bargaining/templates/bargaining/Introduction.html:4
 msgid "Introduction"
-msgstr ""
+msgstr "Введение"
 
 #: bargaining/templates/bargaining/Request.html:5
 msgid "Request"
-msgstr ""
+msgstr "Запрос"
 
 #: bargaining/templates/bargaining/Request.html:10
 msgid "How much will you demand for yourself?"
-msgstr ""
+msgstr "Сколько вы запросите для себя?"
 
 #: bargaining/templates/bargaining/Results.html:5
 msgid "Results"
-msgstr ""
+msgstr "Результаты"
 
 #: bargaining/templates/bargaining/Results.html:12
 msgid "You demanded"
-msgstr ""
+msgstr "Вы запросили"
 
 #: bargaining/templates/bargaining/Results.html:16
 msgid "The other participant demanded"
-msgstr ""
+msgstr "Другой участник запросил"
 
 #: bargaining/templates/bargaining/Results.html:20
 msgid "Sum of your demands"
-msgstr ""
+msgstr "Сумма ваших запросов"
 
 #: bargaining/templates/bargaining/Results.html:24
 msgid "Thus you earn"
-msgstr ""
+msgstr "Ваш итоговый заработок"
 
 #: bargaining/templates/bargaining/instructions.html:7
 msgid "Instructions"
-msgstr ""
+msgstr "Инструкции"
 
 #: bargaining/templates/bargaining/instructions.html:11
 #, python-format
 msgid ""
 "You have been randomly and anonymously paired with another participant. "
-"There is %(Constants.amount_shared)s for you to divide. Both of you have to "
-"simultaneously and independently demand a portion of the "
-"%(Constants.amount_shared)s for yourselves. If the sum of your demands is "
-"smaller or equal to %(Constants.amount_shared)s, both of you get what you "
-"demanded. If the sum of your demands is larger than "
-"%(Constants.amount_shared)s, both of you get nothing."
+"There is %(amount_shared)s for you to divide. Both of you have to "
+"simultaneously and independently demand a portion of the %(amount_shared)s "
+"for yourselves. If the sum of your demands is smaller or equal to "
+"%(amount_shared)s, both of you get what you demanded. If the sum of your "
+"demands is larger than %(amount_shared)s, both of you get nothing."
 msgstr ""
+"Вы были были объединены случайным образом в группу с другим участником. Вам "
+"нужно разделить между собой %(amount_shared)s. Вы оба должны одновременно и "
+"независимо друг от друга  пртребовать себе долю %(amount_shared)s. Если "
+"сумма ваших требований меньше или равна %(amount_shared)s, вы оба получите "
+"то, что потребовали. Если сумма ваших требований превышает "
+"%(amount_shared)s, вы оба ничего не получите."
+
+#: payment_info/templates/payment_info/PaymentInfo.html:5
+msgid "Thank you"
+msgstr "Спасибо!"
+
+#: payment_info/templates/payment_info/PaymentInfo.html:12
+msgid ""
+"Below are examples of messages that could be displayed for different "
+"experimental settings."
+msgstr ""
+"Ниже приведены примеры сообщений, которые могут отображаться для различных "
+"экспериментальных настроек."
+
+#: payment_info/templates/payment_info/PaymentInfo.html:18
+msgid "Laboratory:"
+msgstr "В лаборатории"
+
+#: payment_info/templates/payment_info/PaymentInfo.html:19
+msgid ""
+"Please remain seated until your number is called. Then take your number "
+"card, and proceed to the cashier."
+msgstr ""
+"Пожалуйста, оставайтесь на своих местах, пока не позвонят по вашему номеру. "
+"Затем возьмите свою номерную карту и перейдите к кассе."
+
+#: payment_info/templates/payment_info/PaymentInfo.html:21
+msgid ""
+"Note: For the cashier in the laboratory, oTree can print a list of payments "
+"for all participants as a PDF."
+msgstr ""
+"Примечание: кассиру в лаборатории oTree может распечатать список платежей "
+"для всех участников в формате PDF."
+
+#: payment_info/templates/payment_info/PaymentInfo.html:28
+msgid "Classroom:"
+msgstr "Учебный класс"
+
+#: payment_info/templates/payment_info/PaymentInfo.html:30
+msgid ""
+"If you want to keep track of how students did, the easiest thing is to "
+"assign the starting links to students by name. It is even possible to give "
+"each student a single permanent link for a whole semester using Rooms; so no "
+"need to waste time in each lecture with handing out new links and keeping "
+"track of which student uses which link. Alternatively, you may just give "
+"students anonymous links or secret nicknames."
+msgstr ""
+"Если вы хотите отслеживать, как поступили студенты, проще всего назначить "
+"учащимся начальные ссылки по именам. Можно даже дать каждому студенту одну "
+"постоянную ссылку на весь семестр с помощью Rooms; Так что не нужно тратить "
+"время на каждую лекцию, раздавая новые ссылки и отслеживая, какой студент "
+"использует какую ссылку. Как вариант, вы можете просто дать студентам "
+"анонимные ссылки или секретные псевдонимы."
