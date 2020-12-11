@@ -21,9 +21,9 @@ class Results(Page):
         me = self.player
         opponent = me.other_player()
         return dict(
-            my_decision=me.decision,
-            opponent_decision=opponent.decision,
-            same_choice=me.decision == opponent.decision,
+            my_decision=me.get_decision_display(),
+            opponent_decision=opponent.get_decision_display(),
+            same_choice=me.get_decision_display() == opponent.get_decision_display(),
         )
 
 
