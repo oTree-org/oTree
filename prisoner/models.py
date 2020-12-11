@@ -8,6 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
+from django.utils.translation import gettext_lazy as _
 
 doc = """
 This is a one-shot "Prisoner's Dilemma". Two players are asked separately
@@ -44,7 +45,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     decision = models.StringField(
-        choices=[['Cooperate', 'Cooperate'], ['Defect', 'Defect']],
+        choices=[['Cooperate', _("Cooperate")], ['Defect', _("Defect")]],
         doc="""This player's decision""",
         widget=widgets.RadioSelect,
     )

@@ -8,7 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-
+from django.utils.translation import gettext_lazy as _
 
 doc = """
 Each player decides if to free ride or to volunteer from which all will
@@ -57,5 +57,5 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     volunteer = models.BooleanField(
-        label='Do you wish to volunteer?', doc="""Whether player volunteers"""
+        label=_('Do you wish to volunteer?'), doc="""Whether player volunteers"""
     )

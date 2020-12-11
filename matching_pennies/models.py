@@ -8,7 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-
+from django.utils.translation import gettext_lazy as _
 
 doc = """
 A demo of how rounds work in oTree, in the context of 'matching pennies'
@@ -64,9 +64,9 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     penny_side = models.StringField(
-        choices=[['Heads', 'Heads'], ['Tails', 'Tails']],
+        choices=[['Heads', _("Heads")], ['Tails', _("Tails")]],
         widget=widgets.RadioSelect,
-        label="I choose:",
+        label=_("I choose:"),
     )
 
     is_winner = models.BooleanField()
