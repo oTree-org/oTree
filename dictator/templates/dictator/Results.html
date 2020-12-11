@@ -1,18 +1,17 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n %}
 
 {% block title %}
-    Results
+    {% trans 'Results' %}
 {% endblock %}
 
 {% block content %}
     <p>
 
         {% if player.id_in_group == 1 %}
-            You decided to keep <strong>{{ group.kept }}</strong> for yourself.
+            {% trans 'You decided to keep' %} <strong>{{ group.kept }}</strong> {% trans 'for yourself.' %}
         {% else %}
-            Participant 1 decided to keep <strong>{{ group.kept }}</strong>, so
-            you got <strong>{{ offer }}</strong>.
+            {% trans 'Participant 1 decided to keep' %} <strong>{{ group.kept }}</strong>, {% trans 'so you got' %} <strong>{{ offer }}</strong>.
         {% endif %}
 
         {% next_button %}
