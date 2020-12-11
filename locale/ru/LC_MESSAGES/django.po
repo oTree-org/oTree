@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-11 22:20+1000\n"
+"POT-Creation-Date: 2020-12-12 00:01+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,9 @@ msgid "Please enter an amount from 0 to 100"
 msgstr "Пожалуйста, введите любую сумму от 0 до 100"
 
 #: .\bargaining\templates\bargaining\Introduction.html:4
+#: .\dictator\templates\dictator\Introduction.html:4
 #: .\prisoner\templates\prisoner\Introduction.html:5
+#: .\public_goods\templates\public_goods\Introduction.html:5
 #: .\volunteer_dilemma\templates\volunteer_dilemma\Introduction.html:4
 msgid "Introduction"
 msgstr "Введение"
@@ -39,7 +41,10 @@ msgid "How much will you demand for yourself?"
 msgstr "Сколько вы запросите для себя?"
 
 #: .\bargaining\templates\bargaining\Results.html:5
+#: .\dictator\templates\dictator\Results.html:5
 #: .\prisoner\templates\prisoner\Results.html:5
+#: .\public_goods\templates\public_goods\Results.html:5
+#: .\public_goods_simple\templates\public_goods_simple\Results.html:5
 #: .\volunteer_dilemma\templates\volunteer_dilemma\Results.html:5
 msgid "Results"
 msgstr "Результаты"
@@ -61,8 +66,10 @@ msgid "Thus you earn"
 msgstr "Ваш итоговый заработок"
 
 #: .\bargaining\templates\bargaining\instructions.html:7
+#: .\dictator\templates\dictator\instructions.html:6
 #: .\matching_pennies\templates\matching_pennies\Choice.html:10
 #: .\prisoner\templates\prisoner\instructions.html:8
+#: .\public_goods\templates\public_goods\instructions.html:6
 #: .\volunteer_dilemma\templates\volunteer_dilemma\instructions.html:7
 msgid "Instructions"
 msgstr "Инструкции"
@@ -83,6 +90,70 @@ msgstr ""
 "сумма ваших требований меньше или равна %(amount_shared)s, вы оба получите "
 "то, что потребовали. Если сумма ваших требований превышает "
 "%(amount_shared)s, вы оба ничего не получите."
+
+#: .\dictator\models.py:44
+msgid "I will keep"
+msgstr "Я оставлю себе"
+
+#: .\dictator\templates\dictator\Offer.html:4
+msgid "Your Decision"
+msgstr "Ваше решение"
+
+#: .\dictator\templates\dictator\Offer.html:8
+msgid "You are"
+msgstr "Вы"
+
+#: .\dictator\templates\dictator\Offer.html:8
+msgid "Participant 1"
+msgstr "Участник 1"
+
+#: .\dictator\templates\dictator\Offer.html:8
+msgid "Please decide how much of the"
+msgstr "Пожалуйста, решите, сколько из"
+
+#: .\dictator\templates\dictator\Offer.html:8
+msgid "will keep for yourself."
+msgstr "вы оставите себе?"
+
+#: .\dictator\templates\dictator\Results.html:12
+msgid "You decided to keep"
+msgstr "Вы решили оставить"
+
+#: .\dictator\templates\dictator\Results.html:12
+msgid "for yourself."
+msgstr "себе."
+
+#: .\dictator\templates\dictator\Results.html:14
+msgid "Participant 1 decided to keep"
+msgstr "Участник 1 решил оставить себе"
+
+#: .\dictator\templates\dictator\Results.html:14
+msgid "so you got"
+msgstr "поэтому вы получили"
+
+#: .\dictator\templates\dictator\instructions.html:10
+msgid ""
+"You will be paired randomly and anonymously with another participant. In "
+"this study, one of you will be Participant 1 and the other Participant 2. "
+"Prior to making a decision, you will learn your role, which will be randomly "
+"assigned."
+msgstr ""
+"Вы будете случайно и анонимно поставлены в пару с другим участником. В этом "
+"исследовании один из вас будет Участником 1 и другой Участником 2. Перед "
+"тем, как принять решение, вы узнаете свою роль, которая будет определена "
+"случайным образом"
+
+#: .\dictator\templates\dictator\instructions.html:13
+msgid "There is"
+msgstr "Всего есть"
+
+#: .\dictator\templates\dictator\instructions.html:13
+msgid ""
+"to split. Participant 1 will decide how much she or he will retain. Then the "
+"rest will go to Participant 2."
+msgstr ""
+", которые вам предстоит поделить между собой. Участник 1 решит, сколько он "
+"или она оставит себе. Оставшаяся часть перейдет Участнику 2."
 
 #: .\matching_pennies\models.py:67
 msgid "Heads"
@@ -300,9 +371,9 @@ msgid ""
 "of both as below:"
 msgstr ""
 "В этом исследовании будет случайным и анонимным образом составлена пара из "
-"вас и другого участника. Каждый из вас одновременно и втайне выбирает, "
-"хочет ли он сотрудничать или нет. Ваша выплата будет определяться выбором "
-"обоих игроков, как указано ниже:"
+"вас и другого участника. Каждый из вас одновременно и втайне выбирает, хочет "
+"ли он сотрудничать или нет. Ваша выплата будет определяться выбором обоих "
+"игроков, как указано ниже:"
 
 #: .\prisoner\templates\prisoner\instructions.html:17
 msgid ""
@@ -311,6 +382,132 @@ msgid ""
 msgstr ""
 "В каждой ячейке сумма слева - это ваша выплата, справа - выплата другого "
 "участника."
+
+#: .\public_goods\models.py:66
+msgid "How much will you contribute to the project (from 0 to 100)?"
+msgstr "Сколько вы вложите в проект (от 0 до 100)?"
+
+#: .\public_goods\templates\public_goods\Contribute.html:5
+#: .\public_goods_simple\templates\public_goods_simple\Contribute.html:5
+msgid "Contribute"
+msgstr "Вклад"
+
+#: .\public_goods\templates\public_goods\Results.html:12
+msgid "You contributed"
+msgstr "Вы вложили"
+
+#: .\public_goods\templates\public_goods\Results.html:13
+msgid "Other participants contributed"
+msgstr "Другие участники вложили"
+
+#: .\public_goods\templates\public_goods\Results.html:18
+msgid "Total contribution"
+msgstr "Суммарный вклад"
+
+#: .\public_goods\templates\public_goods\Results.html:22
+msgid "Total earnings from the project"
+msgstr "Суммарный доход от проекта"
+
+#: .\public_goods\templates\public_goods\Results.html:23
+msgid "Your earnings from the project"
+msgstr "Ваш доход от проекта"
+
+#: .\public_goods\templates\public_goods\Results.html:27
+msgid "Thus in total you earned"
+msgstr "Итого вы заработали"
+
+#: .\public_goods\templates\public_goods\admin_report.html:4
+msgid "Average contribution"
+msgstr "Средний вклад"
+
+#: .\public_goods\templates\public_goods\admin_report.html:8
+msgid "Min contribution"
+msgstr "Минимальный вклад"
+
+#: .\public_goods\templates\public_goods\admin_report.html:12
+msgid "Max contribution"
+msgstr "Максимальный вклад"
+
+#: .\public_goods\templates\public_goods\instructions.html:10
+msgid "In this study, you will be in a randomly formed group of"
+msgstr "В этом исследовании вы будете в случайно сформированной группе из"
+
+#: .\public_goods\templates\public_goods\instructions.html:11
+msgid "participants. Each participant in the group is given"
+msgstr "участников. У каждого участника в группе есть"
+
+#: .\public_goods\templates\public_goods\instructions.html:12
+msgid ""
+"The group has the opportunity to undertake a joint project. Each participant "
+"in the group decides how much she or he is going to contribute tothe "
+"project. Contribution could be any integer from 0 to"
+msgstr ""
+"У группы есть возможность вложиться в прибыльный проект. Каждый участник в "
+"группе решает, сколько она или он вложит в проект. Вклад может быть любым "
+"целым числом от 0 до"
+
+#: .\public_goods\templates\public_goods\instructions.html:15
+msgid ""
+"The earnings from the project are calculated as follows: The contributions "
+"of all"
+msgstr "Доходы от проекта рассчитываются следующим образом: Вклады всех"
+
+#: .\public_goods\templates\public_goods\instructions.html:16
+msgid ""
+"participants are added up, the total contribution is multiplied by a factor "
+"of"
+msgstr "участников суммируются, общий вклад умножается на "
+
+#: .\public_goods\templates\public_goods\instructions.html:17
+msgid ""
+"and the resulting amount is the total earnings from the project, which is "
+"evenly split among all"
+msgstr ""
+"и полученное число становится общим доходом от проекта, который делится между"
+
+#: .\public_goods\templates\public_goods\instructions.html:18
+msgid ""
+"participants. Your payoff equals your earnings from the project, plus the "
+"amount you did not contribute."
+msgstr ""
+"участниками поровну. Ваша выплата равна сумме вашего дохода от проекта и не "
+"вложенных в проект денег."
+
+#: .\public_goods_simple\models.py:43
+msgid "How much will you contribute?"
+msgstr "Сколько вы вложите в проект?"
+
+#: .\public_goods_simple\templates\public_goods_simple\Contribute.html:11
+msgid "This is a public goods game with"
+msgstr "Это игра на создание общественного блага с"
+
+#: .\public_goods_simple\templates\public_goods_simple\Contribute.html:12
+msgid "players per group, an endowment of"
+msgstr "участниками в группе, изначальным запасом в"
+
+#: .\public_goods_simple\templates\public_goods_simple\Contribute.html:13
+msgid "and an efficiency factor of"
+msgstr "и коэффициентом доходности вложений"
+
+#: .\public_goods_simple\templates\public_goods_simple\Results.html:11
+msgid "You started with an endowment of"
+msgstr "Вы начали с изначальным запасом в"
+
+#: .\public_goods_simple\templates\public_goods_simple\Results.html:12
+msgid "of which you contributed"
+msgstr "из которых вы вложили"
+
+#: .\public_goods_simple\templates\public_goods_simple\Results.html:13
+msgid "Your group contributed"
+msgstr "Ваша группа вложила"
+
+#: .\public_goods_simple\templates\public_goods_simple\Results.html:14
+msgid "resulting in an individual share of"
+msgstr "что привело к индивидуальному доходу в"
+
+#: .\public_goods_simple\templates\public_goods_simple\Results.html:15
+msgid "Your profit is therefore"
+msgstr "Ваш выигрыш соответственно равен"
 
 #: .\volunteer_dilemma\models.py:60
 msgid "Do you wish to volunteer?"
