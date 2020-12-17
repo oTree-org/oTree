@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Philipp Chapkovski <chapkovski@gmail.com>, Higher School of Economics, Moscow 2020.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-04 16:01+0300\n"
+"POT-Creation-Date: 2020-12-18 01:30+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,47 +19,56 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: bargaining/models.py:55
+#: .\bargaining\models.py:55
 msgid "Please enter an amount from 0 to 100"
 msgstr "Пожалуйста, введите любую сумму от 0 до 100"
 
-#: bargaining/templates/bargaining/Introduction.html:4
+#: .\bargaining\templates\bargaining\Introduction.html:4
+#: .\cournot\templates\cournot\Introduction.html:5
+#: .\guess_two_thirds\templates\guess_two_thirds\Introduction.html:5
+#: .\traveler_dilemma\templates\traveler_dilemma\Introduction.html:4
 msgid "Introduction"
 msgstr "Введение"
 
-#: bargaining/templates/bargaining/Request.html:5
+#: .\bargaining\templates\bargaining\Request.html:5
 msgid "Request"
 msgstr "Запрос"
 
-#: bargaining/templates/bargaining/Request.html:10
+#: .\bargaining\templates\bargaining\Request.html:10
 msgid "How much will you demand for yourself?"
 msgstr "Сколько вы запросите для себя?"
 
-#: bargaining/templates/bargaining/Results.html:5
+#: .\bargaining\templates\bargaining\Results.html:5
+#: .\cournot\templates\cournot\Results.html:5
+#: .\guess_two_thirds\templates\guess_two_thirds\Results.html:5
+#: .\traveler_dilemma\templates\traveler_dilemma\Results.html:3
 msgid "Results"
 msgstr "Результаты"
 
-#: bargaining/templates/bargaining/Results.html:12
+#: .\bargaining\templates\bargaining\Results.html:12
 msgid "You demanded"
 msgstr "Вы запросили"
 
-#: bargaining/templates/bargaining/Results.html:16
+#: .\bargaining\templates\bargaining\Results.html:16
 msgid "The other participant demanded"
 msgstr "Другой участник запросил"
 
-#: bargaining/templates/bargaining/Results.html:20
+#: .\bargaining\templates\bargaining\Results.html:20
 msgid "Sum of your demands"
 msgstr "Сумма ваших запросов"
 
-#: bargaining/templates/bargaining/Results.html:24
+#: .\bargaining\templates\bargaining\Results.html:24
 msgid "Thus you earn"
 msgstr "Ваш итоговый заработок"
 
-#: bargaining/templates/bargaining/instructions.html:7
+#: .\bargaining\templates\bargaining\instructions.html:7
+#: .\cournot\templates\cournot\instructions.html:7
+#: .\guess_two_thirds\templates\guess_two_thirds\instructions.html:7
+#: .\traveler_dilemma\templates\traveler_dilemma\instructions.html:7
 msgid "Instructions"
 msgstr "Инструкции"
 
-#: bargaining/templates/bargaining/instructions.html:11
+#: .\bargaining\templates\bargaining\instructions.html:11
 #, python-format
 msgid ""
 "You have been randomly and anonymously paired with another participant. "
@@ -77,11 +85,177 @@ msgstr ""
 "то, что потребовали. Если сумма ваших требований превышает "
 "%(amount_shared)s, вы оба ничего не получите."
 
-#: payment_info/templates/payment_info/PaymentInfo.html:5
+#: .\cournot\models.py:57
+msgid "How many units will you produce (from 0 to 30)?"
+msgstr "Сколько единиц товара Вы произведете (от 0 до 30)?"
+
+#: .\cournot\templates\cournot\Decide.html:5
+msgid "Production"
+msgstr "Производство"
+
+#: .\cournot\templates\cournot\Results.html:10
+msgid "The results are shown in the following table."
+msgstr "Результаты показаны в следующей таблице."
+
+#: .\cournot\templates\cournot\Results.html:15
+msgid "Your firm produced:"
+msgstr "Ваша фирма произвела:"
+
+#: .\cournot\templates\cournot\Results.html:16
+#: .\cournot\templates\cournot\Results.html:21
+#: .\cournot\templates\cournot\Results.html:26
+msgid "units"
+msgstr "единиц товара"
+
+#: .\cournot\templates\cournot\Results.html:20
+msgid "The other firm produced:"
+msgstr "Другая фирма произвела:"
+
+#: .\cournot\templates\cournot\Results.html:25
+msgid "Total production:"
+msgstr "Суммарное производство"
+
+#: .\cournot\templates\cournot\Results.html:30
+msgid "Unit selling price:"
+msgstr "Цена продажи одной единицы товара:"
+
+#: .\cournot\templates\cournot\Results.html:35
+msgid "Your profit:"
+msgstr "Ваша прибыль:"
+
+#: .\cournot\templates\cournot\instructions.html:11
+msgid ""
+" You have been randomly and anonymously paired with another participant.\n"
+"        Each of you will represent a firm. Both firms manufacture the same "
+"product. "
+msgstr ""
+"Вы были случайным образом анонимно объединены в пару с другим участником.\n"
+"Каждый из вас будет представлять фирму. Обе фирмы производят одинаковый "
+"товар."
+
+#: .\cournot\templates\cournot\instructions.html:16
+#, python-format
+msgid ""
+"The two of you decide simultaneously and independently how many units to "
+"manufacture. Your choices can be any number from 0 to "
+"%(max_units_per_player)s. All produced units will be sold, but the more is "
+"produced, the lower the unit selling price will be."
+msgstr ""
+"Вы вдвоем одновременно и независимо друг от друга решаете, сколько единиц "
+"товара производить. Вашим выбором может быть любое число от 0 до "
+"%(max_units_per_player)s. Все произведенные единицы будут проданы, но чем "
+"больше произведено, тем ниже будет цена продажи единицы."
+
+#: .\cournot\templates\cournot\instructions.html:25
+msgid "The unit selling price is:"
+msgstr "Цена продажи единицы товара:"
+
+#: .\cournot\templates\cournot\instructions.html:30
+#, python-format
+msgid ""
+"Unit selling price = %(total_capacity)s – Units produced by your firm – "
+"Units produced by the other firm"
+msgstr ""
+"Цена продажи = %(total_capacity)s – Количество товара, произведенного Вашей "
+"фирмой – Количество товара, произведенного другой фирмой"
+
+#: .\cournot\templates\cournot\instructions.html:37
+msgid "Your profit is therefore:"
+msgstr "Таким образом, Ваша прибыль:"
+
+#: .\cournot\templates\cournot\instructions.html:41
+msgid "Your profit = Unit selling price × Units produced by your firm"
+msgstr ""
+"Ваша прибыль = Цена продажи * Количество товара, произведенного Вашей фирмой"
+
+#: .\cournot\templates\cournot\instructions.html:45
+msgid ""
+"For your convenience, these instructions will remain available to you on all "
+"subsequent screens of this study."
+msgstr ""
+"Для вашего удобства эти инструкции будут доступны вам на всех последующих "
+"экранах этого исследования."
+
+#: .\guess_two_thirds\models.py:67
+msgid "Please pick a number from 0 to 100:"
+msgstr "Пожалуйста, введите любое число от 0 до 100:"
+
+#: .\guess_two_thirds\templates\guess_two_thirds\Guess.html:5
+msgid "Your Guess"
+msgstr "Ваше предположение"
+
+#: .\guess_two_thirds\templates\guess_two_thirds\Guess.html:12
+msgid "Here were the two-thirds-average values in previous rounds:"
+msgstr "Здесь обозначены 2/3 от среднего в предыдущих раундах:"
+
+#: .\guess_two_thirds\templates\guess_two_thirds\Results.html:10
+msgid "Here were the numbers guessed:"
+msgstr "Числа, предложенные участниками:"
+
+#: .\guess_two_thirds\templates\guess_two_thirds\Results.html:17
+msgid "Two-thirds of the average of these numbers is"
+msgstr "Две трети от среднего арифметического предложенных чисел составляют"
+
+#: .\guess_two_thirds\templates\guess_two_thirds\Results.html:19
+msgid "the closest guess was"
+msgstr "наиболее близким было предположение "
+
+#: .\guess_two_thirds\templates\guess_two_thirds\Results.html:22
+msgid "Your guess was"
+msgstr "Ваше предположение было"
+
+#: .\guess_two_thirds\templates\guess_two_thirds\Results.html:27
+msgid "Therefore, you are one of the"
+msgstr "Следовательно, Вы один из "
+
+#: .\guess_two_thirds\templates\guess_two_thirds\Results.html:28
+msgid "winners who tied for the best guess."
+msgstr "победителей, кто указал наилучшее предположение."
+
+#: .\guess_two_thirds\templates\guess_two_thirds\Results.html:30
+msgid "Therefore, you win!"
+msgstr "Следовательно, Вы победили!"
+
+#: .\guess_two_thirds\templates\guess_two_thirds\Results.html:33
+msgid "Therefore, you did not win."
+msgstr "Следовательно, Вы не победили."
+
+#: .\guess_two_thirds\templates\guess_two_thirds\Results.html:35
+msgid "Your payoff is"
+msgstr "Ваш выигрыш составляет"
+
+#: .\guess_two_thirds\templates\guess_two_thirds\instructions.html:11
+#, python-format
+msgid ""
+"You are in a group of %(players_per_group)s people. Each of you will be "
+"asked to choose a number between 0 and %(guess_max)s. The winner will be the "
+"participant whose number is closest to 2/3 of the average of all chosen "
+"numbers."
+msgstr ""
+"Вы состоите в группе из %(players_per_group)s человек. Каждому из вас "
+"необходимо выбрать число от 0 до %(guess_max)s. Выиграет тот участник, чье "
+"число будет ближе всего к 2/3 от среднего арифметического всех названных "
+"чисел."
+
+#: .\guess_two_thirds\templates\guess_two_thirds\instructions.html:22
+#, python-format
+msgid ""
+"The winner will receive %(jackpot)s. In case of a tie, the %(jackpot)s will "
+"be equally divided among winners."
+msgstr ""
+"Победитель получит %(jackpot)s. В случае ничьей, %(jackpot)s будет разделено "
+"между победителями поровну."
+
+#: .\guess_two_thirds\templates\guess_two_thirds\instructions.html:30
+#, python-format
+msgid "This game will be played for %(num_rounds)s rounds."
+msgstr "Эта игра будет разыграна %(num_rounds)s раз(а). "
+
+#: .\payment_info\templates\payment_info\PaymentInfo.html:5
 msgid "Thank you"
 msgstr "Спасибо!"
 
-#: payment_info/templates/payment_info/PaymentInfo.html:12
+#: .\payment_info\templates\payment_info\PaymentInfo.html:12
 msgid ""
 "Below are examples of messages that could be displayed for different "
 "experimental settings."
@@ -89,11 +263,11 @@ msgstr ""
 "Ниже приведены примеры сообщений, которые могут отображаться для различных "
 "экспериментальных настроек."
 
-#: payment_info/templates/payment_info/PaymentInfo.html:18
+#: .\payment_info\templates\payment_info\PaymentInfo.html:18
 msgid "Laboratory:"
 msgstr "В лаборатории"
 
-#: payment_info/templates/payment_info/PaymentInfo.html:19
+#: .\payment_info\templates\payment_info\PaymentInfo.html:19
 msgid ""
 "Please remain seated until your number is called. Then take your number "
 "card, and proceed to the cashier."
@@ -101,7 +275,7 @@ msgstr ""
 "Пожалуйста, оставайтесь на своих местах, пока не позвонят по вашему номеру. "
 "Затем возьмите свою номерную карту и перейдите к кассе."
 
-#: payment_info/templates/payment_info/PaymentInfo.html:21
+#: .\payment_info\templates\payment_info\PaymentInfo.html:21
 msgid ""
 "Note: For the cashier in the laboratory, oTree can print a list of payments "
 "for all participants as a PDF."
@@ -109,11 +283,11 @@ msgstr ""
 "Примечание: кассиру в лаборатории oTree может распечатать список платежей "
 "для всех участников в формате PDF."
 
-#: payment_info/templates/payment_info/PaymentInfo.html:28
+#: .\payment_info\templates\payment_info\PaymentInfo.html:28
 msgid "Classroom:"
 msgstr "Учебный класс"
 
-#: payment_info/templates/payment_info/PaymentInfo.html:30
+#: .\payment_info\templates\payment_info\PaymentInfo.html:30
 msgid ""
 "If you want to keep track of how students did, the easiest thing is to "
 "assign the starting links to students by name. It is even possible to give "
@@ -128,3 +302,133 @@ msgstr ""
 "время на каждую лекцию, раздавая новые ссылки и отслеживая, какой студент "
 "использует какую ссылку. Как вариант, вы можете просто дать студентам "
 "анонимные ссылки или секретные псевдонимы."
+
+#: .\survey\models.py:31
+msgid "What is your age?"
+msgstr "Сколько Вам лет?"
+
+#: .\survey\models.py:34
+msgid "Male"
+msgstr "Мужской"
+
+#: .\survey\models.py:34
+msgid "Female"
+msgstr "Женский"
+
+#: .\survey\models.py:35
+msgid "What is your gender?"
+msgstr "Укажите Ваш пол:"
+
+#: .\survey\models.py:40
+msgid ""
+"A bat and a ball cost 22 dollars in total.\n"
+"        The bat costs 20 dollars more than the ball.\n"
+"        How many dollars does the ball cost?"
+msgstr ""
+"Бита и мяч в сумме стоят 22 доллара. Бита стоит на 20 долларов больше, чем "
+"мяч. Сколько долларов стоит мяч?"
+
+#: .\survey\models.py:46
+msgid ""
+"If it takes 5 machines 5 minutes to make 5 widgets,\n"
+"        how many minutes would it take 100 machines to make 100 widgets?\n"
+"        "
+msgstr ""
+"Если на создание 5 изделий с помощью 5 станков требуется 5 минут, то сколько "
+"минут понадобится, чтобы сделать 100 изделий с помощью 100 станков? "
+
+#: .\survey\models.py:52
+msgid ""
+"In a lake, there is a patch of lily pads.\n"
+"        Every day, the patch doubles in size.\n"
+"        If it takes 48 days for the patch to cover the entire lake,\n"
+"        how many days would it take for the patch to cover half of the "
+"lake?\n"
+"        "
+msgstr ""
+"На озере есть участок с кувшинками. Каждый день площадь участка удваивается. "
+"Если за 48 дней озеро может зарасти кувшинками целиком, то сколько дней "
+"понадобится, чтобы кувшинки покрыли половину озера? "
+
+#: .\survey\templates\survey\CognitiveReflectionTest.html:5
+#: .\survey\templates\survey\Demographics.html:5
+msgid "Survey"
+msgstr "Опрос"
+
+#: .\survey\templates\survey\CognitiveReflectionTest.html:11
+#: .\survey\templates\survey\Demographics.html:11
+msgid "Please answer the following questions."
+msgstr "Пожалуйста, ответьте на следующие вопросы."
+
+#: .\traveler_dilemma\models.py:75
+msgid "How much will you claim for your antique?"
+msgstr "Сколько Вы потребуете за Ваш антиквариат?"
+
+#: .\traveler_dilemma\templates\traveler_dilemma\Claim.html:5
+msgid "Claim"
+msgstr "Требование"
+
+#: .\traveler_dilemma\templates\traveler_dilemma\Results.html:7
+msgid "You claimed"
+msgstr "Вы потребовали"
+
+#: .\traveler_dilemma\templates\traveler_dilemma\Results.html:11
+msgid "The other traveler claimed"
+msgstr "Другой путешественник потребовал"
+
+#: .\traveler_dilemma\templates\traveler_dilemma\Results.html:15
+msgid "Winning claim (i.e. lower claim)"
+msgstr "Выигрышное требование (т.е. более низкое требование)"
+
+#: .\traveler_dilemma\templates\traveler_dilemma\Results.html:19
+msgid "Your adjustment"
+msgstr "Ваша корректировка"
+
+#: .\traveler_dilemma\templates\traveler_dilemma\Results.html:23
+msgid "Thus you receive"
+msgstr "Таким образом, Вы получаете"
+
+#: .\traveler_dilemma\templates\traveler_dilemma\instructions.html:11
+msgid ""
+" You have been randomly and anonymously paired with another participant.\n"
+"        Now please image the following scenario. "
+msgstr ""
+"Вы были случайным образом анонимно объединены в пару с другим участником.\n"
+"А теперь представьте следующий сценарий. "
+
+#: .\traveler_dilemma\templates\traveler_dilemma\instructions.html:15
+#, python-format
+msgid ""
+"You and another traveler (the other participant) just returned from a remote "
+"island where both of you bought the same antiques. Unfortunately, you "
+"discovered that your airline managed to smash the antiques, as they always "
+"do. The airline manager assures you of adequate compensation. Without "
+"knowing the true value of your antiques, he offers you the following scheme. "
+"Both of you simultaneously and independently make a claim for the value of "
+"your own antique (ranging from %(min_amount)s to %(max_amount)s):"
+msgstr ""
+"Вы и другой путешественник (второй участник) только что вернулись с "
+"отдаленного острова, где вы оба купили одинаковый антиквариат. К сожалению, "
+"вы обнаружили, что ваша авиакомпания умудрилась разбить антиквариат, как это "
+"зачастую бывает. Менеджер авиакомпании заверяет вас в адекватной "
+"компенсации. Не зная истинную ценность вашего антиквариата, он предлагает "
+"вам следующую схему. Вы оба одновременно и независимо предъявляете "
+"требование в отношении стоимости вашего собственного антиквариата (от "
+"%(min_amount)s до %(max_amount)s):"
+
+#: .\traveler_dilemma\templates\traveler_dilemma\instructions.html:28
+msgid "If both claim the same amount, then this amount will be paid to both."
+msgstr "Если оба претендуют на одинаковую сумму, то она будет выплачена обоим."
+
+#: .\traveler_dilemma\templates\traveler_dilemma\instructions.html:31
+#, python-format
+msgid ""
+"If you claim different amounts, then the lower amount will be paid to both. "
+"Additionally, the one with lower claim will receive a reward of "
+"%(adjustment_abs)s; the one with higher claim will receive a penalty of "
+"%(adjustment_abs)s."
+msgstr ""
+"Если вы требуете разные суммы, меньшая сумма будет выплачена обоим. Кроме "
+"того, тот, чье требование меньше, получит вознаграждение в размере "
+"%(adjustment_abs)s; тот, чье требование больше, получит штраф "
+"%(adjustment_abs)s."
