@@ -1,19 +1,22 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n%}
 
 {% block title %}
-    Bid
+    {% trans "Bid" %}
 {% endblock %}
 
 {% block content %}
 
     <p>
-        The value of the item is estimated to be {{ player.item_value_estimate }}.
-        This estimate may deviate from the actual value by at most {{ Constants.estimate_error_margin }}.
+        {% blocktrans trimmed with estimate_error_margin=Constants.estimate_error_margin item_value_estimate=player.item_value_estimate%} The value of the item is estimated to be {{ item_value_estimate }}.
+        This estimate may deviate from the actual value by at most {{ estimate_error_margin }}.
+    {% endblocktrans %}
     </p>
 
     <p>
-        Please make your bid now. The amount can be between {{ Constants.min_allowable_bid }} and {{ Constants.max_allowable_bid }}, inclusive.
+        {% blocktrans trimmed with min_allowable_bid=Constants.min_allowable_bid max_allowable_bid=Constants.max_allowable_bid%}
+        Please make your bid now. The amount can be between {{ min_allowable_bid }} and {{ max_allowable_bid }}, inclusive.
+    {% endblocktrans %}
     </p>
 
     {% formfields %}

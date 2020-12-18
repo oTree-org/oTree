@@ -1,35 +1,43 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n%}
 
 {% block title %}
-    Results
+    {% trans "Results" %}
 {% endblock %}
 
 {% block content %}
 
     {% if player.id_in_group == 1 %}
         <p>
-            You chose to send participant B {{ group.sent_amount }}.
-            Participant B returned {{ group.sent_back_amount }}.
+            {% blocktrans trimmed with sent_amount=group.sent_amount sent_back_amount=group.sent_back_amount %}
+            You chose to send participant B {{sent_amount}}.
+            Participant B returned {{sent_back_amount}}.
+        {% endblocktrans %}
         </p>
         <p>
-            You were initially endowed with {{ Constants.endowment }},
-            chose to send {{ group.sent_amount }},
-            received {{ group.sent_back_amount }}
+            {% blocktrans trimmed with endowment=Constants.endowment sent_back_amount=group.sent_back_amount sent_amount=group.sent_amount payoff=player.payoff %}
+            You were initially endowed with {{endowment}},
+            chose to send {{sent_amount}},
+            received {{sent_back_amount}}
             thus you now have:
-            {{ Constants.endowment }}-{{ group.sent_amount }}+{{ group.sent_back_amount }}=<strong>{{ player.payoff }}</strong>
+            {{endowment}}-{{sent_amount}}+{{sent_back_amount}}=<strong>{{payoff}}</strong>
+        {% endblocktrans %}
         </p>
     {% else %}
         <p>
-            Participant A sent you {{ group.sent_amount }}.
-            They were tripled so you received {{ tripled_amount }}.
-            You chose to return {{ group.sent_back_amount }}.
+            {% blocktrans trimmed with sent_back_amount=group.sent_back_amount sent_amount=group.sent_amount %}
+            Participant A sent you {{sent_amount}}.
+            They were tripled so you received {{tripled_amount}}.
+            You chose to return {{sent_back_amount}}.
+            {% endblocktrans %}
         </p>
         <p>
-            You received {{ tripled_amount }},
-            chose to return {{ group.sent_back_amount }}
+            {% blocktrans trimmed with sent_back_amount=group.sent_back_amount payoff=player.payoff %}
+            You received {{tripled_amount}},
+            chose to return {{sent_back_amount}}
             thus you now have:
-            ({{ tripled_amount }})-({{ group.sent_back_amount }})=<strong>{{ player.payoff }}</strong>
+            ({{tripled_amount}})-({{sent_back_amount}})=<strong>{{payoff}}</strong>
+            {% endblocktrans %}
         </p>
         .
     {% endif %}

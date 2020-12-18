@@ -1,26 +1,27 @@
 {% extends "global/Page.html" %}
+{% load i18n %}
 {% load otree %}
 
 {% block title %}
-    Results
+    {% trans 'Results'%}
 {% endblock %}
 
 {% block content %}
     <table class="table">
         <tr>
-            <th>Your price</th>
+            <th>{% trans 'Your price' %}</th>
             <td>{{ player.price }}</td>
         </tr>
         <tr>
-            <th>Lowest price</th>
+            <th>{% trans 'Lowest price'%}</th>
             <td>{{ group.winning_price }}</td>
         </tr>
         <tr>
-            <th>Was your product sold?</th>
-            <td>{% if player.is_winner %} Yes {% else %} No {% endif %}</td>
+            <th>{% trans 'Was your product sold?' %}</th>
+            <td>{% if player.is_winner %} {% trans 'Yes' %} {% else %} {% trans 'No'%} {% endif %}</td>
         </tr>
         <tr>
-            <th>Your payoff</th>
+            <th>{% trans 'Your payoff' %}</th>
             <td>{{ player.payoff }}</td>
         </tr>
     </table>

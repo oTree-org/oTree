@@ -1,20 +1,21 @@
-{% load otree %}
+{% load otree i18n%}
 
 <div class="instructions well well-lg" style="">
 
     <h3>
-        Instructions
+        {% trans 'Instructions' %}
     </h3>
     <p>
-        You have been randomly and anonymously paired with another participant.
+        {% blocktrans %} You have been randomly and anonymously paired with another participant.
         Each of you will represent a firm. Each firm manufactures one unit of
-        the same product at no cost.
+        the same product at no cost. {% endblocktrans %}
     </p>
     <p>
-        Each of you privately sets your price, anything from 0 to {{ Constants.maximum_price }}.
+        {% blocktrans trimmed with maximum_price=Constants.maximum_price %}
+        Each of you privately sets your price, anything from 0 to {{ maximum_price }}.
         The buyer in the market will always buy one unit of the product at the
         lower price. In case of a tie, the buyer will buy from one of you at
         random. Your profit is your price if your product is sold and zero
-        otherwise.
+        otherwise.{% endblocktrans %}
     </p>
 </div>
