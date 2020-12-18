@@ -1,28 +1,36 @@
-{% load otree %}
+{% load otree i18n %}
 
 <div class="card bg-light m-3">
     <div class="card-body">
 
     <h3>
-        Instructions
+        {% trans 'Instructions' %}
     </h3>
 
     <p>
-        You are in a group of {{ Constants.players_per_group }} people.
+        {% blocktrans trimmed with players_per_group=Constants.players_per_group guess_max=Constants.guess_max %}
+        You are in a group of {{ players_per_group }} people.
         Each of you will be asked to choose a
-        number between 0 and {{ Constants.guess_max }}.
+        number between 0 and {{ guess_max }}.
         The winner will be the participant whose
         number is closest to 2/3 of the
         average of all chosen numbers.
+        {% endblocktrans %}
     </p>
 
     <p>
-        The winner will receive {{ Constants.jackpot }}.
-        In case of a tie, the {{ Constants.jackpot }}
+        {% blocktrans trimmed with jackpot=Constants.jackpot %}
+        The winner will receive {{ jackpot }}.
+        In case of a tie, the {{ jackpot }}
         will be equally divided among winners.
+        {% endblocktrans %}
     </p>
 
-    <p>This game will be played for {{ Constants.num_rounds }} rounds.</p>
+    <p>
+        {% blocktrans trimmed with num_rounds=Constants.num_rounds %}
+        This game will be played for {{ num_rounds }} rounds.
+        {% endblocktrans %}
+    </p>
 
 </div>
 </div>

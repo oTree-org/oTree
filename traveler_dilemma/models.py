@@ -8,6 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
+from django.utils.translation import gettext_lazy as _
 
 doc = """
 Kaushik Basu's famous traveler's dilemma (
@@ -71,7 +72,7 @@ class Player(BasePlayer):
     claim = models.CurrencyField(
         min=Constants.min_amount,
         max=Constants.max_amount,
-        label='How much will you claim for your antique?',
+        label=_('How much will you claim for your antique?'),
         doc="""
         Each player's claim
         """,

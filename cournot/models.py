@@ -8,6 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
+from django.utils.translation import gettext_lazy as _
 
 
 doc = """
@@ -53,7 +54,7 @@ class Player(BasePlayer):
         min=0,
         max=Constants.max_units_per_player,
         doc="""Quantity of units to produce""",
-        label="How many units will you produce (from 0 to 30)?"
+        label=_("How many units will you produce (from 0 to 30)?"),
     )
 
     def other_player(self):

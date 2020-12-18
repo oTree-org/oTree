@@ -1,14 +1,14 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n %}
 
 {% block title %}
-    Survey
+    {% trans "Survey" %}
 {% endblock %}
 
 {% block content %}
 
     <p>
-        Please answer the following questions.
+        {% trans "Please answer the following questions." %}
     </p>
 
     {% formfields %}
