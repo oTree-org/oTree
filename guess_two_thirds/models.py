@@ -8,6 +8,8 @@ from otree.api import (
     Currency,
 )
 
+from django.utils.translation import gettext_lazy as _
+
 
 doc = """
 a.k.a. Keynesian beauty contest.
@@ -62,6 +64,6 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     guess = models.IntegerField(
-        min=0, max=Constants.guess_max, label="Please pick a number from 0 to 100:"
+        min=0, max=Constants.guess_max, label=_("Please pick a number from 0 to 100:")
     )
     is_winner = models.BooleanField(initial=False)
