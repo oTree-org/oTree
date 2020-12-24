@@ -8,7 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-
+from django.utils.translation import gettext_lazy as _
 
 doc = """
 2 firms complete in a market by setting prices for homogenous goods.
@@ -58,7 +58,7 @@ class Player(BasePlayer):
         min=0,
         max=Constants.maximum_price,
         doc="""Price player offers to sell product for""",
-        label="Please enter an amount from 0 to 100 as your price"
+        label=_("Please enter an amount from 0 to 100 as your price")
     )
 
     is_winner = models.BooleanField()

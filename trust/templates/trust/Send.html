@@ -1,14 +1,16 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n%}
 
 {% block title %}
-    Your Choice
+    {% trans "Your Choice"%}
 {% endblock %}
 
 {% block content %}
 
     <p>
-    You are Participant A. Now you have {{Constants.endowment}}. How much will you send to participant B?
+        {% blocktrans trimmed with endowment=Constants.endowment %}
+        You are Participant A. Now you have {{endowment}}. How much will you send to participant B?
+        {% endblocktrans %}
     </p>
 
     {% formfields %}

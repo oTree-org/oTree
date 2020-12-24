@@ -1,27 +1,33 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n%}
 
 {% block title %}
-    Results
+    {% trans "Results"%}
 {% endblock %}
 
 {% block content %}
 
 {% if player.id_in_group == 1 %}
     <p>
-        You sent Participant B {{ group.sent_amount }}.
-        Participant B returned {{group.sent_back_amount}}.
+        {% blocktrans trimmed with sent_amount=group.sent_amount sent_back_amount=group.sent_back_amount %}
+        You sent Participant B {{ sent_amount }}.
+        Participant B returned {{ sent_back_amount}}.
+    {% endblocktrans %}
     </p>
     {% else %}
     <p>
-        Participant A sent you {{ group.sent_amount }}.
-        You returned {{group.sent_back_amount}}.
+    {% blocktrans trimmed with sent_amount=group.sent_amount sent_back_amount=group.sent_back_amount %}
+        Participant A sent you {{ sent_amount }}.
+        You returned {{sent_back_amount}}.
+    {% endblocktrans %}
     </p>
 
 {% endif %}
 
     <p>
-    Therefore, your total payoff is {{player.payoff}}.
+    {% blocktrans trimmed with payoff=player.payoff %}
+    Therefore, your total payoff is {{payoff}}.
+    {% endblocktrans %}
     </p>
 
     {% include Constants.instructions_template %}

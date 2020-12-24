@@ -8,6 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
+from django.utils.translation import gettext_lazy as _
 
 doc = """
 In a common value auction game, players simultaneously bid on the item being
@@ -93,7 +94,7 @@ class Player(BasePlayer):
         min=Constants.min_allowable_bid,
         max=Constants.max_allowable_bid,
         doc="""Amount bidded by the player""",
-        label="Bid amount"
+        label=_("Bid amount")
     )
 
     is_winner = models.BooleanField(
