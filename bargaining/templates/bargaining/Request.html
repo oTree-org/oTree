@@ -1,13 +1,13 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n  %}
 
 {% block title %}
-    Request
+    {% trans 'Request' %}
 {% endblock %}
 
 {% block content %}
 
-    <p>How much will you demand for yourself?</p>
+    <p>{% trans 'How much will you demand for yourself?' %}</p>
 
     {% formfields %}
 

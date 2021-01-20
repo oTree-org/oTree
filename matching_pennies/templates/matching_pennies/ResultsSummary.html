@@ -1,31 +1,31 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n %}
 
 {% block title %}
-    Final results
+    {%  trans 'Final Results' %}
 {% endblock %}
 
 {% block content %}
 
     <table class="table">
         <tr>
-            <th>Round</th>
-            <th>Player and outcome</th>
+            <th>{% trans 'Round' %}</th>
+            <th>{% trans 'Player and outcome' %}</th>
         </tr>
         {% for p in player_in_all_rounds %}
             <tr>
                 <td>{{ p.round_number }}</td>
                 <td>
-                  You were the {% if p.is_matcher %}Matcher{% else %}Mismatcher{% endif %}
-                  and {% if p.is_winner %} won {% else %} lost {% endif %}
+                  {%  trans 'You were the' %} {% if p.is_matcher %}{%  trans 'Matcher' %}{% else %}{%  trans 'Mismatcher' %}{% endif %}
+                  {%  trans 'and' %} {% if p.is_winner %} {%  trans 'won' %} {% else %} {%  trans 'lost' %} {% endif %}
                 </td>
             </tr>
         {% endfor %}
     </table>
 
     <p>
-        The paying round was {{ paying_round }}.
-        Your total payoff is therefore {{ total_payoff }}.
+        {% trans 'The paying round was' %} {{ paying_round }}.
+        {% trans 'Your total payoff is therefore' %} {{ total_payoff }}.
     </p>
 
 {% endblock %}

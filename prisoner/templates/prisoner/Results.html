@@ -1,22 +1,24 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n %}
 
 {% block title %}
-    Results
+    {% trans 'Results' %}
 {% endblock %}
 
 {% block content %}
 
     <p>
         {% if same_choice %}
-            Both of you chose to {{ my_decision }}.
+            {% blocktrans with my_decision=player.get_decision_display %} Both of you chose to {{ my_decision }}. {% endblocktrans %}
         {% else %}
-            You chose to {{ my_decision }} and the other participant chose to {{ opponent_decision }}.
+            {% blocktrans with my_decision=player.get_decision_display opponent_decision=player.other_player.get_decision_display %}
+                You chose to {{ my_decision }} and the other participant chose to {{ opponent_decision }}.
+            {% endblocktrans %}
         {% endif %}
     </p>
 
     <p>
-        As a result, you earned {{ player.payoff }}.
+        {% trans 'As a result, you earned' %} {{ player.payoff }}.
     </p>
 
     {% next_button %}

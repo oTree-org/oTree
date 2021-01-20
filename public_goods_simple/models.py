@@ -8,7 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-
+from django.utils.translation import gettext_lazy as _
 
 class Constants(BaseConstants):
     name_in_url = 'public_goods_simple'
@@ -40,5 +40,5 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     contribution = models.CurrencyField(
-        min=0, max=Constants.endowment, label="How much will you contribute?"
+        min=0, max=Constants.endowment, label=_("How much will you contribute?")
     )

@@ -8,7 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-
+from django.utils.translation import gettext_lazy as _
 
 doc = """
 One player decides how to divide a certain amount between himself and the other
@@ -41,7 +41,7 @@ class Group(BaseGroup):
         doc="""Amount dictator decided to keep for himself""",
         min=0,
         max=Constants.endowment,
-        label="I will keep",
+        label=_("I will keep"),
     )
 
     def set_payoffs(self):

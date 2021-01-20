@@ -1,16 +1,18 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n%}
 
 {% block title %}
-    Your Choice
+    {% trans "Your Choice" %}
 {% endblock %}
 
 {% block content %}
 <p>
+    {% blocktrans trimmed with sent_amount=group.sent_amount %}
     You are Participant B.
-    Participant A sent you {{group.sent_amount}} and you received {{tripled_amount}}.
+    Participant A sent you {{sent_amount}} and you received {{tripled_amount}}.
     Now you have {{tripled_amount}}.
     How much will you send to participant A?
+{% endblocktrans %}
 </p>
 
     {% formfields %}

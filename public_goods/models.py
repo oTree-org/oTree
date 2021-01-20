@@ -8,7 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-
+from django.utils.translation import gettext_lazy as _
 
 doc = """
 This is a one-period public goods game with 3 players.
@@ -63,5 +63,5 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     contribution = models.CurrencyField(
         min=0, max=Constants.endowment, doc="""The amount contributed by the player""",
-        label="How much will you contribute to the project (from 0 to 100)?"
+        label=_("How much will you contribute to the project (from 0 to 100)?")
     )

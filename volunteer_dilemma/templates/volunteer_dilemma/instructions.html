@@ -1,23 +1,19 @@
-{% load otree %}
+{% load otree i18n %}
 
 <div class="card bg-light m-3">
     <div class="card-body">
 
     <h3>
-        Instructions
+        {% trans 'Instructions' %}
     </h3>
 
     <p>
-        You will be grouped randomly and anonymously with
-        another {{ Constants.num_other_players }}
-        participants.
+            {% trans 'You will be grouped randomly and anonymously with another' %} {{ Constants.num_other_players }}
+            {% trans 'participants' %}.
     </p>
     <p>
-        Each of you decides independently and simultaneously whether you will
-        volunteer or not. If at least one of you volunteers, everyone will get
-        {{ Constants.general_benefit }}. However, the volunteer(s) will
-        pay {{ Constants.volunteer_cost }}. If no one
-        volunteers, everyone receives nothing.
+            {% trans 'Each of you decides independently and simultaneously whether you will volunteer or not. If at least one of you volunteers, everyone will get' %}
+            {{ Constants.general_benefit }}. {% trans 'However, the volunteer(s) will pay' %} {{ Constants.volunteer_cost }}. {% trans 'If no one volunteers, everyone receives nothing' %}.
     </p>
     </div>
 </div>

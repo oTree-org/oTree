@@ -1,21 +1,21 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n %}
 
 {% block title %}
-    Results
+    {% trans 'Results' %}
 {% endblock %}
 
 
 {% block content %}
     <p>
         {% if player.volunteer %}
-            You volunteered. As a result, your payoff is
+            {% trans 'You volunteered. As a result, your payoff is' %}
             <strong>{{ player.payoff }}</strong>.
         {% elif group.num_volunteers > 0 %}
-            You did not volunteer but some did. As a result, your payoff is
+            {% trans 'You did not volunteer but some did. As a result, your payoff is' %}
             <strong>{{ player.payoff }}</strong>.
         {% else %}
-            You did not volunteer and no one did. As a result, your payoff is
+            {% trans 'You did not volunteer and no one did. As a result, your payoff is' %}
             <strong>{{ player.payoff }}</strong>.
         {% endif %}
     </p>

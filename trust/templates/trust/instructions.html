@@ -1,28 +1,32 @@
-{% load otree %}
+{% load otree i18n%}
 
 <div class="card bg-light m-3">
     <div class="card-body">
 
     <h3>
-        Instructions
+        {% trans "Instructions"%}
     </h3>
     <p>
+        {% blocktrans %}
         You have been randomly and anonymously paired with another participant.
         One of you will be selected at random to be participant A;
         the other will be participant B.
         You will learn whether you are participant A or B prior to making any
         decision.
+        {% endblocktrans %}
     </p>
     <p>
-        To start, participant A receives {{ Constants.endowment }};
+        {% blocktrans trimmed with endowment=Constants.endowment multiplier=Constants.multiplier%}
+        To start, participant A receives {{ endowment }};
         participant B receives
         nothing.
         Participant A can send some or all of
-        his {{ Constants.endowment }} to participant B.
+        his {{ endowment }} to participant B.
         Before B receives this amount, it will be multiplied
-        by {{ Constants.multiplier }}. Once B receives
+        by {{ multiplier }}. Once B receives
         the tripled amount he can decide to send some or all of it to
         A.
+        {% endblocktrans %}
     </p>
 </div>
 </div>

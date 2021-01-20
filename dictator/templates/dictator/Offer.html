@@ -1,13 +1,11 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n %}
 
-{% block title %}Your Decision{% endblock %}
+{% block title %}{% trans 'Your Decision' %}{% endblock %}
 
 {% block content %}
 <p>
-    You are <strong>Participant 1</strong>.
-    Please decide how much of the {{ Constants.endowment }}
-    you will keep for yourself.
+    {% trans 'You are' %} <strong>{%trans 'Participant 1' %}</strong>. {%trans 'Please decide how much of the' %} {{ Constants.endowment }} {% trans 'will keep for yourself.' %}
 </p>
 
 {% formfields %}

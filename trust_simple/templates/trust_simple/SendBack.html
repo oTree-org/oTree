@@ -1,8 +1,8 @@
 {% extends "global/Page.html" %}
-{% load otree %}
+{% load otree i18n%}
 
 {% block title %}
-    Trust Game: Your Choice
+    {% trans "Trust Game: Your Choice" %}
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,9 @@
     {% include Constants.instructions_template %}
 
 <p>
-You are Participant B. Participant A sent you {{group.sent_amount}} and you received {{tripled_amount}}.
+    {% blocktrans trimmed with sent_amount=group.sent_amount %}
+    You are Participant B. Participant A sent you {{sent_amount}} and you received {{tripled_amount}}.
+    {% endblocktrans %}
 </p>
 
     {% formfields %}

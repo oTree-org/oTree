@@ -8,7 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-
+from django.utils.translation import gettext_lazy as _
 
 doc = """
 Simple trust game
@@ -35,7 +35,7 @@ class Group(BaseGroup):
         min=c(0),
         max=Constants.endowment,
         doc="""Amount sent by P1""",
-        label="How much do you want to send to participant B?",
+        label=_("How much do you want to send to participant B?"),
     )
 
     sent_back_amount = models.CurrencyField(
