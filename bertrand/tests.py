@@ -1,12 +1,12 @@
 from otree.api import Currency as c, currency_range, expect
-from . import pages
-from ._builtin import Bot
-from .models import Constants
+from . import app
+from otree.api import Bot
+from .app import Constants
 
 
 class PlayerBot(Bot):
     def play_round(self):
         # compete price
-        yield pages.Introduction
-        yield pages.Decide, dict(price=c(30))
-        yield pages.Results
+        yield app.Introduction
+        yield app.Decide, dict(price=c(30))
+        yield app.Results
