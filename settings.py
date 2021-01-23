@@ -1,95 +1,20 @@
 from os import environ
 
+
 SESSION_CONFIGS = [
     dict(
         name='public_goods',
-        display_name="Public Goods",
-        num_demo_participants=3,
         app_sequence=['public_goods', 'payment_info'],
+        num_demo_participants=3,
     ),
     dict(
         name='guess_two_thirds',
         display_name="Guess 2/3 of the Average",
-        num_demo_participants=3,
         app_sequence=['guess_two_thirds', 'payment_info'],
-    ),
-    dict(
-        name='survey',
-        display_name='survey',
-        num_demo_participants=1,
-        app_sequence=['survey', 'payment_info'],
-    ),
-    dict(
-        name='trust',
-        display_name="Trust Game",
-        num_demo_participants=2,
-        app_sequence=['trust', 'payment_info'],
-    ),
-    dict(
-        name='prisoner',
-        display_name="Prisoner's Dilemma",
-        num_demo_participants=2,
-        app_sequence=['prisoner', 'payment_info'],
-    ),
-    dict(
-        name='volunteer_dilemma',
-        display_name="Volunteer's Dilemma",
         num_demo_participants=3,
-        app_sequence=['volunteer_dilemma', 'payment_info'],
     ),
     dict(
-        name='cournot',
-        display_name="Cournot Competition",
-        num_demo_participants=2,
-        app_sequence=['cournot', 'payment_info'],
-    ),
-    dict(
-        name='dictator',
-        display_name="Dictator Game",
-        num_demo_participants=2,
-        app_sequence=['dictator', 'payment_info'],
-    ),
-    dict(
-        name='matching_pennies',
-        display_name="Matching Pennies",
-        num_demo_participants=2,
-        app_sequence=['matching_pennies'],
-    ),
-    dict(
-        name='traveler_dilemma',
-        display_name="Traveler's Dilemma",
-        num_demo_participants=2,
-        app_sequence=['traveler_dilemma', 'payment_info'],
-    ),
-    dict(
-        name='bargaining',
-        display_name="Bargaining Game",
-        num_demo_participants=2,
-        app_sequence=['bargaining', 'payment_info'],
-    ),
-    dict(
-        name='common_value_auction',
-        display_name="Common Value Auction",
-        num_demo_participants=3,
-        app_sequence=['common_value_auction', 'payment_info'],
-    ),
-    dict(
-        name='bertrand',
-        display_name="Bertrand Competition",
-        num_demo_participants=2,
-        app_sequence=['bertrand', 'payment_info'],
-    ),
-    dict(
-        name='public_goods_simple',
-        display_name="Public Goods (simple version from tutorial)",
-        num_demo_participants=3,
-        app_sequence=['public_goods_simple', 'payment_info'],
-    ),
-    dict(
-        name='trust_simple',
-        display_name="Trust Game (simple version from tutorial)",
-        num_demo_participants=2,
-        app_sequence=['trust_simple'],
+        name='survey', app_sequence=['survey', 'payment_info'], num_demo_participants=1
     ),
 ]
 
@@ -101,7 +26,6 @@ SESSION_CONFIGS = [
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=0.00, doc=""
 )
-
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
@@ -128,10 +52,7 @@ DEMO_PAGE_INTRO_HTML = """
 Here are some oTree games.
 """
 
-# don't share this with anybody.
-SECRET_KEY = '6lertt4wlb09zj@4wyuy-p-6)i$vh!ljwx&r9bti6kgw54k-h8'
 
-# if an app is included in SESSION_CONFIGS, you don't need to list it here
+SECRET_KEY = '{{ secret_key }}'
+
 INSTALLED_APPS = ['otree']
-
-# inactive session configs
