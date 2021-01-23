@@ -31,7 +31,7 @@
             <tr>
                 <td>{{ p.round_number }}</td>
                 <td>
-                  You were the {% if p.is_matcher %}Matcher{% else %}Mismatcher{% endif %}
+                  You were the {{ p.role }}
                   and {% if p.is_winner %} won {% else %} lost {% endif %}
                 </td>
             </tr>
@@ -39,7 +39,7 @@
     </table>
 
     <p>
-        In this round, you are the {% if player.is_matcher %} Matcher {% else %} Mismatcher {% endif %}.
+        In this round, you are the {{ player.role }}.
     </p>
 
     {% formfields %}

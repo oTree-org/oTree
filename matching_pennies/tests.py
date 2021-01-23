@@ -7,7 +7,7 @@ from .app import Constants
 class PlayerBot(Bot):
     def play_round(self):
         yield app.Choice, dict(penny_side='Heads')
-        if self.player.is_matcher():
+        if self.player.role == Constants.matcher_role:
             expect(self.player.is_winner, True)
         else:
             expect(self.player.is_winner, False)

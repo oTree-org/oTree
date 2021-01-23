@@ -111,7 +111,9 @@ def set_payoff(player: Player):
 class Introduction(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        player.item_value_estimate = player.group.generate_value_estimate()
+        group = player.group
+
+        player.item_value_estimate = generate_value_estimate(group)
 
 
 class Bid(Page):
@@ -126,7 +128,9 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        return dict(is_greedy=player.group.item_value - player.bid_amount < 0)
+        group = player.group
+
+        return dict(is_greedy=group.item_value - player.bid_amount < 0)
 
 
 page_sequence = [Introduction, Bid, ResultsWaitPage, Results]

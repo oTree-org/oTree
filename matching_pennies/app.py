@@ -23,6 +23,9 @@ class Constants(BaseConstants):
     num_rounds = 4
     stakes = c(100)
 
+    matcher_role = 'Matcher'
+    mismatcher_role = 'Mismatcher'
+
 
 class Subsession(BaseSubsession):
     pass
@@ -63,20 +66,18 @@ def set_payoffs(group: Group):
     p2 = group.get_player_by_id(2)
     is_match = p1.penny_side == p2.penny_side
     for p in [p1, p2]:
-        # a simpler way to write these 4 lines would be:
-        # p.is_winner = (p.is_matcher() == is_match)
-        if p.is_matcher() == is_match:
+        is_matcher = p.role == Constants.matcher_role
+        if is_matcher == is_match:
             p.is_winner = True
         else:
             p.is_winner = False
-        if group.subsession.round_number == group.session.vars['paying_round'] and p.is_winner:
+        if (
+            group.subsession.round_number == group.session.vars['paying_round']
+            and p.is_winner
+        ):
             p.payoff = Constants.stakes
         else:
             p.payoff = c(0)
-
-
-def is_matcher(player: Player):
-    return player.id_in_group == 1
 
 
 # PAGES
