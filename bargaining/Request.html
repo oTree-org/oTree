@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Request
+{% endblock %}
+
+{% block content %}
+
+    <p>How much will you demand for yourself?</p>
+
+    {% formfields %}
+
+    <p>{% next_button %}</p>
+
+    {% include Constants.instructions_template %}
+    
+{% endblock %}

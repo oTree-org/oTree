@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Trust Game: Your Choice
+{% endblock %}
+
+{% block content %}
+
+    {% include Constants.instructions_template %}
+
+<p>
+You are Participant B. Participant A sent you {{group.sent_amount}} and you received {{tripled_amount}}.
+</p>
+
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}

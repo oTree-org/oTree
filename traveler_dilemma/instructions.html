@@ -1,0 +1,37 @@
+{% load otree %}
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+
+    <h3>
+        Instructions
+    </h3>
+
+    <p>
+        You have been randomly and anonymously paired with another participant.
+        Now please image the following scenario.
+    </p>
+    <p>
+        You and another traveler (the other participant) just returned from a
+        remote island where both of you bought the same antiques.
+        Unfortunately, you discovered that your airline managed to smash the
+        antiques, as they always do. The airline manager assures you of
+        adequate compensation. Without knowing the true value of your antiques,
+        he offers you the following scheme. Both of you simultaneously and
+        independently make a claim for the value of your own antique (ranging
+        from {{ Constants.min_amount }} to {{ Constants.max_amount }}):
+    </p>
+    <ul>
+        <li>
+            If both claim the same amount, then this amount will be paid to
+            both.
+        </li>
+        <li>
+            If you claim different amounts, then the lower amount will be paid
+            to both. Additionally, the one with lower claim will receive a
+            reward of {{ Constants.adjustment_abs }}; the one with higher claim will
+            receive a penalty of {{ Constants.adjustment_abs }}.
+        </li>
+    </ul>
+</div>
+</div>

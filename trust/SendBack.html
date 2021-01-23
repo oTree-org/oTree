@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Your Choice
+{% endblock %}
+
+{% block content %}
+<p>
+    You are Participant B.
+    Participant A sent you {{group.sent_amount}} and you received {{tripled_amount}}.
+    Now you have {{tripled_amount}}.
+    How much will you send to participant A?
+</p>
+
+    {% formfields %}
+    <p>{% next_button %}</p>
+    {% include Constants.instructions_template %}
+
+{% endblock %}

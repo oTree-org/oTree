@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Contribute
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        This is a public goods game with
+        {{ Constants.players_per_group }} players per group,
+        an endowment of {{ Constants.endowment }},
+        and an efficiency factor of {{ Constants.multiplier }}.
+    </p>
+
+
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}

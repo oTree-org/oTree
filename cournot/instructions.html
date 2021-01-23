@@ -1,0 +1,43 @@
+{% load otree %}
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+
+    <h3>
+        Instructions
+    </h3>
+
+    <p>
+        You have been randomly and anonymously paired with another participant.
+        Each of you will represent a firm. Both firms manufacture the same product.
+    </p>
+
+    <p>
+        The two of you decide simultaneously and independently how many units to manufacture.
+        Your choices can be any number from 0 to {{ Constants.max_units_per_player }}.
+        All produced units will be sold, but the more is produced, the lower the unit selling price will be.
+    </p>
+
+
+    <p>
+        The unit selling price is:
+    </p>
+
+    <ul>
+        <strong>Unit selling price = {{ Constants.total_capacity }} – Units produced by your firm – Units produced by the other firm</strong>
+    </ul>
+
+    <p>
+        Your profit is therefore:
+    </p>
+
+    <ul>
+        <strong>Your profit = Unit selling price × Units produced by your firm</strong>
+    </ul>
+
+    <p>
+        For your convenience, these instructions will remain available to you on all subsequent screens of this study.
+    </p>
+
+</div>
+</div>

@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Trust Game: Your Choice
+{% endblock %}
+
+{% block content %}
+
+    {% include Constants.instructions_template %}
+
+    <p>
+    You are Participant A. Now you have {{Constants.endowment}}.
+    </p>
+
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}
