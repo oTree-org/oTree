@@ -46,11 +46,12 @@ class Player(BasePlayer):
 
 # FUNCTIONS
 def creating_session(subsession: Subsession):
+    session = subsession.session
     import random
 
     if subsession.round_number == 1:
         paying_round = random.randint(1, Constants.num_rounds)
-        subsession.session.vars['paying_round'] = paying_round
+        session.vars['paying_round'] = paying_round
     if subsession.round_number == 3:
         # reverse the roles
         matrix = subsession.get_group_matrix()
@@ -62,19 +63,15 @@ def creating_session(subsession: Subsession):
 
 
 def set_payoffs(group: Group):
+    subsession = group.subsession
+    session = group.session
+
     p1 = group.get_player_by_id(1)
     p2 = group.get_player_by_id(2)
-    is_match = p1.penny_side == p2.penny_side
     for p in [p1, p2]:
         is_matcher = p.role == Constants.matcher_role
-        if is_matcher == is_match:
-            p.is_winner = True
-        else:
-            p.is_winner = False
-        if (
-            group.subsession.round_number == group.session.vars['paying_round']
-            and p.is_winner
-        ):
+        p.is_winner = (p1.penny_side == p2.penny_side) == is_matcher
+        if subsession.round_number == session.vars['paying_round'] and p.is_winner:
             p.payoff = Constants.stakes
         else:
             p.payoff = c(0)
@@ -101,10 +98,12 @@ class ResultsSummary(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
+        session = player.session
+
         player_in_all_rounds = player.in_all_rounds()
         return dict(
             total_payoff=sum([p.payoff for p in player_in_all_rounds]),
-            paying_round=player.session.vars['paying_round'],
+            paying_round=session.vars['paying_round'],
             player_in_all_rounds=player_in_all_rounds,
         )
 

@@ -82,7 +82,9 @@ class SendBack(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        return dict(tripled_amount=player.group.sent_amount * Constants.multiplier)
+        group = player.group
+
+        return dict(tripled_amount=group.sent_amount * Constants.multiplier)
 
 
 class ResultsWaitPage(WaitPage):

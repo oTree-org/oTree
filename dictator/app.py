@@ -76,7 +76,9 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        return dict(offer=Constants.endowment - player.group.kept)
+        group = player.group
+
+        return dict(offer=Constants.endowment - group.kept)
 
 
 page_sequence = [Introduction, Offer, ResultsWaitPage, Results]

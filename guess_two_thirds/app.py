@@ -87,7 +87,9 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        sorted_guesses = sorted(p.guess for p in player.group.get_players())
+        group = player.group
+
+        sorted_guesses = sorted(p.guess for p in group.get_players())
         return dict(sorted_guesses=sorted_guesses)
 
 

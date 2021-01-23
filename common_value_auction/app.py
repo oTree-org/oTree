@@ -99,8 +99,10 @@ def generate_value_estimate(group: Group):
 
 
 def set_payoff(player: Player):
+    group = player.group
+
     if player.is_winner:
-        player.payoff = player.group.item_value - player.bid_amount
+        player.payoff = group.item_value - player.bid_amount
         if player.payoff < 0:
             player.payoff = 0
     else:

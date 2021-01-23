@@ -95,7 +95,9 @@ class Results(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        return dict(total_earnings=player.group.total_contribution * Constants.multiplier)
+        group = player.group
+
+        return dict(total_earnings=group.total_contribution * Constants.multiplier)
 
 
 page_sequence = [Introduction, Contribute, ResultsWaitPage, Results]
