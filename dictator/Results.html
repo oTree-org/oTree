@@ -5,10 +5,10 @@
     <p>
 
         {% if player.id_in_group == 1 %}
-            You decided to keep <strong>{{ group.kept }}</strong> for yourself.
+            You decided to keep <b>{{ group.kept }}</b> for yourself.
         {% else %}
-            Participant 1 decided to keep <strong>{{ group.kept }}</strong>, so
-            you got <strong>{{ offer }}</strong>.
+            Participant 1 decided to keep <b>{{ group.kept }}</b>, so
+            you got <b>{{ offer }}</b>.
         {% endif %}
 
         {% next_button %}
