@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+<<<<<<< HEAD
+{% load otree %}
+
+{% block title %}
+    Introduction
+{% endblock %}
+
+=======
+
+{% block title %}Introduction{% endblock %}
+>>>>>>> full
+{% block content %}
+
+    {% include Constants.instructions_template %}
+
+    {% next_button %}
+
+{% endblock %}
