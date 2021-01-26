@@ -36,7 +36,7 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
-def set_payoffs(group: Group):
+def set_payoffs(group):
     players = group.get_players()
     contributions = [p.contribution for p in players]
     group.total_contribution = sum(contributions)

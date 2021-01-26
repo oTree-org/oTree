@@ -57,7 +57,7 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
-def set_payoffs(group: Group):
+def set_payoffs(group):
     p1, p2 = group.get_players()
     if p1.claim == p2.claim:
         group.lower_claim = p1.claim
@@ -78,7 +78,7 @@ def set_payoffs(group: Group):
         loser.payoff = group.lower_claim + loser.adjustment
 
 
-def other_player(player: Player):
+def other_player(player):
     return player.get_others_in_group()[0]
 
 
@@ -98,7 +98,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     @staticmethod
-    def vars_for_template(player: Player):
+    def vars_for_template(player):
         return dict(other_player_claim=other_player(player).claim)
 
 

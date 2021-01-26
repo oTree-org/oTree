@@ -49,16 +49,16 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
-def set_payoffs(group: Group):
+def set_payoffs(group):
     for p in group.get_players():
         set_payoff(p)
 
 
-def other_player(player: Player):
+def other_player(player):
     return player.get_others_in_group()[0]
 
 
-def set_payoff(player: Player):
+def set_payoff(player):
     payoff_matrix = dict(
         Cooperate=dict(
             Cooperate=Constants.both_cooperate_payoff, Defect=Constants.betrayed_payoff
@@ -86,7 +86,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     @staticmethod
-    def vars_for_template(player: Player):
+    def vars_for_template(player):
         me = player
         opponent = other_player(me)
         return dict(

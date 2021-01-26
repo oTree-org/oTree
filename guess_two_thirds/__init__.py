@@ -46,7 +46,7 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
-def set_payoffs(group: Group):
+def set_payoffs(group):
     players = group.get_players()
     guesses = [p.guess for p in players]
     two_thirds_avg = (2 / 3) * sum(guesses) / len(players)
@@ -59,14 +59,14 @@ def set_payoffs(group: Group):
         p.payoff = Constants.jackpot / group.num_winners
 
 
-def two_thirds_avg_history(group: Group):
+def two_thirds_avg_history(group):
     return [g.two_thirds_avg for g in group.in_previous_rounds()]
 
 
 # PAGES
 class Introduction(Page):
     @staticmethod
-    def is_displayed(player: Player):
+    def is_displayed(player):
         return player.round_number == 1
 
 
@@ -74,7 +74,7 @@ class Guess(Page):
     form_model = 'player'
     form_fields = ['guess']
 
-    def vars_for_template(player: Player):
+    def vars_for_template(player):
         group = player.group
 
         return dict(two_thirds_avg_history=two_thirds_avg_history(group))
@@ -86,7 +86,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     @staticmethod
-    def vars_for_template(player: Player):
+    def vars_for_template(player):
         group = player.group
 
         sorted_guesses = sorted(p.guess for p in group.get_players())

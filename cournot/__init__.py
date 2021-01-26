@@ -48,7 +48,7 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
-def set_payoffs(group: Group):
+def set_payoffs(group):
     players = group.get_players()
     group.total_units = sum([p.units for p in players])
     group.unit_price = Constants.total_capacity - group.total_units
@@ -56,7 +56,7 @@ def set_payoffs(group: Group):
         p.payoff = group.unit_price * p.units
 
 
-def other_player(player: Player):
+def other_player(player):
     return player.get_others_in_group()[0]
 
 
@@ -77,7 +77,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     @staticmethod
-    def vars_for_template(player: Player):
+    def vars_for_template(player):
         return dict(other_player_units=other_player(player).units)
 
 

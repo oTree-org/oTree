@@ -47,7 +47,7 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
-def set_payoffs(group: Group):
+def set_payoffs(group):
     players = group.get_players()
     group.total_requests = sum([p.request for p in players])
     if group.total_requests <= Constants.amount_shared:
@@ -58,7 +58,7 @@ def set_payoffs(group: Group):
             p.payoff = c(0)
 
 
-def other_player(player: Player):
+def other_player(player):
     return player.get_others_in_group()[0]
 
 
@@ -78,7 +78,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     @staticmethod
-    def vars_for_template(player: Player):
+    def vars_for_template(player):
         return dict(other_player_request=other_player(player).request)
 
 

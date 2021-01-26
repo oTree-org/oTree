@@ -45,7 +45,7 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
-def creating_session(subsession: Subsession):
+def creating_session(subsession):
     session = subsession.session
     import random
 
@@ -62,7 +62,7 @@ def creating_session(subsession: Subsession):
         subsession.group_like_round(3)
 
 
-def set_payoffs(group: Group):
+def set_payoffs(group):
     subsession = group.subsession
     session = group.session
 
@@ -83,7 +83,7 @@ class Choice(Page):
     form_fields = ['penny_side']
 
     @staticmethod
-    def vars_for_template(player: Player):
+    def vars_for_template(player):
         return dict(player_in_previous_rounds=player.in_previous_rounds())
 
 
@@ -93,11 +93,11 @@ class ResultsWaitPage(WaitPage):
 
 class ResultsSummary(Page):
     @staticmethod
-    def is_displayed(player: Player):
+    def is_displayed(player):
         return player.round_number == Constants.num_rounds
 
     @staticmethod
-    def vars_for_template(player: Player):
+    def vars_for_template(player):
         session = player.session
 
         player_in_all_rounds = player.in_all_rounds()

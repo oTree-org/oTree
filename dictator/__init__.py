@@ -48,7 +48,7 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
-def set_payoffs(group: Group):
+def set_payoffs(group):
     p1 = group.get_player_by_id(1)
     p2 = group.get_player_by_id(2)
     p1.payoff = group.kept
@@ -65,7 +65,7 @@ class Offer(Page):
     form_fields = ['kept']
 
     @staticmethod
-    def is_displayed(player: Player):
+    def is_displayed(player):
         return player.id_in_group == 1
 
 
@@ -75,7 +75,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     @staticmethod
-    def vars_for_template(player: Player):
+    def vars_for_template(player):
         group = player.group
 
         return dict(offer=Constants.endowment - group.kept)

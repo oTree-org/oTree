@@ -40,7 +40,7 @@ class Player(BasePlayer):
 # PAGES
 class PaymentInfo(Page):
     @staticmethod
-    def vars_for_template(player: Player):
+    def vars_for_template(player):
         participant = player.participant
         return dict(redemption_code=participant.label or participant.code)
 

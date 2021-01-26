@@ -46,7 +46,7 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
-def vars_for_admin_report(subsession: Subsession):
+def vars_for_admin_report(subsession):
     contributions = [p.contribution for p in subsession.get_players() if p.contribution != None]
     if contributions:
         return dict(
@@ -62,7 +62,7 @@ def vars_for_admin_report(subsession: Subsession):
         )
 
 
-def set_payoffs(group: Group):
+def set_payoffs(group):
     group.total_contribution = sum([p.contribution for p in group.get_players()])
     group.individual_share = (
         group.total_contribution * Constants.multiplier / Constants.players_per_group
@@ -94,7 +94,7 @@ class Results(Page):
     """Players payoff: How much each has earned"""
 
     @staticmethod
-    def vars_for_template(player: Player):
+    def vars_for_template(player):
         group = player.group
 
         return dict(total_earnings=group.total_contribution * Constants.multiplier)

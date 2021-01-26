@@ -47,7 +47,7 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
-def set_payoffs(group: Group):
+def set_payoffs(group):
     players = group.get_players()
     group.num_volunteers = sum([p.volunteer for p in players])
     if group.num_volunteers > 0:

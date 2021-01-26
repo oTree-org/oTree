@@ -60,7 +60,7 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
-def creating_session(subsession: Subsession):
+def creating_session(subsession):
     for g in subsession.get_groups():
         import random
 
@@ -70,7 +70,7 @@ def creating_session(subsession: Subsession):
         g.item_value = round(item_value, 1)
 
 
-def set_winner(group: Group):
+def set_winner(group):
     import random
 
     players = group.get_players()
@@ -84,7 +84,7 @@ def set_winner(group: Group):
         set_payoff(p)
 
 
-def generate_value_estimate(group: Group):
+def generate_value_estimate(group):
     import random
 
     minimum = group.item_value - Constants.estimate_error_margin
@@ -98,7 +98,7 @@ def generate_value_estimate(group: Group):
     return estimate
 
 
-def set_payoff(player: Player):
+def set_payoff(player):
     group = player.group
 
     if player.is_winner:
@@ -112,7 +112,7 @@ def set_payoff(player: Player):
 # PAGES
 class Introduction(Page):
     @staticmethod
-    def before_next_page(player: Player, timeout_happened):
+    def before_next_page(player, timeout_happened):
         group = player.group
 
         player.item_value_estimate = generate_value_estimate(group)
@@ -129,7 +129,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     @staticmethod
-    def vars_for_template(player: Player):
+    def vars_for_template(player):
         group = player.group
 
         return dict(is_greedy=group.item_value - player.bid_amount < 0)
