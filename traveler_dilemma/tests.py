@@ -1,7 +1,5 @@
-from otree.api import Currency as c, currency_range, expect
-from . import app
-from otree.api import Bot
-from .app import Constants
+from otree.api import Currency as c, currency_range, expect, Bot
+from . import *
 
 
 class PlayerBot(Bot):
@@ -11,20 +9,20 @@ class PlayerBot(Bot):
         case = self.case
 
         # start game
-        yield app.Introduction
+        yield Introduction
 
         if case == 'both_min':
-            yield app.Claim, dict(claim=Constants.min_amount)
+            yield Claim, dict(claim=Constants.min_amount)
             expect(self.player.payoff, Constants.min_amount)
         elif case == 'both_max':
-            yield app.Claim, dict(claim=Constants.max_amount)
+            yield Claim, dict(claim=Constants.max_amount)
             expect(self.player.payoff, Constants.max_amount)
         else:
             if self.player.id_in_group == 1:
-                yield app.Claim, dict(claim=Constants.min_amount)
+                yield Claim, dict(claim=Constants.min_amount)
                 expect(self.player.payoff, Constants.min_amount + 2)
             else:
-                yield app.Claim, dict(claim=Constants.min_amount + 1)
+                yield Claim, dict(claim=Constants.min_amount + 1)
                 expect(self.player.payoff, Constants.min_amount - 2)
 
-        yield app.Results
+        yield Results

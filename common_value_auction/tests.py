@@ -1,7 +1,5 @@
-from otree.api import Currency as c, currency_range, SubmissionMustFail, expect
-from . import app
-from otree.api import Bot
-from .app import Constants
+from otree.api import Currency as c, currency_range, expect, Bot, SubmissionMustFail
+from . import *
 
 
 class PlayerBot(Bot):
@@ -12,11 +10,11 @@ class PlayerBot(Bot):
         case = self.case
 
         # Introduction
-        yield app.Introduction
+        yield Introduction
 
         if case == 'basic':
             for invalid_bid in [-1, 11]:
-                yield SubmissionMustFail(app.Bid, dict(bid_amount=invalid_bid))
+                yield SubmissionMustFail(Bid, dict(bid_amount=invalid_bid))
         if case == 'p1_wins':
             if self.player.id_in_group == 1:
                 bid_amount = 2
@@ -26,7 +24,7 @@ class PlayerBot(Bot):
             bid_amount = 0
         else:  # case == 'all_max':
             bid_amount = Constants.max_allowable_bid
-        yield app.Bid, dict(bid_amount=bid_amount)
+        yield Bid, dict(bid_amount=bid_amount)
 
         if case == 'p1_wins':
             if self.player.id_in_group == 1:
@@ -46,4 +44,4 @@ class PlayerBot(Bot):
         ]:
             expect(field, '!=', None)
 
-        yield app.Results
+        yield Results

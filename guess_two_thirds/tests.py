@@ -1,7 +1,5 @@
-from otree.api import Currency as c, currency_range, SubmissionMustFail, expect
-from . import app
-from otree.api import Bot
-from .app import Constants
+from otree.api import Currency as c, currency_range, expect, Bot, SubmissionMustFail
+from . import *
 
 
 class PlayerBot(Bot):
@@ -9,27 +7,27 @@ class PlayerBot(Bot):
 
     def play_round(self):
         if self.round_number == 1:
-            yield app.Introduction
+            yield Introduction
 
         if self.case == 'p1_wins':
             if self.player.id_in_group == 1:
                 for invalid_guess in [-1, 101]:
-                    yield SubmissionMustFail(app.Guess, dict(guess=invalid_guess))
-                yield app.Guess, dict(guess=9)
+                    yield SubmissionMustFail(Guess, dict(guess=invalid_guess))
+                yield Guess, dict(guess=9)
                 expect(self.player.payoff, Constants.jackpot)
                 expect('you win', 'in', self.html)
             else:
-                yield app.Guess, dict(guess=10)
+                yield Guess, dict(guess=10)
                 expect(self.player.payoff, 0)
                 expect('you did not win', 'in', self.html)
         else:
             if self.player.id_in_group in [1, 2]:
-                yield app.Guess, dict(guess=9)
+                yield Guess, dict(guess=9)
                 expect(self.player.payoff, Constants.jackpot / 2)
                 expect('you are one of the 2 winners', 'in', self.html)
             else:
-                yield app.Guess, dict(guess=10)
+                yield Guess, dict(guess=10)
                 expect(self.player.payoff, 0)
                 expect('you did not win', 'in', self.html)
 
-        yield app.Results
+        yield Results
