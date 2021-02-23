@@ -1,7 +1,5 @@
-from otree.api import Currency as c, currency_range, SubmissionMustFail, expect
-from . import app
-from otree.api import Bot
-from .app import Constants
+from otree.api import Currency as c, currency_range, expect, Bot, SubmissionMustFail
+from . import *
 
 
 class PlayerBot(Bot):
@@ -14,14 +12,14 @@ class PlayerBot(Bot):
     def play_round(self):
         case = self.case
         if self.player.id_in_group == 1:
-            yield app.Send, dict(sent_amount=case['offer'])
+            yield Send, dict(sent_amount=case['offer'])
 
         else:
             for invalid_return in [-1, case['offer'] * Constants.multiplier + 1]:
                 yield SubmissionMustFail(
-                    app.SendBack, dict(sent_back_amount=invalid_return)
+                    SendBack, dict(sent_back_amount=invalid_return)
                 )
-            yield app.SendBack, dict(sent_back_amount=case['return'])
+            yield SendBack, dict(sent_back_amount=case['return'])
 
         if self.player.id_in_group == 1:
             expected_payoff = case['p1_payoff']
