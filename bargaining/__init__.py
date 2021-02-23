@@ -1,15 +1,6 @@
-from otree.api import (
-    Page,
-    WaitPage,
-    models,
-    widgets,
-    BaseConstants,
-    BaseSubsession,
-    BaseGroup,
-    BasePlayer,
-    Currency as c,
-    currency_range,
-)
+from otree.api import *
+
+c = Currency
 
 
 doc = """
