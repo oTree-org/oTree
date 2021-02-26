@@ -1,0 +1,279 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=Lora:ital@0;1&family=Work+Sans:wght@400;700;900&family=Inter:wght@400;700;900&&display=swap");
+
+:root {
+  --primary: #4bbf8e;
+  --white: #f2f3d9;
+  --black: #272727;
+
+  --base: 15pt;
+  --chasm: 25pt;
+
+  --across: 1000px;
+  --spacer: 3px;
+
+  --snappy: 0.25s ease-in-out;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--white);
+  font-size: var(--base);
+  font-family: "Lora", sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+  margin-top: var(--chasm);
+  margin-bottom: var(--base);
+  font-weight: bold;
+  font-family: "Work Sans";
+}
+
+h1 {
+  font-weight: 900;
+  font-size: calc(var(--base) * 2 + 10pt);
+}
+h2 {
+  font-size: calc(var(--base) + 10pt);
+}
+h3 {
+  font-size: calc(var(--base) + 8pt);
+}
+h4 {
+  font-size: calc(var(--base) + 6pt);
+}
+h5 {
+  font-size: calc(var(--base) + 4pt);
+}
+h6 {
+  font-size: calc(var(--base) + 2pt);
+}
+
+p {
+  margin-top: var(--base);
+  margin-bottom: var(--base);
+}
+
+pre {
+  background-color: var(--black);
+  color: var(--white);
+  margin-top: var(--base);
+  margin-bottom: var(--base);
+  overflow: scroll;
+  padding: var(--base);
+  border-radius: var(--spacer);
+  transition: filter var(--snappy);
+  font-size: 10px;
+}
+
+pre:hover {
+  filter: drop-shadow(0 0 var(--base) var(--primary));
+}
+
+code {
+  font-family: "DM Mono";
+  padding: var(--spacer);
+  border-radius: var(--spacer);
+}
+
+pre code {
+  white-space: pre;
+  background: none;
+
+  padding: 0;
+  border-radius: none;
+}
+
+a,
+img {
+  text-decoration: none;
+  color: var(--primary);
+  filter: drop-shadow(0 0 0 none);
+  transition: color var(--snappy), filter var(--snappy);
+}
+
+a:hover,
+img:hover {
+  color: inherit;
+  filter: drop-shadow(0 0 var(--base) var(--primary));
+}
+
+blockquote {
+  margin: 0;
+  margin-top: var(--base);
+  margin-bottom: var(--base);
+  font-style: italic;
+  padding-left: var(--base);
+  border-left: var(--spacer) solid var(--primary);
+}
+
+.studio-example {
+  padding-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ol,
+ul {
+  padding-left: var(--chasm);
+}
+
+ul {
+  list-style: circle outside none;
+}
+
+ol {
+  list-style: decimal outside none;
+}
+
+li {
+  margin-top: var(--spacer);
+  margin-bottom: var(--spacer);
+}
+
+table {
+  margin: var(--base);
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+thead {
+  font-family: "Work Sans", sans-serif;
+  font-weight: bold;
+}
+
+tr {
+  border-top: var(--spacer) solid var(--black);
+}
+
+thead tr {
+  border-top: none;
+}
+
+th,
+td {
+  padding: var(--spacer);
+  padding-left: var(--base);
+  padding-right: var(--base);
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bolder;
+}
+
+/* -- structural -- */
+
+.major-section {
+  margin: auto;
+  padding: var(--base);
+  padding-bottom: var(--chasm);
+  max-width: var(--across);
+}
+
+.example {
+  display: flex;
+  flex-direction: row;
+}
+
+.example > .code-gloss {
+  width: 35%;
+  margin-right: 1em;
+}
+
+.example > .code-snippet {
+  width: 65%;
+}
+
+.side-by-side {
+  display: flex;
+}
+
+.section {
+  margin-left: var(--base);
+  margin-right: var(--base);
+}
+
+.side-by-side > * {
+  width: 50%;
+}
+
+@media (max-width: 850px) {
+  .side-by-side {
+    flex-direction: column;
+  }
+
+  .side-by-side > * {
+    width: auto;
+  }
+
+  .capped {
+    max-height: 50vh;
+  }
+
+  .example {
+    flex-direction: column;
+  }
+
+  .example > .code-gloss {
+    width: 100%;
+  }
+
+  .example > .code-snippet {
+    width: 100%;
+  }
+}
+
+.bg-light {
+  color: var(--black);
+  background-color: var(--white);
+}
+
+.button {
+  margin-top: var(--spacer);
+  margin-bottom: var(--spacer);
+  padding: calc(var(--base) / 2);
+  padding-left: var(--base);
+  padding-right: var(--base);
+  background-color: var(--primary);
+  color: var(--black);
+  border-radius: var(--spacer);
+  display: inline-block;
+  transition: color var(--snappy), background-color var(--snappy),
+    border var(--snappy);
+}
+
+.button:hover {
+  /* border: 5px var(--black) solid; */
+  color: var(--primary);
+  background-color: var(--black);
+}
+
+.inline {
+  vertical-align: -15%;
+  height: 1em;
+}
+
+.inline:hover {
+  color: inherit;
+  filter: none;
+}
+
+.responsive {
+  width: 100%;
+  height: auto;
+}
