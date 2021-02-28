@@ -76,7 +76,7 @@ class Contribute(Page):
 
 
 class ResultsWaitPage(WaitPage):
-    after_all_players_arrive = 'set_payoffs'
+    after_all_players_arrive = set_payoffs
     body_text = "Waiting for other participants to contribute."
 
 

@@ -71,7 +71,7 @@ class Decision(Page):
 
 
 class ResultsWaitPage(WaitPage):
-    after_all_players_arrive = 'set_payoffs'
+    after_all_players_arrive = set_payoffs
 
 
 class Results(Page):

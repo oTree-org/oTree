@@ -1,4 +1,5 @@
 from otree.api import *
+
 c = Currency
 
 
@@ -90,13 +91,11 @@ class SendBack(Page):
         group = player.group
 
         tripled_amount = group.sent_amount * Constants.multiplier
-        return dict(
-            tripled_amount=tripled_amount,
-        )
+        return dict(tripled_amount=tripled_amount)
 
 
 class ResultsWaitPage(WaitPage):
-    after_all_players_arrive = 'set_payoffs'
+    after_all_players_arrive = set_payoffs
 
 
 class Results(Page):
