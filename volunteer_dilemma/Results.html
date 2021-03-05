@@ -1,20 +1,20 @@
-{% block title %}Results{% endblock %}
-{% block content %}
+{{ block title }}Results{{ endblock }}
+{{ block content }}
     <p>
-        {% if player.volunteer %}
+        {{ if player.volunteer }}
             You volunteered. As a result, your payoff is
             <strong>{{ player.payoff }}</strong>.
-        {% elif group.num_volunteers > 0 %}
+        {{ elif group.num_volunteers > 0 }}
             You did not volunteer but some did. As a result, your payoff is
             <strong>{{ player.payoff }}</strong>.
-        {% else %}
+        {{ else }}
             You did not volunteer and no one did. As a result, your payoff is
             <strong>{{ player.payoff }}</strong>.
-        {% endif %}
+        {{ endif }}
     </p>
 
-    <p>{% next_button %}</p>
+    <p>{{ next_button }}</p>
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}

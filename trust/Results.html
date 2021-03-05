@@ -1,7 +1,7 @@
-{% block title %}Results{% endblock %}
-{% block content %}
+{{ block title }}Results{{ endblock }}
+{{ block content }}
 
-    {% if player.id_in_group == 1 %}
+    {{ if player.id_in_group == 1 }}
         <p>
             You chose to send participant B {{ group.sent_amount }}.
             Participant B returned {{ group.sent_back_amount }}.
@@ -13,7 +13,7 @@
             thus you now have:
             {{ Constants.endowment }}-{{ group.sent_amount }}+{{ group.sent_back_amount }}=<strong>{{ player.payoff }}</strong>
         </p>
-    {% else %}
+    {{ else }}
         <p>
             Participant A sent you {{ group.sent_amount }}.
             They were tripled so you received {{ tripled_amount }}.
@@ -26,10 +26,10 @@
             ({{ tripled_amount }})-({{ group.sent_back_amount }})=<strong>{{ player.payoff }}</strong>
         </p>
         .
-    {% endif %}
+    {{ endif }}
 
-    <p>{% next_button %}</p>
+    <p>{{ next_button }}</p>
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}

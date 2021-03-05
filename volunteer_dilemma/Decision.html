@@ -1,10 +1,10 @@
-{% block title %}Your Choice{% endblock %}
-{% block content %}
+{{ block title }}Your Choice{{ endblock }}
+{{ block content }}
 
-    {% formfields %}
-    <p>{% next_button %}</p>
+    {{ formfields }}
+    <p>{{ next_button }}</p>
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}
 

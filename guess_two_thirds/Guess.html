@@ -1,16 +1,16 @@
-{% block title %}Your Guess{% endblock %}
-{% block content %}
+{{ block title }}Your Guess{{ endblock }}
+{{ block content }}
 
-    {% if player.round_number > 1 %}
+    {{ if player.round_number > 1 }}
         <p>
             Here were the two-thirds-average values in previous rounds:
             {{ two_thirds_avg_history }}
         </p>
-    {% endif %}
+    {{ endif }}
 
-    {% formfields %}
-    {% next_button %}
+    {{ formfields }}
+    {{ next_button }}
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}

@@ -1,15 +1,15 @@
-{% block title %}Your Choice{% endblock %}
-{% block content %}
+{{ block title }}Your Choice{{ endblock }}
+{{ block content }}
 
     <p>
     You are Participant A. Now you have {{Constants.endowment}}. How much will you send to participant B?
     </p>
 
-    {% formfields %}
+    {{ formfields }}
     <p>
-    {% next_button %}
+    {{ next_button }}
     </p>
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}

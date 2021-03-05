@@ -1,5 +1,5 @@
-{% block title %}Results{% endblock %}
-{% block content %}
+{{ block title }}Results{{ endblock }}
+{{ block content }}
     <table class=table style="width: auto">
         <tr>
             <th>You demanded</th>
@@ -19,8 +19,8 @@
         </tr>
     </table>
 
-    <p>{% next_button %}</p>
+    <p>{{ next_button }}</p>
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}

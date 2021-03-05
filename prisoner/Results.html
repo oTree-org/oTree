@@ -1,20 +1,20 @@
-{% block title %}Results{% endblock %}
-{% block content %}
+{{ block title }}Results{{ endblock }}
+{{ block content }}
 
     <p>
-        {% if same_choice %}
+        {{ if same_choice }}
             Both of you chose to {{ my_decision }}.
-        {% else %}
+        {{ else }}
             You chose to {{ my_decision }} and the other participant chose to {{ opponent_decision }}.
-        {% endif %}
+        {{ endif }}
     </p>
 
     <p>
         As a result, you earned {{ player.payoff }}.
     </p>
 
-    {% next_button %}
+    {{ next_button }}
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}

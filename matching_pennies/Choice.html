@@ -1,5 +1,5 @@
-{% block title %}Round {{ subsession.round_number }} of {{ Constants.num_rounds }}{% endblock %}
-{% block content %}
+{{ block title }}Round {{ subsession.round_number }} of {{ Constants.num_rounds }}{{ endblock }}
+{{ block content }}
 
     <h4>Instructions</h4>
     <p>
@@ -21,23 +21,23 @@
             <th>Round</th>
             <th>Player and outcome</th>
         </tr>
-        {% for p in player_in_previous_rounds %}
+        {{ for p in player_in_previous_rounds }}
             <tr>
                 <td>{{ p.round_number }}</td>
                 <td>
                   You were the {{ p.role }}
-                  and {% if p.is_winner %} won {% else %} lost {% endif %}
+                  and {{ if p.is_winner }} won {{ else }} lost {{ endif }}
                 </td>
             </tr>
-        {% endfor %}
+        {{ endfor }}
     </table>
 
     <p>
         In this round, you are the {{ player.role }}.
     </p>
 
-    {% formfields %}
+    {{ formfields }}
 
-    {% next_button %}
+    {{ next_button }}
 
-{% endblock %}
+{{ endblock }}

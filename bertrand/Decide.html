@@ -1,11 +1,11 @@
-{% block title %}Set Your Price{% endblock %}
-{% block content %}
+{{ block title }}Set Your Price{{ endblock }}
+{{ block content }}
 
-    {% formfields %}
+    {{ formfields }}
 
 
-    <p>{% next_button %}</p>
+    <p>{{ next_button }}</p>
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}
