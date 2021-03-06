@@ -1,12 +1,10 @@
-{% extends "global/Page.html" %}
+{{ block title }}Production{{ endblock }}
+{{ block content }}
 
-{% block title %}Production{% endblock %}
-{% block content %}
+    {{ formfields }}
 
-    {% formfields %}
+    {{ next_button }}
 
-    {% next_button %}
+    {{ include Constants.instructions_template }}
 
-    {% include Constants.instructions_template %}
-
-{% endblock %}
+{{ endblock }}

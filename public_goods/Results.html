@@ -1,15 +1,13 @@
-{% extends "global/Page.html" %}
-
-{% block title %}Results{% endblock %}
-{% block content %}
+{{ block title }}Results{{ endblock }}
+{{ block content }}
   
 
     <table class="table-condensed" style="width:500px; margin-top:20px;">
         <tr><td>You contributed:</td><td>{{ player.contribution }}</td></tr>
         <tr><td>Other participants contributed:</td><td></td></tr>
-        {% for p in player.get_others_in_group %}
+        {{ for p in player.get_others_in_group }}
             <tr><td></td><td>{{ p.contribution }}</td></tr>
-        {% endfor %}
+        {{ endfor }}
 
         <tr><td>Total contribution:</td><td>{{ group.total_contribution }}</td></tr>
 
@@ -25,10 +23,10 @@
     </table>
     <p></p>
 
-    {% next_button %}
+    {{ next_button }}
 
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
 
-{% endblock %}
+{{ endblock }}

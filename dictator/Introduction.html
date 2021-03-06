@@ -1,7 +1,5 @@
-{% extends "global/Page.html" %}
-
-{% block title %}Introduction{% endblock %}
-{% block content %}
-    {% include Constants.instructions_template %}
-    {% next_button %}
-{% endblock %}
+{{ block title }}Introduction{{ endblock }}
+{{ block content }}
+    {{ include Constants.instructions_template }}
+    {{ next_button }}
+{{ endblock }}

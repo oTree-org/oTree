@@ -1,17 +1,15 @@
-{% extends "global/Page.html" %}
-
-{% block title %}Results{% endblock %}
-{% block content %}
+{{ block title }}Results{{ endblock }}
+{{ block content }}
     <p>
 
-        {% if player.id_in_group == 1 %}
-            You decided to keep <b>{{ group.kept }}</b> for yourself.
-        {% else %}
-            Participant 1 decided to keep <b>{{ group.kept }}</b>, so
-            you got <b>{{ offer }}</b>.
-        {% endif %}
+        {{ if player.id_in_group == 1 }}
+            You decided to keep <strong>{{ group.kept }}</strong> for yourself.
+        {{ else }}
+            Participant 1 decided to keep <strong>{{ group.kept }}</strong>, so
+            you got <strong>{{ offer }}</strong>.
+        {{ endif }}
 
-        {% next_button %}
+        {{ next_button }}
     </p>
-    {% include Constants.instructions_template %}
-{% endblock %}
+    {{ include Constants.instructions_template }}
+{{ endblock }}

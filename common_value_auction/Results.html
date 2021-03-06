@@ -1,19 +1,17 @@
-{% extends "global/Page.html" %}
-
-{% block title %}Results{% endblock %}
-{% block content %}
+{{ block title }}Results{{ endblock }}
+{{ block content }}
 
     <p>
-        {% if player.is_winner %}
+        {{ if player.is_winner }}
             You won the auction!
-            {% if is_greedy %}
+            {{ if is_greedy }}
                 However, your bid amount was higher than the actual value of the item. Your payoff is therefore zero.
-            {% elif player.payoff == 0 %}
+            {{ elif player.payoff == 0 }}
                 Your payoff, however, is zero.
-            {% endif %}
-        {% else %}
+            {{ endif }}
+        {{ else }}
             You did not win the auction.
-        {% endif %}
+        {{ endif }}
     </p>
 
     <table class="table" style="width:400px">
@@ -34,6 +32,6 @@
 
     </table>
 
-    {% next_button %}
+    {{ next_button }}
 
-{% endblock %}
+{{ endblock }}

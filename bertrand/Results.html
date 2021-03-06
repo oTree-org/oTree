@@ -1,7 +1,5 @@
-{% extends "global/Page.html" %}
-
-{% block title %}Results{% endblock %}
-{% block content %}
+{{ block title }}Results{{ endblock }}
+{{ block content }}
     <table class="table">
         <tr>
             <th>Your price</th>
@@ -13,7 +11,7 @@
         </tr>
         <tr>
             <th>Was your product sold?</th>
-            <td>{% if player.is_winner %} Yes {% else %} No {% endif %}</td>
+            <td>{{ if player.is_winner }} Yes {{ else }} No {{ endif }}</td>
         </tr>
         <tr>
             <th>Your payoff</th>
@@ -21,8 +19,8 @@
         </tr>
     </table>
 
-    {% next_button %}
+    {{ next_button }}
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}

@@ -1,7 +1,5 @@
-{% extends "global/Page.html" %}
-
-{% block title %}Your Choice{% endblock %}
-{% block content %}
+{{ block title }}Your Choice{{ endblock }}
+{{ block content }}
 
     <div class="form-group required">
         <table class="table table-bordered text-center" style="width: auto; margin: auto">
@@ -29,9 +27,9 @@
 
     <p>Here you can chat with the other participant.</p>
 
-    {% chat %}
+    {{ chat }}
 
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}

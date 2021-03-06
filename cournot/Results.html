@@ -1,7 +1,5 @@
-{% extends "global/Page.html" %}
-
-{% block title %}Results{% endblock %}
-{% block content %}
+{{ block title }}Results{{ endblock }}
+{{ block content }}
 
     <p>The results are shown in the following table.</p>
 
@@ -34,8 +32,8 @@
 
     </table>
 
-    {% next_button %}
+    {{ next_button }}
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}

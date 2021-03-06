@@ -1,7 +1,5 @@
-{% extends "global/Page.html" %}
-
-{% block title %}Results{% endblock %}
-{% block content %}
+{{ block title }}Results{{ endblock }}
+{{ block content }}
 
     <p>
         You started with an endowment of {{ Constants.endowment }},
@@ -11,6 +9,6 @@
         Your profit is therefore {{ player.payoff }}.
     </p>
 
-    {% next_button %}
+    {{ next_button }}
 
-{% endblock %}
+{{ endblock }}

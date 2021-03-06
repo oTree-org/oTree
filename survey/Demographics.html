@@ -1,14 +1,12 @@
-{% extends "global/Page.html" %}
-
-{% block title %}Survey{% endblock %}
-{% block content %}
+{{ block title }}Survey{{ endblock }}
+{{ block content }}
 
     <p>
         Please answer the following questions.
     </p>
 
-    {% formfields %}
+    {{ formfields }}
 
-    {% next_button %}
+    {{ next_button }}
 
-{% endblock %}
+{{ endblock }}

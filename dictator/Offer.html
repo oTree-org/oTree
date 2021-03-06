@@ -1,17 +1,15 @@
-{% extends "global/Page.html" %}
-
-{% block title %}Your Decision{% endblock %}
-{% block content %}
+{{ block title }}Your Decision{{ endblock }}
+{{ block content }}
     <p>
         You are <b>Participant 1</b>.
         Please decide how much of the {{ Constants.endowment }}
         you will keep for yourself.
     </p>
 
-    {% formfields %}
+    {{ formfields }}
 
-    {% next_button %}
+    {{ next_button }}
 
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}

@@ -1,11 +1,9 @@
-{% extends "global/Page.html" %}
+{{ block title }}Claim{{ endblock }}
+{{ block content }}
 
-{% block title %}Claim{% endblock %}
-{% block content %}
-
-    {% formfields %}
-    {% next_button %}
+    {{ formfields }}
+    {{ next_button }}
     
-    {% include Constants.instructions_template %}
+    {{ include Constants.instructions_template }}
 
-{% endblock %}
+{{ endblock }}
