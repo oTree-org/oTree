@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=Lora:ital@0;1&family=Work+Sans:wght@400;700;900&family=Inter:wght@400;700;900&&display=swap");
 
 :root {
-  --primary: #4bbf8e;
-  --white: #f2f3d9;
+  --primary: #32e85d;
+  --white: #ffffff;
   --black: #272727;
+  --purple: #5937ce;
 
   --base: 15pt;
   --chasm: 25pt;
@@ -250,7 +251,7 @@ strong {
   padding-left: var(--base);
   padding-right: var(--base);
   background-color: var(--primary);
-  color: var(--black);
+  color: var(--white);
   border-radius: var(--spacer);
   display: inline-block;
   transition: color var(--snappy), background-color var(--snappy),
