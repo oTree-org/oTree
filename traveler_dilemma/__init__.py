@@ -1,5 +1,5 @@
 from otree.api import *
-c = Currency
+c = Currency  # old name for currency; you can delete this.
 
 
 doc = """
@@ -18,12 +18,12 @@ class Constants(BaseConstants):
     num_rounds = 1
     instructions_template = 'traveler_dilemma/instructions.html'
     # Player's reward for the lowest claim"""
-    adjustment_abs = c(2)
+    adjustment_abs = cu(2)
     # Player's deduction for the higher claim
     # The maximum claim to be requested
-    max_amount = c(100)
+    max_amount = cu(100)
     # The minimum claim to be requested
-    min_amount = c(2)
+    min_amount = cu(2)
 
 
 class Subsession(BaseSubsession):
@@ -53,7 +53,7 @@ def set_payoffs(group: Group):
         group.lower_claim = p1.claim
         for p in [p1, p2]:
             p.payoff = group.lower_claim
-            p.adjustment = c(0)
+            p.adjustment = cu(0)
     else:
         if p1.claim < p2.claim:
             winner = p1

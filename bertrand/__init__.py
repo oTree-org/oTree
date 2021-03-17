@@ -1,5 +1,5 @@
 from otree.api import *
-c = Currency
+c = Currency  # old name for currency; you can delete this.
 
 
 doc = """
@@ -15,7 +15,7 @@ class Constants(BaseConstants):
     name_in_url = 'bertrand'
     num_rounds = 1
     instructions_template = 'bertrand/instructions.html'
-    maximum_price = c(100)
+    maximum_price = cu(100)
 
 
 class Subsession(BaseSubsession):
@@ -50,7 +50,7 @@ def set_payoffs(group: Group):
             p.payoff = p.price
         else:
             p.is_winner = False
-            p.payoff = c(0)
+            p.payoff = cu(0)
 
 
 # PAGES

@@ -12,11 +12,11 @@ class PlayerBot(Bot):
         if self.case == 'min':
             yield Decide, dict(units=0)
             # if player produces 0, nothing is sold and they make 0
-            expect(self.player.payoff, c(0))
+            expect(self.player.payoff, cu(0))
 
         if self.case == 'max':
             yield Decide, dict(units=Constants.max_units_per_player)
             # if everyone produces max, price is driven to 0
-            expect(self.player.payoff, c(0))
+            expect(self.player.payoff, cu(0))
 
         yield Results

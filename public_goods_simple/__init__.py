@@ -1,12 +1,12 @@
 from otree.api import *
-c = Currency
+c = Currency  # old name for currency; you can delete this.
 
 
 class Constants(BaseConstants):
     name_in_url = 'public_goods_simple'
     players_per_group = 3
     num_rounds = 1
-    endowment = c(100)
+    endowment = cu(100)
     multiplier = 1.8
 
 

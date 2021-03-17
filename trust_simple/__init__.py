@@ -1,5 +1,5 @@
 from otree.api import *
-c = Currency
+c = Currency  # old name for currency; you can delete this.
 
 
 doc = """
@@ -11,7 +11,7 @@ class Constants(BaseConstants):
     name_in_url = 'trust_simple'
     players_per_group = 2
     num_rounds = 1
-    endowment = c(10)
+    endowment = cu(10)
     multiplier = 3
     instructions_template = 'trust_simple/instructions.html'
 
@@ -22,7 +22,7 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
     sent_amount = models.CurrencyField(
-        min=c(0),
+        min=cu(0),
         max=Constants.endowment,
         doc="""Amount sent by P1""",
         label="How much do you want to send to participant B?",
@@ -38,7 +38,7 @@ class Player(BasePlayer):
 
 # FUNCTIONS
 def sent_back_amount_choices(group: Group):
-    return currency_range(c(0), group.sent_amount * Constants.multiplier, c(1))
+    return currency_range(cu(0), group.sent_amount * Constants.multiplier, cu(1))
 
 
 def set_payoffs(group: Group):

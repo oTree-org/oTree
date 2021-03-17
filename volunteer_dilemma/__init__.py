@@ -1,5 +1,5 @@
 from otree.api import *
-c = Currency
+c = Currency  # old name for currency; you can delete this.
 
 
 doc = """
@@ -17,9 +17,9 @@ class Constants(BaseConstants):
     instructions_template = 'volunteer_dilemma/instructions.html'
     num_other_players = players_per_group - 1
     # """Payoff for each player if at least one volunteers"""
-    general_benefit = c(100)
+    general_benefit = cu(100)
     # """Cost incurred by volunteering player"""
-    volunteer_cost = c(40)
+    volunteer_cost = cu(40)
 
 
 class Subsession(BaseSubsession):
@@ -43,7 +43,7 @@ def set_payoffs(group: Group):
     if group.num_volunteers > 0:
         baseline_amount = Constants.general_benefit
     else:
-        baseline_amount = c(0)
+        baseline_amount = cu(0)
     for p in players:
         p.payoff = baseline_amount
         if p.volunteer:

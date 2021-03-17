@@ -4,9 +4,9 @@ from . import *
 
 class PlayerBot(Bot):
     cases = [
-        {'offer': c(0), 'return': c(0), 'p1_payoff': c(10), 'p2_payoff': c(0)},
-        {'offer': c(5), 'return': c(10), 'p1_payoff': c(15), 'p2_payoff': c(5)},
-        {'offer': c(10), 'return': c(30), 'p1_payoff': c(30), 'p2_payoff': c(0)},
+        {'offer': cu(0), 'return': cu(0), 'p1_payoff': cu(10), 'p2_payoff': cu(0)},
+        {'offer': cu(5), 'return': cu(10), 'p1_payoff': cu(15), 'p2_payoff': cu(5)},
+        {'offer': cu(10), 'return': cu(30), 'p1_payoff': cu(30), 'p2_payoff': cu(0)},
     ]
 
     def play_round(self):

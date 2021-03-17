@@ -6,5 +6,5 @@ class PlayerBot(Bot):
     def play_round(self):
         # compete price
         yield Introduction
-        yield Decide, dict(price=c(30))
+        yield Decide, dict(price=cu(30))
         yield Results

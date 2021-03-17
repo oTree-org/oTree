@@ -4,5 +4,5 @@ from . import *
 
 class PlayerBot(Bot):
     def play_round(self):
-        yield Contribute, dict(contribution=c(1))
+        yield Contribute, dict(contribution=cu(1))
         yield Results

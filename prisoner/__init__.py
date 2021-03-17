@@ -1,5 +1,6 @@
 from otree.api import *
-c = Currency
+
+c = Currency  # old name for currency; you can delete this.
 
 
 doc = """
@@ -15,11 +16,11 @@ class Constants(BaseConstants):
     num_rounds = 1
     instructions_template = 'prisoner/instructions.html'
     # payoff if 1 player defects and the other cooperates""",
-    betray_payoff = c(300)
-    betrayed_payoff = c(0)
+    betray_payoff = cu(300)
+    betrayed_payoff = cu(0)
     # payoff if both players cooperate or both defect
-    both_cooperate_payoff = c(200)
-    both_defect_payoff = c(100)
+    both_cooperate_payoff = cu(200)
+    both_defect_payoff = cu(100)
 
 
 class Subsession(BaseSubsession):

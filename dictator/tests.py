@@ -7,8 +7,8 @@ class PlayerBot(Bot):
         yield Introduction
 
         if self.player.id_in_group == 1:
-            yield Offer, dict(kept=c(99))
-            expect(self.player.payoff, c(99))
+            yield Offer, dict(kept=cu(99))
+            expect(self.player.payoff, cu(99))
         else:
-            expect(self.player.payoff, c(1))
+            expect(self.player.payoff, cu(1))
         yield Results
