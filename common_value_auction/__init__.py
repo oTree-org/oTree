@@ -1,5 +1,5 @@
 from otree.api import *
-c = Currency
+c = Currency  # old name for currency; you can delete this.
 
 
 doc = """
@@ -17,10 +17,10 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     instructions_template = 'common_value_auction/instructions.html'
-    min_allowable_bid = c(0)
-    max_allowable_bid = c(10)
+    min_allowable_bid = cu(0)
+    max_allowable_bid = cu(10)
     # Error margin for the value estimates shown to the players
-    estimate_error_margin = c(1)
+    estimate_error_margin = cu(1)
 
 
 class Subsession(BaseSubsession):

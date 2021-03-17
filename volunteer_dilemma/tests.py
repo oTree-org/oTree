@@ -13,7 +13,7 @@ class PlayerBot(Bot):
 
         if case == '0_volunteer':
             yield Decision, dict(volunteer=False)
-            expect(self.player.payoff, c(0))
+            expect(self.player.payoff, cu(0))
             expect('You did not volunteer and no one did', 'in', self.html)
         elif case == '1_volunteer':
             yield Decision, dict(volunteer=self.player.id_in_group == 1)
@@ -25,5 +25,5 @@ class PlayerBot(Bot):
                 )
             else:
                 expect('You did not volunteer but some did', 'in', self.html)
-                expect(self.player.payoff, c(100))
+                expect(self.player.payoff, cu(100))
         yield Results

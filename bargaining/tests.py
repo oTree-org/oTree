@@ -15,7 +15,7 @@ class PlayerBot(Bot):
         yield Introduction
 
         if self.case == 'success':
-            request = c(10)
+            request = cu(10)
             yield Request, dict(request=request)
             yield Results
             expect(self.player.payoff, request)

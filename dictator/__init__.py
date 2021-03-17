@@ -1,5 +1,5 @@
 from otree.api import *
-c = Currency
+c = Currency  # old name for currency; you can delete this.
 
 
 doc = """
@@ -17,7 +17,7 @@ class Constants(BaseConstants):
     num_rounds = 1
     instructions_template = 'dictator/instructions.html'
     # Initial amount allocated to the dictator
-    endowment = c(100)
+    endowment = cu(100)
 
 
 class Subsession(BaseSubsession):

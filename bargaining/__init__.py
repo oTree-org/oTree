@@ -1,6 +1,6 @@
 from otree.api import *
 
-c = Currency
+c = Currency  # old name for currency; you can delete this.
 
 
 doc = """
@@ -15,7 +15,7 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 1
     instructions_template = 'bargaining/instructions.html'
-    amount_shared = c(100)
+    amount_shared = cu(100)
 
 
 class Subsession(BaseSubsession):
@@ -46,7 +46,7 @@ def set_payoffs(group: Group):
             p.payoff = p.request
     else:
         for p in players:
-            p.payoff = c(0)
+            p.payoff = cu(0)
 
 
 def other_player(player: Player):

@@ -1,5 +1,5 @@
 from otree.api import *
-c = Currency
+c = Currency  # old name for currency; you can delete this.
 
 
 doc = """
@@ -11,7 +11,7 @@ class Constants(BaseConstants):
     name_in_url = 'matching_pennies'
     players_per_group = 2
     num_rounds = 4
-    stakes = c(100)
+    stakes = cu(100)
 
     matcher_role = 'Matcher'
     mismatcher_role = 'Mismatcher'
@@ -64,7 +64,7 @@ def set_payoffs(group: Group):
         if subsession.round_number == session.vars['paying_round'] and p.is_winner:
             p.payoff = Constants.stakes
         else:
-            p.payoff = c(0)
+            p.payoff = cu(0)
 
 
 # PAGES
