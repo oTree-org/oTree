@@ -39,7 +39,7 @@ This table is also useful for new learners of oTree who are trying to understand
     </tr>
     
         <tr>
-            <td>App foldre</td>
+            <td>App folder</td>
             <td><pre><code>dictator/
     _builtin/
     templates/
@@ -110,15 +110,29 @@ from .models import Constants</code></pre></td>
         <tr>
             <td>Model methods</td>
             <td><pre><code>class Subsession(BaseSubsession):
-    xyz = models.IntegerField()
+    aaa = models.IntegerField()
 
     def creating_session(self):
-        self.xyz = 1</code></pre></td>
+        self.aaa = 1
+        
+        
+class Player(BasePlayer):
+    bbb = models.StringField()
+    
+    def bbb_choices(self):
+        ...</code></pre></td>
             <td><pre><code>class Subsession(BaseSubsession):
     xyz = models.IntegerField()
 
 def creating_session(subsession: Subsession):
-    subsession.xyz = 1</code></pre></td>
+    subsession.xyz = 1
+
+
+class Player(BasePlayer):
+    bbb = models.StringField()
+    
+def bbb_choices(player: Player):
+    ...</code></pre></td>
             <td><a href="https://otree.readthedocs.io/en/latest/misc/noself.html">More info</a></td>
             <td></td>
         </tr>
@@ -234,6 +248,17 @@ requirements_base.txt</code></pre></td>
             <td><a href="https://groups.google.com/g/otree/c/Bwv67asPIlo">More info</a></td>
             <td></td>
         </tr>
+        
+        <tr>
+            <td>Intentionally accessing a null field</td>
+            <td><pre><code>x = player.maybe_null_field</code></pre></td>
+            <td><pre><code>try:
+    x = player.maybe_null_field
+except TypeError:
+    x = None</code></pre></td>
+            <td><a href="https://groups.google.com/g/otree/c/SPqGBocBVlc/m/VkNXXdd3AgAJ">More info</a></td>
+            <td></td>
+        </tr>
         </table>
 <h2>About <code>@staticmethod</code> and <code>(player: Player)</code> etc...</h2>
 <p>
@@ -256,6 +281,7 @@ They are not mandatory but will help your editor provide better autocompletion.
         <tr>
             <td></td>
             <td><pre><code>class MyPage(Page):
+
     def is_displayed(player):
         ...</code></pre></td>
             <td><pre><code>class MyPage(Page):
