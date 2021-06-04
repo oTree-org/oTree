@@ -1,6 +1,6 @@
 from otree.api import *
 
-c = Currency  # old name for currency; you can delete this.
+
 
 
 doc = """
