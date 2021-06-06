@@ -2,12 +2,6 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='public_goods',
-        display_name="Public Goods",
-        num_demo_participants=3,
-        app_sequence=['public_goods', 'payment_info'],
-    ),
-    dict(
         name='guess_two_thirds',
         display_name="Guess 2/3 of the Average",
         num_demo_participants=3,
@@ -95,8 +89,8 @@ SESSION_CONFIGS = [
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
-# the session config can be accessed from methods in your apps as self.session.config,
-# e.g. self.session.config['participation_fee']
+# the session config can be accessed from methods in your apps as session.config,
+# e.g. session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=0.00, doc=""

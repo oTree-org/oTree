@@ -1,7 +1,6 @@
 from otree.api import *
 
 
-
 doc = """
 This is a one-period public goods game with 3 players.
 """
@@ -35,9 +34,21 @@ class Player(BasePlayer):
     )
 
 
+def field_or_none(obj, field):
+    """This is necessary because accessing a null field raises an exception"""
+    try:
+        return getattr(obj, field)
+    except TypeError:
+        return None
+
+
 # FUNCTIONS
 def vars_for_admin_report(subsession: Subsession):
-    contributions = [p.contribution for p in subsession.get_players() if p.contribution != None]
+    contributions = [
+        p.contribution
+        for p in subsession.get_players()
+        if field_or_none(p, 'contribution') != None
+    ]
     if contributions:
         return dict(
             avg_contribution=sum(contributions) / len(contributions),
