@@ -11,4 +11,4 @@ __pycache__/
 *.py[cod]
 .DS_Store
 merge.ps1
-*.otrezip
+*.otreezip
