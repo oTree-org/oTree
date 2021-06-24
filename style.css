@@ -278,3 +278,25 @@ strong {
   width: 100%;
   height: auto;
 }
+
+.famous-users-frame {
+    height: 25px;      /* Equals maximum image height */
+    /* width: 160px; */
+    white-space: nowrap; /* This is required unless you put the helper span closely near the img */
+    text-align: center;
+    margin: 1em 0;
+}
+
+.famous-users-helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    padding-left: 30px;
+}
+
+.famous-users-img {
+    background: #3A6F9A;
+    vertical-align: middle;
+    max-height: 250px;
+    max-width: 250px;
+}
