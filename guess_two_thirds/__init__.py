@@ -1,7 +1,6 @@
 from otree.api import *
 
 
-
 doc = """
 a.k.a. Keynesian beauty contest.
 Players all guess a number; whoever guesses closest to
@@ -65,6 +64,7 @@ class Guess(Page):
     form_model = 'player'
     form_fields = ['guess']
 
+    @staticmethod
     def vars_for_template(player: Player):
         group = player.group
 
