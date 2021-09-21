@@ -1,87 +1,65 @@
 <html>
-  <head>
+    <head>
     <title>Recent oTree changes</title>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
-      integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
-      crossorigin="anonymous"
-    />
-  </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+          integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+          crossorigin="anonymous">
+</head>
+    
+    <body><div class="container">
+<div class="page-header">
+    <h1>Summary of recent oTree changes</h1>
+</div>
+<p>In the past few months, oTree has many new features, because of oTree Lite, the new no-self format, and
+various other improvements that were made.</p>
 
-  <body>
-    <div class="container">
-      <div class="page-header">
-        <h1>Summary of recent oTree changes</h1>
-      </div>
-      <p>
-        In the past few months, oTree has many new features, because of oTree
-        Lite, the new no-self format, and various other improvements that were
-        made.
-      </p>
+<p>
+oTree Lite can still run apps written in the 3.x format. However, if you are starting a new project,
+it's recommended to use the newest syntax. 
+</p>
 
-      <p>
-        oTree Lite can still run apps written in the 3.x format. However, if you
-        are starting a new project, it's recommended to use the newest syntax.
-      </p>
+<h2>Old vs new format</h2>
+<p>Some of these changes may look arbitrary, but in each case the change addresses a specific issue,
+either enabling new use cases, preventing certain errors, or making the functionality clearer or more consistent.
+</p>
 
-      <h2>Old vs new format</h2>
-      <p>
-        Some of these changes may look arbitrary, but in each case the change
-        addresses a specific issue, either enabling new use cases, preventing
-        certain errors, or making the functionality clearer or more consistent.
-      </p>
-
-      <p>
-        This table is also useful for new learners of oTree who are trying to
-        understand code written before 2021.
-      </p>
-      <table class="table table-striped">
+<p>
+This table is also useful for new learners of oTree who are trying to understand code written before 2021.
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>Description</th>
+        <th>Old format (still works)</th>
+        <th>New format (recommended)</th>
+        <th>More info</th>
+        <th>Comment</th>        
+    </tr>
+    
         <tr>
-          <th>Description</th>
-          <th>Old format (still works)</th>
-          <th>New format (recommended)</th>
-          <th>More info</th>
-          <th>Comment</th>
-        </tr>
-
-        <tr>
-          <td>App folder</td>
-          <td>
-            <pre><code>dictator/
+            <td>App folder</td>
+            <td><pre><code>dictator/
     _builtin/
-        __init__.py
     templates/
         dictator/
             Decide.html
             Results.html
     __init__.py
     models.py
-    pages.py</code></pre>
-          </td>
-          <td>
-            <pre><code>dictator/
+    pages.py</code></pre></td>
+            <td><pre><code>dictator/
     __init__.py
     Decide.html
-    Results.html</code></pre>
-          </td>
-          <td>
-            <a href="https://otree.readthedocs.io/en/latest/misc/noself.html"
-              >More info</a
-            >
-          </td>
-          <td></td>
+    Results.html</code></pre></td>
+            <td><a href="https://otree.readthedocs.io/en/latest/misc/noself.html">More info</a></td>
+            <td></td>
         </tr>
-
+        
         <tr>
-          <td>Import statements</td>
-          <td>
-            <pre><code># models.py
+            <td>Import statements</td>
+            <td><pre><code># models.py
 from otree.api import (
     models,
     widgets,
@@ -98,64 +76,40 @@ from otree.api import (
     Currency as c, currency_range
 )    
 from ._builtin import Page, WaitPage
-from .models import Constants</code></pre>
-          </td>
-          <td>
-            <pre><code>from otree.api import *</code></pre>
-          </td>
-          <td>
-            <a href="https://groups.google.com/g/otree/c/Bwv67asPIlo"
-              >More info</a
-            >
-          </td>
-          <td></td>
+from .models import Constants</code></pre></td>
+            <td><pre><code>from otree.api import *</code></pre></td>
+            <td><a href="https://groups.google.com/g/otree/c/Bwv67asPIlo">More info</a></td>
+            <td></td>
         </tr>
-
+        
         <tr>
-          <td>Template preamble</td>
-          <td>
-            <pre><code>{% extends "global/Page.html" %}
-{% load otree %}</code></pre>
-          </td>
-          <td>
-            <pre><code>(not needed)</code></pre>
-          </td>
-          <td>
-            <a href="https://groups.google.com/g/otree/c/Bwv67asPIlo"
-              >More info</a
-            >
-          </td>
-          <td></td>
+            <td>Template preamble</td>
+            <td><pre><code>{% extends "global/Page.html" %}
+{% load otree %}</code></pre></td>
+            <td><pre><code>(not needed)</code></pre></td>
+            <td><a href="https://groups.google.com/g/otree/c/Bwv67asPIlo">More info</a></td>
+            <td></td>
         </tr>
-
+        
         <tr>
-          <td>Template tags</td>
-          <td>
-            <pre><code>{% if XYZ %}…{% endif %}
+            <td>Template tags</td>
+            <td><pre><code>{% if XYZ %}…{% endif %}
 {% for x in XYZ %}…{% endfor %}
 {% formfields %}
 {% next_button %}
-{{ player.xyz }}</code></pre>
-          </td>
-          <td>
-            <pre><code>{{ if XYZ }}…{{ endif }}
+{{ player.xyz }}</code></pre></td>
+            <td><pre><code>{{ if XYZ }}…{{ endif }}
 {{ for x in XYZ }}…{{ endfor }}
 {{ formfields }}
 {{ next_button }}
-{{ player.xyz }}</code></pre>
-          </td>
-          <td>
-            <a href="https://groups.google.com/g/otree/c/Bwv67asPIlo"
-              >More info</a
-            >
-          </td>
-          <td></td>
+{{ player.xyz }}</code></pre></td>
+            <td><a href="https://groups.google.com/g/otree/c/Bwv67asPIlo">More info</a></td>
+            <td></td>
         </tr>
-
+        
         <tr>
-          <td>Model methods</td>
-          <td>
-            <pre><code>class Subsession(BaseSubsession):
+            <td>Model methods</td>
+            <td><pre><code>class Subsession(BaseSubsession):
     aaa = models.IntegerField()
 
     def creating_session(self):
@@ -166,10 +120,8 @@ class Player(BasePlayer):
     bbb = models.StringField()
     
     def bbb_choices(self):
-        ...</code></pre>
-          </td>
-          <td>
-            <pre><code>class Subsession(BaseSubsession):
+        ...</code></pre></td>
+            <td><pre><code>class Subsession(BaseSubsession):
     xyz = models.IntegerField()
 
 def creating_session(subsession: Subsession):
@@ -180,280 +132,205 @@ class Player(BasePlayer):
     bbb = models.StringField()
     
 def bbb_choices(player: Player):
-    ...</code></pre>
-          </td>
-          <td>
-            <a href="https://otree.readthedocs.io/en/latest/misc/noself.html"
-              >More info</a
-            >
-          </td>
-          <td></td>
+    ...</code></pre></td>
+            <td><a href="https://otree.readthedocs.io/en/latest/misc/noself.html">More info</a></td>
+            <td></td>
         </tr>
-
+        
         <tr>
-          <td>after_all_players_arrive (method definition style)</td>
-          <td>
-            <pre><code>class MyPage(WaitPage):
+            <td>User-defined functions</td>
+            <td><pre><code>class Player(BasePlayer):
+    bbb = models.IntegerField()
+    
+    def do_something(self):
+        self.bbb = 10
+
+# to use it:                
+player.do_something()</code></pre></td>
+            <td><pre><code>class Player(BasePlayer):
+    bbb = models.StringField()
+    
+def do_something(player: Player):
+    player.bbb = 10
+
+# to use it:
+do_something(player)</code></pre></td>
+            <td><a href="https://otree.readthedocs.io/en/latest/misc/noself.html">More info</a></td>
+            <td></td>
+        </tr>
+        
+        <tr>
+            <td>after_all_players_arrive (method definition style)</td>
+            <td><pre><code>class MyPage(WaitPage):
 
     def after_all_players_arrive(self):
         for p in self.group.get_players():
-            p.payoff = 10</code></pre>
-          </td>
-          <td>
-            <pre><code>class MyPage(WaitPage):
+            p.payoff = 10</code></pre></td>
+            <td><pre><code>class MyPage(WaitPage):
     @staticmethod
     def after_all_players_arrive(group: Group):
         for p in group.get_players():
-            p.payoff = 10</code></pre>
-          </td>
-          <td></td>
-          <td></td>
+            p.payoff = 10</code></pre></td>
+            <td></td>
+            <td></td>
         </tr>
-
+        
         <tr>
-          <td>after_all_players_arrive (method name style)</td>
-          <td>
-            <pre><code>class MyPage(WaitPage):
-    after_all_players_arrive = 'set_payoffs'</code></pre>
-          </td>
-          <td>
-            <pre><code>class MyPage(WaitPage):
-    after_all_players_arrive = set_payoffs</code></pre>
-          </td>
-          <td></td>
-          <td>The old format is not deprecated</td>
+            <td>after_all_players_arrive (method name style)</td>
+            <td><pre><code>class MyPage(WaitPage):
+    after_all_players_arrive = 'set_payoffs'</code></pre></td>
+            <td><pre><code>class MyPage(WaitPage):
+    after_all_players_arrive = set_payoffs</code></pre></td>
+            <td></td>
+            <td>The old format is not deprecated</td>
         </tr>
-
+        
         <tr>
-          <td>before_next_page</td>
-          <td>
-            <pre><code>class MyPage(Page):
+            <td>before_next_page</td>
+            <td><pre><code>class MyPage(Page):
 
     def before_next_page(self):
-        ...</code></pre>
-          </td>
-          <td>
-            <pre><code>class MyPage(Page):
+        ...</code></pre></td>
+            <td><pre><code>class MyPage(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        ...</code></pre>
-          </td>
-          <td>
-            <a href="https://otree.readthedocs.io/en/latest/misc/noself.html"
-              >More info</a
-            >
-          </td>
-          <td></td>
+        ...</code></pre></td>
+            <td><a href="https://otree.readthedocs.io/en/latest/misc/noself.html">More info</a></td>
+            <td></td>
         </tr>
-
+        
         <tr>
-          <td>participant.vars</td>
-          <td>
-            <pre><code>participant.vars['aaa'] = 1
+            <td>participant.vars</td>
+            <td><pre><code>participant.vars['aaa'] = 1
 participant.vars['bbb'] = 2
-session.vars['ccc']</code></pre>
-          </td>
-          <td>
-            <pre><code>participant.aaa = 1
+session.vars['ccc']</code></pre></td>
+            <td><pre><code>participant.aaa = 1
 participant.bbb = 2
 session.ccc = 3
 
 # settings.py:
 PARTICIPANT_FIELDS = ['aaa', 'bbb']
-SESSION_FIELDS = ['ccc']</code></pre>
-          </td>
-          <td>
-            <a
-              href="https://groups.google.com/g/otree/c/lbJg_ND5QkY/m/v6r7S_oJAQAJ"
-              >More info</a
-            >
-          </td>
-          <td>
-            This is just for convenience. You can still use participant.vars.
-          </td>
+SESSION_FIELDS = ['ccc']</code></pre></td>
+            <td><a href="https://groups.google.com/g/otree/c/lbJg_ND5QkY/m/v6r7S_oJAQAJ">More info</a></td>
+            <td>This is just for convenience. You can still use participant.vars.</td>
         </tr>
-
+        
         <tr>
-          <td>Roles</td>
-          <td>
-            <pre><code>class Player(BasePlayer):
+            <td>Roles</td>
+            <td><pre><code>class Player(BasePlayer):
     def role(self):
         if self.id_in_group == 1:
             return 'seller'
         else:
-            return 'buyer'</code></pre>
-          </td>
-          <td>
-            <pre><code>class Constants(BaseConstants):
+            return 'buyer'</code></pre></td>
+            <td><pre><code>class Constants(BaseConstants):
     seller_role = 'seller'
-    buyer_role = 'buyer'</code></pre>
-          </td>
-          <td>
-            <a
-              href="https://otree.readthedocs.io/en/latest/multiplayer/groups.html#roles"
-              >More info</a
-            >
-          </td>
-          <td></td>
+    buyer_role = 'buyer'</code></pre></td>
+            <td><a href="https://otree.readthedocs.io/en/latest/multiplayer/groups.html#roles">More info</a></td>
+            <td></td>
         </tr>
-
+        
         <tr>
-          <td>Requirements files</td>
-          <td>
-            <pre><code>requirements.txt
-requirements_base.txt</code></pre>
-          </td>
-          <td>
-            <pre><code>requirements.txt</code></pre>
-          </td>
-          <td></td>
-          <td></td>
+            <td>Requirements files</td>
+            <td><pre><code>requirements.txt
+requirements_base.txt</code></pre></td>
+            <td><pre><code>requirements.txt</code></pre></td>
+            <td></td>
+            <td></td>
         </tr>
-
+        
         <tr>
-          <td>formfield</td>
-          <td>
-            <pre><code>{% formfield player.xyz %}</code></pre>
-          </td>
-          <td>
-            <pre><code>{{ formfield 'xyz' }}</code></pre>
-          </td>
-          <td>
-            <a href="https://groups.google.com/g/otree/c/iPs119LfAvM"
-              >More info</a
-            >
-          </td>
-          <td>The old format is not deprecated</td>
+            <td>formfield</td>
+            <td><pre><code>{% formfield player.xyz %}</code></pre></td>
+            <td><pre><code>{{ formfield 'xyz' }}</code></pre></td>
+            <td><a href="https://groups.google.com/g/otree/c/iPs119LfAvM">More info</a></td>
+            <td>The old format is not deprecated</td>
         </tr>
-
+        
         <tr>
-          <td>formfield errors</td>
-          <td>
-            <pre><code>{{ form.xyz.errors }}</code></pre>
-          </td>
-          <td>
-            <pre><code>{{ formfield_errors 'xyz' }}</code></pre>
-          </td>
-          <td>
-            <a
-              href="https://otree.readthedocs.io/en/latest/misc/otreelite.html#forms"
-              >More info</a
-            >
-          </td>
-          <td></td>
+            <td>formfield errors</td>
+            <td><pre><code>{{ form.xyz.errors }}</code></pre></td>
+            <td><pre><code>{{ formfield_errors 'xyz' }}</code></pre></td>
+            <td><a href="https://otree.readthedocs.io/en/latest/misc/otreelite.html#forms">More info</a></td>
+            <td></td>
         </tr>
-
+        
         <tr>
-          <td>Rounding numbers in templates</td>
-          <td>
-            <pre><code>{{ pi|floatformat:2 }}</code></pre>
-          </td>
-          <td>
-            <pre><code>{{ pi|to2 }}</code></pre>
-          </td>
-          <td>
-            <a
-              href="https://otree.readthedocs.io/en/latest/misc/otreelite.html#templates"
-              >More info</a
-            >
-          </td>
-          <td>floatformat no longer works in oTree 5</td>
+            <td>Rounding numbers in templates</td>
+            <td><pre><code>{{ pi|floatformat:2 }}</code></pre></td>
+            <td><pre><code>{{ pi|to2 }}</code></pre></td>
+            <td><a href="https://otree.readthedocs.io/en/latest/misc/otreelite.html#templates">More info</a></td>
+            <td>floatformat no longer works in oTree 5</td>
         </tr>
-
+        
         <tr>
-          <td>Currency</td>
-          <td>
-            <pre><code>c(42)</code></pre>
-          </td>
-          <td>
-            <pre><code>cu(42)</code></pre>
-          </td>
-          <td>
-            <a href="https://groups.google.com/g/otree/c/Bwv67asPIlo"
-              >More info</a
-            >
-          </td>
-          <td></td>
+            <td>Currency</td>
+            <td><pre><code>c(42)</code></pre></td>
+            <td><pre><code>cu(42)</code></pre></td>
+            <td><a href="https://groups.google.com/g/otree/c/Bwv67asPIlo">More info</a></td>
+            <td></td>
         </tr>
-
+        
         <tr>
-          <td>Intentionally accessing a null field</td>
-          <td>
-            <pre><code>x = player.maybe_null_field</code></pre>
-          </td>
-          <td>
-            <pre><code>try:
-    x = player.maybe_null_field
+            <td>Intentionally accessing a null (None) field</td>
+            <td><pre><code>x = player.aaa</code></pre></td>
+            <td><pre><code>try:
+    x = player.aaa
 except TypeError:
-    x = None</code></pre>
-          </td>
-          <td>
-            <a
-              href="https://groups.google.com/g/otree/c/SPqGBocBVlc/m/VkNXXdd3AgAJ"
-              >More info</a
-            >
-          </td>
-          <td></td>
-        </tr>
-      </table>
-      <h2>
-        About <code>@staticmethod</code> and
-        <code>(player: Player)</code> etc...
-      </h2>
-      <p>
-        If you are using a text editor to write your oTree code, it's
-        recommended to add @staticmethod before all functions inside a page
-        class, like is_displayed, vars_for_template, before_next_page, etc. They
-        are sometimes omitted from this documentation for brevity. You can also
-        add type annotations on all your functions. They are not mandatory but
-        will help your editor provide better autocompletion.
-      </p>
-      <table class="table table-striped">
-        <tr>
-          <th></th>
-          <th>If documentation says...</th>
-          <th>PyCharm users should type...</th>
-          <th></th>
-          <th></th>
-        </tr>
+    x = None
 
+# OR set the field's 'initial='
+# to something other than None:
+
+aaa = models.IntegerField(initial=0)</code></pre></td>
+            <td><a href="https://groups.google.com/g/otree/c/SPqGBocBVlc/m/VkNXXdd3AgAJ">More info</a></td>
+            <td></td>
+        </tr>
+        </table>
+<h2>About <code>@staticmethod</code> and <code>(player: Player)</code> etc...</h2>
+<p>
+If you are using a text editor to write your oTree code, it's recommended to add @staticmethod before
+all functions inside a page class, like is_displayed, vars_for_template, before_next_page, etc.
+They are sometimes omitted from this documentation for brevity.
+You can also add type annotations on all your functions.
+They are not mandatory but will help your editor provide better autocompletion.
+</p>
+<table class="table table-striped">
+    <tr>
+        <th></th>
+        <th>If documentation says...</th>
+        <th>PyCharm users should type...</th>
+        <th></th>
+        <th></th>
+                
+    </tr>
+    
         <tr>
-          <td></td>
-          <td>
-            <pre><code>class MyPage(Page):
+            <td></td>
+            <td><pre><code>class MyPage(Page):
 
     def is_displayed(player):
-        ...</code></pre>
-          </td>
-          <td>
-            <pre><code>class MyPage(Page):
+        ...</code></pre></td>
+            <td><pre><code>class MyPage(Page):
     @staticmethod
     def is_displayed(player: Player):
-        ...</code></pre>
-          </td>
-          <td></td>
-          <td></td>
+        ...</code></pre></td>
+            <td></td>
+            <td></td>
         </tr>
-
+        
         <tr>
-          <td></td>
-          <td>
-            <pre><code>def creating_session(subsession):
-    ...</code></pre>
-          </td>
-          <td>
-            <pre><code>def creating_session(subsession: Subsession):
-    ...</code></pre>
-          </td>
-          <td></td>
-          <td></td>
+            <td></td>
+            <td><pre><code>def creating_session(subsession):
+    ...</code></pre></td>
+            <td><pre><code>def creating_session(subsession: Subsession):
+    ...</code></pre></td>
+            <td></td>
+            <td></td>
         </tr>
-      </table>
+        </table>
     </div>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
-      integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
+        integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+    </body></html>
