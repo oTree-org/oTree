@@ -1,8 +1,6 @@
 from otree.api import *
 
 
-
-
 doc = """
 This is a one-shot "Prisoner's Dilemma". Two players are asked separately
 whether they want to cooperate or defect. Their choices directly determine the
@@ -15,12 +13,10 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 1
     instructions_template = 'prisoner/instructions.html'
-    # payoff if 1 player defects and the other cooperates""",
-    betray_payoff = cu(300)
-    betrayed_payoff = cu(0)
-    # payoff if both players cooperate or both defect
-    both_cooperate_payoff = cu(200)
-    both_defect_payoff = cu(100)
+    payoff_A = cu(300)
+    payoff_B = cu(200)
+    payoff_C = cu(100)
+    payoff_D = cu(0)
 
 
 class Subsession(BaseSubsession):
@@ -32,8 +28,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    decision = models.StringField(
-        choices=[['Cooperate', 'Cooperate'], ['Defect', 'Defect']],
+    cooperate = models.BooleanField(
+        choices=[[True, 'Cooperate'], [False, 'Defect']],
         doc="""This player's decision""",
         widget=widgets.RadioSelect,
     )
@@ -50,15 +46,14 @@ def other_player(player: Player):
 
 
 def set_payoff(player: Player):
-    payoff_matrix = dict(
-        Cooperate=dict(
-            Cooperate=Constants.both_cooperate_payoff, Defect=Constants.betrayed_payoff
-        ),
-        Defect=dict(
-            Cooperate=Constants.betray_payoff, Defect=Constants.both_defect_payoff
-        ),
-    )
-    player.payoff = payoff_matrix[player.decision][other_player(player).decision]
+    payoff_matrix = {
+        (False, True): Constants.payoff_A,
+        (True, True): Constants.payoff_B,
+        (False, False): Constants.payoff_C,
+        (True, False): Constants.payoff_D,
+    }
+    other = other_player(player)
+    player.payoff = payoff_matrix[(player.cooperate, other.cooperate)]
 
 
 # PAGES
@@ -68,7 +63,7 @@ class Introduction(Page):
 
 class Decision(Page):
     form_model = 'player'
-    form_fields = ['decision']
+    form_fields = ['cooperate']
 
 
 class ResultsWaitPage(WaitPage):
@@ -78,12 +73,12 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        me = player
-        opponent = other_player(me)
+        opponent = other_player(player)
         return dict(
-            my_decision=me.decision,
-            opponent_decision=opponent.decision,
-            same_choice=me.decision == opponent.decision,
+            opponent=opponent,
+            same_choice=player.cooperate == opponent.cooperate,
+            my_decision=player.field_display('cooperate'),
+            opponent_decision=opponent.field_display('cooperate'),
         )
 
 

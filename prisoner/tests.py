@@ -5,7 +5,7 @@ from . import *
 class PlayerBot(Bot):
     def play_round(self):
         yield Introduction
-        yield Decision, dict(decision='Cooperate')
+        yield Decision, dict(cooperate=True)
         expect('Both of you chose to Cooperate', 'in', self.html)
-        expect(self.player.payoff, Constants.both_cooperate_payoff)
+        expect(self.player.payoff, Constants.payoff_B)
         yield Results
