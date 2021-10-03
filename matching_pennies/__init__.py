@@ -41,6 +41,14 @@ def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
         paying_round = random.randint(1, Constants.num_rounds)
         session.vars['paying_round'] = paying_round
+    if subsession.round_number == 3:
+        # reverse the roles
+        matrix = subsession.get_group_matrix()
+        for row in matrix:
+            row.reverse()
+        subsession.set_group_matrix(matrix)
+    if subsession.round_number > 3:
+        subsession.group_like_round(3)
 
 
 def set_payoffs(group: Group):

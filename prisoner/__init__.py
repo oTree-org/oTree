@@ -13,12 +13,10 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 1
     instructions_template = 'prisoner/instructions.html'
-    # payoff if 1 player defects and the other cooperates""",
-    betray_payoff = cu(300)
-    betrayed_payoff = cu(0)
-    # payoff if both players cooperate or both defect
-    both_cooperate_payoff = cu(200)
-    both_defect_payoff = cu(100)
+    payoff_A = cu(300)
+    payoff_B = cu(200)
+    payoff_C = cu(100)
+    payoff_D = cu(0)
 
 
 class Subsession(BaseSubsession):
@@ -49,10 +47,10 @@ def other_player(player: Player):
 
 def set_payoff(player: Player):
     payoff_matrix = {
-        (True, True): Constants.both_cooperate_payoff,
-        (True, False): Constants.betrayed_payoff,
-        (False, True): Constants.betray_payoff,
-        (False, False): Constants.both_defect_payoff,
+        (False, True): Constants.payoff_A,
+        (True, True): Constants.payoff_B,
+        (False, False): Constants.payoff_C,
+        (True, False): Constants.payoff_D,
     }
     other = other_player(player)
     player.payoff = payoff_matrix[(player.cooperate, other.cooperate)]
