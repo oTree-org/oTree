@@ -1,7 +1,6 @@
 from otree.api import *
 
 
-
 doc = """
 Simple trust game
 """
@@ -38,7 +37,7 @@ class Player(BasePlayer):
 
 # FUNCTIONS
 def sent_back_amount_choices(group: Group):
-    return currency_range(cu(0), group.sent_amount * Constants.multiplier, cu(1))
+    return currency_range(0, group.sent_amount * Constants.multiplier, 1)
 
 
 def set_payoffs(group: Group):
