@@ -23,7 +23,7 @@ class PlayerBot(Bot):
         elif case == 'all_0':
             bid_amount = 0
         else:  # case == 'all_max':
-            bid_amount = Constants.max_allowable_bid
+            bid_amount = Constants.bid_max
         yield Bid, dict(bid_amount=bid_amount)
 
         if case == 'p1_wins':

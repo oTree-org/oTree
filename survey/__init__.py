@@ -1,7 +1,6 @@
 from otree.api import *
 
 
-
 class Constants(BaseConstants):
     name_in_url = 'survey'
     players_per_group = None
@@ -31,8 +30,8 @@ class Player(BasePlayer):
     )
     crt_widget = models.IntegerField(
         label='''
-        "If it takes 5 machines 5 minutes to make 5 widgets,
-        how many minutes would it take 100 machines to make 100 widgets?"
+        If it takes 5 machines 5 minutes to make 5 widgets,
+        how many minutes would it take 100 machines to make 100 widgets?
         '''
     )
     crt_lake = models.IntegerField(
