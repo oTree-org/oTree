@@ -2,12 +2,12 @@ from otree.api import *
 
 
 
-class Constants(BaseConstants):
-    name_in_url = 'public_goods_simple'
-    players_per_group = 3
-    num_rounds = 1
-    endowment = cu(100)
-    multiplier = 1.8
+class C(BaseConstants):
+    NAME_IN_URL = 'public_goods_simple'
+    PLAYERS_PER_GROUP = 3
+    NUM_ROUNDS = 1
+    ENDOWMENT = cu(100)
+    MULTIPLIER = 1.8
 
 
 class Subsession(BaseSubsession):
@@ -21,7 +21,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     contribution = models.CurrencyField(
-        min=0, max=Constants.endowment, label="How much will you contribute?"
+        min=0, max=C.ENDOWMENT, label="How much will you contribute?"
     )
 
 
@@ -31,10 +31,10 @@ def set_payoffs(group: Group):
     contributions = [p.contribution for p in players]
     group.total_contribution = sum(contributions)
     group.individual_share = (
-        group.total_contribution * Constants.multiplier / Constants.players_per_group
+        group.total_contribution * C.MULTIPLIER / C.PLAYERS_PER_GROUP
     )
     for p in players:
-        p.payoff = Constants.endowment - p.contribution + group.individual_share
+        p.payoff = C.ENDOWMENT - p.contribution + group.individual_share
 
 
 # PAGES

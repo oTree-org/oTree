@@ -10,12 +10,12 @@ Econometrica: Journal of the Econometric Society, 343-371."
 """
 
 
-class Constants(BaseConstants):
-    players_per_group = 2
-    name_in_url = 'bertrand'
-    num_rounds = 1
-    instructions_template = 'bertrand/instructions.html'
-    maximum_price = cu(100)
+class C(BaseConstants):
+    PLAYERS_PER_GROUP = 2
+    NAME_IN_URL = 'bertrand'
+    NUM_ROUNDS = 1
+    INSTRUCTIONS_TEMPLATE = 'bertrand/instructions.html'
+    MAXIMUM_PRICE = cu(100)
 
 
 class Subsession(BaseSubsession):
@@ -29,7 +29,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     price = models.CurrencyField(
         min=0,
-        max=Constants.maximum_price,
+        max=C.MAXIMUM_PRICE,
         doc="""Price player offers to sell product for""",
         label="Please enter an amount from 0 to 100 as your price",
     )

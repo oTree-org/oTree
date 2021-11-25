@@ -9,13 +9,13 @@ See https://en.wikipedia.org/wiki/Guess_2/3_of_the_average
 """
 
 
-class Constants(BaseConstants):
-    players_per_group = 3
-    num_rounds = 3
-    name_in_url = 'guess_two_thirds'
-    jackpot = Currency(100)
-    guess_max = 100
-    instructions_template = 'guess_two_thirds/instructions.html'
+class C(BaseConstants):
+    PLAYERS_PER_GROUP = 3
+    NUM_ROUNDS = 3
+    NAME_IN_URL = 'guess_two_thirds'
+    JACKPOT = Currency(100)
+    GUESS_MAX = 100
+    INSTRUCTIONS_TEMPLATE = 'guess_two_thirds/instructions.html'
 
 
 class Subsession(BaseSubsession):
@@ -30,7 +30,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     guess = models.IntegerField(
-        min=0, max=Constants.guess_max, label="Please pick a number from 0 to 100:"
+        min=0, max=C.GUESS_MAX, label="Please pick a number from 0 to 100:"
     )
     is_winner = models.BooleanField(initial=False)
 
@@ -46,7 +46,7 @@ def set_payoffs(group: Group):
     group.num_winners = len(winners)
     for p in winners:
         p.is_winner = True
-        p.payoff = Constants.jackpot / group.num_winners
+        p.payoff = C.JACKPOT / group.num_winners
 
 
 def two_thirds_avg_history(group: Group):

@@ -12,17 +12,17 @@ class PlayerBot(Bot):
         yield Introduction
 
         if case == 'both_min':
-            yield Claim, dict(claim=Constants.min_amount)
-            expect(self.player.payoff, Constants.min_amount)
+            yield Claim, dict(claim=C.MIN_AMOUNT)
+            expect(self.player.payoff, C.MIN_AMOUNT)
         elif case == 'both_max':
-            yield Claim, dict(claim=Constants.max_amount)
-            expect(self.player.payoff, Constants.max_amount)
+            yield Claim, dict(claim=C.MAX_AMOUNT)
+            expect(self.player.payoff, C.MAX_AMOUNT)
         else:
             if self.player.id_in_group == 1:
-                yield Claim, dict(claim=Constants.min_amount)
-                expect(self.player.payoff, Constants.min_amount + 2)
+                yield Claim, dict(claim=C.MIN_AMOUNT)
+                expect(self.player.payoff, C.MIN_AMOUNT + 2)
             else:
-                yield Claim, dict(claim=Constants.min_amount + 1)
-                expect(self.player.payoff, Constants.min_amount - 2)
+                yield Claim, dict(claim=C.MIN_AMOUNT + 1)
+                expect(self.player.payoff, C.MIN_AMOUNT - 2)
 
         yield Results

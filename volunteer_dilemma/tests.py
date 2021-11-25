@@ -21,7 +21,7 @@ class PlayerBot(Bot):
                 expect('You volunteered', 'in', self.html)
                 expect(
                     self.player.payoff,
-                    Constants.general_benefit - Constants.volunteer_cost,
+                    C.GENERAL_BENEFIT - C.VOLUNTEER_COST,
                 )
             else:
                 expect('You did not volunteer but some did', 'in', self.html)

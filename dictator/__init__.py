@@ -11,13 +11,13 @@ S285-S300.
 """
 
 
-class Constants(BaseConstants):
-    name_in_url = 'dictator'
-    players_per_group = 2
-    num_rounds = 1
-    instructions_template = 'dictator/instructions.html'
+class C(BaseConstants):
+    NAME_IN_URL = 'dictator'
+    PLAYERS_PER_GROUP = 2
+    NUM_ROUNDS = 1
+    INSTRUCTIONS_TEMPLATE = 'dictator/instructions.html'
     # Initial amount allocated to the dictator
-    endowment = cu(100)
+    ENDOWMENT = cu(100)
 
 
 class Subsession(BaseSubsession):
@@ -28,7 +28,7 @@ class Group(BaseGroup):
     kept = models.CurrencyField(
         doc="""Amount dictator decided to keep for himself""",
         min=0,
-        max=Constants.endowment,
+        max=C.ENDOWMENT,
         label="I will keep",
     )
 
@@ -42,7 +42,7 @@ def set_payoffs(group: Group):
     p1 = group.get_player_by_id(1)
     p2 = group.get_player_by_id(2)
     p1.payoff = group.kept
-    p2.payoff = Constants.endowment - group.kept
+    p2.payoff = C.ENDOWMENT - group.kept
 
 
 # PAGES
@@ -68,7 +68,7 @@ class Results(Page):
     def vars_for_template(player: Player):
         group = player.group
 
-        return dict(offer=Constants.endowment - group.kept)
+        return dict(offer=C.ENDOWMENT - group.kept)
 
 
 page_sequence = [Introduction, Offer, ResultsWaitPage, Results]

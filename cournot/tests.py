@@ -15,7 +15,7 @@ class PlayerBot(Bot):
             expect(self.player.payoff, cu(0))
 
         if self.case == 'max':
-            yield Decide, dict(units=Constants.max_units_per_player)
+            yield Decide, dict(units=C.MAX_UNITS_PER_PLAYER)
             # if everyone produces max, price is driven to 0
             expect(self.player.payoff, cu(0))
 

@@ -14,13 +14,13 @@
             <tr>
                 <th rowspan="2"><span>You</span></th>
                 <td><button name="cooperate" value="True" class="btn btn-primary btn-large">I will cooperate</button></td>
-                <td>{{Constants.payoff_B}}, {{Constants.payoff_B}}</td>
-                <td>{{ Constants.payoff_D }}, {{Constants.payoff_A}}</td>
+                <td>{{C.PAYOFF_B}}, {{C.PAYOFF_B}}</td>
+                <td>{{ C.PAYOFF_D }}, {{C.PAYOFF_A}}</td>
             </tr>
             <tr>
                 <td><button name="cooperate" value="False" class="btn btn-primary btn-large">I will defect</button></td>
-                <td>{{Constants.payoff_A}}, {{ Constants.payoff_D }}</td>
-                <td>{{Constants.payoff_C}}, {{Constants.payoff_C}}</td>
+                <td>{{C.PAYOFF_A}}, {{ C.PAYOFF_D }}</td>
+                <td>{{C.PAYOFF_C}}, {{C.PAYOFF_C}}</td>
             </tr>
         </table>
     </div>
@@ -30,6 +30,6 @@
     {{ chat }}
 
 
-    {{ include Constants.instructions_template }}
+    {{ include C.INSTRUCTIONS_TEMPLATE }}
 
 {{ endblock }}

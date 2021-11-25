@@ -10,12 +10,12 @@ amount, both players get demanded portions. Otherwise, both get nothing.
 """
 
 
-class Constants(BaseConstants):
-    name_in_url = 'bargaining'
-    players_per_group = 2
-    num_rounds = 1
-    instructions_template = 'bargaining/instructions.html'
-    amount_shared = cu(100)
+class C(BaseConstants):
+    NAME_IN_URL = 'bargaining'
+    PLAYERS_PER_GROUP = 2
+    NUM_ROUNDS = 1
+    INSTRUCTIONS_TEMPLATE = 'bargaining/instructions.html'
+    AMOUNT_SHARED = cu(100)
 
 
 class Subsession(BaseSubsession):
@@ -32,7 +32,7 @@ class Player(BasePlayer):
         Amount requested by this player.
         """,
         min=0,
-        max=Constants.amount_shared,
+        max=C.AMOUNT_SHARED,
         label="Please enter an amount from 0 to 100",
     )
 
@@ -41,7 +41,7 @@ class Player(BasePlayer):
 def set_payoffs(group: Group):
     players = group.get_players()
     group.total_requests = sum([p.request for p in players])
-    if group.total_requests <= Constants.amount_shared:
+    if group.total_requests <= C.AMOUNT_SHARED:
         for p in players:
             p.payoff = p.request
     else:

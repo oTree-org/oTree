@@ -8,15 +8,15 @@ payoffs.
 """
 
 
-class Constants(BaseConstants):
-    name_in_url = 'prisoner'
-    players_per_group = 2
-    num_rounds = 1
-    instructions_template = 'prisoner/instructions.html'
-    payoff_A = cu(300)
-    payoff_B = cu(200)
-    payoff_C = cu(100)
-    payoff_D = cu(0)
+class C(BaseConstants):
+    NAME_IN_URL = 'prisoner'
+    PLAYERS_PER_GROUP = 2
+    NUM_ROUNDS = 1
+    INSTRUCTIONS_TEMPLATE = 'prisoner/instructions.html'
+    PAYOFF_A = cu(300)
+    PAYOFF_B = cu(200)
+    PAYOFF_C = cu(100)
+    PAYOFF_D = cu(0)
 
 
 class Subsession(BaseSubsession):
@@ -47,10 +47,10 @@ def other_player(player: Player):
 
 def set_payoff(player: Player):
     payoff_matrix = {
-        (False, True): Constants.payoff_A,
-        (True, True): Constants.payoff_B,
-        (False, False): Constants.payoff_C,
-        (True, False): Constants.payoff_D,
+        (False, True): C.PAYOFF_A,
+        (True, True): C.PAYOFF_B,
+        (False, False): C.PAYOFF_C,
+        (True, False): C.PAYOFF_D,
     }
     other = other_player(player)
     player.payoff = payoff_matrix[(player.cooperate, other.cooperate)]

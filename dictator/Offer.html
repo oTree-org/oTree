@@ -2,7 +2,7 @@
 {{ block content }}
     <p>
         You are <strong>Participant 1</strong>.
-        Please decide how much of the {{ Constants.endowment }}
+        Please decide how much of the {{ C.ENDOWMENT }}
         you will keep for yourself.
     </p>
 
@@ -10,6 +10,6 @@
 
     {{ next_button }}
 
-    {{ include Constants.instructions_template }}
+    {{ include C.INSTRUCTIONS_TEMPLATE }}
 
 {{ endblock }}

@@ -21,6 +21,6 @@ class PlayerBot(Bot):
             expect(self.player.payoff, request)
 
         if self.case == 'greedy':
-            yield Request, dict(request=Constants.amount_shared)
+            yield Request, dict(request=C.AMOUNT_SHARED)
             yield Results
             expect(self.player.payoff, 0)

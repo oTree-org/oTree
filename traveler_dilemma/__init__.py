@@ -11,18 +11,18 @@ for classroom/teaching use.
 """
 
 
-class Constants(BaseConstants):
-    name_in_url = 'traveler_dilemma'
-    players_per_group = 2
-    num_rounds = 1
-    instructions_template = 'traveler_dilemma/instructions.html'
+class C(BaseConstants):
+    NAME_IN_URL = 'traveler_dilemma'
+    PLAYERS_PER_GROUP = 2
+    NUM_ROUNDS = 1
+    INSTRUCTIONS_TEMPLATE = 'traveler_dilemma/instructions.html'
     # Player's reward for the lowest claim"""
-    adjustment_abs = cu(2)
+    ADJUSTMENT_ABS = cu(2)
     # Player's deduction for the higher claim
     # The maximum claim to be requested
-    max_amount = cu(100)
+    MAX_AMOUNT = cu(100)
     # The minimum claim to be requested
-    min_amount = cu(2)
+    MIN_AMOUNT = cu(2)
 
 
 class Subsession(BaseSubsession):
@@ -35,8 +35,8 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     claim = models.CurrencyField(
-        min=Constants.min_amount,
-        max=Constants.max_amount,
+        min=C.MIN_AMOUNT,
+        max=C.MAX_AMOUNT,
         label='How much will you claim for your antique?',
         doc="""
         Each player's claim
@@ -61,8 +61,8 @@ def set_payoffs(group: Group):
             winner = p2
             loser = p1
         group.lower_claim = winner.claim
-        winner.adjustment = Constants.adjustment_abs
-        loser.adjustment = -Constants.adjustment_abs
+        winner.adjustment = C.ADJUSTMENT_ABS
+        loser.adjustment = -C.ADJUSTMENT_ABS
         winner.payoff = group.lower_claim + winner.adjustment
         loser.payoff = group.lower_claim + loser.adjustment
 

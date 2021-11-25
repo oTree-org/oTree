@@ -22,7 +22,7 @@
 
         <tr>
             <td style="border-top-width:4px">Unit selling price:</td>
-            <td style="border-top-width:4px">{{ Constants.total_capacity }} – {{ group.total_units }} = {{ group.unit_price }}</td>
+            <td style="border-top-width:4px">{{ C.TOTAL_CAPACITY }} – {{ group.total_units }} = {{ group.unit_price }}</td>
         </tr>
 
         <tr>
@@ -34,6 +34,6 @@
 
     {{ next_button }}
 
-    {{ include Constants.instructions_template }}
+    {{ include C.INSTRUCTIONS_TEMPLATE }}
 
 {{ endblock }}

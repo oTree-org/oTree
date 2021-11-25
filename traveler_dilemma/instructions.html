@@ -18,7 +18,7 @@
         adequate compensation. Without knowing the true value of your antiques,
         he offers you the following scheme. Both of you simultaneously and
         independently make a claim for the value of your own antique (ranging
-        from {{ Constants.min_amount }} to {{ Constants.max_amount }}):
+        from {{ C.MIN_AMOUNT }} to {{ C.MAX_AMOUNT }}):
     </p>
     <ul>
         <li>
@@ -28,8 +28,8 @@
         <li>
             If you claim different amounts, then the lower amount will be paid
             to both. Additionally, the one with lower claim will receive a
-            reward of {{ Constants.adjustment_abs }}; the one with higher claim will
-            receive a penalty of {{ Constants.adjustment_abs }}.
+            reward of {{ C.ADJUSTMENT_ABS }}; the one with higher claim will
+            receive a penalty of {{ C.ADJUSTMENT_ABS }}.
         </li>
     </ul>
 </div>

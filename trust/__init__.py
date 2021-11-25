@@ -12,14 +12,14 @@ tripled. The trust game was first proposed by
 """
 
 
-class Constants(BaseConstants):
-    name_in_url = 'trust'
-    players_per_group = 2
-    num_rounds = 1
-    instructions_template = 'trust/instructions.html'
+class C(BaseConstants):
+    NAME_IN_URL = 'trust'
+    PLAYERS_PER_GROUP = 2
+    NUM_ROUNDS = 1
+    INSTRUCTIONS_TEMPLATE = 'trust/instructions.html'
     # Initial amount allocated to each player
-    endowment = cu(100)
-    multiplier = 3
+    ENDOWMENT = cu(100)
+    MULTIPLIER = 3
 
 
 class Subsession(BaseSubsession):
@@ -29,7 +29,7 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     sent_amount = models.CurrencyField(
         min=0,
-        max=Constants.endowment,
+        max=C.ENDOWMENT,
         doc="""Amount sent by P1""",
         label="Please enter an amount from 0 to 100:",
     )
@@ -42,14 +42,14 @@ class Player(BasePlayer):
 
 # FUNCTIONS
 def sent_back_amount_max(group: Group):
-    return group.sent_amount * Constants.multiplier
+    return group.sent_amount * C.MULTIPLIER
 
 
 def set_payoffs(group: Group):
     p1 = group.get_player_by_id(1)
     p2 = group.get_player_by_id(2)
-    p1.payoff = Constants.endowment - group.sent_amount + group.sent_back_amount
-    p2.payoff = group.sent_amount * Constants.multiplier - group.sent_back_amount
+    p1.payoff = C.ENDOWMENT - group.sent_amount + group.sent_back_amount
+    p2.payoff = group.sent_amount * C.MULTIPLIER - group.sent_back_amount
 
 
 # PAGES
@@ -90,7 +90,7 @@ class SendBack(Page):
     def vars_for_template(player: Player):
         group = player.group
 
-        tripled_amount = group.sent_amount * Constants.multiplier
+        tripled_amount = group.sent_amount * C.MULTIPLIER
         return dict(tripled_amount=tripled_amount)
 
 
@@ -105,7 +105,7 @@ class Results(Page):
     def vars_for_template(player: Player):
         group = player.group
 
-        return dict(tripled_amount=group.sent_amount * Constants.multiplier)
+        return dict(tripled_amount=group.sent_amount * C.MULTIPLIER)
 
 
 page_sequence = [

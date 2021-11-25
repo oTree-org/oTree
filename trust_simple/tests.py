@@ -15,7 +15,7 @@ class PlayerBot(Bot):
             yield Send, dict(sent_amount=case['offer'])
 
         else:
-            for invalid_return in [-1, case['offer'] * Constants.multiplier + 1]:
+            for invalid_return in [-1, case['offer'] * C.MULTIPLIER + 1]:
                 yield SubmissionMustFail(
                     SendBack, dict(sent_back_amount=invalid_return)
                 )
