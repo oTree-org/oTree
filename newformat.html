@@ -108,6 +108,28 @@ from .models import Constants</code></pre></td>
         </tr>
         
         <tr>
+            <td>Constants</td>
+            <td><pre><code>class Constants(BaseConstants):
+    name_in_url = 'public_goods_simple'
+    players_per_group = 3
+    num_rounds = 1
+    xyz = 42
+
+# using it:
+Constants.xyz</code></pre></td>
+            <td><pre><code>class C(BaseConstants):
+    NAME_IN_URL = 'public_goods_simple'
+    PLAYERS_PER_GROUP = 3
+    NUM_ROUNDS = 1
+    XYZ = 42
+
+# using it:
+C.XYZ</code></pre></td>
+            <td></td>
+            <td>ALL CAPS version is new in 2022. Both formats are OK.</td>
+        </tr>
+        
+        <tr>
             <td>Model methods</td>
             <td><pre><code>class Subsession(BaseSubsession):
     aaa = models.IntegerField()
@@ -274,10 +296,7 @@ requirements_base.txt</code></pre></td>
         <tr>
             <td>Intentionally accessing a null (None) field</td>
             <td><pre><code>x = player.aaa</code></pre></td>
-            <td><pre><code>try:
-    x = player.aaa
-except TypeError:
-    x = None
+            <td><pre><code>x = player.field_maybe_none('aaa')
 
 # OR set the field's 'initial='
 # to something other than None:
