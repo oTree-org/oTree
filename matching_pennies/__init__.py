@@ -6,14 +6,14 @@ A demo of how rounds work in oTree, in the context of 'matching pennies'
 """
 
 
-class Constants(BaseConstants):
-    name_in_url = 'matching_pennies'
-    players_per_group = 2
-    num_rounds = 4
-    stakes = cu(100)
+class C(BaseConstants):
+    NAME_IN_URL = 'matching_pennies'
+    PLAYERS_PER_GROUP = 2
+    NUM_ROUNDS = 4
+    STAKES = cu(100)
 
-    matcher_role = 'Matcher'
-    mismatcher_role = 'Mismatcher'
+    MATCHER_ROLE = 'Matcher'
+    MISMATCHER_ROLE = 'Mismatcher'
 
 
 class Subsession(BaseSubsession):
@@ -39,7 +39,7 @@ def creating_session(subsession: Subsession):
     import random
 
     if subsession.round_number == 1:
-        paying_round = random.randint(1, Constants.num_rounds)
+        paying_round = random.randint(1, C.NUM_ROUNDS)
         session.vars['paying_round'] = paying_round
     if subsession.round_number == 3:
         # reverse the roles
@@ -58,10 +58,10 @@ def set_payoffs(group: Group):
     p1 = group.get_player_by_id(1)
     p2 = group.get_player_by_id(2)
     for p in [p1, p2]:
-        is_matcher = p.role == Constants.matcher_role
+        is_matcher = p.role == C.MATCHER_ROLE
         p.is_winner = (p1.penny_side == p2.penny_side) == is_matcher
         if subsession.round_number == session.vars['paying_round'] and p.is_winner:
-            p.payoff = Constants.stakes
+            p.payoff = C.STAKES
         else:
             p.payoff = cu(0)
 
@@ -83,7 +83,7 @@ class ResultsWaitPage(WaitPage):
 class ResultsSummary(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number == Constants.num_rounds
+        return player.round_number == C.NUM_ROUNDS
 
     @staticmethod
     def vars_for_template(player: Player):

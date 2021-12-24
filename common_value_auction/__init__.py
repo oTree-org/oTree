@@ -11,15 +11,15 @@ payoff depends on the bid amount and the actual value.<br/>
 """
 
 
-class Constants(BaseConstants):
-    name_in_url = 'common_value_auction'
-    players_per_group = None
-    num_rounds = 1
-    instructions_template = 'common_value_auction/instructions.html'
-    bid_min = cu(0)
-    bid_max = cu(10)
+class C(BaseConstants):
+    NAME_IN_URL = 'common_value_auction'
+    PLAYERS_PER_GROUP = None
+    NUM_ROUNDS = 1
+    INSTRUCTIONS_TEMPLATE = 'common_value_auction/instructions.html'
+    BID_MIN = cu(0)
+    BID_MAX = cu(10)
     # Error margin for the value estimates shown to the players
-    bid_noise = cu(1)
+    BID_NOISE = cu(1)
 
 
 class Subsession(BaseSubsession):
@@ -38,8 +38,8 @@ class Player(BasePlayer):
         doc="""Estimate of the common value, may be different for each player"""
     )
     bid_amount = models.CurrencyField(
-        min=Constants.bid_min,
-        max=Constants.bid_max,
+        min=C.BID_MIN,
+        max=C.BID_MAX,
         doc="""Amount bidded by the player""",
         label="Bid amount",
     )
@@ -53,7 +53,7 @@ def creating_session(subsession: Subsession):
     for g in subsession.get_groups():
         import random
 
-        item_value = random.uniform(Constants.bid_min, Constants.bid_max)
+        item_value = random.uniform(C.BID_MIN, C.BID_MAX)
         g.item_value = round(item_value, 1)
 
 
@@ -75,13 +75,13 @@ def generate_value_estimate(group: Group):
     import random
 
     estimate = group.item_value + random.uniform(
-        -Constants.bid_noise, Constants.bid_noise
+        -C.BID_NOISE, C.BID_NOISE
     )
     estimate = round(estimate, 1)
-    if estimate < Constants.bid_min:
-        estimate = Constants.bid_min
-    if estimate > Constants.bid_max:
-        estimate = Constants.bid_max
+    if estimate < C.BID_MIN:
+        estimate = C.BID_MIN
+    if estimate > C.BID_MAX:
+        estimate = C.BID_MAX
     return estimate
 
 

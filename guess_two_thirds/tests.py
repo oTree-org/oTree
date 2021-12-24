@@ -14,7 +14,7 @@ class PlayerBot(Bot):
                 for invalid_guess in [-1, 101]:
                     yield SubmissionMustFail(Guess, dict(guess=invalid_guess))
                 yield Guess, dict(guess=9)
-                expect(self.player.payoff, Constants.jackpot)
+                expect(self.player.payoff, C.JACKPOT)
                 expect('you win', 'in', self.html)
             else:
                 yield Guess, dict(guess=10)
@@ -23,7 +23,7 @@ class PlayerBot(Bot):
         else:
             if self.player.id_in_group in [1, 2]:
                 yield Guess, dict(guess=9)
-                expect(self.player.payoff, Constants.jackpot / 2)
+                expect(self.player.payoff, C.JACKPOT / 2)
                 expect('you are one of the 2 winners', 'in', self.html)
             else:
                 yield Guess, dict(guess=10)

@@ -10,16 +10,16 @@ Resolution, 605-610.
 """
 
 
-class Constants(BaseConstants):
-    name_in_url = 'volunteer_dilemma'
-    players_per_group = 3
-    num_rounds = 1
-    instructions_template = 'volunteer_dilemma/instructions.html'
-    num_other_players = players_per_group - 1
+class C(BaseConstants):
+    NAME_IN_URL = 'volunteer_dilemma'
+    PLAYERS_PER_GROUP = 3
+    NUM_ROUNDS = 1
+    INSTRUCTIONS_TEMPLATE = 'volunteer_dilemma/instructions.html'
+    NUM_OTHER_PLAYERS = PLAYERS_PER_GROUP - 1
     # """Payoff for each player if at least one volunteers"""
-    general_benefit = cu(100)
+    GENERAL_BENEFIT = cu(100)
     # """Cost incurred by volunteering player"""
-    volunteer_cost = cu(40)
+    VOLUNTEER_COST = cu(40)
 
 
 class Subsession(BaseSubsession):
@@ -41,13 +41,13 @@ def set_payoffs(group: Group):
     players = group.get_players()
     group.num_volunteers = sum([p.volunteer for p in players])
     if group.num_volunteers > 0:
-        baseline_amount = Constants.general_benefit
+        baseline_amount = C.GENERAL_BENEFIT
     else:
         baseline_amount = cu(0)
     for p in players:
         p.payoff = baseline_amount
         if p.volunteer:
-            p.payoff -= Constants.volunteer_cost
+            p.payoff -= C.VOLUNTEER_COST
 
 
 # PAGES

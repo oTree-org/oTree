@@ -1,8 +1,8 @@
 {{ block title }}Your Decision{{ endblock }}
 {{ block content }}
     <p>
-        You are <b>Participant 1</b>.
-        Please decide how much of the {{ Constants.endowment }}
+        You are <strong>Participant 1</strong>.
+        Please decide how much of the {{ C.ENDOWMENT }}
         you will keep for yourself.
     </p>
 
@@ -10,6 +10,6 @@
 
     {{ next_button }}
 
-    {{ include Constants.instructions_template }}
+    {{ include C.INSTRUCTIONS_TEMPLATE }}
 
 {{ endblock }}

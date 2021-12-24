@@ -7,5 +7,5 @@ class PlayerBot(Bot):
         yield Introduction
         yield Decision, dict(cooperate=True)
         expect('Both of you chose to Cooperate', 'in', self.html)
-        expect(self.player.payoff, Constants.payoff_B)
+        expect(self.player.payoff, C.PAYOFF_B)
         yield Results

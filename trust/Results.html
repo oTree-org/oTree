@@ -7,11 +7,11 @@
             Participant B returned {{ group.sent_back_amount }}.
         </p>
         <p>
-            You were initially endowed with {{ Constants.endowment }},
+            You were initially endowed with {{ C.ENDOWMENT }},
             chose to send {{ group.sent_amount }},
             received {{ group.sent_back_amount }}
             thus you now have:
-            {{ Constants.endowment }}-{{ group.sent_amount }}+{{ group.sent_back_amount }}=<b>{{ player.payoff }}</b>
+            {{ C.ENDOWMENT }}-{{ group.sent_amount }}+{{ group.sent_back_amount }}=<strong>{{ player.payoff }}</strong>
         </p>
     {{ else }}
         <p>
@@ -23,13 +23,13 @@
             You received {{ tripled_amount }},
             chose to return {{ group.sent_back_amount }}
             thus you now have:
-            ({{ tripled_amount }})-({{ group.sent_back_amount }})=<b>{{ player.payoff }}</b>
+            ({{ tripled_amount }})-({{ group.sent_back_amount }})=<strong>{{ player.payoff }}</strong>
         </p>
         .
     {{ endif }}
 
     <p>{{ next_button }}</p>
 
-    {{ include Constants.instructions_template }}
+    {{ include C.INSTRUCTIONS_TEMPLATE }}
 
 {{ endblock }}

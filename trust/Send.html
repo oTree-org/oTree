@@ -2,7 +2,7 @@
 {{ block content }}
 
     <p>
-    You are Participant A. Now you have {{Constants.endowment}}. How much will you send to participant B?
+    You are Participant A. Now you have {{C.ENDOWMENT}}. How much will you send to participant B?
     </p>
 
     {{ formfields }}
@@ -10,6 +10,6 @@
     {{ next_button }}
     </p>
 
-    {{ include Constants.instructions_template }}
+    {{ include C.INSTRUCTIONS_TEMPLATE }}
 
 {{ endblock }}

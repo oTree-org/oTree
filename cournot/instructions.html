@@ -13,7 +13,7 @@
 
     <p>
         The two of you decide simultaneously and independently how many units to manufacture.
-        Your choices can be any number from 0 to {{ Constants.max_units_per_player }}.
+        Your choices can be any number from 0 to {{ C.MAX_UNITS_PER_PLAYER }}.
         All produced units will be sold, but the more is produced, the lower the unit selling price will be.
     </p>
 
@@ -23,7 +23,7 @@
     </p>
 
     <ul>
-        <b>Unit selling price = {{ Constants.total_capacity }} – Units produced by your firm – Units produced by the other firm</b>
+        <strong>Unit selling price = {{ C.TOTAL_CAPACITY }} – Units produced by your firm – Units produced by the other firm</strong>
     </ul>
 
     <p>
@@ -31,7 +31,7 @@
     </p>
 
     <ul>
-        <b>Your profit = Unit selling price × Units produced by your firm</b>
+        <strong>Your profit = Unit selling price × Units produced by your firm</strong>
     </ul>
 
     <p>

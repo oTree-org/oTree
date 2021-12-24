@@ -3,17 +3,17 @@
 
     <p>
         The value of the item is estimated to be {{ player.item_value_estimate }}.
-        This estimate may deviate from the actual value by at most {{ Constants.bid_noise }}.
+        This estimate may deviate from the actual value by at most {{ C.BID_NOISE }}.
     </p>
 
     <p>
-        Please make your bid now. The amount can be between {{ Constants.bid_min }} and {{ Constants.bid_max }}, inclusive.
+        Please make your bid now. The amount can be between {{ C.BID_MIN }} and {{ C.BID_MAX }}, inclusive.
     </p>
 
     {{ formfields }}
 
     {{ next_button }}
 
-    {{ include Constants.instructions_template }}
+    {{ include C.INSTRUCTIONS_TEMPLATE }}
 
 {{ endblock }}
