@@ -74,9 +74,7 @@ def set_winner(group: Group):
 def generate_value_estimate(group: Group):
     import random
 
-    estimate = group.item_value + random.uniform(
-        -C.BID_NOISE, C.BID_NOISE
-    )
+    estimate = group.item_value + random.uniform(-C.BID_NOISE, C.BID_NOISE)
     estimate = round(estimate, 1)
     if estimate < C.BID_MIN:
         estimate = C.BID_MIN
