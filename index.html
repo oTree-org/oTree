@@ -72,11 +72,11 @@
           </ul>
 
           <p>
-            oTree has been used in
+            oTree has been used in over
             <a
               href="https://scholar.google.com/scholar?hl=en&as_sdt=0%2C48&q=otree&btnG="
               target="_blank"
-              >800 academic publications</a
+              >900 academic publications</a
             >.
           </p>
         </div>
@@ -207,9 +207,9 @@
             </div>
             <div class="code-snippet">
               <pre><code class="language-python"
-              >class Constants(BaseConstants):
-  players_per_group = 2  
-  num_rounds = 10</code></pre>
+              >class C(BaseConstants):
+  PLAYERS_PER_GROUP = 2  
+  NUM_ROUNDS = 10</code></pre>
             </div>
           </div>
           <div class="example">
@@ -237,6 +237,7 @@
   form_model = 'player'
   form_fields = ['contribution']
 
+  @staticmethod
   def is_displayed(player):
     return player.id_in_group == 1</code></pre>
             </div>
@@ -252,6 +253,7 @@
             <div class="code-snippet">
               <pre><code class="language-python"
               >class WaitForOthers(WaitPage):
+  @staticmethod
   def after_all_players_arrive(group):
     p1, p2 = group.get_players()
     p1.payoff = p1.contribution
@@ -270,7 +272,8 @@
               >class Results(Page):
   form_model = 'player'
   form_fields = ['opt_out']
-
+  
+  @staticmethod
   def app_after_this_page(player, upcoming_apps):
     if player.opt_out:
       return 'questionnaire'</code></pre>
@@ -353,6 +356,7 @@ yield Results</code></pre>
             <div class="code-snippet">
               <pre><code class="language-python"
               >class Auction(Page):
+  @staticmethod            
   def live_method(player, bid):
     group = player.group
     if bid > group.highest_bid:
@@ -393,6 +397,16 @@ yield Results</code></pre>
 $ otree startproject myproject
 $ cd myproject
 $ otree devserver</code></pre>
+        </div>
+      </div>
+      <div class="major-section">
+        <div class="section">
+          <h1>Blog</h1>
+          <p>
+            <a href="blog/install-old-version.html"
+              >How to install an old version of oTree</a
+            >
+          </p>
         </div>
       </div>
     </div>
