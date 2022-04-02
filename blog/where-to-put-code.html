@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>"Where do I put this code?"</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+      integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>"Where do I put this code?"</h1>
+      </div>
+
+      <p>
+        When starting to learn oTree, you may face uncertainty about where to
+        put a particular piece of code. Should it go in
+        <code>before_next_page</code>, <code>after_all_players_arrive</code>,
+        <code>creating_session</code>, etc? Should it be a <code>player</code>,
+        <code>group</code>, or <code>subsession</code>
+        function?
+      </p>
+
+      <p>Here is a quick guide comparing these various functions.</p>
+
+      <ul>
+        <li>
+          <b>creating_session</b>: code that is put here will execute
+          immediately when you click the "Create session" button. Therefore,
+          when this function executes, all fields will be blank, because the
+          session has not started yet. <code>creating_session</code> is where
+          you can put "setup" code, such as predetermining treatment groups.
+          This function cannot depend on anything that happens during the
+          session. For that, you should instead use
+          <code>before_next_page</code> or
+          <code>after_all_players_arrive</code>.
+        </li>
+        <li>
+          <b>before_next_page</b>: This function executes after the player
+          finishes the page, before proceeding to the next page.
+        </li>
+        <li>
+          <b>after_all_players_arrive</b>: This function can only be defined on
+          a WaitPage, not a regular page. It's a good place for doing
+          computations that depend on other players in the group, like picking
+          the winner in a multi-player game.
+          <code>after_all_players_arrive</code> executes just once for the whole
+          group, whereas <code>before_next_page</code> executes separately for
+          each player.
+        </li>
+        <li>
+          <b>vars_for_template</b>: This function executes when a page is
+          loaded. Be aware that if the user reloads the page, this code will get
+          re-run. This can be convenient during development, since you can
+          easily edit your code and reload the page to see the result. But make
+          sure the code you put here is idempotent; otherwise, it could be
+          exploited by participants. For example, if you have code that randomly
+          chooses the participant's payoff, the participant could keep reloading
+          the page until they see a payoff that they like. It's safer to use
+          <code>before_next_page</code>, which is guaranteed to only execute
+          once.
+        </li>
+        <li>
+          <b>User-defined functions</b>: in oTree apps, you will frequently see
+          user-defined functions such as
+          <code>def set_payoffs(group):</code> You can define
+          player/group/subsession functions with whatever name you want, but
+          unlike built-in functions, oTree won't execute these functions
+          automatically. It's up to you to call these functions from a built-in
+          function such as <code>creating_session</code>,
+          <code>before_next_page</code>, etc.
+        </li>
+      </ul>
+    </div>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
+      integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
