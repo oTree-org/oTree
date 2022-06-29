@@ -1,237 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
-    />
-    <meta name="description" content="oTree: Behavioral research platform" />
-    <meta property="og:url" content="https://www.otree.org/" />
-    <meta property="og:title" content="oTree" />
-    <meta
-      property="og:description"
-      content="A Python framework for tasks, games, and experiments."
-    />
-    <meta property="og:image" content="http://www.otree.org/images/icon.png" />
-    <meta
-      property="og:image:secure_url"
-      content="https://www.otree.org/images/icon.png"
-    />
-    <link
-      rel="stylesheet"
-      href="https://meyerweb.com/eric/tools/css/reset/reset.css"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <link href="prism.css" rel="stylesheet" />
-    <title>oTree: Behavioral research platform</title>
-  </head>
-  <body>
-    <div class="hero">
-      <div class="major-section">
-        <div class="section">
-          <img src="images/header-logo.png" style="width: 300px" />
-          <h3 style="font-weight: 300">
-            The most powerful platform for behavioral research and experiments
-          </h3>
-          <a href="https://otree-more-demos.herokuapp.com/" target="_blank">
-            <div class="button">Demo</div>
-          </a>
-          <a href="https://otree.readthedocs.io/en/latest/" target="_blank">
-            <div class="button">Documentation</div>
-          </a>
-          <!--
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="oTree: Behavioral research platform" />
+  <meta property="og:url" content="https://www.otree.org/" />
+  <meta property="og:title" content="oTree" />
+  <meta property="og:description" content="A Python framework for tasks, games, and experiments." />
+  <meta property="og:image" content="http://www.otree.org/images/icon.png" />
+  <meta property="og:image:secure_url" content="https://www.otree.org/images/icon.png" />
+  <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="prism.css" rel="stylesheet" />
+  <title>oTree: Behavioral research platform</title>
+</head>
+
+<body>
+  <div class="hero">
+    <div class="major-section">
+      <div class="section">
+        <img src="images/header-logo.png" style="width: 300px" />
+        <h3 style="font-weight: 300">
+          The most powerful platform for behavioral research and experiments
+        </h3>
+        <a href="https://otree-more-demos.herokuapp.com/" target="_blank">
+          <div class="button">Demo</div>
+        </a>
+        <a href="https://otree.readthedocs.io/en/latest/" target="_blank">
+          <div class="button">Documentation</div>
+        </a>
+        <!--
           <a href="https://groups.google.com/g/otree" target="_blank">
             <div class="button">Forum</div>
           </a>
         -->
-          <a href="https://github.com/oTree-org/oTree/" target="_blank">
-            <div class="button">GitHub</div>
-          </a>
+        <a href="https://github.com/oTree-org/oTree/" target="_blank">
+          <div class="button">GitHub</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-light">
+    <div class="major-section">
+      <h1 class="section">About</h1>
+      <div class="section">
+        <p>
+          oTree is an open-source platform for web-based interactive tasks,
+          such as:
+        </p>
+
+        <ul>
+          <li>Economics experiments</li>
+          <li>Psychology experiments</li>
+          <li>Multiplayer games</li>
+          <li>Auction markets</li>
+          <li>Single-player strategy games</li>
+          <li>Dynamic questionnaires or surveys</li>
+          <li>Assessments and tests</li>
+        </ul>
+
+        <p>
+          oTree has been used in over
+          <a href="https://scholar.google.com/scholar?hl=en&as_sdt=0%2C48&q=otree&btnG=" target="_blank">900 academic
+            publications</a>.
+        </p>
+      </div>
+    </div>
+    <div class="major-section">
+      <h1 class="section">Used by</h1>
+      <span class="famous-users-helper">
+        <img class="famous-users-img" width="300px" src="images/famous_users/WorldBank.jpg" />
+      </span>
+      <span class="famous-users-helper">
+        <img class="famous-users-img" width="300px" src="images/famous_users/OECD.jpg" />
+      </span>
+      <span class="famous-users-helper">
+        <img class="famous-users-img" width="300px" src="images/famous_users/IRS.jpg" />
+      </span>
+      <span class="famous-users-helper">
+        <img class="famous-users-img" width="300px" src="images/famous_users/CFPB.png" />
+      </span>
+      <span class="famous-users-helper">
+        <img class="famous-users-img" width="300px" src="images/famous_users/EBRD.jpg" />
+      </span>
+      <span class="famous-users-helper">
+        <img class="famous-users-img" width="300px" src="images/famous_users/BehaviouralInsights.png" />
+      </span>
+    </div>
+    <div class="major-section">
+      <h1 class="section">Why use oTree?</h1>
+      <div class="side-by-side">
+        <div class="section">
+          <h2>Versatile</h2>
+          <p>
+            Few frameworks are as user-friendly yet versatile as oTree. Build
+            anything from a game of tic-tac-toe to a live auction market.
+          </p>
+        </div>
+        <div class="section">
+          <h2>Easy</h2>
+          <p>
+            oTree limits itself to the most basic programming concepts:
+            if-statements, loops, simple functions, lists, and dicts.
+          </p>
+        </div>
+        <div class="section">
+          <h2>Ideal for learning</h2>
+          <p>
+            oTree is a fun way to learn programming. And it is a great
+            hands-on addition to courses in subjects like economics or
+            psychology.
+          </p>
         </div>
       </div>
     </div>
 
-    <div class="bg-light">
-      <div class="major-section">
-        <h1 class="section">About</h1>
-        <div class="section">
-          <p>
-            oTree is an open-source platform for web-based interactive tasks,
-            such as:
-          </p>
-
-          <ul>
-            <li>Economics experiments</li>
-            <li>Psychology experiments</li>
-            <li>Multiplayer games</li>
-            <li>Auction markets</li>
-            <li>Single-player strategy games</li>
-            <li>Dynamic questionnaires or surveys</li>
-            <li>Assessments and tests</li>
-          </ul>
-
-          <p>
-            oTree has been used in over
-            <a
-              href="https://scholar.google.com/scholar?hl=en&as_sdt=0%2C48&q=otree&btnG="
-              target="_blank"
-              >900 academic publications</a
-            >.
-          </p>
-        </div>
+    <div class="major-section">
+      <h1 class="section">Ease into programming</h1>
+      <div class="section">
+        <p>
+          Use <a href="https://www.otreehub.com/">oTree Studio</a>, a hybrid
+          point-and-click interface that puts oTree on rails.
+        </p>
       </div>
-      <div class="major-section">
-        <h1 class="section">Used by</h1>
-        <span class="famous-users-helper">
-          <img
-            class="famous-users-img"
-            width="300px"
-            src="images/famous_users/WorldBank.jpg"
-          />
-        </span>
-        <span class="famous-users-helper">
-          <img
-            class="famous-users-img"
-            width="300px"
-            src="images/famous_users/OECD.jpg"
-          />
-        </span>
-        <span class="famous-users-helper">
-          <img
-            class="famous-users-img"
-            width="300px"
-            src="images/famous_users/IRS.jpg"
-          />
-        </span>
-        <span class="famous-users-helper">
-          <img
-            class="famous-users-img"
-            width="300px"
-            src="images/famous_users/CFPB.png"
-          />
-        </span>
-        <span class="famous-users-helper">
-          <img
-            class="famous-users-img"
-            width="300px"
-            src="images/famous_users/EBRD.jpg"
-          />
-        </span>
-        <span class="famous-users-helper">
-          <img
-            class="famous-users-img"
-            width="300px"
-            src="images/famous_users/BehaviouralInsights.png"
-          />
-        </span>
+      <div class="studio-example">
+        <img src="images/studio-chrome-and-pages.png" style="width: 100%; height: auto" />
       </div>
-      <div class="major-section">
-        <h1 class="section">Why use oTree?</h1>
-        <div class="side-by-side">
-          <div class="section">
-            <h2>Versatile</h2>
-            <p>
-              Few frameworks are as user-friendly yet versatile as oTree. Build
-              anything from a game of tic-tac-toe to a live auction market.
-            </p>
-          </div>
-          <div class="section">
-            <h2>Easy</h2>
-            <p>
-              oTree limits itself to the most basic programming concepts:
-              if-statements, loops, simple functions, lists, and dicts.
-            </p>
-          </div>
-          <div class="section">
-            <h2>Ideal for learning</h2>
-            <p>
-              oTree is a fun way to learn programming. And it is a great
-              hands-on addition to courses in subjects like economics or
-              psychology.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="major-section">
-        <h1 class="section">Ease into programming</h1>
-        <div class="section">
-          <p>
-            Use <a href="https://www.otreehub.com/">oTree Studio</a>, a hybrid
-            point-and-click interface that puts oTree on rails.
-          </p>
-        </div>
-        <div class="studio-example">
-          <img
-            src="images/studio-chrome-and-pages.png"
-            style="width: 100%; height: auto"
-          />
-        </div>
-        <div class="studio-example">
-          <img
-            src="images/studio-page-snippet.png"
-            style="
+      <div class="studio-example">
+        <img src="images/studio-page-snippet.png" style="
               max-width: 100%;
               height: auto;
               margin-left: auto;
               margin-right: auto;
-            "
-          />
-        </div>
-        <div class="studio-example">
-          <img src="images/studio.png" style="max-width: 100%" />
-        </div>
+            " />
       </div>
+      <div class="studio-example">
+        <img src="images/studio.png" style="max-width: 100%" />
+      </div>
+    </div>
 
-      <div class="major-section">
-        <div class="section">
-          <h1>Walkthrough</h1>
-          <p>
-            Just as Python is a high-level language, oTree is a high-level
-            framework. You don't need to know all the nitty-gritty details of
-            HTTP, SQL, etc. Jump in and start building fun things right away!
-          </p>
+    <div class="major-section">
+      <div class="section">
+        <h1>Walkthrough</h1>
+        <p>
+          Just as Python is a high-level language, oTree is a high-level
+          framework. You don't need to know all the nitty-gritty details of
+          HTTP, SQL, etc. Jump in and start building fun things right away!
+        </p>
 
-          <h2>Clear code</h2>
-          <p>
-            oTree Studio is a visual layer on top of an easy-to-understand
-            Python code format.
-          </p>
-          <div class="example">
-            <div class="code-gloss">
-              <p>
-                Players will be automatically split into groups of 2, and the
-                game repeats for 10 rounds.
-              </p>
-            </div>
-            <div class="code-snippet">
-              <pre><code class="language-python"
+        <h2>Clear code</h2>
+        <p>
+          oTree Studio is a visual layer on top of an easy-to-understand
+          Python code format.
+        </p>
+        <div class="example">
+          <div class="code-gloss">
+            <p>
+              Players will be automatically split into groups of 2, and the
+              game repeats for 10 rounds.
+            </p>
+          </div>
+          <div class="code-snippet">
+            <pre><code class="language-python"
               >class C(BaseConstants):
   PLAYERS_PER_GROUP = 2  
   NUM_ROUNDS = 10</code></pre>
-            </div>
           </div>
-          <div class="example">
-            <div class="code-gloss">
-              <p>Here we define the columns of the database table.</p>
-            </div>
-            <div class="code-snippet">
-              <pre><code class="language-python"
+        </div>
+        <div class="example">
+          <div class="code-gloss">
+            <p>Here we define the columns of the database table.</p>
+          </div>
+          <div class="code-snippet">
+            <pre><code class="language-python"
               >class Player(BasePlayer):
   contribution = models.CurrencyField(min=0, max=100)
   opt_out = models.BooleanField()</code></pre>
-            </div>
           </div>
-          <div class="example">
-            <div class="code-gloss">
-              <p>
-                This page has a time limit of 60 seconds, and is only shown to
-                player 1.
-              </p>
-            </div>
-            <div class="code-snippet">
-              <pre><code class="language-python"
+        </div>
+        <div class="example">
+          <div class="code-gloss">
+            <p>
+              This page has a time limit of 60 seconds, and is only shown to
+              player 1.
+            </p>
+          </div>
+          <div class="code-snippet">
+            <pre><code class="language-python"
               >class Contribute(Page):
   timeout_seconds = 60
   form_model = 'player'
@@ -240,35 +197,35 @@
   @staticmethod
   def is_displayed(player):
     return player.id_in_group == 1</code></pre>
-            </div>
           </div>
-          <div class="example">
-            <div class="code-gloss">
-              <p>
-                Multiplayer games are super simple. Just add a WaitPage in your
-                game, and it will automatically synchronize players, at which
-                point you can perform calculations.
-              </p>
-            </div>
-            <div class="code-snippet">
-              <pre><code class="language-python"
+        </div>
+        <div class="example">
+          <div class="code-gloss">
+            <p>
+              Multiplayer games are super simple. Just add a WaitPage in your
+              game, and it will automatically synchronize players, at which
+              point you can perform calculations.
+            </p>
+          </div>
+          <div class="code-snippet">
+            <pre><code class="language-python"
               >class WaitForOthers(WaitPage):
   @staticmethod
   def after_all_players_arrive(group):
     p1, p2 = group.get_players()
     p1.payoff = p1.contribution
     p2.payoff = 100 - p1.contribution</code></pre>
-            </div>
           </div>
-          <div class="example">
-            <div class="code-gloss">
-              <p>
-                This page gives the user a choice to finish the current section,
-                or skip to one of your other apps (e.g. questionnaire).
-              </p>
-            </div>
-            <div class="code-snippet">
-              <pre><code class="language-python"
+        </div>
+        <div class="example">
+          <div class="code-gloss">
+            <p>
+              This page gives the user a choice to finish the current section,
+              or skip to one of your other apps (e.g. questionnaire).
+            </p>
+          </div>
+          <div class="code-snippet">
+            <pre><code class="language-python"
               >class Results(Page):
   form_model = 'player'
   form_fields = ['opt_out']
@@ -277,84 +234,84 @@
   def app_after_this_page(player, upcoming_apps):
     if player.opt_out:
       return 'questionnaire'</code></pre>
-            </div>
           </div>
-          <div class="example">
-            <div class="code-gloss">
-              <p>Chain pages together</p>
-            </div>
-            <div class="code-snippet">
-              <pre><code class="language-django"
+        </div>
+        <div class="example">
+          <div class="code-gloss">
+            <p>Chain pages together</p>
+          </div>
+          <div class="code-snippet">
+            <pre><code class="language-django"
               >page_sequence = [Contribute, WaitForOthers, Results]</code></pre>
-            </div>
           </div>
-          <div class="example">
-            <div class="code-gloss">
-              <p>Chain apps together</p>
-            </div>
-            <div class="code-snippet">
-              <pre><code class="language-django"
+        </div>
+        <div class="example">
+          <div class="code-gloss">
+            <p>Chain apps together</p>
+          </div>
+          <div class="code-snippet">
+            <pre><code class="language-django"
               >app_sequence = ['trust_game', 'questionnaire']</code></pre>
-            </div>
           </div>
-          <h2>Dynamic templates</h2>
-          <p>Design your user interface with dynamic tags, HTML, and CSS.</p>
-          <div class="example">
-            <div class="code-gloss">
-              <p>
-                Built-in components like a chat box and automatic form layout.
-              </p>
-            </div>
-            <div class="code-snippet">
-              <pre><code class="language-django"
+        </div>
+        <h2>Dynamic templates</h2>
+        <p>Design your user interface with dynamic tags, HTML, and CSS.</p>
+        <div class="example">
+          <div class="code-gloss">
+            <p>
+              Built-in components like a chat box and automatic form layout.
+            </p>
+          </div>
+          <div class="code-snippet">
+            <pre><code class="language-django"
               >Please answer the following questions.
 {{ formfields }}
 
 You may chat with other users here: 
 {{ chat }}</code></pre>
-            </div>
           </div>
-          <div class="example">
-            <div class="code-gloss">
-              <p>Conditional logic</p>
-            </div>
-            <div class="code-snippet">
-              <pre><code class="language-django"
+        </div>
+        <div class="example">
+          <div class="code-gloss">
+            <p>Conditional logic</p>
+          </div>
+          <div class="code-snippet">
+            <pre><code class="language-django"
               >{{ if player.payoff > 0 }}
   Congrats, you made {{ player.payoff }}
 {{ else }}  
   You did not make any money.
 {{ endif }}</code></pre>
-            </div>
           </div>
+        </div>
 
-          <h2>Features for advanced users</h2>
-          <div class="example">
-            <div class="code-gloss">
-              <p>
-                Test your apps with bots, which run in parallel to play
-                multiplayer games against each other. You can program different
-                bot strategies and run multi-agent simulations.
-              </p>
-            </div>
-            <div class="code-snippet">
-              <pre><code class="language-python"
+        <h2>Features for advanced users</h2>
+        <div class="example">
+          <div class="code-gloss">
+            <p>
+              Test your apps with bots, which run in parallel to play
+              multiplayer games against each other. You can program different
+              bot strategies and run multi-agent simulations.
+            </p>
+          </div>
+          <div class="code-snippet">
+            <pre><code class="language-python"
               >yield Survey, dict(name='Bob', age=20)
 yield Auction, dict(bid=random.randint(100, 200))
 yield Results</code></pre>
-            </div>
           </div>
-          <div class="example">
-            <div class="code-gloss">
-              <p>
-                Live pages let players interact within the same page, in real
-                time. Send messages to specific players using their ID, or
-                broadcast to the group using special ID
-                <code>0</code>.
-              </p>
-            </div>
-            <div class="code-snippet">
-              <pre><code class="language-python"
+        </div>
+        <div class="example">
+          <div class="code-gloss">
+            <p>
+              Live pages let players interact within the same page, in real
+              time. Send messages to specific players using their ID, or
+              broadcast to the group using special ID
+              <code>0</code>.
+            </p>
+          </div>
+          <div class="code-snippet">
+            <pre><code class="language-python"
               >class Auction(Page):
   @staticmethod            
   def live_method(player, bid):
@@ -369,62 +326,65 @@ yield Results</code></pre>
       return {
         my_id: dict(msg='Your bid was too low.')
       }</code></pre>
-            </div>
           </div>
-          <p>
-            The above just scratches the surface of what oTree can do. Check out
-            the documentation for more details.
-          </p>
         </div>
+        <p>
+          The above just scratches the surface of what oTree can do. Check out
+          the documentation for more details.
+        </p>
       </div>
-      <div class="major-section">
-        <div class="section">
-          <h1>Get started</h1>
-          <a href="https://otree.readthedocs.io/en/latest/">
-            <div class="button">Documentation</div>
-          </a>
-          <a href="https://groups.google.com/g/otree">
-            <div class="button">Forum</div>
-          </a>
-          <a href="https://github.com/oTree-org/oTree/" target="_blank">
-            <div class="button">Browse code samples</div>
-          </a>
-        </div>
-        <div class="section">
-          <br /><br />
-          <pre><code class="language-bash"
+    </div>
+    <div class="major-section">
+      <div class="section">
+        <h1>Get started</h1>
+        <a href="https://otree.readthedocs.io/en/latest/">
+          <div class="button">Documentation</div>
+        </a>
+        <a href="https://groups.google.com/g/otree">
+          <div class="button">Forum</div>
+        </a>
+        <a href="https://github.com/oTree-org/oTree/" target="_blank">
+          <div class="button">Browse code samples</div>
+        </a>
+      </div>
+      <div class="section">
+        <br /><br />
+        <pre><code class="language-bash"
             >$ pip install otree
 $ otree startproject myproject
 $ cd myproject
 $ otree devserver</code></pre>
-        </div>
-      </div>
-      <div class="major-section">
-        <div class="section">
-          <h1>Blog</h1>
-          <p>
-            <a href="blog/install-old-version.html"
-              >How to install an old version of oTree</a
-            >
-          </p>
-          <p>
-            <a href="blog/where-to-put-code.html"
-              >"Where do I put this code?"</a
-            >
-          </p>
-        </div>
       </div>
     </div>
     <div class="major-section">
-      <div class="side-by-side">
-        <p class="section">
-          <a href="faq.html"> FAQ </a>
+      <div class="section">
+        <h1>Blog</h1>
+        <p>
+          <a href="blog/why-use-studio.html">Why you should use oTree Studio</a>
         </p>
-        <p class="section">
-          <a href="https://github.com/oTree-org/oTree/"> GitHub </a>
+        <p>
+          <a href="blog/why-use-hub-heroku.html">Why you should deploy to Heroku through oTree Hub</a>
+        </p>
+        <p>
+          <a href="blog/install-old-version.html">How to install an old version of oTree</a>
+        </p>
+        <p>
+          <a href="blog/where-to-put-code.html">"Where do I put this code?"</a>
         </p>
       </div>
     </div>
-    <script src="prism.js"></script>
-  </body>
+  </div>
+  <div class="major-section">
+    <div class="side-by-side">
+      <p class="section">
+        <a href="faq.html"> FAQ </a>
+      </p>
+      <p class="section">
+        <a href="https://github.com/oTree-org/oTree/"> GitHub </a>
+      </p>
+    </div>
+  </div>
+  <script src="prism.js"></script>
+</body>
+
 </html>

@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <title>Why you should deploy to Heroku through oTree Hub</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+        integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Why you should deploy to Heroku through oTree Hub</h1>
+        </div>
+        <p><i>June 2022</i></p>
+
+        <p>
+            The recommended way to deploy your project to a Heroku server is through oTree Hub.
+        </p>
+
+        <p>There are some unofficial tutorials online showing how to deploy to Heroku via git, etc.
+            I discourage using these methods.
+            There are too many possibilites to get a step wrong, and then find out too late that
+            your experiment runs differently on the server from how it did on your computer,
+            or worse, that participants' data didn't get recorded.
+            I think sooner or later, most users of the git-based techniques will end up in a situation like this.
+        </p>
+
+        <p>
+            Another issue is performance problems.
+            oTree can run quickly on a small inexpensive server -- if your server is properly configured.
+            People who misconfigure their server often run into performance problems.
+            In an attempt to fix this, they often scale up to very expensive dynos, Postgres, Redis, etc.
+        </p>
+
+        <p>
+            Before scaling up your server, you should use oTree Hub's performance monitoring system.
+            It can often pinpoint the performance bottlenecks on your site that can be resolved without
+            upgrading your server.
+        </p>
+
+        <h3>Common concerns and questions</h3>
+        <h5>"Isn't it limiting that I only get 2 free sites?"</h5>
+        <p>
+            For most people 2 sites is more than enough.
+            You can reuse those sites forever, for as many experiments and different projects as you want.
+            Even on a single site you can be running many sessions/apps in parallel.
+            And when you launch a new project you can rename a site, e.g. from aaaaa.herokuapp.com to
+            bbbbb.herokuapp.com
+        </p>
+
+        <h5>"I'm writing my code in PyCharm, rather than oTree Studio"</h5>
+        <p>
+            That is fine. oTree Studio is a separate, independent feature from oTree Hub's Heroku server deployment.
+            Just run <code>otree zip</code> then drag and drop the otreezip file into oTree Hub.
+        </p>
+
+
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
+        integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
