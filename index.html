@@ -10,7 +10,7 @@
   <meta property="og:description" content="A Python framework for tasks, games, and experiments." />
   <meta property="og:image" content="http://www.otree.org/images/icon.png" />
   <meta property="og:image:secure_url" content="https://www.otree.org/images/icon.png" />
-  <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css" />
+  <link rel="stylesheet" href="reset.css" />
   <link rel="stylesheet" href="style.css" />
   <link href="prism.css" rel="stylesheet" />
   <title>oTree: Behavioral research platform</title>
@@ -375,7 +375,8 @@ $ otree devserver</code></pre>
     </div>
   </div>
   <div class="major-section">
-    <div class="side-by-side">
+    <div style="display: flex; flex-direction: row;
+    justify-content: center;">
       <p class="section">
         <a href="faq.html"> FAQ </a>
       </p>
@@ -383,6 +384,13 @@ $ otree devserver</code></pre>
         <a href="https://github.com/oTree-org/oTree/"> GitHub </a>
       </p>
     </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <p>
+        With funding from:
+      </p>
+      <img class="famous-users-img" width="100px" src="images/sloan-logo.jpg" />
+    </div>
+    <p>
   </div>
   <script src="prism.js"></script>
 </body>
