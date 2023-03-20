@@ -14,7 +14,6 @@ class C(BaseConstants):
     NAME_IN_URL = 'volunteer_dilemma'
     PLAYERS_PER_GROUP = 3
     NUM_ROUNDS = 1
-    INSTRUCTIONS_TEMPLATE = 'volunteer_dilemma/instructions.html'
     NUM_OTHER_PLAYERS = PLAYERS_PER_GROUP - 1
     # """Payoff for each player if at least one volunteers"""
     GENERAL_BENEFIT = cu(100)

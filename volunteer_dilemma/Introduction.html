@@ -1,5 +1,5 @@
 {{ block title }}Introduction{{ endblock }}
 {{ block content }}
-    {{ include C.INSTRUCTIONS_TEMPLATE }}
+    {{ include_sibling 'instructions.html' }}
     {{ next_button }}
 {{ endblock }}

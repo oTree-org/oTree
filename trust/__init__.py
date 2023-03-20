@@ -16,7 +16,6 @@ class C(BaseConstants):
     NAME_IN_URL = 'trust'
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 1
-    INSTRUCTIONS_TEMPLATE = 'trust/instructions.html'
     # Initial amount allocated to each player
     ENDOWMENT = cu(100)
     MULTIPLIER = 3

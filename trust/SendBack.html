@@ -9,6 +9,6 @@
 
     {{ formfields }}
     <p>{{ next_button }}</p>
-    {{ include C.INSTRUCTIONS_TEMPLATE }}
+    {{ include_sibling 'instructions.html' }}
 
 {{ endblock }}

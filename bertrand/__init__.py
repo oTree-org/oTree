@@ -14,7 +14,6 @@ class C(BaseConstants):
     PLAYERS_PER_GROUP = 2
     NAME_IN_URL = 'bertrand'
     NUM_ROUNDS = 1
-    INSTRUCTIONS_TEMPLATE = 'bertrand/instructions.html'
     MAXIMUM_PRICE = cu(100)
 
 

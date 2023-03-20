@@ -15,7 +15,6 @@ class C(BaseConstants):
     NAME_IN_URL = 'traveler_dilemma'
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 1
-    INSTRUCTIONS_TEMPLATE = 'traveler_dilemma/instructions.html'
     # Player's reward for the lowest claim"""
     ADJUSTMENT_ABS = cu(2)
     # Player's deduction for the higher claim
