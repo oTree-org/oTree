@@ -12,7 +12,6 @@ class C(BaseConstants):
     NUM_ROUNDS = 1
     ENDOWMENT = cu(10)
     MULTIPLIER = 3
-    INSTRUCTIONS_TEMPLATE = 'trust_simple/instructions.html'
 
 
 class Subsession(BaseSubsession):

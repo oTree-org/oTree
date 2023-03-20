@@ -1,7 +1,7 @@
 {{ block title }}Trust Game: Your Choice{{ endblock }}
 {{ block content }}
 
-    {{ include C.INSTRUCTIONS_TEMPLATE }}
+    {{ include_sibling 'instructions.html' }}
 
     <p>
         You are Participant B. Participant A sent you {{ group.sent_amount }} and you received {{ tripled_amount }}.

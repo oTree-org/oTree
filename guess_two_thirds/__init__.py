@@ -15,7 +15,6 @@ class C(BaseConstants):
     NAME_IN_URL = 'guess_two_thirds'
     JACKPOT = cu(100)
     GUESS_MAX = 100
-    INSTRUCTIONS_TEMPLATE = 'guess_two_thirds/instructions.html'
 
 
 class Subsession(BaseSubsession):

@@ -14,7 +14,6 @@ class C(BaseConstants):
     NAME_IN_URL = 'bargaining'
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 1
-    INSTRUCTIONS_TEMPLATE = 'bargaining/instructions.html'
     AMOUNT_SHARED = cu(100)
 
 

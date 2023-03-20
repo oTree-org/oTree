@@ -13,7 +13,6 @@ class C(BaseConstants):
     NAME_IN_URL = 'cournot'
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 1
-    INSTRUCTIONS_TEMPLATE = 'cournot/instructions.html'
     # Total production capacity of all players
     TOTAL_CAPACITY = 60
     MAX_UNITS_PER_PLAYER = int(TOTAL_CAPACITY / PLAYERS_PER_GROUP)

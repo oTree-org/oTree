@@ -15,7 +15,6 @@ class C(BaseConstants):
     NAME_IN_URL = 'dictator'
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 1
-    INSTRUCTIONS_TEMPLATE = 'dictator/instructions.html'
     # Initial amount allocated to the dictator
     ENDOWMENT = cu(100)
 

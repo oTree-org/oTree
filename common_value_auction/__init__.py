@@ -15,7 +15,6 @@ class C(BaseConstants):
     NAME_IN_URL = 'common_value_auction'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-    INSTRUCTIONS_TEMPLATE = 'common_value_auction/instructions.html'
     BID_MIN = cu(0)
     BID_MAX = cu(10)
     # Error margin for the value estimates shown to the players
