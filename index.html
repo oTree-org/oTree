@@ -112,222 +112,18 @@
     </div>
 
     <div class="major-section">
-      <h1 class="section">Ease into programming</h1>
+      <h1 class="section">Build experiments without code</h1>
       <div class="section">
         <p>
-          Use <a href="https://www.otreehub.com/">oTree Studio</a>, a hybrid
-          point-and-click interface that puts oTree on rails.
+          Use <a href="https://www.otreehub.com/">OTAI</a>
+          to build sophisticated research studies without writing any code.
+          It's engineered for reliability and can deliver research-grade apps.
+          More about OTAI <a href="blog/introducing-otai.html">here</a>.
         </p>
       </div>
-      <div class="studio-example">
-        <img src="images/studio-chrome-and-pages.png" style="width: 100%; height: auto" />
-      </div>
-      <div class="studio-example">
-        <img src="images/studio-page-snippet.png" style="
-              max-width: 100%;
-              height: auto;
-              margin-left: auto;
-              margin-right: auto;
-            " />
-      </div>
-      <div class="studio-example">
-        <img src="images/studio.png" style="max-width: 100%" />
-      </div>
+      <img src="images/otai/boggle-3.png" style="width: 100%; height: auto" />
     </div>
 
-    <div class="major-section">
-      <div class="section">
-        <h1>Walkthrough</h1>
-        <p>
-          Just as Python is a high-level language, oTree is a high-level
-          framework. You don't need to know all the nitty-gritty details of
-          HTTP, SQL, etc. Jump in and start building fun things right away!
-        </p>
-
-        <h2>Clear code</h2>
-        <p>
-          oTree Studio is a visual layer on top of an easy-to-understand
-          Python code format.
-        </p>
-        <div class="example">
-          <div class="code-gloss">
-            <p>
-              Players will be automatically split into groups of 2, and the
-              game repeats for 10 rounds.
-            </p>
-          </div>
-          <div class="code-snippet">
-            <pre><code class="language-python"
-              >class C(BaseConstants):
-  PLAYERS_PER_GROUP = 2  
-  NUM_ROUNDS = 10</code></pre>
-          </div>
-        </div>
-        <div class="example">
-          <div class="code-gloss">
-            <p>Here we define the columns of the database table.</p>
-          </div>
-          <div class="code-snippet">
-            <pre><code class="language-python"
-              >class Player(BasePlayer):
-  contribution = models.CurrencyField(min=0, max=100)
-  opt_out = models.BooleanField()</code></pre>
-          </div>
-        </div>
-        <div class="example">
-          <div class="code-gloss">
-            <p>
-              This page has a time limit of 60 seconds, and is only shown to
-              player 1.
-            </p>
-          </div>
-          <div class="code-snippet">
-            <pre><code class="language-python"
-              >class Contribute(Page):
-  timeout_seconds = 60
-  form_model = 'player'
-  form_fields = ['contribution']
-
-  @staticmethod
-  def is_displayed(player):
-    return player.id_in_group == 1</code></pre>
-          </div>
-        </div>
-        <div class="example">
-          <div class="code-gloss">
-            <p>
-              Multiplayer games are super simple. Just add a WaitPage in your
-              game, and it will automatically synchronize players, at which
-              point you can perform calculations.
-            </p>
-          </div>
-          <div class="code-snippet">
-            <pre><code class="language-python"
-              >class WaitForOthers(WaitPage):
-  @staticmethod
-  def after_all_players_arrive(group):
-    p1, p2 = group.get_players()
-    p1.payoff = p1.contribution
-    p2.payoff = 100 - p1.contribution</code></pre>
-          </div>
-        </div>
-        <div class="example">
-          <div class="code-gloss">
-            <p>
-              This page gives the user a choice to finish the current section,
-              or skip to one of your other apps (e.g. questionnaire).
-            </p>
-          </div>
-          <div class="code-snippet">
-            <pre><code class="language-python"
-              >class Results(Page):
-  form_model = 'player'
-  form_fields = ['opt_out']
-  
-  @staticmethod
-  def app_after_this_page(player, upcoming_apps):
-    if player.opt_out:
-      return 'questionnaire'</code></pre>
-          </div>
-        </div>
-        <div class="example">
-          <div class="code-gloss">
-            <p>Chain pages together</p>
-          </div>
-          <div class="code-snippet">
-            <pre><code class="language-django"
-              >page_sequence = [Contribute, WaitForOthers, Results]</code></pre>
-          </div>
-        </div>
-        <div class="example">
-          <div class="code-gloss">
-            <p>Chain apps together</p>
-          </div>
-          <div class="code-snippet">
-            <pre><code class="language-django"
-              >app_sequence = ['trust_game', 'questionnaire']</code></pre>
-          </div>
-        </div>
-        <h2>Dynamic templates</h2>
-        <p>Design your user interface with dynamic tags, HTML, and CSS.</p>
-        <div class="example">
-          <div class="code-gloss">
-            <p>
-              Built-in components like a chat box and automatic form layout.
-            </p>
-          </div>
-          <div class="code-snippet">
-            <pre><code class="language-django"
-              >Please answer the following questions.
-{{ formfields }}
-
-You may chat with other users here: 
-{{ chat }}</code></pre>
-          </div>
-        </div>
-        <div class="example">
-          <div class="code-gloss">
-            <p>Conditional logic</p>
-          </div>
-          <div class="code-snippet">
-            <pre><code class="language-django"
-              >{{ if player.payoff > 0 }}
-  Congrats, you made {{ player.payoff }}
-{{ else }}  
-  You did not make any money.
-{{ endif }}</code></pre>
-          </div>
-        </div>
-
-        <h2>Features for advanced users</h2>
-        <div class="example">
-          <div class="code-gloss">
-            <p>
-              Test your apps with bots, which run in parallel to play
-              multiplayer games against each other. You can program different
-              bot strategies and run multi-agent simulations.
-            </p>
-          </div>
-          <div class="code-snippet">
-            <pre><code class="language-python"
-              >yield Survey, dict(name='Bob', age=20)
-yield Auction, dict(bid=random.randint(100, 200))
-yield Results</code></pre>
-          </div>
-        </div>
-        <div class="example">
-          <div class="code-gloss">
-            <p>
-              Live pages let players interact within the same page, in real
-              time. Send messages to specific players using their ID, or
-              broadcast to the group using special ID
-              <code>0</code>.
-            </p>
-          </div>
-          <div class="code-snippet">
-            <pre><code class="language-python"
-              >class Auction(Page):
-  @staticmethod            
-  def live_method(player, bid):
-    group = player.group
-    if bid > group.highest_bid:
-      group.highest_bid = bid
-      return {
-        0: dict(msg='New high bid!', bid=bid)
-      }    
-    else:
-      my_id = player.id_in_group
-      return {
-        my_id: dict(msg='Your bid was too low.')
-      }</code></pre>
-          </div>
-        </div>
-        <p>
-          The above just scratches the surface of what oTree can do. Check out
-          the documentation for more details.
-        </p>
-      </div>
-    </div>
     <div class="major-section">
       <div class="section">
         <h1>Get started</h1>
@@ -340,14 +136,6 @@ yield Results</code></pre>
         <a href="https://github.com/oTree-org/oTree/" target="_blank">
           <div class="button">Browse code samples</div>
         </a>
-      </div>
-      <div class="section">
-        <br /><br />
-        <pre><code class="language-bash"
-            >$ pip install otree
-$ otree startproject myproject
-$ cd myproject
-$ otree devserver</code></pre>
       </div>
     </div>
     <div class="major-section">
