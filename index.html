@@ -10,6 +10,7 @@
   <meta property="og:description" content="A Python framework for tasks, games, and experiments." />
   <meta property="og:image" content="http://www.otree.org/images/icon.png" />
   <meta property="og:image:secure_url" content="https://www.otree.org/images/icon.png" />
+  <link rel="icon" type="image/png" href="images/brand/icon-green.png" />
   <!-- Google tag (gtag.js) - cookieless -->
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -23,169 +24,125 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=Lora:ital@0;1&family=Work+Sans:wght@400;700;900&family=Inter:wght@400;700;900&display=swap" />
-  <link rel="stylesheet" href="reset.css" />
+  <link rel="stylesheet" href="brand.css" />
   <link rel="stylesheet" href="style.css" />
   <link href="prism.css" rel="stylesheet" />
   <title>oTree: Behavioral research platform</title>
-
 </head>
 
 <body>
-  <div class="hero">
-    <div class="major-section">
-      <div class="section">
-        <img src="images/header-logo.png" style="width: 300px" />
-        <h3 style="font-weight: 300">
-          Branch out into new ideas
-        </h3>
-        <!-- <a href="https://www.otreehub.com/projects/?featured=1/" target="_blank">
-          <div class="button">Demo</div>
-        </a> -->
-        <a href="https://otree.readthedocs.io/en/latest/" target="_blank">
-          <div class="button">Docs</div>
-        </a>
-        <a href="https://www.otreehub.com" target="_blank">
-          <div class="button">Build without coding</div>
-        </a>
-      </div>
-    </div>
-  </div>
+  <div class="brand-strip"></div>
 
-  <div class="bg-light">
-    <div class="major-section">
-      <h1 class="section">oTree can do it</h1>
-      <div class="section">
-        <p>
-        oTree is a versatile framework for behavioral research that lets you build all kinds of games and tasks.  
-        Our <a target="_blank" href="https://more-demos.demo.otreehub.com/demo">starter library</a> 
-        features a continuous-time <b>double auction</b> market, 
-        simulations of <b>social networking sites</b> and <b>online shopping</b> apps, 
-        multi-player recreational games like <b>poker</b> and <b>live word search</b>.
-        You can easily program classic game theory games like the prisoner’s dilemma, 
-        <b>surveys</b> and psychological tests.
-        </p>
+  <!-- =================== HERO (black) =================== -->
+  <header class="panel-dark">
+    <nav class="top-nav">
+      <a href="/" class="brand">oTree<span class="dot"></span></a>
+      <div class="top-nav-links">
+        <a href="faq.html">FAQ</a>
+        <a href="https://otree.readthedocs.io/en/latest/" target="_blank">Docs</a>
+        <a href="https://www.otreehub.com" class="nav-link-top">oTree Hub</a>
+      </div>
+    </nav>
 
-        <p>
-          oTree has been used in over
-          <a href="https://scholar.google.com/scholar_lookup?title=otree&author=wickens" target="_blank">3000 academic
-            publications</a>.
-        </p>
+    <div class="hero">
+      <div class="section">
+        <img class="hero-logo" src="images/brand/logo-wordmark-white.png" alt="oTree" />
+        <h3 class="hero-tagline">Branch out into new ideas</h3>
+        <a href="https://otree.readthedocs.io/en/latest/" target="_blank" class="btn-cta btn-green">Read the Docs</a>
+        <a href="https://www.otreehub.com" target="_blank" class="btn-cta btn-outline-light">Build without coding</a>
       </div>
     </div>
-    <div class="major-section">
-      <h1 class="section">Used by</h1>
-      <span class="famous-users-helper">
-        <img class="famous-users-img" width="300px" src="images/famous_users/WorldBank.jpg" />
-      </span>
-      <span class="famous-users-helper">
-        <img class="famous-users-img" width="300px" src="images/famous_users/OECD.jpg" />
-      </span>
-      <span class="famous-users-helper">
-        <img class="famous-users-img" width="300px" src="images/famous_users/IRS.jpg" />
-      </span>
-      <span class="famous-users-helper">
-        <img class="famous-users-img" width="300px" src="images/famous_users/CFPB.png" />
-      </span>
-      <span class="famous-users-helper">
-        <img class="famous-users-img" width="300px" src="images/famous_users/EBRD.jpg" />
-      </span>
-      <span class="famous-users-helper">
-        <img class="famous-users-img" width="300px" src="images/famous_users/BehaviouralInsights.png" />
-      </span>
-    </div>
-    <!-- <div class="major-section">
-      <h1 class="section">Why use oTree?</h1>
-      <div class="side-by-side">
-        <div class="section">
-          <h2>Versatile</h2>
-          <p>
-            Few frameworks are as user-friendly yet versatile as oTree. Build
-            anything from a game of tic-tac-toe to a live auction market.
-          </p>
-        </div>
-        <div class="section">
-          <h2>Easy</h2>
-          <p>
-            oTree limits itself to the most basic programming concepts:
-            if-statements, loops, simple functions, lists, and dicts.
-          </p>
-        </div>
-        <div class="section">
-          <h2>Ideal for learning</h2>
-          <p>
-            oTree is a fun way to learn programming. And it is a great
-            hands-on addition to courses in subjects like economics or
-            psychology.
-          </p>
-        </div>
-      </div>
-    </div> -->
+  </header>
 
-    <div class="major-section">
-      <h1 class="section">Build experiments without coding</h1>
-      <div class="section">
-        <p>
-          Use <a href="https://www.otreehub.com/">OTAI</a>
-          to build sophisticated research studies without writing any code.
-          It's engineered for reliability and can deliver research-grade apps.
-          More about OTAI <a href="blog/introducing-otai.html">here</a>.
-        </p>
-      </div>
-      <img src="images/otai/boggle-3.png" style="width: 100%; height: auto" />
-    </div>
-
-    <div class="major-section">
-      <div class="section">
-        <h1>Get started</h1>
-        <a href="https://otree.readthedocs.io/en/latest/">
-          <div class="button">Documentation</div>
-        </a>
-        <a href="https://groups.google.com/g/otree">
-          <div class="button">Forum</div>
-        </a>
-        <a href="https://github.com/oTree-org/oTree/" target="_blank">
-          <div class="button">Browse code samples</div>
-        </a>
-      </div>
-    </div>
-    <div class="major-section">
-      <div class="section">
-        <h1>Blog</h1>
-        <p>
-          <a href="blog/introducing-otai.html">Introducing OTAI, the oTree AI builder</a>
-        </p>
-        <p>
-          <a href="blog/why-use-hub-heroku.html">Why you should deploy to Heroku through oTree Hub</a>
-        </p>
-        <p>
-          <a href="blog/install-old-version.html">How to install an old version of oTree</a>
-        </p>
-        <p>
-          <a href="blog/where-to-put-code.html">"Where do I put this code?"</a>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="major-section">
-    <div style="display: flex; flex-direction: row;
-    justify-content: center;">
-      <p class="section">
-        <a href="faq.html"> FAQ </a>
-      </p>
-      <p class="section">
-        <a href="https://github.com/oTree-org/oTree/"> GitHub </a>
-      </p>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
+  <!-- =================== oTree can do it (white) =================== -->
+  <section class="panel panel-light">
+    <div class="section">
+      <h1>oTree can do it</h1>
       <p>
-        With funding from:
+        oTree is a versatile framework for behavioral research that lets you build all kinds of games and tasks.
+        Our starter library
+        features a continuous-time <strong>double auction</strong> market,
+        simulations of <strong>social networking sites</strong> and <strong>online shopping</strong> apps,
+        multi-player recreational games like <strong>poker</strong> and <strong>live word search</strong>.
+        You can easily program classic game theory games like the prisoner's dilemma,
+        <strong>surveys</strong> and psychological tests.
       </p>
-      <img class="famous-users-img" width="100px" src="images/sloan-logo.jpg" />
+      <p>
+        oTree has been used in over
+        <a href="https://scholar.google.com/scholar_lookup?title=otree&author=wickens" target="_blank">3000 academic
+        publications</a>.
+      </p>
     </div>
-    <p>
-  </div>
+  </section>
+
+  <!-- =================== Used by (white) =================== -->
+  <section class="panel panel-light" style="padding-top: 0;">
+    <div class="section">
+      <h1>Used by</h1>
+      <div class="famous-users-grid">
+        <img src="images/famous_users/WorldBank.jpg" alt="The World Bank" />
+        <img src="images/famous_users/OECD.jpg" alt="OECD" />
+        <img src="images/famous_users/IRS.jpg" alt="IRS" />
+        <img src="images/famous_users/CFPB.png" alt="Consumer Financial Protection Bureau" />
+        <img src="images/famous_users/EBRD.jpg" alt="European Bank for Reconstruction and Development" />
+        <img src="images/famous_users/BehaviouralInsights.png" alt="Behavioural Insights Team" />
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== Build without coding (purple) =================== -->
+  <section class="panel panel-purple">
+    <div class="section">
+      <h1 class="text-center">Build experiments without coding</h1>
+      <p class="text-center" style="max-width: 720px; margin: 0 auto 32px;">
+        Use <a href="https://www.otreehub.com/">OTAI</a>
+        to build sophisticated research studies without writing any code.
+        It's engineered for reliability and can deliver research-grade apps.
+        More about OTAI <a href="blog/introducing-otai.html">here</a>.
+      </p>
+      <div class="screenshot-frame">
+        <img src="images/otai/boggle-3.png" alt="OTAI screenshot" />
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== Get started (black) =================== -->
+  <section class="panel panel-dark">
+    <div class="section text-center">
+      <h1>Get started</h1>
+      <div class="cta-row">
+        <a href="https://otree.readthedocs.io/en/latest/" class="btn-cta btn-green">Documentation</a>
+        <a href="https://groups.google.com/g/otree" class="btn-cta btn-outline-light">Forum</a>
+        <a href="https://github.com/oTree-org/oTree/" target="_blank" class="btn-cta btn-outline-light">Browse code samples</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== Blog (black) =================== -->
+  <!-- <section class="panel panel-dark" style="padding-top: 0;">
+    <div class="section">
+      <h1>Blog</h1>
+      <p><a href="blog/introducing-otai.html">Introducing OTAI, the oTree AI builder</a></p>
+      <p><a href="blog/install-old-version.html">How to install an old version of oTree</a></p>
+    </div>
+  </section> -->
+
+  <!-- =================== Footer (black) =================== -->
+  <footer class="panel-dark">
+    <div class="footer">
+      <div class="section">
+        <div class="links-row">
+          <a href="faq.html">FAQ</a>
+          <a href="https://github.com/oTree-org/oTree/" target="_blank">GitHub</a>
+        </div>
+        <div class="funding">
+          <span>With funding from:</span>
+          <img src="images/sloan-logo.jpg" alt="Alfred P. Sloan Foundation" />
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script src="prism.js"></script>
 </body>
-
 </html>

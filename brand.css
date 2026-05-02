@@ -1,0 +1,435 @@
+/*
+ * oTree brand stylesheet — shared across all admin / non-participant UIs.
+ *
+ * Provides:
+ *   - brand color tokens (--otree-*)
+ *   - light-theme defaults (body, headings, links, code)
+ *   - styling for Bootstrap classes (.btn-*, .table, .form-control, ...)
+ *     used by oTree Hub admin (Bootstrap 4)
+ *   - styling for bare elements (button, table, input) scoped to
+ *     `.brand-page` ancestor, used by OTAI pages that don't use Bootstrap
+ *   - utility classes (.brand-notice, .brand-warning, .brand-error,
+ *     .brand-success) for non-Bootstrap pages that want themed callouts
+ *
+ * Loaded by:
+ *   - hub admin (otreehub/templates/base.html)
+ *   - OTAI base.html
+ *   - OTAI chat.html
+ *
+ * NOT loaded by participant-facing oTree pages.
+ */
+
+/* ---------------- Brand tokens ---------------- */
+:root {
+  --otree-green: #32e85d;
+  --otree-green-dark: #1fb944;
+  --otree-green-darker: #168a32;
+  --otree-purple: #5937ce;
+  --otree-purple-dark: #4527a8;
+  --otree-text: #1f2937;
+  --otree-muted: #64748b;
+  --otree-border: #e2e8f0;
+  --otree-bg: #f7f9fc;
+  --otree-slate: #0f172a;
+
+  /* Bootstrap 5 token overrides (no-op under Bootstrap 4) */
+  --bs-primary: var(--otree-green);
+  --bs-primary-rgb: 50, 232, 93;
+  --bs-link-color: var(--otree-green-dark);
+  --bs-link-hover-color: var(--otree-green-dark);
+  --bs-body-color: var(--otree-text);
+  --bs-body-bg: var(--otree-bg);
+  --bs-border-color: var(--otree-border);
+}
+
+/* ---------------- Body / typography ---------------- */
+body {
+  background-color: var(--otree-bg);
+  color: var(--otree-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--otree-slate);
+  margin-top: 1em;
+}
+h1 { font-size: 1.875rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.1rem; }
+
+.page-header {
+  border-bottom: 1px solid var(--otree-border);
+  padding-bottom: 0.75rem;
+  margin-top: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+.page-header h1,
+.page-header h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--otree-green-dark);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--otree-green-dark);
+  text-decoration: underline;
+}
+
+code, kbd, pre, samp {
+  font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono",
+               "Courier New", monospace;
+}
+code {
+  background: #f1f5f9;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: inherit;
+}
+pre code {
+  background: transparent;
+  padding: 0;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--otree-border);
+  opacity: 1;
+}
+
+/* ---------------- Bootstrap-class styling (Hub admin) ---------------- */
+
+.btn {
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 0.4rem 0.85rem;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+              color 0.15s ease, box-shadow 0.15s ease;
+}
+.btn:focus,
+.btn:focus-visible {
+  box-shadow: 0 0 0 0.2rem rgba(50, 232, 93, 0.30);
+}
+
+.btn-primary,
+.btn-success {
+  background-color: var(--otree-green);
+  border-color: var(--otree-green);
+  color: #0a2e15;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success:not(:disabled):not(.disabled):active {
+  background-color: var(--otree-green-dark) !important;
+  border-color: var(--otree-green-dark) !important;
+  color: #062810 !important;
+}
+
+.btn-outline-primary {
+  color: var(--otree-green-dark);
+  border-color: var(--otree-green);
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  background-color: var(--otree-green) !important;
+  border-color: var(--otree-green) !important;
+  color: #0a2e15 !important;
+}
+
+.btn-secondary {
+  background-color: #fff;
+  border-color: var(--otree-border);
+  color: var(--otree-text);
+}
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-secondary:not(:disabled):not(.disabled):active {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: var(--otree-slate) !important;
+}
+
+.form-control,
+.form-select {
+  border-color: var(--otree-border);
+  border-radius: 6px;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--otree-green);
+  box-shadow: 0 0 0 0.2rem rgba(50, 232, 93, 0.22);
+}
+
+.errorlist {
+  color: #b94a48;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.table {
+  background: #fff;
+  border: 1px solid var(--otree-border);
+  border-radius: 8px;
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.table thead th {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--otree-border);
+  border-top: none;
+  padding: 0.65rem 0.9rem;
+}
+.table td,
+.table tbody th {
+  padding: 0.65rem 0.9rem;
+  vertical-align: middle;
+  border-top: 1px solid var(--otree-border);
+}
+.table tbody tr:first-child td,
+.table tbody tr:first-child th {
+  border-top: none;
+}
+.table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.card {
+  border-color: var(--otree-border);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+.card-header {
+  background-color: #f8fafc;
+  border-bottom: 1px solid var(--otree-border);
+  font-weight: 600;
+}
+
+.alert {
+  border-radius: 6px;
+  border-width: 1px;
+}
+
+.badge {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.dropdown-menu {
+  border-color: var(--otree-border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.10);
+}
+.dropdown-item:active {
+  background-color: var(--otree-green);
+  color: #0a2e15;
+}
+
+.page-link {
+  color: var(--otree-green-dark);
+}
+.page-item.active .page-link {
+  background-color: var(--otree-green);
+  border-color: var(--otree-green);
+  color: #0a2e15;
+}
+
+/* ---------------- Bare-element styling (`.brand-page` opt-in) ----------------
+ * Pages that don't use Bootstrap (OTAI) opt in by adding `class="brand-page"`
+ * to <body>. Bare <button>, <table>, <input> elements then get on-brand
+ * styling automatically. Elements with their own class still win on specificity
+ * (e.g. .launch-btn, #modelBtn, button.delete keep their custom look).
+ */
+
+.brand-page button:not([class]),
+.brand-page input[type="submit"]:not([class]) {
+  padding: 6px 14px;
+  border: 1px solid var(--otree-green);
+  border-radius: 6px;
+  background: var(--otree-green);
+  color: #0a2e15;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.brand-page button:not([class]):hover:not(:disabled),
+.brand-page input[type="submit"]:not([class]):hover:not(:disabled) {
+  background: var(--otree-green-dark);
+  border-color: var(--otree-green-dark);
+  color: #062810;
+}
+.brand-page button:not([class]):disabled,
+.brand-page input[type="submit"]:not([class]):disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.brand-page input[type="text"]:not([class]),
+.brand-page input[type="email"]:not([class]),
+.brand-page input[type="password"]:not([class]),
+.brand-page input[type="number"]:not([class]),
+.brand-page textarea:not([class]) {
+  padding: 6px 10px;
+  border: 1px solid var(--otree-border);
+  border-radius: 6px;
+  font-family: inherit;
+}
+.brand-page input[type="text"]:not([class]):focus,
+.brand-page input[type="email"]:not([class]):focus,
+.brand-page input[type="password"]:not([class]):focus,
+.brand-page input[type="number"]:not([class]):focus,
+.brand-page textarea:not([class]):focus {
+  outline: none;
+  border-color: var(--otree-green);
+  box-shadow: 0 0 0 3px rgba(50, 232, 93, 0.22);
+}
+
+.brand-page table:not([class]) {
+  background: #fff;
+  border: 1px solid var(--otree-border);
+  border-radius: 8px;
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+.brand-page table:not([class]) thead th {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--otree-border);
+  border-top: none;
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+}
+.brand-page table:not([class]) th,
+.brand-page table:not([class]) td {
+  padding: 0.65rem 0.9rem;
+  vertical-align: middle;
+  border-top: 1px solid var(--otree-border);
+  text-align: left;
+}
+.brand-page table:not([class]) tbody tr:first-child td,
+.brand-page table:not([class]) tbody tr:first-child th {
+  border-top: none;
+}
+.brand-page table:not([class]) tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* ---------------- Utility classes for non-Bootstrap callouts ---------------- */
+
+.brand-notice {
+  background: #f5f3ff;
+  color: var(--otree-purple-dark);
+  padding: 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--otree-purple);
+  font-size: 16px;
+  font-weight: 500;
+}
+.brand-notice a {
+  color: var(--otree-purple-dark);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.brand-warning {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  border-left: 4px solid #f59e0b;
+}
+
+.brand-error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  border: 1px solid #fecaca;
+}
+
+.brand-success {
+  background: #dcfce7;
+  color: #166534;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  border: 1px solid #bbf7d0;
+}
+
+/* Aliases for legacy OTAI class names — same visual treatment as the
+ * .brand-* utilities above, but matching the class names already used in
+ * OTAI templates (and the names Django's messages framework emits). */
+.brand-page .prominent-notice {
+  background: #f5f3ff;
+  color: var(--otree-purple-dark);
+  padding: 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--otree-purple);
+  font-size: 16px;
+  font-weight: 500;
+}
+.brand-page .prominent-notice a {
+  color: var(--otree-purple-dark);
+  font-weight: 600;
+  text-decoration: underline;
+}
+.brand-page .warning {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  border-left: 4px solid #f59e0b;
+}
+.brand-page .messages .error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  border: 1px solid #fecaca;
+}
+.brand-page .messages .success {
+  background: #dcfce7;
+  color: #166534;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  border: 1px solid #bbf7d0;
+}
