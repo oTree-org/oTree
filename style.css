@@ -219,11 +219,13 @@ img { max-width: 100%; height: auto; }
 /* ---------------- Screenshot frame ---------------- */
 .screenshot-frame {
   margin: 0 auto 48px;
-  max-width: 920px;
+  max-width: min(95vw, 1700px);
+  padding: 0 24px;
+  box-sizing: border-box;
   text-align: center;
 }
 .screenshot-frame img {
-  max-width: 100%;
+  max-width: min(100%, 1621px);
   height: auto;
   border-radius: 8px;
   box-shadow: 0 8px 30px rgba(89, 55, 206, 0.18),
