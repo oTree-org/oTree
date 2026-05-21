@@ -172,13 +172,13 @@ img { max-width: 100%; height: auto; }
  * panel renders green text on green background. */
 .btn-cta.btn-green {
   background: var(--otree-green);
-  color: #062810;
+  color: white;
   border-color: var(--otree-green);
 }
 .btn-cta.btn-green:hover {
   background: var(--otree-green-dark);
   border-color: var(--otree-green-dark);
-  color: #062810;
+  color: white;
 }
 
 .btn-cta.btn-outline-light {
