@@ -425,3 +425,37 @@ pre code { background: transparent; padding: 0; }
   .example { flex-direction: column; }
   .side-by-side { flex-direction: column; }
 }
+
+/* ---------------- Blog posts ---------------- */
+.post-header { padding-top: 56px; padding-bottom: 64px; }
+.post-header .post-eyebrow {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--otree-green);
+  margin: 0 0 14px;
+}
+.post-header .post-eyebrow a { color: var(--otree-green); }
+.post-header .post-eyebrow a:hover { color: #fff; }
+.post-header h1 { font-size: 2.6rem; margin: 0 0 14px; }
+.post-header .post-date {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+.article,
+.post-header { max-width: 760px; }
+.article h2 { font-size: 1.6rem; margin-top: 1.8em; }
+.article h3 { font-size: 1.35rem; margin-top: 1.8em; }
+.article h5 { font-size: 1.05rem; margin-top: 1.6em; color: var(--otree-purple); }
+.article li { margin: 0.45em 0; }
+.article .cta-row { text-align: left; margin-top: 28px; }
+.article .cta-row .btn-cta:first-child { margin-left: 0; }
+
+@media (max-width: 750px) {
+  .post-header { padding-top: 36px; padding-bottom: 44px; }
+  .post-header h1 { font-size: 1.9rem; }
+}
