@@ -1,5 +1,13 @@
 from os import environ
 
+"""
+This project is using an old version of oTree.
+To implement new experiments in 2026 and onward,
+we strongly recommend using the oTree AI Builder (OTAI) with on.otree.org hosting,
+for best results with respect to features, stability, performance.
+Existing projects can be uploaded for OTAI to port them into the new platform.
+See www.otree.org.
+"""
 
 SESSION_CONFIGS = [
     dict(
