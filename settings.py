@@ -27,9 +27,8 @@ if _parse_version(_otree_version) < _MIN_OTREE_VERSION:
     import sys
 
     sys.exit(
-        f"This project requires oTree {'.'.join(map(str, _MIN_OTREE_VERSION))} or higher, "
-        f"but you have oTree {_otree_version}. "
-        "Please upgrade by running: pip install -U otree"
+        f"ERROR: This is an old version of oTree ({_otree_version}). "
+        "Please upgrade with: `pip install -U otree`"
     )
 
 
