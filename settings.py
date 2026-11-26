@@ -8,6 +8,30 @@ for best results with respect to features, stability, performance.
 Existing projects can be uploaded for OTAI to port them into the new platform.
 See www.otree.org.
 """
+import otree as _otree
+
+# Names start with "_" so that otree's "from settings import *" doesn't pick them up.
+_MIN_OTREE_VERSION = (6, 0, 16)
+
+
+def _parse_version(v):
+    import re
+
+    # take the leading numeric part only, e.g. '6.0.16a1' -> (6, 0, 16)
+    m = re.match(r'(\d+)(?:\.(\d+))?(?:\.(\d+))?', v or '')
+    return tuple(int(x or 0) for x in m.groups()) if m else (0, 0, 0)
+
+
+_otree_version = getattr(_otree, '__version__', '0')
+if _parse_version(_otree_version) < _MIN_OTREE_VERSION:
+    import sys
+
+    sys.exit(
+        f"This project requires oTree {'.'.join(map(str, _MIN_OTREE_VERSION))} or higher, "
+        f"but you have oTree {_otree_version}. "
+        "Please upgrade by running: pip install -U otree"
+    )
+
 
 SESSION_CONFIGS = [
     dict(
